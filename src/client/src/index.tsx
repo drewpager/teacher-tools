@@ -10,15 +10,24 @@ import {
   ApolloProvider,
 } from '@apollo/client';
 
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import theme from './theme';
+import { Header } from './components/layout/Header';
+
 const client = new ApolloClient({
   uri: 'http://localhost:9000/api',
   cache: new InMemoryCache()
 });
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <Lessons title="Drew's Teacher Tools" />
-  </ApolloProvider>,
+  <ThemeProvider theme={theme}>
+    <ApolloProvider client={client}>
+      <Header />
+      <Lessons title="Teacher Tools" />
+    </ApolloProvider>
+    <CssBaseline />
+  </ThemeProvider>,
   document.getElementById('root')
 );
 

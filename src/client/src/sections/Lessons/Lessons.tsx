@@ -4,6 +4,9 @@ import { gql } from 'graphql-tag';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { Lessons as LessonsData } from './__generated__/Lessons';
 import { DeleteLesson as DeleteLessonData, DeleteLessonVariables } from './__generated__/DeleteLesson';
+import { Button, List, ListItem, Avatar, CircularProgress, Alert }  from '@mui/material';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 
 const LESSONS = gql`
   query Lessons {
@@ -45,41 +48,61 @@ export const Lessons = ({ title }: Props) => {
   // Rendering React Elements based on object status
 
   const deleteLessonLoadingMessage = deleteLessonLoading ? (
-    <h3>Deletion in flight!</h3>
+    <CircularProgress sx={{
+              color: 'inherit',
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              zIndex: 1,
+            }}/>
   ) : null;
 
   if (loading) {
-    return <h2>Loading...</h2>;
+    return ( <CircularProgress sx={{
+              color: 'inherit',
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              zIndex: 1,
+            }}/>
+    )
   }
 
   if (error) {
-    return <h2>Oops, something went horribly wrong :(</h2>;
+    return (
+      <Alert variant="outlined" severity="error">
+        Oops, something went horribly wrong :(
+      </Alert>
+    )
   }
 
   const deleteLessonErrorMessage = deleteLessonError ? (
-    <h3>Oops, something went wrong in the deletion process!!</h3>
+    <Alert variant="outlined" severity="error">
+      Oops, something went wrong in the deletion process!
+    </Alert>
   ) : null;
 
   const lessons = data ? data.lessons : null;
 
   const lessonList = (
-    <ul>
+    <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
       {lessons?.map(lesson => {
         return (
-          <li key={lesson.id}>
-            {lesson.title}{" | "}{lesson.category.join(", ")}{" "}
-            <button onClick={() => handleDeleteLesson(lesson.id)}>Delete</button>
-          </li> 
+          <ListItem key={lesson.id} divider={true} alignItems="center">
+            <Avatar alt={lesson.title + " image with text overlay"} src={lesson.image} sx={{ width: 250, height: 150, padding: 2, borderRadius: 5 }} />
+            {lesson.title}{" | "}{lesson.category.join(", ")}{" "}            
+              <Button sx={{ margin: 5 }}variant="contained" onClick={() => handleDeleteLesson(lesson.id)}>Delete</Button>
+          </ListItem> 
         )
       })}
-    </ul>
+    </List>
   )
   return (
-    <div>
-      <h1>{title}</h1>
+    <Container>
+      <Typography variant="h3" component="h1" gutterBottom>{title}</Typography>
       {lessonList}
       {deleteLessonLoadingMessage}
       {deleteLessonErrorMessage}
-    </div>
+    </Container>
   )
 }
