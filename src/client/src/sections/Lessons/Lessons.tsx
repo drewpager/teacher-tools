@@ -4,7 +4,7 @@ import { gql } from 'graphql-tag';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { Lessons as LessonsData } from './__generated__/Lessons';
 import { DeleteLesson as DeleteLessonData, DeleteLessonVariables } from './__generated__/DeleteLesson';
-import { Button, List, ListItem, Avatar, CircularProgress, Alert }  from '@mui/material';
+import { Button, List, ListItem, Avatar, CircularProgress, Alert, Skeleton }  from '@mui/material';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
@@ -58,19 +58,22 @@ export const Lessons = ({ title }: Props) => {
   ) : null;
 
   if (loading) {
-    return ( <CircularProgress sx={{
-              color: 'inherit',
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              zIndex: 1,
-            }}/>
-    )
-  }
+    for (let i = 0; i < 10; i++) {
+      return ( 
+        <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
+          <ListItem key={i} divider={true} alignItems="center">
+            <Skeleton variant="rectangular" width={250} height={150} />{" "}
+            <Skeleton variant="text" />{" "}
+            <Skeleton variant="rectangular" width={50} height={30} />
+          </ListItem>
+        </List>
+      );
+    };
+  };
 
   if (error) {
     return (
-      <Alert variant="outlined" severity="error">
+      <Alert variant="outlined" severity="error" sx={{ padding: "5px" }}>
         Oops, something went horribly wrong :(
       </Alert>
     )
@@ -100,9 +103,9 @@ export const Lessons = ({ title }: Props) => {
   return (
     <Container>
       <Typography variant="h3" component="h1" gutterBottom>{title}</Typography>
+      {deleteLessonErrorMessage}
       {lessonList}
       {deleteLessonLoadingMessage}
-      {deleteLessonErrorMessage}
     </Container>
   )
 }

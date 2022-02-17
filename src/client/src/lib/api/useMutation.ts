@@ -40,6 +40,7 @@ export const useMutation = <TData = any, TVariables = any>(query: string): Mutat
   })
 
   const fetch = async (variables?: TVariables) => {
+    throw new Error();
     try {
       dispatch({ type: "DELETE" })
 

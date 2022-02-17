@@ -13,7 +13,7 @@ import {
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme';
-import { Header } from './components/layout/Header';
+import { Header } from './lib/components/layout/Header';
 
 const client = new ApolloClient({
   uri: 'http://localhost:9000/api',

@@ -43,6 +43,7 @@ export const useQuery = <TData = any>(query: string): QueryResult<TData> => {
     loading: true,
   });
   const fetch = useCallback(() => {
+    throw new Error();
     const fetchAPI = async () => {
       try {
         dispatch({ type: "FETCH" })
