@@ -11,6 +11,24 @@ export interface Lesson {
   endDate: number;
 }
 
+export interface Playlist {
+  _id: ObjectId;
+  name: string;
+  plan: Lesson[];
+}
+
+export interface User {
+  _id: string;
+  token: string;
+  name: string;
+  avatar: string;
+  contact: string;
+  watched: string[];
+  payment?: string;
+  playlists?: Playlist[];
+}
+
 export interface Database {
   lessons: Collection<Lesson>;
+  users: Collection<User>;
 }

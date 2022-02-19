@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import { Database } from "../lib/types";
+import { Database, Lesson, User } from "../lib/types";
 
 
 const url = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
@@ -9,6 +9,7 @@ export const connectDatabase = async (): Promise<Database> => {
   const db = client.db("main");
 
   return {
-    lessons: db.collection("test_lessons")
+    lessons: db.collection<Lesson>("lessons"),
+    users: db.collection<User>("users")
   };
 };
