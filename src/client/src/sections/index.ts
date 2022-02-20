@@ -4,3 +4,5 @@ export * from './Lesson';
 export * from './Teach';
 export * from './NotFound';
 export * from './User';
+export * from './Terms';
+export * from './Privacy';

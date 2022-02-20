@@ -9,7 +9,7 @@ import {
   ApolloProvider,
 } from '@apollo/client';
 
-import { Home, Teach, Lesson, Lessons, NotFound, User } from './sections';
+import { Home, Teach, Lesson, Lessons, NotFound, User, Terms, Privacy } from './sections';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { ThemeProvider } from '@mui/material/styles';
@@ -26,6 +26,8 @@ const App = () => {
         <Route path="/lesson/:id" element={<Lesson />} />
         <Route path="/lessons/:filter?" element={<Lessons title="Teacher Tools" />} />
         <Route path="/user/:id" element={<User />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/privacy" element={<Privacy />} />
         <Route element={<NotFound />} />
       </Routes>
     </Router>
