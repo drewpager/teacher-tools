@@ -1,4 +1,4 @@
 import merge from 'lodash.merge';
-import { lessonResolvers } from '../resolvers/Lessons/index';
+import { viewerResolvers } from './Viewer'
 
-export const resolvers = merge(lessonResolvers);
+export const resolvers = merge(viewerResolvers);

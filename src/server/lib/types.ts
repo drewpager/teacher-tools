@@ -24,11 +24,19 @@ export interface User {
   avatar: string;
   contact: string;
   watched: string[];
-  payment?: string;
+  walletId?: string;
   playlists?: Playlist[];
 }
 
 export interface Database {
   lessons: Collection<Lesson>;
   users: Collection<User>;
+}
+
+export interface Viewer {
+  _id?: string;
+  token?: string;
+  avatar?: string;
+  walletId?: string;
+  didRequest: boolean;
 }

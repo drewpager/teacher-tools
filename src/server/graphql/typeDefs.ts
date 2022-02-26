@@ -1,26 +1,24 @@
 import { gql } from 'apollo-server-express';
 
 export const typeDefs = gql`
-  type Lesson {
-    id: ID!
-    category: [String!]!
-    title: String!
-    meta: String!
-    video: String!
-    image: String!
-    startDate: Int!
-    endDate: Int!
+  type Viewer {
+    id: ID
+    token: String
+    avatar: String
+    hasWallet: Boolean
+    didRequest: Boolean!
   }
-
+  
   type Query {
-    lessons: [Lesson!]!
+    authUrl: String!
   }
 
   type Mutation {
-    deleteLesson(id: ID!): Lesson!
+    logIn(input: LogInInput): Viewer!
+    logOut: Viewer!
   }
 
-  type Lesson {
-    title: String!
+  input LogInInput {
+    code: String!
   }
 `;
