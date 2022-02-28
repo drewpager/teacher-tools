@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
@@ -9,15 +9,25 @@ import {
   ApolloProvider,
 } from '@apollo/client';
 
-import { Home, Teach, Lesson, Lessons, NotFound, User, Terms, Privacy } from './sections';
+import { Home, Teach, Lesson, Lessons, NotFound, User, Terms, Privacy, Login } from './sections';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme';
 import { Header } from './lib/components/layout/Header';
+import { Viewer } from './lib/types';
+
+const initialViewer: Viewer = {
+  id: null,
+  token: null,
+  avatar: null,
+  hasWallet: null,
+  didRequest: false
+}
 
 const App = () => {
+  const [viewer, setViewer] = useState<Viewer>(initialViewer);
   return (
     <Router>
       <Routes>
@@ -28,6 +38,7 @@ const App = () => {
         <Route path="/user/:id" element={<User />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
+        <Route path="/login" children={(props: any) => (<Login {...props} setViewer={setViewer} />)} element={<Login setViewer={setViewer} />} />
         <Route element={<NotFound />} />
       </Routes>
     </Router>

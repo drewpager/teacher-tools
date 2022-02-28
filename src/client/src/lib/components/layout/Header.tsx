@@ -13,8 +13,8 @@ export const Header = () => {
             sx={{ mr: 2 }}
           >
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Timeline
+          <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
+              Teacher Tools
           </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>

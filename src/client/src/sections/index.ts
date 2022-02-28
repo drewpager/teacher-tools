@@ -6,3 +6,4 @@ export * from './NotFound';
 export * from './User';
 export * from './Terms';
 export * from './Privacy';
+export * from './Login';
