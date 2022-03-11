@@ -1,14 +1,22 @@
-// import { IResolvers } from 'apollo-server-express';
-import { ObjectId } from 'mongodb';
 import { Viewer, Database, User } from '../../../lib/types';
 import { Google } from '../../../lib/api';
 import { LogInArgs } from './types';
-import crypto from "crypto";
+import crypto from 'crypto';
+import { Response, Request } from 'express';
+
+const cookieOptions = {
+  httpOnly: true,
+  sameSite: true,
+  signed: true,
+  secure: false,
+  domain: 'localhost'
+}
 
 const logInViaGoogle = async (
   code: string,
   token: string,
-  db: Database
+  db: Database,
+  res: Response
 ): Promise<User | undefined> => {
   const { user } = await Google.logIn(code);
 
@@ -38,17 +46,18 @@ const logInViaGoogle = async (
     { _id: userId },
     {
       $set: {
+        token,
         name: userName,
         avatar: userAvatar,
         contact: userEmail,
-        token
+        watched: [],
+        walletId: "2020",
+        playlists: []
       }
-    },
-    { upsert: true, returnDocument: 'after' }
+    }
   );
-
   let viewer = updateRes.value;
-
+  
   if (!viewer) {
     try {
       const updateResponse = await db.users.insertOne({
@@ -61,16 +70,43 @@ const logInViaGoogle = async (
         walletId: "1010",
         playlists: []
       });
-
-      let viewer = db.users.findOne({ _id: updateResponse.insertedId });
+      viewer = await db.users.findOne({ _id: updateResponse.insertedId });
+      if (viewer) {
+        return viewer;
+      }
     } catch (e) {
-      throw new Error(`Failed to insert one: ${e}`)
+      throw new Error(`Failed with code: ${e}`);
     }
   }
+
   if (viewer) {
-    return viewer;
+    res.cookie('viewer', userId, { 
+        ...cookieOptions, 
+        maxAge: 365 * 24 * 60 * 60 * 1000,
+      })
   } else {
     throw new Error("Failed to return viewer object!");
+  }
+  return viewer;
+};
+
+const logInViaCookie = async (
+  token: string,
+  db: Database,
+  req: Request,
+  res: Response
+): Promise<User | undefined> => {
+  const updateCook = await db.users.findOneAndUpdate(
+    { _id: req.signedCookies.viewer },
+    { $set: { token } }
+  );
+  
+  const viewer = updateCook.value;
+
+  if (!viewer) {
+    res.clearCookie('viewer', { ...cookieOptions });
+  } else {
+    return viewer;
   }
 };
 
@@ -88,15 +124,15 @@ export const viewerResolvers = {
     logIn: async (
       _root: undefined,
       { input }: LogInArgs,
-      { db }: { db: Database }
+      { db, req, res }: { db: Database, req: Request, res: Response },
     ): Promise<Viewer> => {
       try {
         const code = input ? input.code : null;
         const token = crypto.randomBytes(16).toString("hex");
 
         const viewer: User | undefined = code
-          ? await logInViaGoogle(code, token, db)
-          : undefined;
+          ? await logInViaGoogle(code, token, db, res)
+          : await logInViaCookie(token, db, req, res);
 
         if (!viewer) {
           return { didRequest: true };
@@ -113,8 +149,13 @@ export const viewerResolvers = {
         throw new Error(`Failed to log in: ${error}`);
       }
     },
-    logOut: (): Viewer => {
+    logOut: (
+      _root: undefined,
+      _args: Record<string, never>, // replaced {} that threw error
+      { res }: { res: Response }
+    ): Viewer => {
       try {
+        res.clearCookie('viewer', { ...cookieOptions });
         return { didRequest: true };
       } catch (err) {
         throw new Error(`Failed to log out user: ${err}`);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
@@ -9,13 +9,20 @@ import {
   ApolloProvider,
 } from '@apollo/client';
 
-import { Home, Teach, Lesson, Lessons, NotFound, User, Terms, Privacy, Login } from './sections';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useMutation } from '@apollo/react-hooks';
+import { LOG_IN } from '../src/lib/graphql/mutations/LogIn';
+import {
+  LogIn as LogInData,
+  LogInVariables
+} from '../src/lib/graphql/mutations/LogIn/__generated__/LogIn';
 
+import { Home, Teach, Lesson, Lessons, NotFound, User, Terms, Privacy, Login, AppHeader } from './sections';
+import { DisplayError } from './lib/utils';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { Skeleton, CircularProgress, Box } from '@mui/material';
 import theme from './theme';
-import { Header } from './lib/components/layout/Header';
 import { Viewer } from './lib/types';
 
 const initialViewer: Viewer = {
@@ -28,8 +35,39 @@ const initialViewer: Viewer = {
 
 const App = () => {
   const [viewer, setViewer] = useState<Viewer>(initialViewer);
+  const [logIn, { error }] = useMutation<LogInData, LogInVariables>(LOG_IN, {
+    onCompleted: data => {
+      if (data && data.logIn) {
+        setViewer(data.logIn)
+      }
+    } 
+  });
+
+  const logInRef = useRef(logIn);
+
+  useEffect(() => {
+    logInRef.current();
+  }, [])
+
+  if (!viewer.didRequest && !error) {
+    return (
+      <Box>
+        <Skeleton variant="rectangular" animation="wave" width="100%" height="50px" />
+        <Box sx={{ alignItems: "center", justifyContent: "center", position: "absolute"}}>
+          <CircularProgress color="primary" />
+        </Box>
+      </Box>
+    )
+  }
+
+  const LogInError = error ? (
+    <DisplayError title="We weren't able to verify you were logged in. Please try again!" />
+  ) : null;
+
   return (
     <Router>
+      {LogInError}
+      <AppHeader viewer={viewer} setViewer={setViewer} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/teach" element={<Teach />} />
@@ -53,7 +91,6 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <ApolloProvider client={client}>
-      <Header />
       <App />
       {/* <Lessons title="Teacher Tools" /> */}
     </ApolloProvider>

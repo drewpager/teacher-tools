@@ -6,7 +6,8 @@ import { AUTH_URL } from '../../lib/graphql/queries/AuthUrl/index';
 import { AuthUrl as AuthUrlData } from '../../lib/graphql/queries/AuthUrl/__generated__/AuthUrl';
 import { LOG_IN } from '../../lib/graphql/mutations/LogIn/index';
 import { LogIn as LogInData, LogInVariables } from '../../lib/graphql/mutations/LogIn/__generated__/LogIn';
-
+import { Navigate } from 'react-router-dom';
+import { DisplayError } from '../../lib/utils';
 interface Props {
   setViewer: (viewer: Viewer) => void;
 }
@@ -23,7 +24,6 @@ export const Login = ({ setViewer }: Props) => {
     onCompleted: data => {
       if (data && data.logIn) {
         setViewer(data.logIn);
-        setOpen(true);
       } 
     },
     onError: error => {
@@ -32,6 +32,7 @@ export const Login = ({ setViewer }: Props) => {
       }
     }
   });
+  
   const logInRef = useRef(logIn);
 
   useEffect(() => {
@@ -57,6 +58,16 @@ export const Login = ({ setViewer }: Props) => {
     }
   }
 
+  if (LogInData && LogInData.logIn) {
+    const { id: viewerId } = LogInData.logIn;
+    return (
+      <>
+        <Navigate to={`/user/${viewerId}`} />
+        <DisplayError title="Logged in successfully!" />
+      </>
+    );
+  }
+
   const handleClose = () => {
     setOpen(false);
   }
@@ -64,9 +75,7 @@ export const Login = ({ setViewer }: Props) => {
   if (LogInLoading) {
     return (
       <Box sx={{ minWidth: 275, width: 500, height: 500, margin: 5, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Card>
-          <CircularProgress color="primary" />
-        </Card>
+        <CircularProgress color="primary" />
       </Box>
     )
   }
@@ -86,19 +95,6 @@ export const Login = ({ setViewer }: Props) => {
     </Box>
   )
 
-  if (open) {
-    return (
-      <Box>
-        {LogInCard}
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-            Logged In Successfully!
-          </Alert>
-        </Snackbar>
-      </Box>
-    )
-  }
-
   if (LogInError) {
     return (
       <Box>
@@ -106,6 +102,30 @@ export const Login = ({ setViewer }: Props) => {
         <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
           <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
             Error Logging In!
+          </Alert>
+        </Snackbar>
+      </Box>
+    )
+  }
+
+  // if (open) {
+  //   return (
+  //     <Box>
+  //       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+  //         <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+  //           Logged In Successfully!
+  //         </Alert>
+  //       </Snackbar>
+  //     </Box>
+  //   )
+  // }
+
+  if (document.location.href.indexOf("user") > -1) {
+    return (
+      <Box>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+            Logged In Successfully!
           </Alert>
         </Snackbar>
       </Box>

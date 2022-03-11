@@ -7,3 +7,4 @@ export * from './User';
 export * from './Terms';
 export * from './Privacy';
 export * from './Login';
+export * from './AppHeader';
