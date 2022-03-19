@@ -5,6 +5,7 @@ import { LogOut as LogOutData } from '../../lib/graphql/mutations/LogOut/__gener
 import { AppBar, Box, Toolbar, IconButton, Typography, Button, Avatar, Tooltip, Menu, MenuItem } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Viewer } from '../../lib/types';
+import { DisplaySuccess } from '../../lib/utils';
 
 interface Props {
   viewer: Viewer;
@@ -16,6 +17,8 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
     onCompleted: (data) => {
       if (data && data.logOut) {
         setViewer(data.logOut);
+        sessionStorage.removeItem("token")
+        return (<DisplaySuccess title="You've Successfully logged out!" />);
       }
     }
   });

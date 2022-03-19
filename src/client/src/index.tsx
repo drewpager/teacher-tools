@@ -7,7 +7,10 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
+  createHttpLink
 } from '@apollo/client';
+
+import { setContext } from '@apollo/client/link/context';
 
 import { useMutation } from '@apollo/react-hooks';
 import { LOG_IN } from '../src/lib/graphql/mutations/LogIn';
@@ -38,7 +41,13 @@ const App = () => {
   const [logIn, { error }] = useMutation<LogInData, LogInVariables>(LOG_IN, {
     onCompleted: data => {
       if (data && data.logIn) {
-        setViewer(data.logIn)
+        setViewer(data.logIn);
+
+        if (data.logIn.token) {
+          sessionStorage.setItem("token", data.logIn.token);
+        } else {
+          sessionStorage.removeItem("token");
+        }
       }
     } 
   });
@@ -83,9 +92,22 @@ const App = () => {
   )
 }
 
+const httpLink = createHttpLink({
+  uri: '/api'
+});
+
+const authLink = setContext((_, { headers }) => {
+  const token = sessionStorage.getItem("token");
+  return {
+    headers: {
+      "X-CSRF-TOKEN": token || ""
+    }
+  }
+})
+
 const client = new ApolloClient({
-  uri: 'http://localhost:9000/api',
-  cache: new InMemoryCache()
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
 });
 
 ReactDOM.render(

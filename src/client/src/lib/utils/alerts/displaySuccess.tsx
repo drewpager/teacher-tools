@@ -1,20 +1,24 @@
-import React from 'react';
-import { Snackbar, Alert } from '@mui/material';
+import React, { useState } from 'react';
+import { Alert, Snackbar } from '@mui/material';
 
-export const displaySuccess = (title: string = "Success!") => {
-  let open = true;
+interface Props {
+  title: string;
+}
+
+export function DisplaySuccess({ title }: Props) {
+  const [success, setSuccess] = useState<boolean>(true);
   
   const handleClose = () => {
-    open = false;
+    setSuccess(false);
   }
 
   return (
     <>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-          {title} + "Success!"
-        </Alert>
+      <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
+      <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+        {title}
+      </Alert>
       </Snackbar>
     </>
   );
-};
+}

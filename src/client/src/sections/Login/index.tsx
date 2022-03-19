@@ -7,7 +7,7 @@ import { AuthUrl as AuthUrlData } from '../../lib/graphql/queries/AuthUrl/__gene
 import { LOG_IN } from '../../lib/graphql/mutations/LogIn/index';
 import { LogIn as LogInData, LogInVariables } from '../../lib/graphql/mutations/LogIn/__generated__/LogIn';
 import { Navigate } from 'react-router-dom';
-import { DisplayError } from '../../lib/utils';
+import { DisplayError, DisplaySuccess } from '../../lib/utils';
 interface Props {
   setViewer: (viewer: Viewer) => void;
 }
@@ -22,8 +22,10 @@ export const Login = ({ setViewer }: Props) => {
     error: LogInError 
   }]  = useMutation<LogInData, LogInVariables>(LOG_IN, {
     onCompleted: data => {
-      if (data && data.logIn) {
+      if (data && data.logIn && data.logIn.token) {
         setViewer(data.logIn);
+        sessionStorage.setItem("token", data.logIn.token);
+        return (<DisplaySuccess title="You've successfully logged in!"/>)
       } 
     },
     onError: error => {
@@ -63,7 +65,7 @@ export const Login = ({ setViewer }: Props) => {
     return (
       <>
         <Navigate to={`/user/${viewerId}`} />
-        <DisplayError title="Logged in successfully!" />
+        <DisplaySuccess title="Logged in successfully!" />
       </>
     );
   }
@@ -99,11 +101,7 @@ export const Login = ({ setViewer }: Props) => {
     return (
       <Box>
         {LogInCard}
-        <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-            Error Logging In!
-          </Alert>
-        </Snackbar>
+        <DisplayError title="Error Logging In!" />
       </Box>
     )
   }
