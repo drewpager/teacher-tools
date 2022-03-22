@@ -15,6 +15,8 @@ export interface Playlist {
   _id: ObjectId;
   name: string;
   plan: Lesson[];
+  creator: string;
+  authorized?: boolean; // https://www.newline.co/courses/tinyhouse-react-masterclass-part-2/building-the-listing-resolvers
 }
 
 export interface User {
