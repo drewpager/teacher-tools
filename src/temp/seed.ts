@@ -56,6 +56,7 @@ const seed = async () => {
           {
             _id: new ObjectId,
             name: "History 101",
+            creator: "5d378db94e84753160e08b54",
             plan: [
                {
                 _id: new ObjectId,
@@ -93,6 +94,7 @@ const seed = async () => {
           {
             _id: new ObjectId,
             name: "History 102",
+            creator: "5d378db94e84753160e08b53",
             plan: [
                {
                 _id: new ObjectId,
@@ -119,6 +121,7 @@ const seed = async () => {
           {
             _id: new ObjectId,
             name: "History 103",
+            creator: "5d378db94e84753160e08b54",
             plan: [
                {
                 _id: new ObjectId,
@@ -142,10 +145,66 @@ const seed = async () => {
               }
             ]
           },
+        ],
+      },
+    ];
+    
+    const playlists: Playlist[] = [
+      {
+        _id: new ObjectId,
+        name: "History 102",
+        creator: "5d378db94e84753160e08b53",
+        plan: [
+           {
+            _id: new ObjectId,
+            category: ["Prehistory", "World History"],
+            title: "The Mesolithic Period of Early Man",
+            meta: "The Mesolithic period is nestled between the Paleolithic and Neolithic periods and saw the rise of agriculture and animal husbandry to replace the prevailing hunter-gatherer culture, which archeologists and historians believe was an unevenly-embraced advance.  ",
+            video: "https://youtu.be/1HL-aO2FGb4",
+            image: "https://res.cloudinary.com/drewpager/image/upload/v1638115001/mesolithic-period.png",
+            startDate: -10000,
+            endDate: -8000,
+          },
+          {
+            _id: new ObjectId,
+            category: ["Egypt"],
+            title: "Cleopatra",
+            meta: "Cleopatra the 7th was known for her exotic beauty and powers of seduction during her three-decade reign over Egypt, despite repeated attempts to overthrow her rule.",
+            video: "https://youtu.be/ll5LTsveyG4",
+            image: "https://res.cloudinary.com/drewpager/image/upload/v1630419045/cleopatra.png",
+            startDate: -69,
+            endDate: -30,
+          }
         ]
       },
-
-    ];
+      {
+        _id: new ObjectId,
+        name: "History 103",
+        creator: "5d378db94e84753160e08b54",
+        plan: [
+           {
+            _id: new ObjectId,
+            category: ["Prehistory", "World History"],
+            title: "The Mesolithic Period of Early Man",
+            meta: "The Mesolithic period is nestled between the Paleolithic and Neolithic periods and saw the rise of agriculture and animal husbandry to replace the prevailing hunter-gatherer culture, which archeologists and historians believe was an unevenly-embraced advance.  ",
+            video: "https://youtu.be/1HL-aO2FGb4",
+            image: "https://res.cloudinary.com/drewpager/image/upload/v1638115001/mesolithic-period.png",
+            startDate: -10000,
+            endDate: -8000,
+          },
+          {
+            _id: new ObjectId,
+            category: ["Egypt"],
+            title: "Cleopatra",
+            meta: "Cleopatra the 7th was known for her exotic beauty and powers of seduction during her three-decade reign over Egypt, despite repeated attempts to overthrow her rule.",
+            video: "https://youtu.be/ll5LTsveyG4",
+            image: "https://res.cloudinary.com/drewpager/image/upload/v1630419045/cleopatra.png",
+            startDate: -69,
+            endDate: -30,
+          }
+        ]
+      },
+    ]
 
     for (const lesson of lessons) {
       db.lessons.insertOne(lesson);
@@ -153,6 +212,10 @@ const seed = async () => {
 
     for (const user of users) {
       db.users.insertOne(user);
+    }
+
+    for (const playlist of playlists) {
+      db.playlists.insertOne(playlist);
     }
     
     console.log(`[Seed]: Success!`);
