@@ -15,7 +15,7 @@ export const Lesson = () => {
   const params = useParams()
   const { loading, data, error } = useQuery<LessonData, LessonVariables>(LESSON, {
     variables: {
-      id: params.id ? params.id : "10101"
+      id: `${params.id}`
     }
   });
 
@@ -33,5 +33,10 @@ export const Lesson = () => {
 
   const lesson = data ? data.lesson : null;
   
-  return (<h1>Lesson: {lesson}</h1>)
+  return (
+    <>
+      <h1>Lesson: {lesson?.id}</h1>
+      <h2>{lesson?.title}</h2>
+    </>
+  )
 }
