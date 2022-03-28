@@ -7,6 +7,7 @@ export const typeDefs = gql`
     avatar: String
     hasWallet: Boolean
     didRequest: Boolean!
+    playlists: [Playlist]
   }
 
   type Lesson {

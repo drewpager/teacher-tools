@@ -1,4 +1,4 @@
-import { Database, Lesson, Playlist, User } from '../../../lib/types'
+import { Database, Lesson, Playlist, Viewer } from '../../../lib/types'
 import { LessonArgs } from './types';
 import { authorize } from '../../../lib/utils/index';
 import { Request } from 'express';
@@ -33,7 +33,7 @@ export const lessonResolvers = {
       playlist: Playlist,
       _args: Record<string, unknown>,
       { db, req }: { db: Database, req: Request }
-    ): Promise<User> => {
+    ): Promise<string> => {
       try {
         const creator = await db.users.findOne({ _id: playlist.creator });
       
@@ -42,13 +42,13 @@ export const lessonResolvers = {
         }
 
         const viewer = await authorize(db, req);
-        if (viewer && viewer._id === creator._id) {
+        if (viewer && viewer._id === playlist.creator) {
           playlist.authorized = true;
         }
 
-        return creator;
-      } catch (e) {
-        throw new Error(`You are either not the creator or not logged in: ${e}!`)
+        return creator._id;
+      } catch (err) {
+        throw new Error(`You are either not the creator or not logged in: ${err}!`)
       }
     }
   }

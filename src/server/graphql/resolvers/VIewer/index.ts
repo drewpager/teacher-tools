@@ -1,6 +1,6 @@
 import { Viewer, Database, User } from '../../../lib/types';
 import { Google } from '../../../lib/api';
-import { LogInArgs } from './types';
+import { LogInArgs, PlaylistArgs, PlaylistArgsData } from './types';
 import crypto from 'crypto';
 import { Response, Request } from 'express';
 
@@ -143,7 +143,7 @@ export const viewerResolvers = {
           token: viewer.token,
           avatar: viewer.avatar,
           walletId: viewer.walletId,
-          didRequest: true
+          didRequest: true,
         };
       } catch (error) {
         throw new Error(`Failed to log in: ${error}`);
@@ -164,10 +164,40 @@ export const viewerResolvers = {
   },
   Viewer: {
     id: (viewer: Viewer): string | undefined => {
-      return viewer._id;
+      return viewer._id?.toString();
     },
     hasWallet: (viewer: Viewer): boolean | undefined => {
       return viewer.walletId ? true : undefined;
+    },
+    playlists: async (
+      viewer: Viewer,
+      { limit, page }: PlaylistArgs,
+      { db }: { db: Database }
+    ): Promise<PlaylistArgsData | null> => {
+      try {
+        if (!viewer) {
+          return null;
+        }
+
+        const data: PlaylistArgsData = {
+          total: 0,
+          result: []
+        }
+
+        let cursor = await db.playlists.find({
+          creator: { $in: [viewer && viewer._id ? viewer._id : "1010"] }
+        });
+
+        cursor = cursor.skip(page > 0 ? (page - 1) * limit : 0);
+        cursor = cursor.limit(limit);
+
+        data.total = await cursor.count();
+        data.result = await cursor.toArray();
+
+        return data;
+      } catch (e) {
+        throw new Error(`Failed to query user playlists: ${e}`);
+      }
     }
   }
 };

@@ -6,6 +6,7 @@ import { AppBar, Box, Toolbar, IconButton, Typography, Button, Avatar, Tooltip, 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Viewer } from '../../lib/types';
 import { DisplaySuccess } from '../../lib/utils';
+import { Link } from 'react-router-dom'
 
 interface Props {
   viewer: Viewer;
@@ -103,7 +104,9 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
             >
               <AccountCircleIcon />
             </IconButton>
-            <Button color="inherit">Login</Button>
+            <Link to={`/login`} >
+              <Button color="inherit">Login</Button>
+            </Link>
           </>
         )}
         </Toolbar>

@@ -33,6 +33,7 @@ export interface User {
 export interface Database {
   lessons: Collection<Lesson>;
   users: Collection<User>;
+  playlists: Collection<Playlist>;
 }
 
 export interface Viewer {
@@ -41,4 +42,5 @@ export interface Viewer {
   avatar?: string;
   walletId?: string;
   didRequest: boolean;
+  playlists?: Playlist[];
 }
