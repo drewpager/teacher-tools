@@ -6,6 +6,11 @@ export const LESSON = gql`
       id
       category
       title
+      meta
+      video
+      image
+      startDate
+      endDate
     }
   }
 `;

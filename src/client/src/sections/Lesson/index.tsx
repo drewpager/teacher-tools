@@ -6,10 +6,8 @@ import {
 } from '../../lib/graphql/queries/Lesson/__generated__/Lesson';
 import { useQuery } from '@apollo/react-hooks';
 import { useParams } from 'react-router-dom';
-
-interface MatchParams {
-  id: string;
-}
+import { LinearProgress } from '@mui/material';
+import { DisplayError } from '../../lib/utils/alerts/displayError';
 
 export const Lesson = () => {
   const params = useParams()
@@ -21,13 +19,15 @@ export const Lesson = () => {
 
   if (loading) {
     return (
-      <h2>Loading...</h2>
+      <LinearProgress color='success'/>
     )
   }
 
   if (error) {
     return (
-      <h2>ERROR!</h2>
+      <>
+        <DisplayError title='Failed to load lesson' />
+      </>
     )
   }
 
@@ -36,6 +36,7 @@ export const Lesson = () => {
   return (
     <>
       <h1>Lesson: {lesson?.id}</h1>
+      <img src={`${lesson?.image}`} alt={`Text overlay of ${lesson?.title}`} />
       <h2>{lesson?.title}</h2>
     </>
   )

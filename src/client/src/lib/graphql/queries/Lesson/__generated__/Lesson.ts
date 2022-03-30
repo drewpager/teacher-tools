@@ -11,6 +11,11 @@ export interface Lesson_lesson {
   id: string | null;
   category: (string | null)[] | null;
   title: string | null;
+  meta: string | null;
+  video: string | null;
+  image: string | null;
+  startDate: number | null;
+  endDate: number | null;
 }
 
 export interface Lesson {

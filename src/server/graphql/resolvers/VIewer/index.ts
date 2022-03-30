@@ -51,7 +51,7 @@ const logInViaGoogle = async (
         avatar: userAvatar,
         contact: userEmail,
         watched: [],
-        walletId: "2020",
+        paymentId: "2020",
         playlists: []
       }
     }
@@ -67,7 +67,7 @@ const logInViaGoogle = async (
         avatar: userAvatar,
         contact: userEmail,
         watched: [],
-        walletId: "1010",
+        paymentId: "1010",
         playlists: []
       });
       viewer = await db.users.findOne({ _id: updateResponse.insertedId });
@@ -142,7 +142,7 @@ export const viewerResolvers = {
           _id: viewer._id,
           token: viewer.token,
           avatar: viewer.avatar,
-          walletId: viewer.walletId,
+          paymentId: viewer.paymentId,
           didRequest: true,
         };
       } catch (error) {
@@ -166,8 +166,8 @@ export const viewerResolvers = {
     id: (viewer: Viewer): string | undefined => {
       return viewer._id?.toString();
     },
-    hasWallet: (viewer: Viewer): boolean | undefined => {
-      return viewer.walletId ? true : undefined;
+    hasPayment: (viewer: Viewer): boolean | undefined => {
+      return viewer.paymentId ? true : undefined;
     },
     playlists: async (
       viewer: Viewer,

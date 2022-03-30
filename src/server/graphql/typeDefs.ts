@@ -5,9 +5,19 @@ export const typeDefs = gql`
     id: ID
     token: String
     avatar: String
-    hasWallet: Boolean
+    hasPayment: Boolean
     didRequest: Boolean!
     playlists: [Playlist]
+  }
+
+  type User {
+    id: ID!
+    name: String!
+    avatar: String!
+    contact: String!
+    hasPayment: Boolean!
+    playlists: [Playlist]
+    lessons: [Lesson]
   }
 
   type Lesson {

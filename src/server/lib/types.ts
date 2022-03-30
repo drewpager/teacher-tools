@@ -26,7 +26,7 @@ export interface User {
   avatar: string;
   contact: string;
   watched: string[];
-  walletId?: string;
+  paymentId?: string;
   playlists?: Playlist[];
 }
 
@@ -40,7 +40,7 @@ export interface Viewer {
   _id?: string;
   token?: string;
   avatar?: string;
-  walletId?: string;
+  paymentId?: string;
   didRequest: boolean;
   playlists?: Playlist[];
 }

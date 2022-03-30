@@ -1,4 +1,4 @@
-import { Database, Lesson, Playlist, Viewer } from '../../../lib/types'
+import { Database, Lesson, Playlist } from '../../../lib/types'
 import { LessonArgs } from './types';
 import { authorize } from '../../../lib/utils/index';
 import { Request } from 'express';
