@@ -8,6 +8,7 @@ export const typeDefs = gql`
     hasPayment: Boolean
     didRequest: Boolean!
     playlists: [Playlist]
+    lessons: [Lesson]
   }
 
   type User {
@@ -16,8 +17,8 @@ export const typeDefs = gql`
     avatar: String!
     contact: String!
     hasPayment: Boolean!
-    playlists: [Playlist]
-    lessons: [Lesson]
+    playlists(limit: Int!, page: Int!): Playlists
+    lessons(limit: Int!, page: Int!): Lessons
   }
 
   type Lesson {
@@ -29,6 +30,12 @@ export const typeDefs = gql`
     image: String
     startDate: Int
     endDate: Int
+    creator: String
+  }
+
+  type Lessons {
+    total: Int!
+    result: [Lesson!]!
   }
 
   type Playlist {
@@ -38,10 +45,15 @@ export const typeDefs = gql`
     creator: String!
     authorized: Boolean
   }
+
+  type Playlists {
+    total: Int!
+    result: [Playlist!]!
+  }
   
   type Query {
     authUrl: String!
-    user(id: ID!): String!
+    user(id: ID!): User!
     lesson(id: ID!): Lesson!
   }
 

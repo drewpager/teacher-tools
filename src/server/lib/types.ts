@@ -9,6 +9,7 @@ export interface Lesson {
   image: string;
   startDate: number;
   endDate: number;
+  creator: string;
 }
 
 export interface Playlist {
@@ -28,6 +29,8 @@ export interface User {
   watched: string[];
   paymentId?: string;
   playlists?: Playlist[];
+  lessons?: Lesson[];
+  authorized?: boolean;
 }
 
 export interface Database {
@@ -43,4 +46,5 @@ export interface Viewer {
   paymentId?: string;
   didRequest: boolean;
   playlists?: Playlist[];
+  lessons?: Lesson[];
 }
