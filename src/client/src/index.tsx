@@ -32,7 +32,7 @@ const initialViewer: Viewer = {
   id: null,
   token: null,
   avatar: null,
-  hasWallet: null,
+  hasPayment: null,
   didRequest: false
 }
 
