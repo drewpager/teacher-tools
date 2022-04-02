@@ -9,11 +9,7 @@ import cors from 'cors';
 
 const corsOptions = {
   credentials: true,
-  // origin: ["http://localhost:3000", "http://localhost:9000"],
   preflightContinue: true
-  // methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-  // allowHeaders: ["Content-Type", "application/json"],
-  // optionsSuccessStatus: 204,
 }
 
 const mount = async (app: Application) => {
