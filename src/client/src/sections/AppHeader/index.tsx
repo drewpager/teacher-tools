@@ -58,9 +58,11 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
             sx={{ mr: 2 }}
           >
           </IconButton>
-          <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
-              Teacher Tools
-          </Typography>
+            <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
+              <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+                Plato's Peach
+              </Link>
+            </Typography>
           {viewer && viewer.avatar ? (
             <>
               <Tooltip title="User Settings">
@@ -85,7 +87,9 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                 onClose={handleCloseUserMenu}
               >
                 <MenuItem onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">Profile</Typography>
+                  <Link to={`/user/${viewer.id}`} style={{ textDecoration: "none", color: 'black' }}>
+                    <Typography textAlign="center">Profile</Typography>
+                  </Link>
                 </MenuItem>
                 <MenuItem onClick={handleLogOut}>
                   <Typography textAlign="center">Logout</Typography>
