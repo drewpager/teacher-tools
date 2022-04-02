@@ -20,6 +20,7 @@ const seed = async () => {
         image: "https://res.cloudinary.com/drewpager/image/upload/v1637073017/paleolithic-age.png",
         startDate: -2500000,
         endDate: -10000,
+        creator: "001"
       },
       {
         _id: new ObjectId,
@@ -30,6 +31,7 @@ const seed = async () => {
         image: "https://res.cloudinary.com/drewpager/image/upload/v1638115001/mesolithic-period.png",
         startDate: -10000,
         endDate: -8000,
+        creator: "001"
       },
       {
         _id: new ObjectId,
@@ -40,6 +42,7 @@ const seed = async () => {
         image: "https://res.cloudinary.com/drewpager/image/upload/v1630419045/cleopatra.png",
         startDate: -69,
         endDate: -30,
+        creator: "001"
       }
     ];
 
@@ -67,6 +70,7 @@ const seed = async () => {
                 image: "https://res.cloudinary.com/drewpager/image/upload/v1638115001/mesolithic-period.png",
                 startDate: -10000,
                 endDate: -8000,
+                creator: "001"
               },
               {
                 _id: new ObjectId,
@@ -77,6 +81,7 @@ const seed = async () => {
                 image: "https://res.cloudinary.com/drewpager/image/upload/v1637073017/paleolithic-age.png",
                 startDate: -2500000,
                 endDate: -10000,
+                creator: "001"
               }
             ]
           }
@@ -105,6 +110,7 @@ const seed = async () => {
                 image: "https://res.cloudinary.com/drewpager/image/upload/v1638115001/mesolithic-period.png",
                 startDate: -10000,
                 endDate: -8000,
+                creator: "001"
               },
               {
                 _id: new ObjectId,
@@ -115,6 +121,7 @@ const seed = async () => {
                 image: "https://res.cloudinary.com/drewpager/image/upload/v1630419045/cleopatra.png",
                 startDate: -69,
                 endDate: -30,
+                creator: "001"
               }
             ]
           },
@@ -132,6 +139,7 @@ const seed = async () => {
                 image: "https://res.cloudinary.com/drewpager/image/upload/v1638115001/mesolithic-period.png",
                 startDate: -10000,
                 endDate: -8000,
+                creator: "001"
               },
               {
                 _id: new ObjectId,
@@ -142,6 +150,7 @@ const seed = async () => {
                 image: "https://res.cloudinary.com/drewpager/image/upload/v1630419045/cleopatra.png",
                 startDate: -69,
                 endDate: -30,
+                creator: "001"
               }
             ]
           },
@@ -164,6 +173,7 @@ const seed = async () => {
             image: "https://res.cloudinary.com/drewpager/image/upload/v1638115001/mesolithic-period.png",
             startDate: -10000,
             endDate: -8000,
+            creator: "001"
           },
           {
             _id: new ObjectId,
@@ -174,6 +184,7 @@ const seed = async () => {
             image: "https://res.cloudinary.com/drewpager/image/upload/v1630419045/cleopatra.png",
             startDate: -69,
             endDate: -30,
+            creator: "001"
           }
         ]
       },
@@ -191,6 +202,7 @@ const seed = async () => {
             image: "https://res.cloudinary.com/drewpager/image/upload/v1638115001/mesolithic-period.png",
             startDate: -10000,
             endDate: -8000,
+            creator: "001"
           },
           {
             _id: new ObjectId,
@@ -201,6 +213,7 @@ const seed = async () => {
             image: "https://res.cloudinary.com/drewpager/image/upload/v1630419045/cleopatra.png",
             startDate: -69,
             endDate: -30,
+            creator: "001"
           }
         ]
       },
