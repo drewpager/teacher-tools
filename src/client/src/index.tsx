@@ -82,7 +82,7 @@ const App = () => {
         <Route path="/teach" element={<Teach />} />
         <Route path="/lesson/:id" element={<Lesson />} />
         <Route path="/lessons/:filter?" element={<Lessons title="Teacher Tools" />} />
-        <Route path="/user/:id" element={<User />} />
+        <Route path="/user/:id" children={(props: any) => (<User {...props} viewer={viewer} />)} element={<User viewer={viewer} />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/login" children={(props: any) => (<Login {...props} setViewer={setViewer} />)} element={<Login setViewer={setViewer} />} />
