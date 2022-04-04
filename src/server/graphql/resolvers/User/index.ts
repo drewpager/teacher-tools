@@ -81,7 +81,9 @@ export const userResolvers = {
           result: []
         }
 
-        let cursor = await db.lessons.find({ id: { $in: user.lessons }})
+        let cursor = await db.lessons.find({ creator: 
+          { $in: [user && user._id ? user._id : "0"] }
+        })
 
         cursor = cursor.skip(page > 0 ? (page - 1) * limit : 0);
         cursor = cursor.limit(limit);
