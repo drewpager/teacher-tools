@@ -31,7 +31,7 @@ const seed = async () => {
         image: "https://res.cloudinary.com/drewpager/image/upload/v1638115001/mesolithic-period.png",
         startDate: -10000,
         endDate: -8000,
-        creator: "001"
+        creator: "5d378db94e84753160e08b54"
       },
       {
         _id: new ObjectId,
@@ -42,7 +42,7 @@ const seed = async () => {
         image: "https://res.cloudinary.com/drewpager/image/upload/v1630419045/cleopatra.png",
         startDate: -69,
         endDate: -30,
-        creator: "001"
+        creator: "5d378db94e84753160e08b54"
       }
     ];
 
@@ -55,6 +55,30 @@ const seed = async () => {
           "https://cloudinary-res.cloudinary.com/image/upload/bo_1px_solid_rgb:eee,c_thumb,dpr_2.0,f_auto,fl_lossy,g_face,h_42,q_auto,r_max,w_42,z_0.8/profile_nadav_soferman.jpg",
         contact: "drew@siegemedia.com",
         watched: ["https://youtu.be/ll5LTsveyG4"],
+        lessons: [
+          {
+            _id: new ObjectId,
+            category: ["Prehistory", "World History"],
+            title: "The Mesolithic Period of Early Man",
+            meta: "The Mesolithic period is nestled between the Paleolithic and Neolithic periods and saw the rise of agriculture and animal husbandry to replace the prevailing hunter-gatherer culture, which archeologists and historians believe was an unevenly-embraced advance.  ",
+            video: "https://youtu.be/1HL-aO2FGb4",
+            image: "https://res.cloudinary.com/drewpager/image/upload/v1638115001/mesolithic-period.png",
+            startDate: -10000,
+            endDate: -8000,
+            creator: "5d378db94e84753160e08b54"
+          },
+          {
+            _id: new ObjectId,
+            category: ["Egypt"],
+            title: "Cleopatra",
+            meta: "Cleopatra the 7th was known for her exotic beauty and powers of seduction during her three-decade reign over Egypt, despite repeated attempts to overthrow her rule.",
+            video: "https://youtu.be/ll5LTsveyG4",
+            image: "https://res.cloudinary.com/drewpager/image/upload/v1630419045/cleopatra.png",
+            startDate: -69,
+            endDate: -30,
+            creator: "5d378db94e84753160e08b54"
+          }
+        ],
         playlists: [
           {
             _id: new ObjectId,

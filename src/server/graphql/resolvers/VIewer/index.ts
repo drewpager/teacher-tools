@@ -1,16 +1,16 @@
-import { Viewer, Database, User } from '../../../lib/types';
-import { Google } from '../../../lib/api';
-import { LogInArgs, PlaylistArgs, PlaylistArgsData } from './types';
-import crypto from 'crypto';
-import { Response, Request } from 'express';
+import { Viewer, Database, User } from "../../../lib/types";
+import { Google } from "../../../lib/api";
+import { LogInArgs, PlaylistArgs, PlaylistArgsData } from "./types";
+import crypto from "crypto";
+import { Response, Request } from "express";
 
 const cookieOptions = {
   httpOnly: true,
   sameSite: true,
   signed: true,
   secure: false,
-  domain: 'localhost'
-}
+  domain: "localhost",
+};
 
 const logInViaGoogle = async (
   code: string,
@@ -23,22 +23,30 @@ const logInViaGoogle = async (
   if (!user) {
     throw new Error(`Failed to log in with Google!`);
   }
-  
+
   const userNamesList = user.names && user.names.length ? user.names : null;
   const userPhotosList = user.photos && user.photos.length ? user.photos : null;
-  const userEmailList = user.emailAddresses && user.emailAddresses.length ? user.emailAddresses : null;
+  const userEmailList =
+    user.emailAddresses && user.emailAddresses.length
+      ? user.emailAddresses
+      : null;
 
   const userName = userNamesList ? userNamesList[0].displayName : null;
 
-  const userId = userNamesList && userNamesList[0].metadata && userNamesList[0].metadata.source
-    ? userNamesList[0].metadata.source.id
-    : null;
+  const userId =
+    userNamesList &&
+    userNamesList[0].metadata &&
+    userNamesList[0].metadata.source
+      ? userNamesList[0].metadata.source.id
+      : null;
 
-  const userAvatar = userPhotosList && userPhotosList[0].url ? userPhotosList[0].url : null;
+  const userAvatar =
+    userPhotosList && userPhotosList[0].url ? userPhotosList[0].url : null;
 
-  const userEmail = userEmailList && userEmailList[0].value ? userEmailList[0].value : null;
+  const userEmail =
+    userEmailList && userEmailList[0].value ? userEmailList[0].value : null;
 
-  if (!userName || !userId || !userAvatar || !userEmail ) {
+  if (!userName || !userId || !userAvatar || !userEmail) {
     throw new Error("Google Log In Error!");
   }
 
@@ -52,12 +60,12 @@ const logInViaGoogle = async (
         contact: userEmail,
         watched: [],
         paymentId: "2020",
-        playlists: []
-      }
+        playlists: [],
+      },
     }
   );
   let viewer = updateRes.value;
-  
+
   if (!viewer) {
     try {
       const updateResponse = await db.users.insertOne({
@@ -68,7 +76,7 @@ const logInViaGoogle = async (
         contact: userEmail,
         watched: [],
         paymentId: "1010",
-        playlists: []
+        playlists: [],
       });
       viewer = await db.users.findOne({ _id: updateResponse.insertedId });
       if (viewer) {
@@ -80,10 +88,10 @@ const logInViaGoogle = async (
   }
 
   if (viewer) {
-    res.cookie('viewer', userId, { 
-        ...cookieOptions, 
-        maxAge: 365 * 24 * 60 * 60 * 1000,
-      })
+    res.cookie("viewer", userId, {
+      ...cookieOptions,
+      maxAge: 365 * 24 * 60 * 60 * 1000,
+    });
   } else {
     throw new Error("Failed to return viewer object!");
   }
@@ -100,11 +108,11 @@ const logInViaCookie = async (
     { _id: req.signedCookies.viewer },
     { $set: { token } }
   );
-  
+
   const viewer = updateCook.value;
 
   if (!viewer) {
-    res.clearCookie('viewer', { ...cookieOptions });
+    res.clearCookie("viewer", { ...cookieOptions });
   } else {
     return viewer;
   }
@@ -118,13 +126,13 @@ export const viewerResolvers = {
       } catch (err) {
         throw new Error(`Failed to authenticate with Google: ${err}`);
       }
-    }
+    },
   },
   Mutation: {
     logIn: async (
       _root: undefined,
       { input }: LogInArgs,
-      { db, req, res }: { db: Database, req: Request, res: Response },
+      { db, req, res }: { db: Database; req: Request; res: Response }
     ): Promise<Viewer> => {
       try {
         const code = input ? input.code : null;
@@ -155,12 +163,12 @@ export const viewerResolvers = {
       { res }: { res: Response }
     ): Viewer => {
       try {
-        res.clearCookie('viewer', { ...cookieOptions });
+        res.clearCookie("viewer", { ...cookieOptions });
         return { didRequest: true };
       } catch (err) {
         throw new Error(`Failed to log out user: ${err}`);
       }
-    }
+    },
   },
   Viewer: {
     id: (viewer: Viewer): string | undefined => {
@@ -181,11 +189,11 @@ export const viewerResolvers = {
 
         const data: PlaylistArgsData = {
           total: 0,
-          result: []
-        }
+          result: [],
+        };
 
         let cursor = await db.playlists.find({
-          creator: { $in: [viewer && viewer._id ? viewer._id : "1010"] }
+          creator: { $in: [viewer && viewer._id ? viewer._id : "1010"] },
         });
 
         cursor = cursor.skip(page > 0 ? (page - 1) * limit : 0);
@@ -198,6 +206,6 @@ export const viewerResolvers = {
       } catch (e) {
         throw new Error(`Failed to query user playlists: ${e}`);
       }
-    }
-  }
+    },
+  },
 };
