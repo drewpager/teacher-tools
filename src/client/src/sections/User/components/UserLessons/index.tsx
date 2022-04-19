@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import { LessonCard } from '../../../../lib/components/';
-import { List, ListItem, Pagination } from '@mui/material';
+import { Box, List, ListItem, Pagination } from '@mui/material';
 // import { User_user_lessons as User } from '../../../../lib/graphql/queries/User/__generated__/User';
 import { Lessons } from '../../../../graphql/generated';
 
@@ -19,7 +19,7 @@ export const UserLessons = ({ userLessons, lessonsPage, limit, setLessonsPage }:
   }
 
   const userLessonsList = (
-    <>
+    <Box sx={{ marginLeft: 5 }}>
       <h2>{total} Lessons</h2>
       <List sx={{ width: '100%' }}>
         {result.map((value: any, index) => (
@@ -33,7 +33,7 @@ export const UserLessons = ({ userLessons, lessonsPage, limit, setLessonsPage }:
         page={lessonsPage}
         onChange={handleChange}
       />
-    </>
+    </Box>
   )
 
   return (

@@ -48,9 +48,9 @@ export const userResolvers = {
       { db }: { db: Database }
     ): Promise<UserPlaylistData | null> => {
       try {
-        if (!user.authorized) {
-          return null;
-        }
+        // if (!user.authorized) {
+        //   return null;
+        // }
 
         const data: UserPlaylistData = {
           total: 0,
