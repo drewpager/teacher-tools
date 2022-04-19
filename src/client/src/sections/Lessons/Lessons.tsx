@@ -3,6 +3,7 @@ import React from 'react';
 import { gql } from 'graphql-tag';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { Lessons as LessonsData } from './__generated__/Lessons';
+// import { Lessons as LessonsData } from '../../../bin/graphql/generated';
 import { DeleteLesson as DeleteLessonData, DeleteLessonVariables } from './__generated__/DeleteLesson';
 import { Button, List, ListItem, Avatar, CircularProgress, Alert, Skeleton }  from '@mui/material';
 import Container from '@mui/material/Container';

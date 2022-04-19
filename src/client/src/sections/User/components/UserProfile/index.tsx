@@ -1,8 +1,9 @@
 import { Card, Typography, Avatar, Box, Button, Divider } from '@mui/material';
-import { User as UserData } from '../../../../lib/graphql/queries/User/__generated__/User'
+// import { User as UserData } from '../../../../lib/graphql/queries/User/__generated__/User'
+import { User } from '../../../../graphql/generated';
 
 interface Props {
-  user: UserData["user"];
+  user: User;
   viewerIsUser: boolean;
 }
 

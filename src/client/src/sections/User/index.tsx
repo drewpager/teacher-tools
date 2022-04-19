@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/react-hooks';
-import { USER } from '../../lib/graphql/queries/User/';
-import { User as UserData, UserVariables } from '../../lib/graphql/queries/User/__generated__/User';
+// import { useQuery } from '@apollo/react-hooks';
+// import { USER } from '../../lib/graphql/queries/User/';
+// import { User as UserData, UserVariables } from '../../lib/graphql/queries/User/__generated__/User';
+// import { User as UserQuery, UserQueryVariables } from '../../../bin/graphql/generated';
+import { useUserQuery } from '../../graphql/generated';
 import { UserProfile, UserLessons, UserPlaylists } from './components/';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
 import { Viewer } from '../../lib/types';
@@ -19,7 +21,8 @@ export const User = ({ viewer }: Props) => {
   const PAGE_LIMIT = 4;
 
   const params = useParams();
-  const { data, loading, error } = useQuery<UserData, UserVariables>(USER, {
+
+  const { data, loading, error } = useUserQuery({
     variables: {
       id: `${params.id}`,
       playlistsPage,
@@ -30,12 +33,11 @@ export const User = ({ viewer }: Props) => {
 
   const user = data ? data.user : null;
   
-  console.log("User: ", user)
-  const userLessons = user ? user.lessons : null;
-  const userPlaylists = user ? user.playlists : null;
-  
   const viewerIsUser = viewer.id === params.id;
   const UserProfileElement = user ? <UserProfile user={user} viewerIsUser={viewerIsUser} /> : null;
+
+  const userLessons = user ? user.lessons : null;
+  const userPlaylists = user ? user.playlists : null;
 
   const userLessonsElement = userLessons ? (
     <UserLessons

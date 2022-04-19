@@ -1,8 +1,8 @@
 import React, { ChangeEvent } from 'react';
-import { User_user_playlists as User } from '../../../../lib/graphql/queries/User/__generated__/User';
+import { Playlists } from '../../../../graphql/generated';
 
 interface Props {
-  userPlaylists: User;
+  userPlaylists: Playlists;
   playlistsPage: number;
   limit: number;
   setPlaylistsPage: (page: number) => void;
@@ -17,9 +17,12 @@ export const UserPlaylists = ({ userPlaylists, playlistsPage, limit, setPlaylist
 
   const userPlaylistsList = (
     result.map((value: any) => (
-      <ul>
-        <li key={value}>{value}</li>
-      </ul>
+      <>
+        <h2>{total} Playlists</h2>
+        <ul>
+          <li key={value}>{value}</li>
+        </ul>
+      </>
     ))
   );
 

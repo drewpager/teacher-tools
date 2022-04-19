@@ -13,12 +13,14 @@ export const USER = gql`
         result {
           id
           name
+          creator
           plan {
             id
             title
             video
             startDate
             endDate
+            creator
           }
         }
       }
