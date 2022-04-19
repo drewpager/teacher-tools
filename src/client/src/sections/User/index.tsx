@@ -32,8 +32,6 @@ export const User = ({ viewer }: Props) => {
   });
 
   const user = data ? data.user : null;
-
-  console.log("User: ", user);
   
   const viewerIsUser = viewer.id === params.id;
   const UserProfileElement = user ? <UserProfile user={user} viewerIsUser={viewerIsUser} /> : null;

@@ -1,4 +1,4 @@
-import { Playlist, Lesson } from "../../../lib/types";
+import { Playlist } from "../../../lib/types";
 
 export interface LogInArgs {
   input: { code: string } | null;

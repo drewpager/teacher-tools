@@ -69,11 +69,17 @@ export type Query = {
   __typename?: 'Query';
   authUrl: Scalars['String'];
   lesson: Lesson;
+  playlist: Playlist;
   user: User;
 };
 
 
 export type QueryLessonArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryPlaylistArgs = {
   id: Scalars['ID'];
 };
 
@@ -139,6 +145,13 @@ export type LessonQueryVariables = Exact<{
 
 
 export type LessonQuery = { __typename?: 'Query', lesson: { __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: number | null, endDate?: number | null } };
+
+export type PlaylistQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type PlaylistQuery = { __typename?: 'Query', playlist: { __typename?: 'Playlist', id?: string | null, name: string, creator: string, plan: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: number | null, endDate?: number | null, creator?: string | null } | null> } };
 
 export type UserQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -298,6 +311,54 @@ export function useLessonLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Les
 export type LessonQueryHookResult = ReturnType<typeof useLessonQuery>;
 export type LessonLazyQueryHookResult = ReturnType<typeof useLessonLazyQuery>;
 export type LessonQueryResult = Apollo.QueryResult<LessonQuery, LessonQueryVariables>;
+export const PlaylistDocument = gql`
+    query Playlist($id: ID!) {
+  playlist(id: $id) {
+    id
+    name
+    creator
+    plan {
+      id
+      category
+      title
+      meta
+      video
+      image
+      startDate
+      endDate
+      creator
+    }
+  }
+}
+    `;
+
+/**
+ * __usePlaylistQuery__
+ *
+ * To run a query within a React component, call `usePlaylistQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePlaylistQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePlaylistQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function usePlaylistQuery(baseOptions: Apollo.QueryHookOptions<PlaylistQuery, PlaylistQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PlaylistQuery, PlaylistQueryVariables>(PlaylistDocument, options);
+      }
+export function usePlaylistLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PlaylistQuery, PlaylistQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PlaylistQuery, PlaylistQueryVariables>(PlaylistDocument, options);
+        }
+export type PlaylistQueryHookResult = ReturnType<typeof usePlaylistQuery>;
+export type PlaylistLazyQueryHookResult = ReturnType<typeof usePlaylistLazyQuery>;
+export type PlaylistQueryResult = Apollo.QueryResult<PlaylistQuery, PlaylistQueryVariables>;
 export const UserDocument = gql`
     query User($id: ID!, $playlistsPage: Int!, $lessonsPage: Int!, $limit: Int!) {
   user(id: $id) {

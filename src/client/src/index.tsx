@@ -19,7 +19,7 @@ import {
   LogInVariables
 } from '../src/lib/graphql/mutations/LogIn/__generated__/LogIn';
 
-import { Home, Teach, Lesson, Lessons, NotFound, User, Terms, Privacy, Login, AppHeader } from './sections';
+import { Home, Teach, Lesson, Lessons, NotFound, User, Terms, Privacy, Login, AppHeader, Playlist } from './sections';
 import { DisplayError } from './lib/utils';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
@@ -86,6 +86,7 @@ const App = () => {
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/login" children={(props: any) => (<Login {...props} setViewer={setViewer} />)} element={<Login setViewer={setViewer} />} />
+        <Route path="/playlist/:id" element={<Playlist />} />
         <Route element={<NotFound />} />
       </Routes>
     </Router>

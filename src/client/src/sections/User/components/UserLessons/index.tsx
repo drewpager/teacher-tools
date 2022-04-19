@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import { LessonCard } from '../../../../lib/components/';
 import { Box, List, ListItem, Pagination } from '@mui/material';
-// import { User_user_lessons as User } from '../../../../lib/graphql/queries/User/__generated__/User';
+import { Link } from 'react-router-dom';
 import { Lessons } from '../../../../graphql/generated';
 
 interface Props {
@@ -23,9 +23,11 @@ export const UserLessons = ({ userLessons, lessonsPage, limit, setLessonsPage }:
       <h2>{total} Lessons</h2>
       <List sx={{ width: '100%' }}>
         {result.map((value: any, index) => (
-          <ListItem key={index}>
-            <LessonCard lesson={value} />
-          </ListItem>
+          <Link to={`/lesson/${value.id}`}>
+            <ListItem key={index}>
+              <LessonCard lesson={value} />
+            </ListItem>
+          </Link>
         ))}
       </List>
       <Pagination 

@@ -1,12 +1,12 @@
 import React from 'react';
-import { useLessonQuery } from '../../graphql/generated';
+import { usePlaylistQuery } from '../../graphql/generated';
 import { useParams } from 'react-router-dom';
 import { LinearProgress } from '@mui/material';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
 
-export const Lesson = () => {
+export const Playlist = () => {
   const params = useParams()
-  const { loading, data, error } = useLessonQuery({
+  const { data, loading, error } = usePlaylistQuery({
     variables: {
       id: `${params.id}`
     }
@@ -21,18 +21,17 @@ export const Lesson = () => {
   if (error) {
     return (
       <>
-        <DisplayError title='Failed to load lesson' />
+        <DisplayError title='Failed to load playlist' />
       </>
     )
   }
 
-  const lesson = data ? data.lesson : null;
+  const playlist = data ? data.playlist : null;
   
   return (
     <>
-      <h1>Lesson: {lesson?.id}</h1>
-      <img src={`${lesson?.image}`} alt={`Text overlay of ${lesson?.title}`} />
-      <h2>{lesson?.title}</h2>
+      <h1>Playlist: {playlist?.name}</h1>
+      <h2>{playlist?.id}</h2>
     </>
   )
 }
