@@ -1,8 +1,9 @@
 import React from 'react';
 import { usePlaylistQuery } from '../../graphql/generated';
 import { useParams } from 'react-router-dom';
-import { LinearProgress } from '@mui/material';
+import { Box, LinearProgress  } from '@mui/material';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
+import { PlaylistCard } from '../../lib/components/PlaylistCard';
 
 export const Playlist = () => {
   const params = useParams()
@@ -27,11 +28,15 @@ export const Playlist = () => {
   }
 
   const playlist = data ? data.playlist : null;
-  
+
+  console.log(playlist?.plan)
+
   return (
-    <>
-      <h1>Playlist: {playlist?.name}</h1>
-      <h2>{playlist?.id}</h2>
-    </>
+    <Box sx={{ margin: 5 }}>
+      <h2>{playlist?.name}</h2>
+      {playlist?.plan.map((lesson) => (
+        <PlaylistCard {...lesson} />
+      ))}
+    </Box>
   )
 }
