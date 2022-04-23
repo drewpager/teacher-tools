@@ -7,8 +7,8 @@ import { Lesson } from '../../../graphql/generated';
 export const PlaylistCard = (lesson: Lesson) => {
   const [expanded, setExpanded] = useState<string | false>(false);
 
-  const handleChange = (panel: string) => (event: SyntheticEvent, isExpanded: boolean) => {
-    setExpanded(isExpanded ? panel : false);
+  const handleChange = (panel: string) => (event: SyntheticEvent, newExpanded: boolean) => {
+    setExpanded(newExpanded ? panel : false);
   }
   
   return (
@@ -37,10 +37,9 @@ export const PlaylistCard = (lesson: Lesson) => {
       <Grid item xs={8}>
         <Box>
           {expanded ? (
-          <Card sx={{ justifySelf: 'top', marginBottom: 1 }}>
+          <Card sx={{ position: 'absolute', top: 160, width: 900, height: 500, marginBottom: 1 }}>
             <CardMedia 
               component="video"
-              width="350"
               src={`${lesson.video}`}
             />
           </Card>

@@ -67,10 +67,17 @@ export type Playlists = {
 
 export type Query = {
   __typename?: 'Query';
+  allplaylists: Playlists;
   authUrl: Scalars['String'];
   lesson: Lesson;
   playlist: Playlist;
   user: User;
+};
+
+
+export type QueryAllplaylistsArgs = {
+  limit: Scalars['Int'];
+  page: Scalars['Int'];
 };
 
 
@@ -152,6 +159,14 @@ export type PlaylistQueryVariables = Exact<{
 
 
 export type PlaylistQuery = { __typename?: 'Query', playlist: { __typename?: 'Playlist', id?: string | null, name: string, creator: string, plan: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: number | null, endDate?: number | null, creator?: string | null } | null> } };
+
+export type AllPlaylistsQueryVariables = Exact<{
+  limit: Scalars['Int'];
+  page: Scalars['Int'];
+}>;
+
+
+export type AllPlaylistsQuery = { __typename?: 'Query', allplaylists: { __typename?: 'Playlists', total: number, result: Array<{ __typename?: 'Playlist', id?: string | null, name: string, creator: string, plan: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: number | null, endDate?: number | null, creator?: string | null } | null> }> } };
 
 export type UserQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -359,6 +374,58 @@ export function usePlaylistLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<P
 export type PlaylistQueryHookResult = ReturnType<typeof usePlaylistQuery>;
 export type PlaylistLazyQueryHookResult = ReturnType<typeof usePlaylistLazyQuery>;
 export type PlaylistQueryResult = Apollo.QueryResult<PlaylistQuery, PlaylistQueryVariables>;
+export const AllPlaylistsDocument = gql`
+    query AllPlaylists($limit: Int!, $page: Int!) {
+  allplaylists(limit: $limit, page: $page) {
+    total
+    result {
+      id
+      name
+      creator
+      plan {
+        id
+        category
+        title
+        meta
+        video
+        image
+        startDate
+        endDate
+        creator
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useAllPlaylistsQuery__
+ *
+ * To run a query within a React component, call `useAllPlaylistsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllPlaylistsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllPlaylistsQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      page: // value for 'page'
+ *   },
+ * });
+ */
+export function useAllPlaylistsQuery(baseOptions: Apollo.QueryHookOptions<AllPlaylistsQuery, AllPlaylistsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllPlaylistsQuery, AllPlaylistsQueryVariables>(AllPlaylistsDocument, options);
+      }
+export function useAllPlaylistsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllPlaylistsQuery, AllPlaylistsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllPlaylistsQuery, AllPlaylistsQueryVariables>(AllPlaylistsDocument, options);
+        }
+export type AllPlaylistsQueryHookResult = ReturnType<typeof useAllPlaylistsQuery>;
+export type AllPlaylistsLazyQueryHookResult = ReturnType<typeof useAllPlaylistsLazyQuery>;
+export type AllPlaylistsQueryResult = Apollo.QueryResult<AllPlaylistsQuery, AllPlaylistsQueryVariables>;
 export const UserDocument = gql`
     query User($id: ID!, $playlistsPage: Int!, $lessonsPage: Int!, $limit: Int!) {
   user(id: $id) {

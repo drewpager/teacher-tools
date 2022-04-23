@@ -3,7 +3,7 @@ import { usePlaylistQuery } from '../../graphql/generated';
 import { useParams } from 'react-router-dom';
 import { Box, LinearProgress  } from '@mui/material';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
-import { PlaylistCard } from '../../lib/components/PlaylistCard';
+import { PlaylistCard, Search } from '../../lib/components/';
 
 export const Playlist = () => {
   const params = useParams()
@@ -22,6 +22,9 @@ export const Playlist = () => {
   if (error) {
     return (
       <>
+        <h2>Playist Not Found</h2>
+        <h4>Here are a few available playlists or you can try searching again.</h4>
+        <Search />
         <DisplayError title='Failed to load playlist' />
       </>
     )

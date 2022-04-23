@@ -115,7 +115,6 @@ ReactDOM.render(
   <ThemeProvider theme={theme}>
     <ApolloProvider client={client}>
       <App />
-      {/* <Lessons title="Teacher Tools" /> */}
     </ApolloProvider>
     <CssBaseline />
   </ThemeProvider>,

@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-express';
+import { gql } from "apollo-server-express";
 
 export const typeDefs = gql`
   type Viewer {
@@ -50,12 +50,13 @@ export const typeDefs = gql`
     total: Int!
     result: [Playlist!]!
   }
-  
+
   type Query {
     authUrl: String!
     user(id: ID!): User!
     lesson(id: ID!): Lesson!
     playlist(id: ID!): Playlist!
+    allplaylists(limit: Int!, page: Int!): Playlists!
   }
 
   type Mutation {
