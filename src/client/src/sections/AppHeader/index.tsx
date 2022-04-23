@@ -4,7 +4,7 @@ import { LOG_OUT } from '../../lib/graphql/mutations/LogOut';
 import { LogOut as LogOutData } from '../../lib/graphql/mutations/LogOut/__generated__/LogOut';
 import { AppBar, Box, Toolbar, IconButton, Typography, Button, Avatar, Tooltip, Menu, MenuItem } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { Viewer } from '../../lib/types';
+import { Viewer } from '../../graphql/generated';
 import { DisplaySuccess } from '../../lib/utils';
 import { Link } from 'react-router-dom'
 

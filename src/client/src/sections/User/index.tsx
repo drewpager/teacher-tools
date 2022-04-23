@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-// import { useQuery } from '@apollo/react-hooks';
-// import { USER } from '../../lib/graphql/queries/User/';
-// import { User as UserData, UserVariables } from '../../lib/graphql/queries/User/__generated__/User';
-// import { User as UserQuery, UserQueryVariables } from '../../../bin/graphql/generated';
 import { useUserQuery } from '../../graphql/generated';
 import { UserProfile, UserLessons, UserPlaylists } from './components/';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
-import { Viewer } from '../../lib/types';
+import { Viewer } from '../../graphql/generated';
 import { PageSkeleton } from '../../lib/components/';
 
 interface Props {

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {
   ApolloClient,
@@ -11,14 +10,6 @@ import {
 } from '@apollo/client';
 
 import { setContext } from '@apollo/client/link/context';
-
-import { useMutation } from '@apollo/react-hooks';
-import { LOG_IN } from '../src/lib/graphql/mutations/LogIn';
-import {
-  LogIn as LogInData,
-  LogInVariables
-} from '../src/lib/graphql/mutations/LogIn/__generated__/LogIn';
-
 import { Home, Teach, Lesson, Lessons, NotFound, User, Terms, Privacy, Login, AppHeader, Playlist } from './sections';
 import { DisplayError } from './lib/utils';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -26,7 +17,8 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Skeleton, CircularProgress, Box } from '@mui/material';
 import theme from './theme';
-import { Viewer } from './lib/types';
+// import { Viewer } from './lib/types';
+import { Viewer, useLogInMutation } from './graphql/generated';
 
 const initialViewer: Viewer = {
   id: null,
@@ -38,7 +30,7 @@ const initialViewer: Viewer = {
 
 const App = () => {
   const [viewer, setViewer] = useState<Viewer>(initialViewer);
-  const [logIn, { error }] = useMutation<LogInData, LogInVariables>(LOG_IN, {
+  const [logIn, { error }] = useLogInMutation({
     onCompleted: data => {
       if (data && data.logIn) {
         setViewer(data.logIn);
@@ -62,7 +54,7 @@ const App = () => {
     return (
       <Box>
         <Skeleton variant="rectangular" animation="wave" width="100%" height="50px" />
-        <Box sx={{ alignItems: "center", justifyContent: "center", position: "absolute"}}>
+        <Box sx={{ marginLeft: 50, marginTop: 30 }}>
           <CircularProgress color="primary" />
         </Box>
       </Box>

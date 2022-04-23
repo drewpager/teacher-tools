@@ -1,11 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Card, CardContent, CardActions, Typography, Button, Box, CircularProgress, Alert, Snackbar } from '@mui/material';
-import { Viewer } from '../../lib/types';
-import { useApolloClient, useMutation } from '@apollo/react-hooks';
+import { useApolloClient } from '@apollo/react-hooks';
 import { AUTH_URL } from '../../lib/graphql/queries/AuthUrl/index';
 import { AuthUrl as AuthUrlData } from '../../lib/graphql/queries/AuthUrl/__generated__/AuthUrl';
-import { LOG_IN } from '../../lib/graphql/mutations/LogIn/index';
-import { LogIn as LogInData, LogInVariables } from '../../lib/graphql/mutations/LogIn/__generated__/LogIn';
+import { useLogInMutation, Mutation, Viewer } from '../../graphql/generated';
 import { Navigate } from 'react-router-dom';
 import { DisplayError, DisplaySuccess } from '../../lib/utils';
 interface Props {
@@ -17,10 +15,10 @@ export const Login = ({ setViewer }: Props) => {
   const [error, setError] = useState(true);
   const client = useApolloClient();
   const [logIn, { 
-    data: LogInData, 
+    data: Mutation, 
     loading: LogInLoading, 
     error: LogInError 
-  }]  = useMutation<LogInData, LogInVariables>(LOG_IN, {
+  }]  = useLogInMutation({
     onCompleted: data => {
       if (data && data.logIn && data.logIn.token) {
         setViewer(data.logIn);
@@ -60,8 +58,8 @@ export const Login = ({ setViewer }: Props) => {
     }
   }
 
-  if (LogInData && LogInData.logIn) {
-    const { id: viewerId } = LogInData.logIn;
+  if (Mutation && Mutation.logIn) {
+    const { id: viewerId } = Mutation.logIn;
     return (
       <>
         <Navigate to={`/user/${viewerId}`} />
@@ -76,7 +74,7 @@ export const Login = ({ setViewer }: Props) => {
 
   if (LogInLoading) {
     return (
-      <Box sx={{ minWidth: 275, width: 500, height: 500, margin: 5, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <Box sx={{ margin: 50 }}>
         <CircularProgress color="primary" />
       </Box>
     )
@@ -134,7 +132,7 @@ export const Login = ({ setViewer }: Props) => {
     <Box sx={{ minWidth: 275, width: 500, height: 500, margin: 5, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <Card>
         <CardContent>
-          <Typography variant="h4" color="text.secondary">Login to Teacher Tools</Typography>
+          <Typography variant="h4" color="text.secondary">Login to Plato's Peach</Typography>
           <CardActions>
             <Button onClick={handleAuthorize} size="small" sx={{ p:2, border: '1px solid grey' }}>Sign In With Google!</Button>
           </CardActions>
