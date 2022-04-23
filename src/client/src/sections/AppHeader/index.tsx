@@ -1,7 +1,5 @@
 import { useState } from 'react';
-import { useMutation } from '@apollo/react-hooks';
-import { LOG_OUT } from '../../lib/graphql/mutations/LogOut';
-import { LogOut as LogOutData } from '../../lib/graphql/mutations/LogOut/__generated__/LogOut';
+import { useLogOutMutation } from '../../graphql/generated';
 import { AppBar, Box, Toolbar, IconButton, Typography, Button, Avatar, Tooltip, Menu, MenuItem } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Viewer } from '../../graphql/generated';
@@ -14,7 +12,7 @@ interface Props {
 }
 
 export const AppHeader = ({ viewer, setViewer }: Props) => {
-  const [logOut] = useMutation<LogOutData>(LOG_OUT, {
+  const [logOut] = useLogOutMutation({
     onCompleted: (data) => {
       if (data && data.logOut) {
         setViewer(data.logOut);
