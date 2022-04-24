@@ -2,6 +2,7 @@ import React, { useState, SyntheticEvent } from 'react';
 import { Box, Accordion, AccordionDetails, AccordionSummary, Typography, Grid, Card, CardMedia } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Lesson } from '../../../graphql/generated';
+import { VideoPlayer } from '../index';
 // import { Playlist } from '../../../graphql/generated';
 
 export const PlaylistCard = (lesson: Lesson) => {
@@ -38,10 +39,9 @@ export const PlaylistCard = (lesson: Lesson) => {
         <Box>
           {expanded ? (
           <Card sx={{ position: 'absolute', top: 160, width: 900, height: 500, marginBottom: 1 }}>
-            <CardMedia 
-              component="video"
-              src={`${lesson.video}`}
-            />
+            <CardMedia>
+              <VideoPlayer />
+            </CardMedia>
           </Card>
           ) : (
             <></>

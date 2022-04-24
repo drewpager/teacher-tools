@@ -14,7 +14,7 @@ export const Search = () => {
   const [input, setInput] = useState('search playlists');
 
   return (
-    <Box sx={{ marginLeft: 5 }}>
+    <Box>
       <TextField variant='outlined' sx={{ width: 500 }} placeholder={input} onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setInput(`${e.target.value}`)} />
       <Button onClick={(event: FormEvent<any>): void => onSearch(input, event) }><SearchIcon /></Button>
     </Box>

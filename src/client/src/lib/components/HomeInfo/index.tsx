@@ -1,6 +1,5 @@
 import React from 'react';
 import { Paper, Typography, Grid, Link, Box } from '@mui/material'
-import { Search } from '../Search';
 import '../../assets/classroom.jpg';
 
 export const HomeInfo = () => {
@@ -26,7 +25,7 @@ export const HomeInfo = () => {
           right: 0,
           left: 0,
           // backgroundColor: 'rgba(0,0,0,.3)',
-          backgroundColor: 'primary'
+          backgroundColor: 'primary',
         }}
       />
       <Grid container>

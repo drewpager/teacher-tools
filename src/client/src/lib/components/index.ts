@@ -4,3 +4,4 @@ export * from "./HomeInfo";
 export * from "./CardGrid";
 export * from "./Search";
 export * from "./PlaylistCard";
+export * from "./VideoPlayer";
