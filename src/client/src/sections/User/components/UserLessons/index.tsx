@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import { LessonCard } from '../../../../lib/components/';
-import { Box, List, ListItem, Pagination, Grid } from '@mui/material';
+import { Box, ListItem, Pagination, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { Lessons } from '../../../../graphql/generated';
 

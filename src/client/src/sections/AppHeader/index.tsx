@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useLogOutMutation } from '../../graphql/generated';
-import { AppBar, Box, Toolbar, IconButton, Typography, Button, Avatar, Tooltip, Menu, MenuItem } from '@mui/material';
+import { AppBar, Box, Toolbar, IconButton, Typography, Button, Avatar, Tooltip, Menu, MenuItem, SvgIcon } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Viewer } from '../../graphql/generated';
 import { DisplaySuccess } from '../../lib/utils';
 import { Link } from 'react-router-dom'
+import { ReactComponent as PeachIcon } from '../../lib/assets/peach-logo.svg';
 
 interface Props {
   viewer: Viewer;
@@ -44,17 +45,23 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
     logOut();
   }
 
+  const HomeIcon = () => {
+    return (
+      <SvgIcon component={PeachIcon} inheritViewBox sx={{ fontSize: 65 }} />
+    );
+  }
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
           <IconButton
-            size="large"
+            size="small"
             edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
+            color="info"
+            aria-label="home"
           >
+            <HomeIcon />
           </IconButton>
             <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
               <Link to="/" style={{ textDecoration: "none", color: "white" }}>

@@ -1,4 +1,5 @@
 import React, { ReactEventHandler, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Grid, Card, Typography } from '@mui/material';
 import { useAllPlaylistsQuery } from '../../../graphql/generated';
 import { LinearProgress, Box } from '@mui/material';
@@ -68,9 +69,11 @@ export const CardGrid = () => {
           <Grid item spacing={4} lg={4} md={6} sm={12} xs={12}>
             <Card key={index} sx={{ margin: 1}}>
             <CardContent>
+            <Link to={`/playlist/${i.id}`}>
               <Typography variant="h3" color="text.secondary">
                 {i.name}
               </Typography>
+            </Link>
             </CardContent>
             <CardActions disableSpacing>
               <IconButton aria-label="add to favorites">

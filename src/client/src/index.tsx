@@ -13,6 +13,7 @@ import { setContext } from '@apollo/client/link/context';
 import { Home, Teach, Lesson, Lessons, NotFound, User, Terms, Privacy, Login, AppHeader, Playlist, Video } from './sections';
 import { DisplayError } from './lib/utils';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import "@fontsource/noto-serif/";
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Skeleton, CircularProgress, Box } from '@mui/material';
