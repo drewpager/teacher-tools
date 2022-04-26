@@ -10,6 +10,8 @@ const theme = createTheme({
     },
     secondary: {
       // main: '#FFE5B4',
+      // White
+      light: "#e3f2fd",
       // Peach
       main: "#FBC490",
     },
@@ -17,6 +19,9 @@ const theme = createTheme({
       // Scarlet
       main: "#A82810",
     },
+    info: {
+      main: "#e3f2fd"
+    }
   },
 });
 
