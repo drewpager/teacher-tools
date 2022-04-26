@@ -15,7 +15,7 @@ export const PlaylistCard = (lesson: Lesson) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={4}>
-        <Box sx={{ marginBottom: 1, maxWidth: 500 }}>
+        <Box sx={{ marginBottom: 1, maxWidth: "100%" }}>
           <Accordion expanded={expanded === `panel${lesson.id}`} onChange={handleChange(`panel${lesson.id}`)}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -38,7 +38,7 @@ export const PlaylistCard = (lesson: Lesson) => {
       <Grid item xs={8}>
         <Box>
           {expanded ? (
-          <Card sx={{ position: 'absolute', top: 160, width: 900, height: 500, marginBottom: 1 }}>
+          <Card sx={{ position: 'absolute', top: 160, maxWidth: "100%" }}>
             <CardMedia>
               <VideoPlayer />
             </CardMedia>

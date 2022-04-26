@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import { Box, Card, CardContent, List, ListItem, Pagination, Typography } from '@mui/material';
+import { Box, Card, CardContent, ListItem, Pagination, Typography, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { Playlists } from '../../../../graphql/generated';
 
@@ -20,21 +20,24 @@ export const UserPlaylists = ({ userPlaylists, playlistsPage, limit, setPlaylist
   const userPlaylistsList = (
     <Box sx={{ marginLeft: 5 }}>
       <h2>{total} Playlists</h2>
-      <List sx={{ width: '100%' }}>
+      {/* <List sx={{ width: '100%' }}> */}
+      <Grid container>
         {result.map((value: any, index) => (
-          <Link to={`/playlist/${value.id}`}>
-            <ListItem key={index}>
-              <Card>
-                <CardContent>
-                  <Typography variant='h3'>
-                    {value.name}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </ListItem>
-          </Link>
+          <Grid item spacing={4} lg={4} md={6} sm={12} xs={12}>
+            <Link to={`/playlist/${value.id}`}>
+              <ListItem key={index}>
+                <Card>
+                  <CardContent>
+                    <Typography variant='h3'>
+                      {value.name}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </ListItem>
+            </Link>
+          </Grid>
         ))}
-      </List>
+      </Grid>
       <Pagination 
         count={total / limit} 
         page={playlistsPage}
