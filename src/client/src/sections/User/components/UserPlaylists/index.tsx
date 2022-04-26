@@ -1,7 +1,8 @@
 import React, { ChangeEvent } from 'react';
-import { Box, Card, CardContent, ListItem, Pagination, Typography, Grid } from '@mui/material';
+import { Box, Card, CardContent, ListItem, Pagination, Typography, Grid, Tooltip } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { Playlists } from '../../../../graphql/generated';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 interface Props {
   userPlaylists: Playlists;
@@ -19,8 +20,18 @@ export const UserPlaylists = ({ userPlaylists, playlistsPage, limit, setPlaylist
 
   const userPlaylistsList = (
     <Box sx={{ marginLeft: 5 }}>
-      <h2>{total} Playlists</h2>
-      {/* <List sx={{ width: '100%' }}> */}
+      <Grid container spacing={3} sx={{ alignItems: "center" }}>
+        <Grid item spacing={3}>
+          <h2>{total} Playlists</h2>
+        </Grid>
+        <Grid item spacing={3}>
+          <Link to={`/playlist/create`}>
+            <Tooltip title="Add New Playlist">
+              <AddCircleIcon sx={{ color: "black" }} />
+            </Tooltip>
+          </Link>
+        </Grid>
+      </Grid>
       <Grid container>
         {result.map((value: any, index) => (
           <Grid item spacing={4} lg={4} md={6} sm={12} xs={12}>

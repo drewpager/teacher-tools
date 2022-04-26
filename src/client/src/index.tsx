@@ -10,7 +10,7 @@ import {
 } from '@apollo/client';
 
 import { setContext } from '@apollo/client/link/context';
-import { Home, Teach, Lesson, Lessons, NotFound, User, Terms, Privacy, Login, AppHeader, Playlist, Video } from './sections';
+import { Home, Teach, Lesson, Lessons, NotFound, User, Terms, Privacy, Login, AppHeader, Playlist, Video, CreatePlaylist, CreateLesson } from './sections';
 import { DisplayError } from './lib/utils';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import "@fontsource/noto-serif/";
@@ -81,6 +81,8 @@ const App = () => {
         <Route path="/login" children={(props: any) => (<Login {...props} setViewer={setViewer} />)} element={<Login setViewer={setViewer} />} />
         <Route path="/playlist/:id" element={<Playlist />} />
         <Route path="/video" element={<Video />} />
+        <Route path="/playlist/create" element={<CreatePlaylist />} />
+        <Route path="/lesson/create" element={<CreateLesson />} />
         <Route element={<NotFound />} />
       </Routes>
     </Router>
