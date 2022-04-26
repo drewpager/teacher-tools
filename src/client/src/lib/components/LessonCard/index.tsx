@@ -17,9 +17,9 @@ interface Props {
 export const LessonCard = ({ lesson }: Props) => {
   const { title, category, video, image, startDate, endDate } = lesson;
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={1} md={2}>
-        <Card sx={{ minWidth: 275, width: 1/4, boxShadow: 1, padding: 5, margin: 5 }}>
+    <Grid container>
+      <Grid item spacing={4} lg={4} md={6} sm={12} xs={12}>
+        <Card sx={{ minWidth: 275, width: 1/4, boxShadow: 1, padding: 5 }}>
           <Typography variant="h5">{title}</Typography>
           <Typography variant="h6">{category}</Typography>
           <Typography variant="body2">{startDate}</Typography>

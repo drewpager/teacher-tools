@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import { LessonCard } from '../../../../lib/components/';
-import { Box, List, ListItem, Pagination } from '@mui/material';
+import { Box, List, ListItem, Pagination, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { Lessons } from '../../../../graphql/generated';
 
@@ -21,15 +21,18 @@ export const UserLessons = ({ userLessons, lessonsPage, limit, setLessonsPage }:
   const userLessonsList = (
     <Box sx={{ marginLeft: 5 }}>
       <h2>{total} Lessons</h2>
-      <List sx={{ width: '100%' }}>
+      {/* <List sx={{ width: '100%' }}> */}
+      <Grid container>
         {result.map((value: any, index) => (
-          <Link to={`/lesson/${value.id}`}>
-            <ListItem key={index}>
-              <LessonCard lesson={value} />
-            </ListItem>
-          </Link>
+          <Grid item spacing={2} lg={4} md={6} sm={6} xs={12}>
+            <Link to={`/lesson/${value.id}`}>
+              <ListItem key={index}>
+                <LessonCard lesson={value} />
+              </ListItem>
+            </Link>
+          </Grid>
         ))}
-      </List>
+      </Grid>
       <Pagination 
         count={total / limit} 
         page={lessonsPage}
