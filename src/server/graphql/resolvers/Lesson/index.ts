@@ -54,4 +54,9 @@ export const lessonResolvers = {
       }
     },
   },
+  Mutation: {
+    createLesson: (): string => {
+      return "Mutate.lesson";
+    }
+  }
 };

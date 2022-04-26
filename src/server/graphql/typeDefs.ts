@@ -62,6 +62,8 @@ export const typeDefs = gql`
   type Mutation {
     logIn(input: LogInInput): Viewer!
     logOut: Viewer!
+    lessonPlan: String!
+    createLesson: String!
   }
 
   input LogInInput {

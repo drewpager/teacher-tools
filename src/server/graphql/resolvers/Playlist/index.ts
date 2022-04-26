@@ -43,4 +43,9 @@ export const playlistResolvers = {
       return playlist._id.toString();
     },
   },
+  Mutation: {
+    lessonPlan: (): string => {
+      return 'Mutate.Playlist';
+    }
+  }
 };
