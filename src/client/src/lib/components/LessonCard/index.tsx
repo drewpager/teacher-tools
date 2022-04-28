@@ -18,7 +18,7 @@ export const LessonCard = ({ lesson }: Props) => {
   const { title, category, video, image, startDate, endDate } = lesson;
   return (
     <Grid container>
-      <Grid item spacing={4} lg={4} md={6} sm={12} xs={12}>
+      <Grid item lg={4} md={6} sm={12} xs={12}>
         <Card sx={{ minWidth: 275, width: 1/4, boxShadow: 1, padding: 5 }}>
           <Typography variant="h5">{title}</Typography>
           <Typography variant="h6">{category}</Typography>

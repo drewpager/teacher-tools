@@ -66,8 +66,8 @@ export const CardGrid = () => {
     <Box>
       <Grid container>
         {playlists?.result.map((i, index) => (
-          <Grid item spacing={4} lg={4} md={6} sm={12} xs={12}>
-            <Card key={index} sx={{ margin: 1}}>
+          <Grid item lg={4} md={6} sm={12} xs={12}>
+            <Card sx={{ margin: 1}}>
             <CardContent>
             <Link to={`/playlist/${i.id}`}>
               <Typography variant="h3" color="text.secondary">
@@ -93,9 +93,9 @@ export const CardGrid = () => {
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
               <CardContent>
-                {i.plan.map((j, ind) => (
+                {i.plan.map((j, index) => (
                   <ul>
-                    <li key={ind}><Typography paragraph>{j?.title}</Typography></li>
+                    <li key={index}><Typography paragraph>{j?.title}</Typography></li>
                   </ul>
                 ))}
               </CardContent>

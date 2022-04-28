@@ -6,26 +6,36 @@ export const CardGridSkeleton = () => {
   return (
     <Box>
       <Grid container>
-          <Grid item spacing={4} lg={4} md={6} sm={12} xs={12}>
+          <Grid item lg={4} md={6} sm={12} xs={12}>
             <Card sx={{ margin: 2}}>
               <Skeleton variant="rectangular" width="100%" height={100} />
             </Card>
+          </Grid>
+          <Grid item lg={4} md={6} sm={12} xs={12}>
             <Card sx={{ margin: 2}}>
               <Skeleton variant="rectangular" width="100%" height={100} />
             </Card>
+          </Grid>
+          <Grid item lg={4} md={6} sm={12} xs={12}>
             <Card sx={{ margin: 2}}>
               <Skeleton variant="rectangular" width="100%" height={100} />
             </Card>
+          </Grid>
+          <Grid item lg={4} md={6} sm={12} xs={12}>
             <Card sx={{ margin: 2}}>
               <Skeleton variant="rectangular" width="100%" height={100} />
             </Card>
+          </Grid>
+          <Grid item lg={4} md={6} sm={12} xs={12}>
             <Card sx={{ margin: 2}}>
               <Skeleton variant="rectangular" width="100%" height={100} />
             </Card>
+          </Grid>
+          <Grid item lg={4} md={6} sm={12} xs={12}>
             <Card sx={{ margin: 2}}>
               <Skeleton variant="rectangular" width="100%" height={100} />
             </Card>
-        </Grid>
+          </Grid>
       </Grid>
     </Box>
   )

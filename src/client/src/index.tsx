@@ -74,7 +74,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/teach" element={<Teach />} />
         <Route path="/lesson/:id" element={<Lesson />} />
-        <Route path="/lessons/:filter?" element={<Lessons title="Teacher Tools" />} />
+        <Route path="/lessons/:filter?" element={<Lessons title="Plato's Peach" />} />
         <Route path="/user/:id" children={(props: any) => (<User {...props} viewer={viewer} />)} element={<User viewer={viewer} />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
@@ -82,7 +82,7 @@ const App = () => {
         <Route path="/playlist/:id" element={<Playlist />} />
         <Route path="/video" element={<Video />} />
         <Route path="/playlist/create" element={<CreatePlaylist />} />
-        <Route path="/lesson/create" element={<CreateLesson />} />
+        <Route path="/lesson/create" children={(props: any) => (<CreateLesson {...props} viewer={viewer} />)} element={<CreateLesson viewer={viewer} />} />
         <Route element={<NotFound />} />
       </Routes>
     </Router>
