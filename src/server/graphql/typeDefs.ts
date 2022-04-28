@@ -63,10 +63,20 @@ export const typeDefs = gql`
     logIn(input: LogInInput): Viewer!
     logOut: Viewer!
     lessonPlan: String!
-    createLesson: String!
+    createLesson (input: CreateLessonInput): Lesson!
   }
 
   input LogInInput {
     code: String!
+  }
+
+  input CreateLessonInput {
+    title: String!
+    meta: String!
+    category: [String!]!
+    video: String!
+    image: String
+    startDate: Int!
+    endDate: Int!
   }
 `;
