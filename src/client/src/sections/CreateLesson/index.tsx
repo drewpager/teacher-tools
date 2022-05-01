@@ -1,6 +1,5 @@
-import { Typography, Box, TextField, FormGroup, FormControlLabel, Checkbox, Button, FormControlLabelProps, FormLabel } from '@mui/material';
-import { ValueNode } from 'graphql';
-import React, { ChangeEvent, useState, SyntheticEvent } from 'react';
+import { Typography, Box, TextField, FormGroup, FormControlLabel, Checkbox, Button } from '@mui/material';
+import React, { ChangeEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Viewer } from '../../graphql/generated';
 import { DisplayError, categories } from '../../lib/utils';
