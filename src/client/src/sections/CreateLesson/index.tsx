@@ -2,7 +2,9 @@ import { Typography, Box, TextField, FormGroup, FormControlLabel, Checkbox, Butt
 import React, { ChangeEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Viewer } from '../../graphql/generated';
-import { DisplayError, categories } from '../../lib/utils';
+import { categories } from '../../lib/utils';
+// import { Cloudinary } from '@cloudinary/url-gen';
+// import 'dotenv/config';
 
 interface Props {
   viewer: Viewer
@@ -14,7 +16,7 @@ const initialData = {
   categories: [""],
   startDate: 0,
   endDate: 0,
-  video: ""
+  video: File
 }
 
 export const CreateLesson = ({ viewer }: Props) => {
@@ -27,18 +29,92 @@ export const CreateLesson = ({ viewer }: Props) => {
   // TODO - Restrict Video Uploads by File Type and Size
   const [videoUpload, setVideoUpload] = useState<File | undefined | null>();
 
-  const handleVideoUpload = async (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setVideoUpload(e.target.files[0]);
+  // const handleVideoUpload = async (e: ChangeEvent<HTMLInputElement>) => {
+  //   if (e.target.files) {
+  //     setVideoUpload(e.target.files[0]);
     
-      const uploadSize = e.target.files ? e.target.files[0].size / 1000000 : 0;
+  //     const uploadSize = e.target.files ? e.target.files[0].size / 1000000 : 0;
 
-      if (uploadSize > 100) {
-        setVideoUpload(undefined);
-        console.log("Video Upload 2: ", videoUpload);
-        return <DisplayError title="Please Confine Videos to 1GB or smaller" />
+  //     if (uploadSize > 100) {
+  //       setVideoUpload(undefined);
+  //       console.log("Video Upload 2: ", videoUpload);
+  //       return <DisplayError title="Please Confine Videos to 1GB or smaller" />
+  //     }
+  //   }
+  // }
+
+  const handleVideoUpload = async (file: File) => {
+    // Set your cloud name and unsigned upload preset here:
+    var YOUR_CLOUD_NAME = "drewpager";
+    var YOUR_UNSIGNED_UPLOAD_PRESET = "platos-peach";
+    console.log("Cloud Name: ", YOUR_CLOUD_NAME);
+
+    var POST_URL =
+      "https://api.cloudinary.com/v1_1/" + YOUR_CLOUD_NAME + "/auto/upload";
+
+    var XUniqueUploadId: string = new Date().toString();
+
+    handleVideoUpload(file);
+
+    function handleVideoUpload(file: File) {
+      var size = file ? file.size : 0;
+      var sliceSize = 20000000;
+      var start = 0;
+
+      setTimeout(loop, 3);
+
+      function loop() {
+        let end = start + sliceSize;
+
+        if (end > size) {
+          end = size;
+        }
+        const s = slice(file, start, end);
+        send(s, start, end - 1, size);
+        if (end < size) {
+          start += sliceSize;
+          setTimeout(loop, 3);
+        }
       }
     }
+
+    function send(piece: any, start: number, end: number, size: number) {
+      console.log("start ", start);
+      console.log("end", end);
+
+      var formdata = new FormData();
+      console.log(XUniqueUploadId);
+
+      formdata.append("file", piece);
+      formdata.append("cloud_name", YOUR_CLOUD_NAME);
+      formdata.append("upload_preset", YOUR_UNSIGNED_UPLOAD_PRESET);
+      formdata.append("public_id", file.name);
+
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", POST_URL, false);
+      xhr.setRequestHeader("X-Unique-Upload-Id", XUniqueUploadId);
+      xhr.setRequestHeader(
+        "Content-Range",
+        "bytes " + start + "-" + end + "/" + size
+      );
+
+      xhr.onload = function () {
+        // do something to response
+        console.log(this.responseText);
+      };
+
+      xhr.send(formdata);
+    }
+
+    function slice(file: File, start: number, end: number) {
+      const slice = file
+        ? file.slice
+        : noop;
+
+      return slice.bind(file)(start, end);
+    }
+
+    function noop() {}
   }
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -73,6 +149,7 @@ export const CreateLesson = ({ viewer }: Props) => {
       ...category
     })
 
+    handleVideoUpload(new File([formData.video.prototype], formData.title, { type: "video" }));
     console.log(formData);
   }
 
@@ -108,7 +185,7 @@ export const CreateLesson = ({ viewer }: Props) => {
           </FormGroup>
           <TextField type="number | date" variant='outlined' label="Start Date" helperText="-33,000 for 33,000 BCE" sx={{ width: "45%", marginTop: 1 }} value={formData.startDate} name="startDate" onChange={handleInputChange} /><br />
           <TextField type="number | date" variant='outlined' label="End Date" helperText="1052 or 4/29/2022" sx={{ width: "45%", marginTop: 1 }} value={formData.endDate} name="endDate" onChange={handleInputChange} /><br />
-          <TextField type="file" variant='outlined' helperText="Video or Lecture" sx={{ width: "45%", marginTop: 1 }} value={formData.video} name="video" onChange={handleInputChange} /><br />
+          <TextField type="file" variant='outlined' helperText="Video or Lecture" sx={{ width: "45%", marginTop: 1 }} name="video" onChange={handleInputChange} /><br />
           <Button sx={{ marginTop: 2 }} variant='contained' color='primary' type="submit">Submit</Button>
         </form>
       </Box>
