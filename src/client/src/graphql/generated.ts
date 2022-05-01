@@ -16,6 +16,16 @@ export type Scalars = {
   _FieldSet: any;
 };
 
+export type CreateLessonInput = {
+  category: Array<Scalars['String']>;
+  endDate: Scalars['Int'];
+  image?: InputMaybe<Scalars['String']>;
+  meta: Scalars['String'];
+  startDate: Scalars['Int'];
+  title: Scalars['String'];
+  video: Scalars['String'];
+};
+
 export type Lesson = {
   __typename?: 'Lesson';
   category?: Maybe<Array<Maybe<Scalars['String']>>>;
@@ -41,8 +51,15 @@ export type LogInInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createLesson: Lesson;
+  lessonPlan: Scalars['String'];
   logIn: Viewer;
   logOut: Viewer;
+};
+
+
+export type MutationCreateLessonArgs = {
+  input?: InputMaybe<CreateLessonInput>;
 };
 
 
@@ -129,6 +146,13 @@ export type Viewer = {
   token?: Maybe<Scalars['String']>;
 };
 
+export type CreateLessonMutationVariables = Exact<{
+  input: CreateLessonInput;
+}>;
+
+
+export type CreateLessonMutation = { __typename?: 'Mutation', createLesson: { __typename?: 'Lesson', id?: string | null } };
+
 export type LogInMutationVariables = Exact<{
   input?: InputMaybe<LogInInput>;
 }>;
@@ -179,6 +203,39 @@ export type UserQueryVariables = Exact<{
 export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, name: string, avatar: string, contact: string, hasPayment: boolean, playlists?: { __typename?: 'Playlists', total: number, result: Array<{ __typename?: 'Playlist', id?: string | null, name: string, creator: string, plan: Array<{ __typename?: 'Lesson', id?: string | null, title?: string | null, video?: string | null, startDate?: number | null, endDate?: number | null, creator?: string | null } | null> }> } | null, lessons?: { __typename?: 'Lessons', total: number, result: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, startDate?: number | null, endDate?: number | null, creator?: string | null }> } | null } };
 
 
+export const CreateLessonDocument = gql`
+    mutation CreateLesson($input: CreateLessonInput!) {
+  createLesson(input: $input) {
+    id
+  }
+}
+    `;
+export type CreateLessonMutationFn = Apollo.MutationFunction<CreateLessonMutation, CreateLessonMutationVariables>;
+
+/**
+ * __useCreateLessonMutation__
+ *
+ * To run a mutation, you first call `useCreateLessonMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateLessonMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createLessonMutation, { data, loading, error }] = useCreateLessonMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateLessonMutation(baseOptions?: Apollo.MutationHookOptions<CreateLessonMutation, CreateLessonMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateLessonMutation, CreateLessonMutationVariables>(CreateLessonDocument, options);
+      }
+export type CreateLessonMutationHookResult = ReturnType<typeof useCreateLessonMutation>;
+export type CreateLessonMutationResult = Apollo.MutationResult<CreateLessonMutation>;
+export type CreateLessonMutationOptions = Apollo.BaseMutationOptions<CreateLessonMutation, CreateLessonMutationVariables>;
 export const LogInDocument = gql`
     mutation LogIn($input: LogInInput) {
   logIn(input: $input) {
