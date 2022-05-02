@@ -1,4 +1,4 @@
-import { Typography, Box, TextField, FormGroup, FormControlLabel, Checkbox, Button } from '@mui/material';
+import { Typography, Box, TextField, FormGroup, FormControlLabel, Checkbox, Button, CircularProgress } from '@mui/material';
 import React, { ChangeEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Viewer } from '../../graphql/generated';
@@ -27,38 +27,25 @@ export const CreateLesson = ({ viewer }: Props) => {
   const [category, setCategory] = useState<string[]>([]);
   
   // TODO - Restrict Video Uploads by File Type and Size
-  const [videoUpload, setVideoUpload] = useState<File | undefined | null>();
+  const [videoUpload, setVideoUpload] = useState<File | undefined>();
 
-  // const handleVideoUpload = async (e: ChangeEvent<HTMLInputElement>) => {
-  //   if (e.target.files) {
-  //     setVideoUpload(e.target.files[0]);
-    
-  //     const uploadSize = e.target.files ? e.target.files[0].size / 1000000 : 0;
+  const handleVideoUpload = (files: FileList | null) => {
 
-  //     if (uploadSize > 100) {
-  //       setVideoUpload(undefined);
-  //       console.log("Video Upload 2: ", videoUpload);
-  //       return <DisplayError title="Please Confine Videos to 1GB or smaller" />
-  //     }
-  //   }
-  // }
-
-  const handleVideoUpload = async (file: File) => {
+    const file = files ? files[0] : null;
     // Set your cloud name and unsigned upload preset here:
     var YOUR_CLOUD_NAME = "drewpager";
     var YOUR_UNSIGNED_UPLOAD_PRESET = "platos-peach";
-    console.log("Cloud Name: ", YOUR_CLOUD_NAME);
 
     var POST_URL =
       "https://api.cloudinary.com/v1_1/" + YOUR_CLOUD_NAME + "/auto/upload";
 
     var XUniqueUploadId: string = new Date().toString();
 
-    handleVideoUpload(file);
+    handleVideoUpload(file!);
 
     function handleVideoUpload(file: File) {
       var size = file ? file.size : 0;
-      var sliceSize = 20000000;
+      var sliceSize = 10000000;
       var start = 0;
 
       setTimeout(loop, 3);
@@ -88,7 +75,8 @@ export const CreateLesson = ({ viewer }: Props) => {
       formdata.append("file", piece);
       formdata.append("cloud_name", YOUR_CLOUD_NAME);
       formdata.append("upload_preset", YOUR_UNSIGNED_UPLOAD_PRESET);
-      formdata.append("public_id", file.name);
+      formdata.append("chunk_size", "6000000");
+      formdata.append("public_id", file!.name);
 
       var xhr = new XMLHttpRequest();
       xhr.open("POST", POST_URL, false);
@@ -100,10 +88,11 @@ export const CreateLesson = ({ viewer }: Props) => {
 
       xhr.onload = function () {
         // do something to response
-        console.log(this.responseText);
+        console.log("Response: ", this.responseText);
       };
 
       xhr.send(formdata);
+      <CircularProgress />
     }
 
     function slice(file: File, start: number, end: number) {
@@ -115,6 +104,9 @@ export const CreateLesson = ({ viewer }: Props) => {
     }
 
     function noop() {}
+
+    setVideoUpload(new File([formData.video.prototype], formData.title, { type: 'video' }));
+    console.log("Video Upload: ", videoUpload);
   }
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -141,16 +133,14 @@ export const CreateLesson = ({ viewer }: Props) => {
 
   const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
-    console.log(category);
 
     setFormData({
       ...formData,
-      ...category
+      ...category,
+      ...videoUpload
     })
 
-    handleVideoUpload(new File([formData.video.prototype], formData.title, { type: "video" }));
-    console.log(formData);
+    console.log(formData)
   }
 
   if (!viewer.id || !viewer.hasPayment) {
@@ -185,7 +175,7 @@ export const CreateLesson = ({ viewer }: Props) => {
           </FormGroup>
           <TextField type="number | date" variant='outlined' label="Start Date" helperText="-33,000 for 33,000 BCE" sx={{ width: "45%", marginTop: 1 }} value={formData.startDate} name="startDate" onChange={handleInputChange} /><br />
           <TextField type="number | date" variant='outlined' label="End Date" helperText="1052 or 4/29/2022" sx={{ width: "45%", marginTop: 1 }} value={formData.endDate} name="endDate" onChange={handleInputChange} /><br />
-          <TextField type="file" variant='outlined' helperText="Video or Lecture" sx={{ width: "45%", marginTop: 1 }} name="video" onChange={handleInputChange} /><br />
+          <TextField type="file" variant='outlined' helperText="Video or Lecture" sx={{ width: "45%", marginTop: 1 }} name="video" onChange={(e: ChangeEvent<HTMLInputElement>) => handleVideoUpload(e.target.files)} /><br />
           <Button sx={{ marginTop: 2 }} variant='contained' color='primary' type="submit">Submit</Button>
         </form>
       </Box>
