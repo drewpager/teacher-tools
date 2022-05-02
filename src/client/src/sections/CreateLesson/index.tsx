@@ -106,6 +106,7 @@ export const CreateLesson = ({ viewer }: Props) => {
     function noop() {}
 
     setVideoUpload(new File([formData.video.prototype], formData.title, { type: 'video' }));
+    
     console.log("Video Upload: ", videoUpload);
   }
 
