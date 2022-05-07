@@ -1,8 +1,9 @@
 import { Typography, Box, TextField, FormGroup, FormControlLabel, Checkbox, Button, CircularProgress } from '@mui/material';
 import React, { ChangeEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Viewer } from '../../graphql/generated';
-import { categories } from '../../lib/utils';
+import { useCreateLessonMutation, Viewer } from '../../graphql/generated';
+import { categories, DisplayError, DisplaySuccess } from '../../lib/utils';
+import { Navigate } from 'react-router-dom';
 // import { Cloudinary } from '@cloudinary/url-gen';
 // import 'dotenv/config';
 
@@ -13,10 +14,11 @@ interface Props {
 const initialData = {
   title: "",
   meta: "",
-  categories: [""],
+  category: [""],
   startDate: 0,
   endDate: 0,
-  video: File
+  video: "",
+  image: ""
 }
 
 export const CreateLesson = ({ viewer }: Props) => {
@@ -24,7 +26,17 @@ export const CreateLesson = ({ viewer }: Props) => {
   const [checked, setChecked] = useState(
     new Array(categories.length).fill(false)
   );
-  const [category, setCategory] = useState<string[]>([]);
+  const [categorizer, setCategorizer] = useState<string[]>([]);
+
+  const [createLesson, { 
+    data: Mutation,
+    loading: createLessonLoading, 
+    error: createLessonError 
+  }] = useCreateLessonMutation({
+    variables: {
+      input: formData
+    }
+  });
   
   // TODO - Restrict Video Uploads by File Type and Size
   const [videoUpload, setVideoUpload] = useState<File | undefined>();
@@ -88,11 +100,12 @@ export const CreateLesson = ({ viewer }: Props) => {
 
       xhr.onload = function () {
         // do something to response
-        console.log("Response: ", this.responseText);
+        console.log("Cloudinary Response: ", this.responseText);
+        const res = JSON.parse(this.response); 
+        console.log("URL: ", res.url)
+        formData.video = res.url;
       };
-
       xhr.send(formdata);
-      <CircularProgress />
     }
 
     function slice(file: File, start: number, end: number) {
@@ -105,18 +118,100 @@ export const CreateLesson = ({ viewer }: Props) => {
 
     function noop() {}
 
-    setVideoUpload(new File([formData.video.prototype], formData.title, { type: 'video' }));
-    
-    console.log("Video Upload: ", videoUpload);
+    console.log("Form Data: ", formData)
+  }
+
+  const handleImageUpload = (files: FileList | null) => {
+
+    const file = files ? files[0] : null;
+    // Set your cloud name and unsigned upload preset here:
+    var YOUR_CLOUD_NAME = "drewpager";
+    var YOUR_UNSIGNED_UPLOAD_PRESET = "platos-peach";
+
+    var POST_URL =
+      "https://api.cloudinary.com/v1_1/" + YOUR_CLOUD_NAME + "/auto/upload";
+
+    var XUniqueUploadId: string = new Date().toString();
+
+    handleImageUpload(file!);
+
+    function handleImageUpload(file: File) {
+      var size = file ? file.size : 0;
+      var sliceSize = 10000000;
+      var start = 0;
+
+      setTimeout(loop, 3);
+
+      function loop() {
+        let end = start + sliceSize;
+
+        if (end > size) {
+          end = size;
+        }
+        const s = slice(file, start, end);
+        send(s, start, end - 1, size);
+        if (end < size) {
+          start += sliceSize;
+          setTimeout(loop, 3);
+        }
+      }
+    }
+
+    function send(piece: any, start: number, end: number, size: number) {
+      console.log("start ", start);
+      console.log("end", end);
+
+      var formdata = new FormData();
+      console.log(XUniqueUploadId);
+
+      formdata.append("file", piece);
+      formdata.append("cloud_name", YOUR_CLOUD_NAME);
+      formdata.append("upload_preset", YOUR_UNSIGNED_UPLOAD_PRESET);
+      formdata.append("chunk_size", "6000000");
+      formdata.append("public_id", file!.name);
+
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", POST_URL, false);
+      xhr.setRequestHeader("X-Unique-Upload-Id", XUniqueUploadId);
+      xhr.setRequestHeader(
+        "Content-Range",
+        "bytes " + start + "-" + end + "/" + size
+      );
+
+      xhr.onload = function () {
+        // do something to response
+        const res = JSON.parse(this.response); 
+        formData.image = res.url;
+      };
+      xhr.send(formdata);
+    }
+
+    function slice(file: File, start: number, end: number) {
+      const slice = file
+        ? file.slice
+        : noop;
+
+      return slice.bind(file)(start, end);
+    }
+
+    function noop() {}
   }
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: value
     });
   };
+
+  const handleNumChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: parseInt(value)
+    })
+  }
 
   const handleCheck = (position: number, value: { name: string }) => {
     const updatedCheckedState = checked.map((item, index) => index === position ? !item : item)
@@ -124,12 +219,18 @@ export const CreateLesson = ({ viewer }: Props) => {
 
     const name = value.name;
     
-    const indy = category.indexOf(name);
+    const indy = categorizer.indexOf(name);
     if (indy === -1) {
-      setCategory([...category, name])
+      setCategorizer([...categorizer, name])
     } else {
-      setCategory(category.filter((category) => category !== name))
+      setCategorizer(categorizer.filter((categorizer) => categorizer !== name))
     }
+    
+    // TODO: Fix Category State Being 1 Step Behind
+    setFormData({
+      ...formData,
+      category: [...categorizer]
+    })
   }
 
   const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
@@ -137,11 +238,39 @@ export const CreateLesson = ({ viewer }: Props) => {
 
     setFormData({
       ...formData,
-      ...category,
+      ...categorizer,
       ...videoUpload
     })
 
-    console.log(formData)
+    if (formData.video && formData.category) {
+      createLesson({
+        variables: {
+          input: formData
+        }
+      });
+    }
+  }
+
+  if (Mutation && Mutation.createLesson) {
+    const { id } = Mutation.createLesson;
+    return (
+      <>
+        <Navigate to={`/lesson/${id}`} />
+        <DisplaySuccess title="Success!" />
+      </>
+    )
+  }
+
+  if (createLessonLoading) {
+    return (
+      <Box sx={{ margin: 50 }}>
+        <CircularProgress color="primary" />
+      </Box>
+    )
+  }
+
+  if (createLessonError) {
+    return <DisplayError title={`Something's not working here: ${createLessonError}`} />
   }
 
   if (!viewer.id || !viewer.hasPayment) {
@@ -167,16 +296,17 @@ export const CreateLesson = ({ viewer }: Props) => {
             required
           /><br />
           <TextField variant="outlined" label="Description" multiline rows={3} helperText="Min Character Count of 160" sx={{ width: "45%", marginTop: 1 }} value={formData.meta} name="meta" onChange={handleInputChange} />
-          <FormGroup sx={{ marginTop: 1 }} onChange={handleInputChange}>
-            <Typography variant="h5">Categories</Typography>
+          <FormGroup sx={{ marginTop: 1 }}>
+            <Typography variant="h5">Category</Typography>
             <Typography variant="body2" style={{color: "gray"}}>Select All That Apply</Typography>
-            {categories.map((value, index) => (
-              <FormControlLabel control={<Checkbox />} label={value.name} onChange={() => handleCheck(index, value)} checked={checked[index]} key={index} name="categories" /> 
+            {categories.map((val, index) => (
+              <FormControlLabel control={<Checkbox />} onChange={() => handleCheck(index, val)} checked={checked[index]} label={val.name} key={index} /> 
             ))}
           </FormGroup>
-          <TextField type="number | date" variant='outlined' label="Start Date" helperText="-33,000 for 33,000 BCE" sx={{ width: "45%", marginTop: 1 }} value={formData.startDate} name="startDate" onChange={handleInputChange} /><br />
-          <TextField type="number | date" variant='outlined' label="End Date" helperText="1052 or 4/29/2022" sx={{ width: "45%", marginTop: 1 }} value={formData.endDate} name="endDate" onChange={handleInputChange} /><br />
+          <TextField type="number" variant='outlined' label="Start Date" helperText="-33,000 for 33,000 BCE" sx={{ width: "45%", marginTop: 1 }} value={formData.startDate} name="startDate" onChange={handleNumChange} /><br />
+          <TextField type="number" variant='outlined' label="End Date" helperText="1052 or 4/29/2022" sx={{ width: "45%", marginTop: 1 }} value={formData.endDate} name="endDate" onChange={handleNumChange} /><br />
           <TextField type="file" variant='outlined' helperText="Video or Lecture" sx={{ width: "45%", marginTop: 1 }} name="video" onChange={(e: ChangeEvent<HTMLInputElement>) => handleVideoUpload(e.target.files)} /><br />
+          <TextField type="file" variant='outlined' helperText="Image" sx={{ width: "45%", marginTop: 1 }} name="image" onChange={(e: ChangeEvent<HTMLInputElement>) => handleImageUpload(e.target.files)} /><br />
           <Button sx={{ marginTop: 2 }} variant='contained' color='primary' type="submit">Submit</Button>
         </form>
       </Box>
