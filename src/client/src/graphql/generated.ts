@@ -19,7 +19,7 @@ export type Scalars = {
 export type CreateLessonInput = {
   category: Array<Scalars['String']>;
   endDate: Scalars['Int'];
-  image?: InputMaybe<Scalars['String']>;
+  image: Scalars['String'];
   meta: Scalars['String'];
   startDate: Scalars['Int'];
   title: Scalars['String'];
