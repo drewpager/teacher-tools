@@ -63,7 +63,7 @@ export const typeDefs = gql`
     logIn(input: LogInInput): Viewer!
     logOut: Viewer!
     lessonPlan: String!
-    createLesson (input: CreateLessonInput): Lesson!
+    createLesson(input: CreateLessonInput): Lesson!
   }
 
   input LogInInput {
@@ -75,7 +75,7 @@ export const typeDefs = gql`
     meta: String!
     category: [String!]!
     video: String!
-    image: String
+    image: String!
     startDate: Int!
     endDate: Int!
   }

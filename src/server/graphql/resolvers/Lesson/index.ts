@@ -3,6 +3,7 @@ import { CreateLessonArgs, CreateLessonInput, LessonArgs } from "./types";
 import { authorize } from "../../../lib/utils/index";
 import { Request } from "express";
 import { ObjectId } from "mongodb";
+import { Viewer } from "../../../../client/src/graphql/generated";
 
 const verifyCreateLessonInput = ({ title, category, meta, video }: CreateLessonInput) => {
   if (title.length > 160) {
@@ -13,9 +14,9 @@ const verifyCreateLessonInput = ({ title, category, meta, video }: CreateLessonI
     throw new Error("Please add at least one category.")
   }
 
-  if (meta.length < 160) {
-    throw new Error("Please add more information to provide students with context about this lesson.")
-  }
+  // if (meta.length < 160) {
+  //   throw new Error("Please add more information to provide students with context about this lesson.")
+  // }
 
   if (video.length < 1) {
     throw new Error("Please add a video!")
@@ -74,27 +75,32 @@ export const lessonResolvers = {
   },
   Mutation: {
     createLesson: async (
-      user: User,
+      viewer: Viewer,
       { input }: CreateLessonArgs,
       { db }: { db: Database } 
     ): Promise<Lesson> => {
+      const id = new ObjectId();
+      // creator: "116143759549242008910"
+      // const viewerId = viewer && viewer.id ? viewer.id : "116143759549242008910"; 
+
       try {
         verifyCreateLessonInput(input);
-        
+      
         const insertResult = await db.lessons.insertOne({
-          _id: new ObjectId(),
+          _id: id,
           ...input,
-          creator: user._id  
+          // creator: viewerId
+          creator: "116143759549242008910"
         });
         
-        const insertedResult = await db.lessons.findOne({ _id: insertResult.insertedId });
+        const insertedResult = insertResult ? await db.lessons.findOne({ _id: insertResult.insertedId }) : false;
         
         if (!insertedResult) {
-          throw new Error("Failed to insert lesson");
+          throw new Error("Lesson is undefined");
         }
 
         await db.users.updateOne(
-          { _id: user._id },
+          { _id: "116143759549242008910" },
           { $push: { lessons: insertedResult }}
         )
 
