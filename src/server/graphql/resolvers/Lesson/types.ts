@@ -1,3 +1,4 @@
+import { Lesson } from '../../../lib/types';
 export interface LessonArgs {
   id: string;
 }
@@ -14,4 +15,14 @@ export interface CreateLessonInput {
 
 export interface CreateLessonArgs {
   input: CreateLessonInput;
+}
+
+export interface AllLessonsArgs {
+  limit: number;
+  page: number;
+}
+
+export interface AllLessonsData {
+  total: number;
+  result: Lesson[];
 }

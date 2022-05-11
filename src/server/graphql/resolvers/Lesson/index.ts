@@ -1,5 +1,5 @@
 import { Database, Lesson, Playlist, User } from "../../../lib/types";
-import { CreateLessonArgs, CreateLessonInput, LessonArgs } from "./types";
+import { AllLessonsArgs, AllLessonsData, CreateLessonArgs, CreateLessonInput, LessonArgs } from "./types";
 import { authorize } from "../../../lib/utils/index";
 import { Request } from "express";
 import { ObjectId } from "mongodb";
@@ -37,6 +37,26 @@ export const lessonResolvers = {
       }
 
       return lesson;
+    },
+    allLessons: async (
+      _root: undefined,
+      { page, limit }: AllLessonsArgs,
+      { db }: { db: Database }
+    ): Promise<AllLessonsData> => {
+      const data: AllLessonsData = {
+        total: 0,
+        result: []
+      }
+      
+      let cursor = await db.lessons.find({});
+
+      cursor = cursor.skip(page > 1 ? (page - 1) * limit : 0);
+      cursor = cursor.limit(limit);
+
+      data.total = await cursor.count();
+      data.result = await cursor.toArray();
+
+      return data;
     },
   },
   Lesson: {
@@ -80,9 +100,9 @@ export const lessonResolvers = {
       { db }: { db: Database } 
     ): Promise<Lesson> => {
       const id = new ObjectId();
-      // creator: "116143759549242008910"
-      // const viewerId = viewer && viewer.id ? viewer.id : "116143759549242008910"; 
+      //TODO: Fix Viewer resolution vs hard coded id
 
+      // const viewerId = viewer && viewer.id ? viewer.id : "116143759549242008910"; 
       try {
         verifyCreateLessonInput(input);
       
