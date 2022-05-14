@@ -1,9 +1,10 @@
 import { CircularProgress, Grid, Box, Card, Typography, TextField, Button } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import React, { useState, FormEvent, ChangeEvent, useRef, useEffect } from 'react';
-import { Lesson, Playlist } from '../../graphql/generated';
+import React, { useState, ChangeEvent, useRef, useEffect } from 'react';
+import { Lesson, Playlist, Lessons } from '../../graphql/generated';
 import { useAllLessonsQuery } from '../../graphql/generated';
 import { DisplayError } from '../../lib/utils';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
 const initialData: Playlist = {
   id: "",
@@ -24,6 +25,7 @@ export const useFocus = () => {
 
 export const CreatePlaylist = () => {
   const [input, setInput] = useState<string>("")
+  // const [lessons, setLessons] = useState<Lessons>()
   const inputRef = useFocus();
   // const id = viewer && viewer.id ? viewer.id : null;
   const [playlist, setPlaylist] = useState(initialData)
@@ -67,38 +69,54 @@ export const CreatePlaylist = () => {
 
   return (
     <Box sx={{ margin: 5 }}>
-      <Grid container>
-        <Grid item xs={6} md={8} lg={8}>
-          <Card variant="outlined" sx={{ height: "750px", padding: 5, margin: 2 }}>
-            <h2>{playlist.name}</h2>
-          </Card>
-        </Grid>
-        <Grid item xs={6} md={4} lg={4}>
-          <Card variant="outlined" sx={{ height: "750px", padding: 5, margin: 2 }}>
-            <TextField 
-              variant='outlined' 
-              id="lesson-search" 
-              label="Search Lessons" 
-              value={input} 
-              onChange={inputHandler} 
-              ref={inputRef} 
-              onKeyPress={handleKeyPress} 
-            />
-            <Button onClick={() => onSearch(input)}><SearchIcon /></Button>
-            {lessonQuery?.map((i, index) => (
-              <>
-              <Grid container>
-                <Grid item xs={12} md={12} lg={12}>
-                  <Card variant="outlined" sx={{ padding: 2, margin: 1, width: "99%" }} key={index}>
-                    <Typography>{i.title}</Typography>
+      <DragDropContext onDragEnd={(result) => console.log(result)}>
+          <Grid container>
+            <Droppable droppableId='lessons'>
+              {(provided) =>  (
+                <>
+                  <Grid item xs={6} md={8} lg={8} {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
+                  <Card variant="outlined" sx={{ height: "750px", padding: 5, margin: 2 }} key={playlist.name}>
+                    <h2>{playlist.name}</h2>
+                  </Card>
+                  <Grid container>
+
+                  </Grid>
+                </Grid>
+                <Grid item xs={6} md={4} lg={4}>
+                  <Card variant="outlined" sx={{ height: "750px", padding: 5, margin: 2 }}>
+                    <TextField 
+                      variant='outlined' 
+                      id="lesson-search" 
+                      label="Search Lessons" 
+                      value={input} 
+                      onChange={inputHandler} 
+                      ref={inputRef} 
+                      onKeyPress={handleKeyPress} 
+                    />
+                    <Button onClick={() => onSearch(input)}><SearchIcon /></Button>
+                    {lessonQuery?.map((i, index) => (
+                      <>
+                      <Grid container>
+                        <Draggable key={index} draggableId={index.toString()} index={index}>
+                          {(provided) => (
+                            <Grid item xs={12} md={12} lg={12} {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} key={index}>
+                              <Card variant="outlined" sx={{ padding: 2, margin: 1, width: "99%" }} key={index}>
+                                <Typography>{i.title}</Typography>
+                              </Card>
+                            </Grid>
+                           )}
+                        </Draggable>
+                      </Grid>
+                    </>
+                    ))}
+                    {provided.placeholder} 
                   </Card>
                 </Grid>
-              </Grid>
-            </>
-            ))}
-          </Card>
+              </>
+              )}
+          </Droppable>
         </Grid>
-      </Grid>
+      </DragDropContext>
     </Box>
   )
 }
