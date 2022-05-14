@@ -1,6 +1,6 @@
 import { CircularProgress, Grid, Box, Card, Typography, TextField, Button } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import React, { useState, FormEvent, ChangeEvent } from 'react';
+import React, { useState, FormEvent, ChangeEvent, useRef, useEffect } from 'react';
 import { Lesson, Playlist } from '../../graphql/generated';
 import { useAllLessonsQuery } from '../../graphql/generated';
 import { DisplayError } from '../../lib/utils';
@@ -12,8 +12,19 @@ const initialData: Playlist = {
   plan: []
 }
 
+export const useFocus = () => {
+  const ref = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    ref.current?.focus();
+  }, [])
+
+  return ref;
+}
+
 export const CreatePlaylist = () => {
   const [input, setInput] = useState<string>("")
+  const inputRef = useFocus();
   // const id = viewer && viewer.id ? viewer.id : null;
   const [playlist, setPlaylist] = useState(initialData)
   const { data, loading, error } = useAllLessonsQuery({
@@ -31,13 +42,18 @@ export const CreatePlaylist = () => {
       return null;
     }
   }
-  
-  const SearchPlaylists = () => (
-    <Box sx={{ maxWidth: "95%", margin: 1 }}>
-      <TextField variant='outlined' sx={{ width: 500 }} placeholder="Search Playlists" onChange={(e: ChangeEvent<any>) => { e.preventDefault(); setInput(`${e.target.value}`)} } value={input}/>
-      <Button onClick={() => onSearch(input)}><SearchIcon /></Button>
-    </Box>
-  )
+
+  const inputHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    e.preventDefault();
+    const enteredSearch = e.target.value;
+    setInput(enteredSearch)
+  }
+
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "enter") {
+      onSearch(input)
+    }
+  }
 
   if (loading) {
     return <CircularProgress />
@@ -47,7 +63,6 @@ export const CreatePlaylist = () => {
     return <DisplayError title="Failed to query lessons" />
   }
 
-  const lessonCount = data ? data.allLessons.total : 0;
   const lessonQuery = data ? data.allLessons.result : null;
 
   return (
@@ -60,8 +75,16 @@ export const CreatePlaylist = () => {
         </Grid>
         <Grid item xs={6} md={4} lg={4}>
           <Card variant="outlined" sx={{ height: "750px", padding: 5, margin: 2 }}>
-            <p>{lessonCount}</p>
-            <SearchPlaylists />
+            <TextField 
+              variant='outlined' 
+              id="lesson-search" 
+              label="Search Lessons" 
+              value={input} 
+              onChange={inputHandler} 
+              ref={inputRef} 
+              onKeyPress={handleKeyPress} 
+            />
+            <Button onClick={() => onSearch(input)}><SearchIcon /></Button>
             {lessonQuery?.map((i, index) => (
               <>
               <Grid container>
