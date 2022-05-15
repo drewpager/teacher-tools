@@ -4,7 +4,7 @@ import React, { useState, ChangeEvent, useRef, useEffect } from 'react';
 import { Lesson, Playlist, Lessons } from '../../graphql/generated';
 import { useAllLessonsQuery } from '../../graphql/generated';
 import { DisplayError } from '../../lib/utils';
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { DragDropContext, Draggable, Droppable, DropResult, DragUpdate } from 'react-beautiful-dnd';
 
 const initialData: Playlist = {
   id: "",
@@ -25,7 +25,7 @@ export const useFocus = () => {
 
 export const CreatePlaylist = () => {
   const [input, setInput] = useState<string>("")
-  // const [lessons, setLessons] = useState<Lessons>()
+  const [lessons, setLessons] = useState<Array<Lesson>>([])
   const inputRef = useFocus();
   // const id = viewer && viewer.id ? viewer.id : null;
   const [playlist, setPlaylist] = useState(initialData)
@@ -36,12 +36,20 @@ export const CreatePlaylist = () => {
     }
   })
 
+  const lessonQuery = data ? data.allLessons.result : null;
+
+  useEffect(() => {
+    if (lessonQuery) {
+      setLessons(lessonQuery)
+    }
+  }, [lessonQuery])
+
   const onSearch = (input: string) => {
     if (data) {
       const filteredData = data.allLessons.result.filter(({title}) => title?.toLowerCase().indexOf(input.toLowerCase()) !== -1);
-      return filteredData;
+      // return filteredData;
     } else {
-      return null;
+      // return null;
     }
   }
 
@@ -65,11 +73,22 @@ export const CreatePlaylist = () => {
     return <DisplayError title="Failed to query lessons" />
   }
 
-  const lessonQuery = data ? data.allLessons.result : null;
+  type OnDragEndResponder = {
+    result: DropResult,
+  }
+
+  const onDragEndHandler = ({ result }: OnDragEndResponder) => {
+    const items = Array.from(lessons);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    const destination = result.destination ? result.destination.index : 0;
+    items.splice(destination, 0, reorderedItem)
+    
+    setLessons(items)
+  }
 
   return (
     <Box sx={{ margin: 5 }}>
-      <DragDropContext onDragEnd={(result) => console.log(result)}>
+      <DragDropContext onDragEnd={() => onDragEndHandler}>
           <Grid container>
             <Droppable droppableId='lessons'>
               {(provided) =>  (
@@ -94,7 +113,7 @@ export const CreatePlaylist = () => {
                       onKeyPress={handleKeyPress} 
                     />
                     <Button onClick={() => onSearch(input)}><SearchIcon /></Button>
-                    {lessonQuery?.map((i, index) => (
+                    {lessons?.map((i, index) => (
                       <>
                       <Grid container>
                         <Draggable key={index} draggableId={index.toString()} index={index}>
@@ -109,7 +128,7 @@ export const CreatePlaylist = () => {
                       </Grid>
                     </>
                     ))}
-                    {provided.placeholder} 
+                    {provided.placeholder}
                   </Card>
                 </Grid>
               </>
