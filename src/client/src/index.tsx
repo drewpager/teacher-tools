@@ -81,7 +81,7 @@ const App = () => {
         <Route path="/login" children={(props: any) => (<Login {...props} setViewer={setViewer} />)} element={<Login setViewer={setViewer} />} />
         <Route path="/playlist/:id" element={<Playlist />} />
         <Route path="/video" element={<Video />} />
-        <Route path="/playlist/create" element={<CreatePlaylist />} />
+        <Route path="/playlist/create" element={<CreatePlaylist viewer={viewer} />} />
         <Route path="/lesson/create" children={(props: any) => (<CreateLesson {...props} viewer={viewer} />)} element={<CreateLesson viewer={viewer} />} />
         <Route element={<NotFound />} />
       </Routes>

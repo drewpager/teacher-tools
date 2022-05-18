@@ -1,10 +1,15 @@
-import { CircularProgress, Grid, Box, Card, Typography, TextField, Button } from '@mui/material';
+import { CircularProgress, Grid, Box, Card, TextField, Button } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import React, { useState, ChangeEvent, useRef, useEffect } from 'react';
 import { Lesson, Playlist, Lessons } from '../../graphql/generated';
 import { useAllLessonsQuery } from '../../graphql/generated';
 import { DisplayError } from '../../lib/utils';
-import { DragDropContext, Draggable, Droppable, DropResult, DragUpdate } from 'react-beautiful-dnd';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { Viewer } from '../../graphql/generated';
+
+type props = {
+  viewer: Viewer;
+}
 
 const initialData: Playlist = {
   id: "",
@@ -23,7 +28,7 @@ export const useFocus = () => {
   return ref;
 }
 
-export const CreatePlaylist = () => {
+export const CreatePlaylist = ({ viewer }: props) => {
   const [input, setInput] = useState<string>("")
   const [lessons, setLessons] = useState<Array<Lesson>>([])
   const inputRef = useFocus();
@@ -36,6 +41,7 @@ export const CreatePlaylist = () => {
     }
   })
 
+
   const lessonQuery = data ? data.allLessons.result : null;
 
   useEffect(() => {
@@ -43,6 +49,17 @@ export const CreatePlaylist = () => {
       setLessons(lessonQuery)
     }
   }, [lessonQuery])
+
+  if (!viewer.id) {
+    return (
+      <>
+        <DisplayError title="Must be logged in to create a playlist!" />
+        <Box>
+          <Button href='/login'>Log In</Button>
+        </Box>
+      </>
+    )
+  }
 
   const onSearch = (input: string) => {
     if (data) {
@@ -59,6 +76,16 @@ export const CreatePlaylist = () => {
     setInput(enteredSearch)
   }
 
+  const titleHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    e.preventDefault();
+    const name = e.target.value;
+    setPlaylist({ 
+      ...playlist, 
+      name: name, 
+      creator: viewer && viewer.id ? viewer.id : "0" 
+    })
+  }
+
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "enter") {
       onSearch(input)
@@ -73,33 +100,51 @@ export const CreatePlaylist = () => {
     return <DisplayError title="Failed to query lessons" />
   }
 
-  type OnDragEndResponder = {
-    result: DropResult,
-  }
+  const onDragEndHandler = (result: any) => {
+    const { destination, source } = result;
+    
+    if (!destination) {
+      return;
+    }
 
-  const onDragEndHandler = ({ result }: OnDragEndResponder) => {
+    if (source.droppableId === destination.droppableId && source.index === destination.index) {
+      return;
+    }
+
     const items = Array.from(lessons);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    const destination = result.destination ? result.destination.index : 0;
-    items.splice(destination, 0, reorderedItem)
+    const [reorderedItem] = items.splice(source.index, 1);
+    playlist.plan.push(reorderedItem);
+    // const dest = destination ? destination.index : 0;
+    // items.splice(dest, 0, reorderedItem)
     
     setLessons(items)
+    setPlaylist({...playlist})
+    // console.log("Drew hello, anyone out there? ", lessons)
+    console.log("Hello playlist: ", playlist)
   }
 
   return (
     <Box sx={{ margin: 5 }}>
-      <DragDropContext onDragEnd={() => onDragEndHandler}>
+      <DragDropContext onDragEnd={onDragEndHandler}>
           <Grid container>
             <Droppable droppableId='lessons'>
               {(provided) =>  (
                 <>
                   <Grid item xs={6} md={8} lg={8} {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
-                  <Card variant="outlined" sx={{ height: "750px", padding: 5, margin: 2 }} key={playlist.name}>
-                    <h2>{playlist.name}</h2>
+                  <Card variant="outlined" sx={{ height: "750px", padding: 5, margin: 2 }}>
+                    <TextField
+                      label="Lesson Plan Title"
+                      id="standard-size-normal"
+                      variant="standard"
+                      fullWidth
+                      onChange={titleHandler}
+                    />
+                    {playlist.plan.map((i, index) => (
+                      <Card variant="outlined" sx={{ padding: 2, margin: 1, width: "99%" }} key={index}>
+                        {i?.title}
+                      </Card>
+                    ))}
                   </Card>
-                  <Grid container>
-
-                  </Grid>
                 </Grid>
                 <Grid item xs={6} md={4} lg={4}>
                   <Card variant="outlined" sx={{ height: "750px", padding: 5, margin: 2 }}>
@@ -113,22 +158,20 @@ export const CreatePlaylist = () => {
                       onKeyPress={handleKeyPress} 
                     />
                     <Button onClick={() => onSearch(input)}><SearchIcon /></Button>
+                    <Grid container>
                     {lessons?.map((i, index) => (
-                      <>
-                      <Grid container>
-                        <Draggable key={index} draggableId={index.toString()} index={index}>
-                          {(provided) => (
-                            <Grid item xs={12} md={12} lg={12} {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} key={index}>
-                              <Card variant="outlined" sx={{ padding: 2, margin: 1, width: "99%" }} key={index}>
-                                <Typography>{i.title}</Typography>
-                              </Card>
-                            </Grid>
-                           )}
-                        </Draggable>
-                      </Grid>
-                    </>
+                      <Draggable key={index} draggableId={index.toString()} index={index}>
+                        {(provided) => (
+                          <Grid item xs={12} md={12} lg={12} {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} key={i.id}>
+                            <Card variant="outlined" sx={{ padding: 2, margin: 1, width: "99%" }} key={i.id}>
+                              {i.title}
+                            </Card>
+                          </Grid>
+                          )}
+                      </Draggable>
                     ))}
                     {provided.placeholder}
+                    </Grid>
                   </Card>
                 </Grid>
               </>
