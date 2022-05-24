@@ -63,8 +63,8 @@ export const typeDefs = gql`
   type Mutation {
     logIn(input: LogInInput): Viewer!
     logOut: Viewer!
-    lessonPlan: String!
     createLesson(input: CreateLessonInput): Lesson!
+    lessonPlan(input: LessonPlanInput): Playlist!
   }
 
   input LogInInput {
@@ -79,5 +79,22 @@ export const typeDefs = gql`
     image: String!
     startDate: Int!
     endDate: Int!
+  }
+
+  input FullLessonInput {
+    category: [String]
+    title: String
+    meta: String
+    video: String
+    image: String
+    startDate: Int
+    endDate: Int
+    creator: String
+  }
+
+  input LessonPlanInput {
+    name: String!
+    creator: String!
+    plan: [FullLessonInput!]!
   }
 `;

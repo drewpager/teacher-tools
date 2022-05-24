@@ -1,5 +1,5 @@
 import { Database, Playlist } from "../../../lib/types";
-import { PlaylistArgs, PlaylistsArgs, PlaylistsData } from "./types";
+import { PlaylistArgs, PlaylistsArgs, PlaylistsData, CreatePlanArgs } from "./types";
 import { ObjectId } from "mongodb";
 
 export const playlistResolvers = {
@@ -44,8 +44,34 @@ export const playlistResolvers = {
     },
   },
   Mutation: {
-    lessonPlan: (): string => {
-      return 'Mutate.Playlist';
+    lessonPlan: async (
+      _root: undefined,
+      { input }: CreatePlanArgs,
+      { db }: { db: Database }
+    ): Promise<Playlist> => {
+      const id = new ObjectId();
+      try {
+        const insertResult = await db.playlists.insertOne({
+          _id: id,
+          ...input
+        })
+
+        const insertedResult = insertResult ? await db.playlists.findOne({ _id: insertResult.insertedId }) : false;
+
+        if (!insertedResult) {
+          throw new Error("Failed to insert new lesson plan!")
+        }
+
+        // TODO: get viewer id instead of hardcoded value
+        await db.users.updateOne(
+          { _id: "116143759549242008910"},
+          { $push: { playlists: insertedResult }}
+        )
+
+        return insertedResult;
+      } catch (e) {
+        throw new Error(`Failed to insert lesson plan ${e}`)
+      }
     }
   }
 };

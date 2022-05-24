@@ -26,6 +26,18 @@ export type CreateLessonInput = {
   video: Scalars['String'];
 };
 
+export type FullLessonInput = {
+  category?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  creator?: InputMaybe<Scalars['String']>;
+  endDate?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['ID']>;
+  image?: InputMaybe<Scalars['String']>;
+  meta?: InputMaybe<Scalars['String']>;
+  startDate?: InputMaybe<Scalars['Int']>;
+  title?: InputMaybe<Scalars['String']>;
+  video?: InputMaybe<Scalars['String']>;
+};
+
 export type Lesson = {
   __typename?: 'Lesson';
   category?: Maybe<Array<Maybe<Scalars['String']>>>;
@@ -37,6 +49,12 @@ export type Lesson = {
   startDate?: Maybe<Scalars['Int']>;
   title?: Maybe<Scalars['String']>;
   video?: Maybe<Scalars['String']>;
+};
+
+export type LessonPlanInput = {
+  creator: Scalars['String'];
+  name: Scalars['String'];
+  plan: Array<FullLessonInput>;
 };
 
 export type Lessons = {
@@ -52,7 +70,7 @@ export type LogInInput = {
 export type Mutation = {
   __typename?: 'Mutation';
   createLesson: Lesson;
-  lessonPlan: Scalars['String'];
+  lessonPlan: Playlist;
   logIn: Viewer;
   logOut: Viewer;
 };
@@ -60,6 +78,11 @@ export type Mutation = {
 
 export type MutationCreateLessonArgs = {
   input?: InputMaybe<CreateLessonInput>;
+};
+
+
+export type MutationLessonPlanArgs = {
+  input?: InputMaybe<LessonPlanInput>;
 };
 
 
@@ -160,6 +183,13 @@ export type CreateLessonMutationVariables = Exact<{
 
 export type CreateLessonMutation = { __typename?: 'Mutation', createLesson: { __typename?: 'Lesson', id?: string | null } };
 
+export type LessonPlanMutationVariables = Exact<{
+  input: LessonPlanInput;
+}>;
+
+
+export type LessonPlanMutation = { __typename?: 'Mutation', lessonPlan: { __typename?: 'Playlist', id?: string | null } };
+
 export type LogInMutationVariables = Exact<{
   input?: InputMaybe<LogInInput>;
 }>;
@@ -251,6 +281,39 @@ export function useCreateLessonMutation(baseOptions?: Apollo.MutationHookOptions
 export type CreateLessonMutationHookResult = ReturnType<typeof useCreateLessonMutation>;
 export type CreateLessonMutationResult = Apollo.MutationResult<CreateLessonMutation>;
 export type CreateLessonMutationOptions = Apollo.BaseMutationOptions<CreateLessonMutation, CreateLessonMutationVariables>;
+export const LessonPlanDocument = gql`
+    mutation LessonPlan($input: LessonPlanInput!) {
+  lessonPlan(input: $input) {
+    id
+  }
+}
+    `;
+export type LessonPlanMutationFn = Apollo.MutationFunction<LessonPlanMutation, LessonPlanMutationVariables>;
+
+/**
+ * __useLessonPlanMutation__
+ *
+ * To run a mutation, you first call `useLessonPlanMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLessonPlanMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [lessonPlanMutation, { data, loading, error }] = useLessonPlanMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useLessonPlanMutation(baseOptions?: Apollo.MutationHookOptions<LessonPlanMutation, LessonPlanMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<LessonPlanMutation, LessonPlanMutationVariables>(LessonPlanDocument, options);
+      }
+export type LessonPlanMutationHookResult = ReturnType<typeof useLessonPlanMutation>;
+export type LessonPlanMutationResult = Apollo.MutationResult<LessonPlanMutation>;
+export type LessonPlanMutationOptions = Apollo.BaseMutationOptions<LessonPlanMutation, LessonPlanMutationVariables>;
 export const LogInDocument = gql`
     mutation LogIn($input: LogInInput) {
   logIn(input: $input) {
