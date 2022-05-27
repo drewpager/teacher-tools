@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useUserQuery } from '../../graphql/generated';
+import { useUserQuery, Viewer } from '../../graphql/generated';
 import { UserProfile, UserLessons, UserPlaylists } from './components/';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
-import { Viewer } from '../../graphql/generated';
 import { PageSkeleton } from '../../lib/components/';
 
 interface Props {
@@ -21,8 +20,8 @@ export const User = ({ viewer }: Props) => {
   const { data, loading, error } = useUserQuery({
     variables: {
       id: `${params.id}`,
-      playlistsPage,
-      lessonsPage,
+      playlistsPage: playlistsPage,
+      lessonsPage: lessonsPage,
       limit: PAGE_LIMIT
     }
   });

@@ -1,7 +1,7 @@
 import { CircularProgress, Grid, Box, Card, TextField, Button } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import React, { useState, ChangeEvent, useRef, useEffect } from 'react';
-import { Lesson, Playlist, useLessonPlanMutation } from '../../graphql/generated';
+import { FullLessonInput, useLessonPlanMutation } from '../../graphql/generated';
 import { useAllLessonsQuery, Viewer } from '../../graphql/generated';
 import { DisplayError } from '../../lib/utils';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
@@ -13,12 +13,12 @@ type props = {
 type InputLessonPlan = {
   name: string,
   creator: string,
-  plan: Lesson[]
+  plan: FullLessonInput[]
 }
 
 const initialData: InputLessonPlan = {
-  name: "Test",
-  creator: "Testing",
+  name: "",
+  creator: "",
   plan: []
 }
 
@@ -34,7 +34,7 @@ export const useFocus = () => {
 
 export const CreatePlaylist = ({ viewer }: props) => {
   const [searchInput, setSearchInput] = useState<string>("")
-  const [lessons, setLessons] = useState<Array<Lesson>>([])
+  const [lessons, setLessons] = useState<Array<FullLessonInput>>([])
   const inputRef = useFocus();
   // const id = viewer && viewer.id ? viewer.id : null;
   const [playlist, setPlaylist] = useState<InputLessonPlan>(initialData)
@@ -58,9 +58,27 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
   const lessonQuery = data ? data.allLessons.result : null;
 
+
   useEffect(() => {
     if (lessonQuery) {
-      setLessons(lessonQuery)
+      const lessonInput: any = []
+      lessonQuery.forEach(i => {
+        let lessonObj = {
+          title: i.title,
+          category: i.category,
+          creator: i.creator,
+          endDate: i.endDate,
+          image: i.image,
+          meta: i.meta,
+          startDate: i.startDate,
+          video: i.video,
+          id: i.id,
+        }
+
+        lessonInput.push(lessonObj)
+      })
+
+      setLessons(lessonInput)
     }
   }, [lessonQuery])
 
@@ -130,11 +148,11 @@ export const CreatePlaylist = ({ viewer }: props) => {
     playlist.plan.push(reorderedItem);
     // const dest = destination ? destination.index : 0;
     // items.splice(dest, 0, reorderedItem)
-    
     setLessons(items)
     setPlaylist({...playlist})
-    // console.log("Drew hello, anyone out there? ", lessons)
+
     console.log("Hello playlist: ", playlist)
+    // console.log("Hello lessons: ", lessons)
   }
 
   const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
