@@ -172,7 +172,8 @@ export const viewerResolvers = {
   },
   Viewer: {
     id: (viewer: Viewer): string | undefined => {
-      return viewer._id?.toString();
+      // return viewer._id?.toString();
+      return viewer._id;
     },
     hasPayment: (viewer: Viewer): boolean | undefined => {
       return viewer.paymentId ? true : undefined;

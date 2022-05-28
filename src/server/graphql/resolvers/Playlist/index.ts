@@ -39,8 +39,9 @@ export const playlistResolvers = {
     },
   },
   Playlist: {
-    id: (playlist: Playlist): string => {
-      return playlist._id.toString();
+    id: (playlist: Playlist) => {
+      // return playlist._id.toString();
+      return playlist._id;
     },
   },
   Mutation: {

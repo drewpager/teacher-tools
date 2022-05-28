@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useUserQuery, Viewer } from '../../graphql/generated';
+import { useUserQuery, Viewer, UserQuery } from '../../graphql/generated';
 import { UserProfile, UserLessons, UserPlaylists } from './components/';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
 import { PageSkeleton } from '../../lib/components/';

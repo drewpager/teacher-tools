@@ -60,13 +60,13 @@ export const lessonResolvers = {
     },
   },
   Lesson: {
-    id: (lesson: Lesson): string => {
-      return lesson._id.toString();
+    id: (lesson: Lesson) => {
+      return lesson._id;
     },
   },
   Playlist: {
-    id: (playlist: Playlist): string => {
-      return playlist._id.toString();
+    id: (playlist: Playlist)=> {
+      return playlist._id;
     },
     creator: async (
       playlist: Playlist,
