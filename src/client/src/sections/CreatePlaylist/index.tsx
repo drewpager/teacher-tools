@@ -62,7 +62,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
       const lessonInput: any = []
       lessonQuery.forEach(i => {
         let lessonObj = {
-          id: i.id,
           title: i.title,
           category: i.category,
           creator: i.creator,
