@@ -159,7 +159,7 @@ export const viewerResolvers = {
     },
     logOut: (
       _root: undefined,
-      _args: Record<string, never>, // replaced {} that threw error
+      _args: Record<string, never>, 
       { res }: { res: Response }
     ): Viewer => {
       try {
@@ -172,7 +172,6 @@ export const viewerResolvers = {
   },
   Viewer: {
     id: (viewer: Viewer): string | undefined => {
-      // return viewer._id?.toString();
       return viewer._id;
     },
     hasPayment: (viewer: Viewer): boolean | undefined => {
