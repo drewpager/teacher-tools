@@ -13,10 +13,9 @@ export const HomeInfo = () => {
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
-        backgroundImage: 'classroom.jpg',
       }}
     >
-      {<img style={{ display: 'none' }} src="classroom.jpg" alt="classroom with teacher interacting with students" />}
+      {/* {<img style={{ display: 'none' }} src="classroom.jpg" alt="classroom with teacher interacting with students" />} */}
       <Box
         sx={{
           position: 'absolute',
