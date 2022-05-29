@@ -72,6 +72,7 @@ export const typeDefs = gql`
   }
 
   input CreateLessonInput {
+    id: ID!
     title: String!
     meta: String!
     category: [String!]!
@@ -82,6 +83,7 @@ export const typeDefs = gql`
   }
 
   input FullLessonInput {
+    id: ID
     category: [String]
     title: String
     meta: String
