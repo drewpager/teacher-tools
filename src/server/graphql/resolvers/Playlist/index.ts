@@ -40,7 +40,6 @@ export const playlistResolvers = {
   },
   Playlist: {
     id: (playlist: Playlist) => {
-      // return playlist._id.toString();
       return playlist._id;
     },
   },
