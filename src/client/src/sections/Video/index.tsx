@@ -3,6 +3,6 @@ import { VideoPlayer } from '../../lib/components';
 
 export const Video = () => {
   return (
-      <VideoPlayer />
+      <h1>Hello from Video Component</h1>
   )
 };

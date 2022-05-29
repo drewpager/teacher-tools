@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useUserQuery, Viewer, UserQuery } from '../../graphql/generated';
+import { useUserQuery, Viewer } from '../../graphql/generated';
 import { UserProfile, UserLessons, UserPlaylists } from './components/';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
 import { PageSkeleton } from '../../lib/components/';
@@ -13,7 +13,7 @@ export const User = ({ viewer }: Props) => {
   const [playlistsPage, setPlaylistsPage] = useState(1);
   const [lessonsPage, setLessonsPage] = useState(1);
 
-  const PAGE_LIMIT = 4;
+  const PAGE_LIMIT = 6;
 
   const params = useParams();
 

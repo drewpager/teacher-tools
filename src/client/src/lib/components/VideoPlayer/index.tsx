@@ -9,8 +9,12 @@ import {fill} from "@cloudinary/url-gen/actions/resize";
 // import {Gravity} from "@cloudinary/url-gen/qualifiers";
 // import {AutoFocus} from "@cloudinary/url-gen/qualifiers/autoFocus";
 
-export const VideoPlayer = () => {
+interface props {
+  url: any;
+}
 
+export const VideoPlayer = ({ url }: props) => {
+  console.log("Video url: ", url)
   // Create and configure your Cloudinary instance.
   const cld = new Cloudinary({
     cloud: {

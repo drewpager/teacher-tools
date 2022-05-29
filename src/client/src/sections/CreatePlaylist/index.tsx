@@ -5,6 +5,7 @@ import { FullLessonInput, useLessonPlanMutation } from '../../graphql/generated'
 import { useAllLessonsQuery, Viewer } from '../../graphql/generated';
 import { DisplayError } from '../../lib/utils';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { useNavigate } from 'react-router-dom';
 
 type props = {
   viewer: Viewer;
@@ -33,6 +34,7 @@ export const useFocus = () => {
 }
 
 export const CreatePlaylist = ({ viewer }: props) => {
+  let navigate = useNavigate();
   const [searchInput, setSearchInput] = useState<string>("")
   const [lessons, setLessons] = useState<Array<FullLessonInput>>([])
   const inputRef = useFocus();
@@ -45,11 +47,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
     }
   })
 
-  const [lessonPlan, {
-    data: Mutation,
-    loading: lessonPlanMutation,
-    error: lessonPlanError
-  }] = useLessonPlanMutation({
+  const [lessonPlan] = useLessonPlanMutation({
     variables: {
       input: playlist
     }
@@ -64,6 +62,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       const lessonInput: any = []
       lessonQuery.forEach(i => {
         let lessonObj = {
+          id: i.id,
           title: i.title,
           category: i.category,
           creator: i.creator,
@@ -72,7 +71,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
           meta: i.meta,
           startDate: i.startDate,
           video: i.video,
-          id: i.id,
         }
 
         lessonInput.push(lessonObj)
@@ -151,20 +149,21 @@ export const CreatePlaylist = ({ viewer }: props) => {
     setLessons(items)
     setPlaylist({...playlist})
 
-    console.log("Hello playlist: ", playlist)
-    // console.log("Hello lessons: ", lessons)
+    console.log(playlist)
   }
 
-  const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (playlist && playlist.plan) {
-      lessonPlan({
+      await lessonPlan({
         variables: {
           input: playlist
         }
       });
     }
+    // TODO: Navigate to User Profile Page Instead of Home
+    navigate("../", { replace: true })    
   }
 
   return (

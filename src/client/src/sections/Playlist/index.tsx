@@ -6,7 +6,7 @@ import { DisplayError } from '../../lib/utils/alerts/displayError';
 import { PlaylistCard, Search } from '../../lib/components/';
 
 export const Playlist = () => {
-  const params = useParams()
+  const params = useParams();
   const { data, loading, error } = usePlaylistQuery({
     variables: {
       id: `${params.id}`
@@ -31,15 +31,16 @@ export const Playlist = () => {
   }
 
   const playlist = data ? data.playlist : null;
-
-  console.log(playlist?.plan)
+  
+  console.log(playlist)
 
   return (
     <Box sx={{ margin: 5 }}>
       <h2>{playlist?.name}</h2>
-      {playlist?.plan.map((lesson) => (
-        <PlaylistCard {...lesson} />
-      ))}
+      {playlist?.plan.map((lesson, id) => {
+          return (<PlaylistCard {...lesson} key={id} />)
+        }
+      )}
     </Box>
   )
 }

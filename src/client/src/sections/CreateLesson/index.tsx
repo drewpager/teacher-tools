@@ -12,6 +12,7 @@ interface Props {
 }
 
 const initialData = {
+  id: "",
   title: "",
   meta: "",
   category: [""],
