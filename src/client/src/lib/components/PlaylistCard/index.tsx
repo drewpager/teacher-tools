@@ -40,7 +40,7 @@ export const PlaylistCard = (lesson: Lesson) => {
           {expanded ? (
           <Card sx={{ position: 'absolute', top: 160, maxWidth: "100%" }}>
             <CardMedia>
-              <VideoPlayer url={lesson.video} />
+              <VideoPlayer url={`${lesson.video}`} />
             </CardMedia>
           </Card>
           ) : (

@@ -78,7 +78,10 @@ export const CreateLesson = ({ viewer }: Props) => {
       }
     }
 
+
     function send(piece: any, start: number, end: number, size: number) {
+      const publicId = formData.title.replace(/^\s+|\s+$/gm,'-');
+      console.log("PublicID: ", publicId)
       console.log("start ", start);
       console.log("end", end);
 
@@ -89,7 +92,7 @@ export const CreateLesson = ({ viewer }: Props) => {
       formdata.append("cloud_name", YOUR_CLOUD_NAME);
       formdata.append("upload_preset", YOUR_UNSIGNED_UPLOAD_PRESET);
       formdata.append("chunk_size", "6000000");
-      formdata.append("public_id", file!.name);
+      formdata.append("public_id", publicId);
 
       var xhr = new XMLHttpRequest();
       xhr.open("POST", POST_URL, false);
@@ -103,8 +106,8 @@ export const CreateLesson = ({ viewer }: Props) => {
         // do something to response
         console.log("Cloudinary Response: ", this.responseText);
         const res = JSON.parse(this.response); 
-        console.log("URL: ", res.url)
-        formData.video = res.url;
+        console.log("URL: ", res.secure_url)
+        formData.video = res.secure_url;
       };
       xhr.send(formdata);
     }
