@@ -80,7 +80,8 @@ export const CreateLesson = ({ viewer }: Props) => {
 
 
     function send(piece: any, start: number, end: number, size: number) {
-      const publicId = formData.title.replace(/^\s+|\s+$/gm,'-');
+      const regex = /\s+|\W+/gm;
+      const publicId = formData.title.replaceAll(regex, "-");
       console.log("PublicID: ", publicId)
       console.log("start ", start);
       console.log("end", end);
