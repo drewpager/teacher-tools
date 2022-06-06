@@ -31,16 +31,18 @@ export const Playlist = () => {
   }
 
   const playlist = data ? data.playlist : null;
-  
-  console.log(playlist)
+
+  if (playlist) {
+    return (
+      <Box sx={{ marginLeft: 5 }}>
+        <PlaylistCard playlist={playlist} />
+      </Box>
+    )
+  }
 
   return (
-    <Box sx={{ margin: 5 }}>
-      <h2>{playlist?.name}</h2>
-      {playlist?.plan.map((lesson, id) => {
-          return (<PlaylistCard {...lesson} key={id} />)
-        }
-      )}
+    <Box sx={{ marginLeft: 5 }}>
+      <h2>No Playlist By This ID</h2>
     </Box>
   )
 }
