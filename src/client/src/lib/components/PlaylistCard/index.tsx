@@ -1,7 +1,7 @@
 import React, { useState, SyntheticEvent } from 'react';
 import { Box, Accordion, AccordionDetails, AccordionSummary, Typography, Grid, Card, CardMedia, Chip } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Lessons, Playlist } from '../../../graphql/generated';
+import { Playlist } from '../../../graphql/generated';
 import { VideoPlayer } from '../index';
 // import { Playlist } from '../../../graphql/generated';
 interface Props {
@@ -37,7 +37,7 @@ export const PlaylistCard = ({ playlist }: Props) => {
               </AccordionSummary>
               <AccordionDetails>
                 <Typography sx={{ color: 'black' }}>
-                  {lesson?.category?.map((i) => (<Chip label={i} sx={{ marginRight: 1 }}/>))}
+                  {lesson?.category?.map((i) => (<Chip label={i} sx={{ marginRight: 1 }} color="primary" />))}
                 </Typography>
                 <Typography sx={{ color: 'text.secondary' }}>{lesson?.startDate} to {lesson?.endDate}</Typography>
               </AccordionDetails>
