@@ -14,6 +14,9 @@ interface Props {
 
 export const UserLessons = ({ userLessons, lessonsPage, limit, setLessonsPage }: Props) => {
   const { total, result } = userLessons;
+  console.log("Total: ", total)
+  console.log("result length: ", result.length)
+  console.log("limit: ", limit)
 
   const handleChange = (event: ChangeEvent<unknown>, page: number) => {
     setLessonsPage(page)

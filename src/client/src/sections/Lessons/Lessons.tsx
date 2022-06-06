@@ -95,7 +95,7 @@ export const Lessons = ({ title }: Props) => {
           <ListItem key={lesson.id} divider={true} alignItems="center">
             <Avatar alt={lesson.title + " image with text overlay"} src={lesson.image} sx={{ width: 250, height: 150, padding: 2, borderRadius: 5 }} />
             {lesson.title}{" | "}{lesson.category.join(", ")}{" "}            
-              <Button sx={{ margin: 5 }}variant="contained" onClick={() => handleDeleteLesson(lesson.id)}>Delete</Button>
+              <Button sx={{ margin: 5 }} variant="contained" onClick={() => handleDeleteLesson(lesson.id)}>Delete</Button>
           </ListItem> 
         )
       })}
