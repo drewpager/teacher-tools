@@ -23,8 +23,8 @@ export const PlaylistCard = ({ playlist }: Props) => {
     <h1>{playlist.name}</h1>
       {playlist.plan.map((lesson, id) => (
         <Grid container spacing={2}>
-          <Grid item xs={4} key={id}>
-          <Box sx={{ marginBottom: 1, maxWidth: "100%" }}>
+          <Grid item xs={2} md={4} key={id}>
+          <Box sx={{ marginBottom: 1, minWidth: 150 }}>
             <Accordion expanded={expanded === `${lesson?.id}`} onChange={handleChange(`${lesson?.id}`)}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -44,10 +44,10 @@ export const PlaylistCard = ({ playlist }: Props) => {
             </Accordion>
           </Box>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={10} md={8}>
           <Box>
             {expanded ? (
-            <Card sx={{ position: 'absolute', top: 160, maxWidth: "100%" }}>
+            <Card sx={{ position: 'absolute', top: "16%", right: "2%", left: "40%" }}>
               <CardMedia>
                 <VideoPlayer url={`${lesson?.video}`} />
               </CardMedia>
