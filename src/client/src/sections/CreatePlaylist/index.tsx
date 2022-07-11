@@ -132,23 +132,24 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const onDragEndHandler = (result: any) => {
     const { destination, source } = result;
     
+    // if there is no droppable destination, simply return.
     if (!destination) {
       return;
     }
 
+    // if the source and destination are identical, do nothing. 
     if (source.droppableId === destination.droppableId && source.index === destination.index) {
       return;
     }
 
+    // Otherwise, cut the item from lessons array and push to new playlist
     const items = Array.from(lessons);
     const [reorderedItem] = items.splice(source.index, 1);
     playlist.plan.push(reorderedItem);
-    // const dest = destination ? destination.index : 0;
-    // items.splice(dest, 0, reorderedItem)
+    
+    // Set State for items and playlist objects
     setLessons(items)
     setPlaylist({...playlist})
-
-    console.log(playlist)
   }
 
   const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
