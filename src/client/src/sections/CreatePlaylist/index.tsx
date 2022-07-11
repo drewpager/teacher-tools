@@ -131,6 +131,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
   const onDragEndHandler = (result: any) => {
     const { destination, source } = result;
+
+    console.log()
     
     // if there is no droppable destination, simply return.
     if (!destination) {
@@ -144,12 +146,22 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
     // Otherwise, cut the item from lessons array and push to new playlist
     const items = Array.from(lessons);
-    const [reorderedItem] = items.splice(source.index, 1);
-    playlist.plan.push(reorderedItem);
+
+    if (destination.droppableId === "playlist") {
+      const [reorderedItem] = items.splice(source.index, 1);
+      playlist.plan.push(reorderedItem);
     
-    // Set State for items and playlist objects
-    setLessons(items)
-    setPlaylist({...playlist})
+      setLessons(items)
+      setPlaylist({...playlist})
+    }
+
+    if (destination.droppableId === "lessons") {
+      const [reorderedPlay] = playlist.plan.splice(source.index, 1);
+      items.push(reorderedPlay)
+      
+      setLessons(items)
+      setPlaylist({...playlist})
+    }
   }
 
   const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
@@ -171,57 +183,65 @@ export const CreatePlaylist = ({ viewer }: props) => {
       <h1>Create Lesson Plan</h1>
       <form onSubmit={handleSubmit}>
         <DragDropContext onDragEnd={onDragEndHandler}>
-            <Grid container>
-              <Droppable droppableId='lessons'>
-                {(provided) =>  (
-                  <>
-                    <Grid item xs={6} md={8} lg={8} {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
-                    <Card variant="outlined" sx={{ height: "750px", padding: 5, margin: 2 }}>
-                      <TextField
-                        label="Lesson Plan Title"
-                        id="lesson-plan-title"
-                        variant="standard"
-                        fullWidth
-                        onChange={titleHandler}
-                      />
-                      {playlist.plan.map((i, index) => (
-                        <Card variant="outlined" sx={{ padding: 2, margin: 1, width: "99%" }} key={index}>
-                          {i?.title}
-                        </Card>
-                      ))}
-                    </Card>
-                  </Grid>
-                  <Grid item xs={6} md={4} lg={4}>
-                    <Card variant="outlined" sx={{ height: "750px", padding: 5, margin: 2 }}>
-                      <TextField 
-                        variant='outlined' 
-                        id="lesson-search" 
-                        label="Search Lessons" 
-                        value={searchInput} 
-                        onChange={inputHandler} 
-                        ref={inputRef} 
-                        onKeyPress={handleKeyPress} 
-                      />
-                      <Button onClick={() => onSearch(searchInput)}><SearchIcon /></Button>
-                      <Grid container>
-                      {lessons?.map((i, index) => (
-                        <Draggable key={index} draggableId={index.toString()} index={index}>
-                          {(provided) => (
-                            <Grid item xs={12} md={12} lg={12} {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} key={i.id}>
-                              <Card variant="outlined" sx={{ padding: 2, margin: 1, width: "99%" }} key={i.id}>
-                                {i.title}
-                              </Card>
-                            </Grid>
-                            )}
-                        </Draggable>
-                      ))}
-                      {provided.placeholder}
-                      </Grid>
-                    </Card>
-                  </Grid>
-                </>
-                )}
+          <Grid container>
+            <Droppable droppableId='playlist'>
+              {(provided) => (
+                <Grid item xs={6} md={8} lg={8} {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
+                <Card variant="outlined" sx={{ height: "750px", padding: 5, margin: 2 }}>
+                  <TextField
+                    label="Lesson Plan Title"
+                    id="lesson-plan-title"
+                    variant="standard"
+                    fullWidth
+                    onChange={titleHandler}
+                  />
+                  {playlist.plan.map((i, index) => (
+                    <Draggable key={index} draggableId={index.toString()} index={index}>
+                      {(provided) => (
+                        <Grid item xs={12} md={12} lg={12} {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} key={i.id}>
+                          <Card variant="outlined" sx={{ padding: 2, margin: 1, width: "99%" }} key={index}>
+                            {i?.title}
+                          </Card>
+                        </Grid>
+                      )}
+                    </Draggable>
+                  ))}
+                </Card>
+              </Grid>
+              )}
             </Droppable>
+            <Droppable droppableId='lessons'>
+              {(provided) => (
+                <Grid item xs={6} md={4} lg={4} {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
+                <Card variant="outlined" sx={{ height: "750px", padding: 5, margin: 2 }}>
+                  <TextField 
+                    variant='outlined' 
+                    id="lesson-search" 
+                    label="Search Lessons" 
+                    value={searchInput} 
+                    onChange={inputHandler} 
+                    ref={inputRef} 
+                    onKeyPress={handleKeyPress} 
+                  />
+                  <Button onClick={() => onSearch(searchInput)}><SearchIcon /></Button>
+                  <Grid container>
+                  {lessons?.map((i, index) => (
+                    <Draggable key={index} draggableId={index.toString()} index={index}>
+                      {(provided) => (
+                        <Grid item xs={12} md={12} lg={12} {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} key={i.id}>
+                          <Card variant="outlined" sx={{ padding: 2, margin: 1, width: "99%" }} key={i.id}>
+                            {i.title}
+                          </Card>
+                        </Grid>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                  </Grid>
+                </Card>
+              </Grid>
+                )}
+          </Droppable>
           </Grid>
         </DragDropContext>
         <Button variant='outlined' type='submit'>Create</Button>
