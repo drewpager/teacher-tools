@@ -37,6 +37,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
   let navigate = useNavigate();
   const [searchInput, setSearchInput] = useState<string>("")
   const [lessons, setLessons] = useState<Array<FullLessonInput>>([])
+  const [filter, setFilter] = useState<Array<FullLessonInput>>(lessons)
   const inputRef = useFocus();
   // const id = viewer && viewer.id ? viewer.id : null;
   const [playlist, setPlaylist] = useState<InputLessonPlan>(initialData)
@@ -76,6 +77,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       })
 
       setLessons(lessonInput)
+      setFilter(lessonInput)
     }
   }, [lessonQuery])
 
@@ -90,21 +92,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
     )
   }
 
-  const onSearch = (searchInput: string) => {
-    if (data) {
-      const filteredData = data.allLessons.result.filter(({title}) => title?.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1);
-      // return filteredData;
-    } else {
-      // return null;
-    }
-  }
-
-  const inputHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    e.preventDefault();
-    const enteredSearch = e.target.value;
-    setSearchInput(enteredSearch)
-  }
-
   const titleHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     e.preventDefault();
     const name = e.target.value;
@@ -113,12 +100,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
       name: name, 
       creator: viewer && viewer.id ? viewer.id : "0" 
     })
-  }
-
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "enter") {
-      onSearch(searchInput)
-    }
   }
 
   if (loading) {
@@ -152,6 +133,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       playlist.plan.push(reorderedItem);
     
       setLessons(items)
+      setFilter(items)
       setPlaylist({...playlist})
     }
 
@@ -160,7 +142,26 @@ export const CreatePlaylist = ({ viewer }: props) => {
       items.push(reorderedPlay)
       
       setLessons(items)
+      setFilter(items)
       setPlaylist({...playlist})
+    }
+  }
+
+  const inputHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    e.preventDefault();
+    let enteredSearch = e.target.value;
+    setSearchInput(enteredSearch)
+
+    if (enteredSearch) {
+      let filteredLessons = filter.filter(({title}) => title?.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1);
+      setLessons(filteredLessons)
+    }
+
+    if (enteredSearch === '') {
+      setLessons(filter)
+      setFilter(filter)
+      console.log("Filter: ", filter)
+      console.log("lessons: ", lessons)
     }
   }
 
@@ -206,6 +207,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
                       )}
                     </Draggable>
                   ))}
+                  {provided.placeholder}
                 </Card>
               </Grid>
               )}
@@ -221,9 +223,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
                     value={searchInput} 
                     onChange={inputHandler} 
                     ref={inputRef} 
-                    onKeyPress={handleKeyPress} 
+                    sx={{ width: "100%" }}
                   />
-                  <Button onClick={() => onSearch(searchInput)}><SearchIcon /></Button>
                   <Grid container>
                   {lessons?.map((i, index) => (
                     <Draggable key={index} draggableId={index.toString()} index={index}>
