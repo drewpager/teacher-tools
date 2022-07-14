@@ -5,7 +5,7 @@ import { CloudinaryVideo } from "@cloudinary/url-gen";
 // Import required actions and qualifiers.
 import { videoCodec } from "@cloudinary/url-gen/actions/transcode";
 import { auto, vp9 } from "@cloudinary/url-gen/qualifiers/videoCodec";
-import {fill} from "@cloudinary/url-gen/actions/resize";
+import {fill, limitFit} from "@cloudinary/url-gen/actions/resize";
 // import 'dotenv/config';
 // import {byRadius} from "@cloudinary/url-gen/actions/roundCorners";
 // import {FocusOn} from "@cloudinary/url-gen/qualifiers/focusOn";
@@ -26,7 +26,7 @@ export const VideoPlayer = ({ url }: props) => {
   
   // Create and configure your Cloudinary instance.
   const cldUrl = new CloudinaryVideo(`platos-peach-video${fileString[0]}`, { cloudName: 'drewpager' })
-  cldUrl.resize(fill().width(900).height(500));
+  cldUrl.resize(limitFit().width(0.75).height(0.75));
 
   const sources = [
     {
