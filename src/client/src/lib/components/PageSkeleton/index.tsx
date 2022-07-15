@@ -15,13 +15,13 @@ export const PageSkeleton = () => {
       </Card>
       <h2>Lessons</h2>
       <Grid container>
-        <Grid item spacing={2} xs={1} sm={2} lg={3} xl={3}>
+        <Grid item xs={1} sm={2} lg={3} xl={3}>
           <Skeleton variant="rectangular" width={300} height={264}/>
         </Grid>
-        <Grid item spacing={2} xs={1} sm={2} lg={3} xl={3}>
+        <Grid item xs={1} sm={2} lg={3} xl={3}>
           <Skeleton variant="rectangular" width={300} height={264}/>
         </Grid>
-        <Grid item spacing={2} xs={1} sm={2} lg={3} xl={3}>
+        <Grid item xs={1} sm={2} lg={3} xl={3}>
           <Skeleton variant="rectangular" width={300} height={264}/>
         </Grid>
       </Grid>

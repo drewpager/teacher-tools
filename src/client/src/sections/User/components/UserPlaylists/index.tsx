@@ -21,10 +21,10 @@ export const UserPlaylists = ({ userPlaylists, playlistsPage, limit, setPlaylist
   const userPlaylistsList = (
     <Box sx={{ marginLeft: 5 }}>
       <Grid container spacing={3} sx={{ alignItems: "center" }}>
-        <Grid item spacing={3}>
+        <Grid item>
           <h2>{total} Playlists</h2>
         </Grid>
-        <Grid item spacing={3}>
+        <Grid item>
           <Link to={`/playlist/create`}>
             <Tooltip title="Add New Playlist">
               <AddCircleIcon sx={{ color: "black" }} />
@@ -34,7 +34,7 @@ export const UserPlaylists = ({ userPlaylists, playlistsPage, limit, setPlaylist
       </Grid>
       <Grid container>
         {result.map((value: any, index) => (
-          <Grid item spacing={4} lg={4} md={6} sm={12} xs={12}>
+          <Grid item lg={4} md={6} sm={12} xs={12} key={index}>
             <Link to={`/playlist/${value.id}`}>
               <ListItem key={index}>
                 <Card>

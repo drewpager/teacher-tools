@@ -25,10 +25,10 @@ export const UserLessons = ({ userLessons, lessonsPage, limit, setLessonsPage }:
   const userLessonsList = (
     <Box sx={{ marginLeft: 5 }}>
       <Grid container spacing={3} sx={{ alignItems: "center" }}>
-        <Grid item spacing={3}>
+        <Grid item>
           <h2>{total} Lessons</h2>
         </Grid>
-        <Grid item spacing={3}>
+        <Grid item>
           <Link to={`/lesson/create`}>
             <Tooltip title="Add New Lesson">
               <AddCircleIcon sx={{ color: "black" }} />
@@ -38,7 +38,7 @@ export const UserLessons = ({ userLessons, lessonsPage, limit, setLessonsPage }:
       </Grid>
       <Grid container>
         {result.map((value: any, index) => (
-          <Grid item spacing={2} lg={4} md={6} sm={6} xs={12}>
+          <Grid item lg={4} md={6} sm={6} xs={12} key={index}>
             <Link to={`/lesson/${value.id}`}>
               <ListItem key={index}>
                 <LessonCard lesson={value} />
