@@ -128,6 +128,23 @@ export const lessonResolvers = {
       } catch(e) {
         throw new Error(`Failed to insert lesson: ${e}`);
       }
+    },
+    deleteLesson: async (
+      viewer: Viewer,
+      { id }: LessonArgs,
+      { db }: { db: Database}
+    ): Promise<boolean | undefined> => {
+      try {
+        const deletedLesson = await db.lessons.deleteOne({ _id: new ObjectId(id) });
+
+        if (!deletedLesson) {
+          throw new Error("Failed to delete lesson");
+        }
+
+        return deletedLesson.acknowledged;
+      } catch (error) {
+        throw new Error(`Failed to start deleting lesson: ${error}`)
+      }
     }
   }
 };

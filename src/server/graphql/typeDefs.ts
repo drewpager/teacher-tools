@@ -65,6 +65,7 @@ export const typeDefs = gql`
     logOut: Viewer!
     createLesson(input: CreateLessonInput): Lesson!
     lessonPlan(input: LessonPlanInput): Playlist!
+    deleteLesson(id: ID): Boolean!
   }
 
   input LogInInput {

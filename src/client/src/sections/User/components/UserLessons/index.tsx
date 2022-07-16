@@ -14,9 +14,6 @@ interface Props {
 
 export const UserLessons = ({ userLessons, lessonsPage, limit, setLessonsPage }: Props) => {
   const { total, result } = userLessons;
-  console.log("Total: ", total)
-  console.log("result length: ", result.length)
-  console.log("limit: ", limit)
 
   const handleChange = (event: ChangeEvent<unknown>, page: number) => {
     setLessonsPage(page)
@@ -39,11 +36,9 @@ export const UserLessons = ({ userLessons, lessonsPage, limit, setLessonsPage }:
       <Grid container>
         {result.map((value: any, index) => (
           <Grid item lg={4} md={6} sm={6} xs={12} key={index}>
-            <Link to={`/lesson/${value.id}`}>
-              <ListItem key={index}>
-                <LessonCard lesson={value} />
-              </ListItem>
-            </Link>
+            <ListItem key={index}>
+              <LessonCard lesson={value} />
+            </ListItem>
           </Grid>
         ))}
       </Grid>

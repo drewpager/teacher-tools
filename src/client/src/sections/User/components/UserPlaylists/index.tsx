@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import { Box, Card, CardContent, ListItem, Pagination, Typography, Grid, Tooltip } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { Playlists } from '../../../../graphql/generated';
+import { Playlists, Playlist } from '../../../../graphql/generated';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 interface Props {
