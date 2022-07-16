@@ -72,6 +72,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   createLesson: Lesson;
   deleteLesson: Scalars['Boolean'];
+  deletePlaylist: Scalars['Boolean'];
   lessonPlan: Playlist;
   logIn: Viewer;
   logOut: Viewer;
@@ -84,6 +85,11 @@ export type MutationCreateLessonArgs = {
 
 
 export type MutationDeleteLessonArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
+
+export type MutationDeletePlaylistArgs = {
   id?: InputMaybe<Scalars['ID']>;
 };
 
