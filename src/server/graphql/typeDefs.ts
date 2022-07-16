@@ -66,6 +66,7 @@ export const typeDefs = gql`
     createLesson(input: CreateLessonInput): Lesson!
     lessonPlan(input: LessonPlanInput): Playlist!
     deleteLesson(id: ID): Boolean!
+    deletePlaylist(id: ID): Boolean!
   }
 
   input LogInInput {

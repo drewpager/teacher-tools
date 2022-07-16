@@ -1,6 +1,7 @@
 import { Database, Playlist } from "../../../lib/types";
 import { PlaylistArgs, PlaylistsArgs, PlaylistsData, CreatePlanArgs } from "./types";
 import { ObjectId } from "mongodb";
+import { Viewer } from "../../../../client/src/graphql/generated";
 
 export const playlistResolvers = {
   Query: {
@@ -74,6 +75,23 @@ export const playlistResolvers = {
         return insertedResult;
       } catch (e) {
         throw new Error(`Failed to insert lesson plan ${e}`)
+      }
+    },
+    deletePlaylist: async (
+      _root: undefined,
+      { id }: PlaylistArgs,
+      { db }: { db: Database }
+    ): Promise<boolean | undefined> => {
+      try {
+        const deletePlaylist = await db.playlists.deleteOne({ _id: new ObjectId(id) })
+
+        if (!deletePlaylist) {
+          throw new Error("Playlist deletion didn't work!");
+        }
+        
+        return deletePlaylist.acknowledged;
+      } catch (error) {
+        throw new Error(`Failed to delete playlist: ${error}`);
       }
     }
   }

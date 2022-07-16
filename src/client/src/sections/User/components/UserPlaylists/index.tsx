@@ -1,8 +1,9 @@
 import React, { ChangeEvent } from 'react';
-import { Box, Card, CardContent, ListItem, Pagination, Typography, Grid, Tooltip } from '@mui/material';
+import { Box, Pagination, Grid, Tooltip } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { Playlists, Playlist } from '../../../../graphql/generated';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { UserPlaylistsCard } from '../../../../lib/components'
 
 interface Props {
   userPlaylists: Playlists;
@@ -12,6 +13,7 @@ interface Props {
 }
 
 export const UserPlaylists = ({ userPlaylists, playlistsPage, limit, setPlaylistsPage}: Props) => {
+  
   const { total, result } = userPlaylists;
 
   const handleChange = (event: ChangeEvent<unknown>, page: number) => {
@@ -34,19 +36,7 @@ export const UserPlaylists = ({ userPlaylists, playlistsPage, limit, setPlaylist
       </Grid>
       <Grid container>
         {result.map((value: any, index) => (
-          <Grid item lg={4} md={6} sm={12} xs={12} key={index}>
-            <Link to={`/playlist/${value.id}`}>
-              <ListItem key={index}>
-                <Card>
-                  <CardContent>
-                    <Typography variant='h3'>
-                      {value.name}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </ListItem>
-            </Link>
-          </Grid>
+          <UserPlaylistsCard playlist={value} key={index} />
         ))}
       </Grid>
       <Pagination 
