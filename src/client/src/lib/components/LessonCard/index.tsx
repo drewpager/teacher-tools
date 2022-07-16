@@ -5,6 +5,7 @@ import { gql } from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { DeleteLessonData, DeleteLessonVariables } from '../../../sections/Lessons/types';
+import { Viewer } from '../../../graphql/generated';
 
 interface Props {
   lesson: {

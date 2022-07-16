@@ -4,7 +4,7 @@ import { AppBar, Box, Toolbar, IconButton, Typography, Button, Avatar, Tooltip, 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Viewer } from '../../graphql/generated';
 import { DisplaySuccess } from '../../lib/utils';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { ReactComponent as PeachIcon } from '../../lib/assets/peach-logo.svg';
 
 interface Props {
@@ -13,11 +13,13 @@ interface Props {
 }
 
 export const AppHeader = ({ viewer, setViewer }: Props) => {
+  let navigate = useNavigate();
   const [logOut] = useLogOutMutation({
     onCompleted: (data) => {
       if (data && data.logOut) {
         setViewer(data.logOut);
         sessionStorage.removeItem("token")
+        navigate("/login");
         return (<DisplaySuccess title="You've Successfully logged out!" />);
       }
     }
