@@ -38,7 +38,7 @@ export const CardGrid = () => {
     <Box>
       <Grid container>
         {playlists?.result.map((i, index) => (
-          <PlaylistDetails {...i} key={index} />
+          <PlaylistDetails {...i} key={index}/>
         ))}
       </Grid>
     </Box>

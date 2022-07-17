@@ -31,7 +31,6 @@ export const LessonCard = ({ lesson }: Props) => {
   const handleDelete = async (id: string) => {
     const res = await deleteLesson({ variables: { id } })
     if (res) {
-      window.location.reload();
       return <DisplaySuccess title="Deletion Successful!" />
     }
   }
