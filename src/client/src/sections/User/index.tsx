@@ -24,7 +24,8 @@ export const User = ({ viewer }: Props) => {
       playlistsPage: playlistsPage,
       lessonsPage: lessonsPage,
       limit: pageLimit
-    }
+    },
+    pollInterval: 500
   });
 
   const user = data ? data.user : null;
@@ -34,6 +35,7 @@ export const User = ({ viewer }: Props) => {
 
   const userLessons = user ? user.lessons : null;
   const userPlaylists = user ? user.playlists : null;
+
   const lessonPageLimit = user && user.lessons ? user.lessons.total / pageLimit : 2;
   const playlistPageLimit = user && user.playlists ? user.playlists.total / pageLimit : 2;
 
@@ -66,7 +68,6 @@ export const User = ({ viewer }: Props) => {
       <DisplayError title="Failed to find user profile" />
     )
   }
-
   return (
     <>
       {UserProfileElement}

@@ -1,7 +1,7 @@
-import React, { ChangeEvent } from 'react';
-import { Box, Card, CardContent, ListItem, Pagination, Typography, Grid, Tooltip, Button, CircularProgress, Alert } from '@mui/material';
+import React from 'react';
+import { Card, CardContent, ListItem, Typography, Grid, Button, CircularProgress, Alert } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { Playlists, Playlist, Lesson } from '../../../graphql/generated';
+import { Playlist, Lesson } from '../../../graphql/generated';
 import { useMutation } from '@apollo/client';
 import { gql } from 'graphql-tag';
 import { DisplaySuccess } from '../../utils';
@@ -36,7 +36,7 @@ const [deletePlaylist, { loading: DeletePlaylistLoading, error: DeletePlaylistEr
 const handleDelete = async (id: string) => {  
     const res = await deletePlaylist({ variables: { id }})
     if (res) {
-      window.location.reload();
+      // window.location.reload();
       return <DisplaySuccess title="Deletion Successful!" />
     }
   }
