@@ -6,3 +6,4 @@ export * from "./Search";
 export * from "./PlaylistCard";
 export * from "./VideoPlayer";
 export * from "./UserPlaylistsCard";
+export * from "./PlaylistDetails";
