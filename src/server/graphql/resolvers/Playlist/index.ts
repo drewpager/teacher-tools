@@ -26,15 +26,18 @@ export const playlistResolvers = {
       const data: PlaylistsData = {
         total: 0,
         result: [],
+        totalCount: 0
       };
 
       let cursor = await db.playlists.find({});
+      const totalCount = cursor;
 
       cursor = cursor.skip(page > 1 ? (page - 1) * limit : 0);
       cursor = cursor.limit(limit);
 
       data.total = await cursor.count();
       data.result = await cursor.toArray();
+      data.totalCount = await totalCount.count();
 
       return data;
     },

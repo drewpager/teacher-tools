@@ -49,6 +49,7 @@ export const typeDefs = gql`
   type Playlists {
     total: Int!
     result: [Playlist!]!
+    totalCount: Int!
   }
 
   type Query {

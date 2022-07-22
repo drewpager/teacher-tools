@@ -23,6 +23,7 @@ export const USER = gql`
             creator
           }
         }
+        totalCount
       }
       lessons(limit: $limit, page: $lessonsPage) {
         total

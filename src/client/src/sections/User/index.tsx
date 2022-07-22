@@ -37,7 +37,7 @@ export const User = ({ viewer }: Props) => {
   const userPlaylists = user ? user.playlists : null;
 
   const lessonPageLimit = user && user.lessons ? user.lessons.total / pageLimit : 2;
-  const playlistPageLimit = user && user.playlists ? user.playlists.total / pageLimit : 2;
+  // const playlistPageLimit = user && user.playlists ? user.playlists.total / pageLimit : 2;
 
   const userLessonsElement = userLessons ? (
     <UserLessons
@@ -52,7 +52,7 @@ export const User = ({ viewer }: Props) => {
     <UserPlaylists 
       userPlaylists={userPlaylists}
       playlistsPage={playlistsPage}
-      limit={playlistPageLimit}
+      limit={pageLimit}
       setPlaylistsPage={setPlaylistsPage}
     />
   ) : ( <h2>UserPlaylists Not Working</h2> );

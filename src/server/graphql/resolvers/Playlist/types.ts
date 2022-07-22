@@ -10,6 +10,7 @@ export interface PlaylistsArgs {
 export interface PlaylistsData {
   total: number;
   result: Playlist[];
+  totalCount: number;
 }
 
 export interface LessonPlanInput {

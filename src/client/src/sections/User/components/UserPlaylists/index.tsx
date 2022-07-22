@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import { Box, Pagination, Grid, Tooltip } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { Playlists, Playlist } from '../../../../graphql/generated';
+import { Playlists } from '../../../../graphql/generated';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { UserPlaylistsCard } from '../../../../lib/components'
 
@@ -14,7 +14,7 @@ interface Props {
 
 export const UserPlaylists = ({ userPlaylists, playlistsPage, limit, setPlaylistsPage}: Props) => {
   
-  const { total, result } = userPlaylists;
+  const { result, totalCount } = userPlaylists;
 
   const handleChange = (event: ChangeEvent<unknown>, page: number) => {
     setPlaylistsPage(page)
@@ -22,9 +22,9 @@ export const UserPlaylists = ({ userPlaylists, playlistsPage, limit, setPlaylist
 
   const userPlaylistsList = (
     <Box sx={{ marginLeft: 5 }}>
-      <Grid container spacing={3} sx={{ alignItems: "center" }}>
+      <Grid container spacing={2} sx={{ alignItems: "center" }}>
         <Grid item>
-          <h2>{total} Playlists</h2>
+          <h2>{totalCount} Playlists</h2>
         </Grid>
         <Grid item>
           <Link to={`/playlist/create`}>
@@ -40,7 +40,7 @@ export const UserPlaylists = ({ userPlaylists, playlistsPage, limit, setPlaylist
         ))}
       </Grid>
       <Pagination 
-        count={total / limit} 
+        count={Math.ceil(totalCount/limit)} 
         page={playlistsPage}
         onChange={handleChange}
       />

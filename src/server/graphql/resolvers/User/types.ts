@@ -12,6 +12,7 @@ export interface UserPlaylistArgs {
 export interface UserPlaylistData {
   total: number;
   result: Playlist[];
+  totalCount: number;
 }
 
 export interface UserLessonArgs {

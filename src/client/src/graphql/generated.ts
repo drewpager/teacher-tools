@@ -116,6 +116,7 @@ export type Playlists = {
   __typename?: 'Playlists';
   result: Array<Playlist>;
   total: Scalars['Int'];
+  totalCount: Scalars['Int'];
 };
 
 export type Query = {
@@ -258,7 +259,7 @@ export type UserQueryVariables = Exact<{
 }>;
 
 
-export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, name: string, avatar: string, contact: string, hasPayment: boolean, playlists?: { __typename?: 'Playlists', total: number, result: Array<{ __typename?: 'Playlist', id?: string | null, name: string, creator: string, plan: Array<{ __typename?: 'Lesson', id?: string | null, title?: string | null, video?: string | null, startDate?: number | null, endDate?: number | null, creator?: string | null } | null> }> } | null, lessons?: { __typename?: 'Lessons', total: number, result: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, startDate?: number | null, endDate?: number | null, creator?: string | null }> } | null } };
+export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, name: string, avatar: string, contact: string, hasPayment: boolean, playlists?: { __typename?: 'Playlists', total: number, totalCount: number, result: Array<{ __typename?: 'Playlist', id?: string | null, name: string, creator: string, plan: Array<{ __typename?: 'Lesson', id?: string | null, title?: string | null, video?: string | null, startDate?: number | null, endDate?: number | null, creator?: string | null } | null> }> } | null, lessons?: { __typename?: 'Lessons', total: number, result: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, startDate?: number | null, endDate?: number | null, creator?: string | null }> } | null } };
 
 
 export const CreateLessonDocument = gql`
@@ -644,6 +645,7 @@ export const UserDocument = gql`
           creator
         }
       }
+      totalCount
     }
     lessons(limit: $limit, page: $lessonsPage) {
       total
