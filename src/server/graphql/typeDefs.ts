@@ -36,6 +36,7 @@ export const typeDefs = gql`
   type Lessons {
     total: Int!
     result: [Lesson!]!
+    totalCount: Int!
   }
 
   type Playlist {

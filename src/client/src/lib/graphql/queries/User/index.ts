@@ -1,4 +1,4 @@
-import { gql } from 'graphql-tag';
+import { gql } from "graphql-tag";
 
 export const USER = gql`
   query User($id: ID!, $playlistsPage: Int!, $lessonsPage: Int!, $limit: Int!) {
@@ -37,7 +37,8 @@ export const USER = gql`
           endDate
           creator
         }
+        totalCount
       }
     }
   }
-`
+`;

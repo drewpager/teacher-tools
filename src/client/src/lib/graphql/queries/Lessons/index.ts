@@ -1,4 +1,4 @@
-import { gql } from 'graphql-tag';
+import { gql } from "graphql-tag";
 
 export const ALL_LESSONS = gql`
   query AllLessons($limit: Int!, $page: Int!) {

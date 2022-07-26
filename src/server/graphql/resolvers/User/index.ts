@@ -59,7 +59,9 @@ export const userResolvers = {
         };
 
         let cursor = await db.playlists.find({ creator: { $in: [user._id] } });
-        const countTotal = await db.playlists.find({ creator: { $in: [user._id] } });
+        const countTotal = await db.playlists.find({
+          creator: { $in: [user._id] },
+        });
 
         cursor = cursor.skip(page > 0 ? (page - 1) * limit : 0);
         cursor = cursor.limit(limit);
@@ -82,9 +84,13 @@ export const userResolvers = {
         const data: UserLessonData = {
           total: 0,
           result: [],
+          totalCount: 0,
         };
 
         let cursor = await db.lessons.find({
+          creator: { $in: [user._id] },
+        });
+        const totalCount = await db.lessons.find({
           creator: { $in: [user._id] },
         });
 
@@ -93,6 +99,7 @@ export const userResolvers = {
 
         data.total = await cursor.count();
         data.result = await cursor.toArray();
+        data.totalCount = await totalCount.count();
 
         // if (data.total === 0) {
         //   return null;

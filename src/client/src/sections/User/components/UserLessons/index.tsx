@@ -13,7 +13,7 @@ interface Props {
 }
 
 export const UserLessons = ({ userLessons, lessonsPage, limit, setLessonsPage }: Props) => {
-  const { total, result } = userLessons;
+  const { result, totalCount } = userLessons;
 
   const handleChange = (event: ChangeEvent<unknown>, page: number) => {
     setLessonsPage(page)
@@ -23,7 +23,7 @@ export const UserLessons = ({ userLessons, lessonsPage, limit, setLessonsPage }:
     <Box sx={{ marginLeft: 5 }}>
       <Grid container spacing={3} sx={{ alignItems: "center" }}>
         <Grid item>
-          <h2>{total} Lessons</h2>
+          <h2>{totalCount} Lessons</h2>
         </Grid>
         <Grid item>
           <Link to={`/lesson/create`}>
@@ -43,7 +43,7 @@ export const UserLessons = ({ userLessons, lessonsPage, limit, setLessonsPage }:
         ))}
       </Grid>
       <Pagination 
-        count={total / limit} 
+        count={Math.ceil(totalCount/limit)} 
         page={lessonsPage}
         onChange={handleChange}
       />

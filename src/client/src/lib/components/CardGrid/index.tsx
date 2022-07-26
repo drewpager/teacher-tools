@@ -12,7 +12,7 @@ export const CardGrid = () => {
 
   const { data, loading, error } = useAllPlaylistsQuery({
     variables: {
-      limit: 6,
+      limit: 10,
       page: 1
     }
   });

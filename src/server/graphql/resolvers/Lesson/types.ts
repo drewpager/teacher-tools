@@ -1,4 +1,4 @@
-import { Lesson } from '../../../lib/types';
+import { Lesson } from "../../../lib/types";
 export interface LessonArgs {
   id: string;
 }
@@ -26,4 +26,5 @@ export interface AllLessonsArgs {
 export interface AllLessonsData {
   total: number;
   result: Lesson[];
+  totalCount: number;
 }

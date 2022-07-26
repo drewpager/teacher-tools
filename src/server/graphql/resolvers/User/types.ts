@@ -1,4 +1,4 @@
-import { Playlist, Lesson } from '../../../lib/types';
+import { Playlist, Lesson } from "../../../lib/types";
 
 export interface UserArgs {
   id: string;
@@ -23,4 +23,5 @@ export interface UserLessonArgs {
 export interface UserLessonData {
   total: number;
   result: Lesson[];
+  totalCount: number;
 }

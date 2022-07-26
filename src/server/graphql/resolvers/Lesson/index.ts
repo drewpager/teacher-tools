@@ -1,17 +1,28 @@
 import { Database, Lesson, Playlist, User } from "../../../lib/types";
-import { AllLessonsArgs, AllLessonsData, CreateLessonArgs, CreateLessonInput, LessonArgs } from "./types";
+import {
+  AllLessonsArgs,
+  AllLessonsData,
+  CreateLessonArgs,
+  CreateLessonInput,
+  LessonArgs,
+} from "./types";
 import { authorize } from "../../../lib/utils/index";
 import { Request } from "express";
 import { ObjectId } from "mongodb";
 import { Viewer } from "../../../../client/src/graphql/generated";
 
-const verifyCreateLessonInput = ({ title, category, meta, video }: CreateLessonInput) => {
+const verifyCreateLessonInput = ({
+  title,
+  category,
+  meta,
+  video,
+}: CreateLessonInput) => {
   if (title.length > 160) {
-    throw new Error("Title must not exceed 160 characters in length!")
+    throw new Error("Title must not exceed 160 characters in length!");
   }
 
   if (category.length < 1) {
-    throw new Error("Please add at least one category.")
+    throw new Error("Please add at least one category.");
   }
 
   // if (meta.length < 160) {
@@ -19,9 +30,9 @@ const verifyCreateLessonInput = ({ title, category, meta, video }: CreateLessonI
   // }
 
   if (video.length < 1) {
-    throw new Error("Please add a video!")
+    throw new Error("Please add a video!");
   }
-}
+};
 
 export const lessonResolvers = {
   Query: {
@@ -45,16 +56,19 @@ export const lessonResolvers = {
     ): Promise<AllLessonsData> => {
       const data: AllLessonsData = {
         total: 0,
-        result: []
-      }
-      
+        result: [],
+        totalCount: 0,
+      };
+
       let cursor = await db.lessons.find({});
+      const count = cursor;
 
       cursor = cursor.skip(page > 1 ? (page - 1) * limit : 0);
       cursor = cursor.limit(limit);
 
       data.total = await cursor.count();
       data.result = await cursor.toArray();
+      data.totalCount = await count.count();
 
       return data;
     },
@@ -65,7 +79,7 @@ export const lessonResolvers = {
     },
   },
   Playlist: {
-    id: (playlist: Playlist)=> {
+    id: (playlist: Playlist) => {
       return playlist._id;
     },
     creator: async (
@@ -97,45 +111,49 @@ export const lessonResolvers = {
     createLesson: async (
       viewer: Viewer,
       { input }: CreateLessonArgs,
-      { db }: { db: Database } 
+      { db }: { db: Database }
     ): Promise<Lesson> => {
       const id = new ObjectId();
       //TODO: Fix Viewer resolution vs hard coded id
 
-      // const viewerId = viewer && viewer.id ? viewer.id : "116143759549242008910"; 
+      // const viewerId = viewer && viewer.id ? viewer.id : "116143759549242008910";
       try {
         verifyCreateLessonInput(input);
-      
+
         const insertResult = await db.lessons.insertOne({
           _id: id,
           ...input,
           // creator: viewerId
-          creator: "116143759549242008910"
+          creator: "116143759549242008910",
         });
-        
-        const insertedResult = insertResult ? await db.lessons.findOne({ _id: insertResult.insertedId }) : false;
-        
+
+        const insertedResult = insertResult
+          ? await db.lessons.findOne({ _id: insertResult.insertedId })
+          : false;
+
         if (!insertedResult) {
           throw new Error("Lesson is undefined");
         }
 
         await db.users.updateOne(
           { _id: "116143759549242008910" },
-          { $push: { lessons: insertedResult }}
-        )
+          { $push: { lessons: insertedResult } }
+        );
 
         return insertedResult;
-      } catch(e) {
+      } catch (e) {
         throw new Error(`Failed to insert lesson: ${e}`);
       }
     },
     deleteLesson: async (
       viewer: Viewer,
       { id }: LessonArgs,
-      { db }: { db: Database}
+      { db }: { db: Database }
     ): Promise<boolean | undefined> => {
       try {
-        const deletedLesson = await db.lessons.deleteOne({ _id: new ObjectId(id) });
+        const deletedLesson = await db.lessons.deleteOne({
+          _id: new ObjectId(id),
+        });
 
         if (!deletedLesson) {
           throw new Error("Failed to delete lesson");
@@ -143,8 +161,8 @@ export const lessonResolvers = {
 
         return deletedLesson.acknowledged;
       } catch (error) {
-        throw new Error(`Failed to start deleting lesson: ${error}`)
+        throw new Error(`Failed to start deleting lesson: ${error}`);
       }
-    }
-  }
+    },
+  },
 };

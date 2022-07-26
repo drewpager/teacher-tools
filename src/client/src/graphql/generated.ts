@@ -62,6 +62,7 @@ export type Lessons = {
   __typename?: 'Lessons';
   result: Array<Lesson>;
   total: Scalars['Int'];
+  totalCount: Scalars['Int'];
 };
 
 export type LogInInput = {
