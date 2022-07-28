@@ -1,5 +1,5 @@
 import React, { useState, SyntheticEvent } from 'react';
-import { Box, Accordion, AccordionDetails, AccordionSummary, Typography, Grid, Card, CardMedia, Chip } from '@mui/material';
+import { Box, Accordion, AccordionDetails, AccordionSummary, Typography, Grid, Card, CardMedia, Chip, Paper } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Playlist } from '../../../graphql/generated';
 import { VideoPlayer } from '../index';
@@ -15,7 +15,7 @@ export const PlaylistCard = ({ playlist }: Props) => {
 
   const handleChange = (panel: string) => (event: SyntheticEvent, isExpanded: boolean) => {
     setExpanded(isExpanded ? panel : false);
-    console.log(isExpanded)
+    console.log(expanded)
   };
 
   return (
@@ -23,7 +23,7 @@ export const PlaylistCard = ({ playlist }: Props) => {
     <h1>{playlist.name}</h1>
       {playlist.plan.map((lesson, id) => (
         <Grid container spacing={2}>
-          <Grid item xs={2} md={4} lg={4} key={id}>
+          <Grid item xs={2} md={4} lg={4} key={`${id}`}>
           <Box sx={{ marginBottom: 1, minWidth: 150 }}>
             <Accordion expanded={expanded === `${lesson?.id}`} onChange={handleChange(`${lesson?.id}`)}>
               <AccordionSummary
@@ -53,7 +53,9 @@ export const PlaylistCard = ({ playlist }: Props) => {
             </CardMedia>
           </Card>
           ) : (
-            <></>
+            <Paper elevation={8} sx={{ width: "90%", height: "75%" }}>
+              <Typography>Select a Lesson</Typography>
+            </Paper>
           )}
         </Grid>
       </Grid>
