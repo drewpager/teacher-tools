@@ -22,7 +22,6 @@ export const VideoPlayer = ({ url }: props) => {
   const re = new RegExp(/platos-peach-video/gm)
   const filePath = pathname.split(re)
   const fileString = filePath[1].split(".")
-  console.log(fileString[0])
   
   // Create and configure your Cloudinary instance.
   const cldUrl = new CloudinaryVideo(`platos-peach-video${fileString[0]}`, { cloudName: 'drewpager' })
