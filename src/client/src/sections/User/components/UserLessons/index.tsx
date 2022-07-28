@@ -43,6 +43,7 @@ export const UserLessons = ({ userLessons, lessonsPage, limit, setLessonsPage }:
         ))}
       </Grid>
       <Pagination 
+        // Take total number of playlists divided by number of playlists per page
         count={Math.ceil(totalCount/limit)} 
         page={lessonsPage}
         onChange={handleChange}

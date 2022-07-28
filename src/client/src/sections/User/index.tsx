@@ -43,7 +43,7 @@ export const User = ({ viewer }: Props) => {
     <UserLessons
       userLessons={userLessons}
       lessonsPage={lessonsPage}
-      limit={lessonPageLimit}
+      limit={pageLimit}
       setLessonsPage={setLessonsPage}
     />
   ) : ( <h2>UserLessons Not Working</h2> );
