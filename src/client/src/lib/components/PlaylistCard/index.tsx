@@ -11,18 +11,17 @@ interface Props {
 // NOTE: Pass lessons object instead of single lesson for Accordion to work correctly
 export const PlaylistCard = ({ playlist }: Props) => {
 // export const PlaylistCard = (lesson: Lesson) => {
-  const [expanded, setExpanded] = useState<string | false>(false);
+  const [expanded, setExpanded] = useState<string | false>(`${playlist.plan[0]?.id}`);
 
   const handleChange = (panel: string) => (event: SyntheticEvent, isExpanded: boolean) => {
     setExpanded(isExpanded ? panel : false);
-    console.log(expanded)
   };
 
   return (
     <Box>
     <h1>{playlist.name}</h1>
       {playlist.plan.map((lesson, id) => (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} columnSpacing={2}>
           <Grid item xs={2} md={4} lg={4} key={`${id}`}>
           <Box sx={{ marginBottom: 1, minWidth: 150 }}>
             <Accordion expanded={expanded === `${lesson?.id}`} onChange={handleChange(`${lesson?.id}`)}>
@@ -44,20 +43,17 @@ export const PlaylistCard = ({ playlist }: Props) => {
             </Accordion>
           </Box>
         </Grid>
-        <Grid item xs={10} md={8} lg={8}>
-          {expanded ? (
-          // <Card sx={{ position: 'absolute', top: "16%", right: "2%", left: "35%", width: "100%", height: "auto" }}>
-          <Card sx={{ position: 'absolute', width: "100%", height: "auto", margin: "5px" }}>
-            <CardMedia>
-              <VideoPlayer url={`${lesson?.video}`} />
-            </CardMedia>
-          </Card>
+        {expanded === `${lesson?.id}` ? (
+          <Grid item xs={10} md={8} lg={8} key={`${id}`}>
+            <Card sx={{ position: 'absolute', width: "64%", height: "auto", margin: "5px", top: "22%", right: "2%", left: "35%" }}>
+              <CardMedia>
+                <VideoPlayer url={`${lesson?.video}`} />
+              </CardMedia>
+            </Card>
+          </Grid>
           ) : (
-            <Paper elevation={8} sx={{ width: "90%", height: "75%" }}>
-              <Typography>Select a Lesson</Typography>
-            </Paper>
+            <></>
           )}
-        </Grid>
       </Grid>
       ))}
     </Box>
