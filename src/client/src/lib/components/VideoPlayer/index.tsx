@@ -1,11 +1,12 @@
 import React from 'react';
-import { AdvancedVideo } from '@cloudinary/react';
+import { AdvancedVideo, responsive } from '@cloudinary/react';
 import { CloudinaryVideo } from "@cloudinary/url-gen";
 
 // Import required actions and qualifiers.
-import { videoCodec } from "@cloudinary/url-gen/actions/transcode";
-import { auto, vp9 } from "@cloudinary/url-gen/qualifiers/videoCodec";
-import {fill, limitFit} from "@cloudinary/url-gen/actions/resize";
+import { streamingProfile, videoCodec } from "@cloudinary/url-gen/actions/transcode";
+import { auto, vp9, h264 } from "@cloudinary/url-gen/qualifiers/videoCodec";
+import { limitFit, scale, fit, fill } from "@cloudinary/url-gen/actions/resize";
+import { dpr } from '@cloudinary/url-gen/actions/delivery'
 // import 'dotenv/config';
 // import {byRadius} from "@cloudinary/url-gen/actions/roundCorners";
 // import {FocusOn} from "@cloudinary/url-gen/qualifiers/focusOn";
@@ -25,7 +26,8 @@ export const VideoPlayer = ({ url }: props) => {
   
   // Create and configure your Cloudinary instance.
   const cldUrl = new CloudinaryVideo(`platos-peach-video${fileString[0]}`, { cloudName: 'drewpager' })
-  cldUrl.resize(limitFit().width(0.75).height(0.75));
+  // cldUrl.resize(fill())
+  cldUrl.resize(limitFit().width(0.33)).delivery(dpr("1.0"));
 
   const sources = [
     {
@@ -37,10 +39,10 @@ export const VideoPlayer = ({ url }: props) => {
       type: "webm",
       codecs: ["vp8", "vorbis"],
       transcode: videoCodec(vp9())
-    }
+    },
   ];
 
   return ( 
-    <AdvancedVideo cldVid={cldUrl} sources={sources} controls />
+    <AdvancedVideo cldVid={cldUrl} sources={sources} controls autoPlay plugins={[responsive({ steps: [200, 600, 800, 1000, 1200] })]} />
   )
 };

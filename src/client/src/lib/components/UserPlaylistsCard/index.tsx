@@ -6,6 +6,7 @@ import { useMutation } from '@apollo/client';
 import { gql } from 'graphql-tag';
 import { DisplaySuccess } from '../../utils';
 import DeleteIcon from '@mui/icons-material/Delete';
+import theme from '../../../theme';
 
 interface Props {
   playlist: {
@@ -38,7 +39,7 @@ const handleDelete = async (id: string) => {
     const res = await deletePlaylist({ variables: { id }})
     if (res) {
       // window.location.reload();
-      return <DisplaySuccess title="Deletion Successful!" />
+      return ( <DisplaySuccess title="Deletion Successful!" /> );
     }
   }
 
@@ -61,11 +62,14 @@ const handleDelete = async (id: string) => {
   return (
     <Grid item lg={4} md={6} sm={12} xs={12} key={playlist.id}>
     <ListItem key={playlist.id}>
-      <Card>
+      <Card sx={{ minWidth: 350}}>
         <CardContent>
           <Link to={`/playlist/${playlist.id}`} style={{ textDecoration: "none" }}>
-            <Typography variant='h3'>
+            <Typography variant='h4' style={{ color: "#000"}}>
               {playlist.name}
+            </Typography>
+            <Typography variant='h6' style={{ color: "#000"}}>
+              {playlist.plan.length} {playlist.plan.length === 1 ? " Lesson" : " Lessons"}
             </Typography>
           </Link>
           {DeletePlaylistLoading ? deletePlaylistLoadingMessage : <Button onClick={() => handleDelete(playlist.id)}><DeleteIcon /></Button>}

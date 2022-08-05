@@ -14,7 +14,19 @@ export const PageSkeleton = () => {
           <Divider />
       </Card>
       <h2>Lessons</h2>
-      <Grid container>
+      <Grid container spacing={4}>
+        <Grid item xs={1} sm={2} lg={3} xl={3}>
+          <Skeleton variant="rectangular" width={300} height={264}/>
+        </Grid>
+        <Grid item xs={1} sm={2} lg={3} xl={3}>
+          <Skeleton variant="rectangular" width={300} height={264}/>
+        </Grid>
+        <Grid item xs={1} sm={2} lg={3} xl={3}>
+          <Skeleton variant="rectangular" width={300} height={264}/>
+        </Grid>
+      </Grid>
+      <h2>Playlists</h2>
+      <Grid container spacing={4}>
         <Grid item xs={1} sm={2} lg={3} xl={3}>
           <Skeleton variant="rectangular" width={300} height={264}/>
         </Grid>
