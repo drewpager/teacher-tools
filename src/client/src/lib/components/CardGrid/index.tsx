@@ -14,7 +14,8 @@ export const CardGrid = () => {
     variables: {
       limit: 10,
       page: 1
-    }
+    },
+    pollInterval: 500
   });
 
   if (loading) {
