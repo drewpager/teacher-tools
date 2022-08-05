@@ -6,6 +6,8 @@ import { useMutation } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { DeleteLessonData, DeleteLessonVariables } from '../../../sections/Lessons/types';
 import { Viewer } from '../../../graphql/generated';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 interface Props {
   lesson: {
@@ -64,7 +66,7 @@ export const LessonCard = ({ lesson }: Props) => {
             <Typography variant="body2">{startDate}</Typography>
             <Typography variant="body2">{endDate}</Typography>
           </Link>
-          {deleteLessonLoading ? deleteLessonLoadingMessage : <Button onClick={() => handleDelete(id)}>Delete</Button>}
+          {deleteLessonLoading ? deleteLessonLoadingMessage : <Button onClick={() => handleDelete(id)}><DeleteIcon /></Button>}
           {deleteLessonError ? deleteLessonErrorMessage : null}
         </Card>
       </Grid>

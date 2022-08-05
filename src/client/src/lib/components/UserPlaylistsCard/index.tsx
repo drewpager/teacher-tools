@@ -5,6 +5,7 @@ import { Playlist, Lesson } from '../../../graphql/generated';
 import { useMutation } from '@apollo/client';
 import { gql } from 'graphql-tag';
 import { DisplaySuccess } from '../../utils';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 interface Props {
   playlist: {
@@ -67,7 +68,7 @@ const handleDelete = async (id: string) => {
               {playlist.name}
             </Typography>
           </Link>
-          {DeletePlaylistLoading ? deletePlaylistLoadingMessage : <Button onClick={() => handleDelete(playlist.id)}>Delete</Button>}
+          {DeletePlaylistLoading ? deletePlaylistLoadingMessage : <Button onClick={() => handleDelete(playlist.id)}><DeleteIcon /></Button>}
           {DeletePlaylistError ? deletePlaylistErrorMessage : null}
         </CardContent>
       </Card>
