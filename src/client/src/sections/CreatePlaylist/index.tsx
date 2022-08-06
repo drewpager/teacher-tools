@@ -118,17 +118,33 @@ export const CreatePlaylist = ({ viewer }: props) => {
       return;
     }
 
-    // if the source and destination are identical, do nothing. 
-    if (source.droppableId === destination.droppableId && source.index === destination.index) {
-      return;
-    }
-
     // Otherwise, cut the item from lessons array and push to new playlist
     const items = Array.from(lessons);
 
+    if (source.droppableId === "playlist" && destination.droppableId === "playlist") {
+      const [reorderedPlaylistItem] = playlist.plan.splice(source.index, 1);
+      const displacedPlaylistItem = playlist.plan.slice(destination.index, (destination.index + 1));
+      playlist.plan[destination.index] = reorderedPlaylistItem;
+      playlist.plan.push(...displacedPlaylistItem);
+      
+      return {...playlist}
+    }
+
+    if (source.droppableId === "lessons" && destination.droppableId === "lessons") {
+      const [reorderedLessonsItem] = items.splice(source.index, 1);
+      const displacedLessonsItem = items.slice(destination.index, (destination.index + 1));
+      items[destination.index] = reorderedLessonsItem;
+      items.push(...displacedLessonsItem);
+
+      return {...items}
+    }
+
     if (destination.droppableId === "playlist") {
       const [reorderedItem] = items.splice(source.index, 1);
-      playlist.plan.push(reorderedItem);
+      const displacedItem = playlist.plan.slice(destination.index, (destination.index + 1));
+      playlist.plan[destination.index] = reorderedItem;
+      playlist.plan.push(...displacedItem);
+      // playlist.plan.push(reorderedItem);
     
       setLessons(items)
       setPlaylist({...playlist})
@@ -136,7 +152,9 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
     if (destination.droppableId === "lessons") {
       const [reorderedPlay] = playlist.plan.splice(source.index, 1);
-      items.push(reorderedPlay)
+      const displacedPlay = items.slice(destination.index, (destination.index + 1));
+      items[destination.index] = reorderedPlay;
+      items.push(...displacedPlay)
       
       setLessons(items)
       setPlaylist({...playlist})
@@ -169,8 +187,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
         }
       });
     }
-    // TODO: Navigate to User Profile Page Instead of Home
-    navigate("../", { replace: true })    
+    // Navigate to User Profile Page
+    navigate(`../user/${viewer.id}`, { replace: true })    
   }
 
   return (
