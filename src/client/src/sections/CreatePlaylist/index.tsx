@@ -181,20 +181,21 @@ export const CreatePlaylist = ({ viewer }: props) => {
           <Grid container>
             <Droppable droppableId='playlist'>
               {(provided) => (
-                <Grid item xs={6} md={8} lg={8} {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
-                <Card variant="outlined" sx={{ minHeight: "750px", padding: 5, margin: 2 }}>
-                  <TextField
-                    label="Lesson Plan Title"
-                    id="lesson-plan-title"
-                    variant="standard"
-                    fullWidth
-                    onChange={titleHandler}
-                  />
+                <Grid item xs={6} md={8} lg={8}>
+                  <Card variant="outlined" sx={{ minHeight: "750px", padding: 5, margin: 2 }} {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
+                    <TextField
+                      label="Lesson Plan Title"
+                      id="lesson-plan-title"
+                      variant="standard"
+                      ref={inputRef}
+                      fullWidth
+                      onChange={titleHandler}
+                    />
                   {playlist.plan.map((i, index) => (
                     <Draggable key={index} draggableId={index.toString()} index={index}>
-                      {(provided) => (
-                        <Grid item xs={12} md={12} lg={12} {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} key={i.id}>
-                          <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={index}>
+                      {(provide) => (
+                        <Grid item xs={12} md={12} lg={12}>
+                          <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={i.id} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}>
                             {i?.title}
                           </Card>
                         </Grid>
@@ -208,8 +209,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
             </Droppable>
             <Droppable droppableId='lessons'>
               {(provided) => (
-                <Grid item xs={6} md={4} lg={4} {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
-                <Card variant="outlined" sx={{ minHeight: "750px", padding: 5, margin: 2 }}>
+                <Grid item xs={6} md={4} lg={4}>
+                <Card variant="outlined" sx={{ minHeight: "750px", padding: 5, margin: 2, top: 10 }} {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
                   <TextField 
                     variant='outlined' 
                     id="lesson-search" 
@@ -222,9 +223,9 @@ export const CreatePlaylist = ({ viewer }: props) => {
                   <Grid container>
                   {lessons?.map((i, index) => (
                     <Draggable key={index} draggableId={index.toString()} index={index}>
-                      {(provided) => (
-                        <Grid item xs={12} md={12} lg={12} {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} key={i.id}>
-                          <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={i.id}>
+                      {(provide) => (
+                        <Grid item xs={12} md={12} lg={12}>
+                          <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={i.id} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}>
                             {i.title}
                           </Card>
                         </Grid>
