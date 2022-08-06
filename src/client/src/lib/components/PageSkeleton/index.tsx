@@ -1,39 +1,46 @@
-import { Skeleton, Card, Divider, Box, Grid } from '@mui/material';
+import { Skeleton, Card, Divider, Box, Grid, Typography } from '@mui/material';
 
 export const PageSkeleton = () => {
   return (
     <>
       <Box sx={{ marginLeft: 5 }}>
       <h1>User Profile</h1>
-      <Card sx={{ minWidth: 430, minHeight: 454, width: 1/3, boxShadow: 1, padding: 5, margin: 5 }}>
-          <Skeleton variant="circular" width={56} height={56} />
+      <Card sx={{ width: 350, boxShadow: 1, padding: 5, margin: 5 }}>
+          <Skeleton variant="circular" width={56} height={56} sx={{ marginLeft: "40%" }} />
           <Divider />
-          <Skeleton variant="text" />
+          <Typography variant="h5">Details</Typography>
           <Skeleton variant="text" />
           <Skeleton variant="text" />
           <Divider />
+          <Typography variant="h5">Additional Details</Typography>
+          <Skeleton variant="text" />
+          <Skeleton variant="text" />
+          <Skeleton variant="text" />
+          <Skeleton variant="rectangular" width={200} height={50} sx={{ marginLeft: "10%", borderRadius: 3 }} />
+          <Skeleton variant="text" />
+          <Skeleton variant="text" />
       </Card>
       <h2>Lessons</h2>
       <Grid container spacing={4}>
-        <Grid item xs={1} sm={2} lg={3} xl={3}>
+        <Grid item lg={4} md={6} sm={12} xs={12}>
           <Skeleton variant="rectangular" width={300} height={264}/>
         </Grid>
-        <Grid item xs={1} sm={2} lg={3} xl={3}>
+        <Grid item lg={4} md={6} sm={12} xs={12}>
           <Skeleton variant="rectangular" width={300} height={264}/>
         </Grid>
-        <Grid item xs={1} sm={2} lg={3} xl={3}>
+        <Grid item lg={4} md={6} sm={12} xs={12}>
           <Skeleton variant="rectangular" width={300} height={264}/>
         </Grid>
       </Grid>
       <h2>Playlists</h2>
       <Grid container spacing={4}>
-        <Grid item xs={1} sm={2} lg={3} xl={3}>
+        <Grid item lg={4} md={6} sm={12} xs={12}>
           <Skeleton variant="rectangular" width={300} height={264}/>
         </Grid>
-        <Grid item xs={1} sm={2} lg={3} xl={3}>
+        <Grid item lg={4} md={6} sm={12} xs={12}>
           <Skeleton variant="rectangular" width={300} height={264}/>
         </Grid>
-        <Grid item xs={1} sm={2} lg={3} xl={3}>
+        <Grid item lg={4} md={6} sm={12} xs={12}>
           <Skeleton variant="rectangular" width={300} height={264}/>
         </Grid>
       </Grid>
