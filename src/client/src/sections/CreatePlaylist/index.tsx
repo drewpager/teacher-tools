@@ -121,6 +121,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
     // Otherwise, cut the item from lessons array and push to new playlist
     const items = Array.from(lessons);
 
+    // Allow the user to reorder playlist if failed to drag and drop in correct order
     if (source.droppableId === "playlist" && destination.droppableId === "playlist") {
       const [reorderedPlaylistItem] = playlist.plan.splice(source.index, 1);
       const displacedPlaylistItem = playlist.plan.slice(destination.index, (destination.index + 1));
@@ -130,12 +131,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
       return {...playlist}
     }
 
+    // if dragging and dropping within lessons simply return items unchanged
     if (source.droppableId === "lessons" && destination.droppableId === "lessons") {
-      const [reorderedLessonsItem] = items.splice(source.index, 1);
-      const displacedLessonsItem = items.slice(destination.index, (destination.index + 1));
-      items[destination.index] = reorderedLessonsItem;
-      items.push(...displacedLessonsItem);
-
       return {...items}
     }
 

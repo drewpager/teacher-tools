@@ -13,7 +13,6 @@ export const User = ({ viewer }: Props) => {
   const [playlistsPage, setPlaylistsPage] = useState(1);
   const [lessonsPage, setLessonsPage] = useState(1);
 
-  // const [pageLimit, setPageLimit] = useState(6);
   const pageLimit = 3;
 
   const params = useParams();
@@ -35,9 +34,6 @@ export const User = ({ viewer }: Props) => {
 
   const userLessons = user ? user.lessons : null;
   const userPlaylists = user ? user.playlists : null;
-
-  const lessonPageLimit = user && user.lessons ? user.lessons.total / pageLimit : 2;
-  // const playlistPageLimit = user && user.playlists ? user.playlists.total / pageLimit : 2;
 
   const userLessonsElement = userLessons ? (
     <UserLessons
