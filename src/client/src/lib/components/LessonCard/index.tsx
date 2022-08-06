@@ -57,19 +57,17 @@ export const LessonCard = ({ lesson }: Props) => {
     );
 
   return (
-    <Grid container>
-      <Grid item lg={4} md={6} sm={12} xs={12}>
-        <Card sx={{ minWidth: 275, width: 1/4, boxShadow: 1, padding: 5 }}>
-          <Link to={`/lesson/${id}`} style={{ textDecoration: "hover", color: "black" }}>
-            <Typography variant="h5">{title}</Typography>
-            <Typography variant="h6">{category}</Typography>
-            <Typography variant="body2">{startDate}</Typography>
-            <Typography variant="body2">{endDate}</Typography>
-          </Link>
-          {deleteLessonLoading ? deleteLessonLoadingMessage : <Button onClick={() => handleDelete(id)}><DeleteIcon /></Button>}
-          {deleteLessonError ? deleteLessonErrorMessage : null}
-        </Card>
-      </Grid>
+    <Grid item lg={4} md={6} sm={12} xs={12}>
+      <Card sx={{ minWidth: 350, boxShadow: 1, padding: 3 }}>
+        <Link to={`/lesson/${id}`} style={{ textDecoration: "none", color: "black" }}>
+          <Typography variant="h5">{title}</Typography>
+          <Typography variant="h6">{category}</Typography>
+          <Typography variant="body2">{startDate}</Typography>
+          <Typography variant="body2">{endDate}</Typography>
+        </Link>
+        {deleteLessonLoading ? deleteLessonLoadingMessage : <Button onClick={() => handleDelete(id)}><DeleteIcon /></Button>}
+        {deleteLessonError ? deleteLessonErrorMessage : null}
+      </Card>
     </Grid>
   )
 }
