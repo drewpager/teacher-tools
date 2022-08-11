@@ -10,9 +10,9 @@ import {
 } from '@apollo/client';
 
 import { setContext } from '@apollo/client/link/context';
-import { Home, Teach, Lesson, Lessons, NotFound, User, Terms, Privacy, Login, AppHeader, Playlist, CreatePlaylist, CreateLesson } from './sections';
+import { Home, Teach, Lesson, Lessons, NotFound, User, Terms, Privacy, Login, AppHeader, Playlist, CreatePlaylist, CreateLesson, EditPlaylist } from './sections';
 import { DisplayError } from './lib/utils';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useParams } from 'react-router-dom';
 import "@fontsource/noto-serif/";
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -20,6 +20,7 @@ import { Skeleton, CircularProgress, Box } from '@mui/material';
 import theme from './theme';
 // import { Viewer } from './lib/types';
 import { Viewer, useLogInMutation } from './graphql/generated';
+import path from 'path';
 
 const initialViewer: Viewer = {
   id: null,
@@ -81,6 +82,7 @@ const App = () => {
         <Route path="/login" children={(props: any) => (<Login {...props} setViewer={setViewer} />)} element={<Login setViewer={setViewer} />} />
         <Route path="/playlist/:id" element={<Playlist />} />
         <Route path="/playlist/create" element={<CreatePlaylist viewer={viewer} />} />
+        <Route path="/edit/:id" element={<EditPlaylist viewer={viewer} />} />
         <Route path="/lesson/create" children={(props: any) => (<CreateLesson {...props} viewer={viewer} />)} element={<CreateLesson viewer={viewer} />} />
         <Route element={<NotFound />} />
       </Routes>

@@ -11,3 +11,4 @@ export * from "./AppHeader";
 export * from "./Playlist";
 export * from "./CreatePlaylist";
 export * from "./CreateLesson";
+export * from "./EditPlaylist";

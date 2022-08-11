@@ -1,7 +1,6 @@
 import { Database, Playlist } from "../../../lib/types";
-import { PlaylistArgs, PlaylistsArgs, PlaylistsData, CreatePlanArgs } from "./types";
+import { PlaylistArgs, PlaylistsArgs, PlaylistsData, CreatePlanArgs, UpdateParams } from "./types";
 import { ObjectId } from "mongodb";
-import { Viewer } from "../../../../client/src/graphql/generated";
 
 export const playlistResolvers = {
   Query: {
@@ -78,6 +77,23 @@ export const playlistResolvers = {
         return insertedResult;
       } catch (e) {
         throw new Error(`Failed to insert lesson plan ${e}`)
+      }
+    },
+    updatePlan: async (
+      _root: undefined,
+      { id, input }: UpdateParams,
+      { db }: { db: Database }
+    ): Promise<boolean> => {
+      try {
+        const playlist = await db.playlists.findOneAndUpdate({ _id: new ObjectId(id) }, input)
+
+        if (playlist.ok === 1) {
+          return true
+        } else {
+          return false
+        }
+      } catch (e) {
+        throw new Error(`Failed to update playlist ${e}`);
       }
     },
     deletePlaylist: async (

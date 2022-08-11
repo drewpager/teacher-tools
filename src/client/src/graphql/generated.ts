@@ -77,6 +77,7 @@ export type Mutation = {
   lessonPlan: Playlist;
   logIn: Viewer;
   logOut: Viewer;
+  updatePlan: Playlist;
 };
 
 
@@ -102,6 +103,11 @@ export type MutationLessonPlanArgs = {
 
 export type MutationLogInArgs = {
   input?: InputMaybe<LogInInput>;
+};
+
+
+export type MutationUpdatePlanArgs = {
+  input?: InputMaybe<UpdatePlanInput>;
 };
 
 export type Playlist = {
@@ -155,6 +161,14 @@ export type QueryPlaylistArgs = {
 
 export type QueryUserArgs = {
   id: Scalars['ID'];
+};
+
+export type UpdatePlanInput = {
+  authorized?: InputMaybe<Scalars['Boolean']>;
+  creator?: InputMaybe<Scalars['String']>;
+  id: Scalars['ID'];
+  name?: InputMaybe<Scalars['String']>;
+  plan?: InputMaybe<Array<InputMaybe<FullLessonInput>>>;
 };
 
 export type User = {
@@ -216,6 +230,13 @@ export type LogOutMutationVariables = Exact<{ [key: string]: never; }>;
 
 
 export type LogOutMutation = { __typename?: 'Mutation', logOut: { __typename?: 'Viewer', id?: string | null, token?: string | null, avatar?: string | null, hasPayment?: boolean | null, didRequest: boolean } };
+
+export type UpdatePlanMutationVariables = Exact<{
+  input: UpdatePlanInput;
+}>;
+
+
+export type UpdatePlanMutation = { __typename?: 'Mutation', updatePlan: { __typename?: 'Playlist', id?: string | null, name: string, creator: string, authorized?: boolean | null, plan: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: number | null, endDate?: number | null, creator?: string | null } | null> } };
 
 export type AuthUrlQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -402,6 +423,53 @@ export function useLogOutMutation(baseOptions?: Apollo.MutationHookOptions<LogOu
 export type LogOutMutationHookResult = ReturnType<typeof useLogOutMutation>;
 export type LogOutMutationResult = Apollo.MutationResult<LogOutMutation>;
 export type LogOutMutationOptions = Apollo.BaseMutationOptions<LogOutMutation, LogOutMutationVariables>;
+export const UpdatePlanDocument = gql`
+    mutation UpdatePlan($input: UpdatePlanInput!) {
+  updatePlan(input: $input) {
+    id
+    name
+    plan {
+      id
+      category
+      title
+      meta
+      video
+      image
+      startDate
+      endDate
+      creator
+    }
+    creator
+    authorized
+  }
+}
+    `;
+export type UpdatePlanMutationFn = Apollo.MutationFunction<UpdatePlanMutation, UpdatePlanMutationVariables>;
+
+/**
+ * __useUpdatePlanMutation__
+ *
+ * To run a mutation, you first call `useUpdatePlanMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdatePlanMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updatePlanMutation, { data, loading, error }] = useUpdatePlanMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdatePlanMutation(baseOptions?: Apollo.MutationHookOptions<UpdatePlanMutation, UpdatePlanMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdatePlanMutation, UpdatePlanMutationVariables>(UpdatePlanDocument, options);
+      }
+export type UpdatePlanMutationHookResult = ReturnType<typeof useUpdatePlanMutation>;
+export type UpdatePlanMutationResult = Apollo.MutationResult<UpdatePlanMutation>;
+export type UpdatePlanMutationOptions = Apollo.BaseMutationOptions<UpdatePlanMutation, UpdatePlanMutationVariables>;
 export const AuthUrlDocument = gql`
     query AuthUrl {
   authUrl

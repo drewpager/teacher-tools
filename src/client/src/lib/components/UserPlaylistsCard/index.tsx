@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardContent, ListItem, Typography, Grid, Button, CircularProgress, Alert } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Playlist, Lesson } from '../../../graphql/generated';
 import { useMutation } from '@apollo/client';
 import { gql } from 'graphql-tag';
@@ -19,11 +19,19 @@ interface Props {
 }
 
 export const UserPlaylistsCard = ({ playlist }: Props) => {
+  const navigation = useNavigate();
+
   const DELETE_PLAYLIST = gql`
   mutation DeletePlaylist($id: ID) {
     deletePlaylist(id: $id)
   }
 `;
+
+  const UPDATE_PLAN = gql`
+    mutation UpdatePlan($input: playlist) {
+      updatePlan(input: $input)
+    }
+  `;
 
 interface DeletePlaylistData {
   deletePlaylist: Playlist
@@ -32,8 +40,15 @@ interface DeletePlaylistData {
 interface DeletePlaylistVariables {
   id: string
 }
+interface UpdatePlaylistData {
+  updatePlaylist: Playlist
+}
 
+interface UpdatePlaylistVariables {
+  id: string
+}
 const [deletePlaylist, { loading: DeletePlaylistLoading, error: DeletePlaylistError}] = useMutation<DeletePlaylistData, DeletePlaylistVariables>(DELETE_PLAYLIST);
+const [updatePlan, { loading: UpdatePlanLoading, error: UpdatePlanError}] = useMutation<UpdatePlaylistData, UpdatePlaylistVariables>(UPDATE_PLAN);
 
 const handleDelete = async (id: string) => {  
     const res = await deletePlaylist({ variables: { id }})
@@ -41,6 +56,11 @@ const handleDelete = async (id: string) => {
       // window.location.reload();
       return ( <DisplaySuccess title="Deletion Successful!" /> );
     }
+  }
+
+  const handleUpdate = async (id: string) => { 
+    navigation(`/edit/${id}`) 
+    await updatePlan({ variables: { id }})
   }
 
   const deletePlaylistLoadingMessage = (
@@ -52,12 +72,20 @@ const handleDelete = async (id: string) => {
               zIndex: 1,
             }}/>
     );
+
+  const updatePlanLoadingMessage = deletePlaylistLoadingMessage;
     
-    const deletePlaylistErrorMessage = (
-      <Alert variant="outlined" severity="error">
-        Oops, something went wrong in the deletion process!
-      </Alert>
-    );
+  const deletePlaylistErrorMessage = (
+    <Alert variant="outlined" severity="error">
+      Oops, something went wrong in the deletion process!
+    </Alert>
+  );
+
+  const updatePlanErrorMessage = (
+    <Alert variant="outlined" severity="error">
+      Oops, unable to edit playlist right now!
+    </Alert>
+  );
 
   return (
     <Grid item lg={4} md={6} sm={12} xs={12} key={playlist.id}>
@@ -74,6 +102,8 @@ const handleDelete = async (id: string) => {
           </Link>
           {DeletePlaylistLoading ? deletePlaylistLoadingMessage : <Button onClick={() => handleDelete(playlist.id)}><DeleteIcon /></Button>}
           {DeletePlaylistError ? deletePlaylistErrorMessage : null}
+          {UpdatePlanLoading ? updatePlanLoadingMessage : <Button onClick={() => handleUpdate(playlist.id)}>Edit</Button>}
+          {UpdatePlanError ? updatePlanErrorMessage : null}
         </CardContent>
       </Card>
     </ListItem>

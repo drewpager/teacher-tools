@@ -22,3 +22,15 @@ export interface LessonPlanInput {
 export interface CreatePlanArgs {
   input: LessonPlanInput;
 }
+
+export interface UpdatePlanArgs {
+  id: string;
+  creator: string;
+  plan: Playlist[];
+  name: string;
+}
+
+export interface UpdateParams {
+  id: string;
+  input: UpdatePlanArgs;
+}

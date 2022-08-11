@@ -1,8 +1,7 @@
 import { CircularProgress, Grid, Box, Card, TextField, Button } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
 import React, { useState, ChangeEvent, useRef, useEffect } from 'react';
-import { FullLessonInput, useLessonPlanMutation } from '../../graphql/generated';
-import { useAllLessonsQuery, usePlaylistQuery, Viewer } from '../../graphql/generated';
+import { FullLessonInput, Playlist, useUpdatePlanMutation, UpdatePlanInput } from '../../graphql/generated';
+import { useAllLessonsQuery, usePlaylistQuery, Viewer} from '../../graphql/generated';
 import { DisplayError } from '../../lib/utils';
 import { useParams } from 'react-router-dom';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
@@ -10,20 +9,6 @@ import { useNavigate } from 'react-router-dom';
 
 type props = {
   viewer: Viewer;
-  current?: InputLessonPlan;
-}
-
-const initialData: InputLessonPlan = {
-  name: "",
-  creator: "",
-  plan: []
-}
-
-
-type InputLessonPlan = {
-  name: string,
-  creator: string,
-  plan: FullLessonInput[]
 }
 
 export const useEditFocus = () => {
@@ -36,14 +21,21 @@ export const useEditFocus = () => {
   return ref;
 }
 
-export const EditPlaylist = ({ viewer, current }: props) => {
+export const EditPlaylist = ({ viewer }: props) => {
   let navigate = useNavigate();
+  const params = useParams();
+  const [playlist, setPlaylist] = useState<any>()
   const [searchInput, setSearchInput] = useState<string>("")
   const [lessons, setLessons] = useState<Array<FullLessonInput>>([])
   const [filter, setFilter] = useState<Array<FullLessonInput>>(lessons)
   const inputRef = useEditFocus();
-  const [playlist, setPlaylist] = useState<InputLessonPlan>(current ? current : initialData)
-  
+
+  const { data: PlaylistData, loading: PlaylistLoading, error: PlaylistError } = usePlaylistQuery({
+    variables: {
+      id: `${params.id}`
+    }
+  });
+
   const { data, loading, error } = useAllLessonsQuery({
     variables: {
       limit: 10,
@@ -51,14 +43,7 @@ export const EditPlaylist = ({ viewer, current }: props) => {
     }
   })
 
-  const params = useParams();
-  const { data: playlistData, loading: playlistLoading, error: playlistError } = usePlaylistQuery({
-    variables: {
-      id: `${params.id}`
-    }
-  });
-
-  const [lessonPlan] = useLessonPlanMutation({
+  const [updatePlan] = useUpdatePlanMutation({
     variables: {
       input: playlist
     }
@@ -66,8 +51,14 @@ export const EditPlaylist = ({ viewer, current }: props) => {
 
   const lessonQuery = data ? data.allLessons.result : null;
 
-
   useEffect(() => {
+    setPlaylist({
+      id: PlaylistData?.playlist.id,
+      name: PlaylistData?.playlist.name,
+      creator: PlaylistData?.playlist.creator,
+      plan: PlaylistData?.playlist.plan
+    })
+    
     if (lessonQuery) {
       const lessonInput: any = []
       lessonQuery.forEach(i => {
@@ -88,7 +79,15 @@ export const EditPlaylist = ({ viewer, current }: props) => {
       setLessons(lessonInput)
       setFilter(lessonInput)
     }
-  }, [lessonQuery])
+  }, [PlaylistData, lessonQuery])
+
+  if (PlaylistLoading) {
+    return <CircularProgress />
+  }
+
+  if (PlaylistError) {
+    return <DisplayError title="Failed to query current Playlist" />
+  }
 
   if (!viewer) {
     return (
@@ -109,30 +108,11 @@ export const EditPlaylist = ({ viewer, current }: props) => {
     return <DisplayError title="Failed to query lessons" />
   }
 
-  if (playlistLoading) {
-    return <CircularProgress />
-  }
-
-  if (playlistError) {
-    return <DisplayError title="Failed to query current Playlist" />
-  }
-
-  if (playlistData && playlistData.playlist.plan !== null) {
-    setPlaylist({
-      name: playlistData.playlist.name,
-      creator: playlistData.playlist.creator,
-      // FIX THIS
-      plan:[...playlistData.playlist.plan]
-    });
-
-    console.log({...[...playlistData.playlist.plan]})
-  }
-
   const titleHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     e.preventDefault();
     setPlaylist({ 
       ...playlist, 
-      name: current ? current.name : e.target.value, 
+      name: playlist ? playlist.name : e.target.value, 
       creator: viewer && viewer.id ? viewer.id : "0"
     })
   }
@@ -154,7 +134,7 @@ export const EditPlaylist = ({ viewer, current }: props) => {
       const displacedPlaylistItem = playlist.plan.slice(destination.index, (destination.index + 1));
       playlist.plan[destination.index] = reorderedPlaylistItem;
       playlist.plan.push(...displacedPlaylistItem);
-      
+  
       return {...playlist}
     }
 
@@ -168,7 +148,6 @@ export const EditPlaylist = ({ viewer, current }: props) => {
       const displacedItem = playlist.plan.slice(destination.index, (destination.index + 1));
       playlist.plan[destination.index] = reorderedItem;
       playlist.plan.push(...displacedItem);
-      // playlist.plan.push(reorderedItem);
     
       setLessons(items)
       setPlaylist({...playlist})
@@ -205,7 +184,7 @@ export const EditPlaylist = ({ viewer, current }: props) => {
     e.preventDefault();
 
     if (playlist && playlist.plan) {
-      await lessonPlan({
+      await updatePlan({
         variables: {
           input: playlist
         }
@@ -215,9 +194,11 @@ export const EditPlaylist = ({ viewer, current }: props) => {
     navigate(`../user/${viewer.id}`, { replace: true })    
   }
 
-  return (
+  console.log(playlist)
+  
+    return (
     <Box sx={{ margin: 5 }}>
-      <h1>Create Lesson Plan</h1>
+      <h1>Edit Lesson Plan</h1>
       <form onSubmit={handleSubmit}>
         <DragDropContext onDragEnd={onDragEndHandler}>
           <Grid container>
@@ -232,12 +213,13 @@ export const EditPlaylist = ({ viewer, current }: props) => {
                       ref={inputRef}
                       fullWidth
                       onChange={titleHandler}
+                      value={playlist.name}
                     />
-                  {playlist.plan.map((i, index) => (
+                  {playlist.plan?.map((i: any, index: number) => (
                     <Draggable key={index} draggableId={index.toString()} index={index}>
                       {(provide) => (
                         <Grid item xs={12} md={12} lg={12}>
-                          <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={i.id} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}>
+                          <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={i?.id} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}>
                             {i?.title}
                           </Card>
                         </Grid>
@@ -282,7 +264,7 @@ export const EditPlaylist = ({ viewer, current }: props) => {
           </Droppable>
           </Grid>
         </DragDropContext>
-        <Button variant='outlined' type='submit'>Create</Button>
+        <Button variant='outlined' type='submit'>Update</Button>
       </form>
     </Box>
   )
