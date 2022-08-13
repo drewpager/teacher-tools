@@ -1,5 +1,5 @@
 import React, { useState, SyntheticEvent } from 'react';
-import { Box, Accordion, AccordionDetails, AccordionSummary, Typography, Grid, Card, CardMedia, Chip, Paper } from '@mui/material';
+import { Box, Accordion, AccordionDetails, AccordionSummary, Typography, Grid, Chip } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Playlist } from '../../../graphql/generated';
 import { VideoPlayer } from '../index';
@@ -19,43 +19,37 @@ export const PlaylistCard = ({ playlist }: Props) => {
 
   return (
     <Box>
-    <h1>{playlist.name}</h1>
-      {playlist.plan.map((lesson, id) => (
-        <Grid container spacing={2} columnSpacing={3}>
-          <Grid item xs={12} sm={12} md={4} lg={4} key={`${id}`}>
-          <Box sx={{ margin: 1, minWidth: 150 }}>
-            <Accordion expanded={expanded === `${lesson?.id}`} onChange={handleChange(`${lesson?.id}`)}>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls={`panel${lesson?.id}bh-content`}
-                id={`panel${lesson?.id}bh-header`}
-              >
-                <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                  {lesson?.title}
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography sx={{ color: 'black' }}>
-                  {lesson?.category?.map((i) => (<Chip label={i} sx={{ marginRight: 1 }} color="primary" />))}
-                </Typography>
-                <Typography sx={{ color: 'text.secondary' }}>{lesson?.startDate} to {lesson?.endDate}</Typography>
-              </AccordionDetails>
-            </Accordion>
-          </Box>
-        </Grid>
-        {expanded === `${lesson?.id}` ? (
-          <Grid item xs={12} sm={12} md={10} lg={8} key={`${id}`}>
-            <Card>
-              <CardMedia sx={{ position: 'absolute', marginRight: "5px", top: "16%" }}>
-                <VideoPlayer url={`${lesson?.video}`} />
-              </CardMedia>
-            </Card>
+      <h1>{playlist.name}</h1>
+        {playlist.plan.map((lesson, id) => (
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={12} md={6} lg={4}>
+              <Accordion expanded={expanded === `${lesson?.id}`} onChange={handleChange(`${lesson?.id}`)} sx={{ margin: 1 }} key={id}>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls={`panel${lesson?.id}bh-content`}
+                  id={`panel${lesson?.id}bh-header`}
+                >
+                  <Typography>
+                    {lesson?.title}
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography sx={{ color: 'black' }}>
+                    {lesson?.category?.map((i, index) => (<Chip label={i} sx={{ marginRight: 1 }} color="primary" key={index}/>))}
+                  </Typography>
+                  <Typography sx={{ color: 'text.secondary' }}>{lesson?.startDate} to {lesson?.endDate}</Typography>
+                </AccordionDetails>
+              </Accordion>
+            </Grid>
+            <Grid item xs={12} sm={12} md={6} lg={8}>
+              {expanded === `${lesson?.id}` ? (
+                  <VideoPlayer url={`${lesson?.video}`} key={lesson?.id} />
+                ) : (
+                  <></>
+                )}
+            </Grid>
           </Grid>
-          ) : (
-            <></>
-          )}
-      </Grid>
-      ))}
+        ))}
     </Box>
   )
 }

@@ -62,9 +62,9 @@ export const PlaylistDetails = (playlist: Playlist) => {
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            {playlist.plan.map((j, index) => (
+            {playlist.plan.map((j) => (
               <ul>
-                <li key={index}><Typography paragraph>{j?.title}</Typography></li>
+                <li key={j?.id}><Typography paragraph>{j?.title}</Typography></li>
               </ul>
             ))}
           </CardContent>
