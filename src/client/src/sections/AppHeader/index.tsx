@@ -6,6 +6,8 @@ import { Viewer } from '../../graphql/generated';
 import { DisplaySuccess } from '../../lib/utils';
 import { Link, useNavigate } from 'react-router-dom'
 import { ReactComponent as PeachIcon } from '../../lib/assets/peach-logo.svg';
+import theme from '../../theme';
+import zIndex from '@mui/material/styles/zIndex';
 
 interface Props {
   viewer: Viewer;
@@ -24,6 +26,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
       }
     }
   });
+
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   
@@ -52,10 +55,11 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
       <SvgIcon component={PeachIcon} inheritViewBox sx={{ fontSize: 65 }} />
     );
   }
-
+  const appBarZ = theme.zIndex.drawer + 1
+  
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <Box>
+      <AppBar sx={{ zIndex: appBarZ }} position="absolute">
         <Toolbar>
           <IconButton
             size="small"
