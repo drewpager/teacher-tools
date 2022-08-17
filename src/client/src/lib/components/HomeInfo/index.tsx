@@ -1,37 +1,16 @@
 import React from 'react';
-import { Paper, Typography, Grid, Link, Box } from '@mui/material'
+import { Typography, Grid, Link, Box, Toolbar } from '@mui/material'
 import '../../assets/classroom.jpg';
 
 export const HomeInfo = () => {
   return (
-    <Paper
-      sx={{
-        position: 'relative',
-        backgroundColor: 'grey.800',
-        color: '#fff',
-        mb: 4,
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-      }}
-    >
-      {/* {<img style={{ display: 'none' }} src="classroom.jpg" alt="classroom with teacher interacting with students" />} */}
-      <Box
-        sx={{
-          position: 'absolute',
-          top: 0,
-          bottom: 0,
-          right: 0,
-          left: 0,
-          // backgroundColor: 'rgba(0,0,0,.3)',
-          backgroundColor: 'primary',
-        }}
-      />
+    <Box>
+      <Toolbar />
       <Grid container>
         <Grid item md={6}>
           <Box
             sx={{
-              position: 'relative',
+              // position: 'relative',
               p: { xs: 3, md: 6 },
               pr: { md: 0 },
             }}
@@ -52,6 +31,6 @@ export const HomeInfo = () => {
           </Box>
         </Grid>
       </Grid>
-    </Paper>
+    </Box>
   );
 }
