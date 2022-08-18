@@ -1,11 +1,11 @@
 import { CircularProgress, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
-import { Lessons, useAllLessonsQuery } from '../../../graphql/generated';
+import { Lesson, useAllLessonsQuery } from '../../../graphql/generated';
 import { DisplayError } from '../../utils';
 
 export const Timeline = () => {
-  const [start, setStart] = useState<string[]>([])
+  const [start, setStart] = useState<Array<Lesson[]>>([])
   // 1. Get All Start Dates from All Lessons
   const { data, loading, error } = useAllLessonsQuery({ 
     variables: {
@@ -26,20 +26,27 @@ export const Timeline = () => {
     return <DisplayError title='Failed to query Lessons' />
   }
 
-  if (data) {
-    let startArray: string[] = []
-    let res = data.allLessons.result;
-    res.forEach((i) => {
-      startArray.push(`${i.startDate}`)
-    })
-    setStart(startArray)
+  let res = data?.allLessons.result;
+  let sorted: any[] = []
+  
+  for (const lesson in res) {
+    sorted.push([res[lesson]]);
   }
   // 2. Organize in descending order
+  sorted.sort(function(a, b) { 
+    return a[0].startDate - b[0].startDate; 
+  })
+  setStart(sorted)
 
   // 3. Display in Timeline component
   return (
-    <Box>
-      <Typography variant="h3">Hello</Typography>
+    <Box sx={{ marginTop: 5 }}>
+      <Typography variant="h4">Teach History Chronologically</Typography>
+      <ul>
+        {start.map((i, index) => (
+          <li key={index}>{i}</li>
+        ))}
+      </ul>
     </Box>
   )
 }
