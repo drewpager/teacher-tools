@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Typography, Drawer, List, ListItem, ListItemButton, ListItemText, Toolbar } from '@mui/material';
+import { Box, Typography, Drawer, List, ListItem, ListItemButton, ListItemText, Toolbar, Container } from '@mui/material';
 import { Playlist, Lesson } from '../../../graphql/generated';
 import { VideoPlayer } from '../index';
 interface Props {
@@ -38,13 +38,13 @@ export const PlaylistCard = ({ playlist }: Props) => {
           </List>
         </Drawer>
         <Box sx={{ display: 'flex' }}>
-          <Box>
-          <Toolbar />
-          <Toolbar>
-          <Typography variant="h3" sx={{ padding: 5 }}>
-            {playlist.name}
-          </Typography>
-          </Toolbar>
+          <Box sx={{ maxWidth: "1200px" }}>
+            <Toolbar />
+            <Toolbar>
+              <Typography variant="h3" sx={{ padding: 5 }}>
+                {playlist.name}
+              </Typography>
+            </Toolbar>
             <VideoPlayer url={video} />
           </Box>
         </Box>

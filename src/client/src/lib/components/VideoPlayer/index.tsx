@@ -6,6 +6,7 @@ import { CloudinaryVideo } from "@cloudinary/url-gen";
 import { videoCodec } from "@cloudinary/url-gen/actions/transcode";
 import { auto, vp9 } from "@cloudinary/url-gen/qualifiers/videoCodec";
 import { limitFit, scale, fit, fill, limitFill } from "@cloudinary/url-gen/actions/resize";
+import { Container } from '@mui/material';
 // import { dpr } from '@cloudinary/url-gen/actions/delivery'
 // import 'dotenv/config';
 // import {byRadius} from "@cloudinary/url-gen/actions/roundCorners";
@@ -27,7 +28,7 @@ export const VideoPlayer = ({ url }: props) => {
   // Create and configure your Cloudinary instance.
   const cldUrl = new CloudinaryVideo(`platos-peach-video${fileString[0]}`, { cloudName: 'drewpager' })
   // cldUrl.resize(fill())
-  cldUrl.resize(scale().width(1000));
+  cldUrl.resize(fit().width(1200));
 
   const sources = [
     {
@@ -43,6 +44,8 @@ export const VideoPlayer = ({ url }: props) => {
   ];
 
   return ( 
-    <AdvancedVideo cldVid={cldUrl} sources={sources} controls autoPlay plugins={[responsive({ steps: [200, 600, 800, 1000, 1200] })]} />
+    <Container fixed>
+      <AdvancedVideo cldVid={cldUrl} sources={sources} controls autoPlay plugins={[responsive({ steps: 200 })]}/>
+    </Container>
   )
 };
