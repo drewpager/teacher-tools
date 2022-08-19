@@ -58,7 +58,6 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
   const appBarZ = theme.zIndex.drawer + 1
   
   return (
-    <Box>
       <AppBar sx={{ zIndex: appBarZ }} position="absolute">
         <Toolbar>
           <IconButton
@@ -126,6 +125,5 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
         )}
         </Toolbar>
       </AppBar>
-    </Box>
   );
 };
