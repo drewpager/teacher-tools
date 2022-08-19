@@ -19,6 +19,7 @@ export const PlaylistCard = ({ playlist }: Props) => {
   return (
     <>
         <Drawer
+          className='drawer--playlist'
           sx={{
             maxWidth: drawerWidth,
             width: drawerWidth 
@@ -36,8 +37,8 @@ export const PlaylistCard = ({ playlist }: Props) => {
             ))}
           </List>
         </Drawer>
-            <Toolbar>
-              <Typography variant="h3" sx={{ padding: 5 }}>
+            <Toolbar sx={{ px: 0 }}>
+              <Typography variant="h3" sx={{ py: 5 }}>
                 {playlist.name}
               </Typography>
             </Toolbar>

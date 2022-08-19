@@ -44,8 +44,8 @@ export const VideoPlayer = ({ url }: props) => {
   ];
 
   return ( 
-    <Box>
-      <AdvancedVideo cldVid={cldUrl} sources={sources} controls autoPlay plugins={[responsive({ steps: 200 })]}/>
+    <Box className='tt-video-wrapper' >
+      <AdvancedVideo cldVid={cldUrl} sources={sources} controls autoPlay plugins={[responsive({ steps: 200 })]} />
     </Box>
   )
 };

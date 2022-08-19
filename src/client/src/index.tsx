@@ -72,26 +72,7 @@ const App = () => {
     <Router>
       {LogInError}
       <AppHeader viewer={viewer} setViewer={setViewer} />
-      <Drawer
-          sx={{
-            maxWidth: drawerWidth,
-            width: drawerWidth 
-          }}
-          variant="permanent"
-          anchor="left"
-        >
-            <Toolbar />
-            <nav >
-                <List>
-                    <ListItem button>
-                        <Link to="/playlist/62ddc9b50eb8f81cf34879fc">
-                            <ListItemText primary="Playlist" />
-                        </Link>
-                    </ListItem>
-                </List>
-            </nav>            
-        </Drawer>
-        <main style={{ marginLeft: drawerWidth + 12, marginTop: 12 }}>
+        <main style={{ marginLeft: drawerWidth + 12, marginTop: 12, marginRight: 24 }}>
             <Toolbar />
             <Routes>
                 <Route path="/" element={<Home />} />

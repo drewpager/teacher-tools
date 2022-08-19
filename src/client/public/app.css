@@ -1,0 +1,7 @@
+.tt-video-wrapper video {
+    width: 100%;
+}
+
+.drawer--playlist .MuiDrawer-paperAnchorLeft {
+    margin-top: 5rem;
+}
