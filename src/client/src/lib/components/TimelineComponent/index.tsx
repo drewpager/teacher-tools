@@ -1,6 +1,5 @@
-import { CircularProgress, Typography } from '@mui/material';
-import { Box } from '@mui/system';
 import React, { useState, useEffect } from 'react';
+import { Box, CircularProgress, Typography } from '@mui/material';
 import { Lesson, useAllLessonsQuery } from '../../../graphql/generated';
 import { DisplayError } from '../../utils';
 
@@ -28,7 +27,7 @@ export const TimelineComponent = () => {
       return a.startDate - b.startDate;
     })
     setStart(sorted);
-  }, [data])
+  }, [data, start])
 
   if (loading) {
     return (
