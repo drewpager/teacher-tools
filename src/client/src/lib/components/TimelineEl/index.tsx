@@ -3,7 +3,7 @@ import { Box, CircularProgress, Typography } from '@mui/material';
 import { Lesson, useAllLessonsQuery } from '../../../graphql/generated';
 import { DisplayError } from '../../utils';
 
-export const TimelineComponent = () => {
+export const TimelineEl = () => {
   const [start, setStart] = useState<Lesson[]>([]);
 
   // 1. Get All Start Dates from All Lessons
@@ -27,7 +27,7 @@ export const TimelineComponent = () => {
       return a.startDate - b.startDate;
     })
     setStart(sorted);
-  }, [data, start])
+  }, [data])
 
   if (loading) {
     return (
@@ -47,7 +47,7 @@ export const TimelineComponent = () => {
       <Typography variant="h4">Teach History Chronologically</Typography>
       <ul>
         {start.map((i, index) => (
-          <li key={index}>{i}</li>
+          <li key={index}>{i.title}</li>
         ))}
       </ul>
     </Box>

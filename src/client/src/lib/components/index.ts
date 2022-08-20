@@ -7,4 +7,4 @@ export * from "./PlaylistCard";
 export * from "./VideoPlayer";
 export * from "./UserPlaylistsCard";
 export * from "./PlaylistDetails";
-export * from "./TimelineComponent";
+export * from "./TimelineEl";
