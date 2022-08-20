@@ -18,10 +18,11 @@ export const Timeline = () => {
   useEffect(() => {
     const sorted: Lesson[] = [];
     const res = data?.allLessons.result;
+
+    res?.map((i) => (
+      sorted.push(i)
+    ))
     
-    for (const lesson in res) {
-      sorted.push(res[lesson]);
-    }
     // 2. O rganize in descending order
     sorted.sort((a: any, b: any) => {
       return a.startDate - b.startDate;
@@ -49,8 +50,6 @@ export const Timeline = () => {
         {start.map((i, index) => (
           <li key={index}>{i}</li>
         ))}
-        {/* <li key="101">History 101</li>
-        <li key="102">History 102</li> */}
       </ul>
     </Box>
   )
