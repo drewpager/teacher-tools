@@ -1,10 +1,11 @@
 import { CircularProgress, Typography } from '@mui/material';
+import { Timeline } from '@mui/lab'
 import { Box } from '@mui/system';
 import React, { useState, useEffect } from 'react';
 import { Lesson, useAllLessonsQuery } from '../../../graphql/generated';
 import { DisplayError } from '../../utils';
 
-export const Timeline = () => {
+export const TimelineComponent = () => {
   const [start, setStart] = useState<Lesson[]>([]);
 
   // 1. Get All Start Dates from All Lessons
@@ -19,13 +20,15 @@ export const Timeline = () => {
     const sorted: Lesson[] = [];
     const res = data?.allLessons.result;
     
-    for (const lesson in res) {
-      sorted.push(res[lesson]);
-    }
-    // 2. O rganize in descending order
+    res?.map((i) => (
+      sorted.push(i)
+    ))
+    
+    // 2. Organize in descending order
     sorted.sort((a: any, b: any) => {
       return a.startDate - b.startDate;
     })
+    
     setStart(sorted);
   }, [data])
 
@@ -44,14 +47,15 @@ export const Timeline = () => {
   // 3. Display in Timeline component
   return (
     <Box sx={{ marginTop: 5 }}>
-      <Typography variant="h4">Teach History Chronologically</Typography>
+      <Timeline position="alternate">
+
+      </Timeline>
+      {/* <Typography variant="h4">Teach History Chronologically</Typography>
       <ul>
         {start.map((i, index) => (
-          <li key={index}>{i}</li>
+          <li key={index}>{i.title}</li>
         ))}
-        {/* <li key="101">History 101</li>
-        <li key="102">History 102</li> */}
-      </ul>
+      </ul> */}
     </Box>
   )
 }
