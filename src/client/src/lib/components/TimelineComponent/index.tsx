@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Lesson, useAllLessonsQuery } from '../../../graphql/generated';
 import { DisplayError } from '../../utils';
 
-export const Timeline = () => {
+export const TimelineComponent = () => {
   const [start, setStart] = useState<Lesson[]>([]);
 
   // 1. Get All Start Dates from All Lessons
