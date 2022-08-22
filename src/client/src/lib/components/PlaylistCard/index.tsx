@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Typography, Drawer, List, ListItem, ListItemButton, ListItemText, Toolbar, Container } from '@mui/material';
+import { Grid, Typography, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import { Playlist, Lesson } from '../../../graphql/generated';
 import { VideoPlayer } from '../index';
 interface Props {
@@ -14,35 +14,29 @@ export const PlaylistCard = ({ playlist }: Props) => {
     setVideo(`${video}`)
   };
 
-  let drawerWidth = 240;
 
   return (
     <>
-        <Drawer
-          className='drawer--playlist'
-          sx={{
-            maxWidth: drawerWidth,
-            width: drawerWidth 
-          }}
-          variant="permanent"
-          anchor="left"
-        >
-          <List>
-            {playlist.plan.map((lesson, id) => (
-              <ListItem key={id}>
-                <ListItemButton onClick={() => handleChange({ ...lesson })}>
-                  <ListItemText primary={lesson?.title} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-        </Drawer>
-            <Toolbar sx={{ px: 0 }}>
-              <Typography variant="h3" sx={{ py: 5 }}>
-                {playlist.name}
-              </Typography>
-            </Toolbar>
-            <VideoPlayer url={video} />
+        <Typography className='card--title'  variant="h3" sx={{ py: 5 }}>
+            {playlist.name}
+        </Typography>
+
+        <Grid container className='playlistcard--grid'>
+            <Grid className='playlistcard--grid__list'>
+                <List>
+                    {playlist.plan.map((lesson, id) => (
+                    <ListItem disableGutters key={id}>
+                        <ListItemButton disableGutters onClick={() => handleChange({ ...lesson })}>
+                        <ListItemText primary={lesson?.title} />
+                        </ListItemButton>
+                    </ListItem>
+                    ))}
+                </List>
+            </Grid>
+            <Grid  className='playlistcard--grid__video'>
+                <VideoPlayer url={video} />
+            </Grid>
+        </Grid>
     </>
   )
 }
