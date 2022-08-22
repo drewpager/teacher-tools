@@ -3,6 +3,9 @@ export const categories = [
     name: "History"
   },
   {
+    name: "Biography"
+  },
+  {
     name: "American History"
   },
   {
@@ -10,5 +13,8 @@ export const categories = [
   },
   {
     name: "Military History"
+  },
+  {
+    name: "Medicine"
   }
 ];

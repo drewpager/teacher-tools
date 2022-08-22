@@ -218,8 +218,8 @@ export const CreateLesson = ({ viewer }: Props) => {
     })
   }
 
-  const handleCheck = (position: number, value: { name: string }) => {
-    const updatedCheckedState = checked.map((item, index) => index === position ? !item : item)
+  const handleCheck = async (position: number, value: { name: string }) => {
+    const updatedCheckedState = await checked.map((item, index) => index === position ? !item : item)
     setChecked(updatedCheckedState);
 
     const name = value.name;
@@ -230,6 +230,9 @@ export const CreateLesson = ({ viewer }: Props) => {
     } else {
       setCategorizer(categorizer.filter((categorizer) => categorizer !== name))
     }
+
+    console.log("Categorizer: ", categorizer);
+    console.log("Checked: ", checked);
     
     // TODO: Fix Category State Being 1 Step Behind
     setFormData({
