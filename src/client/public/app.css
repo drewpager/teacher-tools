@@ -1,0 +1,36 @@
+.mainPanel {
+    padding: 0 1.5rem;
+}
+
+img, video {
+    max-width: 100%;
+    height: auto;
+}
+
+.tt-video-wrapper video {
+    width: 100%;
+}
+
+.card--title {
+    margin-top: 5rem !important;
+}
+
+.playlistcard--grid {
+    flex-wrap: wrap;
+}
+
+.playlistcard--grid__list,
+.playlistcard--grid__video {
+    flex: 1 1 100%;
+}
+
+@media ( min-width: 900px ) {
+    .playlistcard--grid__list {
+        flex: 0 1 20%;
+    }
+    .playlistcard--grid__video {
+        flex: 1 1 0%;
+        padding: 0 2rem;
+    }
+    
+}
