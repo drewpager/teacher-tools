@@ -34,9 +34,7 @@ export const Playlist = () => {
 
   if (playlist) {
     return (
-      <Box sx={{ marginLeft: 5 }}>
         <PlaylistCard playlist={playlist} />
-      </Box>
     )
   }
 

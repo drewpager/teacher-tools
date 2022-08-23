@@ -6,7 +6,7 @@ import { CloudinaryVideo } from "@cloudinary/url-gen";
 import { videoCodec } from "@cloudinary/url-gen/actions/transcode";
 import { auto, vp9 } from "@cloudinary/url-gen/qualifiers/videoCodec";
 import { limitFit, scale, fit, fill, limitFill } from "@cloudinary/url-gen/actions/resize";
-import { Container } from '@mui/material';
+import { Box } from '@mui/material';
 // import { dpr } from '@cloudinary/url-gen/actions/delivery'
 // import 'dotenv/config';
 // import {byRadius} from "@cloudinary/url-gen/actions/roundCorners";
@@ -44,8 +44,8 @@ export const VideoPlayer = ({ url }: props) => {
   ];
 
   return ( 
-    <Container fixed>
-      <AdvancedVideo cldVid={cldUrl} sources={sources} controls autoPlay plugins={[responsive({ steps: 200 })]}/>
-    </Container>
+    <Box className='tt-video-wrapper' >
+      <AdvancedVideo cldVid={cldUrl} sources={sources} controls autoPlay plugins={[responsive({ steps: 200 })]} />
+    </Box>
   )
 };
