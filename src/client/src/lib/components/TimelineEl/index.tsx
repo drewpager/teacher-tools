@@ -6,7 +6,7 @@ import { DisplayError } from '../../utils';
 
 export const TimelineEl = () => {
   const [start, setStart] = useState<Lesson[]>([]);
-  const [category, setCategory] = useState<string>("")
+  const [category, setCategory] = useState<string>("History")
   const [categoryList, setCategoryList] = useState<string[]>([""])
 
   const handleClick = (category: string) => {
@@ -22,7 +22,7 @@ export const TimelineEl = () => {
   });
 
   useEffect(() => {
-    const sorted: Lesson[] = [];
+    let sorted: Lesson[] = [];
     const categories: string[] = [];
     const res = data?.allLessons.result;
 
@@ -30,7 +30,7 @@ export const TimelineEl = () => {
       sorted.push(i)
     ))
 
-    // 1.5 get categories
+    // get categories
     sorted.map((i) => (
       categories.push(`${i.category}`)
     ))
@@ -39,8 +39,10 @@ export const TimelineEl = () => {
     sorted.sort((a: any, b: any) => {
       return a.startDate - b.startDate;
     })
-
-    sorted.filter((l) => l.category?.toString().toLowerCase().includes(category.toLowerCase()))
+    
+    console.log(category);
+    // sorted.filter((l) => l.category?.toString().toLowerCase().includes(category.toLowerCase()))
+    sorted = sorted.filter((l) => `${l.category?.toString()}` === category)
 
     let uniqueCategories = Array.from(new Set(categories));
     setStart(sorted);
@@ -62,7 +64,7 @@ export const TimelineEl = () => {
   
   // 3. Display in Timeline component
   return (
-    <Box sx={{ marginTop: 5 }}>
+    <Box sx={{ marginTop: 5, minHeight: 550 }}>
       <Typography variant="h4">Teach History Chronologically</Typography>
       {categoryList.map((j) => (<Button onClick={() => handleClick(j)}>{j}</Button>))}
       {start.map((i) => (
