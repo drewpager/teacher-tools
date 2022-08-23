@@ -6,6 +6,7 @@ import { useMutation } from '@apollo/client';
 import { gql } from 'graphql-tag';
 import { DisplaySuccess } from '../../utils';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import theme from '../../../theme';
 
 interface Props {
@@ -100,10 +101,10 @@ const handleDelete = async (id: string) => {
               {playlist.plan.length} {playlist.plan.length === 1 ? " Lesson" : " Lessons"}
             </Typography>
           </Link>
+          {UpdatePlanLoading ? updatePlanLoadingMessage : <Button onClick={() => handleUpdate(playlist.id)}><EditIcon /></Button>}
+          {UpdatePlanError ? updatePlanErrorMessage : null}
           {DeletePlaylistLoading ? deletePlaylistLoadingMessage : <Button onClick={() => handleDelete(playlist.id)}><DeleteIcon /></Button>}
           {DeletePlaylistError ? deletePlaylistErrorMessage : null}
-          {UpdatePlanLoading ? updatePlanLoadingMessage : <Button onClick={() => handleUpdate(playlist.id)}>Edit</Button>}
-          {UpdatePlanError ? updatePlanErrorMessage : null}
         </CardContent>
       </Card>
     </ListItem>
