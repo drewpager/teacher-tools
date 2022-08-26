@@ -29,9 +29,15 @@ const columns: GridColDef[] = [
     valueGetter: (params: GridValueGetterParams) => 
       `${params.row.startDate || ''}-${params.row.endDate || ''}`
   },
+  {
+    field: 'category',
+    headerName: 'Category',
+    width: 150
+  },
 ];
 
 export const Catalogue = () => {
+  let rows = [];
   const { data, loading, error } = useAllLessonsQuery({
     variables: {
       limit: 10,
@@ -48,19 +54,31 @@ export const Catalogue = () => {
   }
 
   if (data) {
-    console.log(data.allLessons.result);
+    let lessons = data.allLessons.result;
+    for (let i = 0; i < lessons.length; i++) {
+      const items = {
+        id: i + 1,
+        title: lessons[i].title,
+        startDate: lessons[i].startDate,
+        endDate: lessons[i].endDate,
+        category: lessons[i].category
+      };
+
+      rows.push(items);
+    }
+    console.log(rows);
   }
 
-  const rows = [
-    { id: 1, title: "Biography of Drew Page", startDate: 1989, endDate: 2022 }
-  ]
+  // const rows = [
+  //   { id: 1, title: "Biography of Drew Page", startDate: 1989, endDate: 2022 }
+  // ]
 
   return (
     <Box sx={{ mt: 10, width: '100%', height: 500 }}>
       <DataGrid 
         rows={rows}
         columns={columns}
-        pageSize={5}
+        pageSize={10}
         rowsPerPageOptions={[50]}
       />
     </Box>

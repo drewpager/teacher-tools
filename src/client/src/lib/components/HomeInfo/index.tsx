@@ -1,11 +1,10 @@
 import React from 'react';
-import { Typography, Grid, Link, Box, Toolbar } from '@mui/material'
+import { Typography, Grid, Link, Box } from '@mui/material'
 import '../../assets/classroom.jpg';
 
 export const HomeInfo = () => {
   return (
     <Box>
-      <Toolbar />
       <Grid container>
         <Grid item md={6}>
           <Box

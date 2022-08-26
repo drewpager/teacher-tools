@@ -17,7 +17,7 @@ export const PlaylistCard = ({ playlist }: Props) => {
 
   return (
     <>
-        <Typography className='card--title'  variant="h3" sx={{ py: 5 }}>
+        <Typography className='card--title' variant="h3" sx={{ py: 1 }}>
             {playlist.name}
         </Typography>
 

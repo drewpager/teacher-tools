@@ -58,7 +58,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
   const appBarZ = theme.zIndex.drawer + 1
   
   return (
-      <AppBar sx={{ zIndex: appBarZ }} position="absolute">
+      <AppBar sx={{ zIndex: appBarZ }} position="static">
         <Toolbar>
           <IconButton
             size="small"
@@ -99,6 +99,11 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                 <MenuItem onClick={handleCloseUserMenu}>
                   <Link to={`/user/${viewer.id}`} style={{ textDecoration: "none", color: 'black' }}>
                     <Typography textAlign="center">Profile</Typography>
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link to={'/lessons'} style={{ textDecoration: 'none', color: 'black'}}>
+                    <Typography textAlign="center">Catalogue</Typography>
                   </Link>
                 </MenuItem>
                 <MenuItem onClick={handleLogOut}>
