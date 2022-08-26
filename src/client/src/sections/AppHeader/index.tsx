@@ -103,7 +103,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                 </MenuItem>
                 <MenuItem>
                   <Link to={'/lessons'} style={{ textDecoration: 'none', color: 'black'}}>
-                    <Typography textAlign="center">Catalogue</Typography>
+                    <Typography textAlign="center">Catalog</Typography>
                   </Link>
                 </MenuItem>
                 <MenuItem onClick={handleLogOut}>
