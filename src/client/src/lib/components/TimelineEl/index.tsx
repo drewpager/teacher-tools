@@ -4,6 +4,8 @@ import { Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineC
 import { Lesson, useAllLessonsQuery } from '../../../graphql/generated';
 import { DisplayError } from '../../utils';
 
+import './timeline.scss';
+
 export const TimelineEl = () => {
   const [start, setStart] = useState<Lesson[]>([]);
   const [category, setCategory] = useState<string>("History")
@@ -64,37 +66,39 @@ export const TimelineEl = () => {
   
   // 3. Display in Timeline component
   return (
-    <Box sx={{ marginTop: 5, minHeight: 550 }}>
+    <Box className='timeline--wrapper'>
       <Typography variant="h4">Teach History Chronologically</Typography>
-      {categoryList.map((j) => (<Button onClick={() => handleClick(j)}>{j}</Button>))}
-      {start.map((i) => (
-        <Box>
-          <Timeline position='right'>
-          <TimelineItem>
-            <TimelineOppositeContent
-              sx={{ m: 'auto 0' }}
-              align="right"
-              variant="body2"
-              color="text.secondary"
-            >
-              {i.startDate}
-            </TimelineOppositeContent>
-            <TimelineSeparator>
-              <TimelineConnector />
-                <TimelineDot />
-              <TimelineConnector />
-            </TimelineSeparator>
-            <TimelineContent sx={{ py: '12px', px: 2 }}>
-              <Typography variant="h6" component="span">
-                {i.title}
-              </Typography>
-              <Typography>{i.meta}</Typography>
-            </TimelineContent>
-          </TimelineItem>
+      
+      {categoryList.map((j, index) => (<Button key={index} onClick={() => handleClick(j)}>{j}</Button>))}
+      
+        <Timeline className='timeline--outer'>
+          {start.map((i, index) => (
+            <TimelineItem className='timeline--item' key={index}>
+                <TimelineOppositeContent
+                    variant="body2"
+                    color="text.secondary"
+                    className='timeline--date'
+                >
+                    {i.startDate}
+                </TimelineOppositeContent>
+                
+                <TimelineSeparator>
+                    <TimelineConnector />
+                        <TimelineDot />
+                    <TimelineConnector />
+                </TimelineSeparator>
+                
+                <TimelineContent className='timeline--title'>
+                    <Typography variant="h6" component="p">
+                        {i.title}
+                    </Typography>
+                    
+                    <Typography className='timeline--description'>{i.meta}</Typography>
+                </TimelineContent>
+            </TimelineItem>
     
-          </Timeline>
-        </Box>
-      ))}
+          ))}
+        </Timeline>
     </Box>
   )
 }

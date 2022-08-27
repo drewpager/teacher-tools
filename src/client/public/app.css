@@ -34,3 +34,11 @@ img, video {
     }
     
 }
+
+.timeline--date {
+    flex-basis: 10%;
+}
+
+.timeline--title {
+    flex-basis: 80%;
+}

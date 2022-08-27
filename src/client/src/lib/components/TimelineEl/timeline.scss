@@ -1,0 +1,35 @@
+.timeline--wrapper {
+    margin-bottom: 2rem;
+}
+
+.MuiTimeline-root {
+    
+    &.timeline--outer {
+        padding: 0;
+        width: 100%;
+    }    
+}
+
+.MuiTimelineItem-root {
+    &.timeline--item {
+        width: 100%;
+    }
+}
+
+.MuiTimelineOppositeContent-root {
+    &.timeline--date {
+        flex-basis: 30%;
+        margin: auto;
+    }    
+}
+
+
+.MuiTimelineContent-root {
+    &.timeline--title {
+        flex-basis: 70%;
+
+        .timeline--description {
+            word-break: break-word;
+        }
+    }
+}

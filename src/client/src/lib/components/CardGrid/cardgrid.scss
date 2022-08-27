@@ -1,0 +1,20 @@
+.grid--cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 1rem;
+    margin-bottom: 2rem;
+
+    .MuiPaper-root {
+        width: 100%;
+
+        @media ( min-width: 600px ) {
+            width: calc(50% - 1rem);
+        }
+        @media ( min-width: 900px ) {
+            width: calc(25% - 1rem);
+        }
+
+    }
+}
