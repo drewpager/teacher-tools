@@ -102,7 +102,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                   </Link>
                 </MenuItem>
                 <MenuItem>
-                  <Link to={'/lessons'} style={{ textDecoration: 'none', color: 'black'}}>
+                  <Link to={'/catalog'} style={{ textDecoration: 'none', color: 'black'}}>
                     <Typography textAlign="center">Catalog</Typography>
                   </Link>
                 </MenuItem>

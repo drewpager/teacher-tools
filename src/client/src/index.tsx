@@ -75,7 +75,7 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/teach" element={<Teach />} />
-                <Route path="/lessons" element={<Catalogue />} />
+                <Route path="/catalog" element={<Catalogue />} />
                 <Route path="/lesson/:id" element={<Lesson />} />
                 <Route path="/lessons/:filter?" element={<Lessons title="Plato's Peach" />} />
                 <Route path="/user/:id" children={(props: any) => (<User {...props} viewer={viewer} />)} element={<User viewer={viewer} />} />
