@@ -6,12 +6,8 @@ import { DisplayError } from '../../utils';
 
 export const TimelineEl = () => {
   const [start, setStart] = useState<Lesson[]>([]);
-  const [category, setCategory] = useState<string>("History")
+  const [category, setCategory] = useState<string>("All")
   const [categoryList, setCategoryList] = useState<string[]>([""])
-
-  const handleClick = (category: string) => {
-    setCategory(category);
-  }
 
   // 1. Get All Start Dates from All Lessons
   const { data, loading, error } = useAllLessonsQuery({ 
@@ -21,9 +17,22 @@ export const TimelineEl = () => {
     }
   });
 
+  const handleClick = (category: string) => {
+    setCategory(category);
+    let allArray: Lesson[] = [];
+    if (category === "All") {
+      let result = data?.allLessons.result;
+      result?.map((i) => (
+        allArray.push(i)
+      ))
+      setStart(allArray);
+    }
+  }
+
   useEffect(() => {
+    // Create an array to push the resulting lesson objects
     let sorted: Lesson[] = [];
-    const categories: string[] = [];
+    const categories: string[] = ["All"];
     const res = data?.allLessons.result;
 
     res?.map((i) => (
@@ -35,17 +44,25 @@ export const TimelineEl = () => {
       categories.push(`${i.category}`)
     ))
     
-    // 2. Organize in descending order
+    // 2. Organize/sort lessons in descending order of start dates
     sorted.sort((a: any, b: any) => {
       return a.startDate - b.startDate;
     })
-    
-    console.log(category);
-    // sorted.filter((l) => l.category?.toString().toLowerCase().includes(category.toLowerCase()))
-    sorted = sorted.filter((l) => `${l.category?.toString()}` === category)
+
+    // Default State & If "All" is selected, setStart to initialState
+    if (category === "All") {
+      let initialState: Lesson[] = [];
+      sorted.map((i) => (
+        initialState.push(i)
+      ))
+      setStart(initialState);
+    } else {
+      // Filter the sorted list based on the category set in state
+      sorted = sorted.filter((l) => `${l.category?.toString()}` === category)
+      setStart(sorted);
+    }
 
     let uniqueCategories = Array.from(new Set(categories));
-    setStart(sorted);
     setCategoryList(uniqueCategories);
 
   }, [data, category])
