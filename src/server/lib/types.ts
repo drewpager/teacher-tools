@@ -7,8 +7,8 @@ export interface Lesson {
   meta: string;
   video: string;
   image: string;
-  startDate: number;
-  endDate: number;
+  startDate: string;
+  endDate: string;
   creator: string;
 }
 

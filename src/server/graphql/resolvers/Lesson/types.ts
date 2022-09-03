@@ -10,8 +10,8 @@ export interface CreateLessonInput {
   category: string[];
   video: string;
   image: string;
-  startDate: number;
-  endDate: number;
+  startDate: string;
+  endDate: string;
 }
 
 export interface CreateLessonArgs {

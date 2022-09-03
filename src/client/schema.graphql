@@ -1,3 +1,5 @@
+scalar DateScalar
+
 type Viewer {
   id: ID
   token: String

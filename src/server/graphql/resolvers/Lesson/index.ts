@@ -10,6 +10,39 @@ import { authorize } from "../../../lib/utils/index";
 import { Request } from "express";
 import { ObjectId } from "mongodb";
 import { Viewer } from "../../../../client/src/graphql/generated";
+import { GraphQLScalarType, Kind } from "graphql";
+
+const dateRegex = /\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[1-2]\d|3[0-1])|-[1-9]\d{0,11}|[1-9]\d{0,4}/;
+
+const validate = (value: any) => {
+  if (typeof value !== "string") {
+    throw new Error(`Value is not a string ${value}`);
+  }
+
+  if (!dateRegex.test(value)) {
+    throw new Error(`Value is not formatted as a date ${value}`);
+  }
+
+  return value;
+}
+
+const parseLiteral = (ast: any) => {
+  if (ast.kind !== Kind.STRING) {
+    throw new Error(`Query error: can only parse strings but got ${ast.kind}`);
+  }
+
+  return validate(ast.value);
+}
+
+const GraphQLDateConfig = {
+  name: 'DateScalar',
+  description: 'A valid date object',
+  serialize: validate,
+  parseValue: validate,
+  parseLiteral
+}
+
+const GraphQLDate = new GraphQLScalarType(GraphQLDateConfig);
 
 const verifyCreateLessonInput = ({
   title,
@@ -165,4 +198,5 @@ export const lessonResolvers = {
       }
     },
   },
+  DateScalar: GraphQLDate,
 };

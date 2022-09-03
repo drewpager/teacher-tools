@@ -1,6 +1,8 @@
 import { gql } from "apollo-server-express";
 
 export const typeDefs = gql`
+  scalar DateScalar
+
   type Viewer {
     id: ID
     token: String
@@ -28,8 +30,8 @@ export const typeDefs = gql`
     meta: String
     video: String
     image: String
-    startDate: Int
-    endDate: Int
+    startDate: DateScalar
+    endDate: DateScalar
     creator: String
   }
 
@@ -67,7 +69,7 @@ export const typeDefs = gql`
     logOut: Viewer!
     createLesson(input: CreateLessonInput): Lesson!
     lessonPlan(input: LessonPlanInput): Playlist!
-    updatePlan(id: ID): Playlist!
+    updatePlan(input: LessonPlanInput): Playlist!
     deleteLesson(id: ID): Boolean!
     deletePlaylist(id: ID): Boolean!
   }
@@ -83,8 +85,8 @@ export const typeDefs = gql`
     category: [String!]!
     video: String!
     image: String!
-    startDate: Int!
-    endDate: Int!
+    startDate: DateScalar!
+    endDate: DateScalar!
   }
 
   input FullLessonInput {
@@ -94,8 +96,8 @@ export const typeDefs = gql`
     meta: String
     video: String
     image: String
-    startDate: Int
-    endDate: Int
+    startDate: DateScalar
+    endDate: DateScalar
     creator: String
   }
 
