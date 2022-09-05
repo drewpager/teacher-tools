@@ -1,6 +1,6 @@
 import { CircularProgress, Grid, Box, Card, TextField, Button } from '@mui/material';
 import React, { useState, ChangeEvent, useRef, useEffect } from 'react';
-import { FullLessonInput, Playlist, useUpdatePlanMutation, UpdatePlanInput } from '../../graphql/generated';
+import { FullLessonInput, Playlist, useUpdatePlanMutation } from '../../graphql/generated';
 import { useAllLessonsQuery, usePlaylistQuery, Viewer} from '../../graphql/generated';
 import { DisplayError } from '../../lib/utils';
 import { useParams } from 'react-router-dom';

@@ -1,6 +1,8 @@
 import React from 'react';
 import { gql } from 'graphql-tag';
 import { useQuery, useMutation } from '@apollo/react-hooks';
+// import { Lessons as LessonsData} from '../../graphql/generated';
+// import { deleteLesson as DeleteLessonData, DeleteLessonVariables } from '../../graphql/generated';
 import { Lessons as LessonsData } from './__generated__/Lessons';
 import { DeleteLesson as DeleteLessonData, DeleteLessonVariables } from './__generated__/DeleteLesson';
 import { Button, List, ListItem, Avatar, CircularProgress, Alert, Skeleton }  from '@mui/material';

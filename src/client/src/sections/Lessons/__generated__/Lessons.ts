@@ -14,8 +14,8 @@ export interface Lessons_lessons {
   meta: string;
   video: string;
   image: string;
-  startDate: number;
-  endDate: number;
+  startDate: string;
+  endDate: string;
 }
 
 export interface Lessons {

@@ -1,24 +1,9 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
 scalar DateScalar
-
-type Viewer {
-  id: ID
-  token: String
-  avatar: String
-  hasPayment: Boolean
-  didRequest: Boolean!
-  playlists: [Playlist]
-  lessons: [Lesson]
-}
-
-type User {
-  id: ID!
-  name: String!
-  avatar: String!
-  contact: String!
-  hasPayment: Boolean!
-  playlists(limit: Int!, page: Int!): Playlists
-  lessons(limit: Int!, page: Int!): Lessons
-}
 
 type Lesson {
   id: ID
@@ -35,6 +20,15 @@ type Lesson {
 type Lessons {
   total: Int!
   result: [Lesson!]!
+}
+
+input LogInInput {
+  code: String!
+}
+
+type Mutation {
+  logIn(input: LogInInput): Viewer!
+  logOut: Viewer!
 }
 
 type Playlist {
@@ -58,11 +52,22 @@ type Query {
   allplaylists(limit: Int!, page: Int!): Playlists!
 }
 
-type Mutation {
-  logIn(input: LogInInput): Viewer!
-  logOut: Viewer!
+type User {
+  id: ID!
+  name: String!
+  avatar: String!
+  contact: String!
+  hasPayment: Boolean!
+  playlists(limit: Int!, page: Int!): Playlists
+  lessons(limit: Int!, page: Int!): Lessons
 }
 
-input LogInInput {
-  code: String!
+type Viewer {
+  id: ID
+  token: String
+  avatar: String
+  hasPayment: Boolean
+  didRequest: Boolean!
+  playlists: [Playlist]
+  lessons: [Lesson]
 }

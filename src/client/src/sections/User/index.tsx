@@ -23,8 +23,8 @@ export const User = ({ viewer }: Props) => {
       playlistsPage: playlistsPage,
       lessonsPage: lessonsPage,
       limit: pageLimit
-    },
-    pollInterval: 500
+    }
+    // pollInterval: 500
   });
 
   const user = data ? data.user : null;
@@ -61,7 +61,10 @@ export const User = ({ viewer }: Props) => {
 
   if (error) {
     return (
-      <DisplayError title="Failed to find user profile" />
+      <>
+        <DisplayError title="Failed to find user profile" />
+        {console.log(error)}
+      </>
     )
   }
   return (
