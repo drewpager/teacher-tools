@@ -29,6 +29,13 @@ export const TimelineEl = () => {
     }
   }
 
+  const formatDate = (date: string) => {
+    if (date.startsWith("-", 0)) {
+      return date.replace("-", "") + " BCE"
+    }
+    return date;
+  }
+
   useEffect(() => {
     // Create an array to push the resulting lesson objects
     let sorted: Lesson[] = [];
@@ -89,17 +96,17 @@ export const TimelineEl = () => {
       {start.map((i) => (
         <Box>
           <Timeline position='right'>
-          <TimelineItem>
+          <TimelineItem key={i.id}>
             <TimelineOppositeContent
               sx={{ m: 'auto 0' }}
               align="right"
               variant="body2"
               color="text.secondary"
             >
-              {i.startDate}
+              {formatDate(i.startDate)}
               <br />
               <br />
-              {i.endDate}
+              {formatDate(i.endDate)}
             </TimelineOppositeContent>
             <TimelineSeparator>
               <TimelineConnector />
