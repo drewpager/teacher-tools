@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Box, Button, CircularProgress, Typography } from '@mui/material';
 import { Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineContent, TimelineOppositeContent, TimelineDot } from '@mui/lab';
 import { Lesson, useAllLessonsQuery } from '../../../graphql/generated';
-import { DisplayError } from '../../utils';
+import { DisplayError, formatDate } from '../../utils';
 
 export const TimelineEl = () => {
   const [start, setStart] = useState<Lesson[]>([]);
@@ -29,12 +29,12 @@ export const TimelineEl = () => {
     }
   }
 
-  const formatDate = (date: string) => {
-    if (date.startsWith("-", 0)) {
-      return date.replace("-", "") + " BCE"
-    }
-    return date;
-  }
+  // const formatDate = (date: string) => {
+  //   if (date.startsWith("-", 0)) {
+  //     return date.replace("-", "") + " BCE"
+  //   }
+  //   return date;
+  // }
 
   useEffect(() => {
     // Create an array to push the resulting lesson objects

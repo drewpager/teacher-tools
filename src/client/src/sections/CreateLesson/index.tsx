@@ -16,8 +16,8 @@ const initialData = {
   title: "",
   meta: "",
   category: [""],
-  startDate: 0,
-  endDate: 0,
+  startDate: "",
+  endDate: "",
   video: "",
   image: ""
 }
@@ -210,14 +210,6 @@ export const CreateLesson = ({ viewer }: Props) => {
     });
   };
 
-  const handleNumChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: parseInt(value)
-    })
-  }
-
   const handleCheck = async (position: number, value: { name: string }) => {
     const updatedCheckedState = await checked.map((item, index) => index === position ? !item : item)
     setChecked(updatedCheckedState);
@@ -311,8 +303,8 @@ export const CreateLesson = ({ viewer }: Props) => {
               <FormControlLabel control={<Checkbox />} onChange={() => handleCheck(index, val)} checked={checked[index]} label={val.name} key={index} /> 
             ))}
           </FormGroup>
-          <TextField type="number" variant='outlined' label="Start Date" helperText="-33,000 for 33,000 BCE" sx={{ width: "45%", marginTop: 1 }} value={formData.startDate} name="startDate" onChange={handleNumChange} /><br />
-          <TextField type="number" variant='outlined' label="End Date" helperText="1052 or 4/29/2022" sx={{ width: "45%", marginTop: 1 }} value={formData.endDate} name="endDate" onChange={handleNumChange} /><br />
+          <TextField variant='outlined' label="Start Date" helperText="-33,000 for 33,000 BCE" sx={{ width: "45%", marginTop: 1 }} value={formData.startDate} name="startDate" onChange={handleInputChange} /><br />
+          <TextField variant='outlined' label="End Date" helperText="1052 or YYYY-MM-DD" sx={{ width: "45%", marginTop: 1 }} value={formData.endDate} name="endDate" onChange={handleInputChange} /><br />
           <TextField type="file" variant='outlined' helperText="Video or Lecture" sx={{ width: "45%", marginTop: 1 }} name="video" onChange={(e: ChangeEvent<HTMLInputElement>) => handleVideoUpload(e.target.files)} /><br />
           <TextField type="file" variant='outlined' helperText="Image" sx={{ width: "45%", marginTop: 1 }} name="image" onChange={(e: ChangeEvent<HTMLInputElement>) => handleImageUpload(e.target.files)} /><br />
           <Button sx={{ marginTop: 2 }} variant='contained' color='primary' type="submit">Submit</Button>

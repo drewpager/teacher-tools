@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, CircularProgress } from '@mui/material';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { useAllLessonsQuery } from '../../graphql/generated';
+import { formatDate } from '../../lib/utils';
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'Lesson', width: 90 },
@@ -59,8 +60,8 @@ export const Catalogue = () => {
       const items = {
         id: i + 1,
         title: lessons[i].title,
-        startDate: lessons[i].startDate,
-        endDate: lessons[i].endDate,
+        startDate: formatDate(lessons[i].startDate),
+        endDate: formatDate(lessons[i].endDate),
         category: lessons[i].category
       };
 
