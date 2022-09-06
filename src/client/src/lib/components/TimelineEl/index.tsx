@@ -46,7 +46,9 @@ export const TimelineEl = () => {
     
     // 2. Organize/sort lessons in descending order of start dates
     sorted.sort((a: any, b: any) => {
-      return a.startDate - b.startDate;
+      let start = Date.parse(a.startDate)
+      let end = Date.parse(b.startDate)
+      return start - end;
     })
 
     // Default State & If "All" is selected, setStart to initialState
@@ -95,6 +97,9 @@ export const TimelineEl = () => {
               color="text.secondary"
             >
               {i.startDate}
+              <br />
+              <br />
+              {i.endDate}
             </TimelineOppositeContent>
             <TimelineSeparator>
               <TimelineConnector />
