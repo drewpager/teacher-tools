@@ -49,6 +49,8 @@ const verifyCreateLessonInput = ({
   category,
   meta,
   video,
+  startDate,
+  endDate
 }: CreateLessonInput) => {
   if (title.length > 160) {
     throw new Error("Title must not exceed 160 characters in length!");
@@ -56,6 +58,14 @@ const verifyCreateLessonInput = ({
 
   if (category.length < 1) {
     throw new Error("Please add at least one category.");
+  }
+
+  if (!dateRegex.test(startDate)) {
+    throw new Error("Please format date as Year-Month-Day (YYYY-MM-DD)")
+  }
+
+  if (!dateRegex.test(endDate)) {
+    throw new Error("Please format date as Year-Month-Day (YYYY-MM-DD)")
   }
 
   // if (meta.length < 160) {
@@ -148,6 +158,11 @@ export const lessonResolvers = {
     ): Promise<Lesson> => {
       const id = new ObjectId();
       //TODO: Fix Viewer resolution vs hard coded id
+
+      if (viewer && viewer.id) {
+        const viewerId = viewer.id
+        console.log("ViewerId: ", viewerId)
+      }
 
       // const viewerId = viewer && viewer.id ? viewer.id : "116143759549242008910";
       try {

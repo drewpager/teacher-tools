@@ -1,5 +1,5 @@
 import { Typography, Box, TextField, FormGroup, FormControlLabel, Checkbox, Button, CircularProgress } from '@mui/material';
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCreateLessonMutation, Viewer } from '../../graphql/generated';
 import { categories, DisplayError, DisplaySuccess } from '../../lib/utils';
@@ -28,6 +28,11 @@ export const CreateLesson = ({ viewer }: Props) => {
     new Array(categories.length).fill(false)
   );
   const [categorizer, setCategorizer] = useState<string[]>([]);
+
+  useEffect(() => {
+    // console.log("Categorizer: ", categorizer);
+    // console.log("Checked: ", checked);
+  }, [formData, categorizer, checked])
 
   const [createLesson, { 
     data: Mutation,
@@ -210,8 +215,8 @@ export const CreateLesson = ({ viewer }: Props) => {
     });
   };
 
-  const handleCheck = async (position: number, value: { name: string }) => {
-    const updatedCheckedState = await checked.map((item, index) => index === position ? !item : item)
+  const handleCheck = (position: number, value: { name: string }) => {
+    const updatedCheckedState = checked.map((item, index) => index === position ? !item : item)
     setChecked(updatedCheckedState);
 
     const name = value.name;
@@ -223,10 +228,6 @@ export const CreateLesson = ({ viewer }: Props) => {
       setCategorizer(categorizer.filter((categorizer) => categorizer !== name))
     }
 
-    console.log("Categorizer: ", categorizer);
-    console.log("Checked: ", checked);
-    
-    // TODO: Fix Category State Being 1 Step Behind
     setFormData({
       ...formData,
       category: [...categorizer]
@@ -251,16 +252,6 @@ export const CreateLesson = ({ viewer }: Props) => {
     }
   }
 
-  if (Mutation && Mutation.createLesson) {
-    const { id } = Mutation.createLesson;
-    return (
-      <>
-        <Navigate to={`/lesson/${id}`} />
-        <DisplaySuccess title="Success!" />
-      </>
-    )
-  }
-
   if (createLessonLoading) {
     return (
       <Box sx={{ margin: 50 }}>
@@ -270,7 +261,27 @@ export const CreateLesson = ({ viewer }: Props) => {
   }
 
   if (createLessonError) {
-    return <DisplayError title={`Something's not working here: ${createLessonError}`} />
+    return (
+      <>
+        <DisplayError title={`${createLessonError}`} />
+        {console.log(formData)}
+      </>
+    )
+  }
+
+  if (Mutation && Mutation.createLesson) {
+    const { id } = Mutation.createLesson;
+    id ? (
+      <>
+        <Navigate to={`/lesson/${id}`} />
+        <DisplaySuccess title="Success!" />
+      </>
+    ) : (
+      <>
+        <Navigate to={`/user/${viewer.id}`} />
+        <DisplaySuccess title="Successfully added lesson!" />
+      </>
+    )
   }
 
   if (!viewer.id || !viewer.hasPayment) {
@@ -295,6 +306,8 @@ export const CreateLesson = ({ viewer }: Props) => {
             onChange={handleInputChange} 
             required
           /><br />
+          <TextField type="file" variant='outlined' helperText="Video or Lecture" sx={{ width: "45%", marginTop: 1 }} name="video" onChange={(e: ChangeEvent<HTMLInputElement>) => handleVideoUpload(e.target.files)} /><br />
+          <TextField type="file" variant='outlined' helperText="Image" sx={{ width: "45%", marginTop: 1 }} name="image" onChange={(e: ChangeEvent<HTMLInputElement>) => handleImageUpload(e.target.files)} /><br />
           <TextField variant="outlined" label="Description" multiline rows={3} helperText="Min Character Count of 160" sx={{ width: "45%", marginTop: 1 }} value={formData.meta} name="meta" onChange={handleInputChange} />
           <FormGroup sx={{ marginTop: 1 }}>
             <Typography variant="h5">Category</Typography>
@@ -303,10 +316,8 @@ export const CreateLesson = ({ viewer }: Props) => {
               <FormControlLabel control={<Checkbox />} onChange={() => handleCheck(index, val)} checked={checked[index]} label={val.name} key={index} /> 
             ))}
           </FormGroup>
-          <TextField variant='outlined' label="Start Date" helperText="-33,000 for 33,000 BCE" sx={{ width: "45%", marginTop: 1 }} value={formData.startDate} name="startDate" onChange={handleInputChange} /><br />
-          <TextField variant='outlined' label="End Date" helperText="1052 or YYYY-MM-DD" sx={{ width: "45%", marginTop: 1 }} value={formData.endDate} name="endDate" onChange={handleInputChange} /><br />
-          <TextField type="file" variant='outlined' helperText="Video or Lecture" sx={{ width: "45%", marginTop: 1 }} name="video" onChange={(e: ChangeEvent<HTMLInputElement>) => handleVideoUpload(e.target.files)} /><br />
-          <TextField type="file" variant='outlined' helperText="Image" sx={{ width: "45%", marginTop: 1 }} name="image" onChange={(e: ChangeEvent<HTMLInputElement>) => handleImageUpload(e.target.files)} /><br />
+          <TextField variant='outlined' label="Start Date or Year" helperText="YYYY-MM-DD or -33,000 for 33,000 BCE" sx={{ width: "45%", marginTop: 1 }} value={formData.startDate} name="startDate" onChange={handleInputChange} /><br />
+          <TextField variant='outlined' label="End Date or Year" helperText="YYYY-MM-DD or 1052" sx={{ width: "45%", marginTop: 1 }} value={formData.endDate} name="endDate" onChange={handleInputChange} /><br />
           <Button sx={{ marginTop: 2 }} variant='contained' color='primary' type="submit">Submit</Button>
         </form>
       </Box>
