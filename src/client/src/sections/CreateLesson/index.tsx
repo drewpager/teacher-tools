@@ -34,7 +34,7 @@ export const CreateLesson = ({ viewer }: Props) => {
   useEffect(() => {
     // console.log("Categorizer: ", categorizer);
     // console.log("Checked: ", checked);
-    if (!formData.title.length && !formData.endDate.length) {
+    if (!formData.title.length || !formData.endDate.length) {
       setButtonError(true);
     } else {
       setButtonError(false);
