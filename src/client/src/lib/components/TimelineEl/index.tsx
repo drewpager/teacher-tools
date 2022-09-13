@@ -12,7 +12,7 @@ export const TimelineEl = () => {
   // 1. Get All Start Dates from All Lessons
   const { data, loading, error } = useAllLessonsQuery({ 
     variables: {
-      limit: 10,
+      limit: 20,
       page: 1
     }
   });
@@ -28,13 +28,6 @@ export const TimelineEl = () => {
       setStart(allArray);
     }
   }
-
-  // const formatDate = (date: string) => {
-  //   if (date.startsWith("-", 0)) {
-  //     return date.replace("-", "") + " BCE"
-  //   }
-  //   return date;
-  // }
 
   useEffect(() => {
     // Create an array to push the resulting lesson objects
@@ -53,8 +46,14 @@ export const TimelineEl = () => {
     
     // 2. Organize/sort lessons in descending order of start dates
     sorted.sort((a: any, b: any) => {
+      if (a.startDate.startsWith("-")) {
+        // if negative, multiply by number of seconds per year to get epoch value
+        let start = a.startDate * 31556926 * 1000;
+        return start;
+      }
       let start = Date.parse(a.startDate)
       let end = Date.parse(b.startDate)
+      
       return start - end;
     })
 
@@ -104,9 +103,11 @@ export const TimelineEl = () => {
               color="text.secondary"
             >
               {formatDate(i.startDate)}
+              {/* {i.startDate} */}
               <br />
               <br />
               {formatDate(i.endDate)}
+              {/* {i.endDate} */}
             </TimelineOppositeContent>
             <TimelineSeparator>
               <TimelineConnector />
