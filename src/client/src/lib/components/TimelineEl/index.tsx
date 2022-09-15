@@ -3,6 +3,7 @@ import { Box, Button, CircularProgress, Typography } from '@mui/material';
 import { Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineContent, TimelineOppositeContent, TimelineDot } from '@mui/lab';
 import { Lesson, useAllLessonsQuery } from '../../../graphql/generated';
 import { DisplayError, formatDate } from '../../utils';
+import theme from '../../../theme';
 
 export const TimelineEl = () => {
   const [start, setStart] = useState<Lesson[]>([]);
@@ -121,9 +122,9 @@ export const TimelineEl = () => {
               {/* {i.endDate} */}
             </TimelineOppositeContent>
             <TimelineSeparator>
-              <TimelineConnector />
-                <TimelineDot />
-              <TimelineConnector />
+              <TimelineConnector sx={{ backgroundColor: `${theme.palette.primary.main}` }} />
+                <TimelineDot sx={{ backgroundColor: `${theme.palette.primary.main}` }} />
+              <TimelineConnector sx={{ backgroundColor: `${theme.palette.primary.main}` }} />
             </TimelineSeparator>
             <TimelineContent sx={{ py: '12px', px: 2 }}>
               <Typography variant="h6" component="span">
