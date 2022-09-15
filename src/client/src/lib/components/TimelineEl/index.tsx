@@ -44,6 +44,17 @@ export const TimelineEl = () => {
       categories.push(`${i.category}`)
     ))
     
+    // Isolate one word categories
+    categories.forEach((c, i) => {
+      if (c.includes(",")) {
+        categories.splice(i, i + 1)
+        const litter: string[] = c.split(",");
+        litter.map((e) => (
+          categories.push(`${e}`)
+        ))
+      }
+    })
+    
     // 2. Organize/sort lessons in descending order of start dates
     sorted.sort((a: any, b: any) => {
       if (a.startDate.startsWith("-")) {
@@ -66,7 +77,7 @@ export const TimelineEl = () => {
       setStart(initialState);
     } else {
       // Filter the sorted list based on the category set in state
-      sorted = sorted.filter((l) => `${l.category?.toString()}` === category)
+      sorted = sorted.filter((l) => `${l.category}`.includes(category))
       setStart(sorted);
     }
 
