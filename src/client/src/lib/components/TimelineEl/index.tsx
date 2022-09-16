@@ -105,36 +105,34 @@ export const TimelineEl = () => {
   return (
     <Box className='timeline--wrapper'>
       <Typography variant="h4">Teach History Chronologically</Typography>
-      {categoryList.map((j) => (<Button onClick={() => handleClick(j)}>{j}</Button>))}
-      {start.map((i) => (
-        <Box>
-          <Timeline position='right'>
-          <TimelineItem key={i.id}>
-            <TimelineOppositeContent
-              sx={{ m: 'auto 0' }}
-              align="right"
-              variant="body2"
-              color="text.secondary"
-            >
-              {formatDate(i.startDate)}
-              {/* {i.startDate} */}
-              <br />
-              <br />
-              {formatDate(i.endDate)}
-              {/* {i.endDate} */}
-            </TimelineOppositeContent>
-            <TimelineSeparator>
-              <TimelineConnector sx={{ backgroundColor: `${theme.palette.primary.main}` }} />
-                <TimelineDot sx={{ backgroundColor: `${theme.palette.primary.main}` }} />
-              <TimelineConnector sx={{ backgroundColor: `${theme.palette.primary.main}` }} />
-            </TimelineSeparator>
-            <TimelineContent sx={{ py: '12px', px: 2 }}>
-              <Typography variant="h6" component="span">
-                {i.title}
-              </Typography>
-              <Typography>{i.meta}</Typography>
-            </TimelineContent>
-          </TimelineItem>
+      
+      {categoryList.map((j, index) => (<Button key={index} onClick={() => handleClick(j)}>{j}</Button>))}
+      
+        <Timeline className='timeline--outer'>
+          {start.map((i, index) => (
+            <TimelineItem className='timeline--item' key={index}>
+                <TimelineOppositeContent
+                    variant="body2"
+                    color="text.secondary"
+                    className='timeline--date'
+                >
+                    {i.startDate}
+                </TimelineOppositeContent>
+                
+                <TimelineSeparator>
+                    <TimelineConnector sx={{ backgroundColor: `${theme.palette.primary.main}` }}/>
+                        <TimelineDot sx={{ backgroundColor: `${theme.palette.primary.main}` }}/>
+                    <TimelineConnector sx={{ backgroundColor: `${theme.palette.primary.main}` }}/>
+                </TimelineSeparator>
+                
+                <TimelineContent className='timeline--title'>
+                    <Typography variant="h6" component="p">
+                        {i.title}
+                    </Typography>
+                    
+                    <Typography className='timeline--description'>{i.meta}</Typography>
+                </TimelineContent>
+            </TimelineItem>
     
           ))}
         </Timeline>
