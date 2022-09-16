@@ -1,0 +1,11 @@
+.MuiButtonBase-root {
+    &.active {
+        background: linear-gradient(#e66465, #9198e5);
+        color: white;
+        border: 1px solid #000;
+        border-radius: 4px;
+
+        padding: 1rem;
+
+    }
+}

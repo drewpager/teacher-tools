@@ -7,15 +7,14 @@ import './homeinfo.scss';
 export const HomeInfo = () => {
   return (
     <Box className='box--title'>
-        <Typography component="h1" variant="h3" color="inherit" gutterBottom>
+        <Typography component="h1" variant="h3" color="inherit" gutterBottom className='title--text'>
             Interactive Lectures, Lesson Plans, and Learning. 
         </Typography>
 
-        <Link variant="subtitle1" href="#">
+        <Link variant="subtitle1" href="#" className='link--start'>
             Start Teaching 
         </Link>
-        <> | </>
-        <Link variant="subtitle1" href="#">
+        <Link variant="subtitle1" href="#" className='link--start'>
             Start Learning 
         </Link>
     </Box>

@@ -8,29 +8,29 @@ import theme from '../../../theme';
 import './timeline.scss';
 
 export const TimelineEl = () => {
-  const [start, setStart] = useState<Lesson[]>([]);
-  const [category, setCategory] = useState<string>("All")
-  const [categoryList, setCategoryList] = useState<string[]>([""])
-
-  // 1. Get All Start Dates from All Lessons
-  const { data, loading, error } = useAllLessonsQuery({ 
-    variables: {
-      limit: 20,
-      page: 1
+    const [start, setStart] = useState<Lesson[]>([]);
+    const [category, setCategory] = useState<string>("All")
+    const [categoryList, setCategoryList] = useState<string[]>([""])
+  
+    // 1. Get All Start Dates from All Lessons
+    const { data, loading, error } = useAllLessonsQuery({ 
+      variables: {
+        limit: 20,
+        page: 1
+      }
+    });
+  
+    const handleClick = (category: string) => {
+      setCategory(category);
+      let allArray: Lesson[] = [];
+      if (category === "All") {
+        let result = data?.allLessons.result;
+        result?.map((i) => (
+          allArray.push(i)
+        ))
+        setStart(allArray);
+      }
     }
-  });
-
-  const handleClick = (category: string) => {
-    setCategory(category);
-    let allArray: Lesson[] = [];
-    if (category === "All") {
-      let result = data?.allLessons.result;
-      result?.map((i) => (
-        allArray.push(i)
-      ))
-      setStart(allArray);
-    }
-  }
 
   useEffect(() => {
     // Create an array to push the resulting lesson objects
@@ -112,11 +112,17 @@ export const TimelineEl = () => {
           {start.map((i, index) => (
             <TimelineItem className='timeline--item' key={index}>
                 <TimelineOppositeContent
+                    sx={{ m: 'auto 0' }}
+                    align="right"
                     variant="body2"
                     color="text.secondary"
                     className='timeline--date'
                 >
-                    {i.startDate}
+                    {formatDate(i.startDate)}
+                    {/* {i.startDate} */}
+                    <br />
+                    {formatDate(i.endDate)}
+                    {/* {i.endDate} */}
                 </TimelineOppositeContent>
                 
                 <TimelineSeparator>

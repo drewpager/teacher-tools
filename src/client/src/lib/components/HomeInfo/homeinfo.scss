@@ -1,4 +1,23 @@
 .box--title {
     margin-top: 2rem;
     margin-bottom: 2rem;
+
+    .title--text {
+        margin-bottom: 2rem;
+    }
+}
+
+.MuiLink-root {
+    &.link--start {
+        background: linear-gradient(#e66465, #9198e5);
+        color: white;
+        border: 1px solid #000;
+        border-radius: 4px;
+
+        padding: 1rem;
+
+        &:first-of-type {
+            margin-right: 1rem;
+        }
+    }
 }
