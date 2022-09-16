@@ -41,7 +41,8 @@
   },
   "devDependencies": {
     "@apollo/rover": "^0.5.1",
-    "@types/react-beautiful-dnd": "^13.1.2"
+    "@types/react-beautiful-dnd": "^13.1.2",
+    "sass": "^1.54.5"
   },
   "scripts": {
     "start": "react-scripts start",

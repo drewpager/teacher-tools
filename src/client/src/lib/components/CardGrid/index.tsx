@@ -7,6 +7,7 @@ import { CardGridSkeleton } from '../CardGridSkeleton';
 
 import { PlaylistDetails } from '../';
 
+import './cardgrid.scss';
 
 export const CardGrid = () => {
 
@@ -36,12 +37,10 @@ export const CardGrid = () => {
   const playlists = data ? data.allplaylists : null;
 
   return (
-    <Box>
-      <Grid container>
+    <Box className='grid--cards'>
         {playlists?.result.map((i, index) => (
           <PlaylistDetails {...i} key={index}/>
         ))}
-      </Grid>
     </Box>
   )
 }

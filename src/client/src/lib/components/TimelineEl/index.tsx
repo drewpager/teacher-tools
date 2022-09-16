@@ -5,6 +5,8 @@ import { Lesson, useAllLessonsQuery } from '../../../graphql/generated';
 import { DisplayError, formatDate } from '../../utils';
 import theme from '../../../theme';
 
+import './timeline.scss';
+
 export const TimelineEl = () => {
   const [start, setStart] = useState<Lesson[]>([]);
   const [category, setCategory] = useState<string>("All")
@@ -101,7 +103,7 @@ export const TimelineEl = () => {
   
   // 3. Display in Timeline component
   return (
-    <Box sx={{ marginTop: 5, minHeight: 550 }}>
+    <Box className='timeline--wrapper'>
       <Typography variant="h4">Teach History Chronologically</Typography>
       {categoryList.map((j) => (<Button onClick={() => handleClick(j)}>{j}</Button>))}
       {start.map((i) => (
@@ -134,9 +136,8 @@ export const TimelineEl = () => {
             </TimelineContent>
           </TimelineItem>
     
-          </Timeline>
-        </Box>
-      ))}
+          ))}
+        </Timeline>
     </Box>
   )
 }

@@ -12,6 +12,8 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Playlist } from '../../../graphql/generated';
 
+import './playlistdetails.scss';
+
 interface Props {
   expand: boolean;
   onClick: ReactEventHandler;
@@ -35,22 +37,25 @@ export const PlaylistDetails = (playlist: Playlist) => {
     setExpanded(!expanded);
   };
   return (
-    <Grid item lg={4} md={6} sm={12} xs={12}>
-      <Card sx={{ margin: 1}}>
+    <>
+      <Card>
         <CardContent>
-        <Link to={`/playlist/${playlist.id}`}>
-          <Typography variant="h3" color="text.secondary">
-            {playlist.name}
-          </Typography>
-        </Link>
+            <Link to={`/playlist/${playlist.id}`}>
+            <Typography className='card--title' variant="h3" color="text.secondary">
+                {playlist.name}
+            </Typography>
+            </Link>
         </CardContent>
+        
         <CardActions disableSpacing>
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
           </IconButton>
+
           <IconButton aria-label="share">
             <ShareIcon />
           </IconButton>
+          
           <ExpandMore
             expand={expanded}
             onClick={handleExpandClick}
@@ -60,16 +65,17 @@ export const PlaylistDetails = (playlist: Playlist) => {
             <ExpandMoreIcon />
           </ExpandMore>
         </CardActions>
+
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            {playlist.plan.map((j) => (
-              <ul>
-                <li key={j?.id}><Typography paragraph>{j?.title}</Typography></li>
-              </ul>
-            ))}
-          </CardContent>
+            <CardContent>
+                <ul>
+                    {playlist.plan.map((j) => (
+                        <li key={j?.id}><Typography paragraph>{j?.title}</Typography></li>
+                    ))}
+                </ul>
+            </CardContent>
         </Collapse>
     </Card>
-  </Grid>
+  </>
   )
 }
