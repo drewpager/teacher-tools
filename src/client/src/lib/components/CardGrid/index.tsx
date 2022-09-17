@@ -22,7 +22,7 @@ export const CardGrid = () => {
   if (loading) {
     return (
       <>
-        <LinearProgress color='success'/>
+        <LinearProgress />
         <CardGridSkeleton />
       </>
     )

@@ -15,14 +15,14 @@ export const Playlist = () => {
 
   if (loading) {
     return (
-      <LinearProgress color='success'/>
+      <LinearProgress />
     )
   }
 
   if (error) {
     return (
       <Box sx={{ marginLeft: 5 }}>
-        <h2>Playist Not Found</h2>
+        <h2>Playlist Not Found</h2>
         <h4>Here are a few available playlists or you can try searching again.</h4>
         <Search />
         <DisplayError title='Failed to load playlist' />

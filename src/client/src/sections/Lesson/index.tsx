@@ -15,7 +15,7 @@ export const Lesson = () => {
 
   if (loading) {
     return (
-      <LinearProgress color='success'/>
+      <LinearProgress />
     )
   }
 
