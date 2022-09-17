@@ -47,7 +47,7 @@ export const PlaylistDetails = (playlist: Playlist) => {
             </Link>
         </CardContent>
         
-        <CardActions disableSpacing className='card--actions'>
+        <CardActions className='card--actions' disableSpacing>
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
           </IconButton>

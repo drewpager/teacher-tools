@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { ReactComponent as PeachIcon } from '../../lib/assets/peach-logo.svg';
 import theme from '../../theme';
 import zIndex from '@mui/material/styles/zIndex';
+import './appHeader.scss';
 
 interface Props {
   viewer: Viewer;
@@ -58,7 +59,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
   const appBarZ = theme.zIndex.drawer + 1
   
   return (
-      <AppBar sx={{ zIndex: appBarZ }} position="static">
+      <AppBar sx={{ zIndex: appBarZ }}>
         <Toolbar>
           <IconButton
             size="small"
