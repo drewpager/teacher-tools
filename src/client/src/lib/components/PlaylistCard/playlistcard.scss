@@ -4,9 +4,7 @@
         color: white;
         border: 1px solid #000;
         border-radius: 4px;
-
         padding: 1rem;
-
     }
 }
 
@@ -21,5 +19,23 @@
         font-size: clamp(1.5rem, 2.5vw, 2.5rem);
         font-weight: 800;
         color: black;
+    }
+}
+
+.MuiGrid-root {
+    &.playlistcard--grid__list,
+    &.playlistcard--grid__video {
+        flex: 1 1 100%;
+    }
+
+    @media ( min-width: 900px ) {
+        &.playlistcard--grid__list {
+            flex: 0 1 20%;
+        }
+        &.playlistcard--grid__video {
+            flex: 1 1 0%;
+            padding: 0 2rem;
+        }
+        
     }
 }

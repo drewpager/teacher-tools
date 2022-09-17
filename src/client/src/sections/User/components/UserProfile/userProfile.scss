@@ -1,0 +1,13 @@
+.MuiButton-root {
+  &.stripe--button {
+    margin: 1;
+    background: linear-gradient(#F67B50, #dd253d);
+    color: white;
+  }
+}
+
+.MuiBox-root {
+  &.user--text {
+    margin-top: 5rem;
+  }
+}

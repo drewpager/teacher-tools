@@ -1,5 +1,11 @@
 .MuiAppBar-root {
   background: linear-gradient(#F67B50, #dd253d);
   position: sticky;
-  margin-bottom: 2rem;
+}
+
+.MuiTypography-root {
+  &.nav--title {
+    flex-grow: 1;
+    padding-top: 0.5rem;
+  }
 }

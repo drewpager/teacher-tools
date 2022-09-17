@@ -106,7 +106,7 @@ export const TimelineEl = () => {
     <Box className='timeline--wrapper'>
       <Typography variant="h4">Teach History Chronologically</Typography>
       
-      {categoryList.map((j, index) => (<Button key={index} onClick={() => handleClick(j)}>{j}</Button>))}
+      {categoryList.map((j, index) => (<Button className="categoryList--button" key={index} onClick={() => handleClick(j)}>{j}</Button>))}
       
         <Timeline className='timeline--outer'>
           {start.map((i, index) => (
@@ -119,10 +119,8 @@ export const TimelineEl = () => {
                     className='timeline--date'
                 >
                     {formatDate(i.startDate)}
-                    {/* {i.startDate} */}
                     <br />
                     {formatDate(i.endDate)}
-                    {/* {i.endDate} */}
                 </TimelineOppositeContent>
                 
                 <TimelineSeparator>

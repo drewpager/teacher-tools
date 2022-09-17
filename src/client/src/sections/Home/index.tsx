@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { HomeInfo, CardGrid, Search, TimelineEl } from '../../lib/components/'
+import { HomeInfo, CardGrid, Search, TimelineEl, Footer } from '../../lib/components/'
 
 export const Home = () => {
   return (
@@ -9,6 +9,7 @@ export const Home = () => {
         <Search />
         <CardGrid />
         <TimelineEl />
+        <Footer />
     </Box>
   );
 }

@@ -6,6 +6,8 @@ import { AuthUrl as AuthUrlData } from '../../lib/graphql/queries/AuthUrl/__gene
 import { useLogInMutation, Mutation, Viewer } from '../../graphql/generated';
 import { Navigate } from 'react-router-dom';
 import { DisplayError, DisplaySuccess } from '../../lib/utils';
+import './login.scss';
+
 interface Props {
   setViewer: (viewer: Viewer) => void;
 }
@@ -81,12 +83,12 @@ export const Login = ({ setViewer }: Props) => {
   }
 
   const LogInCard = (
-    <Box sx={{ minWidth: 275, width: 500, height: 500, margin: 5, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <Card>
+    <Box className="login--box">
+      <Card className="login--card">
         <CardContent>
           <Typography variant="h4" color="text.secondary">Login to Teacher Tools</Typography>
           <CardActions>
-            <Button onClick={handleAuthorize} size="small" sx={{ p:2, border: '1px solid grey' }}>Sign In With Google!</Button>
+            <Button className="login--button" onClick={handleAuthorize} size="small">Sign In With Google!</Button>
           </CardActions>
           <Typography sx={{ fontStyle: 'italic' }}>Note: By signing in, you'll be redirected to the Google consent form to sign in
                 with your Google account.</Typography>
@@ -130,11 +132,11 @@ export const Login = ({ setViewer }: Props) => {
 
   return (
     <Box sx={{ minWidth: 275, width: 500, height: 500, margin: 5, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <Card>
+      <Card className="login--card">
         <CardContent>
           <Typography variant="h4" color="text.secondary">Login to Plato's Peach</Typography>
           <CardActions>
-            <Button onClick={handleAuthorize} size="small" sx={{ p:2, border: '1px solid grey' }}>Sign In With Google!</Button>
+            <Button className="login--button" onClick={handleAuthorize} size="small">Sign In With Google!</Button>
           </CardActions>
           <Typography sx={{ fontStyle: 'italic' }}>Note: By signing in, you'll be redirected to the Google consent form to sign in
                 with your Google account.</Typography>

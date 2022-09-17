@@ -1,0 +1,26 @@
+.MuiPaper-root {
+  &.login--card {
+    margin-top: 5rem;
+  }
+}
+
+.MuiCardContent-root {
+  &.login--box {
+    min-width: 275;
+    width: 5rem; 
+    height: 5rem; 
+    margin: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5rem;
+  }
+}
+
+.MuiButton-root {
+  &.login--button {
+    background: linear-gradient(#F67B50, #dd253d);
+    color: white;
+    padding: 0.5rem;
+  }
+}

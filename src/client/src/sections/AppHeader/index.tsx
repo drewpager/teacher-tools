@@ -56,10 +56,9 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
       <SvgIcon component={PeachIcon} inheritViewBox sx={{ fontSize: 65 }} />
     );
   }
-  const appBarZ = theme.zIndex.drawer + 1
   
   return (
-      <AppBar sx={{ zIndex: appBarZ }}>
+      <AppBar>
         <Toolbar>
           <IconButton
             size="small"
@@ -69,7 +68,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
           >
             <HomeIcon />
           </IconButton>
-            <Typography variant="h1" component="div" sx={{ flexGrow: 1 }}>
+            <Typography variant="h1" className="nav--title">
               <Link to="/" style={{ textDecoration: "none", color: "white", fontSize: 32, fontWeight: 800 }}>
                 Plato's Peach
               </Link>
