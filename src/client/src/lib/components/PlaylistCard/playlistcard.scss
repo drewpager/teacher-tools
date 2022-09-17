@@ -1,11 +1,22 @@
 .MuiButtonBase-root {
     &.active {
-        background: linear-gradient(#e66465, #9198e5);
+        background: linear-gradient(#F67B50, #dd253d);
         color: white;
         border: 1px solid #000;
         border-radius: 4px;
 
         padding: 1rem;
 
+    }
+}
+
+.MuiListItemText-root {
+    padding-left: 1rem;
+}
+
+.MuiTypography-root {
+    &.card--title {
+        font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+        font-weight: 800;
     }
 }

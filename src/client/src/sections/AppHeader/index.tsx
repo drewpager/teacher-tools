@@ -68,8 +68,8 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
           >
             <HomeIcon />
           </IconButton>
-            <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
-              <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+            <Typography variant="h1" component="div" sx={{ flexGrow: 1 }}>
+              <Link to="/" style={{ textDecoration: "none", color: "white", fontSize: 32, fontWeight: 800 }}>
                 Plato's Peach
               </Link>
             </Typography>
