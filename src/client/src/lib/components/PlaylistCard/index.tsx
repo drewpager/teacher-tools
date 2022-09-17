@@ -12,9 +12,11 @@ interface Props {
 // NOTE: Pass lessons object instead of single lesson for Accordion to work correctly
 export const PlaylistCard = ({ playlist }: Props) => {
   const [video, setVideo] = useState<string>(`${playlist.plan[0]?.video}`)
+  const [active, setActive] = useState<string>(`${playlist.plan[0]?.id}`)
 
-  const handleChange = ({ video }: Lesson) => {
+  const handleChange = ({ video, id }: Lesson) => {
     setVideo(`${video}`)
+    setActive(`${id}`)
   };
 
 
@@ -29,7 +31,7 @@ export const PlaylistCard = ({ playlist }: Props) => {
                 <List>
                     {playlist.plan.map((lesson, id) => (
                     <ListItem disableGutters key={id}>
-                        <ListItemButton disableGutters onClick={() => handleChange({ ...lesson })}>
+                        <ListItemButton disableGutters className={active === `${lesson?.id}` ? 'active' : ''} onClick={() => handleChange({ ...lesson })}>
                         <ListItemText primary={lesson?.title} />
                         </ListItemButton>
                     </ListItem>
