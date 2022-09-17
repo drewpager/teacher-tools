@@ -1,5 +1,16 @@
 .MuiTypography-root {
     &.card--title {
         font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+        color: white;
+    }
+}
+
+.MuiCardContent-root {
+    &.card--content {
+        background: linear-gradient(#F67B50, #dd253d);
+        text-decoration: none;
+    }
+    &.card--actions {
+        bottom: 0
     }
 }

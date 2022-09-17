@@ -39,9 +39,9 @@ export const PlaylistDetails = (playlist: Playlist) => {
   return (
     <>
       <Card>
-        <CardContent>
+        <CardContent className='card--content'>
             <Link to={`/playlist/${playlist.id}`}>
-            <Typography className='card--title' variant="h3" color="text.secondary">
+            <Typography className='card--title' variant="h3">
                 {playlist.name}
             </Typography>
             </Link>
