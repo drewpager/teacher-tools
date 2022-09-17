@@ -2,6 +2,15 @@ import { createTheme } from "@mui/material/styles";
 
 // A custom theme for this app
 const theme = createTheme({
+  typography: {
+    h1: {
+      fontFamily: ['"Archivo Black"', "-apple-system"].join(","),
+      fontSize: 20,
+    },
+    h2: {
+      fontFamily: ['"Archivo Black"', "-apple-system"].join(","),
+    },
+  },
   palette: {
     primary: {
       // main: '#5560b9',
@@ -20,8 +29,8 @@ const theme = createTheme({
       main: "#A82810",
     },
     info: {
-      main: "#e3f2fd"
-    }
+      main: "#e3f2fd",
+    },
   },
 });
 
