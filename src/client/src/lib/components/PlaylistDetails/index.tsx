@@ -40,7 +40,7 @@ export const PlaylistDetails = (playlist: Playlist) => {
     <>
       <Card>
         <CardContent className='card--content'>
-            <Link to={`/playlist/${playlist.id}`}>
+            <Link to={`/playlist/${playlist.id}`} style={{ textDecoration: "none" }}>
             <Typography className='card--title' variant="h3">
                 {playlist.name}
             </Typography>

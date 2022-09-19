@@ -5,19 +5,23 @@
     }
 }
 
+// TODO with Chris: make color portion of cards same height.
 .MuiCardContent-root {
     &.card--content {
         background: linear-gradient(#F67B50, #dd253d);
+        display: flex;
+        flex-flow: column;
+        flex-wrap: wrap;
+        flex: auto;
     }
 }
 
-.MuiCardAction-root {
+.MuiCardActions-root {
     &.card--actions {
-        background: #F67B50;
         bottom: 0;
     }
 }
 
-.MuiPaper-root {
-    position: relative;
-}
+// .MuiPaper-root {
+//     position: relative;
+// }

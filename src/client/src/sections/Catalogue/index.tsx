@@ -3,6 +3,7 @@ import { Box, CircularProgress } from '@mui/material';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { useAllLessonsQuery } from '../../graphql/generated';
 import { formatDate } from '../../lib/utils';
+import "./catalog.scss";
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'Lesson', width: 90 },
@@ -75,12 +76,13 @@ export const Catalogue = () => {
   // ]
 
   return (
-    <Box sx={{ mt: 10, width: '100%', height: 500 }}>
+    <Box >
       <DataGrid 
         rows={rows}
         columns={columns}
         pageSize={10}
         rowsPerPageOptions={[50]}
+        className="catalog--dataTable"
       />
     </Box>
   )

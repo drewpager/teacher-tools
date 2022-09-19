@@ -240,7 +240,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
                   {lessons?.map((i, index) => (
                     <Draggable key={index} draggableId={index.toString()} index={index}>
                       {(provide) => (
-                        <Grid item xs={12} md={12} lg={12} className="createPlaylist--lessons">
+                        <Grid item xs={12} md={12} lg={12}>
                           <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={i.id} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}>
                             {i.title}
                           </Card>
