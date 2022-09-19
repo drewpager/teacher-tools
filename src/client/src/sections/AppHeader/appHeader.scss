@@ -8,3 +8,10 @@
     flex-grow: 1;
   }
 }
+
+.MuiButton-root {
+  &.login--button {
+    color: white;
+    text-decoration: none;
+  }
+}

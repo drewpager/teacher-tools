@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { useCreateLessonMutation, Viewer } from '../../graphql/generated';
 import { categories, DisplayError, DisplaySuccess } from '../../lib/utils';
 import { Navigate } from 'react-router-dom';
+import theme from '../../theme';
+import './createLesson.scss';
 // import { Cloudinary } from '@cloudinary/url-gen';
 // import 'dotenv/config';
 
@@ -294,14 +296,14 @@ export const CreateLesson = ({ viewer }: Props) => {
 
   if (!viewer.id || !viewer.hasPayment) {
     return (
-      <Box sx={{ margin: 5 }}>
-        <Typography variant="h2">You Must Be <Link to="/login">Logged In</Link> Using an Active Account.</Typography>
+      <Box className='createLesson--error'>
+        <Typography variant="h3">You Must Be <Link style={{ textDecoration: 'none', color: "#F67B50" }} to="/login">Logged In</Link> Using an Active Account.</Typography>
         <Typography variant="h4">We require content creators to be paying users to avoid fraudulent content.</Typography>
       </Box>
     )
   } else {
     return (
-      <Box sx={{ margin: 5 }}>
+      <Box className='createLesson--form'>
         <h2>Create a New Lesson</h2>
         <form onSubmit={handleSubmit}>
           <TextField 

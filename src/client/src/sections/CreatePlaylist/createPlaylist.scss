@@ -1,0 +1,26 @@
+.MuiBox-root {
+  &.createPlaylist--box {
+    margin-top: 5rem;
+  }
+}
+
+.MuiPaper-root {
+  &.createPlaylist--card {
+    min-height: 5rem;
+    max-height: 47rem;
+    padding: 2rem;
+    margin-top: 1rem;
+    overflow: scroll;
+    overflow-x: hidden;
+  }
+}
+
+.MuiFormControl-root {
+  &.createPlaylist--search {
+    background-color: white;
+    width: 100%;
+    top: 0;
+    position: sticky;
+    z-index: 1;
+  }
+}

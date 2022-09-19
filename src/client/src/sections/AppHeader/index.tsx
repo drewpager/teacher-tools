@@ -123,8 +123,8 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
             >
               <AccountCircleIcon />
             </IconButton>
-            <Link to={`/login`} >
-              <Button color="inherit">Login</Button>
+            <Link to={`/login`} style={{ textDecoration: "none" }}>
+              <Button className="login--button">Login</Button>
             </Link>
           </>
         )}

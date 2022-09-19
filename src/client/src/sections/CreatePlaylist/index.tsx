@@ -6,6 +6,7 @@ import { useAllLessonsQuery, Viewer } from '../../graphql/generated';
 import { DisplayError } from '../../lib/utils';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useNavigate } from 'react-router-dom';
+import './createPlaylist.scss';
 
 type props = {
   viewer: Viewer;
@@ -189,14 +190,14 @@ export const CreatePlaylist = ({ viewer }: props) => {
   }
 
   return (
-    <Box sx={{ margin: 5 }}>
+    <Box className="createPlaylist--box">
       <h1>Create Lesson Plan</h1>
       <form onSubmit={handleSubmit}>
         <DragDropContext onDragEnd={onDragEndHandler}>
           <Grid container>
             <Droppable droppableId='playlist'>
               {(provided) => (
-                <Grid item xs={6} md={8} lg={8}>
+                <Grid item xs={12} sm={6} md={8} lg={8}>
                   <Card variant="outlined" sx={{ minHeight: "750px", padding: 5, margin: 2 }} {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
                     <TextField
                       label="Lesson Plan Title"
@@ -224,8 +225,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
             </Droppable>
             <Droppable droppableId='lessons'>
               {(provided) => (
-                <Grid item xs={6} md={4} lg={4}>
-                <Card variant="outlined" sx={{ minHeight: "750px", padding: 5, margin: 2, top: 10 }} {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
+                <Grid item xs={12} sm={6} md={4} lg={4}>
+                <Card variant="outlined" className="createPlaylist--card" {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
                   <TextField 
                     variant='outlined' 
                     id="lesson-search" 
@@ -233,13 +234,13 @@ export const CreatePlaylist = ({ viewer }: props) => {
                     value={searchInput} 
                     onChange={inputHandler} 
                     ref={inputRef} 
-                    sx={{ width: "100%" }}
+                    className="createPlaylist--search"
                   />
                   <Grid container>
                   {lessons?.map((i, index) => (
                     <Draggable key={index} draggableId={index.toString()} index={index}>
                       {(provide) => (
-                        <Grid item xs={12} md={12} lg={12}>
+                        <Grid item xs={12} md={12} lg={12} className="createPlaylist--lessons">
                           <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={i.id} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}>
                             {i.title}
                           </Card>
