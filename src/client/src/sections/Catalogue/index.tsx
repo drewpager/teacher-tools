@@ -132,7 +132,8 @@ export const Catalogue = () => {
   }
 
   return (
-    <Box >
+    // DataGrid checkboxSelection set to true adds checkbox, but requires an MUI Pro plan to access data
+    <Box>
       <Grid container>
         <Grid item xs={12} sm={12} md={9} lg={8}>
           <DataGrid 
