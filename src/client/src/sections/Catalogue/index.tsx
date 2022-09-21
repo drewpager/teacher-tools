@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { Box, CircularProgress } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Box, CircularProgress, Button, Grid } from '@mui/material';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import { useAllLessonsQuery } from '../../graphql/generated';
+import { Link } from 'react-router-dom';
+import { useAllLessonsQuery, Lesson } from '../../graphql/generated';
 import { formatDate } from '../../lib/utils';
 import "./catalog.scss";
 
@@ -39,6 +40,10 @@ const columns: GridColDef[] = [
 ];
 
 export const Catalogue = () => {
+    const [start, setStart] = useState<Lesson[]>([]);
+    const [category, setCategory] = useState<string>("All")
+    const [categoryList, setCategoryList] = useState<string[]>([""])
+
   let rows = [];
   const { data, loading, error } = useAllLessonsQuery({
     variables: {
@@ -46,6 +51,62 @@ export const Catalogue = () => {
       page: 1
     }
   });
+
+  const handleClick = (category: string) => {
+    setCategory(category);
+    let allArray: Lesson[] = [];
+    if (category === "All") {
+      let result = data?.allLessons.result;
+      result?.map((i) => (
+        allArray.push(i)
+      ))
+      setStart(allArray);
+    }
+  }
+
+  useEffect(() => {
+    // Create an array to push the resulting lesson objects
+    let sorted: Lesson[] = [];
+    const categories: string[] = ["All"];
+    const res = data?.allLessons.result;
+
+    res?.map((i) => (
+      sorted.push(i)
+    ))
+
+    // get categories
+    sorted.map((i) => (
+      categories.push(`${i.category}`)
+    ))
+    
+    // Isolate one word categories
+    categories.forEach((c, i) => {
+      if (c.includes(",")) {
+        categories.splice(i, i + 1)
+        const litter: string[] = c.split(",");
+        litter.map((e) => (
+          categories.push(`${e}`)
+        ))
+      }
+    })
+
+    // Default State & If "All" is selected, setStart to initialState
+    if (category === "All") {
+      let initialState: Lesson[] = [];
+      sorted.map((i) => (
+        initialState.push(i)
+      ))
+      setStart(initialState);
+    } else {
+      // Filter the sorted list based on the category set in state
+      sorted = sorted.filter((l) => `${l.category}`.includes(category))
+      setStart(sorted);
+    }
+
+    let uniqueCategories = Array.from(new Set(categories));
+    setCategoryList(uniqueCategories);
+
+  }, [data, category])
   
   if (loading) {
     return <CircularProgress />;
@@ -55,35 +116,43 @@ export const Catalogue = () => {
     return <h1>Failed!</h1>;
   }
 
-  if (data) {
-    let lessons = data.allLessons.result;
-    for (let i = 0; i < lessons.length; i++) {
+  if (data && categoryList && start) {
+    // let lessons = data.allLessons.result;
+    for (let i = 0; i < start.length; i++) {
       const items = {
         id: i + 1,
-        title: lessons[i].title,
-        startDate: formatDate(lessons[i].startDate),
-        endDate: formatDate(lessons[i].endDate),
-        category: lessons[i].category
+        title: start[i].title,
+        startDate: formatDate(start[i].startDate),
+        endDate: formatDate(start[i].endDate),
+        category: start[i].category
       };
 
       rows.push(items);
     }
-    console.log(rows);
   }
-
-  // const rows = [
-  //   { id: 1, title: "Biography of Drew Page", startDate: 1989, endDate: 2022 }
-  // ]
 
   return (
     <Box >
-      <DataGrid 
-        rows={rows}
-        columns={columns}
-        pageSize={10}
-        rowsPerPageOptions={[50]}
-        className="catalog--dataTable"
-      />
+      <Grid container>
+        <Grid item xs={12} sm={12} md={9} lg={8}>
+          <DataGrid 
+            rows={rows}
+            columns={columns}
+            pageSize={10}
+            rowsPerPageOptions={[50]}
+            className="catalog--dataTable"
+          />
+        </Grid>
+        <Grid item xs={12} sm={12} md={3} lg={4} className="catalogGrid--item">
+          {categoryList.map((j, index) => (<Button className="catalogFilters--button" key={index} onClick={() => handleClick(j)}>{j}</Button>))}
+          <Box className="catalog--cta">
+            <h3>Start Building Your First Lesson Plan</h3>
+            <Link to="/playlist/create" style={{ textDecoration: "none" }}>
+              <Button className="catalogFilters--button">Create Lesson Plan</Button>
+            </Link>
+          </Box>
+        </Grid>
+      </Grid>
     </Box>
   )
 }
