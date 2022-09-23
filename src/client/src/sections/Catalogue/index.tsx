@@ -7,7 +7,7 @@ import { formatDate } from '../../lib/utils';
 import "./catalog.scss";
 
 const columns: GridColDef[] = [
-  { field: 'id', headerName: 'Lesson', width: 90 },
+  { field: 'id', headerName: 'Lesson', width: 70 },
   {
     field: 'title',
     headerName: 'Title',
@@ -16,26 +16,26 @@ const columns: GridColDef[] = [
   {
     field: 'startDate',
     headerName: 'Start Date',
-    width: 150,
+    width: 100,
   },
   {
     field: 'endDate',
     headerName: 'End Date',
-    width: 150
+    width: 100
   },
   {
     field: 'duration',
     headerName: 'Duration',
     description: "This column cannot be sorted.",
     sortable: false,
-    width: 160,
+    width: 200,
     valueGetter: (params: GridValueGetterParams) => 
       `${params.row.startDate || ''}-${params.row.endDate || ''}`
   },
   {
     field: 'category',
     headerName: 'Category',
-    width: 150
+    width: 300
   },
 ];
 
