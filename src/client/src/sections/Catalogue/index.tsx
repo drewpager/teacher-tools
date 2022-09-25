@@ -133,6 +133,7 @@ export const Catalogue = () => {
 
   return (
     // DataGrid checkboxSelection set to true adds checkbox, but requires an MUI Pro plan to access data
+    // TODO: Query user for # of playlists, if > 0, say "Start Building Next Lesson Plan", if 0 say "...First Lesson Plan"
     <Box>
       <Grid container>
         <Grid item xs={12} sm={12} md={9} lg={8}>
