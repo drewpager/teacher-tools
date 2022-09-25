@@ -7,6 +7,8 @@ import { useParams } from 'react-router-dom';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useNavigate } from 'react-router-dom';
 
+import "../CreatePlaylist/createPlaylist.scss";
+
 type props = {
   viewer: Viewer;
 }
@@ -197,7 +199,7 @@ export const EditPlaylist = ({ viewer }: props) => {
   console.log(playlist)
   
     return (
-    <Box sx={{ margin: 5 }}>
+    <Box className="createPlaylist--box">
       <h1>Edit Lesson Plan</h1>
       <form onSubmit={handleSubmit}>
         <DragDropContext onDragEnd={onDragEndHandler}>
@@ -234,7 +236,7 @@ export const EditPlaylist = ({ viewer }: props) => {
             <Droppable droppableId='lessons'>
               {(provided) => (
                 <Grid item xs={6} md={4} lg={4}>
-                <Card variant="outlined" sx={{ minHeight: "750px", padding: 5, margin: 2, top: 10 }} {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
+                <Card variant="outlined" className="createPlaylist--card" {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
                   <TextField 
                     variant='outlined' 
                     id="lesson-search" 
@@ -242,7 +244,7 @@ export const EditPlaylist = ({ viewer }: props) => {
                     value={searchInput} 
                     onChange={inputHandler} 
                     ref={inputRef} 
-                    sx={{ width: "100%" }}
+                    className="createPlaylist--search"
                   />
                   <Grid container>
                   {lessons?.map((i, index) => (
