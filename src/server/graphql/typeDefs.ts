@@ -3,6 +3,13 @@ import { gql } from "apollo-server-express";
 export const typeDefs = gql`
   scalar DateScalar
 
+  enum AnswerFormat {
+    MULTIPLECHOICE
+    TRUEFALSE
+  }
+
+  union LessonPlanUnion = Quiz | Lesson
+
   type Viewer {
     id: ID
     token: String
@@ -35,6 +42,14 @@ export const typeDefs = gql`
     creator: String
   }
 
+  type Quiz {
+    id: ID
+    question: String!
+    answerType: AnswerFormat! 
+    correctAnswer: String!
+    answerOptions: [String]!
+  }
+
   type Lessons {
     total: Int!
     result: [Lesson!]!
@@ -44,7 +59,7 @@ export const typeDefs = gql`
   type Playlist {
     id: ID
     name: String!
-    plan: [Lesson]!
+    plan: [LessonPlanUnion]!
     creator: String!
     authorized: Boolean
   }
@@ -101,9 +116,22 @@ export const typeDefs = gql`
     creator: String
   }
 
+  input FullLessonQuiz {
+    id: ID
+    question: String!
+    answerType: AnswerFormat! 
+    correctAnswer: String!
+    answerOptions: [String]!
+  }
+
+  input FullPlanInput {
+    lesson: FullLessonInput
+    quiz: FullLessonQuiz
+  }
+
   input LessonPlanInput {
     name: String!
     creator: String!
-    plan: [FullLessonInput!]!
+    plan: [FullPlanInput!]!
   }
 `;

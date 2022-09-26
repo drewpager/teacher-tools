@@ -1,4 +1,4 @@
-import { Database, Playlist } from "../../../lib/types";
+import { Database, Playlist, Quiz } from "../../../lib/types";
 import { PlaylistArgs, PlaylistsArgs, PlaylistsData, CreatePlanArgs, UpdateParams } from "./types";
 import { ObjectId } from "mongodb";
 
@@ -51,7 +51,7 @@ export const playlistResolvers = {
       _root: undefined,
       { input }: CreatePlanArgs,
       { db }: { db: Database }
-    ): Promise<Playlist> => {
+    ): Promise<Playlist | Quiz> => {
       const id = new ObjectId();
       input.plan.map((lesson) => {
         lesson._id = new ObjectId(lesson._id)

@@ -12,10 +12,18 @@ export interface Lesson {
   creator: string;
 }
 
+export interface Quiz {
+  _id: ObjectId;
+  question: string;
+  answerType: string; 
+  correctAnswer: string;
+  answerOptions: string[];
+}
+
 export interface Playlist {
   _id: ObjectId;
   name: string;
-  plan: Lesson[];
+  plan: Lesson[] | Quiz[];
   creator: string;
   authorized?: boolean; // https://www.newline.co/courses/tinyhouse-react-masterclass-part-2/building-the-listing-resolvers
 }
@@ -30,6 +38,7 @@ export interface User {
   paymentId?: string;
   playlists?: Playlist[];
   lessons?: Lesson[];
+  quizzes?: Quiz[];
   authorized?: boolean;
 }
 
@@ -37,6 +46,7 @@ export interface Database {
   lessons: Collection<Lesson>;
   users: Collection<User>;
   playlists: Collection<Playlist>;
+  quizzes: Collection<Quiz>;
 }
 
 export interface Viewer {
@@ -47,4 +57,5 @@ export interface Viewer {
   didRequest: boolean;
   playlists?: Playlist[];
   lessons?: Lesson[];
+  quizzes?: Quiz[];
 }
