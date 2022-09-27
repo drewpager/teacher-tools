@@ -7,8 +7,9 @@ const unseed = async () => {
     console.log("Unseeding...")
     const db = await connectDatabase()
 
-    db.lessons.deleteMany({})
-    db.users.deleteMany({})
+    // db.lessons.deleteMany({})
+    // db.users.deleteMany({})
+    db.quizzes.deleteMany({})
 
     console.log("Successfully unseeded DB!")
   } catch (error) {

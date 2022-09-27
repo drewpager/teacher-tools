@@ -12,12 +12,16 @@ export interface Lesson {
   creator: string;
 }
 
+export interface Questions {
+  question: string, 
+  correctAnswer: string,
+  answerOptions: string[],
+  answerType: string
+}
+
 export interface Quiz {
   _id: ObjectId;
-  question: string;
-  answerType: string; 
-  correctAnswer: string;
-  answerOptions: string[];
+  questions: Questions[];
 }
 
 export interface Playlist {

@@ -3,5 +3,6 @@ import { viewerResolvers } from './Viewer'
 import { lessonResolvers } from './Lesson'
 import { userResolvers } from './User';
 import { playlistResolvers } from './Playlist';
+import { quizResolvers } from './Quiz';
 
-export const resolvers = merge(viewerResolvers, lessonResolvers, userResolvers, playlistResolvers);
+export const resolvers = merge(viewerResolvers, lessonResolvers, userResolvers, playlistResolvers, quizResolvers);

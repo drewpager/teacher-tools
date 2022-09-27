@@ -18,6 +18,7 @@ export const typeDefs = gql`
     didRequest: Boolean!
     playlists: [Playlist]
     lessons: [Lesson]
+    quizzes: [Quiz]
   }
 
   type User {
@@ -42,12 +43,16 @@ export const typeDefs = gql`
     creator: String
   }
 
+  type Questions {
+    question: String
+    correctAnswer: String
+    answerOptions: [String]
+    answerType: AnswerFormat! 
+  }
+
   type Quiz {
     id: ID
-    question: String!
-    answerType: AnswerFormat! 
-    correctAnswer: String!
-    answerOptions: [String]!
+    questions: [Questions!]!
   }
 
   type Lessons {
@@ -77,6 +82,7 @@ export const typeDefs = gql`
     playlist(id: ID!): Playlist!
     allplaylists(limit: Int!, page: Int!): Playlists!
     allLessons(limit: Int!, page: Int!): Lessons!
+    quizzes(id: ID!): Quiz!
   }
 
   type Mutation {

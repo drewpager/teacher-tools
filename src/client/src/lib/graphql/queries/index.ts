@@ -3,3 +3,4 @@ export * from "./Lessons";
 export * from "./User";
 export * from "./Playlist";
 export * from "./Playlists";
+export * from "./Quiz";
