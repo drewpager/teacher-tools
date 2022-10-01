@@ -17,5 +17,10 @@ export const quizResolvers = {
 
       return quiz;
     }
+  },
+  Quiz: {
+    id: (quiz: Quiz) => {
+      return quiz._id;
+    }
   }
 }
