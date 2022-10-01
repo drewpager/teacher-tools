@@ -5,6 +5,8 @@ import {
   UserPlaylistData,
   UserLessonArgs,
   UserLessonData,
+  UserQuizData,
+  UserQuizArgs,
 } from "./types";
 import { authorize } from "../../../lib/utils/";
 import { User, Database } from "../../../lib/types";
@@ -108,6 +110,37 @@ export const userResolvers = {
         return data;
       } catch (e) {
         throw new Error(`Failed to query user lessons: ${e}`);
+      }
+    },
+    quizzes: async (
+      user: User,
+      { limit, page }: UserQuizArgs,
+      { db }: { db: Database }
+    ): Promise<UserQuizData | null> => {
+      try {
+        const data: UserQuizData = {
+          total: 0,
+          result: [],
+          totalCount: 0,
+        };
+        let cursor = await db.quizzes.find({
+          creator: { $in: [user._id] },
+        });
+
+        const totalCount = await db.quizzes.find({
+          creator: { $in: [user._id] },
+        });
+
+        cursor = cursor.skip(page > 0 ? (page - 1) * limit : 0);
+        cursor = cursor.limit(limit);
+
+        data.total = await cursor.count();
+        data.result = await cursor.toArray();
+        data.totalCount = await totalCount.count();
+
+        return data;
+      } catch (e) {
+        throw new Error(`Failed to query quizzes ${e}`);
       }
     },
   },

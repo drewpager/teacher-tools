@@ -13,15 +13,16 @@ export interface Lesson {
 }
 
 export interface Questions {
-  question: string, 
-  correctAnswer: string,
-  answerOptions: string[],
-  answerType: string
+  question: string;
+  correctAnswer: string;
+  answerOptions: string[];
+  answerType: string;
 }
 
 export interface Quiz {
   _id: ObjectId;
   questions: Questions[];
+  creator: string;
 }
 
 export interface Playlist {

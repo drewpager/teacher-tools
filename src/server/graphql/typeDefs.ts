@@ -29,6 +29,7 @@ export const typeDefs = gql`
     hasPayment: Boolean!
     playlists(limit: Int!, page: Int!): Playlists
     lessons(limit: Int!, page: Int!): Lessons
+    quizzes(limit: Int!, page: Int!): Quizzes
   }
 
   type Lesson {
@@ -47,12 +48,13 @@ export const typeDefs = gql`
     question: String
     correctAnswer: String
     answerOptions: [String]
-    answerType: AnswerFormat! 
+    answerType: AnswerFormat!
   }
 
   type Quiz {
     id: ID
     questions: [Questions!]!
+    creator: String
   }
 
   type Lessons {
@@ -72,6 +74,12 @@ export const typeDefs = gql`
   type Playlists {
     total: Int!
     result: [Playlist!]!
+    totalCount: Int!
+  }
+
+  type Quizzes {
+    total: Int!
+    result: [Quiz!]!
     totalCount: Int!
   }
 
@@ -122,16 +130,21 @@ export const typeDefs = gql`
     creator: String
   }
 
+  input QuizQuestions {
+    question: String
+    correctAnswer: String
+    answerOptions: [String]
+    answerType: AnswerFormat!
+  }
+
   input FullLessonQuiz {
     id: ID
-    question: String!
-    answerType: AnswerFormat! 
-    correctAnswer: String!
-    answerOptions: [String]!
+    questions: [QuizQuestions!]!
+    creator: String
   }
 
   input FullPlanInput {
-    lesson: FullLessonInput
+    lesson: FullLessonInput!
     quiz: FullLessonQuiz
   }
 
