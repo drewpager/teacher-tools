@@ -32,7 +32,8 @@ const seed = async () => {
             answerOptions: ["False"],    
             answerType: "TRUEFALSE",
           }
-        ]
+        ],
+        creator: "116143759549242008910"
       }
     ]
     

@@ -9,6 +9,7 @@ export const ALL_PLAYLISTS = gql`
         name
         creator
         plan {
+        ... on Lesson {
           id
           category
           title
@@ -18,6 +19,17 @@ export const ALL_PLAYLISTS = gql`
           startDate
           endDate
           creator
+        }
+        ... on Quiz {
+          id
+          questions {
+            question
+            correctAnswer
+            answerOptions
+            answerType
+          }
+          creator
+          }
         }
       }
     }

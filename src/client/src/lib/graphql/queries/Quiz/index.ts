@@ -10,6 +10,7 @@ export const QUIZ = gql`
         answerOptions
         answerType
       }
+      creator
     }
   }
 `
