@@ -8,7 +8,7 @@ export const playlistResolvers = {
       _root: undefined,
       { id }: PlaylistArgs,
       { db }: { db: Database }
-    ): Promise<Playlist> => {
+    ): Promise<Playlist | Quiz> => {
       const playlist = await db.playlists.findOne({ _id: new ObjectId(id) });
 
       if (!playlist) {
