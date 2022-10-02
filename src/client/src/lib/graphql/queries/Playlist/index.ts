@@ -20,6 +20,7 @@ export const PLAYLIST = gql`
       }
       ... on Quiz {
         id
+        title
         questions {
           question
           correctAnswer

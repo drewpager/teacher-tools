@@ -21,6 +21,7 @@ export interface Questions {
 
 export interface Quiz {
   _id: ObjectId;
+  title: string;
   questions: Questions[];
   creator: string;
 }

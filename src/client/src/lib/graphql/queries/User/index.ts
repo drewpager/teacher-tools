@@ -28,6 +28,7 @@ export const USER = gql`
           }
           ... on Quiz {
             id
+            title
             questions {
               question
               correctAnswer
@@ -58,6 +59,7 @@ export const USER = gql`
         total
         result {
           id
+          title
           questions {
             question
             correctAnswer

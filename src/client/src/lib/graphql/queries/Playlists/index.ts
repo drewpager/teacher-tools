@@ -22,6 +22,7 @@ export const ALL_PLAYLISTS = gql`
         }
         ... on Quiz {
           id
+          title
           questions {
             question
             correctAnswer

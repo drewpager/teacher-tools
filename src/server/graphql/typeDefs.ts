@@ -8,7 +8,7 @@ export const typeDefs = gql`
     TRUEFALSE
   }
 
-  union LessonPlanUnion = Quiz | Lesson
+  union LessonPlanUnion = | Quiz | Lesson
 
   type Viewer {
     id: ID
@@ -53,6 +53,7 @@ export const typeDefs = gql`
 
   type Quiz {
     id: ID
+    title: String
     questions: [Questions!]!
     creator: String
   }
@@ -139,6 +140,7 @@ export const typeDefs = gql`
 
   input FullLessonQuiz {
     id: ID
+    title: String
     questions: [QuizQuestions!]!
     creator: String
   }
