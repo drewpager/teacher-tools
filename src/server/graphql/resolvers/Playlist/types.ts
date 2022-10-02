@@ -1,4 +1,4 @@
-import { Playlist, Lesson, Quiz } from "../../../lib/types";
+import { Playlist, Lesson, Quiz, LessonPlan } from "../../../lib/types";
 export interface PlaylistArgs {
   id: string;
 }
@@ -9,14 +9,14 @@ export interface PlaylistsArgs {
 }
 export interface PlaylistsData {
   total: number;
-  result: Playlist[] | Quiz[];
+  result: Playlist[];
   totalCount: number;
 }
 
 export interface LessonPlanInput {
   name: string;
   creator: string;
-  plan: Lesson[] | Quiz[];
+  plan: LessonPlan[];
 }
 
 export interface CreatePlanArgs {
@@ -26,7 +26,7 @@ export interface CreatePlanArgs {
 export interface UpdatePlanArgs {
   id: string;
   creator: string;
-  plan: Playlist[] | Quiz[];
+  plan: LessonPlan[];
   name: string;
 }
 

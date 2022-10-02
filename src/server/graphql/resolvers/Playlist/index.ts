@@ -1,4 +1,4 @@
-import { Database, Playlist, Quiz } from "../../../lib/types";
+import { Database, Playlist } from "../../../lib/types";
 import { PlaylistArgs, PlaylistsArgs, PlaylistsData, CreatePlanArgs, UpdateParams } from "./types";
 import { ObjectId } from "mongodb";
 
@@ -8,7 +8,7 @@ export const playlistResolvers = {
       _root: undefined,
       { id }: PlaylistArgs,
       { db }: { db: Database }
-    ): Promise<Playlist | Quiz> => {
+    ): Promise<Playlist> => {
       const playlist = await db.playlists.findOne({ _id: new ObjectId(id) });
 
       if (!playlist) {
@@ -51,10 +51,15 @@ export const playlistResolvers = {
       _root: undefined,
       { input }: CreatePlanArgs,
       { db }: { db: Database }
-    ): Promise<Playlist | Quiz> => {
+    ): Promise<Playlist> => {
       const id = new ObjectId();
-      input.plan.map((lesson) => {
-        lesson._id = new ObjectId(lesson._id)
+      input.plan.map((plan) => {
+        plan.lessons.map((lesson) => {
+          lesson._id = new ObjectId(lesson._id)
+        })
+        plan.quizzes?.map((quiz) => {
+          quiz._id = new ObjectId(quiz._id)
+        })
       })
       try {
         const insertResult = await db.playlists.insertOne({

@@ -1,5 +1,9 @@
 import { Collection, ObjectId } from "mongodb";
 
+export type LessonPlan = {
+  lessons: Lesson[];
+  quizzes?: Quiz[];
+}
 export interface Lesson {
   _id: ObjectId;
   category: string[];
@@ -29,7 +33,7 @@ export interface Quiz {
 export interface Playlist {
   _id: ObjectId;
   name: string;
-  plan: Lesson[] | Quiz[];
+  plan: LessonPlan[];
   creator: string;
   authorized?: boolean; // https://www.newline.co/courses/tinyhouse-react-masterclass-part-2/building-the-listing-resolvers
 }
