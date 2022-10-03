@@ -8,8 +8,6 @@ export const typeDefs = gql`
     TRUEFALSE
   }
 
-  union LessonPlanUnion = | Quiz | Lesson
-
   type Viewer {
     id: ID
     token: String
@@ -67,7 +65,7 @@ export const typeDefs = gql`
   type Playlist {
     id: ID
     name: String!
-    plan: [LessonPlanUnion]!
+    plan: [LessonPlanUnion!]!
     creator: String!
     authorized: Boolean
   }
@@ -155,4 +153,6 @@ export const typeDefs = gql`
     creator: String!
     plan: [FullPlanInput!]!
   }
+
+  union LessonPlanUnion =  | Quiz | Lesson
 `;

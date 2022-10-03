@@ -1,4 +1,4 @@
-import { Database, Playlist } from "../../../lib/types";
+import { Database, Playlist, Lesson, Quiz, LessonPlan } from "../../../lib/types";
 import { PlaylistArgs, PlaylistsArgs, PlaylistsData, CreatePlanArgs, UpdateParams } from "./types";
 import { ObjectId } from "mongodb";
 
@@ -45,6 +45,20 @@ export const playlistResolvers = {
     id: (playlist: Playlist) => {
       return playlist._id;
     },
+    plan: {
+      __resolveType(obj: any) {
+        if (obj.startDate) {
+          console.log(obj)
+          return 'Lesson';
+        }
+
+        if (obj.questions) {
+          return 'Quiz';
+        }
+
+        return null;
+      }
+    }
   },
   Mutation: {
     lessonPlan: async (
@@ -53,14 +67,14 @@ export const playlistResolvers = {
       { db }: { db: Database }
     ): Promise<Playlist> => {
       const id = new ObjectId();
-      input.plan.map((plan) => {
-        plan.lessons.map((lesson) => {
-          lesson._id = new ObjectId(lesson._id)
-        })
-        plan.quizzes?.map((quiz) => {
-          quiz._id = new ObjectId(quiz._id)
-        })
-      })
+      // input.plan.map((plan) => {
+      //   plan.lessons.map((lesson) => {
+      //     lesson._id = new ObjectId(lesson._id)
+      //   })
+      //   plan.quizzes?.map((quiz) => {
+      //     quiz._id = new ObjectId(quiz._id)
+      //   })
+      // })
       try {
         const insertResult = await db.playlists.insertOne({
           _id: id,
