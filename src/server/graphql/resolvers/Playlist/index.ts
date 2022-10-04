@@ -46,9 +46,8 @@ export const playlistResolvers = {
       return playlist._id;
     },
     plan: {
-      __resolveType(obj: any) {
+      __resolveType(obj: any, context: any, info: any) {
         if (obj.startDate) {
-          console.log(obj)
           return 'Lesson';
         }
 
@@ -58,6 +57,9 @@ export const playlistResolvers = {
 
         return null;
       }
+    },
+    name: (playlist: Playlist) => {
+      return playlist.name;
     }
   },
   Mutation: {

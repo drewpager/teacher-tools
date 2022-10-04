@@ -1,7 +1,8 @@
 import { Collection, ObjectId } from "mongodb";
 
 export type LessonPlan = { 
-  plan: Lesson[] | Quiz[]; 
+  // plan: Lesson[] | Quiz[]; 
+  plan: [Lesson[] | Quiz[]];
 }
 
 export interface Lesson {
@@ -26,7 +27,7 @@ export interface Questions {
 export interface Quiz {
   _id: ObjectId;
   title: string;
-  questions: Questions[];
+  questions: [Questions];
   creator: string;
 }
 
