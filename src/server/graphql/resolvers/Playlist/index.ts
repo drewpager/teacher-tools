@@ -45,21 +45,21 @@ export const playlistResolvers = {
     id: (playlist: Playlist) => {
       return playlist._id;
     },
-    plan: {
-      __resolveType(obj: any, context: any, info: any) {
-        if (obj.startDate) {
-          return 'Lesson';
-        }
-
-        if (obj.questions) {
-          return 'Quiz';
-        }
-
-        return null;
-      }
-    },
     name: (playlist: Playlist) => {
       return playlist.name;
+    }
+  },
+  LessonPlanUnion: {
+    __resolveType(obj: any, context: any, info: any) {
+      if (obj.startDate) {
+        return "Lesson";
+      }
+
+      if (obj.questions) {
+        return "Quiz";
+      }
+
+      return null;
     }
   },
   Mutation: {
