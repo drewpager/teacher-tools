@@ -6,15 +6,29 @@ export const UPDATE_PLAN = gql`
       id
       name
       plan {
-        id
-        category
-        title
-        meta
-        video
-        image
-        startDate
-        endDate
-        creator
+        __typename
+        ... on Lesson {
+          id
+          category
+          title
+          meta
+          video
+          image
+          startDate
+          endDate
+          creator
+        }
+        ... on Quiz {
+          id
+          title
+          questions {
+            question
+            correctAnswer
+            answerOptions
+            answerType
+          }
+          creator
+        }
       }
       creator
       authorized
