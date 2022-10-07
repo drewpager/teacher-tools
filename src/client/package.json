@@ -51,7 +51,8 @@
     "eject": "react-scripts eject",
     "codegen:schema": "rover graph introspect http://localhost:9000/api | rover graph fetch platos-graph-x0gabbj > schema.graphql",
     "generate": "npx apollo client:codegen --localSchemaFile=schema.graphql --includes=src/**/*.ts --globalTypesFile=./src/lib/graphql/globalTypes.ts --target=typescript",
-    "codegen:generate": "graphql-codegen"
+    "codegen:generate": "graphql-codegen",
+    "codegen:run": "npm run codegen:schema && npm run generate"
   },
   "eslintConfig": {
     "extends": [

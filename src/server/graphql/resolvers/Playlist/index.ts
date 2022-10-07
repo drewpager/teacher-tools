@@ -69,14 +69,7 @@ export const playlistResolvers = {
       { db }: { db: Database }
     ): Promise<Playlist> => {
       const id = new ObjectId();
-      // input.plan.map((plan) => {
-      //   plan.lessons.map((lesson) => {
-      //     lesson._id = new ObjectId(lesson._id)
-      //   })
-      //   plan.quizzes?.map((quiz) => {
-      //     quiz._id = new ObjectId(quiz._id)
-      //   })
-      // })
+      
       try {
         const insertResult = await db.playlists.insertOne({
           _id: id,
