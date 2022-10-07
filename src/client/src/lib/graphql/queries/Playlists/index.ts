@@ -9,6 +9,7 @@ export const ALL_PLAYLISTS = gql`
         name
         creator
         plan {
+        __typename
         ... on Lesson {
           id
           category
@@ -30,7 +31,6 @@ export const ALL_PLAYLISTS = gql`
             answerType
           }
           creator
-          }
         }
       }
     }
