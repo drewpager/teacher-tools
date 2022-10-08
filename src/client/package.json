@@ -49,7 +49,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "codegen:schema": "rover graph introspect http://localhost:9000/api | rover graph fetch platos-graph-x0gabbj > schema.graphql",
+    "codegen:schema": "rover graph introspect http://localhost:9000/api | rover graph fetch platos-peach-graph > schema.graphql",
     "generate": "npx apollo client:codegen --localSchemaFile=schema.graphql --includes=src/**/*.ts --globalTypesFile=./src/lib/graphql/globalTypes.ts --target=typescript",
     "codegen:generate": "graphql-codegen",
     "codegen:run": "npm run codegen:schema && npm run codegen:generate"

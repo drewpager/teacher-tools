@@ -2,7 +2,7 @@ import { gql } from 'graphql-tag';
 
 export const QUIZ = gql`
   query Quiz($id: ID!) {
-    quizzes(id: $id) {
+    quiz(id: $id) {
       id
       title
       questions {
@@ -14,4 +14,4 @@ export const QUIZ = gql`
       creator
     }
   }
-`
+`;

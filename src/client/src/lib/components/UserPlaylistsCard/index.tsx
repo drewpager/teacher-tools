@@ -13,7 +13,7 @@ interface Props {
   playlist: {
     id: string
     name: string
-    plan: Lesson[]
+    plan: [Lesson]
     creator: string
     authorized: boolean
   }
@@ -98,7 +98,7 @@ const handleDelete = async (id: string) => {
               {playlist.name}
             </Typography>
             <Typography variant='h6' style={{ color: "#000"}}>
-              {playlist.plan.length} {playlist.plan.length === 1 ? " Lesson" : " Lessons"}
+              {playlist.plan.length} {playlist.plan.length === 1 ? " Item" : " Items"}
             </Typography>
           </Link>
           {UpdatePlanLoading ? updatePlanLoadingMessage : <Button onClick={() => handleUpdate(playlist.id)}><EditIcon /></Button>}

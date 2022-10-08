@@ -72,5 +72,4 @@ export const USER = gql`
         }
       }
     }
-  }
 `;

@@ -89,7 +89,7 @@ export const typeDefs = gql`
     playlist(id: ID!): Playlist!
     allplaylists(limit: Int!, page: Int!): Playlists!
     allLessons(limit: Int!, page: Int!): Lessons!
-    quizzes(id: ID!): Quiz!
+    quiz(id: ID!): Quiz!
   }
 
   type Mutation {

@@ -4,7 +4,7 @@ import { ObjectId } from "mongodb";
 
 export const quizResolvers = {
   Query: {
-    quizzes: async (
+    quiz: async (
       _root: undefined,
       { id }: QuizArgs,
       { db }: { db: Database } 
