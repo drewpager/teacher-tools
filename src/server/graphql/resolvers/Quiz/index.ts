@@ -17,7 +17,7 @@ export const quizResolvers = {
 
       return quiz;
     },
-    allQuizzes: async (
+    allquizzes: async (
       _root: undefined,
       { limit, page }: QuizzesArgs,
       { db }: { db: Database }
