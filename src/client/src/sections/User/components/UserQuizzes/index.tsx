@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import { Box, Pagination, Grid, Tooltip } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { Quizzes, Quiz } from '../../../../graphql/generated';
+import { Quizzes } from '../../../../graphql/generated';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { UserQuizzesCard } from '../../../../lib/components/';
 

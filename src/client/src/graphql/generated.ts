@@ -306,6 +306,7 @@ export type Playlists = {
 export type Query = {
   __typename?: 'Query';
   allLessons: Lessons;
+  allQuizzes: Quizzes;
   allplaylists: Playlists;
   authUrl: Scalars['String'];
   lesson: Lesson;
@@ -316,6 +317,12 @@ export type Query = {
 
 
 export type QueryAllLessonsArgs = {
+  limit: Scalars['Int'];
+  page: Scalars['Int'];
+};
+
+
+export type QueryAllQuizzesArgs = {
   limit: Scalars['Int'];
   page: Scalars['Int'];
 };
