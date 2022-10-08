@@ -1,18 +1,18 @@
 import React, { ChangeEvent } from 'react';
 import { Box, Pagination, Grid, Tooltip } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { Quizzes } from '../../../../graphql/generated';
+import { Quizzes, Quiz } from '../../../../graphql/generated';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { UserQuizzesCard } from '../../../../lib/components/';
 
 interface Props {
   userQuizzes: Quizzes;
-  QuizzesPage: number;
+  quizzesPage: number;
   limit: number;
   setQuizzesPage: (page: number) => void;
 }
 
-export const UserQuizzes = ({ userQuizzes, QuizzesPage, limit, setQuizzesPage}: Props) => {
+export const UserQuizzes = ({ userQuizzes, quizzesPage, limit, setQuizzesPage}: Props) => {
   
   const { result, totalCount } = userQuizzes;
 
@@ -41,7 +41,7 @@ export const UserQuizzes = ({ userQuizzes, QuizzesPage, limit, setQuizzesPage}: 
       </Grid>
       <Pagination 
         count={Math.ceil(totalCount/limit)} 
-        page={QuizzesPage}
+        page={quizzesPage}
         onChange={handleChange}
       />
     </Box>
