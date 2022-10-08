@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardContent, ListItem, Typography, Grid, Button, CircularProgress, Alert } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
-import { Playlist, Lesson } from '../../../graphql/generated';
+import { Playlist, Lesson, LessonPlanUnion } from '../../../graphql/generated';
 import { useMutation } from '@apollo/client';
 import { gql } from 'graphql-tag';
 import { DisplaySuccess } from '../../utils';
@@ -13,7 +13,7 @@ interface Props {
   playlist: {
     id: string
     name: string
-    plan: [Lesson]
+    plan: [LessonPlanUnion]
     creator: string
     authorized: boolean
   }
