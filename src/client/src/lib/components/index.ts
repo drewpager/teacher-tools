@@ -6,6 +6,7 @@ export * from "./Search";
 export * from "./PlaylistCard";
 export * from "./VideoPlayer";
 export * from "./UserPlaylistsCard";
+export * from "./UserQuizzesCard";
 export * from "./PlaylistDetails";
 export * from "./TimelineEl";
 export * from "./Footer";

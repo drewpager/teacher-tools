@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useUserQuery, Viewer } from '../../graphql/generated';
-import { UserProfile, UserLessons, UserPlaylists } from './components/';
+import { UserProfile, UserLessons, UserPlaylists, UserQuizzes } from './components/';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
 import { PageSkeleton } from '../../lib/components/';
 
@@ -12,6 +12,7 @@ interface Props {
 export const User = ({ viewer }: Props) => {
   const [playlistsPage, setPlaylistsPage] = useState(1);
   const [lessonsPage, setLessonsPage] = useState(1);
+  const [quizzesPage, setQuizzesPage] = useState(1);
 
   const pageLimit = 3;
 
@@ -22,6 +23,7 @@ export const User = ({ viewer }: Props) => {
       id: `${params.id}`,
       playlistsPage: playlistsPage,
       lessonsPage: lessonsPage,
+      quizzesPage: quizzesPage,
       limit: pageLimit
     }
     // pollInterval: 500
@@ -34,6 +36,7 @@ export const User = ({ viewer }: Props) => {
 
   const userLessons = user ? user.lessons : null;
   const userPlaylists = user ? user.playlists : null;
+  const userQuizzes = user ? user.quizzes : null;
 
   const userLessonsElement = userLessons ? (
     <UserLessons
@@ -52,6 +55,15 @@ export const User = ({ viewer }: Props) => {
       setPlaylistsPage={setPlaylistsPage}
     />
   ) : ( <h2>UserPlaylists Not Working</h2> );
+
+  const userQuizzesElement = userQuizzes ? (
+    <UserQuizzes
+      userQuizzes={userQuizzes}
+      quizzesPage={quizzesPage}
+      limit={pageLimit}
+      setQuizzesPage={setQuizzesPage}
+    />
+  ) : ( <h2>UserQuizzes Not Working</h2>);
 
   if (loading) {
     return (
@@ -72,6 +84,7 @@ export const User = ({ viewer }: Props) => {
       {UserProfileElement}
       {userLessonsElement}
       {userPlaylistsElement}
+      {userQuizzesElement}
     </>
   )
 }
