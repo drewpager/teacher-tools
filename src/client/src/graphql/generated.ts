@@ -306,8 +306,8 @@ export type Playlists = {
 export type Query = {
   __typename?: 'Query';
   allLessons: Lessons;
-  allQuizzes: Quizzes;
   allplaylists: Playlists;
+  allquizzes: Quizzes;
   authUrl: Scalars['String'];
   lesson: Lesson;
   playlist: Playlist;
@@ -322,13 +322,13 @@ export type QueryAllLessonsArgs = {
 };
 
 
-export type QueryAllQuizzesArgs = {
+export type QueryAllplaylistsArgs = {
   limit: Scalars['Int'];
   page: Scalars['Int'];
 };
 
 
-export type QueryAllplaylistsArgs = {
+export type QueryAllquizzesArgs = {
   limit: Scalars['Int'];
   page: Scalars['Int'];
 };
@@ -500,6 +500,14 @@ export type QuizQueryVariables = Exact<{
 
 export type QuizQuery = { __typename?: 'Query', quiz: { __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, correctAnswer?: string | null, answerOptions?: Array<string | null> | null, answerType: AnswerFormat }> } };
 
+export type AllQuizzesQueryVariables = Exact<{
+  limit: Scalars['Int'];
+  page: Scalars['Int'];
+}>;
+
+
+export type AllQuizzesQuery = { __typename?: 'Query', allquizzes: { __typename?: 'Quizzes', total: number, result: Array<{ __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, correctAnswer?: string | null, answerOptions?: Array<string | null> | null, answerType: AnswerFormat }> }> } };
+
 export type UserQueryVariables = Exact<{
   id: Scalars['ID'];
   playlistsPage: Scalars['Int'];
@@ -509,7 +517,7 @@ export type UserQueryVariables = Exact<{
 }>;
 
 
-export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, name: string, avatar: string, contact: string, hasPayment: boolean, playlists?: { __typename?: 'Playlists', total: number, totalCount: number, result: Array<{ __typename?: 'Playlist', id?: string | null, name: string, creator: string, plan?: Array<{ __typename: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null } | { __typename: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, correctAnswer?: string | null, answerOptions?: Array<string | null> | null, answerType: AnswerFormat }> } | null> | null }> } | null, lessons?: { __typename?: 'Lessons', total: number, totalCount: number, result: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null }> } | null, quizzes?: { __typename?: 'Quizzes', total: number, result: Array<{ __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, correctAnswer?: string | null, answerOptions?: Array<string | null> | null, answerType: AnswerFormat }> }> } | null } };
+export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, name: string, avatar: string, contact: string, hasPayment: boolean, playlists?: { __typename?: 'Playlists', total: number, totalCount: number, result: Array<{ __typename?: 'Playlist', id?: string | null, name: string, creator: string, plan?: Array<{ __typename: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null } | { __typename: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, correctAnswer?: string | null, answerOptions?: Array<string | null> | null, answerType: AnswerFormat }> } | null> | null }> } | null, lessons?: { __typename?: 'Lessons', total: number, totalCount: number, result: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null }> } | null, quizzes?: { __typename?: 'Quizzes', total: number, totalCount: number, result: Array<{ __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, correctAnswer?: string | null, answerOptions?: Array<string | null> | null, answerType: AnswerFormat }> }> } | null } };
 
 
 export const CreateLessonDocument = gql`
@@ -1004,6 +1012,53 @@ export function useQuizLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<QuizQ
 export type QuizQueryHookResult = ReturnType<typeof useQuizQuery>;
 export type QuizLazyQueryHookResult = ReturnType<typeof useQuizLazyQuery>;
 export type QuizQueryResult = Apollo.QueryResult<QuizQuery, QuizQueryVariables>;
+export const AllQuizzesDocument = gql`
+    query AllQuizzes($limit: Int!, $page: Int!) {
+  allquizzes(limit: $limit, page: $page) {
+    total
+    result {
+      id
+      title
+      questions {
+        question
+        correctAnswer
+        answerOptions
+        answerType
+      }
+      creator
+    }
+  }
+}
+    `;
+
+/**
+ * __useAllQuizzesQuery__
+ *
+ * To run a query within a React component, call `useAllQuizzesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllQuizzesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllQuizzesQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      page: // value for 'page'
+ *   },
+ * });
+ */
+export function useAllQuizzesQuery(baseOptions: Apollo.QueryHookOptions<AllQuizzesQuery, AllQuizzesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllQuizzesQuery, AllQuizzesQueryVariables>(AllQuizzesDocument, options);
+      }
+export function useAllQuizzesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllQuizzesQuery, AllQuizzesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllQuizzesQuery, AllQuizzesQueryVariables>(AllQuizzesDocument, options);
+        }
+export type AllQuizzesQueryHookResult = ReturnType<typeof useAllQuizzesQuery>;
+export type AllQuizzesLazyQueryHookResult = ReturnType<typeof useAllQuizzesLazyQuery>;
+export type AllQuizzesQueryResult = Apollo.QueryResult<AllQuizzesQuery, AllQuizzesQueryVariables>;
 export const UserDocument = gql`
     query User($id: ID!, $playlistsPage: Int!, $lessonsPage: Int!, $quizzesPage: Int!, $limit: Int!) {
   user(id: $id) {
@@ -1073,6 +1128,7 @@ export const UserDocument = gql`
         }
         creator
       }
+      totalCount
     }
   }
 }

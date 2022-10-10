@@ -1,6 +1,6 @@
 import React, { ReactEventHandler, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Grid, Card, Typography } from '@mui/material';
+import { Card, Typography } from '@mui/material';
 
 import { styled } from '@mui/material/styles';
 import CardContent from '@mui/material/CardContent';
@@ -69,7 +69,7 @@ export const PlaylistDetails = (playlist: Playlist) => {
         <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
                 <ul>
-                    {playlist.plan.map((j) => (
+                    {playlist?.plan?.map((j) => (
                         <li key={j?.id}><Typography paragraph>{j?.title}</Typography></li>
                     ))}
                 </ul>

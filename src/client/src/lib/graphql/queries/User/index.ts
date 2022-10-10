@@ -69,6 +69,7 @@ export const USER = gql`
           }
           creator
           }
+          totalCount
         }
       }
     }

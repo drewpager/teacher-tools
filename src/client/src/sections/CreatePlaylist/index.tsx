@@ -1,8 +1,17 @@
 import { CircularProgress, Grid, Box, Card, TextField, Button } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import React, { useState, ChangeEvent, useRef, useEffect } from 'react';
-import { FullLessonInput, useLessonPlanMutation } from '../../graphql/generated';
-import { useAllLessonsQuery, Viewer } from '../../graphql/generated';
+import { 
+  FullLessonInput, 
+  useLessonPlanMutation, 
+  useAllLessonsQuery, 
+  useAllQuizzesQuery,
+  Viewer, 
+  FullLessonQuiz, 
+  FullPlanInput,
+  Lesson,
+  Quiz 
+} from '../../graphql/generated';
 import { DisplayError } from '../../lib/utils';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useNavigate } from 'react-router-dom';
@@ -15,7 +24,7 @@ type props = {
 type InputLessonPlan = {
   name: string,
   creator: string,
-  plan: FullLessonInput[]
+  plan: FullPlanInput[]
 }
 
 const initialData: InputLessonPlan = {
@@ -38,14 +47,27 @@ export const CreatePlaylist = ({ viewer }: props) => {
   let navigate = useNavigate();
   const [searchInput, setSearchInput] = useState<string>("")
   const [lessons, setLessons] = useState<Array<FullLessonInput>>([])
+  const [quizzes, setQuizzes] = useState<Array<FullLessonQuiz>>([])
+  const [plans, setPlans] = useState<Array<Lesson[] | Quiz[]>>([lessons, quizzes])
   const [filter, setFilter] = useState<Array<FullLessonInput>>(lessons)
   const inputRef = useFocus();
   // const id = viewer && viewer.id ? viewer.id : null;
   const [playlist, setPlaylist] = useState<InputLessonPlan>(initialData)
-  const { data, loading, error } = useAllLessonsQuery({
+  
+  const limit: number = 10;
+  const page: number = 1;
+
+  const { data: lessonData, loading: lessonLoading, error: lessonError } = useAllLessonsQuery({
     variables: {
-      limit: 10,
-      page: 1
+      limit: limit,
+      page: page
+    }
+  })
+  
+  const { data: quizData, loading: quizLoading, error: quizError } = useAllQuizzesQuery({
+    variables: {
+      limit: limit,
+      page: page
     }
   })
 
@@ -56,8 +78,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
   })
 
 
-  const lessonQuery = data ? data.allLessons.result : null;
-
+  const lessonQuery = lessonData ? lessonData.allLessons.result : null;
+  const quizQuery = quizData ? quizData.allquizzes.result : null;
 
   useEffect(() => {
     if (lessonQuery) {
@@ -80,7 +102,21 @@ export const CreatePlaylist = ({ viewer }: props) => {
       setLessons(lessonInput)
       setFilter(lessonInput)
     }
-  }, [lessonQuery])
+    if (quizQuery) {
+      const quizInput: any = []
+      quizQuery.forEach(q => {
+        let quizObj = {
+          creator: q.creator,
+          id: q.id,
+          title: q.title,
+          questions: [q.questions]
+        }
+
+        quizInput.push(quizObj)
+      })
+      setQuizzes(quizInput)
+    }
+  }, [lessonQuery, quizQuery])
 
   if (!viewer.id) {
     return (
@@ -103,12 +139,12 @@ export const CreatePlaylist = ({ viewer }: props) => {
     })
   }
 
-  if (loading) {
+  if (lessonLoading || quizLoading) {
     return <CircularProgress />
   }
 
-  if (error) {
-    return <DisplayError title="Failed to query lessons" />
+  if (lessonError || quizError) {
+    return <DisplayError title="Failed to query lesson plan items" />
   }
 
   const onDragEndHandler = (result: any) => {
@@ -120,7 +156,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
     }
 
     // Otherwise, cut the item from lessons array and push to new playlist
-    const items = Array.from(lessons);
+    const items = Array.from(plans);
 
     // Allow the user to reorder playlist if failed to drag and drop in correct order
     if (source.droppableId === "playlist" && destination.droppableId === "playlist") {
@@ -140,21 +176,21 @@ export const CreatePlaylist = ({ viewer }: props) => {
     if (destination.droppableId === "playlist") {
       const [reorderedItem] = items.splice(source.index, 1);
       const displacedItem = playlist.plan.slice(destination.index, (destination.index + 1));
-      playlist.plan[destination.index] = reorderedItem;
+      plans[destination.index] = reorderedItem;
       playlist.plan.push(...displacedItem);
       // playlist.plan.push(reorderedItem);
     
-      setLessons(items)
+      setPlans(items)
       setPlaylist({...playlist})
     }
 
     if (destination.droppableId === "lessons") {
       const [reorderedPlay] = playlist.plan.splice(source.index, 1);
       const displacedPlay = items.slice(destination.index, (destination.index + 1));
-      items[destination.index] = reorderedPlay;
+      playlist.plan[destination.index] = reorderedPlay;
       items.push(...displacedPlay)
       
-      setLessons(items)
+      setPlans(items)
       setPlaylist({...playlist})
     }
   }
@@ -211,8 +247,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
                     <Draggable key={index} draggableId={index.toString()} index={index}>
                       {(provide) => (
                         <Grid item xs={12} md={12} lg={12}>
-                          <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={i.id} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}>
-                            {i?.title}
+                          <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={i.lessons.id} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}>
+                            {i?.lessons.title}
                           </Card>
                         </Grid>
                       )}
@@ -243,6 +279,18 @@ export const CreatePlaylist = ({ viewer }: props) => {
                         <Grid item xs={12} md={12} lg={12}>
                           <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={i.id} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}>
                             {i.title}
+                          </Card>
+                        </Grid>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                  {quizzes?.map((q, ind) => (
+                    <Draggable key={ind} draggableId={ind.toString()} index={ind}>
+                      {(provide) => (
+                        <Grid item xs={12} md={12} lg={12}>
+                          <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={q.id} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}>
+                            {q.title}
                           </Card>
                         </Grid>
                       )}
