@@ -16,9 +16,10 @@ import { Box } from '@mui/material';
 
 interface props {
   url: string;
+  id: string;
 }
 
-export const VideoPlayer = ({ url }: props) => {
+export const VideoPlayer = ({ url, id }: props) => {
   const path = new URL(url)
   const pathname = path.pathname;
   const re = new RegExp(/platos-peach-video/gm)

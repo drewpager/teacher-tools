@@ -40,8 +40,22 @@ export const PlaylistCard = ({ playlist }: Props) => {
             </Grid>
             <Grid  className='playlistcard--grid__video'>
               {/* TODO: Render Either a Video or Quiz Element */}
-              <h1>{playlist.id}</h1>
-                {/* <VideoPlayer url={video} /> */}
+             {playlist.plan?.map((item, id) => {
+              if (item?.__typename === "Lesson") {
+                let vid = item ? item.video: null;
+                vid ? (
+                  <VideoPlayer url={vid} id={id.toString()} />
+                ) : (
+                  <h1>Video Currently Unavailable</h1>
+                )
+              }
+
+              if (item?.__typename === "Quiz") {
+                return (
+                  <h1>{item.title}</h1>
+                )
+              }
+             })}
             </Grid>
         </Grid>
     </>
