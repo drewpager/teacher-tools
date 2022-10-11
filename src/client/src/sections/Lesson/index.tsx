@@ -34,7 +34,7 @@ export const Lesson = () => {
       <h1>Lesson: {lesson?.id}</h1>
       <img src={`${lesson?.image}`} alt={`Text overlay of ${lesson?.title}`} />
       <h2>{lesson?.title}</h2>
-      <VideoPlayer url={`${lesson?.video}`} id={`${lesson?.id}`} />
+      <VideoPlayer url={`${lesson?.video}`} />
     </Box>
   )
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Grid, Typography, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import { Playlist, Lesson, LessonPlanUnion } from '../../../graphql/generated';
-import { VideoPlayer } from '../index';
+import { VideoPlayer, QuizPlayer } from '../index';
 import './playlistcard.scss';
 
 interface Props {
@@ -11,14 +11,14 @@ interface Props {
 
 // NOTE: Pass lessons object instead of single lesson for Accordion to work correctly
 export const PlaylistCard = ({ playlist }: Props) => {
-  // const [video, setVideo] = useState<string>(`${playlist.plan[0]?.video}`)
+  const [video, setVideo] = useState<string>()
+  const [itemName, setItemName] = useState<LessonPlanUnion>(playlist && playlist.plan ? {...playlist.plan[0]} : {})
   const [active, setActive] = useState<string>(playlist && playlist.plan ? `${playlist?.plan[0]?.id}` : `1`)
 
-  const handleChange = ({ id }: LessonPlanUnion) => {
-    // setVideo(`${video}`)
-    setActive(`${id}`)
+  const handleChange = ({ ...item }: LessonPlanUnion) => {
+    setItemName(item)
+    setActive(`${item.id}`)
   };
-
 
   return (
     <>
@@ -39,23 +39,20 @@ export const PlaylistCard = ({ playlist }: Props) => {
                 </List>
             </Grid>
             <Grid  className='playlistcard--grid__video'>
-              {/* TODO: Render Either a Video or Quiz Element */}
-             {playlist.plan?.map((item, id) => {
-              if (item?.__typename === "Lesson") {
-                let vid = item ? item.video: null;
-                vid ? (
-                  <VideoPlayer url={vid} id={id.toString()} />
-                ) : (
-                  <h1>Video Currently Unavailable</h1>
-                )
-              }
 
-              if (item?.__typename === "Quiz") {
-                return (
-                  <h1>{item.title}</h1>
-                )
-              }
-             })}
+              {playlist.plan?.filter((item) => item?.id === active).map(item => {
+                if (item?.__typename === "Quiz") {
+                  return (
+                    <QuizPlayer quiz={item} />
+                  )
+                }
+
+                if (item?.__typename === "Lesson") {
+                  return (
+                    <VideoPlayer url={`${item.video}`} />
+                  )
+                }
+              })}
             </Grid>
         </Grid>
     </>
