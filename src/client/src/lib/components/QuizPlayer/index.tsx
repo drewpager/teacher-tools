@@ -23,19 +23,45 @@ export const QuizPlayer = ({ quiz }: Props) => {
   }
 
   const title = quiz.title;
+  const qMap: Array<string> = [];
+
+  function shuffle(array: Array<string>) {
+    let currentIndex = array.length,  randomIndex;
+
+    // While there remain elements to shuffle.
+    while (currentIndex !== 0) {
+
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+
+    return array;
+  }
 
   return (
-    <form>
+    <FormControl>
       <h1>{title}</h1>
       {quiz.questions.map((i) => (
         <>
           <h2>{i.question}</h2>
-          <ul>
-            <li>{i.answerOptions}</li>
-          </ul>
+          <RadioGroup>
+            {qMap.push(`${i.correctAnswer}`)}
+            {i.answerOptions?.map((q) => {
+              qMap.push(`${q}`)
+            })}
+            {shuffle(qMap)}
+            {qMap.map((t) => (
+              <FormControlLabel value={t} label={`${t}`} control={<Radio />} />
+            ))}
+          </RadioGroup>
         </>
       ))}
       <Button type="submit">Check Answers</Button>
-    </form>
+    </FormControl>
   )
 }
