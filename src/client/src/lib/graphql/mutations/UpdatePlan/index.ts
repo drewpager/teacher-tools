@@ -23,8 +23,10 @@ export const UPDATE_PLAN = gql`
           title
           questions {
             question
-            correctAnswer
-            answerOptions
+            answerOptions {
+              answerText
+              isCorrect
+            } 
             answerType
           }
           creator

@@ -13,23 +13,34 @@ const seed = async () => {
     const quizzes: Quiz[] = [
       {
         _id: new ObjectId,
+        title: "Quiz About Drew's Morning!",
         questions: [
           {
             question: "What is the difference between Coffee and Athletic Greens?",
-            correctAnswer: "Coffee has caffeine, AG1 Doesn't",
-            answerOptions: ["Coffee is green", "AG1 is Black", "You Put Cream in AG1"],
+            answerOptions: [
+              { answerText: "Coffee is green", isCorrect: false }, 
+              { answerText: "AG1 is Black", isCorrect: false }, 
+              { answerText: "You Put Cream in AG1", isCorrect: false },
+              { answerText: "Coffee has caffeine", isCorrect: true },
+            ],
             answerType: "MULTIPLECHOICE",
           },
           {
             question: "What is Drew Page's Middle Name?",
-            correctAnswer: "Thomas",
-            answerOptions: ["Robert", "Frank", "Steven"],    
+            answerOptions: [
+              { answerText: "Robert", isCorrect: false }, 
+              { answerText: "Thomas", isCorrect: true }, 
+              { answerText: "Frank", isCorrect: false }, 
+              { answerText: "Steven", isCorrect: false }
+            ],    
             answerType: "MULTIPLECHOICE",
           },
           {
             question: "Coffee Contains Caffeine",
-            correctAnswer: "True",
-            answerOptions: ["False"],    
+            answerOptions: [
+              { answerText: "False", isCorrect: false },
+              { answerText: "True", isCorrect: true },
+            ],    
             answerType: "TRUEFALSE",
           }
         ],

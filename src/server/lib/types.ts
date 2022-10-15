@@ -17,10 +17,13 @@ export interface Lesson {
   creator: string;
 }
 
+export interface Answers {
+  answerText: string;
+  isCorrect: boolean;
+}
 export interface Questions {
   question: string;
-  correctAnswer: string;
-  answerOptions: string[];
+  answerOptions: Answers[];
   answerType: string;
 }
 

@@ -24,8 +24,10 @@ export const PLAYLIST = gql`
           title
           questions {
             question
-            correctAnswer
-            answerOptions
+            answerOptions {
+              answerText
+              isCorrect
+            }
             answerType
           }
           creator

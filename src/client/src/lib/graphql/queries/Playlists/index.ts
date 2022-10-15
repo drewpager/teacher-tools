@@ -26,8 +26,10 @@ export const ALL_PLAYLISTS = gql`
             title
             questions {
               question
-              correctAnswer
-              answerOptions
+              answerOptions {
+                answerText
+                isCorrect
+              }
               answerType
             }
             creator

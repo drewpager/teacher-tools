@@ -32,8 +32,10 @@ export const USER = gql`
               title
               questions {
                 question
-                correctAnswer
-                answerOptions
+                answerOptions {
+                  answerText
+                  isCorrect
+                }
                 answerType
               }
               creator
@@ -63,8 +65,10 @@ export const USER = gql`
           title
           questions {
             question
-            correctAnswer
-            answerOptions
+            answerOptions {
+              answerText
+              isCorrect
+            }
             answerType
           }
           creator

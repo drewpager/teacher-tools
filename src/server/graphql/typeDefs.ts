@@ -42,10 +42,14 @@ export const typeDefs = gql`
     creator: String
   }
 
+  type AnswerOptions {
+    answerText: String
+    isCorrect: Boolean
+  }
+
   type Questions {
     question: String
-    correctAnswer: String
-    answerOptions: [String]
+    answerOptions: [AnswerOptions]
     answerType: AnswerFormat!
   }
 
@@ -130,10 +134,14 @@ export const typeDefs = gql`
     creator: String
   }
 
+  input Answers {
+    answerText: String!
+    isCorrect: Boolean!
+  }
+
   input QuizQuestions {
     question: String
-    correctAnswer: String
-    answerOptions: [String]
+    answerOptions: [Answers!]
     answerType: AnswerFormat!
   }
 

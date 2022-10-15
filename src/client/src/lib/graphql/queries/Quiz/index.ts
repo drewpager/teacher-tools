@@ -7,8 +7,10 @@ export const QUIZ = gql`
       title
       questions {
         question
-        correctAnswer
-        answerOptions
+        answerOptions {
+          answerText
+          isCorrect
+        }
         answerType
       }
       creator
