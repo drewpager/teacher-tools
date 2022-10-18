@@ -27,7 +27,9 @@ export const Quiz = () => {
 
   if (quiz) {
     return (
-      <QuizPlayer quiz={quiz} />
+      <Box sx={{ marginTop: 7 }}>
+        <QuizPlayer quiz={quiz} />
+      </Box>
     )
   }
 
