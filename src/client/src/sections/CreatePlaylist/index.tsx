@@ -10,7 +10,8 @@ import {
   FullLessonQuiz, 
   FullPlanInput,
   Lesson,
-  Quiz 
+  Quiz,
+  LessonPlanUnion,
 } from '../../graphql/generated';
 import { DisplayError } from '../../lib/utils';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
@@ -48,7 +49,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const [searchInput, setSearchInput] = useState<string>("")
   const [lessons, setLessons] = useState<Array<FullLessonInput>>([])
   const [quizzes, setQuizzes] = useState<Array<FullLessonQuiz>>([])
-  const [plans, setPlans] = useState<Array<Lesson[] | Quiz[]>>([lessons, quizzes])
+  const [plans, setPlans] = useState<Array<LessonPlanUnion[] | Lesson[] | Quiz[]>>([lessons, quizzes])
   const [filter, setFilter] = useState<Array<FullLessonInput>>(lessons)
   const inputRef = useFocus();
   // const id = viewer && viewer.id ? viewer.id : null;
@@ -101,6 +102,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
       setLessons(lessonInput)
       setFilter(lessonInput)
+      setPlans(lessonInput)
     }
     if (quizQuery) {
       const quizInput: any = []
@@ -115,6 +117,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
         quizInput.push(quizObj)
       })
       setQuizzes(quizInput)
+      setPlans(p => [...p, ...quizInput])
     }
   }, [lessonQuery, quizQuery])
 
@@ -248,7 +251,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
                       {(provide) => (
                         <Grid item xs={12} md={12} lg={12}>
                           <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={i.lessons.id} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}>
-                            {i?.lessons.title}
+                            {i.lessons.title}
                           </Card>
                         </Grid>
                       )}
@@ -273,24 +276,26 @@ export const CreatePlaylist = ({ viewer }: props) => {
                     className="createPlaylist--search"
                   />
                   <Grid container>
-                  {lessons?.map((i, index) => (
+                  {/* {Object.keys(plans).map((obj: any, index) => (
                     <Draggable key={index} draggableId={index.toString()} index={index}>
                       {(provide) => (
                         <Grid item xs={12} md={12} lg={12}>
-                          <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={i.id} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}>
-                            {i.title}
+                          { console.log(plans[obj]) }
+                          <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={obj} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}> 
+                            {obj}
                           </Card>
                         </Grid>
                       )}
                     </Draggable>
                   ))}
-                  {provided.placeholder}
-                  {quizzes?.map((q, ind) => (
-                    <Draggable key={ind} draggableId={ind.toString()} index={ind}>
+                  {provided.placeholder} */}
+                  {plans.map((i, index) => (
+                    <Draggable key={index} draggableId={index.toString()} index={index}>
                       {(provide) => (
                         <Grid item xs={12} md={12} lg={12}>
-                          <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={q.id} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}>
-                            {q.title}
+                          { console.log(JSON.stringify(i)) }
+                          <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={index} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}> 
+                            {JSON.stringify(i)}
                           </Card>
                         </Grid>
                       )}
@@ -299,6 +304,13 @@ export const CreatePlaylist = ({ viewer }: props) => {
                   {provided.placeholder}
                   </Grid>
                 </Card>
+                <Grid container>
+                <Card variant="outlined" className="createQuiz--card" {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
+                  <h2>
+                    Add Assessment Questions
+                  </h2>
+                </Card>
+              </Grid>
               </Grid>
                 )}
           </Droppable>

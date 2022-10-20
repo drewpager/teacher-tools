@@ -6,12 +6,23 @@
 
 .MuiPaper-root {
   &.createPlaylist--card {
-    min-height: 47rem;
-    max-height: 47rem;
+    min-height: 40rem;
+    max-height: 40rem;
+    min-width: 30rem;
     padding: 2rem;
     margin-top: 1rem;
     overflow: scroll;
     overflow-x: hidden;
+  }
+  &.createQuiz--card {
+    min-height: 6rem;
+    max-height: 6rem;
+    min-width: 31rem;
+    margin-top: 1rem;
+    background-color: #F67B50;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
   }
 }
 
