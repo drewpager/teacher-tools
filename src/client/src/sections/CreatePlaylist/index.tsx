@@ -293,9 +293,9 @@ export const CreatePlaylist = ({ viewer }: props) => {
                     <Draggable key={index} draggableId={index.toString()} index={index}>
                       {(provide) => (
                         <Grid item xs={12} md={12} lg={12}>
-                          { console.log(JSON.stringify(i)) }
                           <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={index} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}> 
-                            {JSON.stringify(i)}
+                            {JSON.parse(JSON.stringify(i)).title}
+                            {JSON.parse(JSON.stringify(i))}
                           </Card>
                         </Grid>
                       )}
