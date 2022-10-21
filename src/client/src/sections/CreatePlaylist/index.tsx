@@ -50,7 +50,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const [lessons, setLessons] = useState<Array<FullLessonInput>>([])
   const [quizzes, setQuizzes] = useState<Array<FullLessonQuiz>>([])
   const [plans, setPlans] = useState<Array<LessonPlanUnion[] | Lesson[] | Quiz[]>>([lessons, quizzes])
-  const [filter, setFilter] = useState<Array<FullLessonInput>>(lessons)
+  const [filter, setFilter] = useState<Array<LessonPlanUnion[] | Lesson[] | Quiz[]>>([lessons, quizzes])
   const inputRef = useFocus();
   // const id = viewer && viewer.id ? viewer.id : null;
   const [playlist, setPlaylist] = useState<InputLessonPlan>(initialData)
@@ -117,6 +117,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
         quizInput.push(quizObj)
       })
       setQuizzes(quizInput)
+      setFilter(f => [...f, ...quizInput])
       setPlans(p => [...p, ...quizInput])
     }
   }, [lessonQuery, quizQuery])
@@ -204,12 +205,12 @@ export const CreatePlaylist = ({ viewer }: props) => {
     setSearchInput(enteredSearch)
 
     if (enteredSearch) {
-      const filteredLessons = lessons.filter(({title}) => title?.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1);
-      setLessons(filteredLessons)
+      const filteredLessons = plans.filter((plan) => JSON.parse(JSON.stringify(plan)).title.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1);
+      setPlans(filteredLessons)
     }
 
     if (enteredSearch === '') {
-      setLessons(filter)
+      setPlans(filter)
       // setFilter(lessons)
     }
   }
