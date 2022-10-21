@@ -152,6 +152,7 @@ export const typeDefs = gql`
     creator: String
   }
 
+
   input FullPlanInput {
     lessons: FullLessonInput!
     quizzes: FullLessonQuiz

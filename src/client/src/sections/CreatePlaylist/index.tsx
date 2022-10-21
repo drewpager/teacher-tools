@@ -160,7 +160,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
     }
 
     // Otherwise, cut the item from lessons array and push to new playlist
-    const items = Array.from(plans);
+    const items = plans;
 
     // Allow the user to reorder playlist if failed to drag and drop in correct order
     if (source.droppableId === "playlist" && destination.droppableId === "playlist") {
@@ -178,13 +178,22 @@ export const CreatePlaylist = ({ viewer }: props) => {
     }
 
     if (destination.droppableId === "playlist") {
+      // Original
+
+      // const [reorderedItem] = items.splice(source.index, 1);
+      // const displacedItem = playlist.plan.slice(destination.index, (destination.index + 1));
+      // items[destination.index] = reorderedItem;
+      // playlist.plan.push(...reorderedItem);
+
       const [reorderedItem] = items.splice(source.index, 1);
       const displacedItem = playlist.plan.slice(destination.index, (destination.index + 1));
-      plans[destination.index] = reorderedItem;
+      items[destination.index] = reorderedItem;
       playlist.plan.push(...displacedItem);
-      // playlist.plan.push(reorderedItem);
+
+      console.log("Displaced: ", displacedItem, " Reordered: ", reorderedItem)
+      console.log(destination.droppableId)
     
-      setPlans(items)
+      setPlans([...items])
       setPlaylist({...playlist})
     }
 
@@ -194,7 +203,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       playlist.plan[destination.index] = reorderedPlay;
       items.push(...displacedPlay)
       
-      setPlans(items)
+      setPlans([...items])
       setPlaylist({...playlist})
     }
   }
@@ -254,6 +263,11 @@ export const CreatePlaylist = ({ viewer }: props) => {
                           <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={i.lessons.id} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}>
                             {i.lessons.title}
                           </Card>
+                          { i.quizzes ? (
+                            <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={i.quizzes?.id} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}>
+                              {i.quizzes?.title}
+                            </Card>
+                          ): <></>}
                         </Grid>
                       )}
                     </Draggable>
@@ -277,19 +291,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
                     className="createPlaylist--search"
                   />
                   <Grid container>
-                  {/* {Object.keys(plans).map((obj: any, index) => (
-                    <Draggable key={index} draggableId={index.toString()} index={index}>
-                      {(provide) => (
-                        <Grid item xs={12} md={12} lg={12}>
-                          { console.log(plans[obj]) }
-                          <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={obj} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}> 
-                            {obj}
-                          </Card>
-                        </Grid>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder} */}
                   {plans.map((i, index) => (
                     <Draggable key={index} draggableId={index.toString()} index={index}>
                       {(provide) => (
@@ -305,7 +306,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
                   </Grid>
                 </Card>
                 <Grid container>
-                <Card variant="outlined" className="createQuiz--card" {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
+                <Card variant="outlined" className="createQuiz--card">
                   <h2>
                     Add Assessment Questions
                   </h2>
