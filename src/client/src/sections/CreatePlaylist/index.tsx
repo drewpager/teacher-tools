@@ -49,7 +49,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const [searchInput, setSearchInput] = useState<string>("")
   const [lessons, setLessons] = useState<Array<FullLessonInput>>([])
   const [quizzes, setQuizzes] = useState<Array<FullLessonQuiz>>([])
-  const [plans, setPlans] = useState<Array<LessonPlanUnion[] | Lesson[] | Quiz[]>>([lessons, quizzes])
+  const [plans, setPlans] = useState<Array<LessonPlanUnion[]| Lesson[] | Quiz[]>>([lessons, quizzes])
   const [filter, setFilter] = useState<Array<LessonPlanUnion[] | Lesson[] | Quiz[]>>([lessons, quizzes])
   const inputRef = useFocus();
   // const id = viewer && viewer.id ? viewer.id : null;
@@ -167,13 +167,19 @@ export const CreatePlaylist = ({ viewer }: props) => {
       const [reorderedPlaylistItem] = playlist.plan.splice(source.index, 1);
       const displacedPlaylistItem = playlist.plan.slice(destination.index, (destination.index + 1));
       playlist.plan[destination.index] = reorderedPlaylistItem;
-      playlist.plan.push(...displacedPlaylistItem);
+      playlist.plan.splice(destination.index, 0, ...displacedPlaylistItem);
       
       return {...playlist}
     }
 
     // if dragging and dropping within lessons simply return items unchanged
     if (source.droppableId === "lessons" && destination.droppableId === "lessons") {
+      const [reorderedLesson] = items.splice(source.index, 1);
+      const displacedLesson = items.slice(destination.index, (destination.index + 1));
+      items[destination.index] = reorderedLesson;
+      items.splice((destination.index + 1), 0, ...displacedLesson)
+      // items.push(...displacedLesson);
+      
       return {...items}
     }
 
@@ -188,10 +194,11 @@ export const CreatePlaylist = ({ viewer }: props) => {
       const [reorderedItem] = items.splice(source.index, 1);
       const displacedItem = playlist.plan.slice(destination.index, (destination.index + 1));
       items[destination.index] = reorderedItem;
-      playlist.plan.push(...displacedItem);
+      playlist.plan.push(...displacedItem)
+      // playlist.plan.splice(destination.index, 0, displacedItem);
 
       console.log("Displaced: ", displacedItem, " Reordered: ", reorderedItem)
-      console.log(destination.droppableId)
+      console.log(playlist.plan)
     
       setPlans([...items])
       setPlaylist({...playlist})
@@ -202,6 +209,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       const displacedPlay = items.slice(destination.index, (destination.index + 1));
       playlist.plan[destination.index] = reorderedPlay;
       items.push(...displacedPlay)
+      // items.splice(destination.index, 0, displacedPlay)
       
       setPlans([...items])
       setPlaylist({...playlist})
