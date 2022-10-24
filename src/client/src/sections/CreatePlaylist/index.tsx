@@ -49,8 +49,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const [searchInput, setSearchInput] = useState<string>("")
   const [lessons, setLessons] = useState<Array<FullLessonInput>>([])
   const [quizzes, setQuizzes] = useState<Array<FullLessonQuiz>>([])
-  const [plans, setPlans] = useState<Array<LessonPlanUnion[]| Lesson[] | Quiz[]>>([lessons, quizzes])
-  const [filter, setFilter] = useState<Array<LessonPlanUnion[] | Lesson[] | Quiz[]>>([lessons, quizzes])
+  const [plans, setPlans] = useState<Array<Lesson[] | Quiz[]>>([lessons, quizzes])
+  const [filter, setFilter] = useState<Array<Lesson[] | Quiz[]>>([lessons, quizzes])
   const inputRef = useFocus();
   // const id = viewer && viewer.id ? viewer.id : null;
   const [playlist, setPlaylist] = useState<InputLessonPlan>(initialData)
