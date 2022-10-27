@@ -102,7 +102,7 @@ export const typeDefs = gql`
     logOut: Viewer!
     createLesson(input: CreateLessonInput): Lesson!
     lessonPlan(input: LessonPlanInput): Playlist!
-    updatePlan(input: LessonPlanInput): Playlist!
+    updatePlan(input: LessonPlanInput, id: ID): Playlist!
     deleteLesson(id: ID): Boolean!
     deletePlaylist(id: ID): Boolean!
   }

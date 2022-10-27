@@ -1,8 +1,8 @@
 import { gql } from 'graphql-tag';
 
 export const UPDATE_PLAN = gql`
-  mutation UpdatePlan($input: LessonPlanInput!) {
-    updatePlan(input: $input) {
+  mutation UpdatePlan($input: LessonPlanInput!, $id: ID!) {
+    updatePlan(input: $input, id: $id) {
       id
       name
       plan {

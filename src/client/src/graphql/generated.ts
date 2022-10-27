@@ -295,6 +295,7 @@ export type MutationLogInArgs = {
 
 
 export type MutationUpdatePlanArgs = {
+  id?: InputMaybe<Scalars['ID']>;
   input?: InputMaybe<LessonPlanInput>;
 };
 
@@ -462,6 +463,7 @@ export type LogOutMutation = { __typename?: 'Mutation', logOut: { __typename?: '
 
 export type UpdatePlanMutationVariables = Exact<{
   input: LessonPlanInput;
+  id: Scalars['ID'];
 }>;
 
 
@@ -669,8 +671,8 @@ export type LogOutMutationHookResult = ReturnType<typeof useLogOutMutation>;
 export type LogOutMutationResult = Apollo.MutationResult<LogOutMutation>;
 export type LogOutMutationOptions = Apollo.BaseMutationOptions<LogOutMutation, LogOutMutationVariables>;
 export const UpdatePlanDocument = gql`
-    mutation UpdatePlan($input: LessonPlanInput!) {
-  updatePlan(input: $input) {
+    mutation UpdatePlan($input: LessonPlanInput!, $id: ID!) {
+  updatePlan(input: $input, id: $id) {
     id
     name
     plan {
@@ -721,6 +723,7 @@ export type UpdatePlanMutationFn = Apollo.MutationFunction<UpdatePlanMutation, U
  * const [updatePlanMutation, { data, loading, error }] = useUpdatePlanMutation({
  *   variables: {
  *      input: // value for 'input'
+ *      id: // value for 'id'
  *   },
  * });
  */

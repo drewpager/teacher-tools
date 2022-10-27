@@ -47,7 +47,8 @@ export const EditPlaylist = ({ viewer }: props) => {
 
   const [updatePlan] = useUpdatePlanMutation({
     variables: {
-      input: playlist
+      input: playlist,
+      id: `${params.id}`
     }
   })
 
@@ -188,7 +189,8 @@ export const EditPlaylist = ({ viewer }: props) => {
     if (playlist && playlist.plan) {
       await updatePlan({
         variables: {
-          input: playlist
+          input: playlist,
+          id: `${params.id}`
         }
       });
     }
