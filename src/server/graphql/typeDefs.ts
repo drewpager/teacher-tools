@@ -66,10 +66,15 @@ export const typeDefs = gql`
     totalCount: Int!
   }
 
+  type PlanItem {
+    lesson: Lesson!
+    quiz: Quiz
+  }
+
   type Playlist {
     id: ID
     name: String!
-    plan: [LessonPlanUnion]
+    plan: [LessonPlanUnion]!
     creator: String!
     authorized: Boolean
   }
@@ -152,16 +157,15 @@ export const typeDefs = gql`
     creator: String
   }
 
-
-  input FullPlanInput {
-    lessons: FullLessonInput!
-    quizzes: FullLessonQuiz
+  input LessonPlanItem {
+    lesson: FullLessonInput!
+    quiz: FullLessonQuiz
   }
 
   input LessonPlanInput {
     name: String!
     creator: String!
-    plan: [FullPlanInput]!
+    plan: [LessonPlanItem]!
   }
 
   union LessonPlanUnion = Quiz | Lesson
