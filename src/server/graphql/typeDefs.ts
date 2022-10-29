@@ -67,14 +67,14 @@ export const typeDefs = gql`
   }
 
   type PlanItem {
-    lesson: Lesson!
+    lesson: Lesson
     quiz: Quiz
   }
 
   type Playlist {
     id: ID
     name: String!
-    plan: [LessonPlanUnion]!
+    plan: [PlanItem]!
     creator: String!
     authorized: Boolean
   }
@@ -158,7 +158,7 @@ export const typeDefs = gql`
   }
 
   input LessonPlanItem {
-    lesson: FullLessonInput!
+    lesson: FullLessonInput
     quiz: FullLessonQuiz
   }
 

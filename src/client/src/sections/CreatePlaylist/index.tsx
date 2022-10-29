@@ -167,7 +167,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       const [reorderedPlaylistItem] = playlist.plan.splice(source.index, 1);
       const displacedPlaylistItem = playlist.plan.slice(destination.index, (destination.index + 1));
       playlist.plan[destination.index] = reorderedPlaylistItem;
-      playlist.plan.splice(destination.index, 0, ...displacedPlaylistItem);
+      playlist.plan.splice((destination.index + 1), 0, ...displacedPlaylistItem);
       
       return {...playlist}
     }
@@ -186,13 +186,9 @@ export const CreatePlaylist = ({ viewer }: props) => {
     if (destination.droppableId === "playlist") {
 
       const [reorderedItem] = items.splice(source.index, 1);
-      const displacedItem = items.slice(destination.index, (destination.index + 1));
+      const displacedItem = playlist.plan.slice(destination.index, (destination.index + 1));
       playlist.plan[destination.index] = reorderedItem;
-
-      // playlist.plan.push(...reorderedItem)
-      // playlist.plan.splice(destination.index, 0, ...displacedItem);
-
-      console.log("Displaced: ", displacedItem, " Reordered: ", reorderedItem)
+      playlist.plan.push(...displacedItem)
     
       setPlans([...items])
       setPlaylist({...playlist})
@@ -261,27 +257,9 @@ export const CreatePlaylist = ({ viewer }: props) => {
                     <Draggable key={index} draggableId={index.toString()} index={index}>
                       {(provide) => (
                         <Grid item xs={12} md={12} lg={12}>
-                          <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={index} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}>
-                            Test
+                          <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={index} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}> 
+                            { playlist.plan[index].lesson || playlist.plan[index].quiz ? playlist.plan[index].lesson?.title || playlist.plan[index].quiz?.title : "Fail" }
                           </Card>
-                          {/* {i.lesson ? (
-                            <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={i.lesson.id} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}>
-                              {i.lesson.title}
-                            </Card>
-                          ) : (
-                            <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={i?.quiz?.id} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}>
-                              {i?.quiz?.title}
-                            </Card>
-                          )} */}
-                          {/* {i.lesson.title || i?.quiz?.title ? (
-                            <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={id} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}>
-                              {title}
-                            </Card>
-                          ) : (
-                            <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={i?.quiz?.id} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}>
-                              {i?.quiz?.title}
-                            </Card>
-                          )} */}
                         </Grid>
                       )}
                     </Draggable>

@@ -240,7 +240,7 @@ export type LessonPlanInput = {
 };
 
 export type LessonPlanItem = {
-  lesson: FullLessonInput;
+  lesson?: InputMaybe<FullLessonInput>;
   quiz?: InputMaybe<FullLessonQuiz>;
 };
 
