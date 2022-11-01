@@ -212,7 +212,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
     setSearchInput(enteredSearch)
 
     if (enteredSearch) {
-      const filteredLessons = plans.filter((plan) => JSON.parse(JSON.stringify(plan)).title.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1);
+      const filteredLessons = plans.filter((plan) => plan?.title?.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1);
       setPlans(filteredLessons)
     }
 
