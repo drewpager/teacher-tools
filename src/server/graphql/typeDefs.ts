@@ -74,7 +74,7 @@ export const typeDefs = gql`
   type Playlist {
     id: ID
     name: String!
-    plan: [PlanItem]!
+    plan: [LessonPlanUnion]!
     creator: String!
     authorized: Boolean
   }
@@ -146,26 +146,34 @@ export const typeDefs = gql`
 
   input QuizQuestions {
     question: String
-    answerOptions: [Answers!]
-    answerType: AnswerFormat!
+    answerOptions: [Answers]
+    answerType: AnswerFormat
   }
 
   input FullLessonQuiz {
     id: ID
     title: String
-    questions: [QuizQuestions!]!
+    questions: [QuizQuestions]
     creator: String
   }
 
-  input LessonPlanItem {
-    lesson: FullLessonInput
-    quiz: FullLessonQuiz
+  input Plan {
+    id: ID
+    category: [String]
+    title: String
+    meta: String
+    video: String
+    image: String
+    startDate: DateScalar
+    endDate: DateScalar
+    questions: [QuizQuestions]
+    creator: String
   }
 
   input LessonPlanInput {
     name: String!
     creator: String!
-    plan: [LessonPlanItem]!
+    plan: [Plan]!
   }
 
   union LessonPlanUnion = Quiz | Lesson

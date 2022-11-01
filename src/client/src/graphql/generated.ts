@@ -216,7 +216,7 @@ export type FullLessonInput = {
 export type FullLessonQuiz = {
   creator?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['ID']>;
-  questions: Array<QuizQuestions>;
+  questions?: InputMaybe<Array<InputMaybe<QuizQuestions>>>;
   title?: InputMaybe<Scalars['String']>;
 };
 
@@ -236,12 +236,7 @@ export type Lesson = {
 export type LessonPlanInput = {
   creator: Scalars['String'];
   name: Scalars['String'];
-  plan: Array<InputMaybe<LessonPlanItem>>;
-};
-
-export type LessonPlanItem = {
-  lesson?: InputMaybe<FullLessonInput>;
-  quiz?: InputMaybe<FullLessonQuiz>;
+  plan: Array<InputMaybe<Plan>>;
 };
 
 export type LessonPlanUnion = Lesson | Quiz;
@@ -299,9 +294,22 @@ export type MutationUpdatePlanArgs = {
   input?: InputMaybe<LessonPlanInput>;
 };
 
+export type Plan = {
+  category?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  creator?: InputMaybe<Scalars['String']>;
+  endDate?: InputMaybe<Scalars['DateScalar']>;
+  id?: InputMaybe<Scalars['ID']>;
+  image?: InputMaybe<Scalars['String']>;
+  meta?: InputMaybe<Scalars['String']>;
+  questions?: InputMaybe<Array<InputMaybe<QuizQuestions>>>;
+  startDate?: InputMaybe<Scalars['DateScalar']>;
+  title?: InputMaybe<Scalars['String']>;
+  video?: InputMaybe<Scalars['String']>;
+};
+
 export type PlanItem = {
   __typename?: 'PlanItem';
-  lesson: Lesson;
+  lesson?: Maybe<Lesson>;
   quiz?: Maybe<Quiz>;
 };
 
@@ -387,8 +395,8 @@ export type Quiz = {
 };
 
 export type QuizQuestions = {
-  answerOptions?: InputMaybe<Array<Answers>>;
-  answerType: AnswerFormat;
+  answerOptions?: InputMaybe<Array<InputMaybe<Answers>>>;
+  answerType?: InputMaybe<AnswerFormat>;
   question?: InputMaybe<Scalars['String']>;
 };
 

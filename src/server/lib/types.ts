@@ -1,9 +1,19 @@
 import { Collection, ObjectId } from "mongodb";
 
 export type LessonPlan = { 
-  lesson: Lesson;
-  quiz: Quiz;
+  // lesson: Lesson;
+  // quiz: Quiz;
   // plan: Lesson[] | Quiz[]; 
+  _id: ObjectId;
+  category: string[];
+  title: string;
+  meta: string;
+  video: string;
+  image: string;
+  startDate: string;
+  endDate: string;
+  creator: string;
+  questions: Questions[];
 }
 
 export interface Lesson {

@@ -7,8 +7,8 @@ import {
   useAllLessonsQuery, 
   useAllQuizzesQuery,
   Viewer, 
-  FullLessonQuiz, 
-  LessonPlanItem,
+  FullLessonQuiz,
+  Plan
 } from '../../graphql/generated';
 import { DisplayError } from '../../lib/utils';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
@@ -22,7 +22,7 @@ type props = {
 type InputLessonPlan = {
   name: string,
   creator: string,
-  plan: LessonPlanItem[]
+  plan: Plan[]
 }
 
 const initialData: InputLessonPlan = {
@@ -30,6 +30,7 @@ const initialData: InputLessonPlan = {
   creator: "",
   plan: []
 }
+
 
 export const useFocus = () => {
   const ref = useRef<HTMLInputElement>(null);
@@ -45,9 +46,9 @@ export const CreatePlaylist = ({ viewer }: props) => {
   let navigate = useNavigate();
   const [searchInput, setSearchInput] = useState<string>("")
   const [lessons, setLessons] = useState<FullLessonInput>({})
-  const [quizzes, setQuizzes] = useState<FullLessonQuiz>()
-  const [plans, setPlans] = useState<Array<LessonPlanItem>>([{ lesson: lessons, quiz: quizzes }])
-  const [filter, setFilter] = useState<Array<LessonPlanItem>>([{ lesson: lessons, quiz: quizzes }])
+  const [quizzes, setQuizzes] = useState<FullLessonQuiz>({})
+  const [plans, setPlans] = useState<Array<Plan>>([lessons, quizzes])
+  const [filter, setFilter] = useState<Array<Plan>>([lessons, quizzes])
   const inputRef = useFocus();
   // const id = viewer && viewer.id ? viewer.id : null;
   const [playlist, setPlaylist] = useState<InputLessonPlan>(initialData)
@@ -257,8 +258,9 @@ export const CreatePlaylist = ({ viewer }: props) => {
                     <Draggable key={index} draggableId={index.toString()} index={index}>
                       {(provide) => (
                         <Grid item xs={12} md={12} lg={12}>
+                          {console.log(playlist.plan)}
                           <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={index} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}> 
-                            { playlist.plan[index].lesson || playlist.plan[index].quiz ? playlist.plan[index].lesson?.title || playlist.plan[index].quiz?.title : "Fail" }
+                            { i.title }
                           </Card>
                         </Grid>
                       )}
