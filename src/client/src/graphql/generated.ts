@@ -179,6 +179,11 @@ export enum AnswerFormat {
   Truefalse = 'TRUEFALSE'
 }
 
+export type AnswerInput = {
+  answerText: Scalars['String'];
+  isCorrect: Scalars['Boolean'];
+};
+
 export type AnswerOptions = {
   __typename?: 'AnswerOptions';
   answerText?: Maybe<Scalars['String']>;
@@ -199,6 +204,13 @@ export type CreateLessonInput = {
   startDate: Scalars['DateScalar'];
   title: Scalars['String'];
   video: Scalars['String'];
+};
+
+export type CreateQuizInput = {
+  creator: Scalars['String'];
+  id: Scalars['ID'];
+  questions: Array<InputMaybe<QuestionInput>>;
+  title: Scalars['String'];
 };
 
 export type FullLessonInput = {
@@ -255,6 +267,7 @@ export type LogInInput = {
 export type Mutation = {
   __typename?: 'Mutation';
   createLesson: Lesson;
+  createQuiz: Quiz;
   deleteLesson: Scalars['Boolean'];
   deletePlaylist: Scalars['Boolean'];
   lessonPlan: Playlist;
@@ -266,6 +279,11 @@ export type Mutation = {
 
 export type MutationCreateLessonArgs = {
   input?: InputMaybe<CreateLessonInput>;
+};
+
+
+export type MutationCreateQuizArgs = {
+  input?: InputMaybe<CreateQuizInput>;
 };
 
 
@@ -379,6 +397,12 @@ export type QueryUserArgs = {
   id: Scalars['ID'];
 };
 
+export type QuestionInput = {
+  answerOptions: Array<InputMaybe<AnswerInput>>;
+  answerType: AnswerFormat;
+  question: Scalars['String'];
+};
+
 export type Questions = {
   __typename?: 'Questions';
   answerOptions?: Maybe<Array<Maybe<AnswerOptions>>>;
@@ -462,6 +486,13 @@ export type LessonPlanMutationVariables = Exact<{
 
 
 export type LessonPlanMutation = { __typename?: 'Mutation', lessonPlan: { __typename?: 'Playlist', id?: string | null } };
+
+export type CreateQuizMutationVariables = Exact<{
+  input: CreateQuizInput;
+}>;
+
+
+export type CreateQuizMutation = { __typename?: 'Mutation', createQuiz: { __typename?: 'Quiz', id?: string | null } };
 
 export type LogInMutationVariables = Exact<{
   input?: InputMaybe<LogInInput>;
@@ -611,6 +642,39 @@ export function useLessonPlanMutation(baseOptions?: Apollo.MutationHookOptions<L
 export type LessonPlanMutationHookResult = ReturnType<typeof useLessonPlanMutation>;
 export type LessonPlanMutationResult = Apollo.MutationResult<LessonPlanMutation>;
 export type LessonPlanMutationOptions = Apollo.BaseMutationOptions<LessonPlanMutation, LessonPlanMutationVariables>;
+export const CreateQuizDocument = gql`
+    mutation CreateQuiz($input: CreateQuizInput!) {
+  createQuiz(input: $input) {
+    id
+  }
+}
+    `;
+export type CreateQuizMutationFn = Apollo.MutationFunction<CreateQuizMutation, CreateQuizMutationVariables>;
+
+/**
+ * __useCreateQuizMutation__
+ *
+ * To run a mutation, you first call `useCreateQuizMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateQuizMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createQuizMutation, { data, loading, error }] = useCreateQuizMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateQuizMutation(baseOptions?: Apollo.MutationHookOptions<CreateQuizMutation, CreateQuizMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateQuizMutation, CreateQuizMutationVariables>(CreateQuizDocument, options);
+      }
+export type CreateQuizMutationHookResult = ReturnType<typeof useCreateQuizMutation>;
+export type CreateQuizMutationResult = Apollo.MutationResult<CreateQuizMutation>;
+export type CreateQuizMutationOptions = Apollo.BaseMutationOptions<CreateQuizMutation, CreateQuizMutationVariables>;
 export const LogInDocument = gql`
     mutation LogIn($input: LogInInput) {
   logIn(input: $input) {

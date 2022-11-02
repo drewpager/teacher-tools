@@ -106,6 +106,7 @@ export const typeDefs = gql`
     logIn(input: LogInInput): Viewer!
     logOut: Viewer!
     createLesson(input: CreateLessonInput): Lesson!
+    createQuiz(input: CreateQuizInput): Quiz!
     lessonPlan(input: LessonPlanInput): Playlist!
     updatePlan(input: LessonPlanInput, id: ID): Playlist!
     deleteLesson(id: ID): Boolean!
@@ -125,6 +126,24 @@ export const typeDefs = gql`
     image: String!
     startDate: DateScalar!
     endDate: DateScalar!
+  }
+
+  input CreateQuizInput {
+    id: ID!
+    title: String!
+    questions: [QuestionInput]!
+    creator: String!
+  }
+  
+  input QuestionInput {
+    question: String!
+    answerOptions: [AnswerInput]!
+    answerType: AnswerFormat!
+  }
+
+  input AnswerInput {
+    answerText: String!
+    isCorrect: Boolean!
   }
 
   input FullLessonInput {

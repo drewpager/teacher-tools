@@ -1,4 +1,4 @@
-import { Playlist, Lesson, Quiz } from "../../../lib/types";
+import { Quiz, Questions } from "../../../lib/types";
 
 export interface QuizArgs {
   id: string;
@@ -13,4 +13,14 @@ export interface QuizzesData {
   total: number;
   result: Quiz[];
   totalCount: number;
+}
+
+export interface CreateQuizInput {
+  title: string;
+  questions: Questions[];
+  creator: string;
+}
+
+export interface CreateQuizArgs {
+  input: CreateQuizInput;
 }

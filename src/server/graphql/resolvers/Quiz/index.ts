@@ -1,5 +1,5 @@
 import { Database, Quiz } from "../../../lib/types";
-import { QuizArgs, QuizzesArgs, QuizzesData } from "./types";
+import { QuizArgs, QuizzesArgs, QuizzesData, CreateQuizArgs } from "./types";
 import { ObjectId } from "mongodb";
 
 export const quizResolvers = {
@@ -44,6 +44,31 @@ export const quizResolvers = {
   Quiz: {
     id: (quiz: Quiz) => {
       return quiz._id;
+    }
+  },
+  Mutation: {
+    createQuiz: async (
+      _root: undefined,
+      { input }: CreateQuizArgs,
+      { db }: { db: Database }
+    ): Promise<Quiz> => {
+      const id = new ObjectId();
+      try {
+        const insertQuiz = await db.quizzes.insertOne({
+          _id: id,
+          ...input
+        })
+
+        const insertedQuiz = insertQuiz ? await db.quizzes.findOne({ _id: insertQuiz.insertedId }) : false;
+
+        if (!insertedQuiz) {
+          throw new Error(`Failed to insert quiz!`);
+        }
+
+        return insertedQuiz;
+      } catch(err) {
+        throw new Error(`Failed with error: ${err}`);
+      }
     }
   }
 }
