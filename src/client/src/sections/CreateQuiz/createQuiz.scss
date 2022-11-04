@@ -1,0 +1,27 @@
+.quiz__answerType {
+  margin-top: 10px;
+}
+
+.quiz__answerArea {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.quiz__multiAnswerArea {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.quiz__multiAnswers {
+  display: flex;
+  align-items: center;
+}
+
+.quiz__answers {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 10px;
+  margin-left: -1px;
+}
