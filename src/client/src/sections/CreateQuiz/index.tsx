@@ -128,7 +128,7 @@ export const CreateQuiz = () => {
           </div>
         </div>
         ) : <></>}
-        {addQuestion ? <QuizQuestion /> : <></>}
+        {addQuestion ? <QuizQuestion key={addQuestion} /> : <></>}
         {/* {addQuestion ? Array(addQuestion).map((_, i) => (<QuizQuestion />)) : <></>} */}
         <Button onClick={() => setAddQuestion(addQuestion + 1)}>Add Question</Button>
       </form>
