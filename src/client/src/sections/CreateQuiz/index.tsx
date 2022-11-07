@@ -1,11 +1,15 @@
 import React, { useState, ChangeEvent, SyntheticEvent } from 'react';
 import { QuizQuestion } from './QuizQuestion';
-import { useCreateQuizMutation } from '../../graphql/generated';
+import { useCreateQuizMutation, Viewer } from '../../graphql/generated';
 import { Box, TextField, FormControl, FormLabel, FormControlLabel, Radio, RadioGroup, Typography, Tooltip, Button } from '@mui/material'
 import { CheckCircle, Cancel } from '@mui/icons-material';
+import { DisplayError } from '../../lib/utils';
 import './createQuiz.scss';
+interface Props {
+  viewer: Viewer;
+}
 
-export const CreateQuiz = () => {
+export const CreateQuiz = ({ viewer }: Props) => {
   const [questions, setQuestions] = useState();
   const [quiz, setQuiz] = useState();
   const [answerType, setAnswerType] = useState<string | undefined>("TRUEFALSE");
@@ -36,6 +40,18 @@ export const CreateQuiz = () => {
 
   const updateAnswers = (t: ChangeEvent<HTMLInputElement>) => {
     console.log(t.target.value)
+  }
+
+  if (!viewer.id) {
+    return (
+      <div className='quiz__error-box'>
+        <DisplayError title="Must be logged in to create a playlist!" />
+        <Box sx={{ marginTop: 15 }}>
+          <h2>Must Be Logged In To Create a Quiz!</h2>
+          <Button href='/login' variant='contained'>Go To Log In Page</Button>
+        </Box>
+      </div>
+    )
   }
 
   return (
