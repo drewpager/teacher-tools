@@ -3,7 +3,10 @@ import { TextField, FormControl, FormLabel, FormControlLabel, Radio, RadioGroup,
 import { CheckCircle, Cancel } from '@mui/icons-material';
 import './createQuiz.scss';
 
+
 export const QuizQuestion = () => {
+  const [questions, setQuestions] = useState<Array<string>>([]);
+  const [answers, setAnswers] = useState<Array<string>>([]);
   const [answerType, setAnswerType] = useState<string | undefined>("TRUEFALSE");
   const [answerTrue, setAnswerTrue] = useState<boolean>(true);
 
@@ -13,11 +16,20 @@ export const QuizQuestion = () => {
   }
   
   const updateQuestions = (t: ChangeEvent<HTMLInputElement>) => {
-  
+    let question = t.target.value;
+    setQuestions([...questions, question])
   }
   
   const updateAnswers = (t: ChangeEvent<HTMLInputElement>) => {
-    console.log(t.target.value)
+    if (answerType === "TRUEFALSE") {
+      const answer = answerTrue ? "True" : "False";
+      setAnswers([...answers, answer])
+    }
+
+    if (answerType === "MULTIPLECHOICE") {
+      let answer = t.target.value;
+      setAnswers([...answers, answer])
+    }
   }
 
   return (

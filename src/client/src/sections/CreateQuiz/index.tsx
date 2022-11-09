@@ -1,6 +1,6 @@
-import React, { useState, ChangeEvent, SyntheticEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent, SyntheticEvent } from 'react';
 import { QuizQuestion } from './QuizQuestion';
-import { useCreateQuizMutation, Viewer, Quiz, Questions } from '../../graphql/generated';
+import { useCreateQuizMutation, Viewer, Quiz, Questions, AnswerOptions, AnswerFormat } from '../../graphql/generated';
 import { Box, TextField, FormControl, FormLabel, FormControlLabel, Radio, RadioGroup, Typography, Tooltip, Button } from '@mui/material'
 import { CheckCircle, Cancel } from '@mui/icons-material';
 import { DisplayError } from '../../lib/utils';
@@ -10,17 +10,30 @@ interface Props {
 }
 
 type quizInput = {
-  title: "",
+  title: string,
+  questions: Questions[],
+  creator: string,
+}
 
+const initialInput: quizInput = {
+  title: "",
+  questions: [],
+  creator: ""
 }
 
 export const CreateQuiz = ({ viewer }: Props) => {
-  const [questions, setQuestions] = useState();
-  const [quiz, setQuiz] = useState();
+  const [questions, setQuestions] = useState<Array<string>>([]);
+  const [answers, setAnswers] = useState<Array<AnswerOptions>>([]);
+  const [quiz, setQuiz] = useState<quizInput>(initialInput);
   const [answerType, setAnswerType] = useState<string | undefined>("TRUEFALSE");
   const [answerTrue, setAnswerTrue] = useState<boolean>(true);
+  const [enumAnswerType, setEnumAnswerType] = useState<AnswerFormat>(AnswerFormat.Truefalse);
   const [addQuestion, setAddQuestion] = useState<number>(0)
   const [title, setTitle] = useState<string>("");
+  
+  useEffect(() => {
+    
+  }, [addQuestion])
   
   // const [createQuiz] = useCreateQuizMutation({
   //   variables: {
@@ -32,19 +45,52 @@ export const CreateQuiz = ({ viewer }: Props) => {
     t.preventDefault();
     let title = t.target.value;
     setTitle(title)
+    setQuiz({
+      ...quiz,
+      title: title
+    })
   }
 
   const handleAnswerChange = (e: SyntheticEvent) => {
     let type = e.currentTarget.getAttribute("value");
+    setEnumAnswerType(type === "TRUEFALSE" ? AnswerFormat.Truefalse : AnswerFormat.Multiplechoice);
     setAnswerType(type?.toLocaleUpperCase());
   }
 
   const updateQuestions = (t: ChangeEvent<HTMLInputElement>) => {
-
+    let question = t.target.value;
+    setQuestions([...questions, question])
+    setQuiz({
+      ...quiz,
+      questions: [{
+        question: question,
+        answerOptions: answers,
+        answerType: enumAnswerType,
+      }]
+    })
   }
 
   const updateAnswers = (t: ChangeEvent<HTMLInputElement>) => {
-    console.log(t.target.value)
+    if (answerType === "TRUEFALSE") {
+      let answer = answerTrue ? [{ answerText: "True", isCorrect: true }, { answerText: "False", isCorrect: false }] : [{ answerText: "False", isCorrect: true },  {answerText: "True", isCorrect: false}];
+      // setAnswers(answer);
+    }
+
+    if (answerType === "MULTIPLECHOICE") {
+      let answer = t.target.value;
+      // setAnswers([...answers, answer])
+    }
+  }
+
+  // console.log(answerType)
+  // console.log(viewer.id)
+  // console.log("Title: ", title)
+  // console.log("Questions: ", questions)
+  // console.log("Answers: ", answers)
+  // console.log(questions)
+  console.log(quiz)
+
+  const handleSubmit = () => {
   }
 
   if (!viewer.id) {
@@ -60,11 +106,11 @@ export const CreateQuiz = ({ viewer }: Props) => {
   }
 
   return (
-    <Box sx={{ marginTop: 10, maxWidth: "50%" }}>
+    <div className='quiz__box'>
       <h1>Create Assessment</h1>
       <form>
         <TextField 
-          label="Enter Quiz Title"
+          label="Enter Assessment Title"
           fullWidth
           onChange={updateTitle}
         />
@@ -149,10 +195,9 @@ export const CreateQuiz = ({ viewer }: Props) => {
           </div>
         </div>
         ) : <></>}
-        {addQuestion ? <QuizQuestion key={addQuestion} /> : <></>}
-        {/* {addQuestion ? Array(addQuestion).map((_, i) => (<QuizQuestion />)) : <></>} */}
         <Button onClick={() => setAddQuestion(addQuestion + 1)}>Add Question</Button>
+        <Button onSubmit={handleSubmit}>Create</Button>
       </form>
-    </Box>
+    </div>
   )
 }
