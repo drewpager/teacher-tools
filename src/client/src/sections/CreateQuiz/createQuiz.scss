@@ -1,5 +1,14 @@
-.quiz__answerType {
-  margin-top: 10px;
+.quiz__box {
+  margin-top: 5rem;
+  max-width: 50%;
+}
+
+.MuiFormControl-root {
+  &.quiz__answerType {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+  }
 }
 
 .quiz__answerArea {
