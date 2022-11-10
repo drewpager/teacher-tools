@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent, SyntheticEvent } from 'react';
+import React, { useState, useRef, useEffect, ChangeEvent, SyntheticEvent, FormEvent } from 'react';
 import { QuizQuestion } from './QuizQuestion';
 import { useCreateQuizMutation, Viewer, Quiz, Questions, AnswerOptions, AnswerFormat } from '../../graphql/generated';
 import { Box, TextField, FormControl, FormLabel, FormControlLabel, Radio, RadioGroup, Typography, Tooltip, Button } from '@mui/material'
@@ -30,10 +30,7 @@ export const CreateQuiz = ({ viewer }: Props) => {
   const [enumAnswerType, setEnumAnswerType] = useState<AnswerFormat>(AnswerFormat.Truefalse);
   const [addQuestion, setAddQuestion] = useState<number>(0)
   const [title, setTitle] = useState<string>("");
-  
-  useEffect(() => {
-    
-  }, [addQuestion])
+
   
   // const [createQuiz] = useCreateQuizMutation({
   //   variables: {
@@ -57,40 +54,49 @@ export const CreateQuiz = ({ viewer }: Props) => {
     setAnswerType(type?.toLocaleUpperCase());
   }
 
+  const updateAnswers = (t: ChangeEvent<HTMLInputElement>) => {
+    if (answerType === "TRUEFALSE") {
+      let answer = answerTrue ? { answerText: "True", isCorrect: true } : { answerText: "False", isCorrect: true };
+      setAnswers([...answers, answer]);
+    }
+
+    if (answerType === "MULTIPLECHOICE") {
+      t.preventDefault()
+      let isTrue = t.currentTarget.getAttribute("label")?.includes("correct");
+      console.log(isTrue);
+      let answerText = t.target.value;
+      let answer = answerText ? { answerText: answerText, isCorrect: true} : { answerText: answerText, isCorrect: false }
+      setAnswers([...answers, answer])
+    }
+  }
+
   const updateQuestions = (t: ChangeEvent<HTMLInputElement>) => {
+    t.preventDefault();
     let question = t.target.value;
     setQuestions([...questions, question])
+
     setQuiz({
       ...quiz,
       questions: [{
         question: question,
-        answerOptions: answers,
+        answerOptions: [...answers],
         answerType: enumAnswerType,
-      }]
+      }],
+      creator: `${viewer.id}`
     })
-  }
-
-  const updateAnswers = (t: ChangeEvent<HTMLInputElement>) => {
-    if (answerType === "TRUEFALSE") {
-      let answer = answerTrue ? [{ answerText: "True", isCorrect: true }, { answerText: "False", isCorrect: false }] : [{ answerText: "False", isCorrect: true },  {answerText: "True", isCorrect: false}];
-      // setAnswers(answer);
-    }
-
-    if (answerType === "MULTIPLECHOICE") {
-      let answer = t.target.value;
-      // setAnswers([...answers, answer])
-    }
   }
 
   // console.log(answerType)
   // console.log(viewer.id)
   // console.log("Title: ", title)
   // console.log("Questions: ", questions)
-  // console.log("Answers: ", answers)
+  console.log("Answers: ", answers)
   // console.log(questions)
-  console.log(quiz)
+  // console.log(quiz)
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: FormEvent<HTMLButtonElement>) => {
+    console.log("Answers: ", answers)
+    console.log(quiz)
   }
 
   if (!viewer.id) {
@@ -165,7 +171,7 @@ export const CreateQuiz = ({ viewer }: Props) => {
               <Cancel sx={{ color: "black", marginRight: 1 }} /> 
             </Tooltip>
             <TextField 
-              label="Enter Incorrect Answer"
+              label="Enter Wrong Answer"
               fullWidth
               sx={{ marginTop: 2 }}
               onChange={updateAnswers}
@@ -176,7 +182,7 @@ export const CreateQuiz = ({ viewer }: Props) => {
               <Cancel sx={{ color: "black", marginRight: 1 }} /> 
             </Tooltip>
             <TextField 
-              label="Enter Incorrect Answer"
+              label="Enter Wrong Answer"
               fullWidth
               sx={{ marginTop: 2 }}
               onChange={updateAnswers}
@@ -187,7 +193,7 @@ export const CreateQuiz = ({ viewer }: Props) => {
               <Cancel sx={{ color: "black", marginRight: 1 }} /> 
             </Tooltip>
             <TextField 
-              label="Enter Incorrect Answer"
+              label="Enter Wrong Answer"
               fullWidth
               sx={{ marginTop: 2 }}
               onChange={updateAnswers}
