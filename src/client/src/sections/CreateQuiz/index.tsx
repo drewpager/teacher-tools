@@ -38,6 +38,7 @@ export const CreateQuiz = ({ viewer }: Props) => {
   //   }
   // })
 
+
   const updateTitle = (t: ChangeEvent<HTMLInputElement>) => {
     t.preventDefault();
     let title = t.target.value;
@@ -85,18 +86,16 @@ export const CreateQuiz = ({ viewer }: Props) => {
       creator: `${viewer.id}`
     })
   }
-
   // console.log(answerType)
   // console.log(viewer.id)
   // console.log("Title: ", title)
   // console.log("Questions: ", questions)
-  console.log("Answers: ", answers)
+  // console.log("Answers: ", answers)
   // console.log(questions)
-  // console.log(quiz)
+  console.log(quiz)
 
   const handleSubmit = (e: FormEvent<HTMLButtonElement>) => {
-    console.log("Answers: ", answers)
-    console.log(quiz)
+  
   }
 
   if (!viewer.id) {
@@ -201,6 +200,7 @@ export const CreateQuiz = ({ viewer }: Props) => {
           </div>
         </div>
         ) : <></>}
+        { Array.from({ length: addQuestion }).map((_, i) => ( <QuizQuestion key={i} /> )) }
         <Button onClick={() => setAddQuestion(addQuestion + 1)}>Add Question</Button>
         <Button onSubmit={handleSubmit}>Create</Button>
       </form>
