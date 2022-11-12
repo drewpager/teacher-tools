@@ -22,7 +22,8 @@ const initialInput: quizInput = {
 }
 
 export const CreateQuiz = ({ viewer }: Props) => {
-  const [questions, setQuestions] = useState<Array<string>>([]);
+  const [question, setQuestion] = useState<string>("")
+  const [questions, setQuestions] = useState<Array<Questions>>([]);
   const [answers, setAnswers] = useState<Array<AnswerOptions>>([]);
   const [quiz, setQuiz] = useState<quizInput>(initialInput);
   const [answerType, setAnswerType] = useState<string | undefined>("TRUEFALSE");
@@ -41,12 +42,8 @@ export const CreateQuiz = ({ viewer }: Props) => {
 
   const updateTitle = (t: ChangeEvent<HTMLInputElement>) => {
     t.preventDefault();
-    let title = t.target.value;
-    setTitle(title)
-    setQuiz({
-      ...quiz,
-      title: title
-    })
+    let quizTitle = t.target.value;
+    setTitle(quizTitle)
   }
 
   const handleAnswerChange = (e: SyntheticEvent) => {
@@ -55,47 +52,57 @@ export const CreateQuiz = ({ viewer }: Props) => {
     setAnswerType(type?.toLocaleUpperCase());
   }
 
-  const updateAnswers = (t: ChangeEvent<HTMLInputElement>) => {
-    if (answerType === "TRUEFALSE") {
-      let answer = answerTrue ? { answerText: "True", isCorrect: true } : { answerText: "False", isCorrect: true };
-      setAnswers([...answers, answer]);
-    }
-
-    if (answerType === "MULTIPLECHOICE") {
-      t.preventDefault()
-      let isTrue = t.currentTarget.getAttribute("label")?.includes("correct");
-      console.log(isTrue);
-      let answerText = t.target.value;
-      let answer = answerText ? { answerText: answerText, isCorrect: true} : { answerText: answerText, isCorrect: false }
-      setAnswers([...answers, answer])
-    }
+  const updateQuestion = (t: ChangeEvent<HTMLInputElement>) => {
+    t.preventDefault();
+    let newQuestion = t.target.value;
+    setQuestion(newQuestion)
   }
 
-  const updateQuestions = (t: ChangeEvent<HTMLInputElement>) => {
-    t.preventDefault();
-    let question = t.target.value;
-    setQuestions([...questions, question])
+
+  const updateAnswers = (t: ChangeEvent<HTMLInputElement>) => {
+
+    if (answerType === 'MULTIPLECHOICE') {
+        t.preventDefault();
+        let corrAnswer = t.target.id === "corr";
+        let answerText = t.target.value;
+        let answer = corrAnswer && answerText ? { answerText: answerText, isCorrect: true} : { answerText: answerText, isCorrect: false }
+        setAnswers([...answers, answer])
+      }
 
     setQuiz({
-      ...quiz,
+      title: title,
       questions: [{
         question: question,
-        answerOptions: [...answers],
-        answerType: enumAnswerType,
+        answerOptions: answers,
+        answerType: enumAnswerType
       }],
       creator: `${viewer.id}`
     })
   }
-  // console.log(answerType)
-  // console.log(viewer.id)
-  // console.log("Title: ", title)
-  // console.log("Questions: ", questions)
-  // console.log("Answers: ", answers)
-  // console.log(questions)
+  
+  // console.log(answers)
   console.log(quiz)
 
-  const handleSubmit = (e: FormEvent<HTMLButtonElement>) => {
-  
+  const saveQuestion = (e: FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    console.log(answerType);
+    
+    if (answerType === "TRUEFALSE") {
+      let answer = answerTrue ? [{ isCorrect: true, answerText: "True" }, { isCorrect: false, answerText: "False" }] : [{ isCorrect: true, answerText: "False" }, { isCorrect: false, answerText: "True" }];
+      setAnswers(answer);
+    }
+
+    setQuiz({
+      title: title,
+      questions: [{
+        question: question,
+        answerOptions: answers,
+        answerType: enumAnswerType
+      }],
+      creator: `${viewer.id}`
+    })
+
+    console.log(quiz)
   }
 
   if (!viewer.id) {
@@ -123,7 +130,7 @@ export const CreateQuiz = ({ viewer }: Props) => {
           label="Enter First Question"
           fullWidth
           sx={{ marginTop: 2 }}
-          onChange={updateQuestions}
+          onChange={updateQuestion}
         />
         <FormControl className='quiz__answerType'>
           <FormLabel id="demo-radio-buttons-group-label">Answer Type</FormLabel>
@@ -163,6 +170,7 @@ export const CreateQuiz = ({ viewer }: Props) => {
               fullWidth
               sx={{ marginTop: 2 }}
               onChange={updateAnswers}
+              id="corr"
             />
           </div>
           <div className="quiz__multiAnswers">
@@ -174,6 +182,7 @@ export const CreateQuiz = ({ viewer }: Props) => {
               fullWidth
               sx={{ marginTop: 2 }}
               onChange={updateAnswers}
+              id="incorr"
             />
           </div>
           <div className="quiz__multiAnswers">
@@ -185,6 +194,7 @@ export const CreateQuiz = ({ viewer }: Props) => {
               fullWidth
               sx={{ marginTop: 2 }}
               onChange={updateAnswers}
+              id="incorr"
             />
           </div>
           <div className="quiz__multiAnswers">
@@ -196,14 +206,59 @@ export const CreateQuiz = ({ viewer }: Props) => {
               fullWidth
               sx={{ marginTop: 2 }}
               onChange={updateAnswers}
+              id="incorr"
             />
           </div>
         </div>
         ) : <></>}
         { Array.from({ length: addQuestion }).map((_, i) => ( <QuizQuestion key={i} /> )) }
-        <Button onClick={() => setAddQuestion(addQuestion + 1)}>Add Question</Button>
-        <Button onSubmit={handleSubmit}>Create</Button>
+        <Button onClick={(e) => saveQuestion(e)}>Add Question</Button>
+        <Button onClick={() => setAddQuestion(addQuestion + 1)}>New Question</Button>
+        <Button onClick={() => {}}>Create</Button>
       </form>
     </div>
   )
 }
+
+  // "input": {
+  //   "title": "Testing Quiz Mutation",
+  //   "questions": [
+  //     {
+  //       "question": "What is a mutation?",
+  //       "answerOptions": [
+  //         {
+  //           "isCorrect": true,
+  //           "answerText": "it's a graphql write operation"
+  //         },
+  //         {
+  //           "isCorrect": false,
+  //           "answerText": "It's a gene editing tool"
+  //         }
+  //       ],
+  //       "answerType": "TRUEFALSE"
+  //     },
+  //     {
+  //       "question": "What is Drew's Middle Name?",
+  //       "answerOptions": [
+  //         {
+  //           "isCorrect": true,
+  //           "answerText": "Thomas"
+  //         },
+  //         {
+  //           "isCorrect": false,
+  //           "answerText": "Roger"
+  //         },
+  //         {
+  //           "isCorrect": false,
+  //           "answerText": "Joe"
+  //         },
+  //         {
+  //           "isCorrect": false,
+  //           "answerText": "Jim"
+  //         }
+  //       ],
+  //       "answerType": "MULTIPLECHOICE"
+  //     }
+  //   ],
+  //   "creator": "116143759549242008910"
+  // }
