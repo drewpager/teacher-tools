@@ -60,14 +60,18 @@ export const CreateQuiz = ({ viewer }: Props) => {
 
 
   const updateAnswers = (t: ChangeEvent<HTMLInputElement>) => {
+    if (answerType === "TRUEFALSE") {
+      let answer = answerType && answerTrue ? [{ isCorrect: true, answerText: "True" }, { isCorrect: false, answerText: "False" }] : [{ isCorrect: true, answerText: "False" }, { isCorrect: false, answerText: "True" }];
+      setAnswers([...answer]);
+    }
 
     if (answerType === 'MULTIPLECHOICE') {
-        t.preventDefault();
-        let corrAnswer = t.target.id === "corr";
-        let answerText = t.target.value;
-        let answer = corrAnswer && answerText ? { answerText: answerText, isCorrect: true} : { answerText: answerText, isCorrect: false }
-        setAnswers([...answers, answer])
-      }
+      t.preventDefault();
+      let corrAnswer = t.target.id === "corr";
+      let answerText = t.target.value;
+      let answer = corrAnswer && answerText ? { isCorrect: true, answerText: answerText, } : { isCorrect: false, answerText: answerText }
+      setAnswers([...answers, answer])
+    }
 
     setQuiz({
       title: title,
@@ -81,15 +85,18 @@ export const CreateQuiz = ({ viewer }: Props) => {
   }
   
   // console.log(answers)
-  console.log(quiz)
+  console.log(title)
+  console.log(question)
+  console.log(answers)
+  console.log(enumAnswerType)
+  console.log(viewer.id)
 
   const saveQuestion = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log(answerType);
-    
+
     if (answerType === "TRUEFALSE") {
-      let answer = answerTrue ? [{ isCorrect: true, answerText: "True" }, { isCorrect: false, answerText: "False" }] : [{ isCorrect: true, answerText: "False" }, { isCorrect: false, answerText: "True" }];
-      setAnswers(answer);
+      let answer = answerType && answerTrue ? [{ isCorrect: true, answerText: "True" }, { isCorrect: false, answerText: "False" }] : [{ isCorrect: true, answerText: "False" }, { isCorrect: false, answerText: "True" }];
+      setAnswers([...answer]);
     }
 
     setQuiz({
@@ -101,8 +108,6 @@ export const CreateQuiz = ({ viewer }: Props) => {
       }],
       creator: `${viewer.id}`
     })
-
-    console.log(quiz)
   }
 
   if (!viewer.id) {
@@ -124,13 +129,14 @@ export const CreateQuiz = ({ viewer }: Props) => {
         <TextField 
           label="Enter Assessment Title"
           fullWidth
-          onChange={updateTitle}
+          // onChange={updateTitle}
+          onInput={updateTitle}
         />
         <TextField 
           label="Enter First Question"
           fullWidth
           sx={{ marginTop: 2 }}
-          onChange={updateQuestion}
+          onChange={() => updateQuestion}
         />
         <FormControl className='quiz__answerType'>
           <FormLabel id="demo-radio-buttons-group-label">Answer Type</FormLabel>
@@ -149,13 +155,13 @@ export const CreateQuiz = ({ viewer }: Props) => {
               <Tooltip title="Click To Switch">
                 <CheckCircle color={"primary"} sx={{ marginRight: 1 }} /> 
               </Tooltip>
-              <Typography>{!answerTrue ? "True" : "False"}</Typography>
+              <Typography>{answerTrue ? "True" : "False"}</Typography>
             </div>
             <div className="quiz__answers">
               <Tooltip title="Click To Switch">
                 <Cancel sx={{ color: "primary", marginRight: 1 }} /> 
               </Tooltip>
-              <Typography>{answerTrue ? "True" : "False"}</Typography>
+              <Typography>{!answerTrue ? "True" : "False"}</Typography>
             </div>
           </div>
         ) : <></>}
@@ -169,7 +175,7 @@ export const CreateQuiz = ({ viewer }: Props) => {
               label="Enter Correct Answer"
               fullWidth
               sx={{ marginTop: 2 }}
-              onChange={updateAnswers}
+              onChange={() => updateAnswers}
               id="corr"
             />
           </div>
@@ -181,7 +187,7 @@ export const CreateQuiz = ({ viewer }: Props) => {
               label="Enter Wrong Answer"
               fullWidth
               sx={{ marginTop: 2 }}
-              onChange={updateAnswers}
+              onChange={() => updateAnswers}
               id="incorr"
             />
           </div>
@@ -193,7 +199,7 @@ export const CreateQuiz = ({ viewer }: Props) => {
               label="Enter Wrong Answer"
               fullWidth
               sx={{ marginTop: 2 }}
-              onChange={updateAnswers}
+              onChange={() => updateAnswers}
               id="incorr"
             />
           </div>
@@ -205,7 +211,7 @@ export const CreateQuiz = ({ viewer }: Props) => {
               label="Enter Wrong Answer"
               fullWidth
               sx={{ marginTop: 2 }}
-              onChange={updateAnswers}
+              onChange={() => updateAnswers}
               id="incorr"
             />
           </div>
