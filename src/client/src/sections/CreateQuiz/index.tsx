@@ -39,11 +39,16 @@ export const CreateQuiz = ({ viewer }: Props) => {
   //   }
   // })
 
-
   const updateTitle = (t: ChangeEvent<HTMLInputElement>) => {
     t.preventDefault();
     let quizTitle = t.target.value;
     setTitle(quizTitle)
+
+    setQuiz({
+      ...quiz,
+      title: title,
+      creator: `${viewer.id}`
+    })
   }
 
   const handleAnswerChange = (e: SyntheticEvent) => {
@@ -62,7 +67,7 @@ export const CreateQuiz = ({ viewer }: Props) => {
   const updateAnswers = (t: ChangeEvent<HTMLInputElement>) => {
     if (answerType === "TRUEFALSE") {
       let answer = answerType && answerTrue ? [{ isCorrect: true, answerText: "True" }, { isCorrect: false, answerText: "False" }] : [{ isCorrect: true, answerText: "False" }, { isCorrect: false, answerText: "True" }];
-      setAnswers([...answer]);
+      setAnswers(answer);
     }
 
     if (answerType === 'MULTIPLECHOICE') {
@@ -73,23 +78,33 @@ export const CreateQuiz = ({ viewer }: Props) => {
       setAnswers([...answers, answer])
     }
 
+    setQuestions([{...questions,
+      question: question,
+      answerOptions: answers,
+      answerType: enumAnswerType
+    }])
+
     setQuiz({
-      title: title,
-      questions: [{
+      ...quiz,
+      // questions: [{
+      //   question: question,
+      //   answerOptions: answers,
+      //   answerType: enumAnswerType
+      // }],
+      questions: questions
+    })
+  }
+
+  const handleNewQuestion = () => {
+    setAddQuestion(addQuestion + 1)
+
+    setQuestions([...questions, {
         question: question,
         answerOptions: answers,
         answerType: enumAnswerType
-      }],
-      creator: `${viewer.id}`
-    })
+      }]
+    )
   }
-  
-  // console.log(answers)
-  console.log(title)
-  console.log(question)
-  console.log(answers)
-  console.log(enumAnswerType)
-  console.log(viewer.id)
 
   const saveQuestion = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -101,14 +116,18 @@ export const CreateQuiz = ({ viewer }: Props) => {
 
     setQuiz({
       title: title,
-      questions: [{
-        question: question,
-        answerOptions: answers,
-        answerType: enumAnswerType
-      }],
+      // questions: [{
+      //   question: question,
+      //   answerOptions: answers,
+      //   answerType: enumAnswerType
+      // }],
+      questions: questions,
       creator: `${viewer.id}`
     })
   }
+
+  console.log(questions)
+  console.log(quiz)
 
   if (!viewer.id) {
     return (
@@ -129,14 +148,14 @@ export const CreateQuiz = ({ viewer }: Props) => {
         <TextField 
           label="Enter Assessment Title"
           fullWidth
-          // onChange={updateTitle}
-          onInput={updateTitle}
+          onChange={updateTitle}
+          // onInput={updateTitle}
         />
         <TextField 
           label="Enter First Question"
           fullWidth
           sx={{ marginTop: 2 }}
-          onChange={() => updateQuestion}
+          onChange={updateQuestion}
         />
         <FormControl className='quiz__answerType'>
           <FormLabel id="demo-radio-buttons-group-label">Answer Type</FormLabel>
@@ -219,52 +238,9 @@ export const CreateQuiz = ({ viewer }: Props) => {
         ) : <></>}
         { Array.from({ length: addQuestion }).map((_, i) => ( <QuizQuestion key={i} /> )) }
         <Button onClick={(e) => saveQuestion(e)}>Add Question</Button>
-        <Button onClick={() => setAddQuestion(addQuestion + 1)}>New Question</Button>
+        <Button onClick={handleNewQuestion}>New Question</Button>
         <Button onClick={() => {}}>Create</Button>
       </form>
     </div>
   )
 }
-
-  // "input": {
-  //   "title": "Testing Quiz Mutation",
-  //   "questions": [
-  //     {
-  //       "question": "What is a mutation?",
-  //       "answerOptions": [
-  //         {
-  //           "isCorrect": true,
-  //           "answerText": "it's a graphql write operation"
-  //         },
-  //         {
-  //           "isCorrect": false,
-  //           "answerText": "It's a gene editing tool"
-  //         }
-  //       ],
-  //       "answerType": "TRUEFALSE"
-  //     },
-  //     {
-  //       "question": "What is Drew's Middle Name?",
-  //       "answerOptions": [
-  //         {
-  //           "isCorrect": true,
-  //           "answerText": "Thomas"
-  //         },
-  //         {
-  //           "isCorrect": false,
-  //           "answerText": "Roger"
-  //         },
-  //         {
-  //           "isCorrect": false,
-  //           "answerText": "Joe"
-  //         },
-  //         {
-  //           "isCorrect": false,
-  //           "answerText": "Jim"
-  //         }
-  //       ],
-  //       "answerType": "MULTIPLECHOICE"
-  //     }
-  //   ],
-  //   "creator": "116143759549242008910"
-  // }
