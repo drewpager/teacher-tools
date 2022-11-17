@@ -65,7 +65,7 @@ export const CreateQuiz = ({ viewer }: Props) => {
 
 
   const updateAnswers = (t: ChangeEvent<HTMLInputElement>) => {
-    if (answerType === "TRUEFALSE") {
+    if (answerType === 'TRUEFALSE') {
       let answer = answerType && answerTrue ? [{ isCorrect: true, answerText: "True" }, { isCorrect: false, answerText: "False" }] : [{ isCorrect: true, answerText: "False" }, { isCorrect: false, answerText: "True" }];
       setAnswers(answer);
     }
@@ -78,7 +78,7 @@ export const CreateQuiz = ({ viewer }: Props) => {
       setAnswers([...answers, answer])
     }
 
-    setQuestions([{...questions,
+    setQuestions([...questions, {
       question: question,
       answerOptions: answers,
       answerType: enumAnswerType
@@ -86,11 +86,6 @@ export const CreateQuiz = ({ viewer }: Props) => {
 
     setQuiz({
       ...quiz,
-      // questions: [{
-      //   question: question,
-      //   answerOptions: answers,
-      //   answerType: enumAnswerType
-      // }],
       questions: questions
     })
   }
@@ -104,29 +99,37 @@ export const CreateQuiz = ({ viewer }: Props) => {
         answerType: enumAnswerType
       }]
     )
+    
+    setQuiz({
+      ...quiz,
+      questions: questions
+    })
+
+    console.log(quiz)
   }
 
   const saveQuestion = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    if (answerType === "TRUEFALSE") {
+    if (answerType === 'TRUEFALSE') {
       let answer = answerType && answerTrue ? [{ isCorrect: true, answerText: "True" }, { isCorrect: false, answerText: "False" }] : [{ isCorrect: true, answerText: "False" }, { isCorrect: false, answerText: "True" }];
-      setAnswers([...answer]);
+      setAnswers(answer);
     }
+
+    setQuestions([...questions, {
+      question: question,
+      answerOptions: answers,
+      answerType: enumAnswerType
+    }]
+  )
 
     setQuiz({
       title: title,
-      // questions: [{
-      //   question: question,
-      //   answerOptions: answers,
-      //   answerType: enumAnswerType
-      // }],
       questions: questions,
       creator: `${viewer.id}`
     })
   }
 
-  console.log(questions)
   console.log(quiz)
 
   if (!viewer.id) {
@@ -194,7 +197,7 @@ export const CreateQuiz = ({ viewer }: Props) => {
               label="Enter Correct Answer"
               fullWidth
               sx={{ marginTop: 2 }}
-              onChange={() => updateAnswers}
+              onChange={updateAnswers}
               id="corr"
             />
           </div>
@@ -206,7 +209,7 @@ export const CreateQuiz = ({ viewer }: Props) => {
               label="Enter Wrong Answer"
               fullWidth
               sx={{ marginTop: 2 }}
-              onChange={() => updateAnswers}
+              onChange={updateAnswers}
               id="incorr"
             />
           </div>
@@ -218,7 +221,7 @@ export const CreateQuiz = ({ viewer }: Props) => {
               label="Enter Wrong Answer"
               fullWidth
               sx={{ marginTop: 2 }}
-              onChange={() => updateAnswers}
+              onChange={updateAnswers}
               id="incorr"
             />
           </div>
@@ -230,13 +233,13 @@ export const CreateQuiz = ({ viewer }: Props) => {
               label="Enter Wrong Answer"
               fullWidth
               sx={{ marginTop: 2 }}
-              onChange={() => updateAnswers}
+              onChange={updateAnswers}
               id="incorr"
             />
           </div>
         </div>
         ) : <></>}
-        { Array.from({ length: addQuestion }).map((_, i) => ( <QuizQuestion key={i} /> )) }
+        { Array.from({ length: addQuestion }).map((_, i) => ( <QuizQuestion quest={questions} quizStart={quiz} key={i} /> )) }
         <Button onClick={(e) => saveQuestion(e)}>Add Question</Button>
         <Button onClick={handleNewQuestion}>New Question</Button>
         <Button onClick={() => {}}>Create</Button>

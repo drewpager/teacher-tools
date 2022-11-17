@@ -4,11 +4,22 @@ import { Questions, AnswerOptions, AnswerFormat } from '../../graphql/generated'
 import { CheckCircle, Cancel } from '@mui/icons-material';
 import './createQuiz.scss';
 
+type Props = {
+  quest: Questions[];
+  quizStart: quizInput;
+}
 
-export const QuizQuestion = () => {
+type quizInput = {
+  title: string,
+  questions: Questions[],
+  creator: string,
+}
+
+export const QuizQuestion = ({ quest, quizStart }: Props) => {
   const [question, setQuestion] = useState<string>("")
-  const [questions, setQuestions] = useState<Array<Questions>>([]);
+  const [questions, setQuestions] = useState<Array<Questions>>(quest);
   const [answers, setAnswers] = useState<Array<AnswerOptions>>([]);
+  const [quiz, setQuiz] = useState<quizInput>(quizStart);
   const [answerType, setAnswerType] = useState<string | undefined>("TRUEFALSE");
   const [answerTrue, setAnswerTrue] = useState<boolean>(true);
   const [enumAnswerType, setEnumAnswerType] = useState<AnswerFormat>(AnswerFormat.Truefalse);
@@ -38,16 +49,23 @@ export const QuizQuestion = () => {
       let answer = corrAnswer && answerText ? { isCorrect: true, answerText: answerText, } : { isCorrect: false, answerText: answerText }
       setAnswers([...answers, answer])
     }
+  }
 
-    setQuestions([{...questions,
+  const handleChanges = () => {
+    setQuestions([...questions, {
       question: question,
       answerOptions: answers,
       answerType: enumAnswerType
     }])
-  }
 
+    setQuiz({
+      ...quiz,
+      questions: questions
+    })
+  }
+  
   return (
-    <div>
+    <div onChange={handleChanges}>
       <TextField 
         label="Enter Question"
         fullWidth
@@ -91,7 +109,7 @@ export const QuizQuestion = () => {
               label="Enter Correct Answer"
               fullWidth
               sx={{ marginTop: 2 }}
-              onChange={() => updateAnswers}
+              onChange={updateAnswers}
               id="corr"
             />
           </div>
@@ -103,7 +121,7 @@ export const QuizQuestion = () => {
               label="Enter Wrong Answer"
               fullWidth
               sx={{ marginTop: 2 }}
-              onChange={() => updateAnswers}
+              onChange={updateAnswers}
               id="incorr"
             />
           </div>
@@ -115,7 +133,7 @@ export const QuizQuestion = () => {
               label="Enter Wrong Answer"
               fullWidth
               sx={{ marginTop: 2 }}
-              onChange={() => updateAnswers}
+              onChange={updateAnswers}
               id="incorr"
             />
           </div>
@@ -127,7 +145,7 @@ export const QuizQuestion = () => {
               label="Enter Wrong Answer"
               fullWidth
               sx={{ marginTop: 2 }}
-              onChange={() => updateAnswers}
+              onChange={updateAnswers}
               id="incorr"
             />
           </div>
