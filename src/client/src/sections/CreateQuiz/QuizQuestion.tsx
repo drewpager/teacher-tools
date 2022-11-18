@@ -63,6 +63,8 @@ export const QuizQuestion = ({ quest, quizStart }: Props) => {
       questions: questions
     })
   }
+
+  console.log(quiz);
   
   return (
     <div onChange={handleChanges}>

@@ -105,7 +105,7 @@ export const CreateQuiz = ({ viewer }: Props) => {
       questions: questions
     })
 
-    console.log(quiz)
+    // console.log(quiz)
   }
 
   const saveQuestion = (e: FormEvent<HTMLButtonElement>) => {
@@ -128,9 +128,11 @@ export const CreateQuiz = ({ viewer }: Props) => {
       questions: questions,
       creator: `${viewer.id}`
     })
+
+    console.log("Save Question: ", quiz)
   }
 
-  console.log(quiz)
+  // console.log(quiz)
 
   if (!viewer.id) {
     return (
