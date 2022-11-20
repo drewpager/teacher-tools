@@ -1,4 +1,4 @@
-import React, { useReducer, useRef, useEffect, ChangeEvent, SyntheticEvent, FormEvent } from 'react';
+import React, { useReducer, useState, useRef, useEffect, ChangeEvent, SyntheticEvent, FormEvent } from 'react';
 import { QuizQuestion } from '../CreateQuiz/QuizQuestion';
 import { useCreateQuizMutation, Viewer, Quiz, Questions, AnswerOptions, AnswerFormat } from '../../graphql/generated';
 import { TextField, FormControl, FormLabel, FormControlLabel, Radio, RadioGroup, Typography, Tooltip, Button } from '@mui/material'
@@ -20,7 +20,8 @@ type quizInput = {
 const initialInput: quizInput = {
   title: "",
   questions: [{
-    answerType: AnswerFormat.Truefalse || AnswerFormat.Multiplechoice, 
+    // answerType: AnswerFormat.Truefalse || AnswerFormat.Multiplechoice,
+    answerType: AnswerFormat.Truefalse, 
     answerOptions: [],
     question: ""
   }],
@@ -37,7 +38,7 @@ function reducer(state: any, action: any) {
     case 'UPDATE_ANSWER_TYPE':
       return {
         ...state,
-        [state.answerType]: action.payload
+        [action.field]: action.payload
       }
     case 'creator':
       return {
@@ -69,9 +70,15 @@ export const QuizCreate = ({ viewer }: Props) => {
   const handleAnswerChecked = (e: SyntheticEvent<Element, Event>) => {
     dispatch({
       type: 'UPDATE_ANSWER_TYPE',
+      field: 'answerType',
       payload: e.currentTarget.getAttribute("value")
     })
   }
+
+  // const handleQuizCreation = () => {
+  
+  // }
+  console.log(state)
   
   return (
     <div className='quiz__box'>
@@ -99,7 +106,7 @@ export const QuizCreate = ({ viewer }: Props) => {
           <FormLabel id="demo-radio-buttons-group-label">Answer Type</FormLabel>
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="TRUEFALSE"
+            // defaultValue="TRUEFALSE"
             name="radio-buttons-group"
           >
             <FormControlLabel
