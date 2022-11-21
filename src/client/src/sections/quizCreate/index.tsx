@@ -17,18 +17,25 @@ type quizInput = {
   creator: string,
 }
 
+type Action =
+  | { type: 'CREATOR', field: string, payload: string | undefined }  
+  | { type: 'UPDATE_FORM_FIELD', field: string, payload: string }
+  | { type: 'UPDATE_QUESTIONS_OBJ', field: string, payload: string }
+  | { type: 'UPDATE_ANSWER_TYPE', field: string, payload: AnswerFormat.Multiplechoice | AnswerFormat.Truefalse | undefined }
+  | { type: 'UPDATE_ANSWER_OPTIONS', field: string, payload: string | undefined };
+
 const initialInput: quizInput = {
   title: "",
   questions: [{
-    // answerType: AnswerFormat.Truefalse || AnswerFormat.Multiplechoice,
-    answerType: AnswerFormat.Truefalse, 
-    answerOptions: [],
-    question: ""
+    answerType: undefined, 
+    question: "",
+    answerOptions: [{}]
   }],
+  // questions: [],
   creator: ""
 }
 
-function reducer(state: any, action: any) {
+const reducer = (state: quizInput, action: Action): quizInput => {
   switch (action.type) {
     case 'UPDATE_FORM_FIELD':
       return {
@@ -38,9 +45,28 @@ function reducer(state: any, action: any) {
     case 'UPDATE_ANSWER_TYPE':
       return {
         ...state,
-        [action.field]: action.payload
+        questions: [{ 
+          ...state.questions, 
+          answerType: action.payload 
+        }]
       }
-    case 'creator':
+    case 'UPDATE_QUESTIONS_OBJ':
+      return {
+        ...state,
+        questions: [{ 
+          ...state.questions, 
+          question: action.payload 
+        }]
+      }
+    case 'UPDATE_ANSWER_OPTIONS':
+      return {
+        ...state,
+        questions: [{ 
+          ...state.questions, 
+          answerOptions: [{ isCorrect: action.field === "True" ? true : false, answerText: action.payload }]
+        }]
+      }
+    case 'CREATOR':
       return {
         ...state,
         [action.field]: action.payload
@@ -52,6 +78,18 @@ function reducer(state: any, action: any) {
 
 export const QuizCreate = ({ viewer }: Props) => {
   const [state, dispatch] = useReducer(reducer, initialInput);
+  const [answerTrue, setAnswerTrue] = useState<boolean>(true);
+  const [addQuestion, setAddQuestion] = useState<number>(0);
+
+  useEffect(() => {
+    if (viewer && viewer.id) {
+      dispatch({
+        type: 'CREATOR',
+        field: 'creator',
+        payload: viewer.id
+      })
+    }
+  }, [viewer])  
 
   const handleFormChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     dispatch({
@@ -59,20 +97,40 @@ export const QuizCreate = ({ viewer }: Props) => {
       field: e.target.name,
       payload: e.target.value
     })
-    
-    dispatch({
-      type: 'creator',
-      field: 'creator',
-      payload: viewer.id
-    })
   }
 
   const handleAnswerChecked = (e: SyntheticEvent<Element, Event>) => {
+    const str1 = e?.currentTarget?.getAttribute("value")?.charAt(0).toUpperCase()
+    const str2 = e?.currentTarget?.getAttribute("value")?.toLowerCase().slice(1, )
+    if (str1 && str2) {
+      let answerType = `AnswerFormat.${str1+str2}`
+      console.log(answerType)
+      dispatch({
+        type: 'UPDATE_ANSWER_TYPE',
+        field: 'answerType',
+        payload: answerType
+      })
+    }
+  }
+
+  const handleQuestionsUpdate = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     dispatch({
-      type: 'UPDATE_ANSWER_TYPE',
-      field: 'answerType',
-      payload: e.currentTarget.getAttribute("value")
+      type: 'UPDATE_QUESTIONS_OBJ',
+      field: e.target.name,
+      payload: e.target.value
     })
+  }
+
+  const handleAnswerOptions = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    dispatch({
+      type: 'UPDATE_ANSWER_OPTIONS',
+      field: e.currentTarget.id,
+      payload: e.target.value
+    })
+  }
+
+  const handleNewQuestion = () => {
+    setAddQuestion(addQuestion + 1)
   }
 
   // const handleQuizCreation = () => {
@@ -84,13 +142,13 @@ export const QuizCreate = ({ viewer }: Props) => {
     <div className='quiz__box'>
       <h1>Create Assessment</h1>
       <p>Title: {state.title}</p>
-      <p>Question: {state.question}</p>
-      <p>AnswerType: {state.answerType}</p>
+      <p>Question: {state.questions[addQuestion].question}</p>
+      <p>AnswerType: {state.questions[addQuestion].answerType}</p>
       <form>
         <TextField 
           label="Enter Assessment Title"
           name="title"
-          value={state.title}
+          // value={state.title}
           fullWidth
           onChange={(e) => handleFormChange(e)}
         />
@@ -98,9 +156,9 @@ export const QuizCreate = ({ viewer }: Props) => {
           label="Enter First Question"
           fullWidth
           name="question"
-          value={state.question}
+          // value={state.question}
           sx={{ marginTop: 2 }}
-          onChange={(e) => handleFormChange(e)}
+          onChange={(e) => handleQuestionsUpdate(e)}
         />
         <FormControl className='quiz__answerType'>
           <FormLabel id="demo-radio-buttons-group-label">Answer Type</FormLabel>
@@ -123,7 +181,7 @@ export const QuizCreate = ({ viewer }: Props) => {
             />
           </RadioGroup>
         </FormControl>
-        {/* {state.questions.answerType === "TRUEFALSE" ? (
+        {state.questions[addQuestion].answerType === "TRUEFALSE" ? (
           <div className="quiz__answerArea" onClick={() => setAnswerTrue(!answerTrue)}>
             <div className="quiz__answers">
               <Tooltip title="Click To Switch">
@@ -139,7 +197,7 @@ export const QuizCreate = ({ viewer }: Props) => {
             </div>
           </div>
         ) : <></>}
-        {state.questions.answerType === "MULTIPLECHOICE" ? (
+        {state.questions[addQuestion].answerType === "MULTIPLECHOICE" ? (
           <div className="quiz__multiAnswerArea">
           <div className="quiz__multiAnswers">
             <Tooltip title="Add Correct Answer">
@@ -150,8 +208,8 @@ export const QuizCreate = ({ viewer }: Props) => {
               fullWidth
               sx={{ marginTop: 2 }}
               name="answerOptions"
-              onChange={(e) => handleFormChange(e)}
-              id="corr"
+              onChange={(e) => handleAnswerOptions(e)}
+              id="true"
             />
           </div>
           <div className="quiz__multiAnswers">
@@ -163,8 +221,8 @@ export const QuizCreate = ({ viewer }: Props) => {
               fullWidth
               sx={{ marginTop: 2 }}
               name="answerOptions"
-              onChange={(e) => handleFormChange(e)}
-              id="incorr"
+              onChange={(e) => handleAnswerOptions(e)}
+              id="false"
             />
           </div>
           <div className="quiz__multiAnswers">
@@ -176,8 +234,8 @@ export const QuizCreate = ({ viewer }: Props) => {
               fullWidth
               sx={{ marginTop: 2 }}
               name="answerOptions"
-              onChange={(e) => handleFormChange(e)}
-              id="incorr"
+              onChange={(e) => handleAnswerOptions(e)}
+              id="false"
             />
           </div>
           <div className="quiz__multiAnswers">
@@ -189,15 +247,15 @@ export const QuizCreate = ({ viewer }: Props) => {
               fullWidth
               sx={{ marginTop: 2 }}
               name="answerOptions"
-              onChange={(e) => handleFormChange(e)}
-              id="incorr"
+              onChange={(e) => handleAnswerOptions(e)}
+              id="false"
             />
           </div>
         </div>
-        ) : <></>} */}
+        ) : <></>}
         {/* { Array.from({ length: addQuestion }).map((_, i) => ( <QuizQuestion quest={questions} quizStart={quiz} key={i} /> )) } */}
-        {/* <Button onClick={(e) => saveQuestion(e)}>Add Question</Button>
-        <Button onClick={handleNewQuestion}>New Question</Button> */}
+        {/* <Button onClick={(e) => saveQuestion(e)}>Add Question</Button> */}
+        <Button onClick={handleNewQuestion}>New Question</Button> 
         <Button onClick={() => {}}>Create</Button>
       </form>
     </div>

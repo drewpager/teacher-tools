@@ -50,7 +50,7 @@ export const typeDefs = gql`
   type Questions {
     question: String
     answerOptions: [AnswerOptions]
-    answerType: AnswerFormat!
+    answerType: AnswerFormat
   }
 
   type Quiz {
