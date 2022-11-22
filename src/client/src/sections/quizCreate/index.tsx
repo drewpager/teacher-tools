@@ -21,8 +21,8 @@ type Action =
   | { type: 'CREATOR', field: string, payload: string | undefined }  
   | { type: 'UPDATE_FORM_FIELD', field: string, payload: string }
   | { type: 'UPDATE_QUESTIONS_OBJ', field: string, payload: string }
-  | { type: 'UPDATE_ANSWER_TYPE', field: string, payload: AnswerFormat.Multiplechoice | AnswerFormat.Truefalse | undefined }
-  | { type: 'UPDATE_ANSWER_OPTIONS', field: string, payload: string | undefined };
+  | { type: 'UPDATE_TYPE_ANSWER', field: string, payload: AnswerFormat | undefined }
+  | { type: 'UPDATE_ANSWER_OPTIONS', field: string, payload: string | undefined }
 
 const initialInput: quizInput = {
   title: "",
@@ -42,7 +42,7 @@ const reducer = (state: quizInput, action: Action): quizInput => {
         ...state,
         [action.field]: action.payload
       }
-    case 'UPDATE_ANSWER_TYPE':
+    case 'UPDATE_TYPE_ANSWER':
       return {
         ...state,
         questions: [{ 
@@ -99,16 +99,25 @@ export const QuizCreate = ({ viewer }: Props) => {
     })
   }
 
+  const handleAnswerOptions = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    dispatch({
+      type: 'UPDATE_ANSWER_OPTIONS',
+      field: e.currentTarget.id,
+      payload: e.target.value
+    })
+  }
+
+
   const handleAnswerChecked = (e: SyntheticEvent<Element, Event>) => {
-    const str1 = e?.currentTarget?.getAttribute("value")?.charAt(0).toUpperCase()
-    const str2 = e?.currentTarget?.getAttribute("value")?.toLowerCase().slice(1, )
+    let str1 = e?.currentTarget?.getAttribute("value")?.charAt(0).toUpperCase()
+    let str2 = e?.currentTarget?.getAttribute("value")?.toLowerCase().slice(1, )
+    
     if (str1 && str2) {
-      let answerType = `AnswerFormat.${str1+str2}`
-      console.log(answerType)
+      let answerType = `${str1+str2}`
       dispatch({
-        type: 'UPDATE_ANSWER_TYPE',
+        type: 'UPDATE_TYPE_ANSWER',
         field: 'answerType',
-        payload: answerType
+        payload: answerType === "Multiplechoice" ? AnswerFormat.Multiplechoice : AnswerFormat.Truefalse
       })
     }
   }
@@ -117,14 +126,6 @@ export const QuizCreate = ({ viewer }: Props) => {
     dispatch({
       type: 'UPDATE_QUESTIONS_OBJ',
       field: e.target.name,
-      payload: e.target.value
-    })
-  }
-
-  const handleAnswerOptions = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    dispatch({
-      type: 'UPDATE_ANSWER_OPTIONS',
-      field: e.currentTarget.id,
       payload: e.target.value
     })
   }
