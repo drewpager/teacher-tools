@@ -1,11 +1,10 @@
-import React, { useReducer, useState, useRef, useEffect, ChangeEvent, SyntheticEvent, FormEvent } from 'react';
+import React, { useReducer, useState, useRef, useEffect, ChangeEvent, SyntheticEvent, FormEvent, MouseEventHandler } from 'react';
 import { QuizQuestion } from '../CreateQuiz/QuizQuestion';
 import { useCreateQuizMutation, Viewer, Quiz, Questions, AnswerOptions, AnswerFormat } from '../../graphql/generated';
 import { TextField, FormControl, FormLabel, FormControlLabel, Radio, RadioGroup, Typography, Tooltip, Button } from '@mui/material'
 import { CheckCircle, Cancel } from '@mui/icons-material';
 import { DisplayError } from '../../lib/utils';
 import '../CreateQuiz/createQuiz.scss';
-import { valueFromAST } from 'graphql';
 
 type Props = {
   viewer: Viewer
@@ -13,25 +12,28 @@ type Props = {
 
 type quizInput = {
   title: string,
-  questions: Questions[],
+  questions: [{
+    answerType?: AnswerFormat | undefined,
+    question?: string,
+    answerOptions?: AnswerOptions[]
+  }],
   creator: string,
 }
 
 type Action =
   | { type: 'CREATOR', field: string, payload: string | undefined }  
   | { type: 'UPDATE_FORM_FIELD', field: string, payload: string }
-  | { type: 'UPDATE_QUESTIONS_OBJ', field: string, payload: string }
+  | { type: 'UPDATE_QUESTIONS_OBJ', field: string, payload: string | undefined }
   | { type: 'UPDATE_TYPE_ANSWER', field: string, payload: AnswerFormat | undefined }
-  | { type: 'UPDATE_ANSWER_OPTIONS', field: string, payload: string | undefined }
+  | { type: 'UPDATE_ANSWER_OPTIONS', field: string, payload: string | undefined };
 
 const initialInput: quizInput = {
   title: "",
   questions: [{
     answerType: undefined, 
     question: "",
-    answerOptions: [{}]
+    answerOptions: [{ isCorrect: undefined, answerText: undefined }]
   }],
-  // questions: [],
   creator: ""
 }
 
@@ -53,7 +55,7 @@ const reducer = (state: quizInput, action: Action): quizInput => {
     case 'UPDATE_QUESTIONS_OBJ':
       return {
         ...state,
-        questions: [{ 
+        questions: [{
           ...state.questions, 
           question: action.payload 
         }]
@@ -63,7 +65,9 @@ const reducer = (state: quizInput, action: Action): quizInput => {
         ...state,
         questions: [{ 
           ...state.questions, 
-          answerOptions: [{ isCorrect: action.field === "True" ? true : false, answerText: action.payload }]
+          answerOptions: [
+            { isCorrect: action.field === "True" ? true : false, answerText: action.payload }
+          ]
         }]
       }
     case 'CREATOR':
@@ -130,6 +134,7 @@ export const QuizCreate = ({ viewer }: Props) => {
     })
   }
 
+
   const handleNewQuestion = () => {
     setAddQuestion(addQuestion + 1)
   }
@@ -137,7 +142,7 @@ export const QuizCreate = ({ viewer }: Props) => {
   // const handleQuizCreation = () => {
   
   // }
-  console.log(state)
+  console.log(answerTrue)
   
   return (
     <div className='quiz__box'>
@@ -149,7 +154,6 @@ export const QuizCreate = ({ viewer }: Props) => {
         <TextField 
           label="Enter Assessment Title"
           name="title"
-          // value={state.title}
           fullWidth
           onChange={(e) => handleFormChange(e)}
         />
@@ -157,7 +161,6 @@ export const QuizCreate = ({ viewer }: Props) => {
           label="Enter First Question"
           fullWidth
           name="question"
-          // value={state.question}
           sx={{ marginTop: 2 }}
           onChange={(e) => handleQuestionsUpdate(e)}
         />
@@ -182,7 +185,7 @@ export const QuizCreate = ({ viewer }: Props) => {
             />
           </RadioGroup>
         </FormControl>
-        {state.questions[addQuestion].answerType === "TRUEFALSE" ? (
+        {state.questions[addQuestion].answerType === 'TRUEFALSE' ? (
           <div className="quiz__answerArea" onClick={() => setAnswerTrue(!answerTrue)}>
             <div className="quiz__answers">
               <Tooltip title="Click To Switch">
@@ -198,7 +201,7 @@ export const QuizCreate = ({ viewer }: Props) => {
             </div>
           </div>
         ) : <></>}
-        {state.questions[addQuestion].answerType === "MULTIPLECHOICE" ? (
+        {state.questions[addQuestion].answerType === 'MULTIPLECHOICE' ? (
           <div className="quiz__multiAnswerArea">
           <div className="quiz__multiAnswers">
             <Tooltip title="Add Correct Answer">
