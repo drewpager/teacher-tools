@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useUserQuery, Viewer } from '../../graphql/generated';
 import { UserProfile, UserLessons, UserPlaylists, UserQuizzes } from './components/';
@@ -26,7 +26,7 @@ export const User = ({ viewer }: Props) => {
       quizzesPage: quizzesPage,
       limit: pageLimit
     }
-  });
+  })
 
   const user = data ? data.user : null;
   
@@ -37,32 +37,32 @@ export const User = ({ viewer }: Props) => {
   const userPlaylists = user ? user.playlists : null;
   const userQuizzes = user ? user.quizzes : null;
 
-  const userLessonsElement = userLessons ? (
+  const userLessonsElement = useMemo(() => userLessons ? (
     <UserLessons
       userLessons={userLessons}
       lessonsPage={lessonsPage}
       limit={pageLimit}
       setLessonsPage={setLessonsPage}
     />
-  ) : ( <h2>UserLessons Not Working</h2> );
+  ) : ( <h2>UserLessons Not Working</h2> ), [userLessons, lessonsPage]);
 
-  const userPlaylistsElement = userPlaylists ? (
+  const userPlaylistsElement = useMemo(() => userPlaylists ? (
     <UserPlaylists 
       userPlaylists={userPlaylists}
       playlistsPage={playlistsPage}
       limit={pageLimit}
       setPlaylistsPage={setPlaylistsPage}
     />
-  ) : ( <h2>UserPlaylists Not Working</h2> );
+  ) : ( <h2>UserPlaylists Not Working</h2> ), [userPlaylists, playlistsPage]);
 
-  const userQuizzesElement = userQuizzes ? (
+  const userQuizzesElement = useMemo(() => userQuizzes ? (
     <UserQuizzes
       userQuizzes={userQuizzes}
       quizzesPage={quizzesPage}
       limit={pageLimit}
       setQuizzesPage={setQuizzesPage}
     />
-  ) : ( <h2>UserQuizzes Not Working</h2>);
+  ) : (<h2>Failed to load quizzes</h2>), [userQuizzes, quizzesPage])
 
   if (loading) {
     return (
