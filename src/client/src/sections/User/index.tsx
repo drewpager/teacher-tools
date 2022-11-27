@@ -14,7 +14,7 @@ export const User = ({ viewer }: Props) => {
   const [lessonsPage, setLessonsPage] = useState(1);
   const [quizzesPage, setQuizzesPage] = useState(1);
 
-  const pageLimit = 20;
+  const pageLimit = 3;
 
   const params = useParams();
 
@@ -26,7 +26,6 @@ export const User = ({ viewer }: Props) => {
       quizzesPage: quizzesPage,
       limit: pageLimit
     }
-    // pollInterval: 500
   });
 
   const user = data ? data.user : null;
