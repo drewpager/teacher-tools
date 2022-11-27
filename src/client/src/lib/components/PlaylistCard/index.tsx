@@ -43,15 +43,18 @@ export const PlaylistCard = ({ playlist }: Props) => {
               {playlist.plan?.filter((item) => item?.id === active).map(item => {
                 if (item?.__typename === "Quiz") {
                   return (
-                    <QuizPlayer quiz={item} />
+                    <QuizPlayer quiz={item} key={item.id} />
                   )
                 }
 
                 if (item?.__typename === "Lesson") {
                   return (
-                    <VideoPlayer url={`${item.video}`} />
+                    <VideoPlayer url={`${item?.video}`} key={item.id} />
                   )
                 }
+                return (
+                  <h2>Failed to load resource</h2>
+                )
               })}
             </Grid>
         </Grid>
