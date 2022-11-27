@@ -25,7 +25,7 @@ type Action =
   | { type: 'UPDATE_FORM_FIELD', field: string, payload: string }
   | { type: 'UPDATE_QUESTIONS_OBJ', field: string, payload: string | undefined }
   | { type: 'UPDATE_TYPE_ANSWER', field: string, payload: AnswerFormat | undefined }
-  | { type: 'UPDATE_ANSWER_OPTIONS', field: string, payload: string | undefined };
+  | { type: 'UPDATE_ANSWER_OPTIONS', field: string, payload: AnswerOptions[] };
 
 const initialInput: quizInput = {
   title: "",
@@ -65,9 +65,7 @@ const reducer = (state: quizInput, action: Action): quizInput => {
         ...state,
         questions: [{ 
           ...state.questions, 
-          answerOptions: [
-            { isCorrect: action.field === "True" ? true : false, answerText: action.payload }
-          ]
+          answerOptions: action.payload
         }]
       }
     case 'CREATOR':
@@ -84,6 +82,7 @@ export const QuizCreate = ({ viewer }: Props) => {
   const [state, dispatch] = useReducer(reducer, initialInput);
   const [answerTrue, setAnswerTrue] = useState<boolean>(true);
   const [addQuestion, setAddQuestion] = useState<number>(0);
+  const [answerOptions, setAnswerOptions] = useState<Array<AnswerOptions>>([])
 
   useEffect(() => {
     if (viewer && viewer.id) {
@@ -104,11 +103,11 @@ export const QuizCreate = ({ viewer }: Props) => {
   }
 
   const handleAnswerOptions = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    dispatch({
-      type: 'UPDATE_ANSWER_OPTIONS',
-      field: e.currentTarget.id,
-      payload: e.target.value
-    })
+    e.preventDefault()
+    setAnswerOptions([{
+      isCorrect: e.currentTarget.id === "true" ? true : false,
+      answerText: e.target.value
+     }, ...answerOptions])
   }
 
 
@@ -137,12 +136,20 @@ export const QuizCreate = ({ viewer }: Props) => {
 
   const handleNewQuestion = () => {
     setAddQuestion(addQuestion + 1)
+
+    dispatch({
+      type: 'UPDATE_ANSWER_OPTIONS',
+      field: 'answerOptions',
+      payload: answerOptions
+    })
   }
 
   // const handleQuizCreation = () => {
   
   // }
-  console.log(answerTrue)
+  // console.log(answerTrue)
+  console.log(state);
+  console.log(answerOptions);
   
   return (
     <div className='quiz__box'>
