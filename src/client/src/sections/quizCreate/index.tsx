@@ -32,7 +32,7 @@ const initialInput: quizInput = {
   questions: [{
     answerType: undefined, 
     question: "",
-    answerOptions: [{ isCorrect: undefined, answerText: undefined }]
+    answerOptions: [{ answerText: undefined, isCorrect: undefined }]
   }],
   creator: ""
 }
@@ -104,10 +104,10 @@ export const QuizCreate = ({ viewer }: Props) => {
 
   const handleAnswerOptions = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     e.preventDefault()
-    setAnswerOptions([{
-      isCorrect: e.currentTarget.id === "true" ? true : false,
-      answerText: e.target.value
-     }, ...answerOptions])
+    setAnswerOptions([ ...answerOptions, {
+      answerText: e.target.value,
+      isCorrect: e.currentTarget.id === "true" ? true : false
+     }])
   }
 
 
