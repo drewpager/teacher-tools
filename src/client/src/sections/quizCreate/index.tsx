@@ -1,8 +1,9 @@
-import React, { useReducer, useState, useRef, useEffect, ChangeEvent, SyntheticEvent, FormEvent, MouseEventHandler } from 'react';
+import React, { useReducer, useState, useRef, useEffect, ChangeEvent, SyntheticEvent, useCallback } from 'react';
 import { QuizQuestion } from '../CreateQuiz/QuizQuestion';
 import { useCreateQuizMutation, Viewer, Quiz, Questions, AnswerOptions, AnswerFormat } from '../../graphql/generated';
 import { TextField, FormControl, FormLabel, FormControlLabel, Radio, RadioGroup, Typography, Tooltip, Button } from '@mui/material'
 import { CheckCircle, Cancel } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 import { DisplayError } from '../../lib/utils';
 import '../CreateQuiz/createQuiz.scss';
 
@@ -10,14 +11,20 @@ type Props = {
   viewer: Viewer
 }
 
-type quizInput = {
+// type quizInput = {
+//   title: string,
+//   questions: [{
+//     answerType?: AnswerFormat | undefined,
+//     question?: string,
+//     answerOptions?: AnswerOptions[]
+//   }],
+//   creator: string,
+// }
+
+type createQuizInput = {
   title: string,
-  questions: [{
-    answerType?: AnswerFormat | undefined,
-    question?: string,
-    answerOptions?: AnswerOptions[]
-  }],
-  creator: string,
+  questions: Questions[],
+  creator: string
 }
 
 type Action =
@@ -27,7 +34,17 @@ type Action =
   | { type: 'UPDATE_TYPE_ANSWER', field: string, payload: AnswerFormat | undefined }
   | { type: 'UPDATE_ANSWER_OPTIONS', field: string, payload: AnswerOptions[] };
 
-const initialInput: quizInput = {
+// const initialInput: quizInput = {
+//   title: "",
+//   questions: [{
+//     answerType: undefined, 
+//     question: "",
+//     answerOptions: [{ answerText: undefined, isCorrect: undefined }]
+//   }],
+//   creator: ""
+// }
+
+const initialInput: createQuizInput = {
   title: "",
   questions: [{
     answerType: undefined, 
@@ -37,7 +54,7 @@ const initialInput: quizInput = {
   creator: ""
 }
 
-const reducer = (state: quizInput, action: Action): quizInput => {
+const reducer = (state: createQuizInput, action: Action): createQuizInput => {
   switch (action.type) {
     case 'UPDATE_FORM_FIELD':
       return {
@@ -83,6 +100,12 @@ export const QuizCreate = ({ viewer }: Props) => {
   const [answerTrue, setAnswerTrue] = useState<boolean>(true);
   const [addQuestion, setAddQuestion] = useState<number>(0);
   const [answerOptions, setAnswerOptions] = useState<Array<AnswerOptions>>([])
+  let navigate = useNavigate();
+
+  const correctRef = useRef<any>();
+  const incorrectOneRef = useRef<any>();
+  const incorrectTwoRef = useRef<any>();
+  const incorrectThreeRef = useRef<any>();
 
   useEffect(() => {
     if (viewer && viewer.id) {
@@ -93,6 +116,12 @@ export const QuizCreate = ({ viewer }: Props) => {
       })
     }
   }, [viewer])  
+
+  const [createQuiz] = useCreateQuizMutation({
+    variables: {
+      input: state
+    }
+  })
 
   const handleFormChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     dispatch({
@@ -144,12 +173,53 @@ export const QuizCreate = ({ viewer }: Props) => {
     })
   }
 
-  // const handleQuizCreation = () => {
-  
-  // }
+  // const formHandler = useCallback(
+  //   () => (e: SubmitEvent) => {
+  //     e.preventDefault();
+
+  //     const data = [
+  //       {isCorrect: true, answerText: correctRef?.current?.value },
+  //       {isCorrect: false, answerText: incorrectOneRef?.current?.value }, 
+  //       {isCorrect: false, answerText: incorrectTwoRef?.current?.value }, 
+  //       {isCorrect: false, answerText: incorrectThreeRef?.current?.value }, 
+  //     ]
+
+  //     console.log(data)
+  //   }, []
+  // )
+
+  const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const data = [
+      {isCorrect: true, answerText: correctRef?.current?.value },
+      {isCorrect: false, answerText: incorrectOneRef?.current?.value }, 
+      {isCorrect: false, answerText: incorrectTwoRef?.current?.value }, 
+      {isCorrect: false, answerText: incorrectThreeRef?.current?.value }, 
+    ]
+
+    console.log(data)
+
+    dispatch({
+      type: 'UPDATE_ANSWER_OPTIONS',
+      field: 'answerOptions',
+      payload: data
+    })
+
+    if (state && state.questions) {
+      await createQuiz({
+        variables: {
+          input: state
+        }
+      });
+    }
+    // Navigate to User Profile Page
+    navigate(`../user/${viewer.id}`, { replace: true })    
+  }
+
   // console.log(answerTrue)
   console.log(state);
-  console.log(answerOptions);
+  // console.log(answerOptions);
   
   return (
     <div className='quiz__box'>
@@ -157,7 +227,8 @@ export const QuizCreate = ({ viewer }: Props) => {
       <p>Title: {state.title}</p>
       <p>Question: {state.questions[addQuestion].question}</p>
       <p>AnswerType: {state.questions[addQuestion].answerType}</p>
-      <form>
+      {/* <form onSubmit={() => formHandler()}> */}
+      <form onSubmit={handleSubmit}>
         <TextField 
           label="Enter Assessment Title"
           name="title"
@@ -219,7 +290,7 @@ export const QuizCreate = ({ viewer }: Props) => {
               fullWidth
               sx={{ marginTop: 2 }}
               name="answerOptions"
-              onChange={(e) => handleAnswerOptions(e)}
+              inputRef={correctRef}
               id="true"
             />
           </div>
@@ -232,7 +303,7 @@ export const QuizCreate = ({ viewer }: Props) => {
               fullWidth
               sx={{ marginTop: 2 }}
               name="answerOptions"
-              onChange={(e) => handleAnswerOptions(e)}
+              inputRef={incorrectOneRef}
               id="false"
             />
           </div>
@@ -245,7 +316,7 @@ export const QuizCreate = ({ viewer }: Props) => {
               fullWidth
               sx={{ marginTop: 2 }}
               name="answerOptions"
-              onChange={(e) => handleAnswerOptions(e)}
+              inputRef={incorrectTwoRef}
               id="false"
             />
           </div>
@@ -258,7 +329,7 @@ export const QuizCreate = ({ viewer }: Props) => {
               fullWidth
               sx={{ marginTop: 2 }}
               name="answerOptions"
-              onChange={(e) => handleAnswerOptions(e)}
+              inputRef={incorrectThreeRef}
               id="false"
             />
           </div>
@@ -267,7 +338,8 @@ export const QuizCreate = ({ viewer }: Props) => {
         {/* { Array.from({ length: addQuestion }).map((_, i) => ( <QuizQuestion quest={questions} quizStart={quiz} key={i} /> )) } */}
         {/* <Button onClick={(e) => saveQuestion(e)}>Add Question</Button> */}
         <Button onClick={handleNewQuestion}>New Question</Button> 
-        <Button onClick={() => {}}>Create</Button>
+        <Button type="submit">Submit Assessment</Button>
+        {/* <Button type="submit">Create</Button> */}
       </form>
     </div>
   )

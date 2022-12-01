@@ -129,7 +129,6 @@ export const typeDefs = gql`
   }
 
   input CreateQuizInput {
-    id: ID!
     title: String!
     questions: [QuestionInput]!
     creator: String!

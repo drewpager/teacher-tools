@@ -208,7 +208,6 @@ export type CreateLessonInput = {
 
 export type CreateQuizInput = {
   creator: Scalars['String'];
-  id: Scalars['ID'];
   questions: Array<InputMaybe<QuestionInput>>;
   title: Scalars['String'];
 };
