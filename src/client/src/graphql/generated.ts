@@ -180,8 +180,8 @@ export enum AnswerFormat {
 }
 
 export type AnswerInput = {
-  answerText: Scalars['String'];
-  isCorrect: Scalars['Boolean'];
+  answerText?: InputMaybe<Scalars['String']>;
+  isCorrect?: InputMaybe<Scalars['Boolean']>;
 };
 
 export type AnswerOptions = {
@@ -191,8 +191,8 @@ export type AnswerOptions = {
 };
 
 export type Answers = {
-  answerText: Scalars['String'];
-  isCorrect: Scalars['Boolean'];
+  answerText?: InputMaybe<Scalars['String']>;
+  isCorrect?: InputMaybe<Scalars['Boolean']>;
 };
 
 export type CreateLessonInput = {
@@ -207,9 +207,9 @@ export type CreateLessonInput = {
 };
 
 export type CreateQuizInput = {
-  creator: Scalars['String'];
-  questions: Array<InputMaybe<QuestionInput>>;
-  title: Scalars['String'];
+  creator?: InputMaybe<Scalars['String']>;
+  questions?: InputMaybe<Array<InputMaybe<QuestionInput>>>;
+  title?: InputMaybe<Scalars['String']>;
 };
 
 export type FullLessonInput = {
@@ -397,9 +397,9 @@ export type QueryUserArgs = {
 };
 
 export type QuestionInput = {
-  answerOptions: Array<InputMaybe<AnswerInput>>;
-  answerType: AnswerFormat;
-  question: Scalars['String'];
+  answerOptions?: InputMaybe<Array<InputMaybe<AnswerInput>>>;
+  answerType?: InputMaybe<AnswerFormat>;
+  question?: InputMaybe<Scalars['String']>;
 };
 
 export type Questions = {

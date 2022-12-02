@@ -129,20 +129,20 @@ export const typeDefs = gql`
   }
 
   input CreateQuizInput {
-    title: String!
-    questions: [QuestionInput]!
-    creator: String!
+    title: String
+    questions: [QuestionInput]
+    creator: String
   }
   
   input QuestionInput {
-    question: String!
-    answerOptions: [AnswerInput]!
-    answerType: AnswerFormat!
+    question: String
+    answerOptions: [AnswerInput]
+    answerType: AnswerFormat
   }
 
   input AnswerInput {
-    answerText: String!
-    isCorrect: Boolean!
+    answerText: String
+    isCorrect: Boolean
   }
 
   input FullLessonInput {
@@ -158,8 +158,8 @@ export const typeDefs = gql`
   }
 
   input Answers {
-    answerText: String!
-    isCorrect: Boolean!
+    answerText: String
+    isCorrect: Boolean
   }
 
   input QuizQuestions {

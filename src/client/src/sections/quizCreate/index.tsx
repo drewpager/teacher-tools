@@ -11,19 +11,13 @@ type Props = {
   viewer: Viewer
 }
 
-// type quizInput = {
-//   title: string,
-//   questions: [{
-//     answerType?: AnswerFormat | undefined,
-//     question?: string,
-//     answerOptions?: AnswerOptions[]
-//   }],
-//   creator: string,
-// }
-
 type createQuizInput = {
   title: string,
-  questions: Questions[],
+  questions: [{
+    answerType?: AnswerFormat,
+    question?: string,
+    answerOptions?: AnswerOptions[]
+  }],
   creator: string
 }
 
@@ -31,25 +25,16 @@ type Action =
   | { type: 'CREATOR', field: string, payload: string | undefined }  
   | { type: 'UPDATE_FORM_FIELD', field: string, payload: string }
   | { type: 'UPDATE_QUESTIONS_OBJ', field: string, payload: string | undefined }
-  | { type: 'UPDATE_TYPE_ANSWER', field: string, payload: AnswerFormat | undefined }
+  | { type: 'UPDATE_TYPE_ANSWER', field: string, payload: AnswerFormat }
   | { type: 'UPDATE_ANSWER_OPTIONS', field: string, payload: AnswerOptions[] };
 
-// const initialInput: quizInput = {
-//   title: "",
-//   questions: [{
-//     answerType: undefined, 
-//     question: "",
-//     answerOptions: [{ answerText: undefined, isCorrect: undefined }]
-//   }],
-//   creator: ""
-// }
 
 const initialInput: createQuizInput = {
   title: "",
   questions: [{
-    answerType: undefined, 
+    answerType: AnswerFormat.Truefalse, 
     question: "",
-    answerOptions: [{ answerText: undefined, isCorrect: undefined }]
+    answerOptions: [{ answerText: "", isCorrect: true || false }]
   }],
   creator: ""
 }
@@ -106,6 +91,7 @@ export const QuizCreate = ({ viewer }: Props) => {
   const incorrectOneRef = useRef<any>();
   const incorrectTwoRef = useRef<any>();
   const incorrectThreeRef = useRef<any>();
+  const questionRef = useRef<string>();
 
   useEffect(() => {
     if (viewer && viewer.id) {
@@ -119,7 +105,11 @@ export const QuizCreate = ({ viewer }: Props) => {
 
   const [createQuiz] = useCreateQuizMutation({
     variables: {
-      input: state
+      input: {
+        title: state.title,
+        questions: [...state.questions],
+        creator: state.creator
+      }
     }
   })
 
@@ -162,7 +152,6 @@ export const QuizCreate = ({ viewer }: Props) => {
     })
   }
 
-
   const handleNewQuestion = () => {
     setAddQuestion(addQuestion + 1)
 
@@ -172,21 +161,6 @@ export const QuizCreate = ({ viewer }: Props) => {
       payload: answerOptions
     })
   }
-
-  // const formHandler = useCallback(
-  //   () => (e: SubmitEvent) => {
-  //     e.preventDefault();
-
-  //     const data = [
-  //       {isCorrect: true, answerText: correctRef?.current?.value },
-  //       {isCorrect: false, answerText: incorrectOneRef?.current?.value }, 
-  //       {isCorrect: false, answerText: incorrectTwoRef?.current?.value }, 
-  //       {isCorrect: false, answerText: incorrectThreeRef?.current?.value }, 
-  //     ]
-
-  //     console.log(data)
-  //   }, []
-  // )
 
   const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -198,18 +172,22 @@ export const QuizCreate = ({ viewer }: Props) => {
       {isCorrect: false, answerText: incorrectThreeRef?.current?.value }, 
     ]
 
-    console.log(data)
-
     dispatch({
       type: 'UPDATE_ANSWER_OPTIONS',
       field: 'answerOptions',
       payload: data
     })
 
+    console.log(state)
+
     if (state && state.questions) {
       await createQuiz({
         variables: {
-          input: state
+          input: {
+            title: state.title,
+            questions: state.questions,
+            creator: state.creator
+          }
         }
       });
     }
@@ -218,7 +196,7 @@ export const QuizCreate = ({ viewer }: Props) => {
   }
 
   // console.log(answerTrue)
-  console.log(state);
+  console.log(state.questions);
   // console.log(answerOptions);
   
   return (
@@ -233,14 +211,14 @@ export const QuizCreate = ({ viewer }: Props) => {
           label="Enter Assessment Title"
           name="title"
           fullWidth
-          onChange={(e) => handleFormChange(e)}
+          onChange={handleFormChange}
         />
         <TextField 
           label="Enter First Question"
           fullWidth
           name="question"
           sx={{ marginTop: 2 }}
-          onChange={(e) => handleQuestionsUpdate(e)}
+          onChange={handleQuestionsUpdate}
         />
         <FormControl className='quiz__answerType'>
           <FormLabel id="demo-radio-buttons-group-label">Answer Type</FormLabel>
