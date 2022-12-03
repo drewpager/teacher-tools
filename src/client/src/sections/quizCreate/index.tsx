@@ -85,13 +85,14 @@ export const QuizCreate = ({ viewer }: Props) => {
   const [answerTrue, setAnswerTrue] = useState<boolean>(true);
   const [addQuestion, setAddQuestion] = useState<number>(0);
   const [answerOptions, setAnswerOptions] = useState<Array<AnswerOptions>>([])
+  const [questions, setQuestions] = useState<Array<string>>([])
   let navigate = useNavigate();
 
   const correctRef = useRef<any>();
   const incorrectOneRef = useRef<any>();
   const incorrectTwoRef = useRef<any>();
   const incorrectThreeRef = useRef<any>();
-  const questionRef = useRef<string>();
+  const questionRef = useRef<any>();
 
   useEffect(() => {
     if (viewer && viewer.id) {
@@ -148,7 +149,7 @@ export const QuizCreate = ({ viewer }: Props) => {
     dispatch({
       type: 'UPDATE_QUESTIONS_OBJ',
       field: e.target.name,
-      payload: e.target.value
+      payload: questionRef?.current?.value
     })
   }
 
@@ -177,22 +178,23 @@ export const QuizCreate = ({ viewer }: Props) => {
       field: 'answerOptions',
       payload: data
     })
+    
 
     console.log(state)
 
-    if (state && state.questions) {
-      await createQuiz({
-        variables: {
-          input: {
-            title: state.title,
-            questions: state.questions,
-            creator: state.creator
-          }
-        }
-      });
-    }
+    // if (state && state.questions) {
+    //   await createQuiz({
+    //     variables: {
+    //       input: {
+    //         title: state.title,
+    //         questions: state.questions,
+    //         creator: state.creator
+    //       }
+    //     }
+    //   });
+    // }
     // Navigate to User Profile Page
-    navigate(`../user/${viewer.id}`, { replace: true })    
+    // navigate(`../user/${viewer.id}`, { replace: true })    
   }
 
   // console.log(answerTrue)
@@ -203,7 +205,8 @@ export const QuizCreate = ({ viewer }: Props) => {
     <div className='quiz__box'>
       <h1>Create Assessment</h1>
       <p>Title: {state.title}</p>
-      <p>Question: {state.questions[addQuestion].question}</p>
+      <p>Question: {questionRef?.current?.value}</p>
+      {/* <p>Question: {state.questions[addQuestion].question}</p> */}
       <p>AnswerType: {state.questions[addQuestion].answerType}</p>
       {/* <form onSubmit={() => formHandler()}> */}
       <form onSubmit={handleSubmit}>
@@ -218,7 +221,8 @@ export const QuizCreate = ({ viewer }: Props) => {
           fullWidth
           name="question"
           sx={{ marginTop: 2 }}
-          onChange={handleQuestionsUpdate}
+          // onChange={handleQuestionsUpdate}
+          inputRef={questionRef}
         />
         <FormControl className='quiz__answerType'>
           <FormLabel id="demo-radio-buttons-group-label">Answer Type</FormLabel>
