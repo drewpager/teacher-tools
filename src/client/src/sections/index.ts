@@ -15,4 +15,4 @@ export * from "./CreateQuiz";
 export * from "./EditPlaylist";
 export * from "./Catalogue";
 export * from "./Quiz";
-export * from "./quizCreate";
+export * from "./QuizCreate";

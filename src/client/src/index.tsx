@@ -104,6 +104,7 @@ const App = () => {
                 <Route path="/playlist/:id" element={<Playlist />} />
                 <Route path="/playlist/create" element={<CreatePlaylist viewer={viewer} />} />
                 <Route path="/quiz/:id" element={<Quiz /> } />
+                {/* <Route path="/quiz/create" element={<QuizCreate /> } /> */}
                 <Route path="/quiz/create" element={<QuizCreate viewer={viewer} /> } />
                 <Route path="/edit/:id" element={<EditPlaylist viewer={viewer} />} />
                 <Route path="/lesson/create" children={(props: any) => (<CreateLesson {...props} viewer={viewer} />)} element={<CreateLesson viewer={viewer} />} />
