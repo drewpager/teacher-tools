@@ -52,6 +52,17 @@ const Input = ({ field, form: { errors, touched } }: FieldProps) => {
   )
 }
 
+// TODO: Click to switch answerOption value from True to False
+const checkInput = ({ field }: FieldProps) => {
+  return (
+    <>
+       <Tooltip title="Click to switch" onClick={() => !field.value}>
+        { field.value ? <CheckCircle color={"primary"} sx={{ marginRight: 1 }} /> : <Cancel sx={{ color: "black", marginRight: 1 }} />  }
+      </Tooltip>
+    </>
+  )
+}
+
 export const QuizCreate = ({ viewer }: props) => {
   const [answerTrue, setAnswerTrue] = useState<boolean>();
 
@@ -69,7 +80,10 @@ export const QuizCreate = ({ viewer }: props) => {
               question: '',
               answerType: '',
               answerOptions: [
-                { isCorrect: true || false, answerText: "" }
+                { answerText: "", isCorrect: true },
+                { answerText: "", isCorrect: false },
+                { answerText: "", isCorrect: false },
+                { answerText: "", isCorrect: false },
               ]
             },
           ],
@@ -143,59 +157,25 @@ export const QuizCreate = ({ viewer }: props) => {
                                 {({ insert, remove, push }) => (
                                   <div>
                                     {values.questions[index].answerOptions.length > 0 &&
-                                      values.questions[index].answerOptions.map((option: any, index: number) => {
+                                      values.questions[index].answerOptions.map((option: any, indy: number) => {
                                         return (
                                           <div className="quiz__multiAnswerArea">
                                             <div className="quiz__multiAnswers">
-                                              <Tooltip title="Add Correct Answer">
-                                                <CheckCircle color={"primary"} sx={{ marginRight: 1 }} /> 
-                                              </Tooltip>
-                                              <TextField 
-                                              label="Enter Correct Answer"
-                                              fullWidth
-                                              sx={{ marginTop: 2 }}
-                                              name={question.answerOptions[index].answerText}
-                                              onChange={handleChange}
-                                              id="true"
+                                            {/* <Tooltip title="Click To Switch" onClick={() => { push({ isCorrect: true })}}> */}
+                                            {/* <Tooltip title="Correct Answer">
+                                              <CheckCircle color={"primary"} sx={{ marginRight: 1 }} /> 
+                                            </Tooltip> */}
+                                            <Field 
+                                              name={`questions[${index}].answerOptions[${indy}].isCorrect`} 
+                                              component={checkInput} 
                                             />
-                                          </div>
-                                          <div className="quiz__multiAnswers">
-                                            <Tooltip title="Add Incorrect Answer">
-                                              <Cancel sx={{ color: "black", marginRight: 1 }} /> 
-                                            </Tooltip>
                                             <TextField 
-                                              label="Enter Wrong Answer"
+                                              label="Enter Answer Option"
                                               fullWidth
                                               sx={{ marginTop: 2 }}
-                                              name={question.answerOptions[index].answerText}
+                                              // name={`answerOptions[${index}].answerText`}
+                                              name={`questions[${index}].answerOptions[${indy}].answerText`}
                                               onChange={handleChange}
-                                              id="false"
-                                            />
-                                          </div>
-                                          <div className="quiz__multiAnswers">
-                                            <Tooltip title="Click To Switch">
-                                              <Cancel sx={{ color: "black", marginRight: 1 }} /> 
-                                            </Tooltip>
-                                            <TextField 
-                                              label="Enter Wrong Answer"
-                                              fullWidth
-                                              sx={{ marginTop: 2 }}
-                                              name={question.answerOptions[index].answerText}
-                                              onChange={handleChange}
-                                              id="false"
-                                            />
-                                          </div>
-                                          <div className="quiz__multiAnswers">
-                                            <Tooltip title="Click To Switch">
-                                              <Cancel sx={{ color: "black", marginRight: 1 }} /> 
-                                            </Tooltip>
-                                            <TextField 
-                                              label="Enter Wrong Answer"
-                                              fullWidth
-                                              sx={{ marginTop: 2 }}
-                                              name={question.answerOptions[index].answerText}
-                                              onChange={handleChange}
-                                              id="false"
                                             />
                                           </div>
                                         </div> 
@@ -223,7 +203,14 @@ export const QuizCreate = ({ viewer }: props) => {
                         </div>
                       )
                     })}
-                    <Button onClick={() => push({ question: '', answerType: '', answerOptions: [ { isCorrect: true || false, answerText: '' }] })}>
+                    <Button onClick={() => push({ question: '', answerType: '', 
+                      answerOptions: [  
+                        { answerText: "", isCorrect: true },
+                        { answerText: "", isCorrect: false },
+                        { answerText: "", isCorrect: false },
+                        { answerText: "", isCorrect: false },
+                      ] })}
+                    >
                       Add Question
                     </Button>
                 </div>
