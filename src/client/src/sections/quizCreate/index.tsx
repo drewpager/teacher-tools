@@ -2,7 +2,7 @@ import React, { useReducer, useState, useRef, useEffect, ChangeEvent, SyntheticE
 import { FieldArray, Formik, getIn, FieldProps, Field } from 'formik';
 import { QuizQuestion } from '../CreateQuiz/QuizQuestion';
 import { useCreateQuizMutation, Viewer, Quiz, Questions, AnswerOptions, AnswerFormat } from '../../graphql/generated';
-import { Box, TextField, FormControl, FormLabel, FormControlLabel, Radio, RadioGroup, Typography, Tooltip, Button, useMediaQuery } from '@mui/material'
+import { Box, TextField, FormLabel, FormControlLabel, Radio, RadioGroup, Typography, Tooltip, Button, CircularProgress } from '@mui/material'
 import { CheckCircle, Cancel } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { DisplayError } from '../../lib/utils';
@@ -26,7 +26,7 @@ const validationSchema = yup.object({
     .array().of(
       yup.object().shape({
         question: yup.string().min(10),
-        answerType: yup.string(),
+        answerType: yup.mixed().oneOf([AnswerFormat.Multiplechoice, AnswerFormat.Truefalse]).defined(),
         answerOptions: yup.array().of(
           yup.object().shape({
             isCorrect: yup.boolean(),
@@ -65,6 +65,29 @@ const checkInput = ({ field }: FieldProps) => {
 
 export const QuizCreate = ({ viewer }: props) => {
   const [answerTrue, setAnswerTrue] = useState<boolean>();
+  const navigate = useNavigate();
+
+  const [createQuiz, { loading, error }] = useCreateQuizMutation({
+    variables: {
+      input: {
+        title: "",
+        questions: [{}],
+        creator: ""
+      }
+    }
+  })
+
+  if (loading) {
+    <Box>
+      <CircularProgress color='primary' />
+    </Box>
+  }
+
+  if (error) {
+    <Box>
+      <DisplayError title="Failed to create assessment" />
+    </Box>
+  }
 
   return (
     <Box 
@@ -78,7 +101,7 @@ export const QuizCreate = ({ viewer }: props) => {
           questions: [
             {
               question: '',
-              answerType: '',
+              answerType: AnswerFormat.Truefalse || AnswerFormat.Multiplechoice,
               answerOptions: [
                 { answerText: "", isCorrect: true },
                 { answerText: "", isCorrect: false },
@@ -90,8 +113,16 @@ export const QuizCreate = ({ viewer }: props) => {
           creator: `${viewer.id}`,
         }}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-          alert(JSON.stringify(values, null, 2));
+        onSubmit={async (values) => {
+          await createQuiz({
+            variables: {
+              input: {  
+                ...values
+              }
+            }
+          });
+
+          navigate(`../user/${viewer.id}`, { replace: true })
         }}
       >
         {({ values, errors, touched, handleSubmit, handleChange }) => (
@@ -203,7 +234,7 @@ export const QuizCreate = ({ viewer }: props) => {
                         </div>
                       )
                     })}
-                    <Button onClick={() => push({ question: '', answerType: '', 
+                    <Button onClick={() => push({ question: '', answerType: AnswerFormat, 
                       answerOptions: [  
                         { answerText: "", isCorrect: true },
                         { answerText: "", isCorrect: false },
@@ -216,7 +247,7 @@ export const QuizCreate = ({ viewer }: props) => {
                 </div>
               )}
               </FieldArray>
-              <Button fullWidth type="submit">Submit</Button>
+              <Button type="submit">Submit</Button>
               <pre>
                 {JSON.stringify(values, null, 2)}
               </pre>
