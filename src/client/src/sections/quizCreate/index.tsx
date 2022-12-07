@@ -56,9 +56,17 @@ const Input = ({ field, form: { errors, touched } }: FieldProps) => {
 const checkInput = ({ field }: FieldProps) => {
   return (
     <>
-       <Tooltip title="Click to switch" onClick={() => !field.value}>
-        { field.value ? <CheckCircle color={"primary"} sx={{ marginRight: 1 }} /> : <Cancel sx={{ color: "black", marginRight: 1 }} />  }
-      </Tooltip>
+      <Field type="checkbox" name={field.name}/>
+      {`${field.value}`}
+    </>
+  )
+}
+
+const trueFalseInput = ({ field }: FieldProps) => {
+  return (
+    <>
+      <Field type="checkbox" name={field.name}/>
+      {`${field.value}`}
     </>
   )
 }
@@ -105,8 +113,8 @@ export const QuizCreate = ({ viewer }: props) => {
               answerOptions: [
                 { answerText: "", isCorrect: true },
                 { answerText: "", isCorrect: false },
-                { answerText: "", isCorrect: false },
-                { answerText: "", isCorrect: false },
+                // { answerText: "", isCorrect: false },
+                // { answerText: "", isCorrect: false },
               ]
             },
           ],
@@ -204,10 +212,11 @@ export const QuizCreate = ({ viewer }: props) => {
                                               label="Enter Answer Option"
                                               fullWidth
                                               sx={{ marginTop: 2 }}
-                                              // name={`answerOptions[${index}].answerText`}
                                               name={`questions[${index}].answerOptions[${indy}].answerText`}
                                               onChange={handleChange}
                                             />
+                                            <Button 
+                                              onClick={() => insert(indy + 1, { answerText: "", isCorrect: false })}>+</Button>
                                           </div>
                                         </div> 
                                         )
@@ -216,20 +225,20 @@ export const QuizCreate = ({ viewer }: props) => {
                                 )}
                             </FieldArray>
                             ) : (
-                              <div className="quiz__answerArea" onClick={() => setAnswerTrue(!answerTrue)}>
-                              <div className="quiz__answers">
-                                <Tooltip title="Click To Switch">
-                                  <CheckCircle color={"primary"} sx={{ marginRight: 1 }} /> 
-                                </Tooltip>
-                                <Typography>{answerTrue ? "True" : "False"}</Typography>
+                              <div>
+                                  <div>
+                                    <Field 
+                                      name={`questions[${index}].answerOptions[0].answerText`} 
+                                      value={`${false}`}
+                                      component={trueFalseInput}
+                                    />
+                                    {/* <Field 
+                                      name={`questions[${index}].answerOptions[1].answerText`}
+                                      value={`${false}`}
+                                      component={trueFalseInput}
+                                    /> */}
+                                </div>
                               </div>
-                              <div className="quiz__answers">
-                              <Tooltip title="Click To Switch">
-                                  <Cancel sx={{ color: "primary", marginRight: 1 }} /> 
-                                </Tooltip>
-                                <Typography>{!answerTrue ? "True" : "False"}</Typography>
-                              </div>
-                            </div>
                             )}
                         </div>
                       )
@@ -237,8 +246,6 @@ export const QuizCreate = ({ viewer }: props) => {
                     <Button onClick={() => push({ question: '', answerType: AnswerFormat, 
                       answerOptions: [  
                         { answerText: "", isCorrect: true },
-                        { answerText: "", isCorrect: false },
-                        { answerText: "", isCorrect: false },
                         { answerText: "", isCorrect: false },
                       ] })}
                     >
