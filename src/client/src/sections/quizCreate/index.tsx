@@ -192,7 +192,7 @@ export const QuizCreate = ({ viewer }: props) => {
                               />
                             </RadioGroup>
                             {question.answerType === "MULTIPLECHOICE" ? (
-                              <FieldArray name="answerOptions">
+                              <FieldArray name={`questions[${index}].answerOptions`}>
                                 {({ insert, remove, push }) => (
                                   <div>
                                     {values.questions[index].answerOptions.length > 0 &&
@@ -216,7 +216,9 @@ export const QuizCreate = ({ viewer }: props) => {
                                               onChange={handleChange}
                                             />
                                             <Button 
-                                              onClick={() => insert(indy + 1, { answerText: "", isCorrect: false })}>+</Button>
+                                              // onClick={() => insert(option, { answerText: "", isCorrect: false })}
+                                              onClick={() => push({ answerText: "", isCorrect: false })}
+                                            >+</Button>
                                           </div>
                                         </div> 
                                         )
