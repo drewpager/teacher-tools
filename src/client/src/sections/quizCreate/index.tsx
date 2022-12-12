@@ -214,11 +214,13 @@ export const QuizCreate = ({ viewer }: props) => {
                                               sx={{ marginTop: 2 }}
                                               name={`questions[${index}].answerOptions[${indy}].answerText`}
                                               onChange={handleChange}
-                                            />
+                                            /> 
                                             <Button 
-                                              // onClick={() => insert(option, { answerText: "", isCorrect: false })}
                                               onClick={() => push({ answerText: "", isCorrect: false })}
                                             >+</Button>
+                                            <Button 
+                                              onClick={() => remove(indy)}
+                                            >-</Button>
                                           </div>
                                         </div> 
                                         )
