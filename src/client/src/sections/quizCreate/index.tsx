@@ -176,7 +176,6 @@ export const QuizCreate = ({ viewer }: props) => {
                               />
                             </RadioGroup>
                             {question.answerType === "MULTIPLECHOICE" ? (
-                              /* TODO: disable remove button on last item and only render +/- buttons when last index of array */
                               <FieldArray name={`questions[${index}].answerOptions`}>
                                 {({ insert, remove, push }) => (
                                   <div>
@@ -203,13 +202,18 @@ export const QuizCreate = ({ viewer }: props) => {
                                                 +
                                               </Button>
                                             </Tooltip>
-                                            <Tooltip title="Remove answer option">
-                                              <Button 
-                                                onClick={() => remove(indy)}
-                                              >
-                                                -
-                                              </Button>
-                                            </Tooltip>
+                                            {(indy === 0) ? (
+                                              <>
+                                              </>
+                                            ): (
+                                              <Tooltip title="Remove answer option">
+                                                <Button 
+                                                  onClick={() => remove(indy)}
+                                                >
+                                                  -
+                                                </Button>
+                                              </Tooltip>
+                                            )}
                                           </div>
                                         </div> 
                                         )
