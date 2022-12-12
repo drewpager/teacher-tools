@@ -13,7 +13,6 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  _FieldSet: any;
   /** Banking account number is a string of 5 to 17 alphanumeric values for representing an generic account number */
   AccountNumber: any;
   /** The `BigInt` scalar type represents non-fractional signed whole numeric values. */
@@ -172,6 +171,7 @@ export type Scalars = {
   UtcOffset: any;
   /** Represents NULL values */
   Void: any;
+  _FieldSet: any;
 };
 
 export enum AnswerFormat {
