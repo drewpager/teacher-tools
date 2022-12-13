@@ -1,4 +1,4 @@
-import { Typography, Box, TextField, FormGroup, FormControlLabel, Checkbox, Button, CircularProgress } from '@mui/material';
+import { Typography, Box, TextField, FormGroup, FormControlLabel, Checkbox, Button, CircularProgress, InputAdornment } from '@mui/material';
 import React, { ChangeEvent, useEffect, useState, MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { useCreateLessonMutation, Viewer } from '../../graphql/generated';
@@ -6,6 +6,7 @@ import { categories, DisplayError, DisplaySuccess } from '../../lib/utils';
 import { Navigate } from 'react-router-dom';
 import theme from '../../theme';
 import './createLesson.scss';
+import { render } from 'react-dom';
 // import { Cloudinary } from '@cloudinary/url-gen';
 // import 'dotenv/config';
 
@@ -32,10 +33,9 @@ export const CreateLesson = ({ viewer }: Props) => {
   const [categorizer, setCategorizer] = useState<string[]>([]);
   const [errorState, setError] = useState<boolean>(false);
   const [buttonError, setButtonError] = useState<boolean>(false);
+  const [progress, setProgress] = useState<number>(0);
 
   useEffect(() => {
-    // console.log("Categorizer: ", categorizer);
-    // console.log("Checked: ", checked);
     if (!formData.title.length || !formData.endDate.length) {
       setButtonError(true);
     } else {
@@ -88,6 +88,8 @@ export const CreateLesson = ({ viewer }: Props) => {
         if (end < size) {
           start += sliceSize;
           setTimeout(loop, 3);
+          
+          setProgress((end/size)*100)
         }
       }
     }
@@ -317,7 +319,22 @@ export const CreateLesson = ({ viewer }: Props) => {
             required
             error={errorState}
           /><br />
-          <TextField type="file" variant='outlined' helperText="Video or Lecture" sx={{ width: "45%", marginTop: 1 }} name="video" onChange={(e: ChangeEvent<HTMLInputElement>) => handleVideoUpload(e.target.files)} required /><br />
+          <TextField 
+            type="file" 
+            variant='outlined'
+            helperText="Video or Lecture" 
+            sx={{ width: "45%", marginTop: 1 }} 
+            name="video" 
+            onChange={(e: ChangeEvent<HTMLInputElement>) => handleVideoUpload(e.target.files)} 
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <CircularProgress color="primary" variant='determinate' value={progress}/>
+                </InputAdornment>
+              )
+            }}
+            required 
+          /><br />
           <TextField type="file" variant='outlined' helperText="Image" sx={{ width: "45%", marginTop: 1 }} name="image" onChange={(e: ChangeEvent<HTMLInputElement>) => handleImageUpload(e.target.files)} required /><br />
           <TextField variant="outlined" label="Description" multiline rows={3} helperText="Min Character Count of 160" sx={{ width: "45%", marginTop: 1 }} value={formData.meta} name="meta" onChange={handleInputChange} required />
           <FormGroup sx={{ marginTop: 1 }}>
