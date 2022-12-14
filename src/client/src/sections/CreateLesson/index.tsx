@@ -1,6 +1,8 @@
 import { Typography, Box, TextField, FormGroup, FormControlLabel, Checkbox, Button, CircularProgress, InputAdornment } from '@mui/material';
 import React, { ChangeEvent, useEffect, useState, MouseEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { FieldArray, Formik, getIn, FieldProps, Field  } from 'formik';
+import * as yup from 'yup';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCreateLessonMutation, Viewer } from '../../graphql/generated';
 import { categories, DisplayError, DisplaySuccess } from '../../lib/utils';
 import { Navigate } from 'react-router-dom';
@@ -25,6 +27,28 @@ const initialData = {
   image: ""
 }
 
+const validationSchema = yup.object({
+  title: yup
+    .string()
+    .required('Title is required'),
+  meta: yup
+    .string()
+    .min(10, 'Meta should be 10 characters')
+    .required('Meta description is required'),
+  category: yup
+    .array().of(
+      yup.string()
+    ),
+  startDate: yup
+    .string()
+    .required('Please add a Start Date'),
+  endDate: yup
+    .string()
+    .required('Please add an End Date'),
+  video: yup.string(),
+  image: yup.string(),
+});
+
 export const CreateLesson = ({ viewer }: Props) => {
   const [formData, setFormData] = useState(initialData);
   const [checked, setChecked] = useState(
@@ -35,6 +59,7 @@ export const CreateLesson = ({ viewer }: Props) => {
   const [buttonError, setButtonError] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
   const [imageProgress, setImageProgress] = useState<number>(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!formData.title.length || !formData.endDate.length) {
@@ -249,19 +274,19 @@ export const CreateLesson = ({ viewer }: Props) => {
     )
   }
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+  // const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target;
+  //   setFormData({
+  //     ...formData,
+  //     [name]: value
+  //   });
 
-     if (!e.target.value) {
-      setError(true);
-    } else {
-      setError(false);
-    }
-  };
+  //    if (!e.target.value) {
+  //     setError(true);
+  //   } else {
+  //     setError(false);
+  //   }
+  // };
 
   const handleCheck = (position: number, value: { name: string }) => {
     const updatedCheckedState = checked.map((item, index) => index === position ? !item : item)
@@ -282,23 +307,23 @@ export const CreateLesson = ({ viewer }: Props) => {
     })
   }
 
-  const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  // const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
 
-    setFormData({
-      ...formData,
-      ...categorizer,
-      ...videoUpload
-    })
+  //   setFormData({
+  //     ...formData,
+  //     ...categorizer,
+  //     ...videoUpload
+  //   })
 
-    if (formData.video && formData.category) {
-      createLesson({
-        variables: {
-          input: formData
-        }
-      });
-    }
-  }
+  //   if (formData.video && formData.category) {
+  //     createLesson({
+  //       variables: {
+  //         input: formData
+  //       }
+  //     });
+  //   }
+  // }
 
   if (createLessonError) {
     return (
@@ -338,15 +363,39 @@ export const CreateLesson = ({ viewer }: Props) => {
     return (
       <Box className='createLesson--form'>
         <h2>Create a New Lesson</h2>
+        <Formik
+          initialValues={{
+            // TODO: Remove id from CreateLessonArgs schema
+            id: "",
+            title: "",
+            meta: "",
+            category: [""],
+            startDate: "",
+            endDate: "",
+            video: "",
+            image: ""
+          }}
+          validationSchema={validationSchema}
+          onSubmit={async (values) => {
+            await createLesson({
+              variables: {
+                input: values
+              }
+            });
+
+            navigate(`../user/${viewer.id}`, { replace: true })
+          }}
+        >
+        {({ values, errors, touched, handleSubmit, handleChange }) => (
         <form onSubmit={handleSubmit}>
           <TextField 
             variant="outlined" 
             label="Title" 
             helperText="Max Character Count of 160" 
             sx={{ width: "45%" }} 
-            value={formData.title} 
+            value={values.title} 
             name="title"
-            onChange={handleInputChange}
+            onChange={handleChange}
             required
             error={errorState}
           /><br />
@@ -382,7 +431,7 @@ export const CreateLesson = ({ viewer }: Props) => {
             }}
             required 
             /><br />
-          <TextField variant="outlined" label="Description" multiline rows={3} helperText="Min Character Count of 160" sx={{ width: "45%", marginTop: 1 }} value={formData.meta} name="meta" onChange={handleInputChange} required />
+          <TextField variant="outlined" label="Description" multiline rows={3} helperText="Min Character Count of 160" sx={{ width: "45%", marginTop: 1 }} value={values.meta} name="meta" onChange={handleChange} required />
           <FormGroup sx={{ marginTop: 1 }}>
             <Typography variant="h5">Category</Typography>
             <Typography variant="body2" style={{color: "gray"}}>Select All That Apply</Typography>
@@ -390,10 +439,13 @@ export const CreateLesson = ({ viewer }: Props) => {
               <FormControlLabel control={<Checkbox />} onChange={() => handleCheck(index, val)} checked={checked[index]} label={val.name} key={index} /> 
             ))}
           </FormGroup>
-          <TextField variant='outlined' label="Start Date or Year" helperText="YYYY-MM-DD or -33,000 for 33,000 BCE" sx={{ width: "45%", marginTop: 1 }} value={formData.startDate} name="startDate" onChange={handleInputChange} required /><br />
-          <TextField variant='outlined' label="End Date or Year" helperText="YYYY-MM-DD or 1052" sx={{ width: "45%", marginTop: 1 }} value={formData.endDate} name="endDate" onChange={handleInputChange} required /><br />
+          <TextField variant='outlined' label="Start Date or Year" helperText="YYYY-MM-DD or -33,000 for 33,000 BCE" sx={{ width: "45%", marginTop: 1 }} value={values.startDate} name="startDate" onChange={handleChange} required /><br />
+          <TextField variant='outlined' label="End Date or Year" helperText="YYYY-MM-DD or 1052" sx={{ width: "45%", marginTop: 1 }} value={values.endDate} name="endDate" onChange={handleChange} required /><br />
           <Button sx={{ marginTop: 2 }} disabled={buttonError} variant='contained' color='primary' type="submit">Submit</Button>
+          {console.log(values)}
         </form>
+        )}
+        </Formik>
       </Box>
     )
   }
