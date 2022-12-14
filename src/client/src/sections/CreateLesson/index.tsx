@@ -34,6 +34,7 @@ export const CreateLesson = ({ viewer }: Props) => {
   const [errorState, setError] = useState<boolean>(false);
   const [buttonError, setButtonError] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
+  const [imageProgress, setImageProgress] = useState<number>(0);
 
   useEffect(() => {
     if (!formData.title.length || !formData.endDate.length) {
@@ -82,6 +83,7 @@ export const CreateLesson = ({ viewer }: Props) => {
 
         if (end > size) {
           end = size;
+          setProgress(100)
         }
         const s = slice(file, start, end);
         send(s, start, end - 1, size);
@@ -168,12 +170,15 @@ export const CreateLesson = ({ viewer }: Props) => {
 
         if (end > size) {
           end = size;
+          setImageProgress(100)
         }
         const s = slice(file, start, end);
         send(s, start, end - 1, size);
         if (end < size) {
           start += sliceSize;
           setTimeout(loop, 3);
+
+          setImageProgress((end/size)*100)
         }
       }
     }
@@ -216,6 +221,32 @@ export const CreateLesson = ({ viewer }: Props) => {
     }
 
     function noop() {}
+  }
+
+  const LabelProgress = ({ progress }: { progress: number }) => {
+    return (
+      <Box sx={{ position: 'relative', display: 'inline-flex' }}>
+        <CircularProgress color="primary" variant='determinate' value={progress}/>
+          <Box
+            sx={{
+              top: 0,
+              left: 0,
+              bottom: 0,
+              right: 2,
+              position: 'absolute',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'right',
+            }}
+          >
+          <Typography
+            variant="caption"
+            component="div"
+            color="text.secondary"
+          >{`${Math.round(progress)}%`}</Typography>
+        </Box>
+      </Box>
+    )
   }
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -329,13 +360,28 @@ export const CreateLesson = ({ viewer }: Props) => {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <CircularProgress color="primary" variant='determinate' value={progress}/>
+                  <LabelProgress progress={progress} />
                 </InputAdornment>
               )
             }}
             required 
           /><br />
-          <TextField type="file" variant='outlined' helperText="Image" sx={{ width: "45%", marginTop: 1 }} name="image" onChange={(e: ChangeEvent<HTMLInputElement>) => handleImageUpload(e.target.files)} required /><br />
+          <TextField 
+            type="file" 
+            variant='outlined' 
+            helperText="Image" 
+            sx={{ width: "45%", marginTop: 1 }} 
+            name="image" 
+            onChange={(e: ChangeEvent<HTMLInputElement>) => handleImageUpload(e.target.files)} 
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <LabelProgress progress={imageProgress} />
+                </InputAdornment>
+              )
+            }}
+            required 
+            /><br />
           <TextField variant="outlined" label="Description" multiline rows={3} helperText="Min Character Count of 160" sx={{ width: "45%", marginTop: 1 }} value={formData.meta} name="meta" onChange={handleInputChange} required />
           <FormGroup sx={{ marginTop: 1 }}>
             <Typography variant="h5">Category</Typography>
