@@ -118,7 +118,6 @@ export const typeDefs = gql`
   }
 
   input CreateLessonInput {
-    id: ID!
     title: String!
     meta: String!
     category: [String!]!

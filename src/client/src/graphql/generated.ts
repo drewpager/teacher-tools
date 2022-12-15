@@ -198,7 +198,6 @@ export type Answers = {
 export type CreateLessonInput = {
   category: Array<Scalars['String']>;
   endDate: Scalars['DateScalar'];
-  id: Scalars['ID'];
   image: Scalars['String'];
   meta: Scalars['String'];
   startDate: Scalars['DateScalar'];

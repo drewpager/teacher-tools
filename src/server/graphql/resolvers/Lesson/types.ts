@@ -4,7 +4,6 @@ export interface LessonArgs {
 }
 
 export interface CreateLessonInput {
-  id: string;
   title: string;
   meta: string;
   category: string[];

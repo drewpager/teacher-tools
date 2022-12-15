@@ -17,7 +17,6 @@ interface Props {
 }
 
 const initialData = {
-  id: "",
   title: "",
   meta: "",
   category: [""],
@@ -61,23 +60,37 @@ export const CreateLesson = ({ viewer }: Props) => {
   const [imageProgress, setImageProgress] = useState<number>(0);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!formData.title.length || !formData.endDate.length) {
-      setButtonError(true);
-    } else {
-      setButtonError(false);
-    }
-  }, [formData, categorizer, checked])
-
-  const [createLesson, { 
-    data: Mutation,
-    loading: createLessonLoading, 
-    error: createLessonError 
-  }] = useCreateLessonMutation({
+  const [createLesson, { loading, error }] = useCreateLessonMutation({
     variables: {
-      input: formData
+      input: {
+        title: "",
+        meta: "",
+        category: [""],
+        startDate: "",
+        endDate: "",
+        video: "",
+        image: ""
+      }
     }
-  });
+  })
+
+  // useEffect(() => {
+  //   if (!values.title.length || !values.endDate.length) {
+  //     setButtonError(true);
+  //   } else {
+  //     setButtonError(false);
+  //   }
+  // }, [formData, categorizer, checked])
+
+  // const [createLesson, { 
+  //   data: Mutation,
+  //   loading: createLessonLoading, 
+  //   error: createLessonError 
+  // }] = useCreateLessonMutation({
+  //   variables: {
+  //     input: formData
+  //   }
+  // });
   
   // TODO - Restrict Video Uploads by File Type and Size
   const [videoUpload, setVideoUpload] = useState<File | undefined>();
@@ -325,32 +338,32 @@ export const CreateLesson = ({ viewer }: Props) => {
   //   }
   // }
 
-  if (createLessonError) {
-    return (
-      <>
-        <DisplayError title={`${createLessonError}`} />
-        {console.log(formData)}
-      </>
-    )
-  }
+  // if (createLessonError) {
+  //   return (
+  //     <>
+  //       <DisplayError title={`${createLessonError}`} />
+  //       {console.log(formData)}
+  //     </>
+  //   )
+  // }
 
-  if (Mutation && Mutation.createLesson) {
-    const { id } = Mutation.createLesson;
-    return (
-      <>
-        <Navigate to={`/lesson/${id}`} />
-        <DisplaySuccess title="Success!" />
-      </>
-    )
-  }
+  // if (Mutation && Mutation.createLesson) {
+  //   const { id } = Mutation.createLesson;
+  //   return (
+  //     <>
+  //       <Navigate to={`/lesson/${id}`} />
+  //       <DisplaySuccess title="Success!" />
+  //     </>
+  //   )
+  // }
 
-  if (createLessonLoading) {
-    return (
-      <Box sx={{ margin: 50 }}>
-        <CircularProgress color="primary" />
-      </Box>
-    )
-  }
+  // if (createLessonLoading) {
+  //   return (
+  //     <Box sx={{ margin: 50 }}>
+  //       <CircularProgress color="primary" />
+  //     </Box>
+  //   )
+  // }
 
   if (!viewer.id || !viewer.hasPayment) {
     return (
@@ -366,7 +379,6 @@ export const CreateLesson = ({ viewer }: Props) => {
         <Formik
           initialValues={{
             // TODO: Remove id from CreateLessonArgs schema
-            id: "",
             title: "",
             meta: "",
             category: [""],
@@ -441,7 +453,7 @@ export const CreateLesson = ({ viewer }: Props) => {
           </FormGroup>
           <TextField variant='outlined' label="Start Date or Year" helperText="YYYY-MM-DD or -33,000 for 33,000 BCE" sx={{ width: "45%", marginTop: 1 }} value={values.startDate} name="startDate" onChange={handleChange} required /><br />
           <TextField variant='outlined' label="End Date or Year" helperText="YYYY-MM-DD or 1052" sx={{ width: "45%", marginTop: 1 }} value={values.endDate} name="endDate" onChange={handleChange} required /><br />
-          <Button sx={{ marginTop: 2 }} disabled={buttonError} variant='contained' color='primary' type="submit">Submit</Button>
+          <Button sx={{ marginTop: 2 }} disabled={!values.title || !values.endDate} variant='contained' color='primary' type="submit">Submit</Button>
           {console.log(values)}
         </form>
         )}
