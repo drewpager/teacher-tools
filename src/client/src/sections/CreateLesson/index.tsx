@@ -1,6 +1,6 @@
 import { Typography, Box, TextField, FormGroup, FormControlLabel, Checkbox, Button, CircularProgress, InputAdornment } from '@mui/material';
 import React, { ChangeEvent, useEffect, useState, MouseEvent } from 'react';
-import { FieldArray, Formik, getIn, FieldProps, Field  } from 'formik';
+import { FieldArray, Formik, getIn, FieldProps, Field, Form  } from 'formik';
 import * as yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCreateLessonMutation, Viewer } from '../../graphql/generated';
@@ -19,7 +19,7 @@ interface Props {
 const initialData = {
   title: "",
   meta: "",
-  category: [""],
+  category: [],
   startDate: "",
   endDate: "",
   video: "",
@@ -55,7 +55,6 @@ export const CreateLesson = ({ viewer }: Props) => {
   );
   const [categorizer, setCategorizer] = useState<string[]>([]);
   const [errorState, setError] = useState<boolean>(false);
-  const [buttonError, setButtonError] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
   const [imageProgress, setImageProgress] = useState<number>(0);
   const navigate = useNavigate();
@@ -65,7 +64,7 @@ export const CreateLesson = ({ viewer }: Props) => {
       input: {
         title: "",
         meta: "",
-        category: [""],
+        category: [],
         startDate: "",
         endDate: "",
         video: "",
@@ -73,27 +72,8 @@ export const CreateLesson = ({ viewer }: Props) => {
       }
     }
   })
-
-  // useEffect(() => {
-  //   if (!values.title.length || !values.endDate.length) {
-  //     setButtonError(true);
-  //   } else {
-  //     setButtonError(false);
-  //   }
-  // }, [formData, categorizer, checked])
-
-  // const [createLesson, { 
-  //   data: Mutation,
-  //   loading: createLessonLoading, 
-  //   error: createLessonError 
-  // }] = useCreateLessonMutation({
-  //   variables: {
-  //     input: formData
-  //   }
-  // });
   
   // TODO - Restrict Video Uploads by File Type and Size
-  const [videoUpload, setVideoUpload] = useState<File | undefined>();
 
   const handleVideoUpload = (files: FileList | null) => {
 
@@ -133,7 +113,6 @@ export const CreateLesson = ({ viewer }: Props) => {
         }
       }
     }
-
 
     function send(piece: any, start: number, end: number, size: number) {
       const regex = /\s+|\W+/gm;
@@ -287,82 +266,29 @@ export const CreateLesson = ({ viewer }: Props) => {
     )
   }
 
-  // const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = e.target;
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value
-  //   });
-
-  //    if (!e.target.value) {
-  //     setError(true);
-  //   } else {
-  //     setError(false);
-  //   }
-  // };
-
-  const handleCheck = (position: number, value: { name: string }) => {
-    const updatedCheckedState = checked.map((item, index) => index === position ? !item : item)
-    setChecked(updatedCheckedState);
-
-    const name = value.name;
-    
-    const indy = categorizer.indexOf(name);
-    if (indy === -1) {
-      setCategorizer([...categorizer, name])
-    } else {
-      setCategorizer(categorizer.filter((categorizer) => categorizer !== name))
-    }
-
-    setFormData({
-      ...formData,
-      category: [...categorizer]
-    })
+  const checkers = ({ field }: FieldProps) => {
+    return (
+      <Field type="checkbox" {...field} />
+    )
   }
 
-  // const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
+  // const handleCheck = (position: number, value: { name: string }) => {
+  //   const updatedCheckedState = checked.map((item, index) => index === position ? !item : item)
+  //   setChecked(updatedCheckedState);
+
+  //   const name = value.name;
+    
+  //   const indy = categorizer.indexOf(name);
+  //   if (indy === -1) {
+  //     setCategorizer([...categorizer, name])
+  //   } else {
+  //     setCategorizer(categorizer.filter((categorizer) => categorizer !== name))
+  //   }
 
   //   setFormData({
   //     ...formData,
-  //     ...categorizer,
-  //     ...videoUpload
+  //     category: [...categorizer]
   //   })
-
-  //   if (formData.video && formData.category) {
-  //     createLesson({
-  //       variables: {
-  //         input: formData
-  //       }
-  //     });
-  //   }
-  // }
-
-  // if (createLessonError) {
-  //   return (
-  //     <>
-  //       <DisplayError title={`${createLessonError}`} />
-  //       {console.log(formData)}
-  //     </>
-  //   )
-  // }
-
-  // if (Mutation && Mutation.createLesson) {
-  //   const { id } = Mutation.createLesson;
-  //   return (
-  //     <>
-  //       <Navigate to={`/lesson/${id}`} />
-  //       <DisplaySuccess title="Success!" />
-  //     </>
-  //   )
-  // }
-
-  // if (createLessonLoading) {
-  //   return (
-  //     <Box sx={{ margin: 50 }}>
-  //       <CircularProgress color="primary" />
-  //     </Box>
-  //   )
   // }
 
   if (!viewer.id || !viewer.hasPayment) {
@@ -374,11 +300,11 @@ export const CreateLesson = ({ viewer }: Props) => {
     )
   } else {
     return (
-      <Box className='createLesson--form'>
+      <Box className='createLesson--page'>
+        <Box className='createLesson--form'>
         <h2>Create a New Lesson</h2>
         <Formik
           initialValues={{
-            // TODO: Remove id from CreateLessonArgs schema
             title: "",
             meta: "",
             category: [""],
@@ -399,7 +325,7 @@ export const CreateLesson = ({ viewer }: Props) => {
           }}
         >
         {({ values, errors, touched, handleSubmit, handleChange }) => (
-        <form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
           <TextField 
             variant="outlined" 
             label="Title" 
@@ -447,17 +373,28 @@ export const CreateLesson = ({ viewer }: Props) => {
           <FormGroup sx={{ marginTop: 1 }}>
             <Typography variant="h5">Category</Typography>
             <Typography variant="body2" style={{color: "gray"}}>Select All That Apply</Typography>
-            {categories.map((val, index) => (
+            <FieldArray name="category">
+              {({ insert, remove, push }) => (
+                // TODO: Render categories
+                <div>
+                  {categories.map((cat, index) => (
+                    <Field name={cat} type="checkbox" key={index} onChange={() => push(cat)}></Field>
+                  ))}
+                </div>
+              )}
+            </FieldArray>
+            {/* {categories.map((val, index) => (
               <FormControlLabel control={<Checkbox />} onChange={() => handleCheck(index, val)} checked={checked[index]} label={val.name} key={index} /> 
-            ))}
+            ))} */}
           </FormGroup>
           <TextField variant='outlined' label="Start Date or Year" helperText="YYYY-MM-DD or -33,000 for 33,000 BCE" sx={{ width: "45%", marginTop: 1 }} value={values.startDate} name="startDate" onChange={handleChange} required /><br />
           <TextField variant='outlined' label="End Date or Year" helperText="YYYY-MM-DD or 1052" sx={{ width: "45%", marginTop: 1 }} value={values.endDate} name="endDate" onChange={handleChange} required /><br />
           <Button sx={{ marginTop: 2 }} disabled={!values.title || !values.endDate} variant='contained' color='primary' type="submit">Submit</Button>
           {console.log(values)}
-        </form>
+        </Form>
         )}
         </Formik>
+      </Box>
       </Box>
     )
   }

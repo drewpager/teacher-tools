@@ -1,6 +1,12 @@
 .MuiBox-root {
-  &.createLesson--form {
+  &.createLesson--page {
     margin-top: 5rem;
+    display: grid;
+    grid-template-columns: repeat(6, 2fr);
+  }
+  &.createLesson--form {
+    grid-column-start: 1;
+    grid-column-end: 4;
   }
   &.createLesson--error {
     margin-top: 5rem;
