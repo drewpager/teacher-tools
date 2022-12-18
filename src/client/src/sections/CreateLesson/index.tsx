@@ -144,6 +144,8 @@ export const CreateLesson = ({ viewer }: Props) => {
         const res = JSON.parse(this.response); 
         console.log("URL: ", res.secure_url)
         formData.video = res.secure_url;
+        console.log("Here it is: ", formData.video)
+        setFormData({...formData, video: `${res.secure_url}`})
       };
       xhr.send(formdata);
     }
@@ -225,6 +227,7 @@ export const CreateLesson = ({ viewer }: Props) => {
         // do something to response
         const res = JSON.parse(this.response); 
         formData.image = res.url;
+        console.log(formData.image)
       };
       xhr.send(formdata);
     }
@@ -307,7 +310,7 @@ export const CreateLesson = ({ viewer }: Props) => {
           initialValues={{
             title: "",
             meta: "",
-            category: [""],
+            category: [],
             startDate: "",
             endDate: "",
             video: "",
@@ -342,7 +345,7 @@ export const CreateLesson = ({ viewer }: Props) => {
             variant='outlined'
             helperText="Video or Lecture" 
             sx={{ width: "45%", marginTop: 1 }} 
-            name="video" 
+            name="video"
             onChange={(e: ChangeEvent<HTMLInputElement>) => handleVideoUpload(e.target.files)} 
             InputProps={{
               endAdornment: (
@@ -351,6 +354,7 @@ export const CreateLesson = ({ viewer }: Props) => {
                 </InputAdornment>
               )
             }}
+            value={values.video} 
             required 
           /><br />
           <TextField 
@@ -358,7 +362,7 @@ export const CreateLesson = ({ viewer }: Props) => {
             variant='outlined' 
             helperText="Image" 
             sx={{ width: "45%", marginTop: 1 }} 
-            name="image" 
+            name="image"
             onChange={(e: ChangeEvent<HTMLInputElement>) => handleImageUpload(e.target.files)} 
             InputProps={{
               endAdornment: (
@@ -367,6 +371,7 @@ export const CreateLesson = ({ viewer }: Props) => {
                 </InputAdornment>
               )
             }}
+            value={values.image}
             required 
             /><br />
           <TextField variant="outlined" label="Description" multiline rows={3} helperText="Min Character Count of 160" sx={{ width: "45%", marginTop: 1 }} value={values.meta} name="meta" onChange={handleChange} required />
@@ -378,7 +383,10 @@ export const CreateLesson = ({ viewer }: Props) => {
                 // TODO: Render categories
                 <div>
                   {categories.map((cat, index) => (
-                    <Field name={cat} type="checkbox" key={index} onChange={() => push(cat)}></Field>
+                    <label key={index}>
+                      <Field type="checkbox" name={`category`} value={cat.name} />
+                      {cat.name}
+                    </label>
                   ))}
                 </div>
               )}
