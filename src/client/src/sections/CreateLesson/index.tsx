@@ -145,7 +145,7 @@ export const CreateLesson = ({ viewer }: Props) => {
         console.log("URL: ", res.secure_url)
         formData.video = res.secure_url;
         console.log("Here it is: ", formData.video)
-        setFormData({...formData, video: `${res.secure_url}`})
+        setFormData({ ...formData, video: formData.video })
       };
       xhr.send(formdata);
     }
