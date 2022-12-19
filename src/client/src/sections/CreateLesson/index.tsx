@@ -144,7 +144,6 @@ export const CreateLesson = ({ viewer }: Props) => {
         const res = JSON.parse(this.response); 
         console.log("URL: ", res.secure_url)
         formData.video = res.secure_url;
-        console.log("Here it is: ", formData.video)
         setFormData({ ...formData, video: formData.video })
       };
       xhr.send(formdata);
@@ -160,7 +159,7 @@ export const CreateLesson = ({ viewer }: Props) => {
 
     function noop() {}
 
-    console.log("Form Data: ", formData)
+    return formData.video
   }
 
   const handleImageUpload = (files: FileList | null) => {
@@ -241,6 +240,8 @@ export const CreateLesson = ({ viewer }: Props) => {
     }
 
     function noop() {}
+
+    return formData.image
   }
 
   const LabelProgress = ({ progress }: { progress: number }) => {
@@ -327,7 +328,7 @@ export const CreateLesson = ({ viewer }: Props) => {
             navigate(`../user/${viewer.id}`, { replace: true })
           }}
         >
-        {({ values, errors, touched, handleSubmit, handleChange }) => (
+        {({ values, errors, touched, handleSubmit, handleChange, setFieldValue }) => (
         <Form onSubmit={handleSubmit}>
           <TextField 
             variant="outlined" 
@@ -346,7 +347,8 @@ export const CreateLesson = ({ viewer }: Props) => {
             helperText="Video or Lecture" 
             sx={{ width: "45%", marginTop: 1 }} 
             name="video"
-            onChange={(e: ChangeEvent<HTMLInputElement>) => handleVideoUpload(e.target.files)} 
+            value={values.video} 
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setFieldValue("video", handleVideoUpload(e.target.files))} 
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -354,7 +356,6 @@ export const CreateLesson = ({ viewer }: Props) => {
                 </InputAdornment>
               )
             }}
-            value={values.video} 
             required 
           /><br />
           <TextField 
@@ -363,7 +364,8 @@ export const CreateLesson = ({ viewer }: Props) => {
             helperText="Image" 
             sx={{ width: "45%", marginTop: 1 }} 
             name="image"
-            onChange={(e: ChangeEvent<HTMLInputElement>) => handleImageUpload(e.target.files)} 
+            value={values.image}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setFieldValue("image", handleImageUpload(e.target.files))} 
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -371,7 +373,6 @@ export const CreateLesson = ({ viewer }: Props) => {
                 </InputAdornment>
               )
             }}
-            value={values.image}
             required 
             /><br />
           <TextField variant="outlined" label="Description" multiline rows={3} helperText="Min Character Count of 160" sx={{ width: "45%", marginTop: 1 }} value={values.meta} name="meta" onChange={handleChange} required />
