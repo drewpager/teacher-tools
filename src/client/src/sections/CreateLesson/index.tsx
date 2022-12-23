@@ -1,16 +1,12 @@
 import { Typography, Box, TextField, FormGroup, FormControlLabel, Checkbox, Button, CircularProgress, InputAdornment } from '@mui/material';
-import React, { ChangeEvent, useEffect, useState, MouseEvent } from 'react';
-import { FieldArray, Formik, getIn, FieldProps, Field, Form  } from 'formik';
+import React, { ChangeEvent, useState } from 'react';
+import { FieldArray, Formik, Field, Form  } from 'formik';
 import * as yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCreateLessonMutation, Viewer } from '../../graphql/generated';
 import { categories, DisplayError, DisplaySuccess } from '../../lib/utils';
-import { Navigate } from 'react-router-dom';
 import theme from '../../theme';
 import './createLesson.scss';
-import { render } from 'react-dom';
-// import { Cloudinary } from '@cloudinary/url-gen';
-// import 'dotenv/config';
 
 interface Props {
   viewer: Viewer
@@ -50,10 +46,6 @@ const validationSchema = yup.object({
 
 export const CreateLesson = ({ viewer }: Props) => {
   const [formData, setFormData] = useState(initialData);
-  const [checked, setChecked] = useState(
-    new Array(categories.length).fill(false)
-  );
-  const [categorizer, setCategorizer] = useState<string[]>([]);
   const [errorState, setError] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
   const [imageProgress, setImageProgress] = useState<number>(0);
@@ -162,12 +154,12 @@ export const CreateLesson = ({ viewer }: Props) => {
     return formData.video
   }
 
-  const handleImageUpload = (files: FileList | null) => {
+  const handleImageUpload = async (files: FileList | null) => {
 
     const file = files ? files[0] : null;
     // Set your cloud name and unsigned upload preset here:
     var YOUR_CLOUD_NAME = "drewpager";
-    var YOUR_UNSIGNED_UPLOAD_PRESET = "platos-peach";
+    var YOUR_UNSIGNED_UPLOAD_PRESET = "platos-peach-image";
 
     var POST_URL =
       "https://api.cloudinary.com/v1_1/" + YOUR_CLOUD_NAME + "/auto/upload";
@@ -270,31 +262,6 @@ export const CreateLesson = ({ viewer }: Props) => {
     )
   }
 
-  const checkers = ({ field }: FieldProps) => {
-    return (
-      <Field type="checkbox" {...field} />
-    )
-  }
-
-  // const handleCheck = (position: number, value: { name: string }) => {
-  //   const updatedCheckedState = checked.map((item, index) => index === position ? !item : item)
-  //   setChecked(updatedCheckedState);
-
-  //   const name = value.name;
-    
-  //   const indy = categorizer.indexOf(name);
-  //   if (indy === -1) {
-  //     setCategorizer([...categorizer, name])
-  //   } else {
-  //     setCategorizer(categorizer.filter((categorizer) => categorizer !== name))
-  //   }
-
-  //   setFormData({
-  //     ...formData,
-  //     category: [...categorizer]
-  //   })
-  // }
-
   if (!viewer.id || !viewer.hasPayment) {
     return (
       <Box className='createLesson--error'>
@@ -319,6 +286,9 @@ export const CreateLesson = ({ viewer }: Props) => {
           }}
           validationSchema={validationSchema}
           onSubmit={async (values) => {
+            values.video = formData.video;
+            values.image = formData.image;
+
             await createLesson({
               variables: {
                 input: values
@@ -342,13 +312,13 @@ export const CreateLesson = ({ viewer }: Props) => {
             error={errorState}
           /><br />
           <TextField 
-            type="file" 
+            type="file"
+            id="video" 
             variant='outlined'
             helperText="Video or Lecture" 
             sx={{ width: "45%", marginTop: 1 }} 
             name="video"
-            value={values.video} 
-            onChange={(e: ChangeEvent<HTMLInputElement>) => setFieldValue("video", handleVideoUpload(e.target.files))} 
+            onChange={async (e: ChangeEvent<HTMLInputElement>) => { setFieldValue("video", await handleVideoUpload(e.target.files)) }} 
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -359,13 +329,13 @@ export const CreateLesson = ({ viewer }: Props) => {
             required 
           /><br />
           <TextField 
-            type="file" 
+            type="file"
+            id="image" 
             variant='outlined' 
             helperText="Image" 
             sx={{ width: "45%", marginTop: 1 }} 
             name="image"
-            value={values.image}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => setFieldValue("image", handleImageUpload(e.target.files))} 
+            onChange={async (e: ChangeEvent<HTMLInputElement>) => { setFieldValue("image", await handleImageUpload(e.target.files)) }} 
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -392,9 +362,6 @@ export const CreateLesson = ({ viewer }: Props) => {
                 </div>
               )}
             </FieldArray>
-            {/* {categories.map((val, index) => (
-              <FormControlLabel control={<Checkbox />} onChange={() => handleCheck(index, val)} checked={checked[index]} label={val.name} key={index} /> 
-            ))} */}
           </FormGroup>
           <TextField variant='outlined' label="Start Date or Year" helperText="YYYY-MM-DD or -33,000 for 33,000 BCE" sx={{ width: "45%", marginTop: 1 }} value={values.startDate} name="startDate" onChange={handleChange} required /><br />
           <TextField variant='outlined' label="End Date or Year" helperText="YYYY-MM-DD or 1052" sx={{ width: "45%", marginTop: 1 }} value={values.endDate} name="endDate" onChange={handleChange} required /><br />
