@@ -6,6 +6,7 @@ import { Viewer } from '../../graphql/generated';
 import { DisplaySuccess } from '../../lib/utils';
 import { Link, useNavigate } from 'react-router-dom'
 import { ReactComponent as PeachIcon } from '../../lib/assets/peach-logo.svg';
+import { ReactComponent as PlatosPeachIcon } from '../../lib/assets/platos-peach-logo.svg';
 import theme from '../../theme';
 import zIndex from '@mui/material/styles/zIndex';
 import './appHeader.scss';
@@ -53,7 +54,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
 
   const HomeIcon = () => {
     return (
-      <SvgIcon component={PeachIcon} inheritViewBox sx={{ fontSize: 65 }} />
+      <SvgIcon component={PlatosPeachIcon} inheritViewBox sx={{ fontSize: 65 }} />
     );
   }
   
