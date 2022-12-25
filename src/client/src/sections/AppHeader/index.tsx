@@ -54,7 +54,9 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
 
   const HomeIcon = () => {
     return (
-      <SvgIcon component={PlatosPeachIcon} inheritViewBox sx={{ fontSize: 65 }} />
+      <Link to="/">
+        <SvgIcon component={PlatosPeachIcon} inheritViewBox sx={{ fontSize: 65, color: "black" }} />
+      </Link>
     );
   }
   
@@ -70,7 +72,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
             <HomeIcon />
           </IconButton>
             <Typography variant="h1" className="nav--title">
-              <Link to="/" style={{ textDecoration: "none", color: "white", fontSize: 32, fontWeight: 800 }}>
+              <Link to="/" style={{ textDecoration: "none", color: "black", fontSize: 32, fontWeight: 800 }}>
                 Plato's Peach
               </Link>
             </Typography>

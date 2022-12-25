@@ -16,6 +16,13 @@ const theme = createTheme({
       // main: '#5560b9',
       // Coral https://www.canva.com/colors/color-palettes/toasted-peach/
       main: "#F67B50",
+
+      // Possible new palette
+      // brown: "#bc6c25"
+      // peachy: "#dda15e"
+      // white: "#fefae0"
+      // darkGreen: "#283618"
+      // lightGreen: "#606c38"
     },
     secondary: {
       // main: '#FFE5B4',
