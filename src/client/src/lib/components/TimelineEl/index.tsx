@@ -113,7 +113,7 @@ export const TimelineEl = () => {
             <TimelineItem className='timeline--item' key={index}>
                 <TimelineOppositeContent
                     sx={{ m: 'auto 0' }}
-                    align="right"
+                    align="left"
                     variant="body2"
                     color="text.secondary"
                     className='timeline--date'
