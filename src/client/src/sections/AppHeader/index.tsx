@@ -55,7 +55,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
   const HomeIcon = () => {
     return (
       <Link to="/">
-        <SvgIcon component={PlatosPeachIcon} inheritViewBox sx={{ fontSize: 65, color: "black" }} />
+        <SvgIcon component={PlatosPeachIcon} inheritViewBox sx={{ fontSize: 65, color: `${theme.palette.primary.light}`}} />
       </Link>
     );
   }
@@ -72,7 +72,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
             <HomeIcon />
           </IconButton>
             <Typography variant="h1" className="nav--title">
-              <Link to="/" style={{ textDecoration: "none", color: "black", fontSize: 32, fontWeight: 800 }}>
+              <Link to="/" style={{ color: `${theme.palette.secondary.light}`, textDecoration: "none", fontSize: 32, fontWeight: 800 }}>
                 Plato's Peach
               </Link>
             </Typography>
@@ -100,17 +100,17 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                 onClose={handleCloseUserMenu}
               >
                 <MenuItem onClick={handleCloseUserMenu}>
-                  <Link to={`/user/${viewer.id}`} style={{ textDecoration: "none", color: 'black' }}>
-                    <Typography textAlign="center">Profile</Typography>
+                  <Link to={`/user/${viewer.id}`} style={{ textDecoration: "none", color: `${theme.palette.primary.light}` }}>
+                    <Typography textAlign="center" sx={{ color: `${theme.palette.primary.light}`}}>Profile</Typography>
                   </Link>
                 </MenuItem>
                 <MenuItem>
-                  <Link to={'/catalog'} style={{ textDecoration: 'none', color: 'black'}}>
-                    <Typography textAlign="center">Catalog</Typography>
+                  <Link to={'/catalog'} style={{ textDecoration: 'none' }}>
+                    <Typography textAlign="center" sx={{ color: `${theme.palette.primary.light}`}}>Catalog</Typography>
                   </Link>
                 </MenuItem>
                 <MenuItem onClick={handleLogOut}>
-                  <Typography textAlign="center">Logout</Typography>
+                  <Typography textAlign="center" sx={{ color: `${theme.palette.primary.light}`}}>Logout</Typography>
                 </MenuItem>
               </Menu>
           </>

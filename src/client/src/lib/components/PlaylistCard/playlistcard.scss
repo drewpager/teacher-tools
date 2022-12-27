@@ -1,10 +1,18 @@
+@use '../../../library';
+
 .MuiButtonBase-root {
     &.active {
-        background: linear-gradient(#F67B50, #dd253d);
-        color: white;
-        border: 1px solid #000;
+        background: library.$coral;
+        color: library.$white;
+        border: 1px solid library.$darkGreen;
         border-radius: 4px;
         padding: 1rem;
+    }
+}
+
+.MuiListItemButton-root {
+    &.active:hover {
+        background: library.$coral;
     }
 }
 
