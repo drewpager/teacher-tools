@@ -1,14 +1,31 @@
+@use '../../../library';
+
+.MuiPaper-root {
+    &.MuiCard-root {
+        background: library.$white;
+        border: 1px solid library.$darkGreen;
+        &:hover {
+            transform: translate(-1px, -2px);
+            border-right: 5px solid library.$darkGreen;
+            border-bottom: 5px solid library.$darkGreen;
+        }
+    }
+}
+
 .MuiTypography-root {
     &.card--title {
         font-size: clamp(1.5rem, 2.5vw, 2.5rem);
-        color: white;
+        color: library.$white;
+        &:hover {
+            color: library.$darkGreen;
+        }
     }
 }
 
 // TODO with Chris: make color portion of cards same height.
 .MuiCardContent-root {
     &.card--content {
-        background: linear-gradient(#F67B50, #dd253d);
+        background: library.$peachy;
         display: flex;
         flex-flow: column;
         flex-wrap: wrap;
@@ -21,7 +38,3 @@
         bottom: 0;
     }
 }
-
-// .MuiPaper-root {
-//     position: relative;
-// }
