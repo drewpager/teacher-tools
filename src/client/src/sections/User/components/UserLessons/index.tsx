@@ -20,7 +20,7 @@ export const UserLessons = ({ userLessons, lessonsPage, limit, setLessonsPage }:
   }
 
   const userLessonsList = (
-    <Box sx={{ marginLeft: 5 }}>
+    <Box>
       <Grid container spacing={3} sx={{ alignItems: "center" }}>
         <Grid item>
           <h2>{totalCount} Lessons</h2>

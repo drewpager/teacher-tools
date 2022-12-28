@@ -12,22 +12,22 @@ export const UserProfile = ({ user, viewerIsUser }: Props) => {
   const additionalDetailsSection = viewerIsUser ? (
     <>
       <Divider sx={{ margin: 1 }}/>
-      <Typography variant="h5" sx={{ color: "primary" }}>Additional Details</Typography>
-      <Typography variant='body1'>Ready to bring engaging lesson plans to the classroom? Sign up now!</Typography>
+      <Typography variant="h5" className="user--text-details">Additional Details</Typography>
+      <Typography variant='body1' className="user--text-details">Ready to bring engaging lesson plans to the classroom? Sign up now!</Typography>
       <Button className='stripe--button' variant="contained">Connect with Stripe!</Button>
-      <Typography variant='body1'>We use <a href="https://stripe.com/en-US/connect" target="_blank" rel="noopener noreferrer"> Stripe</a> to make payments seamless and secure.</Typography>
+      <Typography variant='body1' className="user--text-details">We use <a href="https://stripe.com/en-US/connect" target="_blank" rel="noopener noreferrer"> Stripe</a> to make payments seamless and secure.</Typography>
     </>
   ) : null;
   return (
     <>
-      <Box className="user--text" sx={{ marginLeft: 5 }}>
+      <Box className="user--text">
         <h1>User Profile</h1>
         <Card sx={{ width: 350, boxShadow: 1, padding: 5, margin: 5 }}>
           <Avatar src={user.avatar} sx={{ width: 56, height: 56, marginLeft: "40%" }} />
           <Divider sx={{ margin: 1 }}/>
-          <Typography variant="h5" sx={{ color: "primary" }}>Details</Typography>
-          <Typography>Name: {user.name}</Typography>
-          <Typography>Email: {user.contact}</Typography>
+          <Typography variant="h5" className="user--text-details">Details</Typography>
+          <Typography className="user--text-details">Name: {user.name}</Typography>
+          <Typography className="user--text-details">Email: {user.contact}</Typography>
           {additionalDetailsSection}
         </Card>
       </Box>

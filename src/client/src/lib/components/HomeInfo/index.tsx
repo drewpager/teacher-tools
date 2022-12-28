@@ -7,19 +7,11 @@ import './homeinfo.scss';
 export const HomeInfo = () => {
   return (
     <Paper
-    sx={{
-        position: 'relative',
-        backgroundColor: 'grey.800',
-        color: '#fff',
-        mb: 4,
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-        backgroundImage: `url(${classroom})`,
-      }}
+      className='title--image'
+      sx={{backgroundImage: `url(${classroom})` }}
     >
       <Box className='box--title'>
-          <Typography component="h1" variant="h3" color="inherit" gutterBottom className='title--text'>
+          <Typography variant='h1' className='title--text'>
               Interactive Lectures, Lesson Plans, and Learning. 
           </Typography>
 

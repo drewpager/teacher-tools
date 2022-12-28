@@ -21,7 +21,7 @@ export const UserPlaylists = ({ userPlaylists, playlistsPage, limit, setPlaylist
   }
 
   const userPlaylistsList = (
-    <Box sx={{ marginLeft: 5 }}>
+    <Box>
       <Grid container spacing={2} sx={{ alignItems: "center" }}>
         <Grid item>
           <h2>{totalCount} Playlists</h2>

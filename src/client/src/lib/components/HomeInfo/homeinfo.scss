@@ -1,9 +1,29 @@
 @use '../../../library';
+
 .box--title {
-    .title--text {
+    width: 100%;
+}
+
+.MuiPaper-root {
+    &.title--image {
+        min-height: 400px;
+        position: relative;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        margin-bottom: 2rem;
+    }
+}
+
+.MuiTypography-root {
+    &.title--text {
         margin-top: 6rem;
-        margin-bottom: 8rem;
+        margin-left: 2rem;
+        padding: 4rem 0;
         font-size: clamp(2rem, 3rem, 3.25rem);
+        color: library.$white;
+        align-self: baseline;
+        font-weight: bold;
     }
 }
 
@@ -13,12 +33,20 @@
         color: library.$white;
         border: 1px solid library.$darkGreen;
         border-radius: 4px;
-
+        text-decoration: none;
         padding: 1rem;
+        margin: 2rem 0;
+        &:hover {
+            background: library.$peachy;
+        }
 
         &:first-of-type {
             margin-right: 1rem;
+            margin: 0 2rem;
             background: library.$lightGreen;
+            &:hover {
+                background: library.$darkGreen;
+            }
         }
     }
 }

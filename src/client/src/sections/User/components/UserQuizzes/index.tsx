@@ -21,7 +21,7 @@ export const UserQuizzes = ({ userQuizzes, quizzesPage, limit, setQuizzesPage}: 
   }
 
   const userQuizzesList = (
-    <Box sx={{ marginLeft: 5 }}>
+    <Box>
       <Grid container spacing={2} sx={{ alignItems: "center" }}>
         <Grid item>
           <h2>{totalCount} Quizzes</h2>

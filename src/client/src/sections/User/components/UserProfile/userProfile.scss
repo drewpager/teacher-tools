@@ -1,13 +1,32 @@
+@use '../../../../library';
+
 .MuiButton-root {
   &.stripe--button {
-    margin: 1;
-    background: linear-gradient(#F67B50, #dd253d);
+    margin: 4px 0;
+    background: library.$lightGreen;
+    text-decoration: none;
     color: white;
+    &:hover {
+      background: library.$darkGreen;
+    }
   }
 }
 
 .MuiBox-root {
   &.user--text {
-    margin-top: 5rem;
+    margin: 5rem 0;
+    color: library.$darkGreen
+  }
+}
+
+.MuiTypography-root {
+  &.user--text-details {
+    color: library.$darkGreen;
+    :a {
+      text-decoration: none;
+      &:hover {
+        color: library.$coral
+      }  
+    }
   }
 }
