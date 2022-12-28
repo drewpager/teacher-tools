@@ -86,7 +86,7 @@ export const Login = ({ setViewer }: Props) => {
     <Box className="login--box">
       <Card className="login--card">
         <CardContent>
-          <Typography variant="h4" color="text.secondary">Login to Teacher Tools</Typography>
+          <Typography variant="h4" className='login--text'>Login to Teacher Tools</Typography>
           <CardActions>
             <Button className="login--button" onClick={handleAuthorize} size="small">Sign In With Google!</Button>
           </CardActions>
