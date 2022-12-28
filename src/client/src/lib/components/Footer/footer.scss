@@ -1,8 +1,37 @@
+@use '../../../library';
+
 .MuiBox-root {
   &.footer--box {
-    padding: 1rem;
-    background: linear-gradient(#F67B50, #dd253d);
-    color: white;
-    width: 100%;
+    background: library.$lightGreen;
+    bottom: 0;
+    padding: 3rem;
+    margin-left: -25px;
+    margin-right: -24px;
+    // right: calc(100% - 25px)
+  }
+}
+
+.MuiTypography-root {
+  &.footer--text {
+    color: library.$white;
+    text-decoration: none;
+    text-emphasis: bold;
+    margin-bottom: 1rem;
+  }
+
+  &.footer--link-text {
+    color: library.$white;
+    text-decoration: none;
+    margin: 4px 0;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &.footer--text-center {
+    color: library.$white;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 10px;
   }
 }

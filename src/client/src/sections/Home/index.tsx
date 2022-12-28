@@ -1,15 +1,20 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import { HomeInfo, CardGrid, Search, TimelineEl, Footer } from '../../lib/components/'
+import { Viewer } from '../../graphql/generated';
 
-export const Home = () => {
+type Props = {
+  viewer: Viewer;
+}
+
+export const Home = ({ viewer }: Props) => {
   return (
     <Box>
         <HomeInfo />
         <Search />
         <CardGrid />
         <TimelineEl />
-        <Footer />
+        <Footer viewer={viewer} />
     </Box>
   );
 }

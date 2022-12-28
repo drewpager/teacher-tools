@@ -91,7 +91,7 @@ const App = () => {
       <AppHeader viewer={viewer} setViewer={setViewer} />
         <main className='mainPanel'>
             <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<Home viewer={viewer} />} />
                 <Route path="/teach" element={<Teach />} />
                 <Route path="/catalog" element={<Catalogue />} />
                 <Route path="/lesson/:id" element={<Lesson />} />

@@ -18,8 +18,8 @@ export const QuizPlayer = ({ quiz }: Props) => {
         <>
           <h2>{i.question}</h2>
           <RadioGroup>
-            {i.answerOptions?.map((t) => (
-              <FormControlLabel value={t?.answerText} label={`${t?.answerText}`} control={<Radio />} />
+            {i.answerOptions?.map((t, index) => (
+              <FormControlLabel value={t?.answerText} label={`${t?.answerText}`} key={index} control={<Radio />} />
             ))}
           </RadioGroup>
         </>
