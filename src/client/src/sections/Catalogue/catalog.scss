@@ -1,3 +1,5 @@
+@use '../../library';
+
 .MuiDataGrid-root {
   &.catalog--dataTable {
       margin-top: 6rem; 
@@ -10,10 +12,13 @@
 
 .MuiButton-root {
   &.catalogFilters--button {
-    background: linear-gradient(#F67B50, #dd253d);
+    background: library.$lightGreen;
     color: white;
     padding: 0.5rem;
     margin: 0.5rem;
+    &:hover {
+      background: library.$darkGreen;
+    }
   }
 }
 
