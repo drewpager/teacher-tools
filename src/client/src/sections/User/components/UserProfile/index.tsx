@@ -22,7 +22,7 @@ export const UserProfile = ({ user, viewerIsUser }: Props) => {
     <>
       <Box className="user--text">
         <h1>User Profile</h1>
-        <Card sx={{ width: 350, boxShadow: 1, padding: 5, margin: 5 }}>
+        <Card sx={{ width: 350, boxShadow: 1, padding: 5 }}>
           <Avatar src={user.avatar} sx={{ width: 56, height: 56, marginLeft: "40%" }} />
           <Divider sx={{ margin: 1 }}/>
           <Typography variant="h5" className="user--text-details">Details</Typography>
