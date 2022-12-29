@@ -1,3 +1,5 @@
+@use '../../library';
+
 .MuiBox-root {
   &.createPlaylist--box {
     margin-top: 5rem;
@@ -19,8 +21,8 @@
     max-height: 6rem;
     min-width: 31rem;
     margin-top: 1rem;
-    background-color: #F67B50;
-    color: white;
+    background-color: library.$coral;
+    color: library.$white;
     text-align: center;
     vertical-align: middle;
   }
@@ -30,7 +32,7 @@
 
 .MuiFormControl-root {
   &.createPlaylist--search {
-    background-color: white;
+    background-color: library.$white;
     width: 100%;
     top: 0;
     position: sticky;
