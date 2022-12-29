@@ -1,4 +1,5 @@
-import { Typography, Box, TextField, FormGroup, FormControlLabel, Checkbox, Button, CircularProgress, InputAdornment } from '@mui/material';
+import { Typography, Box, TextField, FormGroup, FormControlLabel, Checkbox, Button, CircularProgress, InputAdornment, Input } from '@mui/material';
+import { VideoLibrary, AddPhotoAlternate } from '@mui/icons-material';
 import React, { ChangeEvent, useState } from 'react';
 import { FieldArray, Formik, Field, Form  } from 'formik';
 import * as yup from 'yup';
@@ -316,6 +317,7 @@ export const CreateLesson = ({ viewer }: Props) => {
             id="video" 
             variant='outlined'
             helperText="Video or Lecture" 
+            className='file--upload'
             sx={{ width: "45%", marginTop: 1 }} 
             name="video"
             onChange={async (e: ChangeEvent<HTMLInputElement>) => { setFieldValue("video", await handleVideoUpload(e.target.files)) }} 
@@ -323,6 +325,11 @@ export const CreateLesson = ({ viewer }: Props) => {
               endAdornment: (
                 <InputAdornment position="end">
                   <LabelProgress progress={progress} />
+                </InputAdornment>
+              ),
+              startAdornment: (
+                <InputAdornment position="start">
+                  <VideoLibrary />
                 </InputAdornment>
               )
             }}
@@ -341,8 +348,14 @@ export const CreateLesson = ({ viewer }: Props) => {
                 <InputAdornment position="end">
                   <LabelProgress progress={imageProgress} />
                 </InputAdornment>
+              ),
+              startAdornment: (
+                <InputAdornment position="start">
+                  <AddPhotoAlternate />
+                </InputAdornment>
               )
             }}
+            color="primary"
             required 
             /><br />
           <TextField variant="outlined" label="Description" multiline rows={3} helperText="Min Character Count of 160" sx={{ width: "45%", marginTop: 1 }} value={values.meta} name="meta" onChange={handleChange} required />
@@ -352,10 +365,15 @@ export const CreateLesson = ({ viewer }: Props) => {
             <FieldArray name="category">
               {({ insert, remove, push }) => (
                 // TODO: Render categories
-                <div>
+                <div className="field--checkboxes">
                   {categories.map((cat, index) => (
                     <label key={index}>
-                      <Field type="checkbox" name={`category`} value={cat.name} />
+                      <Field 
+                        type="checkbox" 
+                        name={`category`} 
+                        value={cat.name} 
+                        className="field--checkbox"
+                      />
                       {cat.name}
                     </label>
                   ))}

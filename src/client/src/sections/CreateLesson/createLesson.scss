@@ -1,14 +1,53 @@
+@use '../../library';
+
 .MuiBox-root {
   &.createLesson--page {
     margin-top: 5rem;
     display: grid;
-    grid-template-columns: repeat(6, 2fr);
+    grid-template-columns: repeat(6, 4fr);
   }
   &.createLesson--form {
     grid-column-start: 1;
-    grid-column-end: 4;
+    grid-column-end: 5;
   }
   &.createLesson--error {
     margin-top: 5rem;
   }
+}
+
+.field--checkboxes {
+  cursor: pointer;
+  font-size: large;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: library.$white;
+  font: inherit;
+  color: library.$coral;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 0.15rem solid library.$coral;
+  border-radius: 0.15rem;
+  transform: translateY(-0.075rem);
+  display: grid;
+  place-content: center;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 0.80rem;
+  height: 0.80rem;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1.10rem 1.10rem library.$coral;
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
 }
