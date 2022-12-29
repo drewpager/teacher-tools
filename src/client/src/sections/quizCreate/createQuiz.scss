@@ -1,6 +1,7 @@
-.quiz__box {
+@use '../../library';
+
+.MuiBox-root {
   margin-top: 5rem;
-  max-width: 50%;
 }
 
 .MuiFormControl-root {
