@@ -2,6 +2,7 @@ import React from 'react';
 import { FieldArray, Formik, getIn, FieldProps, Field } from 'formik';
 import { useCreateQuizMutation, Viewer, AnswerFormat } from '../../graphql/generated';
 import { Box, TextField, FormLabel, FormControlLabel, Radio, RadioGroup, Typography, Tooltip, Button, CircularProgress } from '@mui/material'
+import { Cancel, ControlPoint, Remove } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { DisplayError } from '../../lib/utils';
 import './createQuiz.scss';
@@ -91,11 +92,7 @@ export const QuizCreate = ({ viewer }: props) => {
   }
 
   return (
-    <Box 
-      display="grid" 
-      gap="30px" 
-      gridTemplateColumns="repeat(4, minmax(0, 1fr))"
-    >
+    <Box className="quizCreate--form">
       <Formik
         initialValues={{
           title: '',
@@ -153,8 +150,8 @@ export const QuizCreate = ({ viewer }: props) => {
                               component={Input}
                             />
                             <Tooltip title="Remove question">
-                              <Button onClick={() => remove(index)}>
-                                  X
+                              <Button onClick={() => remove(index)} className="button--cancel">
+                                  <Cancel />
                               </Button>
                             </Tooltip>
                           </div>
@@ -199,7 +196,7 @@ export const QuizCreate = ({ viewer }: props) => {
                                               <Button 
                                                 onClick={() => push({ answerText: "", isCorrect: false })}
                                               >
-                                                +
+                                                <ControlPoint />
                                               </Button>
                                             </Tooltip>
                                             {(indy === 0) ? (
@@ -210,7 +207,7 @@ export const QuizCreate = ({ viewer }: props) => {
                                                 <Button 
                                                   onClick={() => remove(indy)}
                                                 >
-                                                  -
+                                                  <Remove />
                                                 </Button>
                                               </Tooltip>
                                             )}
@@ -253,7 +250,10 @@ export const QuizCreate = ({ viewer }: props) => {
                         </div>
                       )
                     })}
-                    <Button onClick={() => push({ question: '', answerType: AnswerFormat, 
+                    <Button 
+                      variant="outlined"
+                      className="quiz--button-add"
+                      onClick={() => push({ question: '', answerType: AnswerFormat, 
                       answerOptions: [  
                         { answerText: "", isCorrect: true },
                       ] })}
@@ -263,7 +263,11 @@ export const QuizCreate = ({ viewer }: props) => {
                 </div>
               )}
               </FieldArray>
-              <Button type="submit">Submit</Button>
+              <Button 
+                variant="outlined"
+                type="submit"
+                className="quiz--button-submit"
+              >Submit</Button>
               {/* UNCOMMENT TO DISPLAY MUTATION CONSTRUCTION
               <pre>
                 {JSON.stringify(values, null, 2)}

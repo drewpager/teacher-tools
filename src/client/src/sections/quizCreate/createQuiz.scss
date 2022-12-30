@@ -1,16 +1,49 @@
 @use '../../library';
 
 .MuiBox-root {
-  margin-top: 5rem;
+  &.quizCreate--form {
+    display: grid; 
+    grid-template-columns: 2fr 2fr;
+    margin-top: 5rem;
+  }
+
+  .button--cancel {
+    grid-auto-flow: column;
+    grid-column: 2 / -1;
+  }
+
+  .quiz--button-add {
+    background-color: library.$coral;
+    color: library.$white;
+    border: 1px solid library.$coral;
+    
+    &:hover {
+      background-color: library.$peachy;
+      border: 1px solid library.$peachy;
+    }
+  }
+
+  .quiz--button-submit {
+    background-color: library.$lightGreen;
+    color: library.$white;
+    border: 1px solid library.$lightGreen;
+    
+    &:hover {
+      background-color: library.$darkGreen;
+      border: 1px solid library.$darkGreen;
+    }
+  }
 }
 
 .MuiFormControl-root {
   &.quiz__answerType {
-    display: flex;
-    flex-direction: column;
-    margin-top: 1rem;
+    background-color: red;
+    grid-column-start: 2;
+    grid-column-end: 3;
   }
 }
+
+
 
 .quiz__answerArea {
   display: flex;
