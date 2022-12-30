@@ -1,9 +1,10 @@
 import { Skeleton, Card, Divider, Box, Grid, Typography } from '@mui/material';
+import './userPageSkeleton.scss';
 
 export const PageSkeleton = () => {
   return (
     <>
-      <Box>
+      <Box className="user--skeleton">
       <h1>User Profile</h1>
       <Card sx={{ width: 350, boxShadow: 1, padding: 5 }}>
           <Skeleton variant="circular" width={56} height={56} />

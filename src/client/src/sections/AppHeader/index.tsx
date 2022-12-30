@@ -99,6 +99,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                 }}
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
+                className="header--menu"
               >
                 <MenuItem onClick={handleCloseUserMenu}>
                   <Link to={`/user/${viewer.id}`} style={{ textDecoration: "none", color: `${theme.palette.primary.light}` }}>

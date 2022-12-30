@@ -1,3 +1,5 @@
+@use "../../library";
+
 .MuiAppBar-root {
   position: sticky;
 }
@@ -10,7 +12,7 @@
 
 .MuiButton-root {
   &.login--button {
-    color: white;
+    color: library.$white;
     text-decoration: none;
   }
 }
