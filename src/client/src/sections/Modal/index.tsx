@@ -16,7 +16,7 @@ export const UseModal = ({ viewer }: Props) => {
 
   return (
     <Box>
-    <Button onClick={handleOpen} sx={{ color: "white" }}>Add Assessment Questions</Button>
+    <Button onClick={handleOpen} className="modal--button">Add Assessment Questions</Button>
     <Modal
       open={open}
       onClose={handleClose}

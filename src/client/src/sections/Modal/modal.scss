@@ -13,3 +13,16 @@
   overflow-y: scroll;
   overflow-x: hidden;
 }
+
+.MuiButton-root {
+  &.modal--button {
+    margin: 2rem;
+    width: 90%;
+    background-color: library.$coral;
+    color: library.$white;
+    &:hover {
+      background-color: library.$peachy;
+      color: library.$darkGreen;
+    }
+  }
+}

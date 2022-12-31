@@ -19,12 +19,12 @@
   &.createQuiz--card {
     min-height: 6rem;
     max-height: 6rem;
-    min-width: 31rem;
+    min-width: 40%;
     margin-top: 1rem;
-    background-color: library.$coral;
-    color: library.$white;
+    background-color: library.$darkGreen;
+    color: library.$coral;
+    align-items: center;
     text-align: center;
-    vertical-align: middle;
   }
 }
 

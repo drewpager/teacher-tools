@@ -302,9 +302,10 @@ export const CreatePlaylist = ({ viewer }: props) => {
                   </Grid>
                 </Card>
                 <Grid container>
-                <Card variant="outlined" className="createQuiz--card">
+                {/* <Card variant="outlined" className="createQuiz--card">
                   <UseModal viewer={viewer} />
-                </Card>
+                </Card> */}
+                <UseModal viewer={viewer} />
               </Grid>
               </Grid>
                 )}
