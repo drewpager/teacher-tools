@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useAllLessonsQuery, Lesson } from '../../graphql/generated';
 import { formatDate } from '../../lib/utils';
 import "./catalog.scss";
+import { Footer } from '../../lib/components';
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'Lesson', width: 70 },

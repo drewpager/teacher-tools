@@ -11,7 +11,7 @@ export const Home = ({ viewer }: Props) => {
   return (
     <Box>
         <HomeInfo />
-        <Search />
+        {/* <Search /> */}
         <CardGrid />
         <TimelineEl />
         <Footer viewer={viewer} />

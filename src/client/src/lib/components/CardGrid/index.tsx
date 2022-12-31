@@ -13,7 +13,7 @@ export const CardGrid = () => {
 
   const { data, loading, error } = useAllPlaylistsQuery({
     variables: {
-      limit: 10,
+      limit: 8,
       page: 1
     },
     pollInterval: 500
