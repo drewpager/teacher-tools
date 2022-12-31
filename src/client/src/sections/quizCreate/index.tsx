@@ -1,7 +1,7 @@
 import React from 'react';
 import { FieldArray, Formik, getIn, FieldProps, Field } from 'formik';
 import { useCreateQuizMutation, Viewer, AnswerFormat } from '../../graphql/generated';
-import { Box, TextField, FormLabel, FormControlLabel, Radio, RadioGroup, Typography, Tooltip, Button, CircularProgress } from '@mui/material'
+import { Box, TextField, FormLabel, FormControlLabel, Radio, RadioGroup, Typography, Tooltip, Button, CircularProgress, InputAdornment } from '@mui/material'
 import { Cancel, ControlPoint, Remove } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { DisplayError } from '../../lib/utils';
@@ -145,15 +145,18 @@ export const QuizCreate = ({ viewer }: props) => {
                       return (
                         <div className='row' key={index}>
                           <div className='col' key={index}>
-                            <Field 
-                              name={`questions[${index}].question`}
-                              component={Input}
+                            <TextField 
+                              placeholder={`Question/Prompt`}
+                              fullWidth
+                              sx={{ paddingTop: "0.5rem", gridColumn: 4 }}
+                              InputProps={{
+                                endAdornment: (
+                                  <InputAdornment position="end">
+                                    <Cancel onClick={() => remove(index)} className="button--cancel" />
+                                  </InputAdornment>
+                                )
+                              }}
                             />
-                            <Tooltip title="Remove question">
-                              <Button onClick={() => remove(index)} className="button--cancel">
-                                  <Cancel />
-                              </Button>
-                            </Tooltip>
                           </div>
                             <FormLabel>Answer Type</FormLabel>
                             <RadioGroup defaultValue={"TRUEFALSE"}>
@@ -192,23 +195,15 @@ export const QuizCreate = ({ viewer }: props) => {
                                               name={`questions[${index}].answerOptions[${indy}].answerText`}
                                               onChange={handleChange}
                                             /> 
-                                            <Tooltip title="Add another answer option">
-                                              <Button 
-                                                onClick={() => push({ answerText: "", isCorrect: false })}
-                                              >
-                                                <ControlPoint />
-                                              </Button>
+                                            <Tooltip title="Add another answer option" className="quiz--modicons">
+                                              <ControlPoint onClick={() => push({ answerText: "", isCorrect: false })} />
                                             </Tooltip>
                                             {(indy === 0) ? (
                                               <>
                                               </>
                                             ): (
-                                              <Tooltip title="Remove answer option">
-                                                <Button 
-                                                  onClick={() => remove(indy)}
-                                                >
-                                                  <Remove />
-                                                </Button>
+                                              <Tooltip title="Remove answer option" className="quiz--modicons">
+                                                <Remove onClick={() => remove(indy)} />
                                               </Tooltip>
                                             )}
                                           </div>

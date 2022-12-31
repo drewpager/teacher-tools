@@ -4,15 +4,30 @@
   &.quizCreate--form {
     display: grid; 
     grid-template-columns: 2fr 2fr;
-    margin-top: 5rem;
+    margin: 5rem 2rem;
   }
 
   .button--cancel {
     grid-auto-flow: column;
     grid-column: 2 / -1;
+    color: library.$coral;
+    :hover {
+      cursor: pointer;
+      color: library.$peachy;
+    }
+  }
+
+  .quiz--modicons {
+    color: library.$coral;
+    margin: 1rem;
+    :hover {
+      cursor: pointer;
+      color: library.$peachy;
+    }
   }
 
   .quiz--button-add {
+    margin-top: 1rem;
     background-color: library.$coral;
     color: library.$white;
     border: 1px solid library.$coral;
