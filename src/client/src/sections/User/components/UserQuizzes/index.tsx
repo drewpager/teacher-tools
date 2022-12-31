@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Quizzes } from '../../../../graphql/generated';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { UserQuizzesCard } from '../../../../lib/components/';
+import "./userQuizzes.scss";
 
 interface Props {
   userQuizzes: Quizzes;
@@ -21,7 +22,7 @@ export const UserQuizzes = ({ userQuizzes, quizzesPage, limit, setQuizzesPage}: 
   }
 
   const userQuizzesList = (
-    <Box>
+    <Box className="user--quizzes">
       <Grid container spacing={2} sx={{ alignItems: "center" }}>
         <Grid item>
           <h2>{totalCount} Quizzes</h2>

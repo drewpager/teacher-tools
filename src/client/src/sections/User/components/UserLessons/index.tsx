@@ -4,6 +4,7 @@ import { Box, ListItem, Pagination, Grid, Tooltip } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { Lessons } from '../../../../graphql/generated';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import './userLessons.scss';
 
 interface Props {
   userLessons: Lessons;
@@ -20,7 +21,7 @@ export const UserLessons = ({ userLessons, lessonsPage, limit, setLessonsPage }:
   }
 
   const userLessonsList = (
-    <Box>
+    <Box className="user--lessons">
       <Grid container spacing={3} sx={{ alignItems: "center" }}>
         <Grid item>
           <h2>{totalCount} Lessons</h2>

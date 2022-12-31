@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Playlists } from '../../../../graphql/generated';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { UserPlaylistsCard } from '../../../../lib/components'
+import './userPlaylists.scss';
 
 interface Props {
   userPlaylists: Playlists;
@@ -21,7 +22,7 @@ export const UserPlaylists = ({ userPlaylists, playlistsPage, limit, setPlaylist
   }
 
   const userPlaylistsList = (
-    <Box>
+    <Box className="user--playlists">
       <Grid container spacing={2} sx={{ alignItems: "center" }}>
         <Grid item>
           <h2>{totalCount} Playlists</h2>

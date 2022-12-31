@@ -4,6 +4,7 @@ import { useUserQuery, Viewer } from '../../graphql/generated';
 import { UserProfile, UserLessons, UserPlaylists, UserQuizzes } from './components/';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
 import { PageSkeleton } from '../../lib/components/';
+import { Footer } from '../../lib/components/';
 
 interface Props {
   viewer: Viewer
@@ -84,6 +85,7 @@ export const User = ({ viewer }: Props) => {
       {userLessonsElement}
       {userPlaylistsElement}
       {userQuizzesElement}
+      <Footer viewer={viewer} />
     </>
   )
 }
