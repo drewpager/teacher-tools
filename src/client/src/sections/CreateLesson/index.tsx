@@ -367,7 +367,7 @@ export const CreateLesson = ({ viewer }: Props) => {
                 // TODO: Render categories
                 <div className="field--checkboxes">
                   {categories.map((cat, index) => (
-                    <label key={index}>
+                    <label key={index} className="field--checkboxes-label">
                       <Field 
                         type="checkbox" 
                         name={`category`} 

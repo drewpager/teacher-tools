@@ -2,13 +2,13 @@
 
 .MuiBox-root {
   &.createLesson--page {
-    margin-top: 5rem;
+    margin: 5rem 2rem;
     display: grid;
-    grid-template-columns: repeat(6, 4fr);
+    // grid-template-columns: repeat(6, 4fr);
+    grid-template-columns: repeat(auto-fit, minmax(800px, 1fr));
   }
   &.createLesson--form {
-    grid-column-start: 1;
-    grid-column-end: 5;
+    grid-column: 1 / -1
   }
   &.createLesson--error {
     margin-top: 5rem;
@@ -16,12 +16,18 @@
 }
 
 .field--checkboxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   cursor: pointer;
   font-size: large;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+
+  .field--checkboxes-label {
+    grid-row: 1 / -1;
+  }
 }
 
 input[type="checkbox"] {
