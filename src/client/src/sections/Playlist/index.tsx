@@ -41,6 +41,7 @@ export const Playlist = () => {
   return (
     <Box sx={{ marginLeft: 5 }}>
       <h2>No Playlist By This ID</h2>
+      <DisplayError title='No Playlist By This ID' />
     </Box>
   )
 }

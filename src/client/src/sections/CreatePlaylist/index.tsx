@@ -13,6 +13,7 @@ import {
 import { DisplayError } from '../../lib/utils';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useNavigate } from 'react-router-dom';
+import { UseModal } from '../Modal';
 import './createPlaylist.scss';
 
 type props = {
@@ -302,9 +303,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
                 </Card>
                 <Grid container>
                 <Card variant="outlined" className="createQuiz--card">
-                  <h2>
-                    Add Assessment Questions
-                  </h2>
+                  <UseModal viewer={viewer} />
                 </Card>
               </Grid>
               </Grid>
