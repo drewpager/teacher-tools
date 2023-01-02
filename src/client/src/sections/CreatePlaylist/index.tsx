@@ -48,8 +48,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const [searchInput, setSearchInput] = useState<string>("")
   const [lessons, setLessons] = useState<FullLessonInput>({})
   const [quizzes, setQuizzes] = useState<FullLessonQuiz>({})
-  const [plans, setPlans] = useState<Array<Plan>>([lessons, quizzes])
-  const [filter, setFilter] = useState<Array<Plan>>([lessons, quizzes])
+  const [plans, setPlans] = useState<Array<Plan>>([])
+  const [filter, setFilter] = useState<Array<Plan>>([])
   const inputRef = useFocus();
   // const id = viewer && viewer.id ? viewer.id : null;
   const [playlist, setPlaylist] = useState<InputLessonPlan>(initialData)
@@ -94,15 +94,13 @@ export const CreatePlaylist = ({ viewer }: props) => {
           meta: i.meta,
           startDate: i.startDate,
           video: i.video,
+          id: i.id
         }
         lessonInput.push(lessonObj);
       })
 
-      for (let l = 0; l < lessonInput.length; l++) {
-        setLessons(lessonInput[l])
-        setFilter(f => [lessonInput[l], ...f])
-        setPlans(p => [lessonInput[l], ...p])
-      }
+      setFilter(lessonInput)
+      setPlans(lessonInput)
     }
     if (quizQuery) {
       const quizInput: any = []
@@ -116,13 +114,13 @@ export const CreatePlaylist = ({ viewer }: props) => {
         quizInput.push(quizObj)
       })
 
-      for (let i = 0; i < quizInput.length; i++) {
-        setQuizzes(quizInput[i])
-        setFilter(f => [...f, quizInput[i]])
-        setPlans(p => [...p, quizInput[i]])
-      }
+      setQuizzes(quizInput)
+      setFilter(f => [...f, ...quizInput])
+      setPlans(p => [...p, ...quizInput])
     }
   }, [lessonQuery, quizQuery])
+
+  console.log(plans)
 
   if (!viewer.id) {
     return (
@@ -188,11 +186,11 @@ export const CreatePlaylist = ({ viewer }: props) => {
     if (destination.droppableId === "playlist") {
 
       const [reorderedItem] = items.splice(source.index, 1);
+      setPlans([...items]);
       const displacedItem = playlist.plan.slice(destination.index, (destination.index + 1));
       playlist.plan[destination.index] = reorderedItem;
       playlist.plan.push(...displacedItem)
-    
-      setPlans([...items])
+  
       setPlaylist({...playlist})
     }
 
@@ -222,10 +220,11 @@ export const CreatePlaylist = ({ viewer }: props) => {
       // setFilter(lessons)
     }
   }
+  console.log(playlist);
 
   const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    
     if (playlist && playlist.plan) {
       await lessonPlan({
         variables: {
@@ -244,7 +243,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
         <DragDropContext onDragEnd={onDragEndHandler}>
           <Grid container>
             <Droppable droppableId='playlist'>
-              {(provided) => (
+              {(provided, snapshot) => (
                 <Grid item xs={12} sm={6} md={8} lg={8}>
                   <Card variant="outlined" sx={{ minHeight: "750px", padding: 5, margin: 2 }} {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
                     <TextField
@@ -255,12 +254,11 @@ export const CreatePlaylist = ({ viewer }: props) => {
                       fullWidth
                       onChange={titleHandler}
                     />
-                  {playlist.plan.map((i, index) => (
-                    <Draggable key={index} draggableId={index.toString()} index={index}>
-                      {(provide) => (
+                  {playlist.plan.map((i, indices) => (
+                    <Draggable draggableId={`${i.id}`} index={indices} key={i.id}>
+                      {(provided) => (
                         <Grid item xs={12} md={12} lg={12}>
-                          {console.log(playlist.plan)}
-                          <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={index} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}> 
+                          <Card variant="outlined" sx={{ padding: 2, margin: 1 }} {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}> 
                             { i.title }
                           </Card>
                         </Grid>
@@ -273,7 +271,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
               )}
             </Droppable>
             <Droppable droppableId='lessons'>
-              {(provided) => (
+              {(provided, snapshot) => (
                 <Grid item xs={12} sm={6} md={4} lg={4}>
                 <Card variant="outlined" className="createPlaylist--card" {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
                   <TextField 
@@ -288,10 +286,10 @@ export const CreatePlaylist = ({ viewer }: props) => {
                   <Grid container>
                     
                   {plans.map((i, index) => (
-                    <Draggable key={index} draggableId={index.toString()} index={index}>
-                      {(provide) => (
+                    <Draggable draggableId={`${i.id}`} index={index} key={i.id}>
+                      {(provided) => (
                         <Grid item xs={12} md={12} lg={12}>
-                          <Card variant="outlined" sx={{ padding: 2, margin: 1 }} key={index} {...provide.draggableProps} {...provide.dragHandleProps} ref={provide.innerRef}> 
+                          <Card variant="outlined" sx={{ padding: 2, margin: 1 }} {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}> 
                             {JSON.parse(JSON.stringify(i)).title}
                           </Card>
                         </Grid>

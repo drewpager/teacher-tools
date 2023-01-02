@@ -3,6 +3,8 @@
 .MuiBox-root {
   &.createPlaylist--box {
     margin-top: 5rem;
+    overflow-y: hidden;
+    overflow-x: hidden;
   }
 }
 
@@ -13,7 +15,7 @@
     min-width: 30rem;
     padding: 2rem;
     margin-top: 1rem;
-    overflow: scroll;
+    overflow-y: scroll;
     overflow-x: hidden;
   }
   &.createQuiz--card {
