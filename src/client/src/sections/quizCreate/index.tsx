@@ -95,10 +95,10 @@ export const QuizCreate = ({ viewer }: props) => {
     <Box className="quizCreate--form">
       <Formik
         initialValues={{
-          title: '',
+          title: "",
           questions: [
             {
-              question: '',
+              question: "",
               answerType: AnswerFormat.Truefalse || AnswerFormat.Multiplechoice,
               answerOptions: [
                 { answerText: "", isCorrect: true },
@@ -111,9 +111,7 @@ export const QuizCreate = ({ viewer }: props) => {
         onSubmit={async (values) => {
           await createQuiz({
             variables: {
-              input: {  
-                ...values
-              }
+              input: values
             }
           });
 
@@ -149,6 +147,8 @@ export const QuizCreate = ({ viewer }: props) => {
                               placeholder={`Question/Prompt`}
                               fullWidth
                               sx={{ paddingTop: "0.5rem", gridColumn: 4 }}
+                              name={`questions[${index}].question`}
+                              onChange={handleChange}
                               InputProps={{
                                 endAdornment: (
                                   <InputAdornment position="end">
