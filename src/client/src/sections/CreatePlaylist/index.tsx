@@ -71,7 +71,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
     }
   })
 
-  const [lessonPlan] = useLessonPlanMutation({
+  const [lessonPlan, { loading, error }] = useLessonPlanMutation({
     variables: {
       input: playlist
     }
@@ -83,7 +83,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
   useEffect(() => {
     if (lessonQuery) {
-      const lessonInput: any = []
+      const lessonInput: FullLessonInput[] = []
       lessonQuery.forEach(i => {
         let lessonObj = {
           title: i.title,
@@ -103,24 +103,21 @@ export const CreatePlaylist = ({ viewer }: props) => {
       setPlans(lessonInput)
     }
     if (quizQuery) {
-      const quizInput: any = []
+      const quizInput: FullLessonQuiz[] = []
       quizQuery.forEach(q => {
         let quizObj = {
           creator: q.creator,
           id: q.id,
           title: q.title,
-          questions: [q.questions]
+          questions: [...q.questions]
         }
         quizInput.push(quizObj)
       })
 
-      setQuizzes(quizInput)
       setFilter(f => [...f, ...quizInput])
       setPlans(p => [...p, ...quizInput])
     }
   }, [lessonQuery, quizQuery])
-
-  console.log(plans)
 
   if (!viewer.id) {
     return (
@@ -191,7 +188,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       playlist.plan[destination.index] = reorderedItem;
       playlist.plan.push(...displacedItem)
   
-      setPlaylist({...playlist})
+      setPlaylist(playlist)
     }
 
     if (destination.droppableId === "lessons") {
@@ -201,7 +198,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       items.push(...displacedPlay)
       
       setPlans([...items])
-      setPlaylist({...playlist})
+      setPlaylist(playlist)
     }
   }
 
@@ -234,6 +231,14 @@ export const CreatePlaylist = ({ viewer }: props) => {
     }
     // Navigate to User Profile Page
     navigate(`../user/${viewer.id}`, { replace: true })    
+  }
+
+  if (error) {
+    <DisplayError title="Lesson Plan Creation Failed!" />    
+  }
+
+  if (loading) {
+    return <CircularProgress color='primary' />
   }
 
   return (

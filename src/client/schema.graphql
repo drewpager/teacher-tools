@@ -1,3 +1,4 @@
+"""A valid date object"""
 scalar DateScalar
 
 enum AnswerFormat {
@@ -243,39 +244,25 @@ A field whose value conforms to the standard internet email address format as sp
 """
 scalar EmailAddress
 
-"""
-Floats that will have a value less than 0.
-"""
+"""Floats that will have a value less than 0."""
 scalar NegativeFloat
 
-"""
-Integers that will have a value less than 0.
-"""
+"""Integers that will have a value less than 0."""
 scalar NegativeInt
 
-"""
-A string that cannot be passed as an empty value
-"""
+"""A string that cannot be passed as an empty value"""
 scalar NonEmptyString
 
-"""
-Floats that will have a value of 0 or more.
-"""
+"""Floats that will have a value of 0 or more."""
 scalar NonNegativeFloat
 
-"""
-Integers that will have a value of 0 or more.
-"""
+"""Integers that will have a value of 0 or more."""
 scalar NonNegativeInt
 
-"""
-Floats that will have a value of 0 or less.
-"""
+"""Floats that will have a value of 0 or less."""
 scalar NonPositiveFloat
 
-"""
-Integers that will have a value of 0 or less.
-"""
+"""Integers that will have a value of 0 or less."""
 scalar NonPositiveInt
 
 """
@@ -283,14 +270,10 @@ A field whose value conforms to the standard E.164 format as specified in: https
 """
 scalar PhoneNumber
 
-"""
-Floats that will have a value greater than 0.
-"""
+"""Floats that will have a value greater than 0."""
 scalar PositiveFloat
 
-"""
-Integers that will have a value greater than 0.
-"""
+"""Integers that will have a value greater than 0."""
 scalar PositiveInt
 
 """
@@ -298,14 +281,10 @@ A field whose value conforms to the standard postal code formats for United Stat
 """
 scalar PostalCode
 
-"""
-Floats that will have a value of 0 or more.
-"""
+"""Floats that will have a value of 0 or more."""
 scalar UnsignedFloat
 
-"""
-Integers that will have a value of 0 or more.
-"""
+"""Integers that will have a value of 0 or more."""
 scalar UnsignedInt
 
 """
@@ -323,9 +302,7 @@ The `BigInt` scalar type represents non-fractional signed whole numeric values.
 """
 scalar Long
 
-"""
-The `Byte` scalar type represents byte value as a Buffer
-"""
+"""The `Byte` scalar type represents byte value as a Buffer"""
 scalar Byte
 
 """
@@ -413,9 +390,7 @@ The `SafeInt` scalar type represents non-fractional signed whole numeric values 
 """
 scalar SafeInt
 
-"""
-A currency string, such as $21.25
-"""
+"""A currency string, such as $21.25"""
 scalar USCurrency
 
 """
@@ -443,9 +418,7 @@ A field whose value conforms with the standard mongodb object ID as described he
 """
 scalar ObjectID
 
-"""
-Represents NULL values
-"""
+"""Represents NULL values"""
 scalar Void
 
 """
@@ -453,14 +426,10 @@ A field whose value conforms to the standard DID format as specified in did-core
 """
 scalar DID
 
-"""
-A country code as defined by ISO 3166-1 alpha-2
-"""
+"""A country code as defined by ISO 3166-1 alpha-2"""
 scalar CountryCode
 
-"""
-The locale in the format of a BCP 47 (RFC 5646) standard string
-"""
+"""The locale in the format of a BCP 47 (RFC 5646) standard string"""
 scalar Locale
 
 """
