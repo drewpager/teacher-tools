@@ -1,9 +1,9 @@
 import { Collection, ObjectId } from "mongodb";
 
-export type LessonPlan = { 
+export interface LessonPlan {
   // lesson: Lesson;
   // quiz: Quiz;
-  // plan: Lesson[] | Quiz[]; 
+  // plan: Lesson[] | Quiz[];
   _id: ObjectId;
   category: string[];
   title: string;
