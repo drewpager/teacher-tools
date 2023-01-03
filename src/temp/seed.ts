@@ -50,147 +50,69 @@ const seed = async () => {
     // ];
 
     const lessons: Lesson[] = [
-      // {
-      //   _id: new ObjectId(),
-      //   title: "27 Club",
-      //   video:
-      //     "http://res.cloudinary.com/drewpager/video/upload/v1669496508/platos-peach-video/27_Club_gfbdrv.mp4",
-      //   image:
-      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-      //   startDate: "1938",
-      //   endDate: "2022",
-      //   category: ["world history"],
-      //   meta: "The clout of the elusive 27 Club includes famous artists and musicians who coincidentally died at the ripe age of 27. Members include Kurt Cobain, Jimi Hendrix, Janis Joplin, Amy Winehouse, and far too many more.",
-      //   creator: "116143759549242008910",
-      // },
-      // {
-      //   _id: new ObjectId(),
-      //   title: "A Standout Hero at Hacksaw Ridge",
-      //   video:
-      //     "http://res.cloudinary.com/drewpager/video/upload/v1669505501/platos-peach-video/A_Standout_Hero_at_Hacksaw_Ridge_b7t23n.mp4",
-      //   image:
-      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-      //   startDate: "1945/04/01",
-      //   endDate: "1945/06/22",
-      //   category: ["military history", " world war two"],
-      //   meta: "Desmond T. Doss was a United States Army corporal who served as a combat medic during World War II. He was a 'conscientious cooperator' and refused to carry a weapon or kill anyone, instead choosing to serve as a medic, most famously as a hero at Hacksaw Ridge.",
-      //   creator: "116143759549242008910",
-      // },
-      // {
-      //   _id: new ObjectId(),
-      //   title: "A tragic Winter at Valley Forge",
-      //   video:
-      //     "http://res.cloudinary.com/drewpager/video/upload/v1669505775/platos-peach-video/A_tragic_Winter_at_Valley_Forge_qo9bcw.mp4",
-      //   image:
-      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-      //   startDate: "12/19/1777",
-      //   endDate: "06/19/1778",
-      //   category: ["military history", " american revolutionary war"],
-      //   meta: "",
-      //   creator: "116143759549242008910",
-      // },
-      // {
-      //   _id: new ObjectId(),
-      //   title: "Alaska Purchase",
-      //   video:
-      //     "http://res.cloudinary.com/drewpager/video/upload/v1669506852/platos-peach-video/Alaska_Purchase_ug65om.mp4",
-      //   image:
-      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-      //   startDate: "03/30/1867",
-      //   endDate: "03/30/1867",
-      //   category: ["american history", " westward expansion"],
-      //   meta: "The Purchase of Alaska from Russia was completed on October 18th, 1867, adding 586,412 square miles to the U.S. territory for only $7.2 million, less than two cents an acre.",
-      //   creator: "116143759549242008910",
-      // },
-      // {
-      //   _id: new ObjectId(),
-      //   title: "Albert Einstein",
-      //   video:
-      //     "http://res.cloudinary.com/drewpager/video/upload/v1669507109/platos-peach-video/Albert_Einstein_c4cclz.mov",
-      //   image:
-      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-      //   startDate: "03/14/1879",
-      //   endDate: "04/18/1955",
-      //   category: ["biography"],
-      //   meta: "Albert Einstein, educated in Physics and Math, had his 'marvelous year' of theoretical productivity in 1905, catapulting him into the spotlight of intellectual fame and professorship until his death in 1955. ",
-      //   creator: "116143759549242008910",
-      // },
       {
         _id: new ObjectId(),
-        title: "Leonardo da Vinci",
+        title: "27 Club",
         video:
-          "http://res.cloudinary.com/drewpager/video/upload/v1669547768/platos-peach-video/Leonardo_da_Vinci_odcb3u.mov",
+          "http://res.cloudinary.com/drewpager/video/upload/v1669496508/platos-peach-video/27_Club_gfbdrv.mp4",
         image:
           "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-        startDate: "-163522",
-        endDate: "-139035",
-        category: ["category"],
-        meta: "Leonardo da Vinci was a celebrated painter and polymath during the Italian Renaissance. He conceptualized many useful—and some fanciful—inventions and created masterworks like The Last Supper, Mona Lisa and the Vitruvian Man. ",
+        startDate: "1938",
+        endDate: "2022",
+        category: ["world history"],
+        meta: "The clout of the elusive 27 Club includes famous artists and musicians who coincidentally died at the ripe age of 27. Members include Kurt Cobain, Jimi Hendrix, Janis Joplin, Amy Winehouse, and far too many more.",
         creator: "116143759549242008910",
       },
       {
         _id: new ObjectId(),
-        title: "Bloody Mary",
+        title: "A Standout Hero at Hacksaw Ridge",
         video:
-          "http://res.cloudinary.com/drewpager/video/upload/v1669515426/platos-peach-video/Bloody_Mary_m3eo2q.mp4",
+          "http://res.cloudinary.com/drewpager/video/upload/v1669505501/platos-peach-video/A_Standout_Hero_at_Hacksaw_Ridge_b7t23n.mp4",
         image:
           "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-        startDate: "-140204",
-        endDate: "-124591",
+        startDate: "1945/04/01",
+        endDate: "1945/06/22",
+        category: ["military history", " world war two"],
+        meta: "Desmond T. Doss was a United States Army corporal who served as a combat medic during World War II. He was a 'conscientious cooperator' and refused to carry a weapon or kill anyone, instead choosing to serve as a medic, most famously as a hero at Hacksaw Ridge.",
+        creator: "116143759549242008910",
+      },
+      {
+        _id: new ObjectId(),
+        title: "A tragic Winter at Valley Forge",
+        video:
+          "http://res.cloudinary.com/drewpager/video/upload/v1669505775/platos-peach-video/A_tragic_Winter_at_Valley_Forge_qo9bcw.mp4",
+        image:
+          "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+        startDate: "12/19/1777",
+        endDate: "06/19/1778",
+        category: ["military history", " american revolutionary war"],
+        meta: "",
+        creator: "116143759549242008910",
+      },
+      {
+        _id: new ObjectId(),
+        title: "Alaska Purchase",
+        video:
+          "http://res.cloudinary.com/drewpager/video/upload/v1669506852/platos-peach-video/Alaska_Purchase_ug65om.mp4",
+        image:
+          "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+        startDate: "03/30/1867",
+        endDate: "03/30/1867",
+        category: ["american history", " westward expansion"],
+        meta: "The Purchase of Alaska from Russia was completed on October 18th, 1867, adding 586,412 square miles to the U.S. territory for only $7.2 million, less than two cents an acre.",
+        creator: "116143759549242008910",
+      },
+      {
+        _id: new ObjectId(),
+        title: "Albert Einstein",
+        video:
+          "http://res.cloudinary.com/drewpager/video/upload/v1669507109/platos-peach-video/Albert_Einstein_c4cclz.mov",
+        image:
+          "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+        startDate: "03/14/1879",
+        endDate: "04/18/1955",
         category: ["biography"],
-        meta: "Bloody Mary was the nickname of Queen Mary I of England, who ruled from 1553 to 1558. She is known for her attempts to restore Roman Catholicism in England and her persecution of Protestants, earning her the nickname 'Bloody Mary.'",
-        creator: "116143759549242008910",
-      },
-      {
-        _id: new ObjectId(),
-        title: "Michelangelo",
-        video:
-          "http://res.cloudinary.com/drewpager/video/upload/v1669555453/platos-peach-video/Michelangelo_ueeaka.mp4",
-        image:
-          "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-        startDate: "-155162",
-        endDate: "-122672",
-        category: ["biography"],
-        meta: "Michelangelo was born in 1475 and found his passion for art shortly thereafter, becoming most notable for his sculptures and paintings, but he was also a notable architect and a true renaissance man.",
-        creator: "116143759549242008910",
-      },
-      {
-        _id: new ObjectId(),
-        title: "The Mayflower Compact",
-        video:
-          "http://res.cloudinary.com/drewpager/video/upload/v1669705985/platos-peach-video/The_Mayflower_Compact_jx31ie.mov",
-        image:
-          "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-        startDate: "-101951",
-        endDate: "-101951",
-        category: ["american history", " colonial"],
-        meta: "The Mayflower Compact was a governing document created by the Mayflower passengers and Pilgrims once their contract with the Virginia Company was believed to be nullified. It was signed on November 11th, 1620, the day the Mayflower made landfall.",
-        creator: "116143759549242008910",
-      },
-      {
-        _id: new ObjectId(),
-        title: "Galileo",
-        video:
-          "http://res.cloudinary.com/drewpager/video/upload/v1669530482/platos-peach-video/Galileo_csadba.mp4",
-        image:
-          "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-        startDate: "-122675",
-        endDate: "-94223",
-        category: ["biography"],
-        meta: "Galileo Galilei was a mathematician, physicist and early cosmologist who discovered the moons of Jupiter, details of Earth's moon and more. Galileo's belief in a heliocentric solar system placed him at odds with the earth-centric Catholic Church, who in turn placed him under house arrest for the remainder of his life.",
-        creator: "116143759549242008910",
-      },
-      {
-        _id: new ObjectId(),
-        title: "John Locke",
-        video:
-          "http://res.cloudinary.com/drewpager/video/upload/v1669543386/platos-peach-video/John_Locke_hsnk7w.mp4",
-        image:
-          "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-        startDate: "-97642",
-        endDate: "-71254",
-        category: ["european history", " world history"],
-        meta: "John Locke was an Enlightenment thinker, writer and educator, whose work and life have had important and lasting impacts on human governance, curriculums and philosophy.",
+        meta: "Albert Einstein, educated in Physics and Math, had his 'marvelous year' of theoretical productivity in 1905, catapulting him into the spotlight of intellectual fame and professorship until his death in 1955. ",
         creator: "116143759549242008910",
       },
     ];
