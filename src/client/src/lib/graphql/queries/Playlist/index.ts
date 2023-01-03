@@ -1,4 +1,4 @@
-import { gql } from 'graphql-tag';
+import { gql } from "graphql-tag";
 
 export const PLAYLIST = gql`
   query Playlist($id: ID!) {
@@ -7,7 +7,6 @@ export const PLAYLIST = gql`
       name
       creator
       plan {
-        __typename
         ... on Lesson {
           id
           category

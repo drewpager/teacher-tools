@@ -1,5 +1,17 @@
-import { Database, Playlist, Lesson, Quiz, LessonPlan } from "../../../lib/types";
-import { PlaylistArgs, PlaylistsArgs, PlaylistsData, CreatePlanArgs, UpdateParams } from "./types";
+import {
+  Database,
+  Playlist,
+  Lesson,
+  Quiz,
+  LessonPlan,
+} from "../../../lib/types";
+import {
+  PlaylistArgs,
+  PlaylistsArgs,
+  PlaylistsData,
+  CreatePlanArgs,
+  UpdateParams,
+} from "./types";
 import { ObjectId } from "mongodb";
 
 export const playlistResolvers = {
@@ -25,7 +37,7 @@ export const playlistResolvers = {
       const data: PlaylistsData = {
         total: 0,
         result: [],
-        totalCount: 0
+        totalCount: 0,
       };
 
       let cursor = await db.playlists.find({});
@@ -47,7 +59,7 @@ export const playlistResolvers = {
     },
     name: (playlist: Playlist) => {
       return playlist.name;
-    }
+    },
   },
   LessonPlanUnion: {
     __resolveType(obj: any, context: any, info: any) {
@@ -60,7 +72,7 @@ export const playlistResolvers = {
       }
 
       return null;
-    }
+    },
   },
   Mutation: {
     lessonPlan: async (
@@ -69,28 +81,30 @@ export const playlistResolvers = {
       { db }: { db: Database }
     ): Promise<Playlist> => {
       const id = new ObjectId();
-      
+
       try {
         const insertResult = await db.playlists.insertOne({
           _id: id,
-          ...input
-        })
+          ...input,
+        });
 
-        const insertedResult = insertResult ? await db.playlists.findOne({ _id: insertResult.insertedId }) : false;
+        const insertedResult = insertResult
+          ? await db.playlists.findOne({ _id: insertResult.insertedId })
+          : false;
 
         if (!insertedResult) {
-          throw new Error("Failed to insert new lesson plan!")
+          throw new Error("Failed to insert new lesson plan!");
         }
 
         // TODO: get viewer id instead of hardcoded value
         await db.users.updateOne(
-          { _id: "116143759549242008910"},
-          { $push: { playlists: insertedResult }}
-        )
+          { _id: "116143759549242008910" },
+          { $push: { playlists: insertedResult } }
+        );
 
         return insertedResult;
       } catch (e) {
-        throw new Error(`Failed to insert lesson plan ${e}`)
+        throw new Error(`Failed to insert lesson plan ${e}`);
       }
     },
     updatePlan: async (
@@ -99,12 +113,15 @@ export const playlistResolvers = {
       { db }: { db: Database }
     ): Promise<boolean> => {
       try {
-        const playlist = await db.playlists.findOneAndUpdate({ _id: new ObjectId(id) }, input)
+        const playlist = await db.playlists.findOneAndUpdate(
+          { _id: new ObjectId(id) },
+          input
+        );
 
         if (playlist.ok === 1) {
-          return true
+          return true;
         } else {
-          return false
+          return false;
         }
       } catch (e) {
         throw new Error(`Failed to update playlist ${e}`);
@@ -116,16 +133,18 @@ export const playlistResolvers = {
       { db }: { db: Database }
     ): Promise<boolean | undefined> => {
       try {
-        const deletePlaylist = await db.playlists.deleteOne({ _id: new ObjectId(id) })
+        const deletePlaylist = await db.playlists.deleteOne({
+          _id: new ObjectId(id),
+        });
 
         if (!deletePlaylist) {
           throw new Error("Playlist deletion didn't work!");
         }
-        
+
         return deletePlaylist.acknowledged;
       } catch (error) {
         throw new Error(`Failed to delete playlist: ${error}`);
       }
-    }
-  }
+    },
+  },
 };

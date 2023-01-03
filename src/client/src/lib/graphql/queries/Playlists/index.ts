@@ -9,8 +9,7 @@ export const ALL_PLAYLISTS = gql`
         name
         creator
         plan {
-          __typename
-          ...on Lesson {
+          ... on Lesson {
             id
             category
             title
