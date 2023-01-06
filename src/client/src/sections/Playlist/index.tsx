@@ -33,6 +33,7 @@ export const Playlist = () => {
   const playlist = data ? data.playlist : null;
 
   if (playlist) {
+    console.log("Playlist from Index: ", playlist)
     return (
         <PlaylistCard playlist={playlist} />
     )
