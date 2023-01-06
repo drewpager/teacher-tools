@@ -11,12 +11,12 @@ interface Props {
 
 // NOTE: Pass lessons object instead of single lesson for Accordion to work correctly
 export const PlaylistCard = ({ playlist }: Props) => {
-  const [video, setVideo] = useState<string>()
-  const [itemName, setItemName] = useState<LessonPlanUnion>(playlist && playlist.plan ? {...playlist.plan[0]} : {})
+  // const [video, setVideo] = useState<string>()
+  // const [itemName, setItemName] = useState<LessonPlanUnion>(playlist && playlist.plan ? {...playlist.plan[0]} : {})
   const [active, setActive] = useState<string>(playlist && playlist.plan ? `${playlist?.plan[0]?.id}` : `1`)
 
   const handleChange = ({ ...item }: LessonPlanUnion) => {
-    setItemName(item)
+    // setItemName(item)
     setActive(`${item.id}`)
   };
 
@@ -39,17 +39,16 @@ export const PlaylistCard = ({ playlist }: Props) => {
                 </List>
             </Grid>
             <Grid  className='playlistcard--grid__video'>
-
-              {playlist.plan?.filter((item) => item?.id === active).map(item => {
-                if (item?.__typename === "Quiz") {
+              {playlist.plan?.filter((item) => item?.id === active).map((iter, index) => {
+                if (iter?.__typename === "Quiz") {
                   return (
-                    <QuizPlayer quiz={item} key={item.id} />
+                    <QuizPlayer quiz={iter} key={index} />
                   )
                 }
 
-                if (item?.__typename === "Lesson") {
+                if (iter?.__typename === "Lesson") {
                   return (
-                    <VideoPlayer url={`${item?.video}`} key={item.id} />
+                    <VideoPlayer url={`${iter?.video}`} key={index} />
                   )
                 }
                 return (

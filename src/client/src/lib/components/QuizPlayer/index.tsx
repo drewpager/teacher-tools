@@ -14,10 +14,10 @@ export const QuizPlayer = ({ quiz }: Props) => {
     <FormControl>
       <form>
       <h1>{title}</h1>
-      {quiz.questions.map((i) => (
+      {quiz.questions.map((i, indy) => (
         <>
-          <h2>{i.question}</h2>
-          <RadioGroup>
+          <RadioGroup key={indy}>
+            <h2>{i.question}</h2>
             {i.answerOptions?.map((t, index) => (
               <FormControlLabel value={t?.answerText} label={`${t?.answerText}`} key={index} control={<Radio />} />
             ))}

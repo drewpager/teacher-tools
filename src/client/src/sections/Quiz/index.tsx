@@ -26,6 +26,7 @@ export const Quiz = () => {
   const quiz = data && data.quiz ? data.quiz : null;
 
   if (quiz) {
+    console.log(quiz)
     return (
       <Box sx={{ marginTop: 7 }}>
         <QuizPlayer quiz={quiz} />

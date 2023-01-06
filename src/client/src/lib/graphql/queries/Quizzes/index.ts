@@ -8,8 +8,10 @@ export const ALL_QUIZZES = gql`
         id
         title
         questions {
+          __typename
           question
           answerOptions {
+            __typename
             answerText
             isCorrect
           }

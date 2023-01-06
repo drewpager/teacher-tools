@@ -537,7 +537,7 @@ export type PlaylistQueryVariables = Exact<{
 }>;
 
 
-export type PlaylistQuery = { __typename?: 'Query', playlist: { __typename?: 'Playlist', id?: string | null, name: string, creator: string, plan: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null } | { __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> } | null> } };
+export type PlaylistQuery = { __typename?: 'Query', playlist: { __typename?: 'Playlist', id?: string | null, name: string, creator: string, plan: Array<{ __typename: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null } | { __typename: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> } | null> } };
 
 export type AllPlaylistsQueryVariables = Exact<{
   limit: Scalars['Int'];
@@ -545,14 +545,14 @@ export type AllPlaylistsQueryVariables = Exact<{
 }>;
 
 
-export type AllPlaylistsQuery = { __typename?: 'Query', allplaylists: { __typename?: 'Playlists', total: number, result: Array<{ __typename?: 'Playlist', id?: string | null, name: string, creator: string, plan: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null } | { __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> } | null> }> } };
+export type AllPlaylistsQuery = { __typename?: 'Query', allplaylists: { __typename?: 'Playlists', total: number, result: Array<{ __typename?: 'Playlist', id?: string | null, name: string, creator: string, plan: Array<{ __typename: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null } | { __typename: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> } | null> }> } };
 
 export type QuizQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type QuizQuery = { __typename?: 'Query', quiz: { __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> } };
+export type QuizQuery = { __typename?: 'Query', quiz: { __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> } };
 
 export type AllQuizzesQueryVariables = Exact<{
   limit: Scalars['Int'];
@@ -560,7 +560,7 @@ export type AllQuizzesQueryVariables = Exact<{
 }>;
 
 
-export type AllQuizzesQuery = { __typename?: 'Query', allquizzes: { __typename?: 'Quizzes', total: number, result: Array<{ __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> }> } };
+export type AllQuizzesQuery = { __typename?: 'Query', allquizzes: { __typename?: 'Quizzes', total: number, result: Array<{ __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> }> } };
 
 export type UserQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -938,6 +938,7 @@ export const PlaylistDocument = gql`
     name
     creator
     plan {
+      __typename
       ... on Lesson {
         id
         category
@@ -953,8 +954,10 @@ export const PlaylistDocument = gql`
         id
         title
         questions {
+          __typename
           question
           answerOptions {
+            __typename
             answerText
             isCorrect
           }
@@ -1003,6 +1006,7 @@ export const AllPlaylistsDocument = gql`
       name
       creator
       plan {
+        __typename
         ... on Lesson {
           id
           category
@@ -1018,8 +1022,10 @@ export const AllPlaylistsDocument = gql`
           id
           title
           questions {
+            __typename
             question
             answerOptions {
+              __typename
               answerText
               isCorrect
             }
@@ -1067,8 +1073,10 @@ export const QuizDocument = gql`
     id
     title
     questions {
+      __typename
       question
       answerOptions {
+        __typename
         answerText
         isCorrect
       }
@@ -1114,8 +1122,10 @@ export const AllQuizzesDocument = gql`
       id
       title
       questions {
+        __typename
         question
         answerOptions {
+          __typename
           answerText
           isCorrect
         }

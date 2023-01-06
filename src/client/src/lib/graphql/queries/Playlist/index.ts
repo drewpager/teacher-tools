@@ -7,6 +7,7 @@ export const PLAYLIST = gql`
       name
       creator
       plan {
+        __typename
         ... on Lesson {
           id
           category
@@ -22,8 +23,10 @@ export const PLAYLIST = gql`
           id
           title
           questions {
+            __typename
             question
             answerOptions {
+              __typename
               answerText
               isCorrect
             }

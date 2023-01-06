@@ -13,6 +13,7 @@ import {
   UpdateParams,
 } from "./types";
 import { ObjectId } from "mongodb";
+import { __Type } from "graphql";
 
 export const playlistResolvers = {
   Query: {

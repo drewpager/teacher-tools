@@ -1,4 +1,4 @@
-import { gql } from 'graphql-tag';
+import { gql } from "graphql-tag";
 
 export const QUIZ = gql`
   query Quiz($id: ID!) {
@@ -6,8 +6,10 @@ export const QUIZ = gql`
       id
       title
       questions {
+        __typename
         question
         answerOptions {
+          __typename
           answerText
           isCorrect
         }
