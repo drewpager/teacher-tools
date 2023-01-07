@@ -54,7 +54,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
   // const id = viewer && viewer.id ? viewer.id : null;
   const [playlist, setPlaylist] = useState<InputLessonPlan>(initialData)
   
-  const limit: number = 10;
+  const limit: number = 2000;
   const page: number = 1;
 
   const { data: lessonData, loading: lessonLoading, error: lessonError } = useAllLessonsQuery({
@@ -94,7 +94,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
           meta: i.meta,
           startDate: i.startDate,
           video: i.video,
-          id: i.id
+          _id: i.id
         }
         lessonInput.push(lessonObj);
       })
@@ -108,7 +108,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       quizQuery.forEach(q => {
         let quizObj = {
           creator: q.creator,
-          id: q.id,
+          _id: q.id,
           title: q.title,
           questions: [...q.questions]
         }
@@ -264,7 +264,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
                       onChange={titleHandler}
                     />
                   {playlist.plan.map((i, indices) => (
-                    <Draggable draggableId={`${i.id}`} index={indices} key={i.id}>
+                    <Draggable draggableId={`${i._id}`} index={indices} key={i._id}>
                       {(provided) => (
                         <Grid item xs={12} md={12} lg={12}>
                           <Card variant="outlined" sx={{ padding: 2, margin: 1 }} {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}> 
@@ -295,7 +295,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
                   <Grid container>
                     
                   {plans.map((i, index) => (
-                    <Draggable draggableId={`${i.id}`} index={index} key={i.id}>
+                    <Draggable draggableId={`${i._id}`} index={index} key={i._id}>
                       {(provided) => (
                         <Grid item xs={12} md={12} lg={12}>
                           <Card variant="outlined" sx={{ padding: 2, margin: 1 }} {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}> 

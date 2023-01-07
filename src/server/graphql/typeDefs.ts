@@ -132,7 +132,7 @@ export const typeDefs = gql`
     questions: [QuestionInput]
     creator: String
   }
-  
+
   input QuestionInput {
     question: String
     answerOptions: [AnswerInput]
@@ -145,7 +145,7 @@ export const typeDefs = gql`
   }
 
   input FullLessonInput {
-    id: ID
+    _id: ID
     category: [String]
     title: String
     meta: String
@@ -168,14 +168,14 @@ export const typeDefs = gql`
   }
 
   input FullLessonQuiz {
-    id: ID
+    _id: ID
     title: String
     questions: [QuizQuestions]
     creator: String
   }
 
   input Plan {
-    id: ID
+    _id: ID
     category: [String]
     title: String
     meta: String
