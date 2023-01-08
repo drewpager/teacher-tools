@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useCreateLessonMutation, Viewer } from '../../graphql/generated';
 import { categories, DisplayError, DisplaySuccess } from '../../lib/utils';
 import theme from '../../theme';
+import Moment from 'moment';
 import './createLesson.scss';
 
 interface Props {
@@ -23,26 +24,41 @@ const initialData = {
   image: ""
 }
 
+
 const validationSchema = yup.object({
   title: yup
     .string()
-    .required('Title is required'),
+    .required('Title is required')
+    .max(61, 'Title should be less than 60 characters'),
   meta: yup
     .string()
-    .min(10, 'Meta should be 10 characters')
+    .min(150, 'Meta should be 160 characters or longer')
     .required('Meta description is required'),
   category: yup
     .array().of(
-      yup.string()
-    ),
-  startDate: yup
-    .string()
-    .required('Please add a Start Date'),
+      yup.string().min(1, "Please select at least one category.")
+    ).min(2, "Please select at least two categories.")
+    .required('Please select a category'),
+  startDate: yup  
+    .date()
+    .required('Please add a start date'),
   endDate: yup
+    .date().transform((value, originalValue, context) => {
+      // check to see if the previous transform already parsed the date
+      if (context.isType(value)) return value;
+
+      // the default coercion failed so let's try it with Moment.js instead
+      value = Moment(originalValue, "YYYY-MM-DD");
+
+      // if it's valid return the date object, otherwise return an `InvalidDate`
+      return value.isValid() ? value.toDate() : new Date('');
+    })
+    .required('Please add an end date'),
+  video: yup
     .string()
-    .required('Please add an End Date'),
-  video: yup.string(),
-  image: yup.string(),
+    .required('A video or lecture is required, please upload.'),
+  image: yup
+    .string(),
 });
 
 export const CreateLesson = ({ viewer }: Props) => {
@@ -299,24 +315,26 @@ export const CreateLesson = ({ viewer }: Props) => {
             navigate(`../user/${viewer.id}`, { replace: true })
           }}
         >
-        {({ values, errors, touched, handleSubmit, handleChange, setFieldValue }) => (
+        {({ values, errors, touched, isSubmitting, handleSubmit, handleChange, setFieldValue }) => (
         <Form onSubmit={handleSubmit}>
+          {/* {errors.title ? (<h5>{errors.title}</h5>) : null} */}
           <TextField 
             variant="outlined" 
             label="Title" 
-            helperText="Max Character Count of 160" 
+            helperText={errors.title ? `${errors.title}` : "Add a Lesson Title (Max Character Count of 160)"}
             sx={{ width: "45%" }} 
             value={values.title} 
             name="title"
             onChange={handleChange}
             required
-            error={errorState}
-          /><br />
+            error={touched && errors.title ? true : false}
+          />
+          <br />
           <TextField 
             type="file"
             id="video" 
             variant='outlined'
-            helperText="Video or Lecture" 
+            helperText={errors.video ? `${errors.video}` : "Upload a Video or Lecture"}
             className='file--upload'
             sx={{ width: "45%", marginTop: 1 }} 
             name="video"
@@ -334,6 +352,7 @@ export const CreateLesson = ({ viewer }: Props) => {
               )
             }}
             required 
+            error={errors.video || touched.video ? true : false}
           /><br />
           <TextField 
             type="file"
@@ -358,7 +377,18 @@ export const CreateLesson = ({ viewer }: Props) => {
             color="primary"
             required 
             /><br />
-          <TextField variant="outlined" label="Description" multiline rows={3} helperText="Min Character Count of 160" sx={{ width: "45%", marginTop: 1 }} value={values.meta} name="meta" onChange={handleChange} required />
+          <TextField 
+            variant="outlined" 
+            label="Description" 
+            multiline rows={3} 
+            helperText="Min Character Count of 160" 
+            sx={{ width: "45%", marginTop: 1 }} 
+            value={values.meta} 
+            name="meta" 
+            onChange={handleChange} 
+            required 
+            error={touched.meta && errors.meta ? true : false}
+          />
           <FormGroup sx={{ marginTop: 1 }}>
             <Typography variant="h5">Category</Typography>
             <Typography variant="body2" style={{color: "gray"}}>Select All That Apply</Typography>
@@ -367,12 +397,16 @@ export const CreateLesson = ({ viewer }: Props) => {
                 // TODO: Render categories
                 <div className="field--checkboxes">
                   {categories.map((cat, index) => (
-                    <label key={index} className="field--checkboxes-label">
+                    <label 
+                      key={index} 
+                      className="field--checkboxes-label"
+                    >
                       <Field 
                         type="checkbox" 
-                        name={`category`} 
+                        name="category" 
                         value={cat.name} 
                         className="field--checkbox"
+                        error={touched.category && errors.category ? true : false}
                       />
                       {cat.name}
                     </label>
@@ -381,10 +415,31 @@ export const CreateLesson = ({ viewer }: Props) => {
               )}
             </FieldArray>
           </FormGroup>
-          <TextField variant='outlined' label="Start Date or Year" helperText="YYYY-MM-DD or -33,000 for 33,000 BCE" sx={{ width: "45%", marginTop: 1 }} value={values.startDate} name="startDate" onChange={handleChange} required /><br />
-          <TextField variant='outlined' label="End Date or Year" helperText="YYYY-MM-DD or 1052" sx={{ width: "45%", marginTop: 1 }} value={values.endDate} name="endDate" onChange={handleChange} required /><br />
-          <Button sx={{ marginTop: 2 }} disabled={!values.title || !values.endDate} variant='contained' color='primary' type="submit">Submit</Button>
-          {console.log(values)}
+          <TextField 
+            variant='outlined' 
+            name="startDate"
+            label="Start Date or Year" 
+            helperText={errors.startDate ? `${errors.startDate}` : "Add a time period start date as YYYY-MM-DD or -33,000 for 33,000 BCE"}
+            sx={{ width: "45%", marginTop: 1 }} 
+            value={values.startDate}  
+            onChange={handleChange}
+            error={touched.startDate && errors.startDate ? true : false}
+            required 
+          /><br />
+          <TextField 
+            variant='outlined' 
+            name="endDate"
+            label="End Date or Year" 
+            helperText="YYYY-MM-DD or 1052" 
+            sx={{ width: "45%", marginTop: 1 }} 
+            value={values.endDate} 
+            onChange={handleChange} 
+            required
+            error={touched.endDate && errors.endDate ? true : false} 
+          /><br />
+          {errors ? setError(true) : setError(false)}
+          {console.log(errors)}
+          <Button sx={{ marginTop: 2 }} disabled={!values.title || !values.endDate || errorState || isSubmitting } variant='contained' color='primary' type="submit">Submit</Button>
         </Form>
         )}
         </Formik>
