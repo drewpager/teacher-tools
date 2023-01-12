@@ -11,8 +11,10 @@ import { Request } from "express";
 import { ObjectId } from "mongodb";
 import { Viewer } from "../../../../client/src/graphql/generated";
 import { GraphQLScalarType, Kind } from "graphql";
+import { DisplayError } from "../../../../client/src/lib/utils";
 
-const dateRegex = /\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[1-2]\d|3[0-1])|-[1-9]\d{0,11}|[1-9]\d{0,4}/;
+const dateRegex =
+  /\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[1-2]\d|3[0-1])|-[1-9]\d{0,11}|[1-9]\d{0,4}/g;
 
 const validate = (value: any) => {
   if (typeof value !== "string") {
@@ -24,7 +26,7 @@ const validate = (value: any) => {
   }
 
   return value;
-}
+};
 
 const parseLiteral = (ast: any) => {
   if (ast.kind !== Kind.STRING) {
@@ -32,15 +34,15 @@ const parseLiteral = (ast: any) => {
   }
 
   return validate(ast.value);
-}
+};
 
 const GraphQLDateConfig = {
-  name: 'DateScalar',
-  description: 'A valid date object',
+  name: "DateScalar",
+  description: "A valid date object",
   serialize: validate,
   parseValue: validate,
-  parseLiteral
-}
+  parseLiteral,
+};
 
 const GraphQLDate = new GraphQLScalarType(GraphQLDateConfig);
 
@@ -50,7 +52,7 @@ const verifyCreateLessonInput = ({
   meta,
   video,
   startDate,
-  endDate
+  endDate,
 }: CreateLessonInput) => {
   if (title.length > 160) {
     throw new Error("Title must not exceed 160 characters in length!");
@@ -61,11 +63,12 @@ const verifyCreateLessonInput = ({
   }
 
   if (!dateRegex.test(startDate)) {
-    throw new Error("Please format date as Year-Month-Day (YYYY-MM-DD)")
+    throw new Error("Please format date as Year-Month-Day (YYYY-MM-DD)");
   }
 
   if (!dateRegex.test(endDate)) {
-    throw new Error("Please format date as Year-Month-Day (YYYY-MM-DD)")
+    console.log("ERROR WILL ROBINSON!");
+    throw new Error("Please format date as Year-Month-Day (YYYY-MM-DD)");
   }
 
   // if (meta.length < 160) {
@@ -160,8 +163,8 @@ export const lessonResolvers = {
       //TODO: Fix Viewer resolution vs hard coded id
 
       if (viewer && viewer.id) {
-        const viewerId = viewer.id
-        console.log("ViewerId: ", viewerId)
+        const viewerId = viewer.id;
+        console.log("ViewerId: ", viewerId);
       }
 
       // const viewerId = viewer && viewer.id ? viewer.id : "116143759549242008910";

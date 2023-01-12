@@ -77,5 +77,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:9000"
+  "proxy": "http://localhost:9000",
+  "resolutions": {
+    "csstype": "3.0.10"
+  }
 }
