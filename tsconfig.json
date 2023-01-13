@@ -8,10 +8,7 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "strict": true,
-    "lib": [
-      "ES2021.String",
-      "DOM"
-    ]
+    "lib": ["ES2021.String", "DOM"]
   },
   "exclude": ["temp"]
 }
