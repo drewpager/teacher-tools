@@ -14,7 +14,7 @@ import { GraphQLScalarType, Kind } from "graphql";
 import { DisplayError } from "../../../../client/src/lib/utils";
 
 const dateRegex =
-  /\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[1-2]\d|3[0-1])|-[1-9]\d{0,11}|[1-9]\d{0,4}/g;
+  /\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[1-2]\d|3[0-1])|-[1-9]\d{0,11}|[1-9]\d{0,4}/;
 
 const validate = (value: any) => {
   if (typeof value !== "string") {

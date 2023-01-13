@@ -15,7 +15,7 @@ export const TimelineEl = () => {
     // 1. Get All Start Dates from All Lessons
     const { data, loading, error } = useAllLessonsQuery({ 
       variables: {
-        limit: 20,
+        limit: 10,
         page: 1
       }
     });
@@ -108,7 +108,7 @@ export const TimelineEl = () => {
       
       {categoryList.map((j, index) => (<Button className="categoryList--button" key={index} onClick={() => handleClick(j)}>{j}</Button>))}
       
-        <Timeline className='timeline--outer'>
+        <Timeline className='timeline--outer' nonce={undefined} onResize={undefined} onResizeCapture={undefined}>
           {start.map((i, index) => (
             <TimelineItem className='timeline--item' key={index}>
                 <TimelineOppositeContent

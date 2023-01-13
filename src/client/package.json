@@ -15,6 +15,7 @@
     "@graphql-codegen/typescript-operations": "^2.3.5",
     "@graphql-codegen/typescript-react-apollo": "^3.2.11",
     "@graphql-codegen/typescript-react-query": "^3.5.9",
+    "@mui/base": "^5.0.0-alpha.113",
     "@mui/icons-material": "^5.4.4",
     "@mui/lab": "^5.0.0-alpha.115",
     "@mui/material": "^5.11.0",
