@@ -4,7 +4,7 @@
     "module": "commonjs",
     "jsx": "react-jsx",
     "rootDir": "./",
-    "outDir": "./build",
+    "outDir": "../platos-peach-deploy/buildos-peach-deploy/build",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "strict": true,

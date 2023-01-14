@@ -15,24 +15,24 @@ import {
 import omitDeep from 'omit-deep-lodash';
 
 import { setContext } from '@apollo/client/link/context';
-import { 
-  Home, 
-  Teach, 
-  Lesson, 
-  Lessons, 
-  NotFound, 
-  User, 
-  Terms, 
-  Privacy, 
-  Login, 
-  AppHeader, 
-  Playlist, 
-  CreatePlaylist, 
-  CreateLesson, 
+import {
+  Home,
+  Teach,
+  Lesson,
+  Lessons,
+  NotFound,
+  User,
+  Terms,
+  Privacy,
+  Login,
+  AppHeader,
+  Playlist,
+  CreatePlaylist,
+  CreateLesson,
   QuizCreate,
-  EditPlaylist, 
-  Catalogue, 
-  Quiz 
+  EditPlaylist,
+  Catalogue,
+  Quiz
 } from './sections';
 import { DisplayError } from './lib/utils';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -66,7 +66,7 @@ const App = () => {
           sessionStorage.removeItem("token");
         }
       }
-    } 
+    }
   });
 
   const logInRef = useRef(logIn);
@@ -94,26 +94,26 @@ const App = () => {
     <Router>
       {LogInError}
       <AppHeader viewer={viewer} setViewer={setViewer} />
-        <main className='mainPanel'>
-            <Routes>
-                <Route path="/" element={<Home viewer={viewer} />} />
-                <Route path="/teach" element={<Teach />} />
-                <Route path="/catalog" element={<Catalogue />} />
-                <Route path="/lesson/:id" element={<Lesson />} />
-                <Route path="/lessons/:filter?" element={<Lessons title="Plato's Peach" />} />
-                <Route path="/user/:id" children={(props: any) => (<User {...props} viewer={viewer} />)} element={<User viewer={viewer} />} />
-                <Route path="/terms" element={<Terms />} />
-                <Route path="/privacy" element={<Privacy />} />
-                <Route path="/login" children={(props: any) => (<Login {...props} setViewer={setViewer} />)} element={<Login setViewer={setViewer} />} />
-                <Route path="/playlist/:id" element={<Playlist />} />
-                <Route path="/playlist/create" element={<CreatePlaylist viewer={viewer} />} />
-                <Route path="/quiz/:id" element={<Quiz /> } />
-                <Route path="/quiz/create" element={<QuizCreate viewer={viewer} /> } />
-                <Route path="/edit/:id" element={<EditPlaylist viewer={viewer} />} />
-                <Route path="/lesson/create" children={(props: any) => (<CreateLesson {...props} viewer={viewer} />)} element={<CreateLesson viewer={viewer} />} />
-                <Route element={<NotFound />} />
-            </Routes>
-        </main>
+      <main className='mainPanel'>
+        <Routes>
+          <Route path="/" element={<Home viewer={viewer} />} />
+          <Route path="/teach" element={<Teach />} />
+          <Route path="/catalog" element={<Catalogue />} />
+          <Route path="/lesson/:id" element={<Lesson />} />
+          <Route path="/lessons/:filter?" element={<Lessons title="Plato's Peach" />} />
+          <Route path="/user/:id" children={(props: any) => (<User {...props} viewer={viewer} />)} element={<User viewer={viewer} />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/login" children={(props: any) => (<Login {...props} setViewer={setViewer} />)} element={<Login setViewer={setViewer} />} />
+          <Route path="/playlist/:id" element={<Playlist />} />
+          <Route path="/playlist/create" element={<CreatePlaylist viewer={viewer} />} />
+          <Route path="/quiz/:id" element={<Quiz />} />
+          <Route path="/quiz/create" element={<QuizCreate viewer={viewer} />} />
+          <Route path="/edit/:id" element={<EditPlaylist viewer={viewer} />} />
+          <Route path="/lesson/create" children={(props: any) => (<CreateLesson {...props} viewer={viewer} />)} element={<CreateLesson viewer={viewer} />} />
+          <Route element={<NotFound />} />
+        </Routes>
+      </main>
     </Router>
   )
 }
@@ -139,7 +139,7 @@ export {
 };
 
 const httpLink = createHttpLink({
-  uri: '/api'
+  uri: 'https://neon-platypus-80b049.netlify.app/api'
 });
 
 const authLink = setContext((_, { headers }) => {
