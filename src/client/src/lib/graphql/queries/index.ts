@@ -5,3 +5,4 @@ export * from "./Playlist";
 export * from "./Playlists";
 export * from "./Quiz";
 export * from "./Quizzes";
+export * from "./AuthUrl";

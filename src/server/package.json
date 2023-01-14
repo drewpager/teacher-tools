@@ -1,0 +1,74 @@
+{
+  "name": "teacher-tools-server",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": "16.14.2"
+  },
+  "dependencies": {
+    "@graphql-codegen/cli": "^2.6.2",
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "apollo-server-express": "^3.6.2",
+    "body-parser": "^1.19.1",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "d3": "^7.3.0",
+    "express": "^4.17.2",
+    "googleapis": "^95.0.0",
+    "graphql": "16.3.0",
+    "graphql-scalars": "^1.18.0",
+    "lodash.merge": "^4.6.2",
+    "mongodb": "^4.3.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "5.0.0",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "nodemon index.ts",
+    "build": "tsc -p ./",
+    "seed": "ts-node temp/seed.ts",
+    "unseed": "ts-node temp/unseed.ts",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest",
+      "typescript"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.2",
+    "@types/compression": "^1.7.2",
+    "@types/cookie-parser": "^1.4.2",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.13",
+    "@types/lodash.merge": "^4.6.6",
+    "@types/mongodb": "^4.0.7",
+    "@types/node": "^17.0.13",
+    "@typescript-eslint/eslint-plugin": "^5.10.1",
+    "@typescript-eslint/parser": "^5.10.1",
+    "dotenv": "^16.0.0",
+    "eslint": "^8.8.0",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.5"
+  }
+}

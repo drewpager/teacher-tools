@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.628f3a42.css",
+    "main.js": "/static/js/main.9ca4820d.js",
+    "static/js/787.ee616d6a.chunk.js": "/static/js/787.ee616d6a.chunk.js",
+    "static/media/classroom.jpg": "/static/media/classroom.8d5c60f200734b0b28c9.jpg",
+    "static/media/noto-serif-all-400-normal.woff": "/static/media/noto-serif-all-400-normal.cc8d505e17e9106c7bb6.woff",
+    "static/media/noto-serif-latin-ext-400-normal.woff2": "/static/media/noto-serif-latin-ext-400-normal.dacb5b2801ec86ed9cd4.woff2",
+    "static/media/peach-logo.svg": "/static/media/peach-logo.5002c8f528fa52cc1d8955932c39a683.svg",
+    "static/media/noto-serif-cyrillic-ext-400-normal.woff2": "/static/media/noto-serif-cyrillic-ext-400-normal.3b1a6b81ad2880cbfa11.woff2",
+    "static/media/noto-serif-latin-400-normal.woff2": "/static/media/noto-serif-latin-400-normal.0e4a2822a91cc3a78520.woff2",
+    "static/media/noto-serif-greek-400-normal.woff2": "/static/media/noto-serif-greek-400-normal.e7b144dc27fe0458b3d8.woff2",
+    "static/media/noto-serif-cyrillic-400-normal.woff2": "/static/media/noto-serif-cyrillic-400-normal.bc7ea545cf7b883404c9.woff2",
+    "static/media/noto-serif-greek-ext-400-normal.woff2": "/static/media/noto-serif-greek-ext-400-normal.42a9f5d91dcd0b514f8e.woff2",
+    "static/media/noto-serif-vietnamese-400-normal.woff2": "/static/media/noto-serif-vietnamese-400-normal.f1c754dda31c5a66e5dc.woff2",
+    "index.html": "/index.html",
+    "main.628f3a42.css.map": "/static/css/main.628f3a42.css.map",
+    "main.9ca4820d.js.map": "/static/js/main.9ca4820d.js.map",
+    "787.ee616d6a.chunk.js.map": "/static/js/787.ee616d6a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.628f3a42.css",
+    "static/js/main.9ca4820d.js"
+  ]
+}

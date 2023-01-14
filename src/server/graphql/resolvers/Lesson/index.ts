@@ -1,4 +1,4 @@
-import { Database, Lesson, Playlist, User } from "../../../lib/types";
+import { Database, Lesson, Playlist, User, Viewer } from "../../../lib/types";
 import {
   AllLessonsArgs,
   AllLessonsData,
@@ -9,9 +9,7 @@ import {
 import { authorize } from "../../../lib/utils/index";
 import { Request } from "express";
 import { ObjectId } from "mongodb";
-import { Viewer } from "../../../../client/src/graphql/generated";
 import { GraphQLScalarType, Kind } from "graphql";
-import { DisplayError } from "../../../../client/src/lib/utils";
 
 const dateRegex =
   /\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[1-2]\d|3[0-1])|-[1-9]\d{0,11}|[1-9]\d{0,4}/;
@@ -162,8 +160,8 @@ export const lessonResolvers = {
       const id = new ObjectId();
       //TODO: Fix Viewer resolution vs hard coded id
 
-      if (viewer && viewer.id) {
-        const viewerId = viewer.id;
+      if (viewer && viewer._id) {
+        const viewerId = viewer._id;
         console.log("ViewerId: ", viewerId);
       }
 

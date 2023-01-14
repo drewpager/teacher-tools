@@ -3,7 +3,7 @@ import { Card, CardContent, CardActions, Typography, Button, Box, CircularProgre
 import { useApolloClient } from '@apollo/react-hooks';
 import { AUTH_URL } from '../../lib/graphql/queries/AuthUrl/index';
 import { AuthUrl as AuthUrlData } from '../../lib/graphql/queries/AuthUrl/__generated__/AuthUrl';
-import { useLogInMutation, Mutation, Viewer } from '../../graphql/generated';
+import { useLogInMutation, Viewer } from '../../graphql/generated';
 import { Navigate } from 'react-router-dom';
 import { DisplayError, DisplaySuccess } from '../../lib/utils';
 import './login.scss';
@@ -14,19 +14,19 @@ interface Props {
 
 export const Login = ({ setViewer }: Props) => {
   const [open, setOpen] = useState(false);
-  const [error, setError] = useState(true);
+  const [error, setError] = useState(false);
   const client = useApolloClient();
-  const [logIn, { 
-    data: Mutation, 
-    loading: LogInLoading, 
-    error: LogInError 
-  }]  = useLogInMutation({
+  const [logIn, {
+    data: Mutation,
+    loading: LogInLoading,
+    error: LogInError
+  }] = useLogInMutation({
     onCompleted: data => {
       if (data && data.logIn && data.logIn.token) {
         setViewer(data.logIn);
         sessionStorage.setItem("token", data.logIn.token);
-        return (<DisplaySuccess title="You've successfully logged in!"/>)
-      } 
+        return (<DisplaySuccess title="You've successfully logged in!" />)
+      }
     },
     onError: error => {
       if (error) {
@@ -34,7 +34,7 @@ export const Login = ({ setViewer }: Props) => {
       }
     }
   });
-  
+
   const logInRef = useRef(logIn);
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export const Login = ({ setViewer }: Props) => {
         query: AUTH_URL
       });
       window.location.href = data.authUrl;
-      
+
     } catch {
       setError(true)
     }
@@ -91,7 +91,7 @@ export const Login = ({ setViewer }: Props) => {
             <Button className="login--button" onClick={handleAuthorize} size="small">Sign In With Google!</Button>
           </CardActions>
           <Typography sx={{ fontStyle: 'italic' }}>Note: By signing in, you'll be redirected to the Google consent form to sign in
-                with your Google account.</Typography>
+            with your Google account.</Typography>
         </CardContent>
       </Card>
     </Box>
@@ -139,7 +139,7 @@ export const Login = ({ setViewer }: Props) => {
             <Button className="login--button" onClick={handleAuthorize} size="small">Sign In With Google!</Button>
           </CardActions>
           <Typography sx={{ fontStyle: 'italic' }}>Note: By signing in, you'll be redirected to the Google consent form to sign in
-                with your Google account.</Typography>
+            with your Google account.</Typography>
         </CardContent>
       </Card>
     </Box>

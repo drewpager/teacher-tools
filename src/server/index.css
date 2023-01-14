@@ -1,0 +1,8 @@
+body {
+  background-color: #ccc3c3;
+}
+.App {
+  background-color: #ccc3c3;
+  border: 1px solid white;
+  display: inline-block;
+}
