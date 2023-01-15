@@ -16,7 +16,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const apollo_server_express_1 = require("apollo-server-express");
 const graphql_scalars_1 = require("graphql-scalars");
-const graphql_1 = require("./graphql");
+const graphql_1 = require("../buildos-peach-deploy/build/graphql");
 const database_1 = require("./database");
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const cors_1 = __importDefault(require("cors"));
