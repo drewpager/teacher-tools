@@ -135,7 +135,7 @@ const removeTypenameFromMutationLink = new ApolloLink(removeTypenameFromMutation
 
 export {
   removeTypenameFromMutationLink,
-  removeTypenameFromMutation,
+  removeTypenameFromMutation
 };
 
 const httpLink = createHttpLink({

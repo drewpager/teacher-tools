@@ -33,7 +33,10 @@ const mount = async (app: Application) => {
   });
 
   await server.start();
-  server.applyMiddleware({ app, path: "/api" });
+  server.applyMiddleware({
+    app,
+    path: "/api",
+  });
   app.listen(process.env.PORT);
 
   console.log(`[app]: started on port ${process.env.PORT}`);
