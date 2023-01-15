@@ -152,7 +152,7 @@ const authLink = setContext((_, { headers }) => {
 })
 
 const client = new ApolloClient({
-  link: from([removeTypenameFromMutationLink, authLink.concat(httpLink)]),
+  link: from([authLink.concat(httpLink), removeTypenameFromMutationLink]),
   cache: new InMemoryCache(),
 });
 
