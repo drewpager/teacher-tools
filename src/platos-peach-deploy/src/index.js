@@ -30,7 +30,7 @@ const mount = (app) => __awaiter(void 0, void 0, void 0, function* () {
     app.use((0, cors_1.default)(corsOptions));
     app.use((0, cookie_parser_1.default)(process.env.SECRET));
     app.use((0, compression_1.default)());
-    app.use(express_1.default.static(`${__dirname}/`));
+    app.use(express_1.default.static(`${__dirname}/static/`));
     app.get("/*", (_req, res) => res.sendFile(`${__dirname}/index.html`));
     const server = new apollo_server_express_1.ApolloServer({
         typeDefs: [graphql_1.typeDefs, ...graphql_scalars_1.typeDefs],
@@ -40,7 +40,7 @@ const mount = (app) => __awaiter(void 0, void 0, void 0, function* () {
     yield server.start();
     server.applyMiddleware({
         app,
-        path: "/api",
+        path: "/graphql",
     });
     app.listen(process.env.PORT);
     console.log(`[app]: started on port ${process.env.PORT}`);
