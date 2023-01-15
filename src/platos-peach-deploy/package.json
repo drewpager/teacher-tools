@@ -28,6 +28,6 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "node dist/index.js"
+    "start": "npm run compile && node ./dist/index.js"
   }
 }
