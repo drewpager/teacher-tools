@@ -16,8 +16,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const apollo_server_express_1 = require("apollo-server-express");
 const graphql_scalars_1 = require("graphql-scalars");
-const graphql_1 = require("../graphql");
-const database_1 = require("../database");
+const graphql_1 = require("./graphql");
+const database_1 = require("./database");
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const cors_1 = __importDefault(require("cors"));
 const compression_1 = __importDefault(require("compression"));
@@ -40,7 +40,7 @@ const mount = (app) => __awaiter(void 0, void 0, void 0, function* () {
     yield server.start();
     server.applyMiddleware({
         app,
-        path: "/graphql",
+        path: "/api",
     });
     app.listen(process.env.PORT);
     console.log(`[app]: started on port ${process.env.PORT}`);
