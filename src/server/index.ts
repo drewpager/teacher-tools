@@ -23,8 +23,8 @@ const mount = async (app: Application) => {
   app.use(cors(corsOptions));
   app.use(cookieParser(process.env.SECRET));
   app.use(compression());
-  app.use(express.static(`${__dirname}/static/`));
-  app.get("/*", (_req, res) => res.sendFile(`${__dirname}/index.html`));
+  // app.use(express.static(`${__dirname}/static/`));
+  // app.get("/*", (_req, res) => res.sendFile(`${__dirname}/index.html`));
 
   const server = new ApolloServer({
     typeDefs: [typeDefs, ...scalarTypeDefs],
