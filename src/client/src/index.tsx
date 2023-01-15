@@ -139,7 +139,7 @@ export {
 };
 
 const httpLink = createHttpLink({
-  uri: 'https://neon-platypus-80b049.netlify.app/api'
+  uri: '/api'
 });
 
 const authLink = setContext((_, { headers }) => {
