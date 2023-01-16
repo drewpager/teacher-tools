@@ -41,6 +41,7 @@ const startServer = async () => {
       res: res,
     }),
     listen: { port: 9000 },
+    // listen: { path: "/api" },
   });
 
   console.log(`🚀  Server ready at: ${url}`);
