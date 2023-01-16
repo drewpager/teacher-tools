@@ -1,14 +1,16 @@
 {
+  "extends": "@tsconfig/node16/tsconfig.json",
   "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
+    "target": "es2020",
+    "module": "CommonJS",
     "jsx": "react-jsx",
-    "rootDir": "./",
-    "outDir": "dist/",
+    "rootDirs": ["./"],
+    "outDir": "dist",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "strict": true,
-    "lib": ["ES2021.String", "DOM"]
+    "lib": ["ESNext", "ES2021.String", "DOM"],
+    "types": ["node"]
   },
   "exclude": ["temp/*"]
 }

@@ -139,7 +139,7 @@ export {
 };
 
 const httpLink = createHttpLink({
-  uri: 'https://neon-platypus-80b049.netlify.app/api'
+  uri: '/api'
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -152,7 +152,7 @@ const authLink = setContext((_, { headers }) => {
 })
 
 const client = new ApolloClient({
-  link: from([removeTypenameFromMutationLink, httpLink]),
+  link: from([removeTypenameFromMutationLink, authLink.concat(httpLink)]),
   cache: new InMemoryCache(),
 });
 
