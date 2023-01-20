@@ -32,8 +32,8 @@ const mount = async (app: Application) => {
   app.use(compression());
   app.use(cors(corsOptions));
 
-  app.use(express.static(`${__dirname}/client`));
-  app.get("/*", (_req, res) => res.sendFile(`${__dirname}/client/index.html`));
+  app.use(express.static(`${__dirname}/`));
+  app.get("/*", (_req, res) => res.sendFile(`${__dirname}/index.html`));
 
   const server = new ApolloServer({
     typeDefs,
@@ -41,7 +41,7 @@ const mount = async (app: Application) => {
     context: ({ req, res }) => ({ db, req, res }),
   });
 
-  server;
+  await server.start();
   server.applyMiddleware({ app, path: "/api" });
   app.listen(process.env.PORT);
 
@@ -49,24 +49,3 @@ const mount = async (app: Application) => {
 };
 
 mount(express());
-
-// const startServer = async () => {
-//   const server = new ApolloServer<MyContext>({
-//     typeDefs: [typeDefs, scalarTypeDefs],
-//     resolvers: [resolvers, scalarResolvers],
-//   });
-
-//   const { url } = await startStandaloneServer(server, {
-//     context: async ({ req, res }) => ({
-//       db: await connectDatabase(),
-//       req: req,
-//       res: res,
-//     }),
-//     listen: { port: 9000 },
-//     // listen: { path: "/api" },
-//   });
-
-//   console.log(`🚀  Server ready at: ${url}`);
-// };
-
-// startServer();
