@@ -1,50 +1,72 @@
 require("dotenv").config();
 
-// import express, { Application } from "express";
-// import { ApolloServer } from "apollo-server-express";
-import { ApolloServer } from "@apollo/server";
+import express, { Application } from "express";
+import { ApolloServer } from "apollo-server-express";
+// import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 // import { expressMiddleware } from "@apollo/server/express4";
 // import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
-// import express from "express";
 // import http from "http";
-// import bodyParser from "body-parser";
+import bodyParser from "body-parser";
 import {
   typeDefs as scalarTypeDefs,
   resolvers as scalarResolvers,
 } from "graphql-scalars";
 import { typeDefs, resolvers } from "./graphql";
 import { connectDatabase } from "./database";
-// import cookieParser from "cookie-parser";
+import cookieParser from "cookie-parser";
 import cors from "cors";
-// import compression from "compression";
+import compression from "compression";
 import { Database } from "./lib/types";
 
 const corsOptions = {
   credentials: true,
   preflightContinue: true,
 };
-interface MyContext {
-  db?: Database;
-}
 
-const startServer = async () => {
-  const server = new ApolloServer<MyContext>({
-    typeDefs: [typeDefs, scalarTypeDefs],
-    resolvers: [resolvers, scalarResolvers],
+const mount = async (app: Application) => {
+  const db = await connectDatabase();
+
+  app.use(bodyParser.json({ limit: "2mb" }));
+  app.use(cookieParser(process.env.SECRET));
+  app.use(compression());
+  app.use(cors(corsOptions));
+
+  app.use(express.static(`${__dirname}/client`));
+  app.get("/*", (_req, res) => res.sendFile(`${__dirname}/client/index.html`));
+
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    context: ({ req, res }) => ({ db, req, res }),
   });
 
-  const { url } = await startStandaloneServer(server, {
-    context: async ({ req, res }) => ({
-      db: await connectDatabase(),
-      req: req,
-      res: res,
-    }),
-    listen: { port: 9000 },
-    // listen: { path: "/api" },
-  });
+  server;
+  server.applyMiddleware({ app, path: "/api" });
+  app.listen(process.env.PORT);
 
-  console.log(`🚀  Server ready at: ${url}`);
+  console.log(`[app] : http://localhost:${process.env.PORT}`);
 };
 
-startServer();
+mount(express());
+
+// const startServer = async () => {
+//   const server = new ApolloServer<MyContext>({
+//     typeDefs: [typeDefs, scalarTypeDefs],
+//     resolvers: [resolvers, scalarResolvers],
+//   });
+
+//   const { url } = await startStandaloneServer(server, {
+//     context: async ({ req, res }) => ({
+//       db: await connectDatabase(),
+//       req: req,
+//       res: res,
+//     }),
+//     listen: { port: 9000 },
+//     // listen: { path: "/api" },
+//   });
+
+//   console.log(`🚀  Server ready at: ${url}`);
+// };
+
+// startServer();
