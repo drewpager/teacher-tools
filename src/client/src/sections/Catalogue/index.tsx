@@ -30,7 +30,7 @@ const columns: GridColDef[] = [
     description: "This column cannot be sorted.",
     sortable: false,
     width: 200,
-    valueGetter: (params: GridValueGetterParams) => 
+    valueGetter: (params: GridValueGetterParams) =>
       `${params.row.startDate || ''}-${params.row.endDate || ''}`
   },
   {
@@ -41,14 +41,14 @@ const columns: GridColDef[] = [
 ];
 
 export const Catalogue = () => {
-    const [start, setStart] = useState<Lesson[]>([]);
-    const [category, setCategory] = useState<string>("All")
-    const [categoryList, setCategoryList] = useState<string[]>([""])
+  const [start, setStart] = useState<Lesson[]>([]);
+  const [category, setCategory] = useState<string>("All")
+  const [categoryList, setCategoryList] = useState<string[]>([""])
 
   let rows = [];
   const { data, loading, error } = useAllLessonsQuery({
     variables: {
-      limit: 10,
+      limit: 215,
       page: 1
     }
   });
@@ -79,7 +79,7 @@ export const Catalogue = () => {
     sorted.map((i) => (
       categories.push(`${i.category}`)
     ))
-    
+
     // Isolate one word categories
     categories.forEach((c, i) => {
       if (c.includes(",")) {
@@ -108,7 +108,7 @@ export const Catalogue = () => {
     setCategoryList(uniqueCategories);
 
   }, [data, category])
-  
+
   if (loading) {
     return <CircularProgress />;
   }
@@ -138,11 +138,11 @@ export const Catalogue = () => {
     <Box>
       <Grid container>
         <Grid item xs={12} sm={12} md={9} lg={8}>
-          <DataGrid 
+          <DataGrid
             rows={rows}
             columns={columns}
-            pageSize={10}
-            rowsPerPageOptions={[50]}
+            pageSize={20}
+            rowsPerPageOptions={[215]}
             className="catalog--dataTable"
           />
         </Grid>
