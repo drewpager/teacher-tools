@@ -16,3 +16,11 @@
     text-decoration: none;
   }
 }
+
+.MuiSvgIcon-root {
+  &.nav--user-actions {
+    color: library.$white;
+    width: 47px;
+    height: 47px;
+  }
+}

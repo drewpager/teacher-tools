@@ -3,7 +3,7 @@ require("dotenv").config();
 import express, { Application } from "express";
 import { ApolloServer } from "apollo-server-express";
 // import { ApolloServer } from "@apollo/server";
-import { startStandaloneServer } from "@apollo/server/standalone";
+// import { startStandaloneServer } from "@apollo/server/standalone";
 // import { expressMiddleware } from "@apollo/server/express4";
 // import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
 // import http from "http";
