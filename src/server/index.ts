@@ -36,8 +36,8 @@ const mount = async (app: Application) => {
   app.get("/*", (_req, res) => res.sendFile(`${__dirname}/index.html`));
 
   const server = new ApolloServer({
-    typeDefs,
-    resolvers,
+    typeDefs: [typeDefs, scalarTypeDefs],
+    resolvers: [resolvers, scalarResolvers],
     context: ({ req, res }) => ({ db, req, res }),
   });
 
