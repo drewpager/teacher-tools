@@ -101,7 +101,7 @@ export const CreateLesson = ({ viewer }: Props) => {
       var size = file ? file.size : 0;
       var sliceSize = 19000000;
       var start = 0;
-
+      setProgress(1);
       setTimeout(loop, 3);
 
       function loop() {
@@ -188,7 +188,7 @@ export const CreateLesson = ({ viewer }: Props) => {
       var size = file ? file.size : 0;
       var sliceSize = 10000000;
       var start = 0;
-
+      setProgress(1);
       setTimeout(loop, 3);
 
       function loop() {
