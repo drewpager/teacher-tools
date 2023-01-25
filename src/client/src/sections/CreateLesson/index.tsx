@@ -1,7 +1,7 @@
 import { Typography, Box, TextField, FormGroup, FormControlLabel, Checkbox, Button, CircularProgress, InputAdornment, Input } from '@mui/material';
 import { VideoLibrary, AddPhotoAlternate } from '@mui/icons-material';
 import React, { ChangeEvent, useState } from 'react';
-import { FieldArray, Formik, Field, Form  } from 'formik';
+import { FieldArray, Formik, Field, Form } from 'formik';
 import * as yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCreateLessonMutation, Viewer } from '../../graphql/generated';
@@ -32,16 +32,16 @@ const validationSchema = yup.object({
     .max(61, 'Title should be less than 60 characters'),
   meta: yup
     .string()
-    .min(150, 'Meta should be 160 characters or longer')
+    .min(10, 'Meta should be longer')
     .required('Meta description is required'),
   category: yup
     .array().of(
-      yup.string().min(1, "Please select at least one category.")
-    ).min(2, "Please select at least two categories.")
+      yup.string().min(1, "Please select one.")
+    ).min(1, "Please select at least one category.")
     .required('Please select a category'),
-  startDate: yup  
+  startDate: yup
     .date()
-    .required('Please add a start date'),
+    .required('Please add a start date (YYYY-MM-DD)'),
   endDate: yup
     .date().transform((value, originalValue, context) => {
       // check to see if the previous transform already parsed the date
@@ -53,12 +53,11 @@ const validationSchema = yup.object({
       // if it's valid return the date object, otherwise return an `InvalidDate`
       return value.isValid() ? value.toDate() : new Date('');
     })
-    .required('Please add an end date'),
+    .required('Please add an end date (YYYY-MM-DD)'),
   video: yup
-    .string()
-    .required('A video or lecture is required, please upload.'),
-  image: yup
     .string(),
+  image: yup
+    .string()
 });
 
 export const CreateLesson = ({ viewer }: Props) => {
@@ -81,7 +80,7 @@ export const CreateLesson = ({ viewer }: Props) => {
       }
     }
   })
-  
+
   // TODO - Restrict Video Uploads by File Type and Size
 
   const handleVideoUpload = (files: FileList | null) => {
@@ -100,7 +99,7 @@ export const CreateLesson = ({ viewer }: Props) => {
 
     function handleVideoUpload(file: File) {
       var size = file ? file.size : 0;
-      var sliceSize = 10000000;
+      var sliceSize = 19000000;
       var start = 0;
 
       setTimeout(loop, 3);
@@ -117,8 +116,8 @@ export const CreateLesson = ({ viewer }: Props) => {
         if (end < size) {
           start += sliceSize;
           setTimeout(loop, 3);
-          
-          setProgress((end/size)*100)
+
+          setProgress((end / size) * 100)
         }
       }
     }
@@ -136,7 +135,7 @@ export const CreateLesson = ({ viewer }: Props) => {
       formdata.append("file", piece);
       formdata.append("cloud_name", YOUR_CLOUD_NAME);
       formdata.append("upload_preset", YOUR_UNSIGNED_UPLOAD_PRESET);
-      formdata.append("chunk_size", "6000000");
+      formdata.append("chunk_size", "19000000");
       formdata.append("public_id", publicId);
 
       var xhr = new XMLHttpRequest();
@@ -150,7 +149,7 @@ export const CreateLesson = ({ viewer }: Props) => {
       xhr.onload = function () {
         // do something to response
         console.log("Cloudinary Response: ", this.responseText);
-        const res = JSON.parse(this.response); 
+        const res = JSON.parse(this.response);
         console.log("URL: ", res.secure_url)
         formData.video = res.secure_url;
         setFormData({ ...formData, video: formData.video })
@@ -166,7 +165,7 @@ export const CreateLesson = ({ viewer }: Props) => {
       return slice.bind(file)(start, end);
     }
 
-    function noop() {}
+    function noop() { }
 
     return formData.video
   }
@@ -205,7 +204,7 @@ export const CreateLesson = ({ viewer }: Props) => {
           start += sliceSize;
           setTimeout(loop, 3);
 
-          setImageProgress((end/size)*100)
+          setImageProgress((end / size) * 100)
         }
       }
     }
@@ -220,7 +219,7 @@ export const CreateLesson = ({ viewer }: Props) => {
       formdata.append("file", piece);
       formdata.append("cloud_name", YOUR_CLOUD_NAME);
       formdata.append("upload_preset", YOUR_UNSIGNED_UPLOAD_PRESET);
-      formdata.append("chunk_size", "6000000");
+      formdata.append("chunk_size", "9000000");
       formdata.append("public_id", file!.name);
 
       var xhr = new XMLHttpRequest();
@@ -233,7 +232,7 @@ export const CreateLesson = ({ viewer }: Props) => {
 
       xhr.onload = function () {
         // do something to response
-        const res = JSON.parse(this.response); 
+        const res = JSON.parse(this.response);
         formData.image = res.url;
         console.log(formData.image)
       };
@@ -248,7 +247,7 @@ export const CreateLesson = ({ viewer }: Props) => {
       return slice.bind(file)(start, end);
     }
 
-    function noop() {}
+    function noop() { }
 
     return formData.image
   }
@@ -256,19 +255,19 @@ export const CreateLesson = ({ viewer }: Props) => {
   const LabelProgress = ({ progress }: { progress: number }) => {
     return (
       <Box sx={{ position: 'relative', display: 'inline-flex' }}>
-        <CircularProgress color="primary" variant='determinate' value={progress}/>
-          <Box
-            sx={{
-              top: 0,
-              left: 0,
-              bottom: 0,
-              right: 2,
-              position: 'absolute',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'right',
-            }}
-          >
+        <CircularProgress color="primary" variant='determinate' value={progress} />
+        <Box
+          sx={{
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 2,
+            position: 'absolute',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'right',
+          }}
+        >
           <Typography
             variant="caption"
             component="div"
@@ -290,160 +289,160 @@ export const CreateLesson = ({ viewer }: Props) => {
     return (
       <Box className='createLesson--page'>
         <Box className='createLesson--form'>
-        <h2>Create a New Lesson</h2>
-        <Formik
-          initialValues={{
-            title: "",
-            meta: "",
-            category: [],
-            startDate: "",
-            endDate: "",
-            video: "",
-            image: ""
-          }}
-          validationSchema={validationSchema}
-          onSubmit={async (values) => {
-            values.video = formData.video;
-            values.image = formData.image;
-
-            await createLesson({
-              variables: {
-                input: values
-              }
-            });
-
-            navigate(`../user/${viewer.id}`, { replace: true })
-          }}
-        >
-        {({ values, errors, touched, isSubmitting, handleSubmit, handleChange, setFieldValue }) => (
-        <Form onSubmit={handleSubmit}>
-          {/* {errors.title ? (<h5>{errors.title}</h5>) : null} */}
-          <TextField 
-            variant="outlined" 
-            label="Title" 
-            helperText={errors.title ? `${errors.title}` : "Add a Lesson Title (Max Character Count of 160)"}
-            sx={{ width: "45%" }} 
-            value={values.title} 
-            name="title"
-            onChange={handleChange}
-            required
-            error={touched && errors.title ? true : false}
-          />
-          <br />
-          <TextField 
-            type="file"
-            id="video" 
-            variant='outlined'
-            helperText={errors.video ? `${errors.video}` : "Upload a Video or Lecture"}
-            className='file--upload'
-            sx={{ width: "45%", marginTop: 1 }} 
-            name="video"
-            onChange={async (e: ChangeEvent<HTMLInputElement>) => { setFieldValue("video", await handleVideoUpload(e.target.files)) }} 
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <LabelProgress progress={progress} />
-                </InputAdornment>
-              ),
-              startAdornment: (
-                <InputAdornment position="start">
-                  <VideoLibrary />
-                </InputAdornment>
-              )
+          <h2>Create a New Lesson</h2>
+          <Formik
+            initialValues={{
+              title: "",
+              meta: "",
+              category: [],
+              startDate: "",
+              endDate: "",
+              video: "",
+              image: ""
             }}
-            required 
-            error={errors.video || touched.video ? true : false}
-          /><br />
-          <TextField 
-            type="file"
-            id="image" 
-            variant='outlined' 
-            helperText="Image" 
-            sx={{ width: "45%", marginTop: 1 }} 
-            name="image"
-            onChange={async (e: ChangeEvent<HTMLInputElement>) => { setFieldValue("image", await handleImageUpload(e.target.files)) }} 
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <LabelProgress progress={imageProgress} />
-                </InputAdornment>
-              ),
-              startAdornment: (
-                <InputAdornment position="start">
-                  <AddPhotoAlternate />
-                </InputAdornment>
-              )
+            validationSchema={validationSchema}
+            onSubmit={async (values) => {
+              values.video = formData.video;
+              values.image = formData.image;
+
+              await createLesson({
+                variables: {
+                  input: values
+                }
+              });
+
+              navigate(`../user/${viewer.id}`, { replace: true })
             }}
-            color="primary"
-            required 
-            /><br />
-          <TextField 
-            variant="outlined" 
-            label="Description" 
-            multiline rows={3} 
-            helperText="Min Character Count of 160" 
-            sx={{ width: "45%", marginTop: 1 }} 
-            value={values.meta} 
-            name="meta" 
-            onChange={handleChange} 
-            required 
-            error={touched.meta && errors.meta ? true : false}
-          />
-          <FormGroup sx={{ marginTop: 1 }}>
-            <Typography variant="h5">Category</Typography>
-            <Typography variant="body2" style={{color: "gray"}}>Select All That Apply</Typography>
-            <FieldArray name="category">
-              {({ insert, remove, push }) => (
-                // TODO: Render categories
-                <div className="field--checkboxes">
-                  {categories.map((cat, index) => (
-                    <label 
-                      key={index} 
-                      className="field--checkboxes-label"
-                    >
-                      <Field 
-                        type="checkbox" 
-                        name="category" 
-                        value={cat.name} 
-                        className="field--checkbox"
-                        error={touched.category && errors.category ? true : false}
-                      />
-                      {cat.name}
-                    </label>
-                  ))}
-                </div>
-              )}
-            </FieldArray>
-          </FormGroup>
-          <TextField 
-            variant='outlined' 
-            name="startDate"
-            label="Start Date or Year" 
-            helperText={errors.startDate ? `${errors.startDate}` : "Add a time period start date as YYYY-MM-DD or -33,000 for 33,000 BCE"}
-            sx={{ width: "45%", marginTop: 1 }} 
-            value={values.startDate}  
-            onChange={handleChange}
-            error={touched.startDate && errors.startDate ? true : false}
-            required 
-          /><br />
-          <TextField 
-            variant='outlined' 
-            name="endDate"
-            label="End Date or Year" 
-            helperText="YYYY-MM-DD or 1052" 
-            sx={{ width: "45%", marginTop: 1 }} 
-            value={values.endDate} 
-            onChange={handleChange} 
-            required
-            error={touched.endDate && errors.endDate ? true : false} 
-          /><br />
-          {errors ? setError(true) : setError(false)}
-          {console.log(errors)}
-          <Button sx={{ marginTop: 2 }} disabled={!values.title || !values.endDate || errorState || isSubmitting } variant='contained' color='primary' type="submit">Submit</Button>
-        </Form>
-        )}
-        </Formik>
-      </Box>
+          >
+            {({ values, errors, touched, isSubmitting, handleSubmit, handleChange, setFieldValue }) => (
+              <Form onSubmit={handleSubmit}>
+                {/* {errors.title ? (<h5>{errors.title}</h5>) : null} */}
+                <TextField
+                  variant="outlined"
+                  label="Title"
+                  helperText={errors.title ? `${errors.title}` : "Add a Lesson Title (Max Character Count of 160)"}
+                  sx={{ width: "45%" }}
+                  value={values.title}
+                  name="title"
+                  onChange={handleChange}
+                  required
+                  error={touched && errors.title ? true : false}
+                />
+                <br />
+                <TextField
+                  type="file"
+                  id="video"
+                  variant='outlined'
+                  helperText={errors.video ? `${errors.video}` : "Upload a Video or Lecture"}
+                  className='file--upload'
+                  sx={{ width: "45%", marginTop: 1 }}
+                  name="video"
+                  onChange={async (e: ChangeEvent<HTMLInputElement>) => { setFieldValue("video", await handleVideoUpload(e.target.files)) }}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <LabelProgress progress={progress} />
+                      </InputAdornment>
+                    ),
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <VideoLibrary />
+                      </InputAdornment>
+                    )
+                  }}
+                  required
+                  error={touched.video && errors.video ? true : false}
+                /><br />
+                <TextField
+                  type="file"
+                  id="image"
+                  variant='outlined'
+                  helperText="Image"
+                  sx={{ width: "45%", marginTop: 1 }}
+                  name="image"
+                  onChange={async (e: ChangeEvent<HTMLInputElement>) => { setFieldValue("image", await handleImageUpload(e.target.files)) }}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <LabelProgress progress={imageProgress} />
+                      </InputAdornment>
+                    ),
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <AddPhotoAlternate />
+                      </InputAdornment>
+                    )
+                  }}
+                  color="primary"
+                  required
+                /><br />
+                <TextField
+                  variant="outlined"
+                  label="Description"
+                  multiline rows={3}
+                  helperText="Min Character Count of 160"
+                  sx={{ width: "45%", marginTop: 1 }}
+                  value={values.meta}
+                  name="meta"
+                  onChange={handleChange}
+                  required
+                  error={touched.meta && errors.meta ? true : false}
+                />
+                <FormGroup sx={{ marginTop: 1 }}>
+                  <Typography variant="h5">Category</Typography>
+                  <Typography variant="body2" style={{ color: "gray" }}>Select All That Apply</Typography>
+                  <FieldArray name="category">
+                    {({ insert, remove, push }) => (
+                      // TODO: Render categories
+                      <div className="field--checkboxes">
+                        {categories.map((cat, index) => (
+                          <label
+                            key={index}
+                            className="field--checkboxes-label"
+                          >
+                            <Field
+                              type="checkbox"
+                              name="category"
+                              value={cat.name}
+                              className="field--checkbox"
+                              error={touched.category && errors.category ? true : false}
+                            />
+                            {cat.name}
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                  </FieldArray>
+                </FormGroup>
+                <TextField
+                  variant='outlined'
+                  name="startDate"
+                  label="Start Date or Year"
+                  helperText={errors.startDate ? `${errors.startDate}` : "Add a time period start date as YYYY-MM-DD or -33,000 for 33,000 BCE"}
+                  sx={{ width: "45%", marginTop: 1 }}
+                  value={values.startDate}
+                  onChange={handleChange}
+                  error={touched.startDate && errors.startDate ? true : false}
+                  required
+                /><br />
+                <TextField
+                  variant='outlined'
+                  name="endDate"
+                  label="End Date or Year"
+                  helperText="YYYY-MM-DD, 1052 or Present"
+                  sx={{ width: "45%", marginTop: 1 }}
+                  value={values.endDate}
+                  onChange={handleChange}
+                  required
+                  error={touched.endDate && errors.endDate ? true : false}
+                /><br />
+                {errors ? setError(true) : setError(false)}
+                {console.log(errors)}
+                <Button sx={{ marginTop: 2 }} disabled={!values.title || !values.endDate || isSubmitting} variant='contained' color='primary' type="submit">Submit</Button>
+              </Form>
+            )}
+          </Formik>
+        </Box>
       </Box>
     )
   }
