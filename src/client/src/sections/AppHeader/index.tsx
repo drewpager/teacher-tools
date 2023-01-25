@@ -115,17 +115,17 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
               onClose={handleCloseActionMenu}
               className="header--menu"
             >
-              <MenuItem onClick={handleCloseUserMenu}>
+              <MenuItem onClick={handleCloseActionMenu}>
                 <Link to={`/lesson/create`} style={{ textDecoration: "none", color: `${theme.palette.primary.light}` }}>
                   <Typography textAlign="center" sx={{ color: `${theme.palette.primary.light}` }}>Create Lesson</Typography>
                 </Link>
               </MenuItem>
-              <MenuItem>
+              <MenuItem onClick={handleCloseActionMenu}>
                 <Link to={'/quiz/create'} style={{ textDecoration: 'none' }}>
                   <Typography textAlign="center" sx={{ color: `${theme.palette.primary.light}` }}>Create Asessment</Typography>
                 </Link>
               </MenuItem>
-              <MenuItem>
+              <MenuItem onClick={handleCloseActionMenu}>
                 <Link to={'/playlist/create'} style={{ textDecoration: 'none' }}>
                   <Typography textAlign="center" sx={{ color: `${theme.palette.primary.light}` }}>Create Playlist</Typography>
                 </Link>
@@ -158,8 +158,8 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                   <Typography textAlign="center" sx={{ color: `${theme.palette.primary.light}` }}>Profile</Typography>
                 </Link>
               </MenuItem>
-              <MenuItem>
-                <Link to={'/catalog'} style={{ textDecoration: 'none' }}>
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Link to={`/catalog`} style={{ textDecoration: 'none' }}>
                   <Typography textAlign="center" sx={{ color: `${theme.palette.primary.light}` }}>Catalog</Typography>
                 </Link>
               </MenuItem>
