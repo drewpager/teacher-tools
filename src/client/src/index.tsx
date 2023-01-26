@@ -77,7 +77,7 @@ const App = () => {
 
   if (!viewer.didRequest && !error) {
     return (
-      <Box sx={{ backgroundColor: "#fefae0" }}>
+      <Box sx={{ backgroundColor: "#FAF9F6" }}>
         <Skeleton variant="rectangular" animation="wave" width="100%" height="50px" />
         <Box sx={{ textAlign: "center" }}>
           <CircularProgress color="primary" />

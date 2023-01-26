@@ -70,7 +70,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
   const HomeIcon = () => {
     return (
       <Link to="/">
-        <SvgIcon component={PlatosPeachIcon} inheritViewBox sx={{ fontSize: 65, color: `${theme.palette.info.main}` }} />
+        <SvgIcon component={PlatosPeachIcon} inheritViewBox sx={{ fontSize: 65, color: `${theme.palette.primary.light}` }} />
       </Link>
     );
   }

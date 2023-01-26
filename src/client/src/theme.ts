@@ -17,6 +17,7 @@ export const colors = {
     200: "#a1a4ab",
     300: "#727681",
     400: "#1F2A40",
+    450: "#BC4710",
     500: "#141b2d",
     600: "#101624",
     700: "#0c101b",
@@ -92,6 +93,7 @@ const theme = createTheme({
     // palette values for dark mode
     primary: {
       main: colors.primary[500],
+      light: colors.primary[450],
     },
     secondary: {
       main: colors.greenAccent[500],
