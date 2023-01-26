@@ -19,6 +19,7 @@ export const colors = {
     400: "#1F2A40",
     450: "#BC4710",
     500: "#141b2d",
+    550: "#FAF9F6",
     600: "#101624",
     700: "#0c101b",
     800: "#080b12",
@@ -101,7 +102,7 @@ const theme = createTheme({
     info: {
       dark: colors.grey[700],
       main: colors.grey[500],
-      light: colors.grey[100],
+      light: colors.primary[550],
     },
     background: {
       default: colors.primary[500],

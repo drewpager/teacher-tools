@@ -87,7 +87,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
           <HomeIcon />
         </IconButton>
         <Typography variant="h1" className="nav--title">
-          <Link to="/" style={{ color: `${theme.palette.secondary.light}`, textDecoration: "none", fontSize: 32, fontWeight: 800 }}>
+          <Link to="/" style={{ color: `${theme.palette.info.light}`, textDecoration: "none", fontSize: 32, fontWeight: 800 }}>
             Plato's Peach
           </Link>
         </Typography>
