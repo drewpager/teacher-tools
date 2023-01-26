@@ -43,7 +43,9 @@ const validationSchema = yup.object({
     .date()
     .required('Please add a start date (YYYY-MM-DD)'),
   endDate: yup
-    .date().transform((value, originalValue, context) => {
+    .string()
+    .matches(/(?:0[1-9]|1[0-2])-(?:0[1-9]|[1-2]\d|3[0-1])|-[1-9]\d{0,11}|[1-9]\d{0,4}|([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))|(present)/i)
+    .transform((value, originalValue, context) => {
       // check to see if the previous transform already parsed the date
       if (context.isType(value)) return value;
 
@@ -80,6 +82,14 @@ export const CreateLesson = ({ viewer }: Props) => {
       }
     }
   })
+
+  if (error) {
+    return (
+      <>
+        <DisplayError title="Failed to create Lesson!" />
+      </>
+    )
+  }
 
   // TODO - Restrict Video Uploads by File Type and Size
 
