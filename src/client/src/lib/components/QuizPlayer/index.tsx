@@ -7,16 +7,30 @@ interface Props {
 }
 
 export const QuizPlayer = ({ quiz }: Props) => {
-  const [quizState, setQuizState] = useState<boolean[]>([]);
+  const [quizState, setQuizState] = useState<string[]>([]);
+  const [checked, setChecked] = useState<boolean>(false);
 
   const title = quiz.title;
 
   const handleCheck = () => {
-
+    const quizKey: any[] = []
+    quiz.questions.map((v, i) => {
+      quizKey.push(v.answerOptions?.find((q) => q?.isCorrect))
+    })
+    const correct = quizState.filter((e, i) => e.matchAll(quizKey[i].isCorrect))
+    console.log("Quiz Key: ", correct)
   }
 
-  const handleSelect = (z: any) => {
-    setQuizState([...quizState, z.isCorrect])
+  const handleSelect = (value: string) => {
+    console.log(value)
+    setChecked(true);
+    setQuizState([...quizState, value])
+  }
+
+  const handleCorrectness = (e: string) => {
+    console.log(e)
+    setChecked(true);
+    setQuizState([...quizState, e])
   }
 
   // TODO: 
@@ -32,15 +46,15 @@ export const QuizPlayer = ({ quiz }: Props) => {
         {console.log(quiz)}
         {quiz.questions.map((i, indy) => (
           <>
-            <RadioGroup key={indy}>
+            <RadioGroup>
               <h2>{i.question}</h2>
               {i.answerType === "MULTIPLECHOICE" && i.answerOptions?.map((t, index) => (
-                <FormControlLabel value={t?.answerText} label={`${t?.answerText}`} key={index} control={<Radio onSelect={(t) => handleSelect(t)} />} />
+                <FormControlLabel value={t?.answerText} label={`${t?.answerText}`} key={index} control={<Radio onChange={(e) => handleSelect(e.target.value)} />} />
               ))}
-              {i.answerType === "TRUEFALSE" && i.answerOptions?.map((f, index) => (
+              {i.answerType === "TRUEFALSE" && i.answerOptions?.map((f, id) => (
                 <>
-                  <FormControlLabel value={f?.isCorrect?.valueOf()} label={`${f?.isCorrect?.valueOf()}`} key={index} control={<Radio onSelect={(f) => handleSelect(f)} />} />
-                  <FormControlLabel value={!f?.isCorrect?.valueOf()} label={`${!f?.isCorrect?.valueOf()}`} key={index} control={<Radio onSelect={(f) => handleSelect(f)} />} />
+                  <FormControlLabel value={f?.isCorrect?.valueOf()} label={`${f?.isCorrect?.valueOf()}`} key={id} control={<Radio onChange={(e) => handleCorrectness(e.target.value)} />} sx={{ border: checked ? "3px solid black" : undefined }} />
+                  <FormControlLabel value={!f?.isCorrect?.valueOf()} label={`${!f?.isCorrect?.valueOf()}`} key={id + 1} control={<Radio onChange={(e) => handleCorrectness(e.target.value)} />} />
                 </>
               ))}
               {console.log(quizState)}
