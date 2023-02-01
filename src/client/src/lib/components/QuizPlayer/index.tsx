@@ -1,6 +1,7 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { Box, Button, Radio, RadioGroup, FormControl, FormControlLabel } from '@mui/material';
 import { Quiz } from '../../../graphql/generated';
+import { Formik, Field, Form } from "formik";
 
 interface Props {
   quiz: Quiz
@@ -40,11 +41,54 @@ export const QuizPlayer = ({ quiz }: Props) => {
   // 1. Allow teachers to set # of attempts before locking in grade?
 
   return (
-    <FormControl>
-      <form>
-        <h1>{title}</h1>
-        {console.log(quiz)}
-        {quiz.questions.map((i, indy) => (
+    <Box>
+      <h1>{title}</h1>
+      <Formik
+        initialValues={{
+          question: {
+            answers: [""],
+          }
+        }}
+        onSubmit={async (values) => {
+          await new Promise((r) => setTimeout(r, 500));
+          alert(JSON.stringify(values, null, 2));
+        }}
+      >
+        {({ values }) => (
+          <Box>
+            {quiz.questions.map((i, index) => (
+              <>
+                <div id="my-radio-group" key={index}>{i.question}</div>
+                <div role="group" aria-labelledby="my-radio-group">
+                  <Form>
+                    {i.answerType === "MULTIPLECHOICE" && i.answerOptions?.map((op, id) => (
+                      <label>
+                        <Field type="radio" name={`question.answers[${i}]`} value={op?.answerText} key={id} />
+                        {op?.answerText}
+                      </label>
+                    ))}
+                    {i.answerType === "TRUEFALSE" && i.answerOptions?.map((od, ip) => (
+                      <div>
+                        <label key={index}>
+                          <Field type="radio" name="answers" value={od?.isCorrect} key={ip} />
+                          True
+                        </label>
+                        <label>
+                          <Field type="radio" name="answers" value={!od?.isCorrect} key={ip} />
+                          False
+                        </label>
+                      </div>
+                    ))}
+                  </Form>
+                </div>
+              </>
+            ))}
+            <button type="submit">Submit</button>
+            {console.log(values.question.answers)}
+          </Box>
+        )}
+      </Formik>
+      {/* {quiz.questions.map((i, indy) => (
           <>
             <RadioGroup>
               <h2>{i.question}</h2>
@@ -61,8 +105,7 @@ export const QuizPlayer = ({ quiz }: Props) => {
             </RadioGroup>
           </>
         ))}
-        <Button type="button" onClick={handleCheck}>Check Answers</Button>
-      </form>
-    </FormControl>
+        <Button type="button" onClick={handleCheck}>Check Answers</Button> */}
+    </Box>
   )
 }
