@@ -1,21 +1,48 @@
 export const categories = [
   {
-    name: "History",
+    name: "history",
   },
   {
-    name: "Biography",
+    name: "biography",
   },
   {
-    name: "American History",
+    name: "american history",
   },
   {
-    name: "World History",
+    name: "world history",
   },
   {
-    name: "Military History",
+    name: "military history",
   },
   {
-    name: "Medicine",
+    name: "medicine",
+  },
+  {
+    name: "geography",
+  },
+  {
+    name: "art",
+  },
+  {
+    name: "science & technology",
+  },
+  {
+    name: "literature",
+  },
+  {
+    name: "holiday history",
+  },
+  {
+    name: "world religions",
+  },
+  {
+    name: "world war one",
+  },
+  {
+    name: "world war two",
+  },
+  {
+    name: "vietnam war",
   },
 ];
 
