@@ -25,11 +25,9 @@ export const Catalogue = () => {
     )
   }
 
-  let caters = [{ name: "biography" }, { name: "military history" }];
-
   return (
     <Box mt={10}>
-      <h1>Catalog!</h1>
+      <h1>Catalog ({data?.allLessons.total})</h1>
       {data && categories.map((cater) => (
         <>
           <CatalogItem name={cater.name} category={data.allLessons.result.filter((b) => b.category?.includes(cater.name))} />
