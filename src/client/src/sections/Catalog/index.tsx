@@ -10,7 +10,7 @@ type Props = {
   viewer: Viewer;
 }
 
-export const Catalogue = ({ viewer }: Props) => {
+export const Catalog = ({ viewer }: Props) => {
 
   const { data, loading, error } = useAllLessonsQuery({
     variables: {

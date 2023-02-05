@@ -31,7 +31,7 @@ import {
   CreateLesson,
   QuizCreate,
   EditPlaylist,
-  Catalogue,
+  Catalog,
   Quiz
 } from './sections';
 import { DisplayError } from './lib/utils';
@@ -98,7 +98,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home viewer={viewer} />} />
           <Route path="/teach" element={<Teach />} />
-          <Route path="/catalog" element={<Catalogue viewer={viewer} />} />
+          <Route path="/catalog" element={<Catalog viewer={viewer} />} />
           <Route path="/lesson/:id" element={<Lesson />} />
           <Route path="/lessons/:filter?" element={<Lessons title="Plato's Peach" />} />
           <Route path="/user/:id" children={(props: any) => (<User {...props} viewer={viewer} />)} element={<User viewer={viewer} />} />

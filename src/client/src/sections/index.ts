@@ -12,7 +12,7 @@ export * from "./Playlist";
 export * from "./CreatePlaylist";
 export * from "./CreateLesson";
 export * from "./EditPlaylist";
-export * from "./Catalogue";
+export * from "./Catalog";
 export * from "./Quiz";
 export * from "./QuizCreate";
 export * from "./Modal";
