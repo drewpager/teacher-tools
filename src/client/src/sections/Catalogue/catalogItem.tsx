@@ -1,10 +1,12 @@
 import React from 'react';
 import { Grid, Card, Box, CardMedia, CardContent, IconButton, Typography, Button } from '@mui/material';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import { Link } from 'react-router-dom';
 import { Lesson } from '../../graphql/generated';
 import { titleCase } from '../../lib/utils';
 import { useKeenSlider } from 'keen-slider/react';
+import KeenSlider from 'keen-slider';
 import { UseVideoModal } from '../../lib/components/VideoModal'
 import 'keen-slider/keen-slider.min.css'
 
@@ -14,6 +16,7 @@ type props = {
 }
 
 export const CatalogItem = ({ name, category }: props) => {
+
   const [sliderRef, instanceRef] = useKeenSlider(
     {
       mode: "snap",
@@ -22,14 +25,9 @@ export const CatalogItem = ({ name, category }: props) => {
         perView: 3,
         spacing: 10,
       },
-      breakpoints: {
-        '(min-width: 600px)': {
-          loop: false
-        }
-      }
     },
     [
-      // add plugins here
+
     ]
   )
 
@@ -62,6 +60,9 @@ export const CatalogItem = ({ name, category }: props) => {
                     <IconButton aria-label="play/pause" sx={{ color: "#FAF9F6" }}>
                       <UseVideoModal video={`${l.video}`} />
                     </IconButton>
+                    {/* <IconButton aria-label="bookmark" sx={{ color: "#FAF9F6" }}>
+                      <BookmarkAddIcon />
+                    </IconButton> */}
                   </Box>
                 </Box>
               </Card>

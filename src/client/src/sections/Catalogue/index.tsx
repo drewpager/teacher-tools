@@ -1,11 +1,16 @@
 import React from 'react';
 import { Box, Card, Grid } from '@mui/material'
-import { useAllLessonsQuery, Lesson } from '../../graphql/generated';
+import { useAllLessonsQuery, Lesson, Viewer } from '../../graphql/generated';
 import { categories } from '../../lib/utils';
 import { CatalogItem } from './catalogItem';
+import { Footer } from '../../lib/components';
 import "./catalog.scss";
 
-export const Catalogue = () => {
+type Props = {
+  viewer: Viewer;
+}
+
+export const Catalogue = ({ viewer }: Props) => {
 
   const { data, loading, error } = useAllLessonsQuery({
     variables: {
@@ -27,11 +32,14 @@ export const Catalogue = () => {
   }
 
   return (
-    <Box className="catalogBackground">
-      <h1 className="catalogTitle">Catalog ({data?.allLessons.total})</h1>
-      {data && categories.map((cater) => (
-        <CatalogItem name={cater.name} category={data.allLessons.result.filter((b) => b.category?.includes(cater.name))} />
-      ))}
-    </Box >
+    <>
+      <Box className="catalogBackground" sx={{ marginBottom: "80px" }}>
+        <h1 className="catalogTitle">Catalog ({data?.allLessons.total})</h1>
+        {data && categories.map((cater) => (
+          <CatalogItem name={cater.name} category={data.allLessons.result.filter((b) => b.category?.includes(cater.name))} />
+        ))}
+      </Box >
+      <Footer viewer={viewer} />
+    </>
   )
 }
