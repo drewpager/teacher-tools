@@ -93,7 +93,9 @@ const theme = createTheme({
   palette: {
     // palette values for dark mode
     primary: {
+      // Dark
       main: colors.primary[500],
+      // Orange
       light: colors.primary[450],
     },
     secondary: {
@@ -102,6 +104,7 @@ const theme = createTheme({
     info: {
       dark: colors.grey[700],
       main: colors.grey[500],
+      // White
       light: colors.primary[550],
     },
     background: {

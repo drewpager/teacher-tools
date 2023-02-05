@@ -33,6 +33,7 @@
     "formik": "^2.2.9",
     "graphql": "^16.3.0",
     "graphql-tag": "^2.12.6",
+    "keen-slider": "^6.8.5",
     "moment": "^2.29.4",
     "omit-deep-lodash": "^1.1.7",
     "react": "^17.0.2",

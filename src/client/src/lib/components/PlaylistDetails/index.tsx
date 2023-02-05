@@ -28,7 +28,7 @@ const ExpandMore = styled((props: Props) => {
   transition: theme.transitions.create('transform', {
     duration: theme.transitions.duration.shortest,
   }),
-}));  
+}));
 
 export const PlaylistDetails = (playlist: Playlist) => {
   const [expanded, setExpanded] = useState(false);
@@ -38,15 +38,15 @@ export const PlaylistDetails = (playlist: Playlist) => {
   };
   return (
     <>
-      <Card>
+      <Card className="playlistCard">
         <CardContent className='card--content'>
-            <Link to={`/playlist/${playlist.id}`} style={{ textDecoration: "none" }}>
+          <Link to={`/playlist/${playlist.id}`} style={{ textDecoration: "none" }}>
             <Typography className='card--title' variant="h3">
-                {playlist.name}
+              {playlist.name}
             </Typography>
-            </Link>
+          </Link>
         </CardContent>
-        
+
         <CardActions className='card--actions' disableSpacing>
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
@@ -55,7 +55,7 @@ export const PlaylistDetails = (playlist: Playlist) => {
           <IconButton aria-label="share">
             <ShareIcon />
           </IconButton>
-          
+
           <ExpandMore
             expand={expanded}
             onClick={handleExpandClick}
@@ -67,15 +67,15 @@ export const PlaylistDetails = (playlist: Playlist) => {
         </CardActions>
 
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-            <CardContent>
-                <ul>
-                    {playlist?.plan?.map((j) => (
-                        <li key={j?.id}><Typography paragraph>{j?.title}</Typography></li>
-                    ))}
-                </ul>
-            </CardContent>
+          <CardContent>
+            <ul>
+              {playlist?.plan?.map((j) => (
+                <li key={j?.id}><Typography paragraph>{j?.title}</Typography></li>
+              ))}
+            </ul>
+          </CardContent>
         </Collapse>
-    </Card>
-  </>
+      </Card>
+    </>
   )
 }

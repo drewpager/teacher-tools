@@ -1,0 +1,26 @@
+@use '../../../library';
+
+.video-modal {
+  position: absolute;
+  top: 50%;  
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  max-height: 100%;
+  // background-color: library.$darkGreen;
+  color: library.$darkGreen;
+  border: 2px solid library.$darkGreen;
+}
+
+// .MuiButton-root {
+//   &.modal--button {
+//     margin: 2rem;
+//     width: 90%;
+//     background-color: library.$coral;
+//     color: library.$white;
+//     &:hover {
+//       background-color: library.$peachy;
+//       color: library.$darkGreen;
+//     }
+//   }
+// }

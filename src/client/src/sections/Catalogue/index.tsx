@@ -3,6 +3,7 @@ import { Box, Card, Grid } from '@mui/material'
 import { useAllLessonsQuery, Lesson } from '../../graphql/generated';
 import { categories } from '../../lib/utils';
 import { CatalogItem } from './catalogItem';
+import "./catalog.scss";
 
 export const Catalogue = () => {
 
@@ -26,13 +27,11 @@ export const Catalogue = () => {
   }
 
   return (
-    <Box mt={10}>
-      <h1>Catalog ({data?.allLessons.total})</h1>
+    <Box className="catalogBackground">
+      <h1 className="catalogTitle">Catalog ({data?.allLessons.total})</h1>
       {data && categories.map((cater) => (
-        <>
-          <CatalogItem name={cater.name} category={data.allLessons.result.filter((b) => b.category?.includes(cater.name))} />
-        </>
+        <CatalogItem name={cater.name} category={data.allLessons.result.filter((b) => b.category?.includes(cater.name))} />
       ))}
-    </Box>
+    </Box >
   )
 }

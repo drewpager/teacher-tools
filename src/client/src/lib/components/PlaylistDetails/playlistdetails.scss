@@ -2,12 +2,14 @@
 
 .MuiPaper-root {
     &.MuiCard-root {
-        background: library.$white;
-        border: 1px solid library.$darkGreen;
-        &:hover {
-            transform: translate(-1px, -2px);
-            border-right: 5px solid library.$darkGreen;
-            border-bottom: 5px solid library.$darkGreen;
+        &.playlistCard {
+            background: library.$white;
+            border: 1px solid library.$darkGreen;
+            &:hover {
+                transform: translate(-1px, -2px);
+                border-right: 5px solid library.$darkGreen;
+                border-bottom: 5px solid library.$darkGreen;
+            }
         }
     }
 }

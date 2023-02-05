@@ -5,6 +5,7 @@ export * from "./CardGrid";
 export * from "./Search";
 export * from "./PlaylistCard";
 export * from "./VideoPlayer";
+export * from "./VideoModal";
 export * from "./QuizPlayer";
 export * from "./UserPlaylistsCard";
 export * from "./UserQuizzesCard";
