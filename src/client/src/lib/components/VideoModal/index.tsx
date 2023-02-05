@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Button, Box, Typography } from '@mui/material';
+import { Button, Box, Typography, Fab } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import { VideoPlayer } from '../VideoPlayer';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import CancelIcon from '@mui/icons-material/Cancel';
 import './videoModal.scss';
 
 type props = {
@@ -24,6 +25,12 @@ export const UseVideoModal = ({ video }: props) => {
         aria-describedby="modal-modal-description"
       >
         <Box className="video-modal">
+          <Box>
+            <Fab aria-label="cancel" onClick={handleClose} sx={{ justifySelf: "right", mb: "5px" }}>
+              {/* <CancelIcon /> */}
+              X
+            </Fab>
+          </Box>
           <VideoPlayer url={video} />
         </Box>
       </Modal>
