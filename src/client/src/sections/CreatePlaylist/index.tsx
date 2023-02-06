@@ -1,12 +1,12 @@
-import { CircularProgress, Grid, Box, Card, TextField, Button } from '@mui/material';
+import { CircularProgress, Grid, Box, Card, TextField, Button, Switch, FormControlLabel, Typography } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import React, { useState, ChangeEvent, useRef, useEffect } from 'react';
-import { 
-  FullLessonInput, 
-  useLessonPlanMutation, 
-  useAllLessonsQuery, 
+import {
+  FullLessonInput,
+  useLessonPlanMutation,
+  useAllLessonsQuery,
   useAllQuizzesQuery,
-  Viewer, 
+  Viewer,
   FullLessonQuiz,
   Plan
 } from '../../graphql/generated';
@@ -15,6 +15,7 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useNavigate } from 'react-router-dom';
 import { UseModal } from '../Modal';
 import './createPlaylist.scss';
+import { Link } from 'react-router-dom';
 
 type props = {
   viewer: Viewer;
@@ -50,10 +51,11 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const [quizzes, setQuizzes] = useState<FullLessonQuiz>({})
   const [plans, setPlans] = useState<Array<Plan>>([])
   const [filter, setFilter] = useState<Array<Plan>>([])
+  const [yourContent, setYourContent] = useState<boolean>(false);
   const inputRef = useFocus();
   // const id = viewer && viewer.id ? viewer.id : null;
   const [playlist, setPlaylist] = useState<InputLessonPlan>(initialData)
-  
+
   const limit: number = 2000;
   const page: number = 1;
 
@@ -63,7 +65,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       page: page
     }
   })
-  
+
   const { data: quizData, loading: quizLoading, error: quizError } = useAllQuizzesQuery({
     variables: {
       limit: limit,
@@ -135,10 +137,10 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const titleHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     e.preventDefault();
     const name = e.target.value;
-    setPlaylist({ 
-      ...playlist, 
-      name: name, 
-      creator: viewer && viewer.id ? viewer.id : "0" 
+    setPlaylist({
+      ...playlist,
+      name: name,
+      creator: viewer && viewer.id ? viewer.id : "0"
     })
   }
 
@@ -153,7 +155,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
   const onDragEndHandler = (result: any) => {
     const { destination, source } = result;
-    
+
     // if there is no droppable destination, simply return.
     if (!destination) {
       return;
@@ -168,8 +170,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
       const displacedPlaylistItem = playlist.plan.slice(destination.index, (destination.index + 1));
       playlist.plan[destination.index] = reorderedPlaylistItem;
       playlist.plan.splice((destination.index + 1), 0, ...displacedPlaylistItem);
-      
-      return {...playlist}
+
+      return { ...playlist }
     }
 
     // if dragging and dropping within lessons simply return items unchanged
@@ -179,8 +181,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
       items[destination.index] = reorderedLesson;
       items.splice((destination.index + 1), 0, ...displacedLesson)
       // items.push(...displacedLesson);
-      
-      return {...items}
+
+      return { ...items }
     }
 
     if (destination.droppableId === "playlist") {
@@ -190,7 +192,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       const displacedItem = playlist.plan.slice(destination.index, (destination.index + 1));
       playlist.plan[destination.index] = reorderedItem;
       playlist.plan.push(...displacedItem)
-  
+
       setPlaylist(playlist)
     }
 
@@ -199,7 +201,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       const displacedPlay = items.slice(destination.index, (destination.index + 1));
       items[destination.index] = reorderedPlay;
       items.push(...displacedPlay)
-      
+
       setPlans([...items])
       setPlaylist(playlist)
     }
@@ -224,7 +226,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
   const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     if (playlist && playlist.plan) {
       await lessonPlan({
         variables: {
@@ -233,7 +235,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       });
     }
     // Navigate to User Profile Page
-    navigate(`../user/${viewer.id}`, { replace: true })    
+    navigate(`../user/${viewer.id}`, { replace: true })
   }
 
   if (error) {
@@ -263,60 +265,77 @@ export const CreatePlaylist = ({ viewer }: props) => {
                       fullWidth
                       onChange={titleHandler}
                     />
-                  {playlist.plan.map((i, indices) => (
-                    <Draggable draggableId={`${i._id}`} index={indices} key={i._id}>
-                      {(provided) => (
-                        <Grid item xs={12} md={12} lg={12}>
-                          <Card variant="outlined" sx={{ padding: 2, margin: 1 }} {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}> 
-                            { i.title }
-                          </Card>
-                        </Grid>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </Card>
-              </Grid>
+                    {playlist.plan.map((i, indices) => (
+                      <Draggable draggableId={`${i._id}`} index={indices} key={i._id}>
+                        {(provided) => (
+                          <Grid item xs={12} md={12} lg={12}>
+                            <Card variant="outlined" className="lesson--card" {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                              {i.title}
+                            </Card>
+                          </Grid>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </Card>
+                </Grid>
               )}
             </Droppable>
             <Droppable droppableId='lessons'>
               {(provided, snapshot) => (
                 <Grid item xs={12} sm={6} md={4} lg={4}>
-                <Card variant="outlined" className="createPlaylist--card" {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
-                  <TextField 
-                    variant='outlined' 
-                    id="lesson-search" 
-                    label="Search Lessons" 
-                    value={searchInput} 
-                    onChange={inputHandler} 
-                    ref={inputRef} 
-                    className="createPlaylist--search"
+                  <FormControlLabel
+                    control={<Switch
+                      sx={{ m: 1 }}
+                      checked={!yourContent}
+                      onChange={() => setYourContent(!yourContent)}
+                    />}
+                    label={yourContent ? "All Public Content" : "Your Content Only"}
                   />
+                  <Card variant="outlined" className="createPlaylist--card" {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
+                    <TextField
+                      variant='outlined'
+                      id="lesson-search"
+                      label="Search Lessons"
+                      value={searchInput}
+                      onChange={inputHandler}
+                      ref={inputRef}
+                      className="createPlaylist--search"
+                    />
+                    <Grid container>
+                      {plans.map((i, index) => (
+                        yourContent && i.creator === viewer.id ? (
+                          <Draggable draggableId={`${i._id}`} index={index} key={i._id}>
+                            {(provided) => (
+                              <Grid item xs={12} md={12} lg={12}>
+                                {/* {!i && <Link to="/create/lesson"><Typography variant="h5">You haven't added any content yet, click here to add your first lesson.</Typography></Link>} */}
+                                <Card variant="outlined" className="lesson--card" sx={{ padding: 2, margin: 1 }} {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                                  {JSON.parse(JSON.stringify(i)).title}
+                                </Card>
+                              </Grid>
+                            )}
+                          </Draggable>
+                        ) : !yourContent && i.creator !== viewer.id && (
+                          <Draggable draggableId={`${i._id}`} index={index} key={i._id}>
+                            {(provided) => (
+                              <Grid item xs={12} md={12} lg={12}>
+                                <Card variant="outlined" className="lesson--card" sx={{ padding: 2, margin: 1 }} {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                                  {JSON.parse(JSON.stringify(i)).title}
+                                </Card>
+                              </Grid>
+                            )}
+                          </Draggable>
+                        )
+                      ))}
+                      {provided.placeholder}
+                    </Grid>
+                  </Card>
                   <Grid container>
-                    
-                  {plans.map((i, index) => (
-                    <Draggable draggableId={`${i._id}`} index={index} key={i._id}>
-                      {(provided) => (
-                        <Grid item xs={12} md={12} lg={12}>
-                          <Card variant="outlined" sx={{ padding: 2, margin: 1 }} {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}> 
-                            {JSON.parse(JSON.stringify(i)).title}
-                          </Card>
-                        </Grid>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
+                    <UseModal viewer={viewer} />
                   </Grid>
-                </Card>
-                <Grid container>
-                {/* <Card variant="outlined" className="createQuiz--card">
-                  <UseModal viewer={viewer} />
-                </Card> */}
-                <UseModal viewer={viewer} />
-              </Grid>
-              </Grid>
-                )}
-          </Droppable>
+                </Grid>
+              )}
+            </Droppable>
           </Grid>
         </DragDropContext>
         <Button variant='outlined' type='submit'>Create</Button>

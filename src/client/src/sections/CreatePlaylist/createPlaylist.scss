@@ -28,6 +28,12 @@
     align-items: center;
     text-align: center;
   }
+  &.lesson--card {
+    background-color: library.$coral;
+    padding: 1rem; 
+    margin: 0.5rem;
+    color: library.$white;
+  }
 }
 
 // TODO With Chris: Stop cards from showing above search bar on scroll.
