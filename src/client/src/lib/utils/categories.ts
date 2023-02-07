@@ -15,6 +15,12 @@ export const categories = [
     name: "military history",
   },
   {
+    name: "american military history",
+  },
+  {
+    name: "world military history",
+  },
+  {
     name: "medicine",
   },
   {
@@ -43,6 +49,15 @@ export const categories = [
   },
   {
     name: "vietnam war",
+  },
+  {
+    name: "european history",
+  },
+  {
+    name: "ancient history",
+  },
+  {
+    name: "uncategorized",
   },
 ];
 
