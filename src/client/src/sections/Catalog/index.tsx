@@ -36,7 +36,9 @@ export const Catalog = ({ viewer }: Props) => {
       <Box className="catalogBackground" sx={{ marginBottom: "80px" }}>
         <h1 className="catalogTitle">Catalog ({data?.allLessons.total})</h1>
         {data && categories.map((cater) => (
-          <CatalogItem name={cater.name} category={data.allLessons.result.filter((b) => b.category?.includes(cater.name))} />
+          <div className="catalog--item">
+            <CatalogItem name={cater.name} category={data.allLessons.result.filter((b) => b.category?.includes(cater.name))} />
+          </div>
         ))}
       </Box >
       <Footer viewer={viewer} />

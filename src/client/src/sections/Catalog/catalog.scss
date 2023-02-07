@@ -37,6 +37,10 @@
     padding: 1rem;
   }
 
+  &.catalog--item {
+    border: 1px solid red;
+  }
+
   &.catalogTitle {
     color: red;
     background-color: aqua;
