@@ -1,5 +1,6 @@
-import React from 'react';
-import { Grid, Card, Box, CardMedia, CardContent, IconButton, Typography, Button } from '@mui/material';
+import React, { useState } from 'react';
+import { Grid, Card, Box, CardMedia, CardContent, IconButton, Typography, Button, Chip, InputLabel, FormControl, OutlinedInput, MenuItem } from '@mui/material';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import { Link } from 'react-router-dom';
@@ -7,8 +8,9 @@ import { Lesson } from '../../graphql/generated';
 import { titleCase } from '../../lib/utils';
 import { useKeenSlider } from 'keen-slider/react';
 import KeenSlider from 'keen-slider';
-import { UseVideoModal } from '../../lib/components/VideoModal'
-import 'keen-slider/keen-slider.min.css'
+import { UseVideoModal } from '../../lib/components/VideoModal';
+import 'keen-slider/keen-slider.min.css';
+import "./catalog.scss";
 
 type props = {
   name: string;
@@ -26,14 +28,14 @@ export const CatalogItem = ({ name, category }: props) => {
         spacing: 10,
       },
     },
-    [
-
-    ]
   )
 
   return (
-    <Box>
-      {category.length > 0 && <h2 style={{ padding: "5px" }}>{titleCase(name)} ({category.length})</h2>}
+    <Box className="category--box">
+      {
+        category.length > 0 &&
+        <h2 className='category--h2'>{titleCase(name)} ({category.length})</h2>
+      }
       <Grid
         container
         gap={1}
@@ -55,14 +57,17 @@ export const CatalogItem = ({ name, category }: props) => {
                     <Typography variant="subtitle1" color="#e0e0e0" component="div">
                       {l.startDate}-{l.endDate}
                     </Typography>
+                    {l.category?.map((c, idx) => (
+                      idx !== 0 && <Chip label={titleCase(`${c}`)} color="primary" key={idx} />
+                    ))}
                   </CardContent>
                   <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
                     <IconButton aria-label="play/pause" sx={{ color: "#FAF9F6" }}>
                       <UseVideoModal video={`${l.video}`} />
                     </IconButton>
                     {/* <IconButton aria-label="bookmark" sx={{ color: "#FAF9F6" }}>
-                      <BookmarkAddIcon />
-                    </IconButton> */}
+                    <BookmarkAddIcon />
+                  </IconButton> */}
                   </Box>
                 </Box>
               </Card>

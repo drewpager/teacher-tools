@@ -30,26 +30,20 @@
   }
 }
 
-.MuiBox-root {
-  &.catalog--cta {
-    margin: 1rem 0.5rem;
-    border: 1px solid rgba(224, 224, 224, 1);
-    padding: 1rem;
-  }
-
+.MuiPaper-root {
   &.catalog--item {
     border: 1px solid red;
   }
+}
 
-  &.catalogTitle {
-    color: red;
-    background-color: aqua;
-    padding-top: 25px;
-  }
-
+.MuiBox-root {
   &.catalogBackground {
-    margin-top: 5%;
+    margin-top: 5rem;
     max-width: max-content;
     overflow-y: visible;
+  }
+  
+  &.category--box {
+    margin-top: 0.5rem;
   }
 }
