@@ -30,6 +30,7 @@ export const CatalogItem = ({ name, category }: props) => {
     },
   )
 
+  const uniqueCategories: any[] = [];
   return (
     <Box className="category--box">
       {
