@@ -18,7 +18,7 @@ type Props = {
 export const Catalog = ({ viewer }: Props) => {
 
   const [expanded, setExpanded] = React.useState<string[]>([]);
-  const [selected, setSelected] = React.useState<string[]>([]);
+  const [selected, setSelected] = React.useState<string[]>(['geography']);
 
   const handleToggle = (event: React.SyntheticEvent, nodeIds: string[]) => {
     setExpanded(nodeIds);
@@ -59,6 +59,7 @@ export const Catalog = ({ viewer }: Props) => {
     )
   }
 
+
   // Filtering functions
   function onlyUnique(value: any, index: number, self: any) {
     return self.indexOf(value) === index;
@@ -72,7 +73,9 @@ export const Catalog = ({ viewer }: Props) => {
   const categor = data?.allLessons.result;
   const mainCategoryArray: any[] = [];
   const secondaryCategory: any = [{}];
-  categor?.map((i) => mainCategoryArray.push(i?.category ? i.category[0] : undefined))
+  const allCategories: any[] = [];
+  categor?.map((i) => mainCategoryArray.push(i?.category ? i.category[0]?.trim() : undefined))
+  categor?.map((i) => allCategories.push(i?.category ? i.category.map(item => item?.trim()) : undefined))
   categor?.map((i) => secondaryCategory.push(i?.category ? { main: i.category[0], secondary: i.category[1]?.trim() } : undefined))
   categor?.map((i) => secondaryCategory.push(i?.category ? { main: i.category[0], secondary: i.category[2]?.trim() } : undefined))
   categor?.map((i) => secondaryCategory.push(i?.category ? { main: i.category[0], secondary: i.category[3]?.trim() } : undefined))
@@ -82,21 +85,13 @@ export const Catalog = ({ viewer }: Props) => {
     [item["secondary"], item])).values();
 
   const combinedCategories = Array.from(secondaryCategories)
-  console.log("Secondary Cat: ", combinedCategories)
+  const selectedSecondary = allCategories.filter((b) => b.includes(selected[0]));
   return (
     <Box>
       <Grid container>
         <Grid item sm={12} md={2} lg={3}>
           {console.log("Category Array: ", mainCategoryArray)}
-          <Box sx={{ height: "auto", flexGrow: 1, maxWidth: 400, overflowY: 'auto', marginTop: 10, position: "sticky", top: 30 }}>
-            <Box sx={{ mb: 1 }}>
-              <Button onClick={handleExpandClick}>
-                {expanded.length === 0 ? 'Expand all' : 'Collapse all'}
-              </Button>
-              <Button onClick={handleSelectClick}>
-                {selected.length === 0 ? 'Select all' : 'Unselect'}
-              </Button>
-            </Box>
+          <Box sx={{ height: "auto", flexGrow: 1, maxWidth: 400, overflowY: 'auto', marginTop: 15, position: "sticky", top: 80 }}>
             <TreeView
               aria-label="controlled"
               defaultCollapseIcon={<ExpandMoreIcon />}
@@ -109,12 +104,11 @@ export const Catalog = ({ viewer }: Props) => {
             >
               {mainCategories?.map((cat, ind) => (
                 <TreeItem nodeId={`${cat}`} label={titleCase(cat)}>
-                  {combinedCategories.map((i: any) => i.main === `${cat}` && (
+                  {combinedCategories.map((i: any) => i.main === `${cat}` && !!i.secondary && (
                     <TreeItem nodeId={`${i.secondary}`} label={titleCase(`${i.secondary}`)} key={`${i.secondary}`} />
                   ))}
                 </TreeItem>
               ))}
-              {console.log(selected)}
             </TreeView>
           </Box>
         </Grid>
@@ -123,7 +117,7 @@ export const Catalog = ({ viewer }: Props) => {
             <h1 className="catalogTitle">Catalog ({data?.allLessons.total})</h1>
             {selected && data && (
               <div className="catalog--item">
-                <CatalogItem name={`${selected}`} category={data.allLessons.result.filter((b) => b.category?.includes(selected[0]))} key={`${selected}`} />
+                <CatalogItem name={`${selected[0]}`} category={data.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0]))} key={`${selected[0]}`} />
               </div>
             )}
             {data && categories.map((cater) => (
