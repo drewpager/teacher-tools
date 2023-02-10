@@ -68,10 +68,6 @@ export const Catalog = ({ viewer }: Props) => {
     return value.secondary !== undefined
   }
 
-  function onlyUniqueObj(value: { main: string, secondary: undefined | string }, index: number, self: any) {
-    return self.indexOf(value) === index;
-  }
-
   // Isolate the main and any secondary categories
   const categor = data?.allLessons.result;
   const mainCategoryArray: any[] = [];
@@ -119,14 +115,6 @@ export const Catalog = ({ viewer }: Props) => {
                 </TreeItem>
               ))}
               {console.log(selected)}
-              {/* <TreeItem nodeId="5" label="Documents">
-            <TreeItem nodeId="6" label="MUI">
-              <TreeItem nodeId="7" label="src">
-                <TreeItem nodeId="8" label="index.js" />
-                <TreeItem nodeId="9" label="tree-view.js" />
-              </TreeItem>
-            </TreeItem>
-          </TreeItem> */}
             </TreeView>
           </Box>
         </Grid>
