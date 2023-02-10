@@ -59,15 +59,34 @@ export const Catalog = ({ viewer }: Props) => {
     )
   }
 
+  // Filtering functions
   function onlyUnique(value: any, index: number, self: any) {
     return self.indexOf(value) === index;
   }
 
+  function onlyDefined(value: { main: string, secondary: undefined | string }, index: number, self: any) {
+    return value.secondary !== undefined
+  }
+
+  function onlyUniqueObj(value: { main: string, secondary: undefined | string }, index: number, self: any) {
+    return self.indexOf(value) === index;
+  }
+
+  // Isolate the main and any secondary categories
   const categor = data?.allLessons.result;
   const mainCategoryArray: any[] = [];
+  const secondaryCategory: any = [{}];
   categor?.map((i) => mainCategoryArray.push(i?.category ? i.category[0] : undefined))
+  categor?.map((i) => secondaryCategory.push(i?.category ? { main: i.category[0], secondary: i.category[1]?.trim() } : undefined))
+  categor?.map((i) => secondaryCategory.push(i?.category ? { main: i.category[0], secondary: i.category[2]?.trim() } : undefined))
+  categor?.map((i) => secondaryCategory.push(i?.category ? { main: i.category[0], secondary: i.category[3]?.trim() } : undefined))
   const mainCategories = mainCategoryArray.filter(onlyUnique)
+  let secCategories = secondaryCategory.filter(onlyDefined)
+  const secondaryCategories = new Map(secCategories.map((item: any) =>
+    [item["secondary"], item])).values();
 
+  const combinedCategories = Array.from(secondaryCategories)
+  console.log("Secondary Cat: ", combinedCategories)
   return (
     <Box>
       <Grid container>
@@ -93,7 +112,11 @@ export const Catalog = ({ viewer }: Props) => {
               multiSelect
             >
               {mainCategories?.map((cat, ind) => (
-                <TreeItem nodeId={`${cat}`} label={titleCase(cat)} />
+                <TreeItem nodeId={`${cat}`} label={titleCase(cat)}>
+                  {combinedCategories.map((i: any) => i.main === `${cat}` && (
+                    <TreeItem nodeId={`${i.secondary}`} label={titleCase(`${i.secondary}`)} key={`${i.secondary}`} />
+                  ))}
+                </TreeItem>
               ))}
               {console.log(selected)}
               {/* <TreeItem nodeId="5" label="Documents">
