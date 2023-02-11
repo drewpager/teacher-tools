@@ -3,6 +3,8 @@ import { Grid, Card, Box, CardMedia, CardContent, IconButton, Typography, Button
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Link } from 'react-router-dom';
 import { Lesson } from '../../graphql/generated';
 import { titleCase } from '../../lib/utils';
@@ -18,19 +20,26 @@ type props = {
 }
 
 export const CatalogItem = ({ name, category }: props) => {
-
+  const [loaded, setLoaded] = useState<boolean>(false);
+  const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [sliderRef, instanceRef] = useKeenSlider(
     {
-      mode: "snap",
       slides: {
         origin: "auto",
         perView: 3,
         spacing: 10,
       },
+      initial: 0,
+      mode: "snap",
+      slideChanged(slider) {
+        setCurrentSlide(slider.track.details.rel)
+      },
+      created() {
+        setLoaded(true)
+      },
     },
   )
 
-  const uniqueCategories: any[] = [];
   return (
     <Box className="category--box">
       {
@@ -72,6 +81,25 @@ export const CatalogItem = ({ name, category }: props) => {
                   </Box>
                 </Box>
               </Card>
+              {loaded && instanceRef.current && (
+                <>
+                  <IconButton
+                    onClick={() =>
+                      instanceRef.current?.prev()
+                    }
+                    disabled={currentSlide === 0}
+                  >
+                    <ChevronLeftIcon />
+                  </IconButton>
+
+                  <IconButton
+                    onClick={() => instanceRef.current?.next()}
+                    disabled={currentSlide === instanceRef.current.track.details.slides.length - 1}
+                  >
+                    <ChevronRightIcon />
+                  </IconButton>
+                </>
+              )}
             </div>
           ))}
         </div>

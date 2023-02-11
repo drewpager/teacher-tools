@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Card, Grid } from '@mui/material'
+import { Box, Card, CircularProgress, Grid } from '@mui/material'
 import Button from '@mui/material/Button';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -7,6 +7,7 @@ import TreeView from '@mui/lab/TreeView';
 import TreeItem from '@mui/lab/TreeItem';
 import { useAllLessonsQuery, Lesson, Viewer } from '../../graphql/generated';
 import { categories, titleCase } from '../../lib/utils';
+import { DisplayError } from '../../lib/utils';
 import { CatalogItem } from './catalogItem';
 import { Footer } from '../../lib/components';
 import "./catalog.scss";
@@ -49,13 +50,17 @@ export const Catalog = ({ viewer }: Props) => {
 
   if (loading) {
     return (
-      <h2>Loading...</h2>
+      <Box marginTop={70} marginLeft={"50%"}>
+        <CircularProgress />
+      </Box>
     )
   }
 
   if (error) {
     return (
-      <h2>Error!</h2>
+      <Box>
+        <DisplayError title='Failed to load Content Catalog' />
+      </Box>
     )
   }
 
