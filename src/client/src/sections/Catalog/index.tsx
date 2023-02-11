@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Card, CircularProgress, Grid } from '@mui/material'
+import { Box, Card, CircularProgress, Grid, Typography } from '@mui/material'
 import Button from '@mui/material/Button';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -108,9 +108,18 @@ export const Catalog = ({ viewer }: Props) => {
               multiSelect
             >
               {mainCategories?.map((cat, ind) => (
-                <TreeItem nodeId={`${cat}`} label={titleCase(cat)}>
+                <TreeItem nodeId={`${cat}`} label={
+                  <Typography variant='h3'>
+                    {titleCase(cat)}
+                  </Typography>
+                }>
                   {combinedCategories.map((i: any) => i.main === `${cat}` && !!i.secondary && (
-                    <TreeItem nodeId={`${i.secondary}`} label={titleCase(`${i.secondary}`)} key={`${i.secondary}`} />
+                    <TreeItem nodeId={`${i.secondary}`} label={
+                      <Typography variant='h4'>
+                        {titleCase(`${i.secondary}`)}
+                      </Typography>
+                    }
+                      key={`${i.secondary}`} />
                   ))}
                 </TreeItem>
               ))}
