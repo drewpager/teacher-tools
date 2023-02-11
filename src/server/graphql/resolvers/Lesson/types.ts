@@ -11,6 +11,7 @@ export interface CreateLessonInput {
   image: string;
   startDate: string;
   endDate: string;
+  creator: string;
 }
 
 export interface CreateLessonArgs {

@@ -125,6 +125,7 @@ export const typeDefs = gql`
     image: String!
     startDate: DateScalar!
     endDate: DateScalar!
+    creator: String!
   }
 
   input CreateQuizInput {

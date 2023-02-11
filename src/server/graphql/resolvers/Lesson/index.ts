@@ -154,17 +154,11 @@ export const lessonResolvers = {
   },
   Mutation: {
     createLesson: async (
-      viewer: Viewer,
+      _root: undefined,
       { input }: CreateLessonArgs,
       { db }: { db: Database }
     ): Promise<Lesson> => {
       const id = new ObjectId();
-      //TODO: Fix Viewer resolution vs hard coded id
-
-      if (viewer && viewer._id) {
-        const viewerId = viewer._id;
-        console.log("ViewerId: ", viewerId);
-      }
 
       // const viewerId = viewer && viewer.id ? viewer.id : "116143759549242008910";
       try {
@@ -173,8 +167,6 @@ export const lessonResolvers = {
         const insertResult = await db.lessons.insertOne({
           _id: id,
           ...input,
-          // creator: viewerId
-          creator: "116143759549242008910",
         });
 
         const insertedResult = insertResult
@@ -186,7 +178,7 @@ export const lessonResolvers = {
         }
 
         await db.users.updateOne(
-          { _id: "116143759549242008910" },
+          { _id: `${input.creator}` },
           { $push: { lessons: insertedResult } }
         );
 

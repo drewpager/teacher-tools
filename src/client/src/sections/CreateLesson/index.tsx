@@ -21,7 +21,8 @@ const initialData = {
   startDate: "",
   endDate: "",
   video: "",
-  image: ""
+  image: "",
+  creator: ""
 }
 
 
@@ -78,7 +79,8 @@ export const CreateLesson = ({ viewer }: Props) => {
         startDate: "",
         endDate: "",
         video: "",
-        image: ""
+        image: "",
+        creator: `${viewer.id}`,
       }
     }
   })
@@ -308,7 +310,8 @@ export const CreateLesson = ({ viewer }: Props) => {
               startDate: "",
               endDate: "",
               video: "",
-              image: ""
+              image: "",
+              creator: `${viewer.id}`
             }}
             validationSchema={validationSchema}
             onSubmit={async (values) => {
