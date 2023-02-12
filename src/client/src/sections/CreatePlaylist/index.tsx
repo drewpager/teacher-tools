@@ -1,6 +1,7 @@
-import { CircularProgress, Grid, Box, Card, TextField, Button, Switch, FormControlLabel, Typography } from '@mui/material';
+import { CircularProgress, Grid, Box, Card, TextField, Button, Switch, FormControlLabel, Chip, Avatar } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import React, { useState, ChangeEvent, useRef, useEffect } from 'react';
+import DoneIcon from '@mui/icons-material/Done';
+import React, { useState, ChangeEvent, useRef, useEffect, useReducer } from 'react';
 import {
   FullLessonInput,
   useLessonPlanMutation,
@@ -47,13 +48,14 @@ export const useFocus = () => {
 export const CreatePlaylist = ({ viewer }: props) => {
   let navigate = useNavigate();
   const [searchInput, setSearchInput] = useState<string>("")
-  const [lessons, setLessons] = useState<FullLessonInput>({})
-  const [quizzes, setQuizzes] = useState<FullLessonQuiz>({})
+  const [variant, setVariant] = useState<boolean>(true)
+  const [variantAssessment, setVariantAssessment] = useState<boolean>(true)
+  const [lessons, setLessons] = useState<Array<Plan>>([])
+  const [quizzes, setQuizzes] = useState<Array<Plan>>([])
   const [plans, setPlans] = useState<Array<Plan>>([])
   const [filter, setFilter] = useState<Array<Plan>>([])
   const [yourContent, setYourContent] = useState<boolean>(false);
   const inputRef = useFocus();
-  // const id = viewer && viewer.id ? viewer.id : null;
   const [playlist, setPlaylist] = useState<InputLessonPlan>(initialData)
 
   const limit: number = 2000;
@@ -103,6 +105,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
       setFilter(lessonInput)
       setPlans(lessonInput)
+      setLessons(lessonInput)
     }
     if (quizQuery) {
       console.log(quizQuery)
@@ -120,16 +123,15 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
       setFilter(f => [...f, ...quizInput])
       setPlans(p => [...p, ...quizInput])
+      setQuizzes(quizInput)
     }
   }, [lessonQuery, quizQuery])
 
   if (!viewer.id) {
     return (
       <>
+        {navigate('/login', { replace: true })}
         <DisplayError title="Must be logged in to create a playlist!" />
-        <Box sx={{ margin: 5 }}>
-          <Button href='/login' variant='contained'>Go To Log In Page</Button>
-        </Box>
       </>
     )
   }
@@ -238,6 +240,28 @@ export const CreatePlaylist = ({ viewer }: props) => {
     navigate(`../user/${viewer.id}`, { replace: true })
   }
 
+  const handleAssessmentClick = () => {
+    // setVariants([variant, !variantAssessment])
+    setVariantAssessment(!variantAssessment)
+
+    // !variantAssessment && variant && setPlans([...lessons])
+    // variantAssessment && variant && setPlans([...plans])
+    // !variant && variantAssessment && setPlans([...quizzes])
+
+    // if (variantAssessment && variant) {
+    //   setPlans([...plans])
+    // } else if (variantAssessment && !variant) {
+    //   setPlans([...quizzes])
+    // } else if (!variantAssessment && variant) {
+    //   setPlans([...lessons])
+    // } else {
+    //   setPlans([])
+    // }
+
+    // setVariantAssessment(!variantAssessment)
+    // onFilterClick(variant, variantAssessment)
+  }
+
   if (error) {
     console.log(error)
     return <DisplayError title="Lesson Plan Creation Failed!" />
@@ -291,6 +315,20 @@ export const CreatePlaylist = ({ viewer }: props) => {
                       onChange={() => setYourContent(!yourContent)}
                     />}
                     label={yourContent ? "All Public Content" : "Your Content Only"}
+                  />
+                  <Chip
+                    label="Lessons"
+                    variant={variant ? "filled" : "outlined"}
+                    onClick={() => setVariant(!variant)}
+                    onDelete={() => setVariant(!variant)}
+                    deleteIcon={variant ? undefined : <DoneIcon />}
+                  />
+                  <Chip
+                    label="Assessments"
+                    variant={variantAssessment ? "filled" : "outlined"}
+                    onClick={() => setVariantAssessment(!variantAssessment)}
+                    onDelete={() => setVariantAssessment(!variantAssessment)}
+                    deleteIcon={variantAssessment ? undefined : <DoneIcon />}
                   />
                   <Card variant="outlined" className="createPlaylist--card" {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
                     <TextField

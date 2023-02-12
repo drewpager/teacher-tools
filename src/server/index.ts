@@ -32,6 +32,7 @@ const mount = async (app: Application) => {
   app.use(compression());
   app.use(cors(corsOptions));
 
+  // UNCOMMENT FOR PRODUCTION?
   // app.use(express.static(`${__dirname}/`));
   // app.get("/*", (_req, res) => res.sendFile(`${__dirname}/index.html`));
 
