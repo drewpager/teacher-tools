@@ -56,7 +56,7 @@ export const CatalogItem = ({ name, category }: props) => {
         <div ref={sliderRef} className="keen-slider">
           {category.map((l, index) => (
             <div className="keen-slider__slide">
-              <Card sx={{ display: 'flex', backgroundColor: '#535ac8' }} key={index}>
+              <Card sx={{ display: 'flex', backgroundColor: '#535ac8', borderRadius: 5, height: "200px" }} key={index}>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                   <CardContent sx={{ flex: '1 0 auto' }}>
                     <Link to={`/lesson/${l.id}`} style={{ textDecoration: "none" }}>
@@ -65,7 +65,7 @@ export const CatalogItem = ({ name, category }: props) => {
                       </Typography>
                     </Link>
                     <Typography variant="subtitle1" color="#e0e0e0" component="div">
-                      {l.startDate}-{l.endDate}
+                      {(l.startDate === l.endDate) ? (l.startDate) : (`${l.startDate} to ${l.endDate}`)}
                     </Typography>
                     {l.category?.map((c, idx) => (
                       idx !== 0 && <Chip label={titleCase(`${c}`)} color="primary" key={idx} />
@@ -75,9 +75,9 @@ export const CatalogItem = ({ name, category }: props) => {
                     <IconButton aria-label="play/pause" sx={{ color: "#FAF9F6" }}>
                       <UseVideoModal video={`${l.video}`} />
                     </IconButton>
-                    {/* <IconButton aria-label="bookmark" sx={{ color: "#FAF9F6" }}>
-                    <BookmarkAddIcon />
-                  </IconButton> */}
+                    <IconButton aria-label="bookmark" sx={{ color: "#FAF9F6" }}>
+                      <BookmarkAddIcon />
+                    </IconButton>
                   </Box>
                 </Box>
               </Card>
