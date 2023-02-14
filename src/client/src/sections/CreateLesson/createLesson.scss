@@ -17,8 +17,10 @@
 
 .field--checkboxes {
   margin-top: 1rem;
+  width: 50%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-template-rows: min-content;
   cursor: pointer;
   font-size: large;
   -webkit-user-select: none;
@@ -27,7 +29,8 @@
   user-select: none;
 
   .field--checkboxes-label {
-    grid-row: 1 / -1;
+    display: block;
+    margin: 1rem 0;
   }
 }
 

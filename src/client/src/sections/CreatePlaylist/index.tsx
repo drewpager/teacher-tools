@@ -45,11 +45,24 @@ export const useFocus = () => {
   return ref;
 }
 
+
+function reducer(state: any, action: any) {
+  switch (action.type) {
+    case "lessonOnly":
+      return { lessons: state.lessons, quizzes: state.quizzes, };
+    case "quizOnly":
+      return { lessons: state.lessons, quizzes: state.quizzes };
+    default:
+      return { lessons: state.lessons, quizzes: state.quizzes };
+  }
+}
+
 export const CreatePlaylist = ({ viewer }: props) => {
   let navigate = useNavigate();
   const [searchInput, setSearchInput] = useState<string>("")
   const [variant, setVariant] = useState<boolean>(true)
   const [variantAssessment, setVariantAssessment] = useState<boolean>(true)
+  const [variants, setVariants] = useState<boolean[]>([variant, variantAssessment])
   const [lessons, setLessons] = useState<Array<Plan>>([])
   const [quizzes, setQuizzes] = useState<Array<Plan>>([])
   const [plans, setPlans] = useState<Array<Plan>>([])
@@ -57,6 +70,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const [yourContent, setYourContent] = useState<boolean>(false);
   const inputRef = useFocus();
   const [playlist, setPlaylist] = useState<InputLessonPlan>(initialData)
+  const [state, dispatch] = useReducer(reducer, { lessons: [...lessons], quizzes: [...quizzes] })
 
   const limit: number = 2000;
   const page: number = 1;
@@ -240,26 +254,14 @@ export const CreatePlaylist = ({ viewer }: props) => {
     navigate(`../user/${viewer.id}`, { replace: true })
   }
 
+  const handleLessonClick = () => {
+    setVariant(!variant)
+    dispatch({ type: "lessonOnly" })
+  }
+
   const handleAssessmentClick = () => {
-    // setVariants([variant, !variantAssessment])
     setVariantAssessment(!variantAssessment)
-
-    // !variantAssessment && variant && setPlans([...lessons])
-    // variantAssessment && variant && setPlans([...plans])
-    // !variant && variantAssessment && setPlans([...quizzes])
-
-    // if (variantAssessment && variant) {
-    //   setPlans([...plans])
-    // } else if (variantAssessment && !variant) {
-    //   setPlans([...quizzes])
-    // } else if (!variantAssessment && variant) {
-    //   setPlans([...lessons])
-    // } else {
-    //   setPlans([])
-    // }
-
-    // setVariantAssessment(!variantAssessment)
-    // onFilterClick(variant, variantAssessment)
+    dispatch({ type: "quizOnly" })
   }
 
   if (error) {
@@ -319,15 +321,15 @@ export const CreatePlaylist = ({ viewer }: props) => {
                   <Chip
                     label="Lessons"
                     variant={variant ? "filled" : "outlined"}
-                    onClick={() => setVariant(!variant)}
-                    onDelete={() => setVariant(!variant)}
+                    onClick={() => handleLessonClick()}
+                    onDelete={() => handleLessonClick()}
                     deleteIcon={variant ? undefined : <DoneIcon />}
                   />
                   <Chip
                     label="Assessments"
                     variant={variantAssessment ? "filled" : "outlined"}
-                    onClick={() => setVariantAssessment(!variantAssessment)}
-                    onDelete={() => setVariantAssessment(!variantAssessment)}
+                    onClick={() => handleAssessmentClick()}
+                    onDelete={() => handleAssessmentClick()}
                     deleteIcon={variantAssessment ? undefined : <DoneIcon />}
                   />
                   <Card variant="outlined" className="createPlaylist--card" {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
