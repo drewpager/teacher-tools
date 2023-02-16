@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { HomeInfo, CardGrid, TimelineEl, Footer } from '../../lib/components/'
+import { HomeInfo, CardGrid, TimelineEl, ProductValues, Footer } from '../../lib/components/'
 import { Viewer } from '../../graphql/generated';
 
 type Props = {
@@ -10,10 +10,11 @@ type Props = {
 export const Home = ({ viewer }: Props) => {
   return (
     <Box>
-        <HomeInfo />
-        <CardGrid />
-        <TimelineEl />
-        <Footer viewer={viewer} />
+      <HomeInfo />
+      <ProductValues />
+      {/* <CardGrid />
+        <TimelineEl /> */}
+      <Footer viewer={viewer} />
     </Box>
   );
 }

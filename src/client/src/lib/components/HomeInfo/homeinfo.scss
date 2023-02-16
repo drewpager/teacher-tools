@@ -2,30 +2,46 @@
 
 .box--title {
     width: 100%;
+    margin-left: 4rem;
 }
 
-.MuiPaper-root {
-    &.title--image {
-        min-height: 400px;
-        position: relative;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-color: library.$white;
-        margin-bottom: 2rem;
-    }
+.contain {
+    max-width: 500px;
+    min-width: 400px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    margin-top: -150px;
+}
+
+.grid--container {
+    position: relative;
 }
 
 .MuiTypography-root {
     &.title--text {
-        margin-top: 6rem;
+        margin-top: 10rem;
+        margin-right: 2rem;
         margin-left: 2rem;
-        padding: 4rem 0;
+        padding: 1rem 0;
         font-size: clamp(2rem, 3rem, 3.25rem);
-        color: library.$white;
+        color: library.$peachy;
         align-self: baseline;
         font-weight: bold;
     }
+
+    &.subtitle--text {
+        width: 70%;
+        padding: 0 2rem;
+        margin: 1rem 0;
+        font-size: clamp(0.75rem, 1.25rem, 1.5rem);
+        color: library.$peachy;
+        align-self: baseline;
+    }
+}
+
+.grid--buttons {
+    margin-top: 3rem;
 }
 
 .MuiLink-root {

@@ -10,5 +10,6 @@ export * from "./QuizPlayer";
 export * from "./UserPlaylistsCard";
 export * from "./UserQuizzesCard";
 export * from "./PlaylistDetails";
+export * from "./ProductValues";
 export * from "./TimelineEl";
 export * from "./Footer";

@@ -1,0 +1,13 @@
+@use '../../../library';
+
+.MuiAvatar-root {
+  &.product--icons {
+    width: 90px;
+    height: 90px;
+    background-color: library.$coral;
+    transition: .5s;
+    &:hover {
+      transform: scale(1.25);
+    }
+  }
+}
