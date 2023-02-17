@@ -1,0 +1,24 @@
+@use '../../../library';
+
+// .home--details {
+//   display: flex;
+//   overflow: hidden;
+//   margin-left: -25px;
+//   margin-right: -24px;
+//   min-height: 350px;
+//   margin-top: 4rem;
+//   // background-color: library.$coral;
+// }
+
+.homeDetails--box {
+  margin-top: 8rem;
+  margin-bottom: 3rem;
+  margin-left: 6rem;
+  display: flex;
+}
+
+.viewAll--button {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}

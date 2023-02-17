@@ -1,6 +1,7 @@
 export * from "./PageSkeleton";
 export * from "./LessonCard";
 export * from "./HomeInfo";
+export * from "./HomeDetails";
 export * from "./CardGrid";
 export * from "./Search";
 export * from "./PlaylistCard";

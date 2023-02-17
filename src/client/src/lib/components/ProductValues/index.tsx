@@ -61,9 +61,8 @@ export const ProductValues = () => {
               </Typography>
               <Typography variant="h5">
                 {
-                  'We pride ourselves in producing meticulously-researched short documentaries, combined with supporting visual evidence that engages both students and teachers alike. Our short films are based on the most widely-accepted curriculums for K6-12 and early college, helping students to gain a foundational understanding of a given topic, presented in short sessions that promote long-term retention of a given subject or event. '
+                  'We pride ourselves in producing meticulously-researched short documentaries that engages both students and teachers alike. Our short films are based on the most widely-accepted curriculums for K6-12 and early college, helping students to gain a foundational understanding through short sessions that promote long-term retention.'
                 }
-                {'Our short films are based on the most widely-accepted curriculums for K6-12 and early college, helping students to gain a foundational understanding of a given topic, presented in short sessions that promote long-term retention of a given subject or event.'}
               </Typography>
             </Box>
           </Grid>
