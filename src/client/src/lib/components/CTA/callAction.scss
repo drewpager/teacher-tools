@@ -12,18 +12,23 @@
   }
 }
 
+.MuiButtonBase-root {
+  &.callAction--buttonFirst {
+    // margin-right: 1rem;
+    padding-right: 1rem;
+    margin: 1rem 1rem 1rem 0;
+    background-color: library.$coral;
+  }
+  
+  &.callAction--buttonSecond {
+    color: library.$white;
+    border: 1px solid library.$white;
+  }
+}
+
 .callAction--buttonDiv {
   padding-top: 1.5rem;
-  display: block;
-}
-
-.callAction--buttonFirst {
-  margin-right: 1rem;
-}
-
-.callAction--buttonSecond {
-  color: library.$white;
-  border: 1px solid library.$white;
+  // justify-content: space-between;
 }
 
 .MuiTypography-root {

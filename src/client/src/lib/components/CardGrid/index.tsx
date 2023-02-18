@@ -13,7 +13,7 @@ export const CardGrid = () => {
 
   const { data, loading, error } = useAllPlaylistsQuery({
     variables: {
-      limit: 8,
+      limit: 4,
       page: 1
     },
     pollInterval: 500
@@ -38,9 +38,9 @@ export const CardGrid = () => {
 
   return (
     <Box className='grid--cards'>
-        {playlists?.result.map((i, index) => (
-          <PlaylistDetails {...i} key={index}/>
-        ))}
+      {playlists?.result.map((i, index) => (
+        <PlaylistDetails {...i} key={index} />
+      ))}
     </Box>
   )
 }
