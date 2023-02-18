@@ -55,8 +55,8 @@ export const HomeDetails = () => {
       >
         <div ref={sliderRef} className="keen-slider">
           {data?.allLessons.result.map((l, index) => (
-            <div className="keen-slider__slide">
-              <Card sx={{ display: 'flex', backgroundColor: '#535ac8', borderRadius: 5, height: "200px" }} key={index}>
+            <div className="keen-slider__slide" key={`${index}`}>
+              <Card sx={{ display: 'flex', backgroundColor: '#535ac8', borderRadius: 5, height: "200px" }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                   <CardContent sx={{ flex: '1 0 auto' }}>
                     <Link to={`/lesson/${l.id}`} style={{ textDecoration: "none" }}>
