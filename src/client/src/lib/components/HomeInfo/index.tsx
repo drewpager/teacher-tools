@@ -23,7 +23,7 @@ export const HomeInfo = () => {
     //   sx={{ backgroundImage: `url(${classroom})` }}
     // >
     <Grid container className='grid--container'>
-      <Grid item sm={12} md={7}>
+      <Grid item xs={12} sm={12} md={7} lg={6}>
         <Box className='box--title'>
           <Typography variant='h1' className='title--text'>
             Real results for students, teachers and life-long learners.
@@ -41,7 +41,7 @@ export const HomeInfo = () => {
           </div>
         </Box>
       </Grid>
-      <Grid item xs={0} sm={0} md={5}>
+      <Grid item xs={0} sm={0} md={5} lg={6}>
         <div className="contain" ref={contain}></div>
       </Grid>
     </Grid>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Grid, Card, Box, CardMedia, CardContent, IconButton, Typography, Button, Chip, InputLabel, FormControl, OutlinedInput, MenuItem, CircularProgress } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
@@ -14,6 +14,7 @@ import 'keen-slider/keen-slider.min.css';
 import './homedetails.scss';
 
 export const HomeDetails = () => {
+  const windowWidth = useRef([window.innerWidth]);
   const { data, loading, error } = useAllLessonsQuery({
     variables: {
       limit: 20,
@@ -36,7 +37,7 @@ export const HomeDetails = () => {
     {
       slides: {
         origin: 0,
-        perView: 5,
+        perView: `${windowWidth.current[0] > 500}` ? 5 : 3,
         spacing: 10,
       },
       initial: 0,
