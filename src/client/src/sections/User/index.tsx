@@ -30,7 +30,7 @@ export const User = ({ viewer }: Props) => {
   })
 
   const user = data ? data.user : null;
-  
+
   const viewerIsUser = viewer.id === params.id;
   const UserProfileElement = user ? <UserProfile user={user} viewerIsUser={viewerIsUser} /> : null;
 
@@ -45,16 +45,16 @@ export const User = ({ viewer }: Props) => {
       limit={pageLimit}
       setLessonsPage={setLessonsPage}
     />
-  ) : ( <h2>UserLessons Not Working</h2> ), [userLessons, lessonsPage]);
+  ) : (<h2>UserLessons Not Working</h2>), [userLessons, lessonsPage]);
 
   const userPlaylistsElement = useMemo(() => userPlaylists ? (
-    <UserPlaylists 
+    <UserPlaylists
       userPlaylists={userPlaylists}
       playlistsPage={playlistsPage}
       limit={pageLimit}
       setPlaylistsPage={setPlaylistsPage}
     />
-  ) : ( <h2>UserPlaylists Not Working</h2> ), [userPlaylists, playlistsPage]);
+  ) : (<h2>UserPlaylists Not Working</h2>), [userPlaylists, playlistsPage]);
 
   const userQuizzesElement = useMemo(() => userQuizzes ? (
     <UserQuizzes
@@ -75,7 +75,6 @@ export const User = ({ viewer }: Props) => {
     return (
       <>
         <DisplayError title="Failed to find user profile" />
-        {console.log(error)}
       </>
     )
   }

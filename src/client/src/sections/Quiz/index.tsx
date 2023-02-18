@@ -20,13 +20,12 @@ export const Quiz = () => {
   }
 
   if (error) {
-    <DisplayError title='Failed to load this Quiz'/>
+    <DisplayError title='Failed to load this Quiz' />
   }
 
   const quiz = data && data.quiz ? data.quiz : null;
 
   if (quiz) {
-    console.log(quiz)
     return (
       <Box sx={{ marginTop: 7 }}>
         <QuizPlayer quiz={quiz} />

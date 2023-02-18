@@ -122,7 +122,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
       setLessons(lessonInput)
     }
     if (quizQuery) {
-      console.log(quizQuery)
       const quizInput: FullLessonQuiz[] = []
       quizQuery.forEach(q => {
         let quizObj = {
@@ -133,7 +132,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
         }
         quizInput.push(quizObj)
       })
-      console.log(quizInput)
 
       setFilter(f => [...f, ...quizInput])
       setPlans(p => [...p, ...quizInput])
@@ -165,7 +163,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
   }
 
   if (lessonError || quizError) {
-    console.log(lessonError || quizError)
     return <DisplayError title="Failed to query lesson plan items" />
   }
 
@@ -238,7 +235,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
       // setFilter(lessons)
     }
   }
-  console.log(playlist);
 
   const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -265,7 +261,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
   }
 
   if (error) {
-    console.log(error)
     return <DisplayError title="Lesson Plan Creation Failed!" />
   }
 

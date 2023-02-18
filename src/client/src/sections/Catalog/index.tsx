@@ -95,7 +95,6 @@ export const Catalog = ({ viewer }: Props) => {
     <Box>
       <Grid container>
         <Grid item sm={12} md={2} lg={3}>
-          {console.log("Category Array: ", mainCategoryArray)}
           <Box sx={{ height: "auto", flexGrow: 1, maxWidth: 400, overflowY: 'auto', marginTop: 15, position: "sticky", top: 80 }}>
             <TreeView
               aria-label="controlled"

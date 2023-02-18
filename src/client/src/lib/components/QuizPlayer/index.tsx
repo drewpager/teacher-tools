@@ -19,17 +19,14 @@ export const QuizPlayer = ({ quiz }: Props) => {
       quizKey.push(v.answerOptions?.find((q) => q?.isCorrect))
     })
     const correct = quizState.filter((e, i) => e.matchAll(quizKey[i].isCorrect))
-    console.log("Quiz Key: ", correct)
   }
 
   const handleSelect = (value: string) => {
-    console.log(value)
     setChecked(true);
     setQuizState([...quizState, value])
   }
 
   const handleCorrectness = (e: string) => {
-    console.log(e)
     setChecked(true);
     setQuizState([...quizState, e])
   }
@@ -84,7 +81,6 @@ export const QuizPlayer = ({ quiz }: Props) => {
               </>
             ))}
             <button type="submit">Submit</button>
-            {console.log(values.question.answers)}
           </Box>
         )}
       </Formik>

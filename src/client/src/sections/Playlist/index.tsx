@@ -1,7 +1,7 @@
 import React from 'react';
 import { usePlaylistQuery } from '../../graphql/generated';
 import { useParams } from 'react-router-dom';
-import { Box, LinearProgress  } from '@mui/material';
+import { Box, LinearProgress } from '@mui/material';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
 import { PlaylistCard, Search } from '../../lib/components/';
 
@@ -33,9 +33,8 @@ export const Playlist = () => {
   const playlist = data ? data.playlist : null;
 
   if (playlist) {
-    console.log("Playlist from Index: ", playlist)
     return (
-        <PlaylistCard playlist={playlist} />
+      <PlaylistCard playlist={playlist} />
     )
   }
 
