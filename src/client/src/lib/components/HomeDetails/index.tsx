@@ -6,12 +6,13 @@ import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Link } from 'react-router-dom';
-import { Lesson, useAllLessonsQuery } from '../../../graphql/generated';
+import { Lesson, useAllLessonsQuery, useAllLessonsLazyQuery } from '../../../graphql/generated';
 import { DisplayError, titleCase } from '../../../lib/utils';
 import { useKeenSlider } from 'keen-slider/react';
 import { UseVideoModal } from '../../../lib/components/VideoModal';
 import 'keen-slider/keen-slider.min.css';
 import './homedetails.scss';
+import { HomeDetailsSkeleton } from '../HomeDetailsSkeleton';
 
 export const HomeDetails = () => {
   const windowWidth = useRef([window.innerWidth]);
@@ -22,34 +23,25 @@ export const HomeDetails = () => {
     }
   })
 
-  if (loading) {
-    <Box sx={{ alignContent: "center" }}>
-      <CircularProgress />
-    </Box>
-  }
-
-  if (error) {
-    <DisplayError title="Failed to query lessons" />
-  }
-  const [loaded, setLoaded] = useState<boolean>(false);
-  const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [sliderRef, instanceRef] = useKeenSlider(
     {
       slides: {
-        origin: 0,
-        perView: `${windowWidth.current[0] > 500}` ? 5 : 3,
+        // origin: 0,
+        perView: () => (windowWidth.current[0] > 500 ? 5 : 3),
         spacing: 10,
       },
-      initial: 0,
+      // initial: 0,
       mode: "snap",
-      slideChanged(slider) {
-        setCurrentSlide(slider.track.details.rel)
-      },
-      created() {
-        setLoaded(true)
-      },
     },
   )
+
+  if (loading) {
+    return <HomeDetailsSkeleton />
+  }
+
+  if (error) {
+    return <DisplayError title="Failed to query lessons" />
+  }
 
   return (
     <Box className="home--details">
