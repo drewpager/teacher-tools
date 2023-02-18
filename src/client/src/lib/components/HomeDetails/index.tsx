@@ -67,7 +67,16 @@ export const HomeDetails = () => {
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                   <CardContent sx={{ flex: '1 0 auto' }}>
                     <Link to={`/lesson/${l.id}`} style={{ textDecoration: "none" }}>
-                      <Typography component="div" variant="h3" style={{ color: "#FAF9F6" }}>
+                      <Typography component="div" variant="h3" sx={{
+                        color: "#FAF9F6",
+                        fontSize: {
+                          lg: 20,
+                          md: 18,
+                          sm: 16,
+                          xs: 16
+                        },
+                        wordWrap: 'break-word',
+                      }}>
                         {l.title}
                       </Typography>
                     </Link>
@@ -78,7 +87,7 @@ export const HomeDetails = () => {
                       idx !== 0 && <Chip label={titleCase(`${c}`)} color="primary" key={idx} />
                     ))}
                   </CardContent>
-                  <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1, pt: 1 }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
                     <IconButton aria-label="play/pause" sx={{ color: "#FAF9F6" }}>
                       <UseVideoModal video={`${l.video}`} />
                     </IconButton>
