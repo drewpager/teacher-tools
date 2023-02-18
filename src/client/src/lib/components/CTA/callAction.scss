@@ -1,0 +1,36 @@
+@use '../../../library';
+
+.MuiPaper-root {
+  &.callAction--home {
+    background-color: library.$orange;
+    min-width: 75%;
+    display: flex;
+    align-self: center;
+    padding: 4rem;
+    margin: 4rem;
+    border-radius: 15px;
+  }
+}
+
+.callAction--buttonDiv {
+  padding-top: 1.5rem;
+  display: block;
+}
+
+.callAction--buttonFirst {
+  margin-right: 1rem;
+}
+
+.callAction--buttonSecond {
+  color: library.$white;
+  border: 1px solid library.$white;
+}
+
+.MuiTypography-root {
+  &.callAction--text {
+    color: library.$white;
+    text-decoration: none; 
+    font-size: 32px; 
+    font-weight: 800;
+  }
+}
