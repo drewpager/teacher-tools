@@ -1,10 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Grid, Card, Box, CardMedia, CardContent, IconButton, Typography, Button, Chip, InputLabel, FormControl, OutlinedInput, MenuItem, CircularProgress } from '@mui/material';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import React, { useRef } from 'react';
+import { Grid, Card, Box, CardContent, IconButton, Typography, Button, Chip } from '@mui/material';
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Link } from 'react-router-dom';
 import { Lesson, useAllLessonsQuery, useAllLessonsLazyQuery } from '../../../graphql/generated';
 import { DisplayError, titleCase } from '../../../lib/utils';
@@ -26,11 +22,9 @@ export const HomeDetails = () => {
   const [sliderRef, instanceRef] = useKeenSlider(
     {
       slides: {
-        // origin: 0,
         perView: () => (windowWidth.current[0] > 500 ? 5 : 3),
         spacing: 10,
       },
-      // initial: 0,
       mode: "snap",
     },
   )
@@ -90,25 +84,6 @@ export const HomeDetails = () => {
                   </Box>
                 </Box>
               </Card>
-              {/* {loaded && instanceRef.current && (
-                <>
-                  <IconButton
-                    onClick={() =>
-                      instanceRef.current?.prev()
-                    }
-                    disabled={currentSlide === 0}
-                  >
-                    <ChevronLeftIcon />
-                  </IconButton>
-
-                  <IconButton
-                    onClick={() => instanceRef.current?.next()}
-                    disabled={currentSlide === instanceRef.current.track.details.slides.length - 1}
-                  >
-                    <ChevronRightIcon />
-                  </IconButton>
-                </>
-              )} */}
             </div>
           ))}
         </div>
