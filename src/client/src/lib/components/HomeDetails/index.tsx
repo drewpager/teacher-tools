@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Grid, Card, Box, CardContent, IconButton, Typography, Button, Chip } from '@mui/material';
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import { Link } from 'react-router-dom';
@@ -12,6 +12,12 @@ import { HomeDetailsSkeleton } from '../HomeDetailsSkeleton';
 
 export const HomeDetails = () => {
   const windowWidth = useRef([window.innerWidth]);
+  const [width, setWidth] = useState(windowWidth)
+
+  useEffect(() => {
+    setWidth(windowWidth);
+  }, [windowWidth])
+
   const { data, loading, error } = useAllLessonsQuery({
     variables: {
       limit: 20,
@@ -22,7 +28,7 @@ export const HomeDetails = () => {
   const [sliderRef, instanceRef] = useKeenSlider(
     {
       slides: {
-        perView: () => (windowWidth.current[0] > 500 ? 5 : 3),
+        perView: () => (width.current[0] > 500 ? 5 : 3),
         spacing: 10,
       },
       mode: "snap",
