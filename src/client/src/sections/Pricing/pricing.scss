@@ -1,0 +1,14 @@
+@use '../../library';
+
+.MuiBox-root {
+  &.pricing--heading {
+    color: library.$darkGreen;
+  }
+}
+
+.MuiTypography-root {
+  &.pricing--font {
+    color: library.$coral;
+    font-weight: 800;
+  }
+}

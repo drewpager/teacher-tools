@@ -24,6 +24,7 @@ import {
   User,
   Terms,
   Privacy,
+  Pricing,
   Login,
   AppHeader,
   Playlist,
@@ -104,6 +105,7 @@ const App = () => {
           <Route path="/user/:id" children={(props: any) => (<User {...props} viewer={viewer} />)} element={<User viewer={viewer} />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/pricing" element={<Pricing />} />
           <Route path="/login" children={(props: any) => (<Login {...props} setViewer={setViewer} />)} element={<Login setViewer={setViewer} />} />
           <Route path="/playlist/:id" element={<Playlist />} />
           <Route path="/playlist/create" element={<CreatePlaylist viewer={viewer} />} />
