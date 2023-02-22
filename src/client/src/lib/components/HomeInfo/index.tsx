@@ -22,7 +22,7 @@ export const HomeInfo = () => {
     //   className='title--image'
     //   sx={{ backgroundImage: `url(${classroom})` }}
     // >
-    <Grid container className='grid--container'>
+    <Grid container spacing={1} className='grid--container'>
       <Grid item xs={12} sm={12} md={7} lg={6}>
         <Box className='box--title'>
           <Typography variant='h1' className='title--text'>

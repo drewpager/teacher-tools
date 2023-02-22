@@ -1,0 +1,24 @@
+@import '../../../mixins';
+
+.MuiBox-root {
+  &.details--box {
+    padding-left: 2rem;
+    padding-right: 2rem;
+
+    @include sm {
+      padding: 0 2rem;
+    }
+
+    @include md {
+      padding: 0 3rem;
+    }
+
+    @include lg {
+      padding: 0 4rem;
+    }
+
+    @include rwd(1400) {
+      padding: 0 4rem;
+    }
+  }
+}
