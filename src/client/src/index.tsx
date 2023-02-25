@@ -44,6 +44,7 @@ import { Skeleton, CircularProgress, Box } from '@mui/material';
 import theme from './theme';
 // import { Viewer } from './lib/types';
 import { Viewer, useLogInMutation } from './graphql/generated';
+import { ScrollToTop } from './lib/utils/scrollToTop';
 
 
 const initialViewer: Viewer = {
@@ -93,6 +94,7 @@ const App = () => {
 
   return (
     <Router>
+      <ScrollToTop />
       {LogInError}
       <AppHeader viewer={viewer} setViewer={setViewer} />
       <main className='mainPanel'>
