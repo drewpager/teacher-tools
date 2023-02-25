@@ -31,30 +31,28 @@ export const LessonCard = ({ lesson }: Props) => {
   `;
 
   const handleDelete = async (id: string) => {
-    const res = await deleteLesson({ variables: { id } })
-    if (res) {
-      return <DisplaySuccess title="Deletion Successful!" />
-    }
+    let res = await deleteLesson({ variables: { id } })
+    res && (<DisplaySuccess title='Successfully Deleted!' />)
   }
 
-  const [deleteLesson, { loading: deleteLessonLoading, error: deleteLessonError}] = useMutation<DeleteLessonData, DeleteLessonVariables>(DELETE_LESSON)
+  const [deleteLesson, { loading: deleteLessonLoading, error: deleteLessonError }] = useMutation<DeleteLessonData, DeleteLessonVariables>(DELETE_LESSON)
   const { id, title, category, video, image, startDate, endDate } = lesson;
 
   const deleteLessonLoadingMessage = (
     <CircularProgress sx={{
-              color: 'inherit',
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              zIndex: 1,
-            }}/>
-    );
-    
-    const deleteLessonErrorMessage = (
-      <Alert variant="outlined" severity="error">
-        Oops, something went wrong in the deletion process!
-      </Alert>
-    );
+      color: 'inherit',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      zIndex: 1,
+    }} />
+  );
+
+  const deleteLessonErrorMessage = (
+    <Alert variant="outlined" severity="error">
+      Oops, something went wrong in the deletion process!
+    </Alert>
+  );
 
   return (
     <Grid item lg={4} md={6} sm={12} xs={12}>

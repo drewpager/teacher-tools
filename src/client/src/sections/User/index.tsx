@@ -26,7 +26,8 @@ export const User = ({ viewer }: Props) => {
       lessonsPage: lessonsPage,
       quizzesPage: quizzesPage,
       limit: pageLimit
-    }
+    },
+    pollInterval: 200
   })
 
   const user = data ? data.user : null;
