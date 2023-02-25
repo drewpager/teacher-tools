@@ -3040,201 +3040,201 @@ const seed = async () => {
       //   meta: "Phineas Taylor Barnum, or PT Barnum, was a centerpiece in nineteenth-century American showmanship and entrepreneurship. At 60 years of age, he partnered with James Bailey to tour the country as The Bailey and Barnum traveling circus of performers, acts and animals.  ",
       //   creator: "116143759549242008910",
       // },
-      {
-        _id: new ObjectId(),
-        title: "Ada Lovelace: First Female Computer Programmer",
-        video:
-          "http://res.cloudinary.com/drewpager/video/upload/v1669505994/platos-peach-video/Ada_Lovelace_The_First_Female_Computer_Programmer_jdrquq.mp4",
-        image:
-          "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-        startDate: "1815-12-10",
-        endDate: "1852-11-27",
-        category: ["biography"],
-        meta: "Known as the first female computer programmer, Ada Lovelace was educated in math and science, mentored by inventor Charles Babbage, and creator of loops in software.",
-        creator: "116143759549242008910",
-      },
-      {
-        _id: new ObjectId(),
-        title: "Florence Nightingale and the Dawn of Modern Healthcare",
-        video:
-          "http://res.cloudinary.com/drewpager/video/upload/v1669528960/platos-peach-video/Florence_Nightingale_ewbvz1.mov",
-        image:
-          "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-        startDate: "1820-05-12",
-        endDate: "1910-08-13",
-        category: ["biography"],
-        meta: "Florence Nightingale opted to attend nursing school, a rare choice in the Victorian-era, but would soon prove vital in the Crimean War, where she implemented nursing best practices such as sanitation, saving thousands from filth diseases and death.",
-        creator: "116143759549242008910",
-      },
-      {
-        _id: new ObjectId(),
-        title: "The Life & Masterworks of Rosa Bonheur",
-        video:
-          "http://res.cloudinary.com/drewpager/video/upload/v1669703138/platos-peach-video/The_Life_and_Masterworks_of_Rosa_Bonheur_ccz3et.mov",
-        image:
-          "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-        startDate: "1822-03-16",
-        endDate: "1899-05-25",
-        category: ["biography"],
-        meta: "The richest and most famous female artist of 19th century France, Marie-Rosalie (Rosa) Bonheur spent the last forty years of her life entrenched in her small chateau above the Seine River town of Thomery.",
-        creator: "116143759549242008910",
-      },
-      {
-        _id: new ObjectId(),
-        title: "Ulysses S. Grant",
-        video:
-          "http://res.cloudinary.com/drewpager/video/upload/v1669740718/platos-peach-video/Ulysses_S._Grant_f84ehg.mov",
-        image:
-          "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-        startDate: "1822-04-27",
-        endDate: "1885-07-23",
-        category: ["biography"],
-        meta: "Ulysses S. Grant was a West Point graduate, Civil War hero, two-term U.S. President, prosecutor of racial injustice and proponent of meritocracy in civil service.   ",
-        creator: "116143759549242008910",
-      },
-      {
-        _id: new ObjectId(),
-        title: "Stonewall Jackson",
-        video:
-          "http://res.cloudinary.com/drewpager/video/upload/v1669577691/platos-peach-video/Stonewall_Jackson_j1clqo.mp4",
-        image:
-          "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-        startDate: "1824-10-21",
-        endDate: "1863-05-10",
-        category: ["american history", " civil war"],
-        meta: "Stonewall Jackson served in the Mexican-American War where he earned a reputation for bravery and toughness in battle, ultimately leading his Confederate Army forces to many victories against superior numbers of Union soldiers.",
-        creator: "116143759549242008910",
-      },
-      {
-        _id: new ObjectId(),
-        title: "Nat Turner's Rebellion",
-        video:
-          "http://res.cloudinary.com/drewpager/video/upload/v1669558565/platos-peach-video/Nat_Turner_s_Rebellion_nwwt50.mov",
-        image:
-          "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-        startDate: "1831-08-21",
-        endDate: "1831-08-23",
-        category: ["american history", " south & slavery"],
-        meta: "Nat Turner was an educated and religious African American slave who claimed to hear commandments from God. Nat Turner's Rebellion was a violent insurrection against white slave owners, killing between 55 and 65 white people, but ultimately resulting in the death of three times as many slaves.  ",
-        creator: "116143759549242008910",
-      },
-      {
-        _id: new ObjectId(),
-        title: "The Great Moon Hoax of 1835",
-        video:
-          "http://res.cloudinary.com/drewpager/video/upload/v1669683814/platos-peach-video/The_Great_Moon_Hoax_of_1835_hqrequ.mp4",
-        image:
-          "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-        startDate: "1835-08-25",
-        endDate: "1835-09-16",
-        category: ["american history", " world history"],
-        meta: "In 1835, a fictional writer Dr. Andrew Grant published in the New York Sun newspaper about having seen life on the moon through a new high-power telescope in South Africa. The popularity and global phenomena of the six articles would be known as the Great Moon Hoax of 1835.",
-        creator: "116143759549242008910",
-      },
-      {
-        _id: new ObjectId(),
-        title: "Andrew Carnegie",
-        video:
-          "http://res.cloudinary.com/drewpager/video/upload/v1669510617/platos-peach-video/Andrew_Carnegie_t8pjrk.mp4",
-        image:
-          "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-        startDate: "1835-11-25",
-        endDate: "1919-08-11",
-        category: ["biography"],
-        meta: "From an impoverished immigrant family, Andrew Carnegie built himself up to become a self-made billionaire investor, innovator, and philanthropist.",
-        creator: "116143759549242008910",
-      },
-      {
-        _id: new ObjectId(),
-        title: "The Mexican American War",
-        video:
-          "http://res.cloudinary.com/drewpager/video/upload/v1669706529/platos-peach-video/The_Mexican_American_War_dtiv3f.mp4",
-        image:
-          "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-        startDate: "1846-04-25",
-        endDate: "1848-02-02",
-        category: ["military history", " mexican-american war"],
-        meta: "After Mexico refused to sell land to U.S. President Polk, his belief in manifest destiny led to his declaration of war in 1846. The Mexican American War would ultimately last for two years, costing Mexico a lot of lives and land",
-        creator: "116143759549242008910",
-      },
-      {
-        _id: new ObjectId(),
-        title: "The Forgotten Genius of Charles Scott Sherrington",
-        video:
-          "http://res.cloudinary.com/drewpager/video/upload/v1669678003/platos-peach-video/The_Forgotten_Genius_of_Charles_Scott_Sherrington_ljd7gg.mp4",
-        image:
-          "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-        startDate: "1857-11-27",
-        endDate: "1954-04-04",
-        category: ["science & technology"],
-        meta: "The life and work of Sir Charles Scott Sherrington, whose seminal breakthroughs in science and human physiology have been largely forgotten in modern times.",
-        creator: "116143759549242008910",
-      },
-      {
-        _id: new ObjectId(),
-        title: "John Brown's Raid on Harpers Ferry",
-        video:
-          "http://res.cloudinary.com/drewpager/video/upload/v1669542946/platos-peach-video/John_Brown_s_Raid_on_Harpers_Ferry_xyqeay.mp4",
-        image:
-          "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-        startDate: "1859-10-16",
-        endDate: "1859-10-18",
-        category: ["american history", " abolition"],
-        meta: "John Brown's radical plans for the abolition of slavery culminated in the Harpers Ferry raid, where 22 recruited men helped Brown overtake an armory in Harpers Ferry, Virginia, leading to a fatal and treasonous standoff.",
-        creator: "116143759549242008910",
-      },
-      {
-        _id: new ObjectId(),
-        title: "Abraham Lincoln's Emancipation Proclamation",
-        video:
-          "http://res.cloudinary.com/drewpager/video/upload/v1669526295/platos-peach-video/Emancipation_Proclamation_i0awld.mov",
-        image:
-          "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-        startDate: "1863-01-01",
-        endDate: "1863-01-01",
-        category: ["american history", " civil war"],
-        meta: "In September of 1862, Abraham Lincoln made his Emancipation Proclamation giving confederate states 100-days to rejoin the Union before their slaves would be set free. Signed on New Years Day, 1863, the proclamation proved a monumental step towards the abolition of US slavery.",
-        creator: "116143759549242008910",
-      },
-      {
-        _id: new ObjectId(),
-        title: "The Battle of Chancellorsville",
-        video:
-          "http://res.cloudinary.com/drewpager/video/upload/v1669586716/platos-peach-video/The_Battle_of_Chancellorsville_w5ygfl.mov",
-        image:
-          "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-        startDate: "1863-04-30",
-        endDate: "1863-05-06",
-        category: ["military history", " american civil war"],
-        meta: "The Battle of Chancellorsville showcased General Robert E. Lee's strategic prowess with a Confederate army less than half the size of his Union opponents. The battle saw multiple flanks and ambushes, before the Union Army retreated in defeat.",
-        creator: "116143759549242008910",
-      },
-      {
-        _id: new ObjectId(),
-        title: "Sherman's March to the Sea",
-        video:
-          "http://res.cloudinary.com/drewpager/video/upload/v1669573441/platos-peach-video/Sherman_s_March_to_the_Sea_fssjns.mp4",
-        image:
-          "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-        startDate: "1864-11-15",
-        endDate: "1864-12-21",
-        category: ["military history", " american civil war"],
-        meta: "General William Tecumseh Sherman's march to the sea during the Civil War was a strategy to break the morale of Confederate supporters by marching a division of the Union Army from Atlanta to Charleston, wreaking havoc along the way.",
-        creator: "116143759549242008910",
-      },
-      {
-        _id: new ObjectId(),
-        title: "The 13th Amendment",
-        video:
-          "http://res.cloudinary.com/drewpager/video/upload/v1669578416/platos-peach-video/The_13th_Amendment_curowu.mp4",
-        image:
-          "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-        startDate: "1865-01-31",
-        endDate: "1865-12-06",
-        category: ["american history", " civil war"],
-        meta: "The 13th Amendment was passed by Abraham Lincoln's Republican party on January 31st, 1865. The Amendment formally abolished slavery under federal law.",
-        creator: "116143759549242008910",
-      },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "Ada Lovelace: First Female Computer Programmer",
+      //   video:
+      //     "http://res.cloudinary.com/drewpager/video/upload/v1669505994/platos-peach-video/Ada_Lovelace_The_First_Female_Computer_Programmer_jdrquq.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1815-12-10",
+      //   endDate: "1852-11-27",
+      //   category: ["biography"],
+      //   meta: "Known as the first female computer programmer, Ada Lovelace was educated in math and science, mentored by inventor Charles Babbage, and creator of loops in software.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "Florence Nightingale and the Dawn of Modern Healthcare",
+      //   video:
+      //     "http://res.cloudinary.com/drewpager/video/upload/v1669528960/platos-peach-video/Florence_Nightingale_ewbvz1.mov",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1820-05-12",
+      //   endDate: "1910-08-13",
+      //   category: ["biography"],
+      //   meta: "Florence Nightingale opted to attend nursing school, a rare choice in the Victorian-era, but would soon prove vital in the Crimean War, where she implemented nursing best practices such as sanitation, saving thousands from filth diseases and death.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "The Life & Masterworks of Rosa Bonheur",
+      //   video:
+      //     "http://res.cloudinary.com/drewpager/video/upload/v1669703138/platos-peach-video/The_Life_and_Masterworks_of_Rosa_Bonheur_ccz3et.mov",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1822-03-16",
+      //   endDate: "1899-05-25",
+      //   category: ["biography"],
+      //   meta: "The richest and most famous female artist of 19th century France, Marie-Rosalie (Rosa) Bonheur spent the last forty years of her life entrenched in her small chateau above the Seine River town of Thomery.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "Ulysses S. Grant",
+      //   video:
+      //     "http://res.cloudinary.com/drewpager/video/upload/v1669740718/platos-peach-video/Ulysses_S._Grant_f84ehg.mov",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1822-04-27",
+      //   endDate: "1885-07-23",
+      //   category: ["biography"],
+      //   meta: "Ulysses S. Grant was a West Point graduate, Civil War hero, two-term U.S. President, prosecutor of racial injustice and proponent of meritocracy in civil service.   ",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "Stonewall Jackson",
+      //   video:
+      //     "http://res.cloudinary.com/drewpager/video/upload/v1669577691/platos-peach-video/Stonewall_Jackson_j1clqo.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1824-10-21",
+      //   endDate: "1863-05-10",
+      //   category: ["american history", " civil war"],
+      //   meta: "Stonewall Jackson served in the Mexican-American War where he earned a reputation for bravery and toughness in battle, ultimately leading his Confederate Army forces to many victories against superior numbers of Union soldiers.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "Nat Turner's Rebellion",
+      //   video:
+      //     "http://res.cloudinary.com/drewpager/video/upload/v1669558565/platos-peach-video/Nat_Turner_s_Rebellion_nwwt50.mov",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1831-08-21",
+      //   endDate: "1831-08-23",
+      //   category: ["american history", " south & slavery"],
+      //   meta: "Nat Turner was an educated and religious African American slave who claimed to hear commandments from God. Nat Turner's Rebellion was a violent insurrection against white slave owners, killing between 55 and 65 white people, but ultimately resulting in the death of three times as many slaves.  ",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "The Great Moon Hoax of 1835",
+      //   video:
+      //     "http://res.cloudinary.com/drewpager/video/upload/v1669683814/platos-peach-video/The_Great_Moon_Hoax_of_1835_hqrequ.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1835-08-25",
+      //   endDate: "1835-09-16",
+      //   category: ["american history", " world history"],
+      //   meta: "In 1835, a fictional writer Dr. Andrew Grant published in the New York Sun newspaper about having seen life on the moon through a new high-power telescope in South Africa. The popularity and global phenomena of the six articles would be known as the Great Moon Hoax of 1835.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "Andrew Carnegie",
+      //   video:
+      //     "http://res.cloudinary.com/drewpager/video/upload/v1669510617/platos-peach-video/Andrew_Carnegie_t8pjrk.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1835-11-25",
+      //   endDate: "1919-08-11",
+      //   category: ["biography"],
+      //   meta: "From an impoverished immigrant family, Andrew Carnegie built himself up to become a self-made billionaire investor, innovator, and philanthropist.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "The Mexican American War",
+      //   video:
+      //     "http://res.cloudinary.com/drewpager/video/upload/v1669706529/platos-peach-video/The_Mexican_American_War_dtiv3f.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1846-04-25",
+      //   endDate: "1848-02-02",
+      //   category: ["military history", " mexican-american war"],
+      //   meta: "After Mexico refused to sell land to U.S. President Polk, his belief in manifest destiny led to his declaration of war in 1846. The Mexican American War would ultimately last for two years, costing Mexico a lot of lives and land",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "The Forgotten Genius of Charles Scott Sherrington",
+      //   video:
+      //     "http://res.cloudinary.com/drewpager/video/upload/v1669678003/platos-peach-video/The_Forgotten_Genius_of_Charles_Scott_Sherrington_ljd7gg.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1857-11-27",
+      //   endDate: "1954-04-04",
+      //   category: ["science & technology"],
+      //   meta: "The life and work of Sir Charles Scott Sherrington, whose seminal breakthroughs in science and human physiology have been largely forgotten in modern times.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "John Brown's Raid on Harpers Ferry",
+      //   video:
+      //     "http://res.cloudinary.com/drewpager/video/upload/v1669542946/platos-peach-video/John_Brown_s_Raid_on_Harpers_Ferry_xyqeay.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1859-10-16",
+      //   endDate: "1859-10-18",
+      //   category: ["american history", " abolition"],
+      //   meta: "John Brown's radical plans for the abolition of slavery culminated in the Harpers Ferry raid, where 22 recruited men helped Brown overtake an armory in Harpers Ferry, Virginia, leading to a fatal and treasonous standoff.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "Abraham Lincoln's Emancipation Proclamation",
+      //   video:
+      //     "http://res.cloudinary.com/drewpager/video/upload/v1669526295/platos-peach-video/Emancipation_Proclamation_i0awld.mov",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1863-01-01",
+      //   endDate: "1863-01-01",
+      //   category: ["american history", " civil war"],
+      //   meta: "In September of 1862, Abraham Lincoln made his Emancipation Proclamation giving confederate states 100-days to rejoin the Union before their slaves would be set free. Signed on New Years Day, 1863, the proclamation proved a monumental step towards the abolition of US slavery.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "The Battle of Chancellorsville",
+      //   video:
+      //     "http://res.cloudinary.com/drewpager/video/upload/v1669586716/platos-peach-video/The_Battle_of_Chancellorsville_w5ygfl.mov",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1863-04-30",
+      //   endDate: "1863-05-06",
+      //   category: ["military history", " american civil war"],
+      //   meta: "The Battle of Chancellorsville showcased General Robert E. Lee's strategic prowess with a Confederate army less than half the size of his Union opponents. The battle saw multiple flanks and ambushes, before the Union Army retreated in defeat.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "Sherman's March to the Sea",
+      //   video:
+      //     "http://res.cloudinary.com/drewpager/video/upload/v1669573441/platos-peach-video/Sherman_s_March_to_the_Sea_fssjns.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1864-11-15",
+      //   endDate: "1864-12-21",
+      //   category: ["military history", " american civil war"],
+      //   meta: "General William Tecumseh Sherman's march to the sea during the Civil War was a strategy to break the morale of Confederate supporters by marching a division of the Union Army from Atlanta to Charleston, wreaking havoc along the way.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "The 13th Amendment",
+      //   video:
+      //     "http://res.cloudinary.com/drewpager/video/upload/v1669578416/platos-peach-video/The_13th_Amendment_curowu.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1865-01-31",
+      //   endDate: "1865-12-06",
+      //   category: ["american history", " civil war"],
+      //   meta: "The 13th Amendment was passed by Abraham Lincoln's Republican party on January 31st, 1865. The Amendment formally abolished slavery under federal law.",
+      //   creator: "116143759549242008910",
+      // },
       {
         _id: new ObjectId(),
         title: "The Battle of Little Bighorn",
