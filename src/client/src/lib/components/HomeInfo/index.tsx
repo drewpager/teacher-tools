@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { Typography, Grid, Link, Box, Paper } from '@mui/material'
+import { Typography, Grid, Link, Box } from '@mui/material'
 import lottie from 'lottie-web';
-import classroom from '../../assets/classroom.jpg';
 
 import './homeinfo.scss';
 
@@ -18,10 +17,6 @@ export const HomeInfo = () => {
     })
   }, [])
   return (
-    // <Paper
-    //   className='title--image'
-    //   sx={{ backgroundImage: `url(${classroom})` }}
-    // >
     <Grid container spacing={1} className='grid--container'>
       <Grid item xs={12} sm={12} md={7} lg={6}>
         <Box className='box--title'>
@@ -45,6 +40,5 @@ export const HomeInfo = () => {
         <div className="contain" ref={contain}></div>
       </Grid>
     </Grid>
-    // </Paper>
   );
 }
