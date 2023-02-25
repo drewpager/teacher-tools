@@ -44,7 +44,7 @@ export const CatalogItem = ({ name, category }: props) => {
     <Box className="category--box">
       {
         category.length > 0 &&
-        <h2 className='category--h2'>{titleCase(name)} ({category.length})</h2>
+        <h2 className='category--h2'>{titleCase(name)} <Chip label={category.length} color="primary" size="medium" /></h2>
       }
       <Grid
         container

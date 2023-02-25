@@ -93,6 +93,9 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
         </Typography>
         {viewer && viewer.avatar ? (
           <>
+            <Link to={`/catalog`} style={{ textDecoration: "none" }}>
+              <p style={{ color: `${theme.palette.info.light}` }}>Catalog</p>
+            </Link>
             <Tooltip title="User Actions">
               <IconButton onClick={handleOpenActionMenu}>
                 <AddCircleIcon className="nav--user-actions" />
@@ -116,18 +119,18 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
               className="header--menu"
             >
               <MenuItem onClick={handleCloseActionMenu}>
-                <Link to={`/lesson/create`} style={{ textDecoration: "none", color: `${theme.palette.primary.light}` }}>
-                  <Typography textAlign="center" sx={{ color: `${theme.palette.primary.light}` }}>Create Lesson</Typography>
+                <Link to={`/lesson/create`} style={{ textDecoration: "none" }}>
+                  <Typography textAlign="center">Create Lesson</Typography>
                 </Link>
               </MenuItem>
               <MenuItem onClick={handleCloseActionMenu}>
                 <Link to={'/quiz/create'} style={{ textDecoration: 'none' }}>
-                  <Typography textAlign="center" sx={{ color: `${theme.palette.primary.light}` }}>Create Asessment</Typography>
+                  <Typography textAlign="center">Create Asessment</Typography>
                 </Link>
               </MenuItem>
               <MenuItem onClick={handleCloseActionMenu}>
                 <Link to={'/playlist/create'} style={{ textDecoration: 'none' }}>
-                  <Typography textAlign="center" sx={{ color: `${theme.palette.primary.light}` }}>Create Playlist</Typography>
+                  <Typography textAlign="center">Create Playlist</Typography>
                 </Link>
               </MenuItem>
             </Menu>
@@ -154,22 +157,25 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
               className="header--menu"
             >
               <MenuItem onClick={handleCloseUserMenu}>
-                <Link to={`/user/${viewer.id}`} style={{ textDecoration: "none", color: `${theme.palette.primary.light}` }}>
-                  <Typography textAlign="center" sx={{ color: `${theme.palette.primary.light}` }}>Profile</Typography>
+                <Link to={`/user/${viewer.id}`} style={{ textDecoration: "none" }}>
+                  <Typography textAlign="center">Profile</Typography>
                 </Link>
               </MenuItem>
               <MenuItem onClick={handleCloseUserMenu}>
                 <Link to={`/catalog`} style={{ textDecoration: 'none' }}>
-                  <Typography textAlign="center" sx={{ color: `${theme.palette.primary.light}` }}>Catalog</Typography>
+                  <Typography textAlign="center">Catalog</Typography>
                 </Link>
               </MenuItem>
               <MenuItem onClick={handleLogOut}>
-                <Typography textAlign="center" sx={{ color: `${theme.palette.primary.light}` }}>Logout</Typography>
+                <Typography textAlign="center">Logout</Typography>
               </MenuItem>
             </Menu>
           </>
         ) : (
           <>
+            <Link to={`/catalog`} style={{ textDecoration: "none" }}>
+              <p style={{ color: `${theme.palette.info.light}` }}>Catalog</p>
+            </Link>
             <IconButton
               size="large"
               aria-label="account of current user"

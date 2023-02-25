@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Card, CircularProgress, Grid, Typography } from '@mui/material'
+import { Box, Card, CircularProgress, Grid, Typography, Chip } from '@mui/material'
 import Button from '@mui/material/Button';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -43,7 +43,7 @@ export const Catalog = ({ viewer }: Props) => {
 
   const { data, loading, error } = useAllLessonsQuery({
     variables: {
-      limit: 215,
+      limit: 687,
       page: 1
     }
   });
@@ -127,7 +127,7 @@ export const Catalog = ({ viewer }: Props) => {
         </Grid>
         <Grid item sm={12} md={10} lg={9}>
           <Box className="catalogBackground" sx={{ marginBottom: "80px" }}>
-            <h1 className="catalogTitle">Catalog ({data?.allLessons.total})</h1>
+            <h1 className="catalogTitle">Catalog <Chip label={data?.allLessons.total} color="primary" size="medium" /></h1>
             {selected && data && (
               <div className="catalog--item">
                 <CatalogItem name={`${selected[0]}`} category={data.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0]))} key={`${selected[0]}`} />

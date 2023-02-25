@@ -25,7 +25,7 @@ export const ProductValues = () => {
       component="section"
       sx={{ display: 'flex', overflow: 'hidden' }}
     >
-      <Container sx={{ mt: 10, mb: 10, display: 'flex', position: 'relative' }}>
+      <Container className="values--container">
         <Grid container spacing={2}>
           <Grid item xs={12} md={4}>
             <Box sx={item} >
