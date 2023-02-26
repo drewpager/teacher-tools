@@ -10,10 +10,10 @@
         width: 100%;
 
         @media ( min-width: 600px ) {
-            width: calc(50% - 1rem);
+            width: calc(95% - 1rem);
         }
-        @media ( min-width: 900px ) {
-            width: calc(25% - 1rem);
+        @media ( min-width: 1000px ) {
+            width: calc(45% - 1rem);
         }
 
     }
