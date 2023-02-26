@@ -5,6 +5,10 @@
     margin-top: 5rem;
     overflow-y: hidden;
     overflow-x: hidden;
+    
+    .createPlaylist--h1, .createPlaylist--button {
+      margin-left: 3rem;
+    }
   }
 }
 
@@ -31,7 +35,8 @@
   &.lesson--card {
     background-color: library.$coral;
     padding: 1rem; 
-    margin: 0.5rem;
+    margin: 0.5rem -1rem;
+    width: 95%;
     color: library.$white;
   }
 }

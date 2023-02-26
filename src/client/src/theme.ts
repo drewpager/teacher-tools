@@ -110,6 +110,9 @@ const theme = createTheme({
     background: {
       default: colors.primary[500],
     },
+    error: {
+      main: colors.primary[450],
+    },
     // primary: {
     //   // main: '#5560b9',
     //   // Coral https://www.canva.com/colors/color-palettes/toasted-peach/

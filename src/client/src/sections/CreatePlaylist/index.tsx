@@ -17,6 +17,8 @@ import { useNavigate } from 'react-router-dom';
 import { UseModal } from '../Modal';
 import './createPlaylist.scss';
 import { Link } from 'react-router-dom';
+import { CreatePlaylistCard } from '../../lib/components';
+import theme from '../../theme';
 
 type props = {
   viewer: Viewer;
@@ -75,14 +77,14 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const limit: number = 2000;
   const page: number = 1;
 
-  const { data: lessonData, loading: lessonLoading, error: lessonError } = useAllLessonsQuery({
+  const { data: lessonData, loading: lessonLoading, error: lessonError, refetch: lessonRefetch } = useAllLessonsQuery({
     variables: {
       limit: limit,
       page: page
     }
   })
 
-  const { data: quizData, loading: quizLoading, error: quizError } = useAllQuizzesQuery({
+  const { data: quizData, loading: quizLoading, error: quizError, refetch: quizRefetch } = useAllQuizzesQuery({
     variables: {
       limit: limit,
       page: page
@@ -270,7 +272,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
   return (
     <Box className="createPlaylist--box">
-      <h1>Create Lesson Plan</h1>
+      <h1 className='createPlaylist--h1'>Create Lesson Plan</h1>
       <form onSubmit={handleSubmit}>
         <DragDropContext onDragEnd={onDragEndHandler}>
           <Grid container>
@@ -287,12 +289,18 @@ export const CreatePlaylist = ({ viewer }: props) => {
                       onChange={titleHandler}
                     />
                     {playlist.plan.map((i, indices) => (
-                      <Draggable draggableId={`${i._id}`} index={indices} key={i._id}>
-                        {(provided) => (
+                      <Draggable draggableId={`${i._id}`} index={indices} key={`${i._id}`}>
+                        {(provided, snapshot) => (
                           <Grid item xs={12} md={12} lg={12}>
-                            <Card variant="outlined" className="lesson--card" {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                              {i.title}
-                            </Card>
+                            <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                              {i.questions ? (
+                                <Card className="lesson--card">
+                                  {i.title} <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                                </Card>
+                              ) : (
+                                <CreatePlaylistCard {...i} />
+                              )}
+                            </div>
                           </Grid>
                         )}
                       </Draggable>
@@ -340,23 +348,35 @@ export const CreatePlaylist = ({ viewer }: props) => {
                     <Grid container>
                       {plans.map((i, index) => (
                         yourContent && i.creator === viewer.id ? (
-                          <Draggable draggableId={`${i._id}`} index={index} key={i._id}>
+                          <Draggable draggableId={`${i._id}`} index={index} key={`${i._id}`}>
                             {(provided) => (
                               <Grid item xs={12} md={12} lg={12}>
                                 {/* {!i && <Link to="/create/lesson"><Typography variant="h5">You haven't added any content yet, click here to add your first lesson.</Typography></Link>} */}
-                                <Card variant="outlined" className="lesson--card" sx={{ padding: 2, margin: 1 }} {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                                  {JSON.parse(JSON.stringify(i)).title}
-                                </Card>
+                                <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                                  {i.questions ? (
+                                    <Card className="lesson--card" sx={{ padding: 2, margin: 1 }}>
+                                      {JSON.parse(JSON.stringify(i)).title} <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                                    </Card>
+                                  ) : (
+                                    <CreatePlaylistCard {...i} />
+                                  )}
+                                </div>
                               </Grid>
                             )}
                           </Draggable>
                         ) : !yourContent && i.creator !== viewer.id && (
-                          <Draggable draggableId={`${i._id}`} index={index} key={i._id}>
+                          <Draggable draggableId={`${i._id}`} index={index} key={`${i._id}`}>
                             {(provided) => (
                               <Grid item xs={12} md={12} lg={12}>
-                                <Card variant="outlined" className="lesson--card" sx={{ padding: 2, margin: 1 }} {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                                  {JSON.parse(JSON.stringify(i)).title}
-                                </Card>
+                                <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                                  {i.questions ? (
+                                    <Card className="lesson--card" sx={{ padding: 2, margin: 1 }}>
+                                      {JSON.parse(JSON.stringify(i)).title} <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                                    </Card>
+                                  ) : (
+                                    <CreatePlaylistCard {...i} />
+                                  )}
+                                </div>
                               </Grid>
                             )}
                           </Draggable>
@@ -373,8 +393,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
             </Droppable>
           </Grid>
         </DragDropContext>
-        <Button variant='outlined' type='submit'>Create</Button>
-      </form>
+        <Button className="createPlaylist--button" variant='contained' type='submit'>Create</Button>
+      </form >
     </Box>
   )
 }
