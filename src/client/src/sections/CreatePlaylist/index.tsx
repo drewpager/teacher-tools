@@ -159,6 +159,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       creator: viewer && viewer.id ? viewer.id : "0"
     })
   }
+  console.log(plans)
 
   if (lessonLoading || quizLoading) {
     return <CircularProgress />
@@ -167,6 +168,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
   if (lessonError || quizError) {
     return <DisplayError title="Failed to query lesson plan items" />
   }
+
 
   const onDragEndHandler = (result: any) => {
     const { destination, source } = result;
@@ -177,7 +179,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
     }
 
     // Otherwise, cut the item from lessons array and push to new playlist
-    const items = plans;
+    let items = plans;
 
     // Allow the user to reorder playlist if failed to drag and drop in correct order
     if (source.droppableId === "playlist" && destination.droppableId === "playlist") {
@@ -233,7 +235,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
     }
 
     if (enteredSearch === '') {
-      setPlans(filter)
+      setPlans(filter.filter(val => !playlist.plan.includes(val)))
       // setFilter(lessons)
     }
   }
