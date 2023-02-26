@@ -74,17 +74,17 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const [playlist, setPlaylist] = useState<InputLessonPlan>(initialData)
   const [state, dispatch] = useReducer(reducer, { lessons: [...lessons], quizzes: [...quizzes] })
 
-  const limit: number = 2000;
+  const limit: number = 700;
   const page: number = 1;
 
-  const { data: lessonData, loading: lessonLoading, error: lessonError, refetch: lessonRefetch } = useAllLessonsQuery({
+  const { data: lessonData, loading: lessonLoading, error: lessonError } = useAllLessonsQuery({
     variables: {
       limit: limit,
       page: page
     }
   })
 
-  const { data: quizData, loading: quizLoading, error: quizError, refetch: quizRefetch } = useAllQuizzesQuery({
+  const { data: quizData, loading: quizLoading, error: quizError } = useAllQuizzesQuery({
     variables: {
       limit: limit,
       page: page
@@ -251,6 +251,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       });
     }
     // Navigate to User Profile Page
+    playlist.plan.length = 0;
     navigate(`../user/${viewer.id}`, { replace: true })
   }
 
