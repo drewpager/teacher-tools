@@ -159,7 +159,7 @@ export const viewerResolvers = {
     },
     logOut: (
       _root: undefined,
-      _args: Record<string, never>, 
+      _args: Record<string, never>,
       { res }: { res: Response }
     ): Viewer => {
       try {

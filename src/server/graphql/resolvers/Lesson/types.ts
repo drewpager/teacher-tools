@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { Lesson } from "../../../lib/types";
 export interface LessonArgs {
   id: string;
@@ -27,4 +28,9 @@ export interface AllLessonsData {
   total: number;
   result: Lesson[];
   totalCount: number;
+}
+
+export interface lessonsArgs {
+  cursor: ObjectId;
+  first: number;
 }

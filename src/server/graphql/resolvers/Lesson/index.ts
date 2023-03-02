@@ -5,6 +5,7 @@ import {
   CreateLessonArgs,
   CreateLessonInput,
   LessonArgs,
+  lessonsArgs,
 } from "./types";
 import { authorize } from "../../../lib/utils/index";
 import { Request } from "express";
@@ -80,6 +81,29 @@ const verifyCreateLessonInput = ({
 
 export const lessonResolvers = {
   Query: {
+    lessons: async (
+      _root: undefined,
+      { cursor, first }: lessonsArgs,
+      { db }: { db: Database }
+    ): Promise<any> => {
+      const lessonry = db.lessons.find();
+      const lessons: Lesson[] = await lessonry.toArray();
+      const cursorIndex = !cursor
+        ? 0
+        : lessons.findIndex((lesson: Lesson) => lesson._id === cursor) + 1;
+      const sliceOfLessons = lessons.slice(cursorIndex, cursorIndex + first);
+
+      return {
+        edges: sliceOfLessons.map((lesson: Lesson) => ({
+          cursor: lesson._id,
+          node: { ...lesson },
+        })),
+        pageInfo: {
+          endCursor: sliceOfLessons[sliceOfLessons.length - 1]._id,
+          hasNextPage: cursorIndex + first < lessons.length,
+        },
+      };
+    },
     lesson: async (
       _root: undefined,
       { id }: LessonArgs,
