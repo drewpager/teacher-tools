@@ -33,7 +33,8 @@ import {
   QuizCreate,
   EditPlaylist,
   Catalog,
-  Quiz
+  Quiz,
+  TestElement
 } from './sections';
 import { DisplayError } from './lib/utils';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -101,6 +102,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home viewer={viewer} />} />
           <Route path="/teach" element={<Teach />} />
+          <Route path="/test" element={<TestElement />} />
           <Route path="/catalog" element={<Catalog viewer={viewer} />} />
           <Route path="/lesson/:id" element={<Lesson />} />
           <Route path="/lessons/:filter?" element={<Lessons title="Plato's Peach" />} />

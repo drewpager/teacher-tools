@@ -5,6 +5,8 @@ export const TestElement = () => {
 
   // Render your list
   return (
-    <h2>`${name}`'s Test Page</h2>
+    <div style={{ marginTop: 100 }}>
+      <h2>{name}'s Test Page</h2>
+    </div>
   );
 }
