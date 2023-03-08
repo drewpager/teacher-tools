@@ -29,3 +29,12 @@ export interface AllLessonsData {
   result: Lesson[];
   totalCount: number;
 }
+
+export interface lessonsArgs {
+  cursor: ObjectId;
+  first: number;
+}
+
+export interface BookmarkLesson {
+  id: string;
+}
