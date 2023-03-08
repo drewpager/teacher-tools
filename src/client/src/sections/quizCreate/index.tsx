@@ -38,8 +38,8 @@ const Input = ({ field, form: { errors, touched } }: FieldProps) => {
 
   return (
     <>
-      <TextField 
-        {...field} 
+      <TextField
+        {...field}
         placeholder={`Question/Prompt`}
         fullWidth
         sx={{ paddingTop: "0.5rem", gridColumn: 4 }}
@@ -54,8 +54,8 @@ const checkInput = ({ field, form: { errors, touched } }: FieldProps) => {
   const errorMessage = getIn(errors, field.name)
   return (
     <div>
-      <Field 
-        type="checkbox" 
+      <Field
+        type="checkbox"
         name={field.name}
         default={true}
         sx={{ padding: "0.5rem", gridColumn: 4 }}
@@ -119,31 +119,31 @@ export const QuizCreate = ({ viewer }: props) => {
         }}
       >
         {({ values, errors, touched, handleSubmit, handleChange }) => (
-          
+
           <form onSubmit={handleSubmit}>
             <h1>Create Assessment</h1>
-              <TextField
-                fullWidth
-                type="text"
-                name="title"
-                label="Assessment Title"
-                value={values.title}
-                onChange={handleChange}
-                error={Boolean(errors.title)}
-                helperText={errors.title}
-                sx={{
-                  gridColumn: 3
-                }}
-              />
-              <FieldArray name="questions">
+            <TextField
+              fullWidth
+              type="text"
+              name="title"
+              label="Assessment Title"
+              value={values.title}
+              onChange={handleChange}
+              error={Boolean(errors.title)}
+              helperText={errors.title}
+              sx={{
+                gridColumn: 3
+              }}
+            />
+            <FieldArray name="questions">
               {({ insert, remove, push }) => (
                 <div>
-                  {values.questions.length > 0 && 
-                    values.questions.map((question: any, index: number) =>  {
+                  {values.questions.length > 0 &&
+                    values.questions.map((question: any, index: number) => {
                       return (
                         <div className='row' key={index}>
                           <div className='col' key={index}>
-                            <TextField 
+                            <TextField
                               placeholder={`Question/Prompt`}
                               fullWidth
                               sx={{ paddingTop: "0.5rem", gridColumn: 4 }}
@@ -158,112 +158,114 @@ export const QuizCreate = ({ viewer }: props) => {
                               }}
                             />
                           </div>
-                            <FormLabel>Answer Type</FormLabel>
-                            <RadioGroup defaultValue={"TRUEFALSE"}>
-                              <FormControlLabel
-                                name={`questions[${index}].answerType`}
-                                value="TRUEFALSE"
-                                control={<Radio />} 
-                                label="True/False"
-                                onChange={handleChange} 
-                              />
-                              <FormControlLabel
-                                name={`questions[${index}].answerType`}
-                                value="MULTIPLECHOICE"
-                                control={<Radio />} 
-                                label="Multiple Choice" 
-                                onChange={handleChange}
-                              />
-                            </RadioGroup>
-                            {question.answerType === "MULTIPLECHOICE" ? (
-                              <FieldArray name={`questions[${index}].answerOptions`}>
-                                {({ insert, remove, push }) => (
-                                  <div>
-                                    {values.questions[index].answerOptions.length > 0 &&
-                                      values.questions[index].answerOptions.map((option: any, indy: number) => {
-                                        return (
-                                          <div className="quiz__multiAnswerArea">
-                                            <div className="quiz__multiAnswers">
-                                            <Field 
-                                              name={`questions[${index}].answerOptions[${indy}].isCorrect`} 
-                                              component={checkInput} 
+                          <FormLabel>Answer Type</FormLabel>
+                          <RadioGroup defaultValue={"TRUEFALSE"}>
+                            <FormControlLabel
+                              name={`questions[${index}].answerType`}
+                              value="TRUEFALSE"
+                              control={<Radio />}
+                              label="True/False"
+                              onChange={handleChange}
+                            />
+                            <FormControlLabel
+                              name={`questions[${index}].answerType`}
+                              value="MULTIPLECHOICE"
+                              control={<Radio />}
+                              label="Multiple Choice"
+                              onChange={handleChange}
+                            />
+                          </RadioGroup>
+                          {question.answerType === "MULTIPLECHOICE" ? (
+                            <FieldArray name={`questions[${index}].answerOptions`}>
+                              {({ insert, remove, push }) => (
+                                <div>
+                                  {values.questions[index].answerOptions.length > 0 &&
+                                    values.questions[index].answerOptions.map((option: any, indy: number) => {
+                                      return (
+                                        <div className="quiz__multiAnswerArea">
+                                          <div className="quiz__multiAnswers">
+                                            <Field
+                                              name={`questions[${index}].answerOptions[${indy}].isCorrect`}
+                                              component={checkInput}
                                             />
-                                            <TextField 
+                                            <TextField
                                               label="Enter Answer Option"
                                               fullWidth
                                               sx={{ marginTop: 2 }}
                                               name={`questions[${index}].answerOptions[${indy}].answerText`}
                                               onChange={handleChange}
-                                            /> 
+                                            />
                                             <Tooltip title="Add another answer option" className="quiz--modicons">
                                               <ControlPoint onClick={() => push({ answerText: "", isCorrect: false })} />
                                             </Tooltip>
                                             {(indy === 0) ? (
                                               <>
                                               </>
-                                            ): (
+                                            ) : (
                                               <Tooltip title="Remove answer option" className="quiz--modicons">
                                                 <Remove onClick={() => remove(indy)} />
                                               </Tooltip>
                                             )}
                                           </div>
-                                        </div> 
-                                        )
-                                      })}
-                                  </div>
-                                )}
+                                        </div>
+                                      )
+                                    })}
+                                </div>
+                              )}
                             </FieldArray>
-                            ) : (
-                              <>
-                              </>
-                            )}
-                            {question.answerType === "TRUEFALSE" ? (
-                              /* TODO: disable remove button on last item and only render +/- buttons when last index of array */
-                              <FieldArray name={`questions[${index}].answerOptions`}>
-                                {({ insert, remove, push }) => (
-                                  <div>
-                                    {values.questions[index].answerOptions.length > 0 &&
-                                      values.questions[index].answerOptions.map((option: any, indy: number) => {
-                                        return (
-                                          <div className="quiz__multiAnswerArea">
-                                            <div className="quiz__multiAnswers">
-                                            <Field 
-                                              name={`questions[${index}].answerOptions[${indy}].isCorrect`} 
-                                              component={checkInput} 
+                          ) : (
+                            <>
+                            </>
+                          )}
+                          {question.answerType === "TRUEFALSE" ? (
+                            /* TODO: disable remove button on last item and only render +/- buttons when last index of array */
+                            <FieldArray name={`questions[${index}].answerOptions`}>
+                              {({ insert, remove, push }) => (
+                                <div>
+                                  {values.questions[index].answerOptions.length > 0 &&
+                                    values.questions[index].answerOptions.map((option: any, indy: number) => {
+                                      return (
+                                        <div className="quiz__multiAnswerArea">
+                                          <div className="quiz__multiAnswers">
+                                            <Field
+                                              name={`questions[${index}].answerOptions[${indy}].isCorrect`}
+                                              component={checkInput}
                                             />
                                           </div>
-                                        </div> 
-                                        )
-                                      })}
-                                  </div>
-                                )}
+                                        </div>
+                                      )
+                                    })}
+                                </div>
+                              )}
                             </FieldArray>
-                            ) : (
-                              <>
-                              </>
-                            )}
+                          ) : (
+                            <>
+                            </>
+                          )}
                         </div>
                       )
                     })}
-                    <Button 
-                      variant="outlined"
-                      className="quiz--button-add"
-                      onClick={() => push({ question: '', answerType: AnswerFormat, 
-                      answerOptions: [  
+                  <Button
+                    variant="outlined"
+                    className="quiz--button-add"
+                    onClick={() => push({
+                      question: '', answerType: AnswerFormat,
+                      answerOptions: [
                         { answerText: "", isCorrect: true },
-                      ] })}
-                    >
-                      Add Question
-                    </Button>
+                      ]
+                    })}
+                  >
+                    Add Question
+                  </Button>
                 </div>
               )}
-              </FieldArray>
-              <Button 
-                variant="outlined"
-                type="submit"
-                className="quiz--button-submit"
-              >Submit</Button>
-              {/* UNCOMMENT TO DISPLAY MUTATION CONSTRUCTION
+            </FieldArray>
+            <Button
+              variant="outlined"
+              type="submit"
+              className="quiz--button-submit"
+            >Submit</Button>
+            {/* UNCOMMENT TO DISPLAY MUTATION CONSTRUCTION
               <pre>
                 {JSON.stringify(values, null, 2)}
               </pre>
