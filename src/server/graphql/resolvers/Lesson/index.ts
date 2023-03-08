@@ -2,6 +2,7 @@ import { Database, Lesson, Playlist, User, Viewer } from "../../../lib/types";
 import {
   AllLessonsArgs,
   AllLessonsData,
+  BookmarkLesson,
   CreateLessonArgs,
   CreateLessonInput,
   LessonArgs,
@@ -203,6 +204,30 @@ export const lessonResolvers = {
         return deletedLesson.acknowledged;
       } catch (error) {
         throw new Error(`Failed to start deleting lesson: ${error}`);
+      }
+    },
+
+    bookmarkLesson: async (
+      viewer: Viewer,
+      { id }: BookmarkLesson,
+      { db }: { db: Database }
+    ): Promise<boolean | undefined> => {
+      try {
+        const data = await db.lessons.findOne({
+          _id: new ObjectId(id),
+        });
+        const bookmark = await db.users.updateOne(
+          { _id: viewer._id },
+          { $push: { bookmarks: data } }
+        );
+
+        if (!bookmark) {
+          throw new Error("Failed to bookmark lesson");
+        }
+
+        return bookmark.acknowledged;
+      } catch (error) {
+        throw new Error(`Failed to bookmark lesson entirely: ${error}`);
       }
     },
   },

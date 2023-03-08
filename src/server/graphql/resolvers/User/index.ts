@@ -7,6 +7,8 @@ import {
   UserLessonData,
   UserQuizData,
   UserQuizArgs,
+  BookmarkLessonArgs,
+  BookmarkLessonData,
 } from "./types";
 import { authorize } from "../../../lib/utils/";
 import { User, Database } from "../../../lib/types";
@@ -141,6 +143,34 @@ export const userResolvers = {
         return data;
       } catch (e) {
         throw new Error(`Failed to query quizzes ${e}`);
+      }
+    },
+    bookmarks: async (
+      user: User,
+      { limit, page }: BookmarkLessonArgs,
+      { db }: { db: Database }
+    ): Promise<BookmarkLessonData | null> => {
+      try {
+        const data: BookmarkLessonData = {
+          total: 0,
+          result: [],
+          totalCount: 0,
+        };
+
+        const cursor = await db.users.distinct("bookmarks", { _id: user._id });
+        // const totalCount = await db.lessons.find({ _id: id });
+
+        // cursor = cursor.skip(page > 0 ? (page - 1) * limit : 0);
+        // cursor = cursor.limit(limit);
+
+        data.total = cursor.length;
+        data.result = cursor;
+        data.totalCount = cursor.length;
+
+        // db.users.updateOne({ _id: user._id }, { $push: { bookmarks: data } });
+        return data;
+      } catch (e) {
+        throw new Error(`Failed to bookmark anything ${e}`);
       }
     },
   },

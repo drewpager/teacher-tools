@@ -265,6 +265,7 @@ export type LogInInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  bookmarkLesson: Scalars['Boolean'];
   createLesson: Lesson;
   createQuiz: Quiz;
   deleteLesson: Scalars['Boolean'];
@@ -273,6 +274,11 @@ export type Mutation = {
   logIn: Viewer;
   logOut: Viewer;
   updatePlan: Playlist;
+};
+
+
+export type MutationBookmarkLessonArgs = {
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 
@@ -433,6 +439,7 @@ export type Quizzes = {
 export type User = {
   __typename?: 'User';
   avatar: Scalars['String'];
+  bookmarks?: Maybe<Lessons>;
   contact: Scalars['String'];
   hasPayment: Scalars['Boolean'];
   id: Scalars['ID'];
@@ -440,6 +447,12 @@ export type User = {
   name: Scalars['String'];
   playlists?: Maybe<Playlists>;
   quizzes?: Maybe<Quizzes>;
+};
+
+
+export type UserBookmarksArgs = {
+  limit: Scalars['Int'];
+  page: Scalars['Int'];
 };
 
 

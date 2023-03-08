@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { Playlist, Lesson, Quiz } from "../../../lib/types";
 
 export interface UserArgs {
@@ -35,4 +36,15 @@ export interface UserQuizData {
 export interface UserQuizArgs {
   limit: number;
   page: number;
+}
+
+export interface BookmarkLessonArgs {
+  limit: number;
+  page: number;
+}
+
+export interface BookmarkLessonData {
+  total: number;
+  result: Lesson[];
+  totalCount: number;
 }

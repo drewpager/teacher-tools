@@ -28,6 +28,7 @@ export const typeDefs = gql`
     playlists(limit: Int!, page: Int!): Playlists
     lessons(limit: Int!, page: Int!): Lessons
     quizzes(limit: Int!, page: Int!): Quizzes
+    bookmarks(limit: Int!, page: Int!): Lessons
   }
 
   type Lesson {
@@ -111,6 +112,7 @@ export const typeDefs = gql`
     updatePlan(input: LessonPlanInput, id: ID): Playlist!
     deleteLesson(id: ID): Boolean!
     deletePlaylist(id: ID): Boolean!
+    bookmarkLesson(id: ID): Boolean!
   }
 
   input LogInInput {
