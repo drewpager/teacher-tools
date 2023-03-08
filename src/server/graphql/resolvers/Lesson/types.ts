@@ -29,7 +29,3 @@ export interface AllLessonsData {
   result: Lesson[];
   totalCount: number;
 }
-
-export interface BookmarkLesson {
-  id: string;
-}

@@ -92,6 +92,21 @@ export const typeDefs = gql`
     totalCount: Int!
   }
 
+  type LessonConnection {
+    edges: [LessonEdge]
+    pageInfo: PageInfo
+  }
+
+  type PageInfo {
+    endCursor: ID!
+    hasNextPage: Boolean!
+  }
+
+  type LessonEdge {
+    cursor: ID!
+    node: Lesson!
+  }
+
   type Query {
     authUrl: String!
     user(id: ID!): User!
@@ -99,6 +114,7 @@ export const typeDefs = gql`
     playlist(id: ID!): Playlist!
     allplaylists(limit: Int!, page: Int!): Playlists!
     allLessons(limit: Int!, page: Int!): Lessons!
+    lessons(first: Int!, cursor: ID): LessonConnection
     quiz(id: ID!): Quiz!
     allquizzes(limit: Int!, page: Int!): Quizzes!
   }

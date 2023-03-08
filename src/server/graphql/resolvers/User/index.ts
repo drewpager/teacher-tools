@@ -10,7 +10,7 @@ import {
   BookmarkLessonArgs,
   BookmarkLessonData,
 } from "./types";
-import { authorize } from "../../../lib/utils/";
+import { authorize } from "../../../lib/utils";
 import { User, Database } from "../../../lib/types";
 
 export const userResolvers = {
