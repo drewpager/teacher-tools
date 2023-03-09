@@ -1,13 +1,30 @@
 import { gql } from "graphql-tag";
 
 export const USER = gql`
-  query User($id: ID!, $playlistsPage: Int!, $lessonsPage: Int!, $quizzesPage: Int!, $limit: Int!) {
+  query User(
+    $id: ID!
+    $playlistsPage: Int!
+    $lessonsPage: Int!
+    $quizzesPage: Int!
+    $limit: Int!
+  ) {
     user(id: $id) {
       id
       name
       avatar
       contact
       hasPayment
+      bookmarks {
+        id
+        category
+        title
+        meta
+        video
+        image
+        startDate
+        endDate
+        creator
+      }
       playlists(limit: $limit, page: $playlistsPage) {
         total
         result {
@@ -72,9 +89,9 @@ export const USER = gql`
             answerType
           }
           creator
-          }
-          totalCount
         }
+        totalCount
       }
     }
+  }
 `;

@@ -1,22 +1,29 @@
 import React, { useState } from 'react';
-import { Grid, Card, Box, CardMedia, CardContent, IconButton, Typography, Button, Chip, InputLabel, FormControl, OutlinedInput, MenuItem } from '@mui/material';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { Grid, Card, Box, CardMedia, CardContent, IconButton, Typography, Chip, CircularProgress, Alert } from '@mui/material';
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Link } from 'react-router-dom';
 import { Lesson } from '../../graphql/generated';
-import { titleCase } from '../../lib/utils';
+import { DisplaySuccess, titleCase } from '../../lib/utils';
 import { useKeenSlider } from 'keen-slider/react';
-import KeenSlider from 'keen-slider';
 import { UseVideoModal } from '../../lib/components/VideoModal';
 import 'keen-slider/keen-slider.min.css';
 import "./catalog.scss";
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/client';
 
 type props = {
   name: string;
-  category: Lesson[]
+  category: Lesson[];
+}
+
+type BookmarkLessonData = {
+  bookmarkLesson: Lesson;
+}
+
+type BookmarkLessonVariables = {
+  id: string;
 }
 
 export const CatalogItem = ({ name, category }: props) => {
@@ -40,6 +47,35 @@ export const CatalogItem = ({ name, category }: props) => {
     },
   )
 
+  const BOOKMARK_LESSON = gql`
+    mutation BookmarkLesson($id: ID) {
+      bookmarkLesson(id: $id)
+    }
+  `;
+
+  const [bookmarkLesson, { loading: BookmarkLessonLoading, error: BookmarkLessonError }] = useMutation<BookmarkLessonData, BookmarkLessonVariables>(BOOKMARK_LESSON);
+
+  const onBookmark = async (id: string) => {
+    console.log(id);
+    let res = await bookmarkLesson({ variables: { id } })
+    res && (<DisplaySuccess title="Bookmarked!" />)
+  }
+
+  BookmarkLessonLoading && (
+    <CircularProgress sx={{
+      color: 'inherit',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      zIndex: 1,
+    }} />
+  )
+
+  BookmarkLessonError && (
+    <Alert variant="outlined" severity="error">
+      Oops, something went wrong in the bookmarking process!
+    </Alert>
+  );
   return (
     <Box className="category--box">
       {
@@ -75,8 +111,11 @@ export const CatalogItem = ({ name, category }: props) => {
                     <IconButton aria-label="play/pause" sx={{ color: "#FAF9F6" }}>
                       <UseVideoModal video={`${l.video}`} />
                     </IconButton>
-                    <IconButton aria-label="bookmark" sx={{ color: "#FAF9F6" }}>
-                      <BookmarkAddIcon />
+                    <IconButton
+                      aria-label="bookmark"
+                      sx={{ color: "#FAF9F6" }}
+                    >
+                      <BookmarkAddIcon onClick={() => onBookmark(`${l.id}`)} />
                     </IconButton>
                   </Box>
                 </Box>

@@ -9,6 +9,7 @@ interface Props {
 }
 
 export const UserProfile = ({ user, viewerIsUser }: Props) => {
+  console.log(user)
   const additionalDetailsSection = viewerIsUser ? (
     <>
       <Divider sx={{ margin: 1 }} />
@@ -28,7 +29,7 @@ export const UserProfile = ({ user, viewerIsUser }: Props) => {
           <Typography variant="h5" className="user--text-details">Details</Typography>
           <Typography className="user--text-details">Name: {user.name}</Typography>
           <Typography className="user--text-details">Email: {user.contact}</Typography>
-          <Typography className="user--text-details">bookmarks: {user.bookmarks?.result.length}</Typography>
+          <Typography className="user--text-details">bookmarks: {user.bookmarks?.length}</Typography>
           {additionalDetailsSection}
         </Card>
       </Box>
