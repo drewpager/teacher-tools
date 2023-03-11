@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { Grid, Card, Box, CardMedia, CardContent, IconButton, Typography, Chip, CircularProgress, Alert, Snackbar } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Grid, Card, Box, CardMedia, CardContent, IconButton, Typography, Chip, CircularProgress, Alert, Snackbar, Button } from '@mui/material';
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Link } from 'react-router-dom';
 import { Lesson } from '../../graphql/generated';
-import { DisplayError, DisplaySuccess, titleCase } from '../../lib/utils';
+import { titleCase } from '../../lib/utils';
 import { useKeenSlider } from 'keen-slider/react';
 import { UseVideoModal } from '../../lib/components/VideoModal';
 import 'keen-slider/keen-slider.min.css';
@@ -29,6 +29,7 @@ type BookmarkLessonVariables = {
 }
 
 export const CatalogItem = ({ name, category, viewer }: props) => {
+  const [open, setOpen] = useState<boolean>(false);
   const [loaded, setLoaded] = useState<boolean>(false);
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [sliderRef, instanceRef] = useKeenSlider(
@@ -49,6 +50,10 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
     },
   )
 
+  const handleClose = () => {
+    setOpen(false)
+  }
+
   const BOOKMARK_LESSON = gql`
     mutation BookmarkLesson($id: ID!, $viewer: String!) {
       bookmarkLesson(id: $id, viewer: $viewer)
@@ -64,13 +69,7 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
         viewer
       }
     })
-    if (res.data) {
-      return (
-        <>
-          <DisplaySuccess title={'Bookmarked!'} key={id} />
-        </>
-      )
-    }
+    res && setOpen(true)
   }
 
   BookmarkLessonLoading && (
@@ -155,6 +154,17 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
           ))}
         </div>
       </Grid>
+      <>
+        <Snackbar
+          open={open}
+          autoHideDuration={2000}
+          onClose={handleClose}
+        >
+          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+            Bookmarked!
+          </Alert>
+        </Snackbar>
+      </>
     </Box>
   )
 }

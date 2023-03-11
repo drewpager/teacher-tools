@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Card, CircularProgress, Grid, Typography, Chip } from '@mui/material'
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -16,6 +18,19 @@ type Props = {
 }
 
 export const Catalog = ({ viewer }: Props) => {
+  const [open, setOpen] = useState<boolean>(true);
+
+  const handleClose = () => {
+    setOpen(false)
+  }
+  const action = (
+    <Button onClick={handleClose}>
+      Close
+    </Button>
+  )
+  useEffect(() => {
+    console.log(open);
+  }, [open])
 
   const [expanded, setExpanded] = React.useState<string[]>([]);
   const [selected, setSelected] = React.useState<string[]>(['geography']);

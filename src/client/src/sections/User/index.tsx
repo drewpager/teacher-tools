@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useUserQuery, Viewer } from '../../graphql/generated';
-import { UserProfile, UserLessons, UserPlaylists, UserQuizzes } from './components/';
+import { UserProfile, UserLessons, UserPlaylists, UserQuizzes, UserBookmarks } from './components/';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
 import { PageSkeleton } from '../../lib/components/';
 import { Footer } from '../../lib/components/';
@@ -14,6 +14,7 @@ export const User = ({ viewer }: Props) => {
   const [playlistsPage, setPlaylistsPage] = useState(1);
   const [lessonsPage, setLessonsPage] = useState(1);
   const [quizzesPage, setQuizzesPage] = useState(1);
+  const [bookmarksPage, setBookmarksPage] = useState(1);
 
   const pageLimit = 3;
 
@@ -38,6 +39,7 @@ export const User = ({ viewer }: Props) => {
   const userLessons = user ? user.lessons : null;
   const userPlaylists = user ? user.playlists : null;
   const userQuizzes = user ? user.quizzes : null;
+  const userBookmarks = user ? user.bookmarks : null;
 
   const userLessonsElement = useMemo(() => userLessons ? (
     <UserLessons
@@ -66,6 +68,10 @@ export const User = ({ viewer }: Props) => {
     />
   ) : (<h2>Failed to load quizzes</h2>), [userQuizzes, quizzesPage])
 
+  const userBookmarksElement = useMemo(() => userBookmarks ? (
+    <UserBookmarks user={user} setBookmarksPage={setBookmarksPage} />
+  ) : (<h2>Failed to load bookmarks</h2>), [userBookmarks, user])
+
   if (loading) {
     return (
       <PageSkeleton />
@@ -85,6 +91,7 @@ export const User = ({ viewer }: Props) => {
       {userLessonsElement}
       {userPlaylistsElement}
       {userQuizzesElement}
+      {userBookmarksElement}
       <Footer viewer={viewer} />
     </>
   )

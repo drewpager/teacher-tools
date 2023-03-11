@@ -28,7 +28,7 @@ export const UserProfile = ({ user, viewerIsUser }: Props) => {
           <Typography variant="h5" className="user--text-details">Details</Typography>
           <Typography className="user--text-details">Name: {user.name}</Typography>
           <Typography className="user--text-details">Email: {user.contact}</Typography>
-          <Typography className="user--text-details">bookmarks: {user.bookmarks?.length}</Typography>
+          <Typography className="user--text-details">Bookmarks: {user.bookmarks?.length}</Typography>
           {additionalDetailsSection}
         </Card>
       </Box>
