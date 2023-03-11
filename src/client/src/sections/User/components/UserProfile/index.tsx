@@ -9,7 +9,6 @@ interface Props {
 }
 
 export const UserProfile = ({ user, viewerIsUser }: Props) => {
-  console.log(user)
   const additionalDetailsSection = viewerIsUser ? (
     <>
       <Divider sx={{ margin: 1 }} />
