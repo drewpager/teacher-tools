@@ -31,4 +31,5 @@ export interface AllLessonsData {
 
 export interface BookmarkLesson {
   id: string;
+  viewer: string;
 }

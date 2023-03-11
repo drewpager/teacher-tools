@@ -208,21 +208,21 @@ export const lessonResolvers = {
     },
     bookmarkLesson: async (
       _root: undefined,
-      { id }: BookmarkLesson,
+      { id, viewer }: BookmarkLesson,
       { db }: { db: Database }
-    ): Promise<boolean | undefined> => {
+    ): Promise<boolean | Lesson[]> => {
       try {
         const data = await db.lessons.findOne({
           _id: new ObjectId(id),
         });
 
         const bookmark = await db.users.updateOne(
-          { _id: "112129642735396482304" },
+          { _id: viewer },
           { $push: { bookmarks: data } }
         );
 
         if (!bookmark) {
-          throw new Error("Failed to bookmark lesson");
+          throw new Error("Failed to bookmark lesson!");
         }
 
         return bookmark.acknowledged;

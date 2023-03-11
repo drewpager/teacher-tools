@@ -6,8 +6,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import TreeView from '@mui/lab/TreeView';
 import TreeItem from '@mui/lab/TreeItem';
 import { useAllLessonsQuery, Lesson, Viewer } from '../../graphql/generated';
-import { categories, titleCase } from '../../lib/utils';
-import { DisplayError } from '../../lib/utils';
+import { categories, titleCase, DisplaySuccess, DisplayError } from '../../lib/utils';
 import { CatalogItem } from './catalogItem';
 import { Footer } from '../../lib/components';
 import "./catalog.scss";
@@ -130,12 +129,12 @@ export const Catalog = ({ viewer }: Props) => {
             <h1 className="catalogTitle">Catalog <Chip label={data?.allLessons.total} color="primary" size="medium" /></h1>
             {selected && data && (
               <div className="catalog--item">
-                <CatalogItem name={`${selected[0]}`} category={data.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0]))} key={`${selected[0]}`} />
+                <CatalogItem viewer={`${viewer.id}`} name={`${selected[0]}`} category={data.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0]))} key={`${selected[0]}`} />
               </div>
             )}
             {data && categories.map((cater) => (
               <div className="catalog--item">
-                <CatalogItem name={cater.name} category={data.allLessons.result.filter((b) => b.category?.includes(cater.name))} key={cater.name} />
+                <CatalogItem viewer={`${viewer.id}`} name={cater.name} category={data.allLessons.result.filter((b) => b.category?.includes(cater.name))} key={cater.name} />
               </div>
             ))}
           </Box >

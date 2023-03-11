@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Grid, Card, Box, CardMedia, CardContent, IconButton, Typography, Chip, CircularProgress, Alert } from '@mui/material';
+import { Grid, Card, Box, CardMedia, CardContent, IconButton, Typography, Chip, CircularProgress, Alert, Snackbar } from '@mui/material';
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Link } from 'react-router-dom';
 import { Lesson } from '../../graphql/generated';
-import { DisplaySuccess, titleCase } from '../../lib/utils';
+import { DisplayError, DisplaySuccess, titleCase } from '../../lib/utils';
 import { useKeenSlider } from 'keen-slider/react';
 import { UseVideoModal } from '../../lib/components/VideoModal';
 import 'keen-slider/keen-slider.min.css';
@@ -16,6 +16,7 @@ import { useMutation } from '@apollo/client';
 type props = {
   name: string;
   category: Lesson[];
+  viewer: string;
 }
 
 type BookmarkLessonData = {
@@ -24,9 +25,10 @@ type BookmarkLessonData = {
 
 type BookmarkLessonVariables = {
   id: string;
+  viewer: string;
 }
 
-export const CatalogItem = ({ name, category }: props) => {
+export const CatalogItem = ({ name, category, viewer }: props) => {
   const [loaded, setLoaded] = useState<boolean>(false);
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [sliderRef, instanceRef] = useKeenSlider(
@@ -48,17 +50,27 @@ export const CatalogItem = ({ name, category }: props) => {
   )
 
   const BOOKMARK_LESSON = gql`
-    mutation BookmarkLesson($id: ID) {
-      bookmarkLesson(id: $id)
+    mutation BookmarkLesson($id: ID!, $viewer: String!) {
+      bookmarkLesson(id: $id, viewer: $viewer)
     }
   `;
 
   const [bookmarkLesson, { loading: BookmarkLessonLoading, error: BookmarkLessonError }] = useMutation<BookmarkLessonData, BookmarkLessonVariables>(BOOKMARK_LESSON);
 
-  const onBookmark = async (id: string) => {
-    console.log(id);
-    let res = await bookmarkLesson({ variables: { id } })
-    res && (<DisplaySuccess title="Bookmarked!" />)
+  const onBookmark = async (id: string, viewer: string) => {
+    let res = await bookmarkLesson({
+      variables: {
+        id,
+        viewer
+      }
+    })
+    if (res.data) {
+      return (
+        <>
+          <DisplaySuccess title={'Bookmarked!'} key={id} />
+        </>
+      )
+    }
   }
 
   BookmarkLessonLoading && (
@@ -115,7 +127,7 @@ export const CatalogItem = ({ name, category }: props) => {
                       aria-label="bookmark"
                       sx={{ color: "#FAF9F6" }}
                     >
-                      <BookmarkAddIcon onClick={() => onBookmark(`${l.id}`)} />
+                      <BookmarkAddIcon onClick={() => onBookmark(`${l.id}`, viewer)} />
                     </IconButton>
                   </Box>
                 </Box>

@@ -65,6 +65,7 @@ export interface User {
   lessons?: Lesson[];
   quizzes?: Quiz[];
   authorized?: boolean;
+  bookmarks?: any[];
 }
 
 export interface Database {
@@ -83,4 +84,5 @@ export interface Viewer {
   playlists?: Playlist[];
   lessons?: Lesson[];
   quizzes?: Quiz[];
+  bookmarks?: any[];
 }

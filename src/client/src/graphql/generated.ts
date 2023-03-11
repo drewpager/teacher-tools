@@ -265,7 +265,7 @@ export type LogInInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  bookmarkLesson: Scalars['Boolean'];
+  bookmarkLesson?: Maybe<Scalars['Boolean']>;
   createLesson: Lesson;
   createQuiz: Quiz;
   deleteLesson: Scalars['Boolean'];
@@ -278,7 +278,8 @@ export type Mutation = {
 
 
 export type MutationBookmarkLessonArgs = {
-  id?: InputMaybe<Scalars['ID']>;
+  id: Scalars['ID'];
+  viewer: Scalars['String'];
 };
 
 
@@ -470,6 +471,7 @@ export type UserQuizzesArgs = {
 export type Viewer = {
   __typename?: 'Viewer';
   avatar?: Maybe<Scalars['String']>;
+  bookmarks?: Maybe<Array<Maybe<Lesson>>>;
   didRequest: Scalars['Boolean'];
   hasPayment?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['ID']>;
