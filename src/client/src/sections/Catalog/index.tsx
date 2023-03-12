@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Card, CircularProgress, Grid, Typography, Chip } from '@mui/material'
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
-import Button from '@mui/material/Button';
+import React from 'react';
+import { Box, CircularProgress, Grid, Typography, Chip } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import TreeView from '@mui/lab/TreeView';
 import TreeItem from '@mui/lab/TreeItem';
-import { useAllLessonsQuery, Lesson, Viewer } from '../../graphql/generated';
-import { categories, titleCase, DisplaySuccess, DisplayError } from '../../lib/utils';
+import { useAllLessonsQuery, Viewer } from '../../graphql/generated';
+import { categories, titleCase, DisplayError } from '../../lib/utils';
 import { CatalogItem } from './catalogItem';
 import { Footer } from '../../lib/components';
 import "./catalog.scss";
@@ -18,20 +15,6 @@ type Props = {
 }
 
 export const Catalog = ({ viewer }: Props) => {
-  const [open, setOpen] = useState<boolean>(true);
-
-  const handleClose = () => {
-    setOpen(false)
-  }
-  const action = (
-    <Button onClick={handleClose}>
-      Close
-    </Button>
-  )
-  useEffect(() => {
-    console.log(open);
-  }, [open])
-
   const [expanded, setExpanded] = React.useState<string[]>([]);
   const [selected, setSelected] = React.useState<string[]>(['geography']);
 
