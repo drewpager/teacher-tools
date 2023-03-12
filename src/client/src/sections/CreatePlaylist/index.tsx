@@ -333,9 +333,9 @@ export const CreatePlaylist = ({ viewer }: props) => {
                       checked={!yourContent}
                       onChange={() => setYourContent(!yourContent)}
                     />}
-                    label={yourContent ? "All Public Content" : "Your Content Only"}
+                    label={yourContent ? "Viewing Your Content Only" : "Viewing All Public Content"}
                   />
-                  <Chip
+                  {/* <Chip
                     label="Lessons"
                     variant={variant ? "filled" : "outlined"}
                     onClick={() => handleLessonClick()}
@@ -348,7 +348,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
                     onClick={() => handleAssessmentClick()}
                     onDelete={() => handleAssessmentClick()}
                     deleteIcon={variantAssessment ? undefined : <DoneIcon />}
-                  />
+                  /> */}
                   <Card variant="outlined" className="createPlaylist--card" {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
                     <TextField
                       variant='outlined'
