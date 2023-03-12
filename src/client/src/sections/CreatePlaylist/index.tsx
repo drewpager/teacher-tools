@@ -9,7 +9,8 @@ import {
   useAllQuizzesQuery,
   Viewer,
   FullLessonQuiz,
-  Plan
+  Plan,
+  useUserQuery
 } from '../../graphql/generated';
 import { DisplayError } from '../../lib/utils';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
@@ -77,6 +78,16 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const limit: number = 700;
   const page: number = 1;
 
+  const { data: userData, loading: userLoading, error: userError } = useUserQuery({
+    variables: {
+      id: `${viewer.id}`,
+      playlistsPage: 0,
+      lessonsPage: 0,
+      quizzesPage: 0,
+      limit: 0
+    }
+  });
+
   const { data: lessonData, loading: lessonLoading, error: lessonError } = useAllLessonsQuery({
     variables: {
       limit: limit,
@@ -100,6 +111,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
   const lessonQuery = lessonData ? lessonData.allLessons.result : null;
   const quizQuery = quizData ? quizData.allquizzes.result : null;
+  const bookmarkQuery = userData ? userData.user.bookmarks : null;
 
   useEffect(() => {
     if (lessonQuery) {
@@ -159,7 +171,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
       creator: viewer && viewer.id ? viewer.id : "0"
     })
   }
-  console.log(plans)
 
   if (lessonLoading || quizLoading) {
     return <CircularProgress />
@@ -350,7 +361,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
                     />
                     <Grid container>
                       {plans.map((i, index) => (
-                        yourContent && i.creator === viewer.id ? (
+                        yourContent && (bookmarkQuery?.find((val) => val?.id === i._id) || (i.creator === viewer.id)) ? (
                           <Draggable draggableId={`${i._id}`} index={index} key={`${i._id}`}>
                             {(provided) => (
                               <Grid item xs={12} md={12} lg={12}>
