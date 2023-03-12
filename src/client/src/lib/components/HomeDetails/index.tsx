@@ -84,9 +84,9 @@ export const HomeDetails = () => {
                     <IconButton aria-label="play/pause" sx={{ color: "#FAF9F6" }}>
                       <UseVideoModal video={`${l.video}`} />
                     </IconButton>
-                    <IconButton aria-label="bookmark" sx={{ color: "#FAF9F6" }}>
+                    {/* <IconButton aria-label="bookmark" sx={{ color: "#FAF9F6" }}>
                       <BookmarkAddIcon />
-                    </IconButton>
+                    </IconButton> */}
                   </Box>
                 </Box>
               </Card>
