@@ -2,7 +2,7 @@ import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { Box, Button, Radio, RadioGroup, FormControl, FormControlLabel } from '@mui/material';
 import { Quiz } from '../../../graphql/generated';
 import { Formik, Field, Form } from "formik";
-
+import './quizPlayer.scss';
 interface Props {
   quiz: Quiz
 }
@@ -38,8 +38,8 @@ export const QuizPlayer = ({ quiz }: Props) => {
   // 1. Allow teachers to set # of attempts before locking in grade?
 
   return (
-    <Box>
-      <h1>{title}</h1>
+    <Box className="quiz--container">
+      <h1 className="quiz--title">{title}</h1>
       <Formik
         initialValues={{
           question: {
@@ -55,7 +55,7 @@ export const QuizPlayer = ({ quiz }: Props) => {
           <Box>
             {quiz.questions.map((i, index) => (
               <>
-                <div id="my-radio-group" key={index}>{i.question}</div>
+                <h2 id="my-radio-group" key={index}>{i.question}</h2>
                 <div role="group" aria-labelledby="my-radio-group">
                   <Form>
                     {i.answerType === "MULTIPLECHOICE" && i.answerOptions?.map((op, id) => (
@@ -67,11 +67,11 @@ export const QuizPlayer = ({ quiz }: Props) => {
                     {i.answerType === "TRUEFALSE" && i.answerOptions?.map((od, ip) => (
                       <div>
                         <label key={index}>
-                          <Field type="radio" name="answers" value={od?.isCorrect} key={ip} />
+                          <Field type="radio" name={`question.answers[${i}]`} value={od?.isCorrect} key={ip} />
                           True
                         </label>
                         <label>
-                          <Field type="radio" name="answers" value={!od?.isCorrect} key={ip} />
+                          <Field type="radio" name={`question.answers[${i}]`} value={!od?.isCorrect} key={ip} />
                           False
                         </label>
                       </div>
@@ -80,7 +80,12 @@ export const QuizPlayer = ({ quiz }: Props) => {
                 </div>
               </>
             ))}
-            <button type="submit">Submit</button>
+            <Button
+              variant="outlined"
+              type="submit"
+              onClick={() => console.log(values)}
+              className="checkAnswersButton"
+            >Submit</Button>
           </Box>
         )}
       </Formik>
