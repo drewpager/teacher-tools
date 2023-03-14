@@ -42,9 +42,10 @@ export const QuizPlayer = ({ quiz }: Props) => {
       <h1 className="quiz--title">{title}</h1>
       <Formik
         initialValues={{
-          question: {
-            answers: [""],
-          }
+          answers: [],
+          // question: {
+          //   answers: [""],
+          // }
         }}
         onSubmit={async (values) => {
           await new Promise((r) => setTimeout(r, 500));
@@ -57,21 +58,21 @@ export const QuizPlayer = ({ quiz }: Props) => {
               <>
                 <h2 id="my-radio-group" key={index}>{i.question}</h2>
                 <div role="group" aria-labelledby="my-radio-group">
-                  <Form>
+                  <Form className='quiz--form'>
                     {i.answerType === "MULTIPLECHOICE" && i.answerOptions?.map((op, id) => (
                       <label>
-                        <Field type="radio" name={`question.answers[${i}]`} value={op?.answerText} key={id} />
+                        <Field type="checkbox" name={`answers[${i}]`} value={op?.answerText} key={id} />
                         {op?.answerText}
                       </label>
                     ))}
                     {i.answerType === "TRUEFALSE" && i.answerOptions?.map((od, ip) => (
                       <div>
                         <label key={index}>
-                          <Field type="radio" name={`question.answers[${i}]`} value={od?.isCorrect} key={ip} />
+                          <Field type="checkbox" name={`answers[${i}]`} value={od?.isCorrect} key={ip} />
                           True
                         </label>
                         <label>
-                          <Field type="radio" name={`question.answers[${i}]`} value={!od?.isCorrect} key={ip} />
+                          <Field type="checkbox" name={`answers[${i}]`} value={!od?.isCorrect} key={ip} />
                           False
                         </label>
                       </div>
@@ -83,7 +84,7 @@ export const QuizPlayer = ({ quiz }: Props) => {
             <Button
               variant="outlined"
               type="submit"
-              onClick={() => console.log(values)}
+              onClick={() => console.log(values.answers.map((i) => i))}
               className="checkAnswersButton"
             >Submit</Button>
           </Box>
