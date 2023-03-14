@@ -10,6 +10,13 @@
 
 .quiz--form {
   border: 1px dotted blue;
+  align-items: center;
+}
+
+.quiz--form > label {
+  padding-left: 1em;
+  place-content: center;
+  justify-items: center;
 }
 .checkAnswersButton {
   margin-top: 2em;
