@@ -21,3 +21,14 @@
 .checkAnswersButton {
   margin-top: 2em;
 }
+
+.answer--options {
+  list-style: none;
+}
+
+.answer--options > li {
+  border: 2px dotted blue;
+  margin-top: 3px;
+  max-width: max-content;
+  padding: 2px 10px;
+}
