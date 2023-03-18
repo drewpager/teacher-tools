@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Button } from '@mui/material';
-import { Quiz } from '../../../graphql/generated';
+import { Quiz, AnswerOptions } from '../../../graphql/generated';
 import { Formik, Field, Form } from "formik";
 import { titleCase } from '../../utils';
 import './quizPlayer.scss';
@@ -10,6 +10,7 @@ interface Props {
 
 export const QuizPlayer = ({ quiz }: Props) => {
   const [showFinalResult, setFinalResult] = useState<boolean>(false);
+  const [quizOptionId, setQuizOptionId] = useState<number | undefined>();
   const [score, setScore] = useState<number>(0);
   const [quizState, setQuizState] = useState<string[]>([]);
 
@@ -27,18 +28,30 @@ export const QuizPlayer = ({ quiz }: Props) => {
       : "")
   }
 
-  const handleClick = (isCorrect: boolean | string | undefined | null) => {
-    if (isCorrect) {
+  const handleClick = (a: AnswerOptions | null, id: number) => {
+    setQuizOptionId(id);
+    
+    if (a?.isCorrect) {
       setScore(score + 1)
     }
+    if (!a?.isCorrect) {
+      setScore(score - 1)
+    }
+  }
+  const resetQuiz = () => {
+    setFinalResult(false);
+    setScore(0);
+    setQuizOptionId(undefined)
   }
   console.log("Score: ", score);
+  console.log("Total Correct: ", totalCorrect);
   return (
     <Box>
       <h1>{title}</h1>
       {showFinalResult ? (
       <div>
-        <p>Final Result! - {Math.round(score / totalCorrect) + "%"}</p>
+        <p>Final Result! - {Math.round(score / totalCorrect) * 100 > 0 ? Math.round(score / totalCorrect) * 100 : "0"}%</p>
+        <Button type="submit" variant="outlined" onClick={() => resetQuiz()}>Reset!</Button>
       </div>
     ) : (
       <div>
@@ -50,7 +63,8 @@ export const QuizPlayer = ({ quiz }: Props) => {
             {q.answerOptions?.map((a, id) => (
               <li 
                 key={id}
-                onClick={() => handleClick(a?.isCorrect)}
+                className={quizOptionId === id ? 'onItemClick' : 'quiz--item'}
+                onClick={() => handleClick(a, id)}
               >
                 {a?.answerText === "" ? "True" : a?.answerText}
               </li>
@@ -58,9 +72,10 @@ export const QuizPlayer = ({ quiz }: Props) => {
           </ul>
           </>
         ))}
+      <Button type="submit" variant="outlined" onClick={() => setFinalResult(true)}>Show Results!</Button>
       </div>
     )}
-   </Box>
+  </Box>
   )
 }
 
