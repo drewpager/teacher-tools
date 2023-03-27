@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Button } from '@mui/material';
+import { Box, Button, FormControl, Radio, RadioGroup } from '@mui/material';
 import { Quiz, AnswerOptions } from '../../../graphql/generated';
 import { Formik, Field, Form } from "formik";
 import { titleCase } from '../../utils';
@@ -22,15 +22,15 @@ export const QuizPlayer = ({ quiz }: Props) => {
   }
 
   let initialAnswers = {
-    ...quiz.questions.map((i) => 
-      i.answerOptions && i.answerOptions[0] 
-      ? i.answerOptions[0].answerText 
-      : "")
+    ...quiz.questions.map((i) =>
+      i.answerOptions && i.answerOptions[0]
+        ? i.answerOptions[0].answerText
+        : "")
   }
 
   const handleClick = (a: AnswerOptions | null, id: number) => {
     setQuizOptionId(id);
-    
+
     if (a?.isCorrect) {
       setScore(score + 1)
     }
@@ -49,126 +49,33 @@ export const QuizPlayer = ({ quiz }: Props) => {
     <Box>
       <h1>{title}</h1>
       {showFinalResult ? (
-      <div>
-        <p>Final Result! - {Math.round(score / totalCorrect) * 100 > 0 ? Math.round(score / totalCorrect) * 100 : "0"}%</p>
-        <Button type="submit" variant="outlined" onClick={() => resetQuiz()}>Reset!</Button>
-      </div>
-    ) : (
-      <div>
-        {quiz.questions.map((q, index) => (
-          <>
-          <p>Question {index + 1} out of {quiz.questions.length}</p>
-          <h2>{q.question}</h2>
-          <ul className='answer--options'>
-            {q.answerOptions?.map((a, id) => (
-              <li 
-                key={id}
-                className={quizOptionId === id ? 'onItemClick' : 'quiz--item'}
-                onClick={() => handleClick(a, id)}
-              >
-                {a?.answerText === "" ? "True" : a?.answerText}
-              </li>
-            ))}
-          </ul>
-          </>
-        ))}
-      <Button type="submit" variant="outlined" onClick={() => setFinalResult(true)}>Show Results!</Button>
-      </div>
-    )}
-  </Box>
+        <div>
+          <p>Final Result! - {Math.round(score / totalCorrect) * 100 > 0 ? Math.round(score / totalCorrect) * 100 : "0"}%</p>
+          <Button type="submit" variant="outlined" onClick={() => resetQuiz()}>Reset!</Button>
+        </div>
+      ) : (
+        <div>
+          {quiz.questions.map((q, index) => (
+            <form onSubmit={() => console.log(score)}>
+              <p>Question {index + 1} out of {quiz.questions.length}</p>
+              <h2>{q.question}</h2>
+              {q.answerOptions && q.answerOptions.map((choice, inder) => (
+                <div key={inder}>
+                  <input
+                    type={q.answerType === "TRUEFALSE" ? "radio" : "checkbox"}
+                    name="answer"
+                    value={`${choice?.answerText}`}
+                    onChange={() => handleClick(choice, inder)}
+                  />
+                  <label>{choice?.answerText === "" ? "True" : choice?.answerText}</label>
+                  {q.answerType === "TRUEFALSE" && (<><input type="radio" name="answer" value="false" /><label>False</label></>)}
+                </div>
+              ))}
+            </form>
+          ))}
+          <Button type="submit" variant="outlined" onClick={() => setFinalResult(true)}>Show Results!</Button>
+        </div>
+      )}
+    </Box>
   )
 }
-
-// export const QuizPlayer = ({ quiz }: Props) => {
-//   const [quizState, setQuizState] = useState<string[]>([]);
-//   const [checked, setChecked] = useState<boolean>(false);
-
-//   const title = quiz.title;
-
-//   const handleCheck = () => {
-//     const quizKey: any[] = []
-//     quiz.questions.map((v, i) => {
-//       quizKey.push(v.answerOptions?.find((q) => q?.isCorrect))
-//     })
-//     const correct = quizState.filter((e, i) => e.matchAll(quizKey[i].isCorrect))
-//   }
-
-//   const handleSelect = (value: string) => {
-//     setChecked(true);
-//     setQuizState([...quizState, value])
-//   }
-
-//   const handleCorrectness = (e: string) => {
-//     setChecked(true);
-//     setQuizState([...quizState, e])
-//   }
-
-//   interface Values {
-//     answers: string[] | undefined[];
-//   }
-
-//   let initialAnswers = {
-//     ...quiz.questions.map((i) => 
-//       i.answerOptions && i.answerOptions[0] 
-//       ? i.answerOptions[0].answerText 
-//       : "")
-//   }
-  
-//   console.log("Initial: ", initialAnswers);
-//   // TODO: 
-//   // 1. Randomize order of answerOptions
-//   // 2. Check answers + Show Errors/Correct
-//   // Considerations:
-//   // 1. Allow teachers to set # of attempts before locking in grade?
-
-//   return (
-//     <Box className="quiz--container">
-//       <h1 className="quiz--title">{title}</h1>
-//       <Formik
-//         initialValues={{
-//           answers: [],
-//         }}
-//         onSubmit={async (values: Values) => {
-//           await new Promise((r) => setTimeout(r, 500));
-//           alert(JSON.stringify(values, null, 2));
-//         }}
-//       >
-//         {({ values }) => (
-//           <Box>
-//             {quiz.questions.map((i, index) => (
-//               <>
-//                 <h2 key={index}>{i.question}</h2>
-//                   <Form className='quiz--form'>
-//                     {i.answerType === "TRUEFALSE" && i.answerOptions?.map((od, ip) => (
-//                       // <div role="group" id="my-radio-group" aria-labelledby="my-radio-group">
-//                       <div>
-//                         <label>
-//                         <Field 
-//                           type="checkbox" 
-//                           name={values.answers[index]}  
-//                         />
-//                           {titleCase(`${od?.isCorrect}`)}
-//                         </label>
-//                       </div>
-//                     ))}
-//                     {i.answerType === "MULTIPLECHOICE" && i.answerOptions?.map((op, id) => (
-//                       <label>
-//                         <Field type="checkbox" name={`values.answers[${index}]`} value={op?.answerText} key={id} />
-//                         {op?.answerText}
-//                       </label>
-//                     ))}
-//                   </Form>
-//               </>
-//             ))}
-//             <Button
-//               variant="outlined"
-//               type="submit"
-//               onClick={() => console.log(values.answers)}
-//               className="checkAnswersButton"
-//             >Submit</Button>
-//           </Box>
-//         )}
-//       </Formik>
-//     </Box>
-//   )
-// }

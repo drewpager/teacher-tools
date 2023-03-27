@@ -31,7 +31,6 @@ export interface Lesson {
 export interface Answers {
   answerText: string;
   isCorrect: boolean;
-  id?: string;
 }
 export interface Questions {
   question: string;

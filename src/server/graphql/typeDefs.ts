@@ -47,7 +47,6 @@ export const typeDefs = gql`
   type AnswerOptions {
     answerText: String
     isCorrect: Boolean
-    id: ID
   }
 
   type Questions {
