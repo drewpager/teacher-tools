@@ -51,7 +51,7 @@ export const QuizPlayer = ({ quiz }: Props) => {
       {showFinalResult ? (
         <div>
           <p>Final Result! - {Math.round(score / totalCorrect) * 100 > 0 ? Math.round(score / totalCorrect) * 100 : "0"}%</p>
-          <Button type="submit" variant="outlined" onClick={() => resetQuiz()}>Reset!</Button>
+          <Button type="submit" variant="outlined" onClick={() => resetQuiz()}>Retake!</Button>
         </div>
       ) : (
         <div>
