@@ -27,6 +27,7 @@ export const Playlist = () => {
         <h4>Here are a few available playlists or you can try searching again.</h4>
         <Search />
         <DisplayError title='Failed to load playlist' />
+        <Footer />
       </Box>
     )
   }
@@ -46,6 +47,7 @@ export const Playlist = () => {
     <Box sx={{ marginLeft: 5 }}>
       <h2>No Playlist By This ID</h2>
       <DisplayError title='No Playlist By This ID' />
+      <Footer />
     </Box>
   )
 }
