@@ -7,7 +7,7 @@ import './footer.scss';
 import { Link } from 'react-router-dom';
 
 type Props = {
-  viewer: Viewer
+  viewer?: Viewer
 }
 
 export const Footer = ({ viewer }: Props) => {
@@ -41,9 +41,9 @@ export const Footer = ({ viewer }: Props) => {
           <Link to="/" style={{ textDecoration: "none" }}>
             <Typography variant='body1' className='footer--link-text'>Playlist Search <Chip label="Coming Soon!" size="small" sx={{ textDecoration: "none", backgroundColor: "#dda15e" }} /></Typography>
           </Link>
-          <Link to={viewer && viewer.id ? `/user/${viewer.id}` : `/login`} style={{ textDecoration: "none" }}>
+          {viewer ? (<Link to={viewer && viewer.id ? `/user/${viewer.id}` : `/login`} style={{ textDecoration: "none" }}>
             <Typography variant='body1' className='footer--link-text'>{viewer && viewer.id ? "Profile" : "Login"}</Typography>
-          </Link>
+          </Link>) : (<></>)}
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
           <Typography variant="h5" className='footer--text'>

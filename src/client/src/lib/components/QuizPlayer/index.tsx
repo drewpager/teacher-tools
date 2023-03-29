@@ -21,12 +21,12 @@ export const QuizPlayer = ({ quiz }: Props) => {
     answers: string[] | undefined[];
   }
 
-  let initialAnswers = {
-    ...quiz.questions.map((i) =>
-      i.answerOptions && i.answerOptions[0]
-        ? i.answerOptions[0].answerText
-        : "")
-  }
+  // let initialAnswers = {
+  //   ...quiz.questions.map((i) =>
+  //     i.answerOptions && i.answerOptions[0]
+  //       ? i.answerOptions[0].answerText
+  //       : "")
+  // }
 
   const handleClick = (a: AnswerOptions | null, id: number) => {
     setQuizOptionId(id);
@@ -43,10 +43,9 @@ export const QuizPlayer = ({ quiz }: Props) => {
     setScore(0);
     setQuizOptionId(undefined)
   }
-  console.log("Score: ", score);
-  console.log("Total Correct: ", totalCorrect);
+  //TODO: Evaluate final submission state before calculating score.
   return (
-    <Box>
+    <Box className='quiz--container'>
       <h1>{title}</h1>
       {showFinalResult ? (
         <div>

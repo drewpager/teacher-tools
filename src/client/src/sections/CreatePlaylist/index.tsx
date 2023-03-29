@@ -18,7 +18,7 @@ import { useNavigate } from 'react-router-dom';
 import { UseModal } from '../Modal';
 import './createPlaylist.scss';
 import { Link } from 'react-router-dom';
-import { CreatePlaylistCard } from '../../lib/components';
+import { CreatePlaylistCard, Footer } from '../../lib/components';
 import theme from '../../theme';
 
 type props = {
@@ -158,6 +158,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       <>
         {navigate('/login', { replace: true })}
         <DisplayError title="Must be logged in to create a playlist!" />
+        <Footer />
       </>
     )
   }
@@ -285,57 +286,58 @@ export const CreatePlaylist = ({ viewer }: props) => {
   }
 
   return (
-    <Box className="createPlaylist--box">
-      <h1 className='createPlaylist--h1'>Create Lesson Plan</h1>
-      <form onSubmit={handleSubmit}>
-        <DragDropContext onDragEnd={onDragEndHandler}>
-          <Grid container>
-            <Droppable droppableId='playlist'>
-              {(provided, snapshot) => (
-                <Grid item xs={12} sm={6} md={8} lg={8}>
-                  <Card variant="outlined" sx={{ minHeight: "750px", padding: 5, margin: 2 }} {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
-                    <TextField
-                      label="Lesson Plan Title"
-                      id="lesson-plan-title"
-                      variant="standard"
-                      ref={inputRef}
-                      fullWidth
-                      onChange={titleHandler}
+    <div>
+      <Box className="createPlaylist--box">
+        <h1 className='createPlaylist--h1'>Create Lesson Plan</h1>
+        <form onSubmit={handleSubmit}>
+          <DragDropContext onDragEnd={onDragEndHandler}>
+            <Grid container>
+              <Droppable droppableId='playlist'>
+                {(provided, snapshot) => (
+                  <Grid item xs={12} sm={6} md={8} lg={8}>
+                    <Card variant="outlined" sx={{ minHeight: "750px", padding: 5, margin: 2 }} {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
+                      <TextField
+                        label="Lesson Plan Title"
+                        id="lesson-plan-title"
+                        variant="standard"
+                        ref={inputRef}
+                        fullWidth
+                        onChange={titleHandler}
+                      />
+                      {playlist.plan.map((i, indices) => (
+                        <Draggable draggableId={`${i._id}`} index={indices} key={`${i._id}`}>
+                          {(provided, snapshot) => (
+                            <Grid item xs={12} md={12} lg={12}>
+                              <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                                {i.questions ? (
+                                  <Card className="lesson--card">
+                                    {i.title} <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                                  </Card>
+                                ) : (
+                                  <CreatePlaylistCard {...i} />
+                                )}
+                              </div>
+                            </Grid>
+                          )}
+                        </Draggable>
+                      ))}
+                      {provided.placeholder}
+                    </Card>
+                  </Grid>
+                )}
+              </Droppable>
+              <Droppable droppableId='lessons'>
+                {(provided, snapshot) => (
+                  <Grid item xs={12} sm={6} md={4} lg={4}>
+                    <FormControlLabel
+                      control={<Switch
+                        sx={{ m: 1 }}
+                        checked={!yourContent}
+                        onChange={() => setYourContent(!yourContent)}
+                      />}
+                      label={yourContent ? "Viewing Your Content Only" : "Viewing All Public Content"}
                     />
-                    {playlist.plan.map((i, indices) => (
-                      <Draggable draggableId={`${i._id}`} index={indices} key={`${i._id}`}>
-                        {(provided, snapshot) => (
-                          <Grid item xs={12} md={12} lg={12}>
-                            <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                              {i.questions ? (
-                                <Card className="lesson--card">
-                                  {i.title} <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
-                                </Card>
-                              ) : (
-                                <CreatePlaylistCard {...i} />
-                              )}
-                            </div>
-                          </Grid>
-                        )}
-                      </Draggable>
-                    ))}
-                    {provided.placeholder}
-                  </Card>
-                </Grid>
-              )}
-            </Droppable>
-            <Droppable droppableId='lessons'>
-              {(provided, snapshot) => (
-                <Grid item xs={12} sm={6} md={4} lg={4}>
-                  <FormControlLabel
-                    control={<Switch
-                      sx={{ m: 1 }}
-                      checked={!yourContent}
-                      onChange={() => setYourContent(!yourContent)}
-                    />}
-                    label={yourContent ? "Viewing Your Content Only" : "Viewing All Public Content"}
-                  />
-                  {/* <Chip
+                    {/* <Chip
                     label="Lessons"
                     variant={variant ? "filled" : "outlined"}
                     onClick={() => handleLessonClick()}
@@ -349,66 +351,68 @@ export const CreatePlaylist = ({ viewer }: props) => {
                     onDelete={() => handleAssessmentClick()}
                     deleteIcon={variantAssessment ? undefined : <DoneIcon />}
                   /> */}
-                  <Card variant="outlined" className="createPlaylist--card" {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
-                    <TextField
-                      variant='outlined'
-                      id="lesson-search"
-                      label="Search Lessons"
-                      value={searchInput}
-                      onChange={inputHandler}
-                      ref={inputRef}
-                      className="createPlaylist--search"
-                    />
+                    <Card variant="outlined" className="createPlaylist--card" {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
+                      <TextField
+                        variant='outlined'
+                        id="lesson-search"
+                        label="Search Lessons"
+                        value={searchInput}
+                        onChange={inputHandler}
+                        ref={inputRef}
+                        className="createPlaylist--search"
+                      />
+                      <Grid container>
+                        {plans.map((i, index) => (
+                          yourContent && (bookmarkQuery?.find((val) => val?.id === i._id) || (i.creator === viewer.id)) ? (
+                            <Draggable draggableId={`${i._id}`} index={index} key={`${i._id}`}>
+                              {(provided) => (
+                                <Grid item xs={12} md={12} lg={12}>
+                                  {/* {!i && <Link to="/create/lesson"><Typography variant="h5">You haven't added any content yet, click here to add your first lesson.</Typography></Link>} */}
+                                  <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                                    {i.questions ? (
+                                      <Card className="lesson--card" sx={{ padding: 2, margin: 1 }}>
+                                        {JSON.parse(JSON.stringify(i)).title} <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                                      </Card>
+                                    ) : (
+                                      <CreatePlaylistCard {...i} />
+                                    )}
+                                  </div>
+                                </Grid>
+                              )}
+                            </Draggable>
+                          ) : !yourContent && i.creator !== viewer.id && (
+                            <Draggable draggableId={`${i._id}`} index={index} key={`${i._id}`}>
+                              {(provided) => (
+                                <Grid item xs={12} md={12} lg={12}>
+                                  <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                                    {i.questions ? (
+                                      <Card className="lesson--card" sx={{ padding: 2, margin: 1 }}>
+                                        {JSON.parse(JSON.stringify(i)).title} <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                                      </Card>
+                                    ) : (
+                                      <CreatePlaylistCard {...i} />
+                                    )}
+                                  </div>
+                                </Grid>
+                              )}
+                            </Draggable>
+                          )
+                        ))}
+                        {provided.placeholder}
+                      </Grid>
+                    </Card>
                     <Grid container>
-                      {plans.map((i, index) => (
-                        yourContent && (bookmarkQuery?.find((val) => val?.id === i._id) || (i.creator === viewer.id)) ? (
-                          <Draggable draggableId={`${i._id}`} index={index} key={`${i._id}`}>
-                            {(provided) => (
-                              <Grid item xs={12} md={12} lg={12}>
-                                {/* {!i && <Link to="/create/lesson"><Typography variant="h5">You haven't added any content yet, click here to add your first lesson.</Typography></Link>} */}
-                                <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                                  {i.questions ? (
-                                    <Card className="lesson--card" sx={{ padding: 2, margin: 1 }}>
-                                      {JSON.parse(JSON.stringify(i)).title} <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
-                                    </Card>
-                                  ) : (
-                                    <CreatePlaylistCard {...i} />
-                                  )}
-                                </div>
-                              </Grid>
-                            )}
-                          </Draggable>
-                        ) : !yourContent && i.creator !== viewer.id && (
-                          <Draggable draggableId={`${i._id}`} index={index} key={`${i._id}`}>
-                            {(provided) => (
-                              <Grid item xs={12} md={12} lg={12}>
-                                <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                                  {i.questions ? (
-                                    <Card className="lesson--card" sx={{ padding: 2, margin: 1 }}>
-                                      {JSON.parse(JSON.stringify(i)).title} <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
-                                    </Card>
-                                  ) : (
-                                    <CreatePlaylistCard {...i} />
-                                  )}
-                                </div>
-                              </Grid>
-                            )}
-                          </Draggable>
-                        )
-                      ))}
-                      {provided.placeholder}
+                      <UseModal viewer={viewer} />
                     </Grid>
-                  </Card>
-                  <Grid container>
-                    <UseModal viewer={viewer} />
                   </Grid>
-                </Grid>
-              )}
-            </Droppable>
-          </Grid>
-        </DragDropContext>
-        <Button className="createPlaylist--button" variant='contained' type='submit'>Create</Button>
-      </form >
-    </Box>
+                )}
+              </Droppable>
+            </Grid>
+          </DragDropContext>
+          <Button className="createPlaylist--button" variant='contained' type='submit'>Create</Button>
+        </form >
+      </Box>
+      <Footer viewer={viewer} />
+    </div>
   )
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { LinearProgress, Box } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { useQuizQuery } from '../../graphql/generated';
-import { QuizPlayer } from '../../lib/components';
+import { QuizPlayer, Footer } from '../../lib/components';
 import { DisplayError } from '../../lib/utils';
 
 export const Quiz = () => {
@@ -29,6 +29,7 @@ export const Quiz = () => {
     return (
       <Box sx={{ marginTop: 7 }}>
         <QuizPlayer quiz={quiz} />
+        <Footer />
       </Box>
     )
   }
@@ -36,6 +37,7 @@ export const Quiz = () => {
   return (
     <Box sx={{ marginLeft: 5 }}>
       <h2>No Quiz By This ID</h2>
+      <Footer />
     </Box>
   )
 }

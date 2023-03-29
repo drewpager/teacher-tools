@@ -1,12 +1,13 @@
 import React from 'react';
-import { usePlaylistQuery } from '../../graphql/generated';
+import { usePlaylistQuery, Viewer } from '../../graphql/generated';
 import { useParams } from 'react-router-dom';
 import { Box, LinearProgress } from '@mui/material';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
-import { PlaylistCard, Search } from '../../lib/components/';
+import { PlaylistCard, Search, Footer } from '../../lib/components/';
 
 export const Playlist = () => {
   const params = useParams();
+  console.log(params)
   const { data, loading, error } = usePlaylistQuery({
     variables: {
       id: `${params.id}`
@@ -34,7 +35,10 @@ export const Playlist = () => {
 
   if (playlist) {
     return (
-      <PlaylistCard playlist={playlist} />
+      <>
+        <PlaylistCard playlist={playlist} />
+        <Footer />
+      </>
     )
   }
 

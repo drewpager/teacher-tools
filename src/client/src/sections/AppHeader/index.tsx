@@ -130,7 +130,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
               </MenuItem>
               <MenuItem onClick={handleCloseActionMenu}>
                 <Link to={'/playlist/create'} style={{ textDecoration: 'none' }}>
-                  <Typography textAlign="center">Create Playlist</Typography>
+                  <Typography textAlign="center">Create Lesson Plan</Typography>
                 </Link>
               </MenuItem>
             </Menu>

@@ -5,6 +5,7 @@ import { Box, TextField, FormLabel, FormControlLabel, Radio, RadioGroup, Typogra
 import { Cancel, ControlPoint, Remove } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { DisplayError } from '../../lib/utils';
+import { Footer } from '../../lib/components';
 import './createQuiz.scss';
 import * as yup from 'yup';
 interface props {
@@ -82,199 +83,204 @@ export const QuizCreate = ({ viewer }: props) => {
   if (loading) {
     <Box>
       <CircularProgress color='primary' />
+      <Footer />
     </Box>
   }
 
   if (error) {
     <Box>
       <DisplayError title="Failed to create assessment" />
+      <Footer />
     </Box>
   }
 
   return (
-    <Box className="quizCreate--form">
-      <Formik
-        initialValues={{
-          title: "",
-          questions: [
-            {
-              question: "",
-              answerType: AnswerFormat.Truefalse || AnswerFormat.Multiplechoice,
-              answerOptions: [
-                { answerText: "", isCorrect: true },
-              ]
-            },
-          ],
-          creator: `${viewer.id}`,
-        }}
-        validationSchema={validationSchema}
-        onSubmit={async (values) => {
-          await createQuiz({
-            variables: {
-              input: values
-            }
-          });
+    <div>
+      <Box className="quizCreate--form">
+        <Formik
+          initialValues={{
+            title: "",
+            questions: [
+              {
+                question: "",
+                answerType: AnswerFormat.Truefalse || AnswerFormat.Multiplechoice,
+                answerOptions: [
+                  { answerText: "", isCorrect: true },
+                ]
+              },
+            ],
+            creator: `${viewer.id}`,
+          }}
+          validationSchema={validationSchema}
+          onSubmit={async (values) => {
+            await createQuiz({
+              variables: {
+                input: values
+              }
+            });
 
-          navigate(`../user/${viewer.id}`, { replace: true })
-        }}
-      >
-        {({ values, errors, touched, handleSubmit, handleChange }) => (
+            navigate(`../user/${viewer.id}`, { replace: true })
+          }}
+        >
+          {({ values, errors, touched, handleSubmit, handleChange }) => (
 
-          <form onSubmit={handleSubmit}>
-            <h1>Create Assessment</h1>
-            <TextField
-              fullWidth
-              type="text"
-              name="title"
-              label="Assessment Title"
-              value={values.title}
-              onChange={handleChange}
-              error={Boolean(errors.title)}
-              helperText={errors.title}
-              sx={{
-                gridColumn: 3
-              }}
-            />
-            <FieldArray name="questions">
-              {({ insert, remove, push }) => (
-                <div>
-                  {values.questions.length > 0 &&
-                    values.questions.map((question: any, index: number) => {
-                      return (
-                        <div className='row' key={index}>
-                          <div className='col' key={index}>
-                            <TextField
-                              placeholder={`Question/Prompt`}
-                              fullWidth
-                              sx={{ paddingTop: "0.5rem", gridColumn: 4 }}
-                              name={`questions[${index}].question`}
-                              onChange={handleChange}
-                              InputProps={{
-                                endAdornment: (
-                                  <InputAdornment position="end">
-                                    <Cancel onClick={() => remove(index)} className="button--cancel" />
-                                  </InputAdornment>
-                                )
-                              }}
-                            />
-                          </div>
-                          <FormLabel>Answer Type</FormLabel>
-                          <RadioGroup defaultValue={"TRUEFALSE"}>
-                            <FormControlLabel
-                              name={`questions[${index}].answerType`}
-                              value="TRUEFALSE"
-                              control={<Radio />}
-                              label="True/False"
-                              onChange={handleChange}
-                            />
-                            <FormControlLabel
-                              name={`questions[${index}].answerType`}
-                              value="MULTIPLECHOICE"
-                              control={<Radio />}
-                              label="Multiple Choice"
-                              onChange={handleChange}
-                            />
-                          </RadioGroup>
-                          {question.answerType === "MULTIPLECHOICE" ? (
-                            <FieldArray name={`questions[${index}].answerOptions`}>
-                              {({ insert, remove, push }) => (
-                                <div>
-                                  {values.questions[index].answerOptions.length > 0 &&
-                                    values.questions[index].answerOptions.map((option: any, indy: number) => {
-                                      return (
-                                        <div className="quiz__multiAnswerArea">
-                                          <div className="quiz__multiAnswers">
-                                            <Field
-                                              name={`questions[${index}].answerOptions[${indy}].isCorrect`}
-                                              component={checkInput}
-                                            />
-                                            <TextField
-                                              label="Enter Answer Option"
-                                              fullWidth
-                                              sx={{ marginTop: 2 }}
-                                              name={`questions[${index}].answerOptions[${indy}].answerText`}
-                                              onChange={handleChange}
-                                            />
-                                            <Tooltip title="Add another answer option" className="quiz--modicons">
-                                              <ControlPoint onClick={() => push({ answerText: "", isCorrect: false })} />
-                                            </Tooltip>
-                                            {(indy === 0) ? (
-                                              <>
-                                              </>
-                                            ) : (
-                                              <Tooltip title="Remove answer option" className="quiz--modicons">
-                                                <Remove onClick={() => remove(indy)} />
+            <form onSubmit={handleSubmit}>
+              <h1>Create Assessment</h1>
+              <TextField
+                fullWidth
+                type="text"
+                name="title"
+                label="Assessment Title"
+                value={values.title}
+                onChange={handleChange}
+                error={Boolean(errors.title)}
+                helperText={errors.title}
+                sx={{
+                  gridColumn: 3
+                }}
+              />
+              <FieldArray name="questions">
+                {({ insert, remove, push }) => (
+                  <div>
+                    {values.questions.length > 0 &&
+                      values.questions.map((question: any, index: number) => {
+                        return (
+                          <div className='row' key={index}>
+                            <div className='col' key={index}>
+                              <TextField
+                                placeholder={`Question/Prompt`}
+                                fullWidth
+                                sx={{ paddingTop: "0.5rem", gridColumn: 4 }}
+                                name={`questions[${index}].question`}
+                                onChange={handleChange}
+                                InputProps={{
+                                  endAdornment: (
+                                    <InputAdornment position="end">
+                                      <Cancel onClick={() => remove(index)} className="button--cancel" />
+                                    </InputAdornment>
+                                  )
+                                }}
+                              />
+                            </div>
+                            <FormLabel>Answer Type</FormLabel>
+                            <RadioGroup defaultValue={"TRUEFALSE"}>
+                              <FormControlLabel
+                                name={`questions[${index}].answerType`}
+                                value="TRUEFALSE"
+                                control={<Radio />}
+                                label="True/False"
+                                onChange={handleChange}
+                              />
+                              <FormControlLabel
+                                name={`questions[${index}].answerType`}
+                                value="MULTIPLECHOICE"
+                                control={<Radio />}
+                                label="Multiple Choice"
+                                onChange={handleChange}
+                              />
+                            </RadioGroup>
+                            {question.answerType === "MULTIPLECHOICE" ? (
+                              <FieldArray name={`questions[${index}].answerOptions`}>
+                                {({ insert, remove, push }) => (
+                                  <div>
+                                    {values.questions[index].answerOptions.length > 0 &&
+                                      values.questions[index].answerOptions.map((option: any, indy: number) => {
+                                        return (
+                                          <div className="quiz__multiAnswerArea">
+                                            <div className="quiz__multiAnswers">
+                                              <Field
+                                                name={`questions[${index}].answerOptions[${indy}].isCorrect`}
+                                                component={checkInput}
+                                              />
+                                              <TextField
+                                                label="Enter Answer Option"
+                                                fullWidth
+                                                sx={{ marginTop: 2 }}
+                                                name={`questions[${index}].answerOptions[${indy}].answerText`}
+                                                onChange={handleChange}
+                                              />
+                                              <Tooltip title="Add another answer option" className="quiz--modicons">
+                                                <ControlPoint onClick={() => push({ answerText: "", isCorrect: false })} />
                                               </Tooltip>
-                                            )}
+                                              {(indy === 0) ? (
+                                                <>
+                                                </>
+                                              ) : (
+                                                <Tooltip title="Remove answer option" className="quiz--modicons">
+                                                  <Remove onClick={() => remove(indy)} />
+                                                </Tooltip>
+                                              )}
+                                            </div>
                                           </div>
-                                        </div>
-                                      )
-                                    })}
-                                </div>
-                              )}
-                            </FieldArray>
-                          ) : (
-                            <>
-                            </>
-                          )}
-                          {question.answerType === "TRUEFALSE" ? (
-                            /* TODO: disable remove button on last item and only render +/- buttons when last index of array */
-                            <FieldArray name={`questions[${index}].answerOptions`}>
-                              {({ insert, remove, push }) => (
-                                <div>
-                                  {values.questions[index].answerOptions.length > 0 &&
-                                    values.questions[index].answerOptions.map((option: any, indy: number) => {
-                                      return (
-                                        <div className="quiz__multiAnswerArea">
-                                          <div className="quiz__multiAnswers">
-                                            <Field
-                                              name={`questions[${index}].answerOptions[${indy}].isCorrect`}
-                                              component={checkInput}
-                                            />
+                                        )
+                                      })}
+                                  </div>
+                                )}
+                              </FieldArray>
+                            ) : (
+                              <>
+                              </>
+                            )}
+                            {question.answerType === "TRUEFALSE" ? (
+                              /* TODO: disable remove button on last item and only render +/- buttons when last index of array */
+                              <FieldArray name={`questions[${index}].answerOptions`}>
+                                {({ insert, remove, push }) => (
+                                  <div>
+                                    {values.questions[index].answerOptions.length > 0 &&
+                                      values.questions[index].answerOptions.map((option: any, indy: number) => {
+                                        return (
+                                          <div className="quiz__multiAnswerArea">
+                                            <div className="quiz__multiAnswers">
+                                              <Field
+                                                name={`questions[${index}].answerOptions[${indy}].isCorrect`}
+                                                component={checkInput}
+                                              />
+                                            </div>
                                           </div>
-                                        </div>
-                                      )
-                                    })}
-                                </div>
-                              )}
-                            </FieldArray>
-                          ) : (
-                            <>
-                            </>
-                          )}
-                        </div>
-                      )
-                    })}
-                  <Button
-                    variant="outlined"
-                    className="quiz--button-add"
-                    onClick={() => push({
-                      question: '', answerType: AnswerFormat,
-                      answerOptions: [
-                        { answerText: "", isCorrect: true },
-                      ]
-                    })}
-                  >
-                    Add Question
-                  </Button>
-                </div>
-              )}
-            </FieldArray>
-            <Button
-              variant="outlined"
-              type="submit"
-              className="quiz--button-submit"
-            >Submit</Button>
-            {/* UNCOMMENT TO DISPLAY MUTATION CONSTRUCTION
+                                        )
+                                      })}
+                                  </div>
+                                )}
+                              </FieldArray>
+                            ) : (
+                              <>
+                              </>
+                            )}
+                          </div>
+                        )
+                      })}
+                    <Button
+                      variant="outlined"
+                      className="quiz--button-add"
+                      onClick={() => push({
+                        question: '', answerType: AnswerFormat,
+                        answerOptions: [
+                          { answerText: "", isCorrect: true },
+                        ]
+                      })}
+                    >
+                      Add Question
+                    </Button>
+                  </div>
+                )}
+              </FieldArray>
+              <Button
+                variant="outlined"
+                type="submit"
+                className="quiz--button-submit"
+              >Submit</Button>
+              {/* UNCOMMENT TO DISPLAY MUTATION CONSTRUCTION
               <pre>
                 {JSON.stringify(values, null, 2)}
               </pre>
               <pre>
                 {JSON.stringify(errors, null, 2)}
               </pre> */}
-          </form>
-        )}
-      </Formik>
-    </Box>
+            </form>
+          )}
+        </Formik>
+      </Box>
+      <Footer />
+    </div>
   )
 }
