@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, ListItem, Typography, Grid, Button, CircularProgress, Alert } from '@mui/material';
+import { Card, CardContent, ListItem, Typography, Grid, Button, CircularProgress, Alert, Tooltip } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { Playlist, Lesson, LessonPlanUnion } from '../../../graphql/generated';
 import { useMutation } from '@apollo/client';
@@ -34,48 +34,48 @@ export const UserPlaylistsCard = ({ playlist }: Props) => {
     }
   `;
 
-interface DeletePlaylistData {
-  deletePlaylist: Playlist
-}
+  interface DeletePlaylistData {
+    deletePlaylist: Playlist
+  }
 
-interface DeletePlaylistVariables {
-  id: string
-}
-interface UpdatePlaylistData {
-  updatePlaylist: Playlist
-}
+  interface DeletePlaylistVariables {
+    id: string
+  }
+  interface UpdatePlaylistData {
+    updatePlaylist: Playlist
+  }
 
-interface UpdatePlaylistVariables {
-  id: string
-}
-const [deletePlaylist, { loading: DeletePlaylistLoading, error: DeletePlaylistError}] = useMutation<DeletePlaylistData, DeletePlaylistVariables>(DELETE_PLAYLIST);
-const [updatePlan, { loading: UpdatePlanLoading, error: UpdatePlanError}] = useMutation<UpdatePlaylistData, UpdatePlaylistVariables>(UPDATE_PLAN);
+  interface UpdatePlaylistVariables {
+    id: string
+  }
+  const [deletePlaylist, { loading: DeletePlaylistLoading, error: DeletePlaylistError }] = useMutation<DeletePlaylistData, DeletePlaylistVariables>(DELETE_PLAYLIST);
+  const [updatePlan, { loading: UpdatePlanLoading, error: UpdatePlanError }] = useMutation<UpdatePlaylistData, UpdatePlaylistVariables>(UPDATE_PLAN);
 
-const handleDelete = async (id: string) => {  
-    const res = await deletePlaylist({ variables: { id }})
+  const handleDelete = async (id: string) => {
+    const res = await deletePlaylist({ variables: { id } })
     if (res) {
       // window.location.reload();
-      return ( <DisplaySuccess title="Deletion Successful!" /> );
+      return (<DisplaySuccess title="Deletion Successful!" />);
     }
   }
 
-  const handleUpdate = async (id: string) => { 
-    navigation(`/edit/${id}`) 
-    await updatePlan({ variables: { id }})
+  const handleUpdate = async (id: string) => {
+    navigation(`/edit/${id}`)
+    await updatePlan({ variables: { id } })
   }
 
   const deletePlaylistLoadingMessage = (
     <CircularProgress sx={{
-              color: 'inherit',
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              zIndex: 1,
-            }}/>
-    );
+      color: 'inherit',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      zIndex: 1,
+    }} />
+  );
 
   const updatePlanLoadingMessage = deletePlaylistLoadingMessage;
-    
+
   const deletePlaylistErrorMessage = (
     <Alert variant="outlined" severity="error">
       Oops, something went wrong in the deletion process!
@@ -90,24 +90,32 @@ const handleDelete = async (id: string) => {
 
   return (
     <Grid item lg={4} md={6} sm={12} xs={12} key={playlist.id}>
-    <ListItem key={playlist.id}>
-      <Card sx={{ minWidth: 350}}>
-        <CardContent>
-          <Link to={`/playlist/${playlist.id}`} style={{ textDecoration: "none" }}>
-            <Typography variant='h4' style={{ color: "#000"}}>
-              {playlist.name}
-            </Typography>
-            <Typography variant='h6' style={{ color: "#000"}}>
-              {playlist.plan.length} {playlist.plan.length === 1 ? " Item" : " Items"}
-            </Typography>
-          </Link>
-          {UpdatePlanLoading ? updatePlanLoadingMessage : <Button onClick={() => handleUpdate(playlist.id)}><EditIcon /></Button>}
-          {UpdatePlanError ? updatePlanErrorMessage : null}
-          {DeletePlaylistLoading ? deletePlaylistLoadingMessage : <Button onClick={() => handleDelete(playlist.id)}><DeleteIcon /></Button>}
-          {DeletePlaylistError ? deletePlaylistErrorMessage : null}
-        </CardContent>
-      </Card>
-    </ListItem>
-  </Grid>
+      <ListItem key={playlist.id}>
+        <Card sx={{ minWidth: 350 }}>
+          <CardContent>
+            <Link to={`/playlist/${playlist.id}`} style={{ textDecoration: "none" }}>
+              <Typography variant='h4' style={{ color: "#000" }}>
+                {playlist.name}
+              </Typography>
+              <Typography variant='h6' style={{ color: "#000" }}>
+                {playlist.plan.length} {playlist.plan.length === 1 ? " Item" : " Items"}
+              </Typography>
+            </Link>
+            {UpdatePlanLoading ? updatePlanLoadingMessage : (
+              <Tooltip title="Edit contents of playlist!">
+                <Button onClick={() => handleUpdate(playlist.id)}><EditIcon /></Button>
+              </Tooltip>
+            )}
+            {UpdatePlanError ? updatePlanErrorMessage : null}
+            {DeletePlaylistLoading ? deletePlaylistLoadingMessage : (
+              <Tooltip title="Delete playlist!">
+                <Button onClick={() => handleDelete(playlist.id)}><DeleteIcon /></Button>
+              </Tooltip>
+            )}
+            {DeletePlaylistError ? deletePlaylistErrorMessage : null}
+          </CardContent>
+        </Card>
+      </ListItem>
+    </Grid>
   )
 }

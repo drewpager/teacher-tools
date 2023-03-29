@@ -1,5 +1,5 @@
 import React, { MouseEvent } from 'react';
-import { Grid, Card, Typography, Button, CircularProgress, Alert } from '@mui/material';
+import { Grid, Card, Typography, Button, CircularProgress, Alert, Tooltip } from '@mui/material';
 import { DisplaySuccess } from '../../utils';
 import { gql } from 'graphql-tag';
 import { useMutation } from '@apollo/client';
@@ -63,7 +63,11 @@ export const LessonCard = ({ lesson }: Props) => {
           <Typography variant="body2">{startDate}</Typography>
           <Typography variant="body2">{endDate}</Typography>
         </Link>
-        {deleteLessonLoading ? deleteLessonLoadingMessage : <Button onClick={() => handleDelete(id)}><DeleteIcon /></Button>}
+        {deleteLessonLoading ? deleteLessonLoadingMessage : (
+          <Tooltip title="Delete Lesson!">
+            <Button onClick={() => handleDelete(id)}><DeleteIcon /></Button>
+          </Tooltip>
+        )}
         {deleteLessonError ? deleteLessonErrorMessage : null}
       </Card>
     </Grid>
