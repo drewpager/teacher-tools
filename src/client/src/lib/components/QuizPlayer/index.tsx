@@ -50,7 +50,7 @@ export const QuizPlayer = ({ quiz }: Props) => {
       <h1>{title}</h1>
       {showFinalResult ? (
         <div>
-          <p>Final Result! - {Math.round(score / totalCorrect) * 100 > 0 ? Math.round(score / totalCorrect) * 100 : "0"}%</p>
+          <p>Final Result! - {score > 0 ? `${(score / totalCorrect) * 100}` : "0"}%</p>
           <Button type="submit" variant="outlined" onClick={() => resetQuiz()}>Retake!</Button>
         </div>
       ) : (
