@@ -12,13 +12,13 @@ export const Pricing = () => (
   <section style={{ marginTop: "70px" }}>
     <div className="product">
       <div className="description">
-        <h3>Individual plan</h3>
+        <h3>Individual Plan</h3>
         <h5>$3.99 / month</h5>
       </div>
     </div>
     <form action="/create-checkout-session" method="POST">
       {/* Add a hidden field with the lookup_key of your Price */}
-      <input type="hidden" name="lookup_key" value="{{PRICE_LOOKUP_KEY}}" />
+      <input type="hidden" name="lookup_key" value="0111" />
       <button id="checkout-and-portal-button" type="submit">
         Checkout
       </button>
@@ -31,7 +31,7 @@ const SuccessDisplay = ({ sessionId }: Props) => {
     <section>
       <div className="product Box-root">
         <div className="description Box-root">
-          <h3>Subscription to starter plan successful!</h3>
+          <h3>Subscription to our individual plan successful!</h3>
         </div>
       </div>
       <form action="/create-portal-session" method="POST">

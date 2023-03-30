@@ -34,7 +34,8 @@ import {
   EditPlaylist,
   Catalog,
   Quiz,
-  TestElement
+  TestElement,
+  Billing
 } from './sections';
 import { DisplayError } from './lib/utils';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -110,6 +111,7 @@ const App = () => {
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/pricing" element={<Pricing />} />
+          <Route path="/billing" element={<Billing viewer={viewer} />} />
           <Route path="/login" children={(props: any) => (<Login {...props} setViewer={setViewer} />)} element={<Login setViewer={setViewer} />} />
           <Route path="/playlist/:id" element={<Playlist />} />
           <Route path="/playlist/create" element={<CreatePlaylist viewer={viewer} />} />

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, Box, CardContent, Typography, IconButton, Chip, Grid } from '@mui/material';
-import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import { titleCase } from '../../utils';
 import { UseVideoModal } from '../VideoModal';
 import { Lesson } from '../../../graphql/generated';
