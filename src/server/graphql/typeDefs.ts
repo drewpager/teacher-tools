@@ -12,7 +12,7 @@ export const typeDefs = gql`
     id: ID
     token: String
     avatar: String
-    hasPayment: Boolean
+    hasPayment: String
     didRequest: Boolean!
     playlists: [Playlist]
     lessons: [Lesson]
@@ -25,7 +25,7 @@ export const typeDefs = gql`
     name: String!
     avatar: String!
     contact: String!
-    hasPayment: Boolean!
+    hasPayment: String
     playlists(limit: Int!, page: Int!): Playlists
     lessons(limit: Int!, page: Int!): Lessons
     quizzes(limit: Int!, page: Int!): Quizzes
@@ -114,6 +114,7 @@ export const typeDefs = gql`
     deleteLesson(id: ID): Boolean!
     deletePlaylist(id: ID): Boolean!
     bookmarkLesson(id: ID!, viewer: String!): Boolean
+    addPayment(id: String, userId: ID): String
   }
 
   input LogInInput {

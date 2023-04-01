@@ -1,7 +1,12 @@
 import { Viewer, Database, User } from "../../../lib/types";
 import { ObjectId } from "mongodb";
 import { Google } from "../../../lib/api";
-import { LogInArgs, PlaylistArgs, PlaylistArgsData } from "./types";
+import {
+  LogInArgs,
+  PlaylistArgs,
+  PlaylistArgsData,
+  PaymentArgs,
+} from "./types";
 import crypto from "crypto";
 import { Response, Request } from "express";
 
@@ -60,7 +65,6 @@ const logInViaGoogle = async (
         avatar: userAvatar,
         contact: userEmail,
         watched: [],
-        paymentId: "2020",
         playlists: [],
       },
     }
@@ -76,7 +80,6 @@ const logInViaGoogle = async (
         avatar: userAvatar,
         contact: userEmail,
         watched: [],
-        paymentId: "1010",
         playlists: [],
       });
       viewer = await db.users.findOne({ _id: updateResponse.insertedId });
@@ -170,13 +173,30 @@ export const viewerResolvers = {
         throw new Error(`Failed to log out user: ${err}`);
       }
     },
+    addPayment: async (
+      viewer: Viewer,
+      { id }: PaymentArgs,
+      { db }: { db: Database }
+    ): Promise<number> => {
+      try {
+        const user = await db.users.findOneAndUpdate(
+          { _id: viewer._id },
+          { paymentId: id }
+        );
+        viewer.paymentId = id;
+        console.log(viewer);
+        return user.ok;
+      } catch (e) {
+        throw new Error(`Failed to save paymentID: ${e}`);
+      }
+    },
   },
   Viewer: {
     id: (viewer: Viewer): string | undefined => {
       return viewer._id;
     },
-    hasPayment: (viewer: Viewer): boolean | undefined => {
-      return viewer.paymentId ? true : undefined;
+    hasPayment: (viewer: Viewer): string | undefined => {
+      return viewer.paymentId ? viewer.paymentId : undefined;
     },
     playlists: async (
       viewer: Viewer,

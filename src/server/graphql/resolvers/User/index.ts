@@ -9,9 +9,11 @@ import {
   UserQuizArgs,
   BookmarkLessonArgs,
   BookmarkLessonData,
+  UserPaymentArgs,
 } from "./types";
 import { authorize } from "../../../lib/utils";
 import { User, Database, Lesson } from "../../../lib/types";
+import { ObjectId } from "mongodb";
 
 export const userResolvers = {
   Query: {
@@ -43,8 +45,8 @@ export const userResolvers = {
     id: (user: User) => {
       return user._id;
     },
-    hasPayment: (user: User) => {
-      return Boolean(user.paymentId);
+    hasPayment: async (user: User) => {
+      return user.paymentId;
     },
     playlists: async (
       user: User,
@@ -158,6 +160,23 @@ export const userResolvers = {
         return cursor;
       } catch (e) {
         throw new Error(`Failed to bookmark anything ${e}`);
+      }
+    },
+  },
+  Mutation: {
+    addPayment: async (
+      _root: undefined,
+      { id, userId }: UserPaymentArgs,
+      { db }: { db: Database }
+    ): Promise<boolean> => {
+      try {
+        const userPay = await db.users.findOneAndUpdate(
+          { _id: `${userId}` },
+          { $set: { paymentId: `${id}` } }
+        );
+        return userPay.value ? true : false;
+      } catch (err) {
+        throw new Error(`Error adding payment in Mutation: ${err}`);
       }
     },
   },

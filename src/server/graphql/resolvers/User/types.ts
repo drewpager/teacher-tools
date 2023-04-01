@@ -48,3 +48,7 @@ export interface BookmarkLessonData {
   result: Lesson[];
   totalCount: number;
 }
+export interface UserPaymentArgs {
+  id: string;
+  userId: string;
+}

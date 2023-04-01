@@ -265,6 +265,7 @@ export type LogInInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  addPayment?: Maybe<Scalars['Boolean']>;
   bookmarkLesson?: Maybe<Scalars['Boolean']>;
   createLesson: Lesson;
   createQuiz: Quiz;
@@ -274,6 +275,11 @@ export type Mutation = {
   logIn: Viewer;
   logOut: Viewer;
   updatePlan: Playlist;
+};
+
+
+export type MutationAddPaymentArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -442,7 +448,7 @@ export type User = {
   avatar: Scalars['String'];
   bookmarks?: Maybe<Array<Maybe<Lesson>>>;
   contact: Scalars['String'];
-  hasPayment: Scalars['Boolean'];
+  hasPayment?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   lessons?: Maybe<Lessons>;
   name: Scalars['String'];
@@ -473,7 +479,7 @@ export type Viewer = {
   avatar?: Maybe<Scalars['String']>;
   bookmarks?: Maybe<Array<Maybe<Lesson>>>;
   didRequest: Scalars['Boolean'];
-  hasPayment?: Maybe<Scalars['Boolean']>;
+  hasPayment?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['ID']>;
   lessons?: Maybe<Array<Maybe<Lesson>>>;
   playlists?: Maybe<Array<Maybe<Playlist>>>;
@@ -507,12 +513,12 @@ export type LogInMutationVariables = Exact<{
 }>;
 
 
-export type LogInMutation = { __typename?: 'Mutation', logIn: { __typename?: 'Viewer', id?: string | null, token?: string | null, avatar?: string | null, hasPayment?: boolean | null, didRequest: boolean } };
+export type LogInMutation = { __typename?: 'Mutation', logIn: { __typename?: 'Viewer', id?: string | null, token?: string | null, avatar?: string | null, hasPayment?: string | null, didRequest: boolean } };
 
 export type LogOutMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type LogOutMutation = { __typename?: 'Mutation', logOut: { __typename?: 'Viewer', id?: string | null, token?: string | null, avatar?: string | null, hasPayment?: boolean | null, didRequest: boolean } };
+export type LogOutMutation = { __typename?: 'Mutation', logOut: { __typename?: 'Viewer', id?: string | null, token?: string | null, avatar?: string | null, hasPayment?: string | null, didRequest: boolean } };
 
 export type UpdatePlanMutationVariables = Exact<{
   input: LessonPlanInput;
@@ -581,7 +587,7 @@ export type UserQueryVariables = Exact<{
 }>;
 
 
-export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, name: string, avatar: string, contact: string, hasPayment: boolean, bookmarks?: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null } | null> | null, playlists?: { __typename?: 'Playlists', total: number, totalCount: number, result: Array<{ __typename?: 'Playlist', id?: string | null, name: string, creator: string, plan: Array<{ __typename: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null } | { __typename: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> } | null> }> } | null, lessons?: { __typename?: 'Lessons', total: number, totalCount: number, result: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null }> } | null, quizzes?: { __typename?: 'Quizzes', total: number, totalCount: number, result: Array<{ __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> }> } | null } };
+export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, name: string, avatar: string, contact: string, hasPayment?: string | null, bookmarks?: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null } | null> | null, playlists?: { __typename?: 'Playlists', total: number, totalCount: number, result: Array<{ __typename?: 'Playlist', id?: string | null, name: string, creator: string, plan: Array<{ __typename: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null } | { __typename: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> } | null> }> } | null, lessons?: { __typename?: 'Lessons', total: number, totalCount: number, result: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null }> } | null, quizzes?: { __typename?: 'Quizzes', total: number, totalCount: number, result: Array<{ __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> }> } | null } };
 
 
 export const CreateLessonDocument = gql`

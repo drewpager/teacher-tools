@@ -18,6 +18,15 @@ export const UserProfile = ({ user, viewerIsUser }: Props) => {
       <Typography variant='body1' className="user--text-details">We use <a href="https://stripe.com/en-US/connect" target="_blank" rel="noopener noreferrer"> Stripe</a> to make payments seamless and secure.</Typography>
     </>
   ) : null;
+
+  const subscriberSection = (
+    <>
+      <Divider sx={{ margin: 1 }} />
+      <Typography variant="h5" className="user--text-details">Subscription Details</Typography>
+      <Typography variant='body1' className="user--text-details">Thank you for subscribing!</Typography>
+      <Button className='stripe--button' variant="contained">Manage Subscription!</Button>
+    </>
+  )
   return (
     <>
       <Box className="user--text">
@@ -29,7 +38,8 @@ export const UserProfile = ({ user, viewerIsUser }: Props) => {
           <Typography className="user--text-details">Name: {user.name}</Typography>
           <Typography className="user--text-details">Email: {user.contact}</Typography>
           <Typography className="user--text-details">Bookmarks: {user.bookmarks?.length}</Typography>
-          {additionalDetailsSection}
+          {console.log(user.hasPayment)}
+          {(user.hasPayment !== "") ? subscriberSection : additionalDetailsSection}
         </Card>
       </Box>
     </>

@@ -13,3 +13,7 @@ export interface PlaylistArgsData {
   total: number;
   result: Playlist[];
 }
+
+export interface PaymentArgs {
+  id: string;
+}
