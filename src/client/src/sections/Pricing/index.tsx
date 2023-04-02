@@ -1,91 +1,143 @@
 import { Box, Typography, Divider, Container, Tabs, Fade, Tab, Button, Paper } from '@mui/material';
 import KeyboardArrowRightRounded from '@mui/icons-material/KeyboardArrowRightOutlined';
 import React, { useState, forwardRef, useEffect } from 'react';
+import { CheckoutForm } from '../../lib/components/CheckoutForm/CheckoutForm';
+import { loadStripe } from '@stripe/stripe-js'
+import { Elements } from '@stripe/react-stripe-js'
 import './pricing.scss'
-// import './App.css';
 
-type Props = {
-  sessionId: any;
-}
-
-export const Pricing = () => (
-  <section style={{ marginTop: "70px" }}>
-    <div className="product">
-      <div className="description">
-        <h3>Individual Plan</h3>
-        <h5>$3.99 / month</h5>
-      </div>
-    </div>
-    <form action="/create-checkout-session" method="POST">
-      {/* Add a hidden field with the lookup_key of your Price */}
-      <input type="hidden" name="lookup_key" value="0111" />
-      <button id="checkout-and-portal-button" type="submit">
-        Checkout
-      </button>
-    </form>
-  </section>
-);
-
-const SuccessDisplay = ({ sessionId }: Props) => {
-  return (
-    <section>
-      <div className="product Box-root">
-        <div className="description Box-root">
-          <h3>Subscription to our individual plan successful!</h3>
-        </div>
-      </div>
-      <form action="/create-portal-session" method="POST">
-        <input
-          type="hidden"
-          id="session-id"
-          name="session_id"
-          value={sessionId}
-        />
-        <button id="checkout-and-portal-button" type="submit">
-          Manage your billing information
-        </button>
-      </form>
-    </section>
-  );
-};
-
-const Message = ({ message }: any) => (
-  <section>
-    <p>{message}</p>
-  </section>
-);
-
-export default function Success() {
-  let [message, setMessage] = useState('');
-  let [success, setSuccess] = useState(false);
-  let [sessionId, setSessionId] = useState('');
+export const Pricing = () => {
+  const [stripePromise, setStripePromise] = useState<any | null>(null);
+  const [clientSecret, setClientSecret] = useState<string | undefined>("")
 
   useEffect(() => {
-    // Check to see if this is a redirect back from Checkout
-    const query = new URLSearchParams(window.location.search);
+    fetch('/config').then(async (r) => {
+      const { publishableKey } = await r.json();
 
-    if (query.get('success')) {
-      setSuccess(true);
-      console.log("Query Get: ", query.get('session_id'))
-      // setSessionId(query.get('session_id'));
-    }
+      setStripePromise(loadStripe(publishableKey));
+    })
+  }, [])
 
-    if (query.get('canceled')) {
-      setSuccess(false);
-      setMessage(
-        "Order cancelled -- continue to shop around and checkout when you're ready."
-      );
-    }
-  }, [sessionId]);
+  useEffect(() => {
+    fetch('/create-payment-intent', {
+      method: "POST",
+      body: JSON.stringify({}),
+    }).then(async (r) => {
+      const { clientSecret } = await r.json();
 
-  if (!success && message === '') {
-    return <Pricing />;
-  } else if (success && sessionId !== '') {
-    return <SuccessDisplay sessionId={sessionId} />;
-  } else {
-    return <Message message={message} />;
-  }
+      setClientSecret(clientSecret);
+    })
+  }, [])
+
+  return (
+    <Box sx={{ marginTop: 10 }}>
+      <h2>Payment Page</h2>
+      <h3>Plato's Peach Socrates Solo Plan = $3.99/month</h3>
+      {stripePromise && clientSecret && (
+        <Elements stripe={stripePromise} options={{ clientSecret }}>
+          <CheckoutForm />
+        </Elements>
+      )}
+    </Box>
+  )
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// type Props = {
+//   sessionId: any;
+// }
+
+// export const Pricing = () => (
+//   <section style={{ marginTop: "70px" }}>
+//     <div className="product">
+//       <div className="description">
+//         <h3>Individual Plan</h3>
+//         <h5>$3.99 / month</h5>
+//       </div>
+//     </div>
+//     <form action="/create-checkout-session" method="POST">
+//       {/* Add a hidden field with the lookup_key of your Price */}
+//       <input type="hidden" name="lookup_key" value="0111" />
+//       <button id="checkout-and-portal-button" type="submit">
+//         Checkout
+//       </button>
+//     </form>
+//   </section>
+// );
+
+// const SuccessDisplay = ({ sessionId }: Props) => {
+//   return (
+//     <section>
+//       <div className="product Box-root">
+//         <div className="description Box-root">
+//           <h3>Subscription to our individual plan successful!</h3>
+//         </div>
+//       </div>
+//       <form action="/create-portal-session" method="POST">
+//         <input
+//           type="hidden"
+//           id="session-id"
+//           name="session_id"
+//           value={sessionId}
+//         />
+//         <button id="checkout-and-portal-button" type="submit">
+//           Manage your billing information
+//         </button>
+//       </form>
+//     </section>
+//   );
+// };
+
+// const Message = ({ message }: any) => (
+//   <section>
+//     <p>{message}</p>
+//   </section>
+// );
+
+// export default function Success() {
+//   let [message, setMessage] = useState('');
+//   let [success, setSuccess] = useState(false);
+//   let [sessionId, setSessionId] = useState('');
+
+//   useEffect(() => {
+//     // Check to see if this is a redirect back from Checkout
+//     const query = new URLSearchParams(window.location.search);
+
+//     if (query.get('success')) {
+//       setSuccess(true);
+//       console.log("Query Get: ", query.get('session_id'))
+//       // setSessionId(query.get('session_id'));
+//     }
+
+//     if (query.get('canceled')) {
+//       setSuccess(false);
+//       setMessage(
+//         "Order cancelled -- continue to shop around and checkout when you're ready."
+//       );
+//     }
+//   }, [sessionId]);
+
+//   if (!success && message === '') {
+//     return <Pricing />;
+//   } else if (success && sessionId !== '') {
+//     return <SuccessDisplay sessionId={sessionId} />;
+//   } else {
+//     return <Message message={message} />;
+//   }
+// }
 
 // import HeroPricing from 'docs/src/components/pricing/HeroPricing';
 // import PricingTable from 'docs/src/components/pricing/PricingTable';

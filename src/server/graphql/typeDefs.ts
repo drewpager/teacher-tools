@@ -114,7 +114,7 @@ export const typeDefs = gql`
     deleteLesson(id: ID): Boolean!
     deletePlaylist(id: ID): Boolean!
     bookmarkLesson(id: ID!, viewer: String!): Boolean
-    addPayment(id: String, userId: ID): String
+    addPayment(paymentId: String, viewer: String): Boolean
   }
 
   input LogInInput {

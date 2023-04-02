@@ -9,9 +9,6 @@ type Props = {
 }
 
 export const Billing = ({ viewer }: Props) => {
-  let { params } = useParams();
-  console.log("Params: ", params);
-  console.log("Viewer: ", viewer.id);
   return (
     <Box sx={{ marginTop: 10 }}>
       <h1>Billing Page</h1>

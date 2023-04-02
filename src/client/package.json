@@ -20,6 +20,8 @@
     "@mui/lab": "^5.0.0-alpha.115",
     "@mui/material": "^5.11.0",
     "@mui/x-data-grid": "^5.15.3",
+    "@stripe/react-stripe-js": "^2.1.0",
+    "@stripe/stripe-js": "^1.52.0",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
