@@ -291,7 +291,7 @@ export const CreateLesson = ({ viewer }: Props) => {
     )
   }
 
-  if (!viewer.id || !viewer.hasPayment) {
+  if (!viewer.id || !viewer.paymentId) {
     return (
       <Box className='createLesson--error'>
         <Typography variant="h3">You Must Be <Link style={{ textDecoration: 'none', color: "#F67B50" }} to="/login">Logged In</Link> Using an Active Account.</Typography>

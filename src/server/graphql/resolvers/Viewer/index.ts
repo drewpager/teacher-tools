@@ -1,14 +1,16 @@
 import { Viewer, Database, User } from "../../../lib/types";
 import { ObjectId } from "mongodb";
-import { Google } from "../../../lib/api";
+import { Google, Stripe } from "../../../lib/api";
 import {
   LogInArgs,
+  ConnectStripeArgs,
   PlaylistArgs,
   PlaylistArgsData,
   PaymentArgs,
 } from "./types";
 import crypto from "crypto";
 import { Response, Request } from "express";
+import { authorize } from "../../../lib/utils";
 
 const cookieOptions = {
   httpOnly: true,
@@ -190,12 +192,88 @@ export const viewerResolvers = {
         throw new Error(`Failed to save paymentID: ${e}`);
       }
     },
+    connectStripe: async (
+      _root: undefined,
+      { input }: ConnectStripeArgs,
+      { db, req }: { db: Database; req: Request }
+    ): Promise<Viewer> => {
+      try {
+        const { code } = input;
+
+        let viewer = await authorize(db, req);
+
+        if (!viewer) {
+          throw new Error(`Viewer cannot be found!`);
+        }
+
+        const wallet = await Stripe.connect(code);
+
+        if (!wallet) {
+          throw new Error("Stripe grant error");
+        }
+
+        const updateRes = await db.users.findOneAndUpdate(
+          { _id: viewer._id },
+          { $set: { paymentId: wallet } }
+        );
+
+        if (!updateRes) {
+          throw new Error(`Failed to update user with payment information`);
+        }
+
+        viewer = updateRes.value;
+
+        return {
+          _id: viewer?._id,
+          token: viewer?.token,
+          avatar: viewer?.avatar,
+          paymentId: viewer?.paymentId,
+          didRequest: true,
+        };
+      } catch (e) {
+        throw new Error(`Failed to connect with stripe: ${e}`);
+      }
+    },
+    disconnectStripe: async (
+      _root: undefined,
+      _args: Record<string, unknown>,
+      { db, req }: { db: Database; req: Request }
+    ): Promise<Viewer> => {
+      try {
+        let viewer = await authorize(db, req);
+
+        if (!viewer) {
+          throw new Error(`Failed to authorize viewer!`);
+        }
+
+        const updateRes = await db.users.findOneAndUpdate(
+          { _id: viewer._id },
+          { $set: { paymentId: null } }
+        );
+
+        if (!updateRes.value) {
+          throw new Error(`Viewer could not be updated`);
+        }
+
+        viewer = updateRes.value;
+
+        return {
+          _id: viewer?._id,
+          token: viewer?.token,
+          avatar: viewer?.avatar,
+          paymentId: viewer?.paymentId,
+          didRequest: true,
+        };
+      } catch (e) {
+        throw new Error(`Failed to disconnect Stripe: ${e}`);
+      }
+    },
   },
   Viewer: {
     id: (viewer: Viewer): string | undefined => {
       return viewer._id;
     },
-    hasPayment: (viewer: Viewer): string | undefined => {
+    paymentId: (viewer: Viewer): string | undefined => {
       return viewer.paymentId ? viewer.paymentId : undefined;
     },
     playlists: async (

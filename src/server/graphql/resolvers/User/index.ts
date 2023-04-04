@@ -45,7 +45,7 @@ export const userResolvers = {
     id: (user: User) => {
       return user._id;
     },
-    hasPayment: async (user: User) => {
+    paymentId: async (user: User) => {
       return user.paymentId;
     },
     playlists: async (

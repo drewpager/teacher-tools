@@ -1,4 +1,4 @@
-import { gql } from 'graphql-tag';
+import { gql } from "graphql-tag";
 
 export const LOG_OUT = gql`
   mutation LogOut {
@@ -6,7 +6,7 @@ export const LOG_OUT = gql`
       id
       token
       avatar
-      hasPayment
+      paymentId
       didRequest
     }
   }

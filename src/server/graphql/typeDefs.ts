@@ -12,7 +12,7 @@ export const typeDefs = gql`
     id: ID
     token: String
     avatar: String
-    hasPayment: String
+    paymentId: String
     didRequest: Boolean!
     playlists: [Playlist]
     lessons: [Lesson]
@@ -25,7 +25,7 @@ export const typeDefs = gql`
     name: String!
     avatar: String!
     contact: String!
-    hasPayment: String
+    paymentId: String
     playlists(limit: Int!, page: Int!): Playlists
     lessons(limit: Int!, page: Int!): Lessons
     quizzes(limit: Int!, page: Int!): Quizzes
@@ -107,6 +107,8 @@ export const typeDefs = gql`
   type Mutation {
     logIn(input: LogInInput): Viewer!
     logOut: Viewer!
+    connectStripe(input: ConnectStripeInput!): Viewer!
+    disconnectStripe: Viewer!
     createLesson(input: CreateLessonInput): Lesson!
     createQuiz(input: CreateQuizInput): Quiz!
     lessonPlan(input: LessonPlanInput): Playlist!
@@ -118,6 +120,10 @@ export const typeDefs = gql`
   }
 
   input LogInInput {
+    code: String!
+  }
+
+  input ConnectStripeInput {
     code: String!
   }
 

@@ -2,19 +2,20 @@ import { Box, Typography, Divider, Container, Tabs, Fade, Tab, Button, Paper } f
 import KeyboardArrowRightRounded from '@mui/icons-material/KeyboardArrowRightOutlined';
 import React, { useState, forwardRef, useEffect } from 'react';
 import { CheckoutForm } from '../../lib/components/CheckoutForm/CheckoutForm';
-import { loadStripe } from '@stripe/stripe-js'
+import { Stripe, loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 import './pricing.scss'
 
 export const Pricing = () => {
-  const [stripePromise, setStripePromise] = useState<any | null>(null);
+  const [stripePromise, setStripePromise] = useState<Stripe | null>(null);
   const [clientSecret, setClientSecret] = useState<string | undefined>("")
 
   useEffect(() => {
     fetch('/config').then(async (r) => {
       const { publishableKey } = await r.json();
+      const stripeConfig = await loadStripe(publishableKey)
 
-      setStripePromise(loadStripe(publishableKey));
+      setStripePromise(stripeConfig);
     })
   }, [])
 

@@ -13,7 +13,7 @@ export const USER = gql`
       name
       avatar
       contact
-      hasPayment
+      paymentId
       bookmarks {
         id
         category

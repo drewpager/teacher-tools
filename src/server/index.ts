@@ -34,8 +34,8 @@ const mount = async (app: Application) => {
   app.use(cors(corsOptions));
 
   // UNCOMMENT FOR PRODUCTION?
-  app.use(express.static(`${__dirname}/`));
-  app.get("/*", (_req, res) => res.sendFile(`${__dirname}/index.html`));
+  // app.use(express.static(`${__dirname}/`));
+  // app.get("/*", (_req, res) => res.sendFile(`${__dirname}/index.html`));
 
   const server = new ApolloServer({
     typeDefs: [typeDefs, scalarTypeDefs],
@@ -53,6 +53,10 @@ const mount = async (app: Application) => {
     });
   });
 
+  // const customer = await stripe.customers.create({
+
+  // });
+
   app.post("/create-payment-intent", async (req, res) => {
     try {
       const paymentIntent = await stripe.paymentIntents.create({
@@ -67,6 +71,23 @@ const mount = async (app: Application) => {
     } catch (e) {
       throw new Error(`Failed to create payment intent: ${e}`);
     }
+  });
+
+  const configuration = await stripe.billingPortal.configurations.create({
+    business_profile: {
+      headline: "Platos Peach partners with Stripe for simplified billing.",
+    },
+    features: { invoice_history: { enabled: true } },
+  });
+
+  app.post("/create-customer-portal-session", async (req, res) => {
+    // Authenticate your user.
+    const session = await stripe.billingPortal.sessions.create({
+      customer: "{{CUSTOMER_ID}}",
+      return_url: process.env.PUBLIC_URL,
+    });
+
+    res.redirect(session.url);
   });
 
   // app.post("/create-checkout-session", async (req, res) => {
@@ -99,7 +120,7 @@ const mount = async (app: Application) => {
 
     // This is the url to which the customer will be redirected when they are done
     // managing their billing with the portal.
-    const returnUrl = `http://localhost:3000/`;
+    const returnUrl = process.env.PUBLIC_URL;
 
     const portalSession = await stripe.billingPortal.sessions.create({
       customer: checkoutSession.customer,

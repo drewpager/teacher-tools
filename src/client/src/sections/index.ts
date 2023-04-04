@@ -19,3 +19,4 @@ export * from "./EditPlaylist";
 export * from "./Quiz";
 export * from "./QuizCreate";
 export * from "./Modal";
+export * from "./Stripe";

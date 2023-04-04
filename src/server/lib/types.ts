@@ -60,7 +60,7 @@ export interface User {
   avatar: string;
   contact: string;
   watched: string[];
-  paymentId?: string;
+  paymentId?: string | null;
   playlists?: Playlist[];
   lessons?: Lesson[];
   quizzes?: Quiz[];
@@ -79,7 +79,7 @@ export interface Viewer {
   _id?: string;
   token?: string;
   avatar?: string;
-  paymentId?: string;
+  paymentId?: string | null;
   didRequest: boolean;
   playlists?: Playlist[];
   lessons?: Lesson[];

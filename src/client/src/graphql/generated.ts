@@ -195,6 +195,10 @@ export type Answers = {
   isCorrect?: InputMaybe<Scalars['Boolean']>;
 };
 
+export type ConnectStripeInput = {
+  code: Scalars['String'];
+};
+
 export type CreateLessonInput = {
   category: Array<Scalars['String']>;
   creator: Scalars['String'];
@@ -267,10 +271,12 @@ export type Mutation = {
   __typename?: 'Mutation';
   addPayment?: Maybe<Scalars['Boolean']>;
   bookmarkLesson?: Maybe<Scalars['Boolean']>;
+  connectStripe: Viewer;
   createLesson: Lesson;
   createQuiz: Quiz;
   deleteLesson: Scalars['Boolean'];
   deletePlaylist: Scalars['Boolean'];
+  disconnectStripe: Viewer;
   lessonPlan: Playlist;
   logIn: Viewer;
   logOut: Viewer;
@@ -279,13 +285,19 @@ export type Mutation = {
 
 
 export type MutationAddPaymentArgs = {
-  id: Scalars['ID'];
+  paymentId?: InputMaybe<Scalars['String']>;
+  viewer?: InputMaybe<Scalars['String']>;
 };
 
 
 export type MutationBookmarkLessonArgs = {
   id: Scalars['ID'];
   viewer: Scalars['String'];
+};
+
+
+export type MutationConnectStripeArgs = {
+  input: ConnectStripeInput;
 };
 
 
@@ -448,10 +460,10 @@ export type User = {
   avatar: Scalars['String'];
   bookmarks?: Maybe<Array<Maybe<Lesson>>>;
   contact: Scalars['String'];
-  hasPayment?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   lessons?: Maybe<Lessons>;
   name: Scalars['String'];
+  paymentId?: Maybe<Scalars['String']>;
   playlists?: Maybe<Playlists>;
   quizzes?: Maybe<Quizzes>;
 };
@@ -479,13 +491,20 @@ export type Viewer = {
   avatar?: Maybe<Scalars['String']>;
   bookmarks?: Maybe<Array<Maybe<Lesson>>>;
   didRequest: Scalars['Boolean'];
-  hasPayment?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['ID']>;
   lessons?: Maybe<Array<Maybe<Lesson>>>;
+  paymentId?: Maybe<Scalars['String']>;
   playlists?: Maybe<Array<Maybe<Playlist>>>;
   quizzes?: Maybe<Array<Maybe<Quiz>>>;
   token?: Maybe<Scalars['String']>;
 };
+
+export type ConnectStripeMutationVariables = Exact<{
+  input: ConnectStripeInput;
+}>;
+
+
+export type ConnectStripeMutation = { __typename?: 'Mutation', connectStripe: { __typename?: 'Viewer', paymentId?: string | null } };
 
 export type CreateLessonMutationVariables = Exact<{
   input: CreateLessonInput;
@@ -513,12 +532,12 @@ export type LogInMutationVariables = Exact<{
 }>;
 
 
-export type LogInMutation = { __typename?: 'Mutation', logIn: { __typename?: 'Viewer', id?: string | null, token?: string | null, avatar?: string | null, hasPayment?: string | null, didRequest: boolean } };
+export type LogInMutation = { __typename?: 'Mutation', logIn: { __typename?: 'Viewer', id?: string | null, token?: string | null, avatar?: string | null, paymentId?: string | null, didRequest: boolean } };
 
 export type LogOutMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type LogOutMutation = { __typename?: 'Mutation', logOut: { __typename?: 'Viewer', id?: string | null, token?: string | null, avatar?: string | null, hasPayment?: string | null, didRequest: boolean } };
+export type LogOutMutation = { __typename?: 'Mutation', logOut: { __typename?: 'Viewer', id?: string | null, token?: string | null, avatar?: string | null, paymentId?: string | null, didRequest: boolean } };
 
 export type UpdatePlanMutationVariables = Exact<{
   input: LessonPlanInput;
@@ -587,9 +606,42 @@ export type UserQueryVariables = Exact<{
 }>;
 
 
-export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, name: string, avatar: string, contact: string, hasPayment?: string | null, bookmarks?: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null } | null> | null, playlists?: { __typename?: 'Playlists', total: number, totalCount: number, result: Array<{ __typename?: 'Playlist', id?: string | null, name: string, creator: string, plan: Array<{ __typename: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null } | { __typename: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> } | null> }> } | null, lessons?: { __typename?: 'Lessons', total: number, totalCount: number, result: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null }> } | null, quizzes?: { __typename?: 'Quizzes', total: number, totalCount: number, result: Array<{ __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> }> } | null } };
+export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, name: string, avatar: string, contact: string, paymentId?: string | null, bookmarks?: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null } | null> | null, playlists?: { __typename?: 'Playlists', total: number, totalCount: number, result: Array<{ __typename?: 'Playlist', id?: string | null, name: string, creator: string, plan: Array<{ __typename: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null } | { __typename: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> } | null> }> } | null, lessons?: { __typename?: 'Lessons', total: number, totalCount: number, result: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null }> } | null, quizzes?: { __typename?: 'Quizzes', total: number, totalCount: number, result: Array<{ __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> }> } | null } };
 
 
+export const ConnectStripeDocument = gql`
+    mutation ConnectStripe($input: ConnectStripeInput!) {
+  connectStripe(input: $input) {
+    paymentId
+  }
+}
+    `;
+export type ConnectStripeMutationFn = Apollo.MutationFunction<ConnectStripeMutation, ConnectStripeMutationVariables>;
+
+/**
+ * __useConnectStripeMutation__
+ *
+ * To run a mutation, you first call `useConnectStripeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useConnectStripeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [connectStripeMutation, { data, loading, error }] = useConnectStripeMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useConnectStripeMutation(baseOptions?: Apollo.MutationHookOptions<ConnectStripeMutation, ConnectStripeMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ConnectStripeMutation, ConnectStripeMutationVariables>(ConnectStripeDocument, options);
+      }
+export type ConnectStripeMutationHookResult = ReturnType<typeof useConnectStripeMutation>;
+export type ConnectStripeMutationResult = Apollo.MutationResult<ConnectStripeMutation>;
+export type ConnectStripeMutationOptions = Apollo.BaseMutationOptions<ConnectStripeMutation, ConnectStripeMutationVariables>;
 export const CreateLessonDocument = gql`
     mutation CreateLesson($input: CreateLessonInput!) {
   createLesson(input: $input) {
@@ -695,7 +747,7 @@ export const LogInDocument = gql`
     id
     token
     avatar
-    hasPayment
+    paymentId
     didRequest
   }
 }
@@ -732,7 +784,7 @@ export const LogOutDocument = gql`
     id
     token
     avatar
-    hasPayment
+    paymentId
     didRequest
   }
 }
@@ -1178,7 +1230,7 @@ export const UserDocument = gql`
     name
     avatar
     contact
-    hasPayment
+    paymentId
     bookmarks {
       id
       category
