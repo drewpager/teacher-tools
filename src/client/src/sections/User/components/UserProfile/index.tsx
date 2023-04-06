@@ -3,14 +3,13 @@ import { Card, Typography, Avatar, Box, Button, Divider } from '@mui/material';
 import { User } from '../../../../graphql/generated';
 import './userProfile.scss';
 import { DisplayError } from '../../../../lib/utils';
-
 // require("dotenv").config();
 interface Props {
   user: User;
   viewerIsUser: boolean;
 }
 
-const stripeAuthUrl = `https://connect.stripe.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_S_CLIENT_ID}&scope=read_write`
+const stripeAuthUrl = `https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_GlRG8w1CyGj2SucbT6q132lZSf2HtYXk&scope=read_write`
 
 export const UserProfile = ({ user, viewerIsUser }: Props) => {
 
@@ -50,8 +49,8 @@ export const UserProfile = ({ user, viewerIsUser }: Props) => {
           <Typography className="user--text-details">Email: {user.contact}</Typography>
           <Typography className="user--text-details">Bookmarks: {user.bookmarks?.length}</Typography>
           {console.log(user.paymentId)}
-          {/* {(user.hasPayment !== "") ? subscriberSection : additionalDetailsSection} */}
-          {additionalDetailsSection}
+          {(user.paymentId !== "") ? subscriberSection : additionalDetailsSection}
+          {/* {additionalDetailsSection} */}
           {stripeError && <DisplayError title="Failed to connect to stripe! Please try again" />}
         </Card>
       </Box>

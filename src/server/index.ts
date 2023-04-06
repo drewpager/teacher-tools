@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-const stripe = require("stripe")(process.env.S_SECRET_KEY);
+const stripe = require("stripe")(`${process.env.S_SECRET_KEY}`);
 import express, { Application } from "express";
 import { ApolloServer } from "apollo-server-express";
 // import { ApolloServer } from "@apollo/server";

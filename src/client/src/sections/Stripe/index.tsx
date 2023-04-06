@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-// import { useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
+import { gql } from 'graphql-tag'
 // import { CONNECT_STRIPE } from '../../lib/graphql/mutations/ConnectStripe';
 import { Box, CircularProgress } from '@mui/material';
 import { Viewer, useConnectStripeMutation } from '../../graphql/generated';
@@ -11,16 +12,22 @@ type Props = {
   setViewer: (viewer: Viewer) => void;
 }
 
+const ADD_PAYMENT = gql`
+  mutation AddPayment($paymentId: String, $viewer: String) {
+    addPayment(paymentId: $paymentId, viewer: $viewer)
+  }
+`
+
 export const Stripe = ({ viewer, setViewer }: Props) => {
   const [connectStripe, { data, loading, error }] = useConnectStripeMutation({
-    onCompleted: (data) => {
-      if (data && data.connectStripe) {
-        setViewer({ ...viewer, paymentId: data.connectStripe.paymentId })
-        return (<DisplaySuccess title="Successfully Striped!" />)
-      }
+    onCompleted: data => {
+      setViewer({ ...viewer, paymentId: data.connectStripe.paymentId })
     }
   })
   const connectStripeRef = useRef(connectStripe)
+
+  const [addPayment, { data: userPaymentData, loading: userPaymentLoading, error: userPaymentError}] = useMutation(ADD_PAYMENT);
+  const addPaymentRef = useRef(addPayment);
 
   useEffect(() => {
     const code = new URL(window.location.href).searchParams.get("code");
@@ -28,19 +35,37 @@ export const Stripe = ({ viewer, setViewer }: Props) => {
     if (code) {
       connectStripeRef.current({
         variables: {
-          input: { code }
+          input: { 
+            code: code 
+          }
         }
       })
+      addPaymentRef.current({
+        variables: {
+          paymentId: code,
+          viewer: viewer.id
+        }
+      })
+      console.log(viewer)
     } else {
       <Navigate to="/login" replace={true} />
     }
-  }, [])
+  }, [viewer])
 
-  if (data && data.connectStripe) {
+  if (data) {
+    return (
+      <>
+      <Navigate to={`/billing`} replace={true} />
+      <DisplaySuccess title="Successfully setup Stripe!" />
+      </>
+    )
+  }
+  
+  if (userPaymentData) {
     return <Navigate to={`/user/${viewer.id}`} replace={true} />
   }
 
-  if (loading) {
+  if (loading || userPaymentLoading) {
     return (
       <Box sx={{ marginTop: 10 }}>
         <CircularProgress />
@@ -50,6 +75,10 @@ export const Stripe = ({ viewer, setViewer }: Props) => {
 
   if (error) {
     return <Navigate to={`/user/${viewer.id}?stripe_error=true`} replace={true} />
+  }
+
+  if (userPaymentError) {
+    return <Navigate to={`/user/${viewer.id}?user_error=true`} replace={true} />
   }
 
   return null;

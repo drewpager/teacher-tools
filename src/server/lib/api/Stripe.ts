@@ -1,7 +1,7 @@
 // import stripe from "stripe";
 require("dotenv").config();
 
-const client = require("stripe")(process.env.S_SECRET_KEY);
+const client = require("stripe")(`${process.env.S_SECRET_KEY}`);
 
 // const client = new stripe(`${process.env.S_SECRET_KEY}`);
 

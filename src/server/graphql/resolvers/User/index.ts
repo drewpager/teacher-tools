@@ -45,7 +45,7 @@ export const userResolvers = {
     id: (user: User) => {
       return user._id;
     },
-    paymentId: async (user: User) => {
+    paymentId: (user: User) => {
       return user.paymentId;
     },
     playlists: async (
@@ -166,13 +166,13 @@ export const userResolvers = {
   Mutation: {
     addPayment: async (
       _root: undefined,
-      { id, userId }: UserPaymentArgs,
+      { paymentId, viewer }: UserPaymentArgs,
       { db }: { db: Database }
     ): Promise<boolean> => {
       try {
         const userPay = await db.users.findOneAndUpdate(
-          { _id: `${userId}` },
-          { $set: { paymentId: `${id}` } }
+          { _id: `${viewer}` },
+          { $set: { paymentId: `${paymentId}` } }
         );
         return userPay.value ? true : false;
       } catch (err) {
