@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Card, CardContent, CardActions, Typography, Button, Box, CircularProgress, Alert, Snackbar } from '@mui/material';
+import { Card, CardContent, CardActions, Typography, Button, Box, CircularProgress, Alert, Snackbar, IconButton, Icon } from '@mui/material';
+import GoogleIcon from '@mui/icons-material/Google';
 import { useApolloClient } from '@apollo/react-hooks';
 import { AUTH_URL } from '../../lib/graphql/queries/AuthUrl/index';
 import { AuthUrl as AuthUrlData } from '../../lib/graphql/queries/AuthUrl/__generated__/AuthUrl';
@@ -86,7 +87,7 @@ export const Login = ({ setViewer }: Props) => {
     <Box className="login--box">
       <Card className="login--card">
         <CardContent>
-          <Typography variant="h4" className='login--text'>Login to Teacher Tools</Typography>
+          <Typography variant="h4" className='login--text'>Login to Plato's Peach</Typography>
           <CardActions>
             <Button className="login--button" onClick={handleAuthorize} size="small">Sign In With Google!</Button>
           </CardActions>
@@ -136,7 +137,7 @@ export const Login = ({ setViewer }: Props) => {
         <CardContent>
           <Typography variant="h4" color="text.secondary">Login to Plato's Peach</Typography>
           <CardActions>
-            <Button className="login--button" onClick={handleAuthorize} size="small">Sign In With Google!</Button>
+            <Button className="login--button" onClick={handleAuthorize} size="medium"><GoogleIcon fontSize='medium' /> Sign In With Google!</Button>
           </CardActions>
           <Typography sx={{ fontStyle: 'italic' }}>Note: By signing in, you'll be redirected to the Google consent form to sign in
             with your Google account.</Typography>
