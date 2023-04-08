@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Card, CardContent, CardActions, Typography, Button, Box, CircularProgress, Alert, Snackbar, IconButton, Icon } from '@mui/material';
+import { Card, CardContent, CardActions, Typography, Button, Box, CircularProgress, Alert, Snackbar, IconButton, Icon, Divider } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import { useApolloClient } from '@apollo/react-hooks';
 import { AUTH_URL } from '../../lib/graphql/queries/AuthUrl/index';
@@ -8,6 +8,7 @@ import { useLogInMutation, Viewer } from '../../graphql/generated';
 import { Navigate } from 'react-router-dom';
 import { DisplayError, DisplaySuccess } from '../../lib/utils';
 import './login.scss';
+import { Footer } from '../../lib/components';
 
 interface Props {
   setViewer: (viewer: Viewer) => void;
@@ -132,17 +133,23 @@ export const Login = ({ setViewer }: Props) => {
   }
 
   return (
-    <Box sx={{ minWidth: 275, width: 500, height: 500, margin: 5, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <Card className="login--card">
-        <CardContent>
-          <Typography variant="h4" color="text.secondary">Login to Plato's Peach</Typography>
-          <CardActions>
-            <Button className="login--button" onClick={handleAuthorize} size="medium"><GoogleIcon fontSize='medium' /> Sign In With Google!</Button>
-          </CardActions>
-          <Typography sx={{ fontStyle: 'italic' }}>Note: By signing in, you'll be redirected to the Google consent form to sign in
-            with your Google account.</Typography>
-        </CardContent>
-      </Card>
-    </Box>
+    // <Box sx={{ minWidth: 275, width: 500, height: 500, margin: 5, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <div>
+      <Box className="login--box">
+        <Card className="login--card">
+          <CardContent>
+            <Typography variant="h4" color="text.secondary">Login to Plato's Peach</Typography>
+            <Divider sx={{ margin: 2 }} />
+            <CardActions>
+              <Button className="google--button" onClick={handleAuthorize} size="medium"><GoogleIcon fontSize='medium' /> Sign In With Google!</Button>
+            </CardActions>
+            <Divider sx={{ margin: 2 }} />
+            <Typography sx={{ fontStyle: 'italic' }}>Note: By signing in, you'll be redirected to the Google consent form to sign in
+              with your Google account.</Typography>
+          </CardContent>
+        </Card>
+      </Box>
+      <Footer />
+    </div>
   )
 }
