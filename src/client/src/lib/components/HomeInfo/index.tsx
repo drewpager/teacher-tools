@@ -15,9 +15,9 @@ export const HomeInfo = () => {
       autoplay: true,
       animationData: require('../../assets/platos-quiz.json')
     })
-  }, [])
+  }, [contain])
   return (
-    <Grid container spacing={1} className='grid--container'>
+    <Grid container className='grid--container'>
       <Grid item xs={12} sm={12} md={7} lg={6}>
         <Box className='box--title'>
           <Typography variant='h1' className='title--text'>
@@ -37,7 +37,7 @@ export const HomeInfo = () => {
         </Box>
       </Grid>
       <Grid item xs={0} sm={0} md={5} lg={6}>
-        <div className="contain" ref={contain}></div>
+        <div className="contain" ref={contain} />
       </Grid>
     </Grid>
   );

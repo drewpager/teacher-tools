@@ -15,6 +15,20 @@
   &.login--button {
     color: library.$white;
     text-decoration: none;
+    text-transform: none;
+    padding: 0.5em;
+    border-radius: 2em;
+  }
+}
+
+.MuiButtonBase-root {
+  &.dropdown--buttons {
+    border: 2px solid transparent;
+    // content: '';
+    // position: absolute;
+    // top: -2px; right: -2px;
+    // bottom: -2px; left: -2px;
+    // // background-color: pink;
   }
 }
 

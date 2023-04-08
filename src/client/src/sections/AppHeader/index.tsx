@@ -156,17 +156,17 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
               onClose={handleCloseUserMenu}
               className="header--menu"
             >
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Link to={`/user/${viewer.id}`} style={{ textDecoration: "none" }}>
+              <MenuItem onClick={handleCloseUserMenu} className="dropdown--buttons">
+                <Link to={`/user/${viewer.id}`} style={{ textDecoration: 'none' }}>
                   <Typography textAlign="center">Profile</Typography>
                 </Link>
               </MenuItem>
-              <MenuItem onClick={handleCloseUserMenu}>
+              <MenuItem onClick={handleCloseUserMenu} className="dropdown--buttons">
                 <Link to={`/catalog`} style={{ textDecoration: 'none' }}>
                   <Typography textAlign="center">Catalog</Typography>
                 </Link>
               </MenuItem>
-              <MenuItem onClick={handleLogOut}>
+              <MenuItem onClick={handleLogOut} className="dropdown--buttons">
                 <Typography textAlign="center">Logout</Typography>
               </MenuItem>
             </Menu>
@@ -176,18 +176,20 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
             <Link to={`/catalog`} style={{ textDecoration: "none" }}>
               <p style={{ color: `${theme.palette.info.light}` }}>Catalog</p>
             </Link>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <AccountCircleIcon />
-            </IconButton>
-            <Link to={`/login`} style={{ textDecoration: "none" }}>
-              <Button className="login--button">Login</Button>
+            <Link to={`/login`} style={{ textDecoration: "none", color: "white" }}>
+              <Tooltip title="Account Login">
+                <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleOpenNavMenu}
+                  color="inherit"
+                >
+                  <AccountCircleIcon />
+                </IconButton>
+              </Tooltip>
+              <Button className="login--button">Start free</Button>
             </Link>
           </>
         )}
