@@ -83,14 +83,12 @@ export const QuizCreate = ({ viewer }: props) => {
   if (loading) {
     <Box>
       <CircularProgress color='primary' />
-      <Footer />
     </Box>
   }
 
   if (error) {
     <Box>
       <DisplayError title="Failed to create assessment" />
-      <Footer />
     </Box>
   }
 
@@ -280,7 +278,6 @@ export const QuizCreate = ({ viewer }: props) => {
           )}
         </Formik>
       </Box>
-      <Footer />
     </div>
   )
 }
