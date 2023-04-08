@@ -34,6 +34,19 @@
   &.catalog--item {
     border: 1px solid red;
   }
+  
+  &.keenSlider--item {
+    display: flex;
+    background-color: #535ac8;
+    border-radius: 0.4em; 
+    height: 200px;
+    padding: 0.25em 0;
+  }
+}
+
+.keenSlider--content {
+  flex: '1 0 auto';
+  font-size: clamp(0.2em, 0.5em, 1em);
 }
 
 .MuiBox-root {

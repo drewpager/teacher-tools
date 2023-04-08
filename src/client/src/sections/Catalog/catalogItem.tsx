@@ -103,9 +103,9 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
         <div ref={sliderRef} className="keen-slider">
           {category.map((l, index) => (
             <div className="keen-slider__slide">
-              <Card sx={{ display: 'flex', backgroundColor: '#535ac8', borderRadius: 5, height: "200px" }} key={index}>
+              <Card className="keenSlider--item" key={index}>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                  <CardContent sx={{ flex: '1 0 auto' }}>
+                  <CardContent className="keenSlider--content">
                     <Link to={`/lesson/${l.id}`} style={{ textDecoration: "none" }}>
                       <Typography component="div" variant="h3" style={{ color: "#FAF9F6" }}>
                         {l.title}
