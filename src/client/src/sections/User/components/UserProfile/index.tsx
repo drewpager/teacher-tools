@@ -9,7 +9,7 @@ interface Props {
   viewerIsUser: boolean;
 }
 
-const stripeAuthUrl = `https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_GlRG8w1CyGj2SucbT6q132lZSf2HtYXk&scope=read_write`
+const stripeAuthUrl = `https://connect.stripe.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_S_CLIENT_ID}&scope=read_write`
 
 export const UserProfile = ({ user, viewerIsUser }: Props) => {
 
