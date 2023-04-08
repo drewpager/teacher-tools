@@ -3,13 +3,17 @@
 .MuiPaper-root {
   &.callAction--home {
     background-color: library.$orange;
-    min-width: 75%;
+    // min-width: 75%;
     display: flex;
     align-self: center;
     padding: 4rem;
     margin: 4rem;
     border-radius: 15px;
   }
+}
+
+.grid--container {
+  position: relative;
 }
 
 .MuiButtonBase-root {
@@ -35,20 +39,27 @@
   &.callAction--text {
     color: library.$white;
     text-decoration: none; 
-    font-size: 32px; 
+    font-size: clamp(1em, 2em, 2.5em); 
     font-weight: 800;
   }
 }
 
-.containCTA {
-  max-width: 400px;
-  min-width: 300px;
-  right: 0;
-  top: 30%;
-  height: auto;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: -100px;
-  margin-top: -150px;
+.MuiGrid-container {
+  .containCTA {
+    max-width: 400px;
+    width: 300px;
+    right: 0;
+    top: 30%;
+    height: auto;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: -100px;
+    margin-top: -150px;
+  }
+  @media screen and (max-width: 1200px) {
+    .containCTA {
+      display: none;
+    }
+  }
 }

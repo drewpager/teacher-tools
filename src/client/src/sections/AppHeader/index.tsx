@@ -118,17 +118,17 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
               onClose={handleCloseActionMenu}
               className="header--menu"
             >
-              <MenuItem onClick={handleCloseActionMenu}>
-                <Link to={`/lesson/create`} style={{ textDecoration: "none" }}>
+              <Link to={`/lesson/create`} style={{ textDecoration: 'none' }}>
+                <MenuItem onClick={handleCloseActionMenu} className="dropdown--buttons">
                   <Typography textAlign="center">Create Lesson</Typography>
-                </Link>
-              </MenuItem>
-              <MenuItem onClick={handleCloseActionMenu}>
+                </MenuItem>
+              </Link>
+              <MenuItem onClick={handleCloseActionMenu} className="dropdown--buttons">
                 <Link to={'/quiz/create'} style={{ textDecoration: 'none' }}>
                   <Typography textAlign="center">Create Asessment</Typography>
                 </Link>
               </MenuItem>
-              <MenuItem onClick={handleCloseActionMenu}>
+              <MenuItem onClick={handleCloseActionMenu} className="dropdown--buttons">
                 <Link to={'/playlist/create'} style={{ textDecoration: 'none' }}>
                   <Typography textAlign="center">Create Lesson Plan</Typography>
                 </Link>
@@ -156,16 +156,16 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
               onClose={handleCloseUserMenu}
               className="header--menu"
             >
-              <MenuItem onClick={handleCloseUserMenu} className="dropdown--buttons">
-                <Link to={`/user/${viewer.id}`} style={{ textDecoration: 'none' }}>
+              <Link to={`/user/${viewer.id}`} style={{ textDecoration: 'none' }}>
+                <MenuItem onClick={handleCloseUserMenu} className="dropdown--buttons">
                   <Typography textAlign="center">Profile</Typography>
-                </Link>
-              </MenuItem>
-              <MenuItem onClick={handleCloseUserMenu} className="dropdown--buttons">
-                <Link to={`/catalog`} style={{ textDecoration: 'none' }}>
+                </MenuItem>
+              </Link>
+              <Link to={`/catalog`} style={{ textDecoration: 'none' }}>
+                <MenuItem onClick={handleCloseUserMenu} className="dropdown--buttons">
                   <Typography textAlign="center">Catalog</Typography>
-                </Link>
-              </MenuItem>
+                </MenuItem>
+              </Link>
               <MenuItem onClick={handleLogOut} className="dropdown--buttons">
                 <Typography textAlign="center">Logout</Typography>
               </MenuItem>
