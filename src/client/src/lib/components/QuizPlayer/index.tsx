@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Box, Button, FormControl, Radio, RadioGroup } from '@mui/material';
+import { Box, Button, FormControl, Radio, RadioGroup, Chip, Divider } from '@mui/material';
+import QuizIcon from '@mui/icons-material/Quiz';
 import { Quiz, AnswerOptions } from '../../../graphql/generated';
 import { Formik, Field, Form } from "formik";
 import { titleCase } from '../../utils';
 import './quizPlayer.scss';
+
 interface Props {
   quiz: Quiz
 }
@@ -46,17 +48,27 @@ export const QuizPlayer = ({ quiz }: Props) => {
   //TODO: Evaluate final submission state before calculating score.
   return (
     <Box className='quiz--container'>
-      <h1>{title}</h1>
+      <h1><QuizIcon color="secondary" /> {title}</h1>
+      <Divider sx={{ margin: "0.5em" }} />
       {showFinalResult ? (
         <div>
-          <p>Final Result! - {score > 0 ? `${(score / totalCorrect) * 100}` : "0"}%</p>
+          <p>Result: <Chip
+            label={score > 0 ? `${(score / totalCorrect) * 100}%` : "0%"}
+            variant="outlined"
+            color="secondary"
+          /></p>
+
           <Button type="submit" variant="outlined" onClick={() => resetQuiz()}>Retake!</Button>
         </div>
       ) : (
         <div>
           {quiz.questions.map((q, index) => (
             <form onSubmit={() => console.log(score)}>
-              <p>Question {index + 1} out of {quiz.questions.length}</p>
+              <Chip
+                label={`Question ${index + 1} out of ${quiz.questions.length}`}
+                variant="outlined"
+                color="secondary"
+              />
               <h2>{q.question}</h2>
               {q.answerOptions && q.answerOptions.map((choice, inder) => (
                 <div key={inder}>
@@ -70,6 +82,7 @@ export const QuizPlayer = ({ quiz }: Props) => {
                   {q.answerType === "TRUEFALSE" && (<><input type="radio" name="answer" value="false" /><label>False</label></>)}
                 </div>
               ))}
+              <Divider sx={{ margin: "0.5em" }} />
             </form>
           ))}
           <Button type="submit" variant="outlined" onClick={() => setFinalResult(true)}>Show Results!</Button>

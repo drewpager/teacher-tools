@@ -1,7 +1,9 @@
+@use '../../../library';
+
 .MuiBox-root {
   &.quiz--container {
-    padding-top: 1em;
-    margin-bottom: 2em;
+    padding: 0.1em 20% 1.5em 0.5em;
+    // margin: 0 2em;
   }
 
   &.quiz--title {

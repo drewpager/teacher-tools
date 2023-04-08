@@ -99,7 +99,7 @@ const theme = createTheme({
       light: colors.primary[450],
     },
     secondary: {
-      main: colors.greenAccent[500],
+      main: colors.blueAccent[500],
     },
     info: {
       dark: colors.grey[700],

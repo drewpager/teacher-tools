@@ -3,16 +3,22 @@
 .MuiButtonBase-root {
     &.active {
         background: library.$coral;
-        color: library.$white;
-        border: 1px solid library.$darkGreen;
+        box-shadow: 0 0 0 1px library.$darkGreen;
         border-radius: 4px;
-        padding: 1rem;
+        padding: 0.7rem;
+        &.span {
+            color: white;
+        }
     }
 }
 
 .MuiListItemButton-root {
     &.active:hover {
         background: library.$coral;
+    }
+    
+    &.active:hover + span {
+        color: white !important;
     }
 }
 
@@ -23,7 +29,7 @@
 .MuiTypography-root {
     &.playlist--title {
         margin-top: 5rem;
-        padding-top: 1rem;
+        padding: 1rem 2em;
         font-size: clamp(1.5rem, 2.5vw, 2.5rem);
         font-weight: 800;
         color: library.$peachy;
@@ -34,6 +40,7 @@
     &.playlistcard--grid__list,
     &.playlistcard--grid__video {
         flex: 1 1 100%;
+        margin-right: 1em; 
     }
 
     @media ( min-width: 900px ) {
