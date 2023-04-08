@@ -13,8 +13,7 @@ export const Pricing = () => {
   useEffect(() => {
     fetch('/config').then(async (r) => {
       const { publishableKey } = await r.json();
-      const stripeConfig = await loadStripe(publishableKey)
-
+      const stripeConfig = await loadStripe(`${publishableKey}`)
       setStripePromise(stripeConfig);
     })
   }, [])
@@ -25,7 +24,6 @@ export const Pricing = () => {
       body: JSON.stringify({}),
     }).then(async (r) => {
       const { clientSecret } = await r.json();
-
       setClientSecret(clientSecret);
     })
   }, [])

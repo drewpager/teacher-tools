@@ -9,15 +9,6 @@ export const CheckoutForm = () => {
   const elements = useElements();
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [message, setMessage] = useState<string | undefined>("")
-  const [sessionId, setSessionId] = useState<string | undefined>("")
-
-  const ADD_PAYMENT = gql`
-    mutation AddPayment($paymentId: string, $userId: string) {
-      addPayment(paymentId: $paymentId, userId: $userId)
-    }
-  `;
-
-  const [addPayment, { error: paymentError, loading: paymentLoading }] = useMutation(ADD_PAYMENT);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -58,7 +49,7 @@ export const CheckoutForm = () => {
         {message && (
           <div>
             <p>{message}</p>
-            <Button variant="outlined" href="/create-portal-session">Manage Subscription</Button>
+            {/* <Button variant="outlined" href="/create-portal-session">Manage Subscription</Button> */}
           </div>)}
       </form>
     </Box>

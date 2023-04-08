@@ -17,6 +17,19 @@ export const UserProfile = ({ user, viewerIsUser }: Props) => {
     window.location.href = stripeAuthUrl;
   }
 
+  const handleSubscription = async (user: User) => {
+    const res = await fetch('/create-customer-portal-session', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ customer: `${user.paymentId}` })
+    });
+    const content = await res.json()
+
+    console.log(content);
+  }
   const stripeError = new URL(window.location.href).searchParams.get("stripe_error");
 
   const additionalDetailsSection = viewerIsUser ? (
@@ -34,6 +47,7 @@ export const UserProfile = ({ user, viewerIsUser }: Props) => {
       <Divider sx={{ margin: 1 }} />
       <Typography variant="h5" className="user--text-details">Subscription Details</Typography>
       <Typography variant='body1' className="user--text-details">Thank you for subscribing!</Typography>
+      <Button className='stripe--button' variant="contained" onClick={() => handleSubscription(user)}>Edit Subscription!</Button>
       <Button className='stripe--button' variant="contained" href='https://billing.stripe.com/p/login/test_dR65mV9VY2ty3fifYY'>Manage Subscription!</Button>
     </>
   )
@@ -48,7 +62,6 @@ export const UserProfile = ({ user, viewerIsUser }: Props) => {
           <Typography className="user--text-details">Name: {user.name}</Typography>
           <Typography className="user--text-details">Email: {user.contact}</Typography>
           <Typography className="user--text-details">Bookmarks: {user.bookmarks?.length}</Typography>
-          {console.log(user.paymentId)}
           {(user.paymentId !== "") ? subscriberSection : additionalDetailsSection}
           {/* {additionalDetailsSection} */}
           {stripeError && <DisplayError title="Failed to connect to stripe! Please try again" />}
