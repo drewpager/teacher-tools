@@ -215,7 +215,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
     }
 
     if (destination.droppableId === "playlist") {
-
       const [reorderedItem] = items.splice(source.index, 1);
       setPlans([...items]);
       const displacedItem = playlist.plan.slice(destination.index, (destination.index + 1));
@@ -262,7 +261,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
         }
       });
     }
-    // Navigate to User Profile Page
+    // Remove items from playlist plan field for next visit and Navigate to User Profile Page
     playlist.plan.length = 0;
     navigate(`../user/${viewer.id}`, { replace: true })
   }

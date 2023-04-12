@@ -16,17 +16,25 @@
   align-items: center;
 }
 
-.quiz--form > label {
-  padding-left: 1em;
-  place-content: center;
-  justify-items: center;
-}
 .checkAnswersButton {
   margin-top: 2em;
 }
 
 .answer--options {
   list-style: none;
+}
+
+.quiz--div > input[type="checkbox"] {
+  // place-content: center;
+  // justify-items: center;
+  // display: flexbox;
+  vertical-align: middle;
+  padding-left: 0.2em;
+}
+
+.quiz--label {
+  padding-left: 0.2em;
+  vertical-align: middle;
 }
 
 .quiz--item {

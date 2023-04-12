@@ -111,18 +111,29 @@ export const playlistResolvers = {
       _root: undefined,
       { id, input }: UpdateParams,
       { db }: { db: Database }
-    ): Promise<boolean> => {
+    ): Promise<Playlist> => {
+      const ide = new ObjectId(id);
       try {
         const playlist = await db.playlists.findOneAndUpdate(
-          { _id: new ObjectId(id) },
-          input
+          { _id: ide },
+          {
+            $set: {
+              name: input.name,
+              creator: input.creator,
+              plan: input.plan,
+            },
+          }
         );
 
-        if (playlist.ok === 1) {
-          return true;
-        } else {
-          return false;
+        const insertedResult = playlist
+          ? await db.playlists.findOne({ _id: playlist.value?._id })
+          : false;
+
+        if (!insertedResult) {
+          throw new Error(`Sorry, but I Failed to update this playlist!`);
         }
+
+        return insertedResult;
       } catch (e) {
         throw new Error(`Failed to update playlist ${e}`);
       }

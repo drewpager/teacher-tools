@@ -24,7 +24,6 @@ export interface CreatePlanArgs {
 }
 
 export interface UpdatePlanArgs {
-  id: string;
   creator: string;
   plan: LessonPlan[];
   name: string;

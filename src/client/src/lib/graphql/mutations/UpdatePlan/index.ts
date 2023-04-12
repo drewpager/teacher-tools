@@ -1,4 +1,4 @@
-import { gql } from 'graphql-tag';
+import { gql } from "graphql-tag";
 
 export const UPDATE_PLAN = gql`
   mutation UpdatePlan($input: LessonPlanInput!, $id: ID!) {
@@ -6,7 +6,6 @@ export const UPDATE_PLAN = gql`
       id
       name
       plan {
-        __typename
         ... on Lesson {
           id
           category
@@ -26,14 +25,13 @@ export const UPDATE_PLAN = gql`
             answerOptions {
               answerText
               isCorrect
-            } 
+            }
             answerType
           }
           creator
         }
       }
       creator
-      authorized
     }
   }
 `;
