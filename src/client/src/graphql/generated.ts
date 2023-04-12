@@ -820,17 +820,6 @@ export const UpdatePlanDocument = gql`
     id
     name
     plan {
-      ... on Lesson {
-        id
-        category
-        title
-        meta
-        video
-        image
-        startDate
-        endDate
-        creator
-      }
       ... on Quiz {
         id
         title
@@ -842,6 +831,17 @@ export const UpdatePlanDocument = gql`
           }
           answerType
         }
+        creator
+      }
+      ... on Lesson {
+        id
+        category
+        title
+        meta
+        video
+        image
+        startDate
+        endDate
         creator
       }
     }

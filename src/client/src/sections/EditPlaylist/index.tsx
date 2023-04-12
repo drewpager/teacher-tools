@@ -262,7 +262,9 @@ export const EditPlaylist = ({ viewer }: props) => {
       plan: playlist.plan
     })
 
-    if (playlist && playlist.plan) {
+    console.log("Here's the playlist: ", playlist)
+
+    if (playlist) {
       await updatePlan({
         variables: {
           input: playlist,

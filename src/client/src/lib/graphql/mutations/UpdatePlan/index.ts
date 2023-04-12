@@ -6,17 +6,6 @@ export const UPDATE_PLAN = gql`
       id
       name
       plan {
-        ... on Lesson {
-          id
-          category
-          title
-          meta
-          video
-          image
-          startDate
-          endDate
-          creator
-        }
         ... on Quiz {
           id
           title
@@ -28,6 +17,17 @@ export const UPDATE_PLAN = gql`
             }
             answerType
           }
+          creator
+        }
+        ... on Lesson {
+          id
+          category
+          title
+          meta
+          video
+          image
+          startDate
+          endDate
           creator
         }
       }
