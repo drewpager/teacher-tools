@@ -256,6 +256,12 @@ export const EditPlaylist = ({ viewer }: props) => {
   const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    setPlaylist({
+      name: `${playlist.name}`,
+      creator: `${playlist.creator}`,
+      plan: playlist.plan
+    })
+
     if (playlist && playlist.plan) {
       await updatePlan({
         variables: {
@@ -297,7 +303,7 @@ export const EditPlaylist = ({ viewer }: props) => {
                         defaultValue={`${playlist.name}`}
                         ref={inputRef}
                         fullWidth
-                        onChange={(e) => titleHandler(e)}
+                        onChange={titleHandler}
                       />
                       {playlist.plan.map((i: any, indices: number) => (
                         <Draggable draggableId={`${i._id}`} index={indices} key={`${i._id}`}>
