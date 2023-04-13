@@ -264,7 +264,7 @@ export const EditPlaylist = ({ viewer }: props) => {
 
     console.log("Here's the playlist: ", playlist)
 
-    if (playlist) {
+    if (playlist && params.id) {
       await updatePlan({
         variables: {
           input: playlist,

@@ -118,12 +118,16 @@ export const playlistResolvers = {
           { _id: ide },
           {
             $set: {
-              name: input.name,
-              creator: input.creator,
-              plan: input.plan,
+              name: `${input.name}`,
+              creator: `${input.creator}`,
+              plan: [...input.plan],
             },
           }
         );
+
+        if (!playlist) {
+          throw new Error(`Playlist Database update failed`);
+        }
 
         const insertedResult = playlist
           ? await db.playlists.findOne({ _id: playlist.value?._id })

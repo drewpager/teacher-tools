@@ -7,7 +7,6 @@ import { PlaylistCard, Search, Footer } from '../../lib/components/';
 
 export const Playlist = () => {
   const params = useParams();
-  console.log(params)
   const { data, loading, error } = usePlaylistQuery({
     variables: {
       id: `${params.id}`
