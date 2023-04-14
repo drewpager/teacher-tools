@@ -111,7 +111,7 @@ export const EditPlaylist = ({ viewer }: props) => {
 
   useEffect(() => {
     if (lessonQuery) {
-      const lessonInput: any = []
+      const lessonInput: FullLessonInput[] = []
       lessonQuery.forEach(i => {
         let lessonObj = {
           title: i.title,
@@ -122,6 +122,7 @@ export const EditPlaylist = ({ viewer }: props) => {
           meta: i.meta,
           startDate: i.startDate,
           video: i.video,
+          _id: i.id
         }
 
         lessonInput.push(lessonObj)
@@ -256,13 +257,7 @@ export const EditPlaylist = ({ viewer }: props) => {
   const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setPlaylist({
-      name: `${playlist.name}`,
-      creator: `${playlist.creator}`,
-      plan: playlist.plan
-    })
-
-    console.log("Here's the playlist: ", playlist)
+    console.log(playlist)
 
     if (playlist && params.id) {
       await updatePlan({
@@ -282,10 +277,11 @@ export const EditPlaylist = ({ viewer }: props) => {
   }
 
   if (updatePlanError) {
+    console.log(updatePlanError.clientErrors)
     return <DisplayError title="Failed to update lesson plan" />
   }
 
-  console.log(playlist);
+  console.log(playlist)
 
   return (
     <div>

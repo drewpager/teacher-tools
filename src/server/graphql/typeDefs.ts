@@ -68,11 +68,6 @@ export const typeDefs = gql`
     totalCount: Int!
   }
 
-  type PlanItem {
-    lesson: Lesson
-    quiz: Quiz
-  }
-
   type Playlist {
     id: ID
     name: String!

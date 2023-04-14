@@ -72,13 +72,14 @@ export const QuizPlayer = ({ quiz }: Props) => {
               <h2>{q.question}</h2>
               {q.answerOptions && q.answerOptions.map((choice, inder) => (
                 <div key={inder} className='quiz--div'>
-                  <input
-                    type={q.answerType === "TRUEFALSE" ? "radio" : "checkbox"}
-                    name="answer"
-                    value={`${choice?.answerText}`}
-                    onChange={() => handleClick(choice, inder)}
-                  />
-                  <label className='quiz--label'>{choice?.answerText === "" ? "True" : choice?.answerText}</label>
+                  <label className='quiz--label'>
+                    <input
+                      type={q.answerType === "TRUEFALSE" ? "radio" : "checkbox"}
+                      name="answer"
+                      value={`${choice?.answerText}`}
+                      onChange={() => handleClick(choice, inder)}
+                    />
+                    {choice?.answerText === "" ? "True" : choice?.answerText}</label>
                   {q.answerType === "TRUEFALSE" && (<><input type="radio" name="answer" value="false" /><label>False</label></>)}
                 </div>
               ))}

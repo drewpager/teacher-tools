@@ -349,12 +349,6 @@ export type Plan = {
   video?: InputMaybe<Scalars['String']>;
 };
 
-export type PlanItem = {
-  __typename?: 'PlanItem';
-  lesson?: Maybe<Lesson>;
-  quiz?: Maybe<Quiz>;
-};
-
 export type Playlist = {
   __typename?: 'Playlist';
   authorized?: Maybe<Scalars['Boolean']>;

@@ -30,6 +30,6 @@ export interface UpdatePlanArgs {
 }
 
 export interface UpdateParams {
-  id: string;
   input: UpdatePlanArgs;
+  id: string;
 }

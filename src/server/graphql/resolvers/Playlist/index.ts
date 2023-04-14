@@ -118,9 +118,9 @@ export const playlistResolvers = {
           { _id: ide },
           {
             $set: {
-              name: `${input.name}`,
-              creator: `${input.creator}`,
-              plan: [...input.plan],
+              name: input.name,
+              creator: input.creator,
+              plan: input.plan,
             },
           }
         );

@@ -24,17 +24,10 @@
   list-style: none;
 }
 
-.quiz--div > input[type="checkbox"] {
-  // place-content: center;
-  // justify-items: center;
-  // display: flexbox;
-  vertical-align: middle;
-  padding-left: 0.2em;
-}
-
 .quiz--label {
-  padding-left: 0.2em;
-  vertical-align: middle;
+  display: flex;
+  margin: 0.4em 0;
+  align-items: center;
 }
 
 .quiz--item {
