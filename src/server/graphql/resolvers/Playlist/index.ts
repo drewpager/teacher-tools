@@ -125,12 +125,12 @@ export const playlistResolvers = {
           }
         );
 
-        if (!playlist) {
-          throw new Error(`Playlist Database update failed`);
-        }
+        // if (!playlist) {
+        //   throw new Error(`Playlist Database update failed`);
+        // }
 
         const insertedResult = playlist
-          ? await db.playlists.findOne({ _id: playlist.value?._id })
+          ? await db.playlists.findOne({ _id: ide })
           : false;
 
         if (!insertedResult) {

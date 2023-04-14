@@ -123,6 +123,7 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
                       <UseVideoModal video={`${l.video}`} />
                     </IconButton>
                     <IconButton
+                      className="bookmark--button"
                       aria-label="bookmark"
                       sx={{ color: "#FAF9F6" }}
                     >

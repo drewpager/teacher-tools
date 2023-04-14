@@ -23,6 +23,14 @@
   }
 }
 
+.MuiButtonBase-root {
+  &.bookmark--button {
+    &:hover {
+      box-shadow: 1px 1px 2px 2px white;
+    }
+  }
+}
+
 .MuiGrid-root {
   &.catalogGrid--item {
     margin-top: 5.5rem;
