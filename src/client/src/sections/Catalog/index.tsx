@@ -16,7 +16,7 @@ type Props = {
 
 export const Catalog = ({ viewer }: Props) => {
   const [expanded, setExpanded] = React.useState<string[]>([]);
-  const [selected, setSelected] = React.useState<string[]>(['geography']);
+  const [selected, setSelected] = React.useState<string[]>(['ancient history']);
 
   const handleToggle = (event: React.SyntheticEvent, nodeIds: string[]) => {
     setExpanded(nodeIds);
@@ -24,18 +24,6 @@ export const Catalog = ({ viewer }: Props) => {
 
   const handleSelect = (event: React.SyntheticEvent, nodeIds: string[]) => {
     setSelected(nodeIds);
-  };
-
-  const handleExpandClick = () => {
-    setExpanded((oldExpanded) =>
-      oldExpanded.length === 0 ? ['1', '5', '6', '7'] : [],
-    );
-  };
-
-  const handleSelectClick = () => {
-    setSelected((oldSelected) =>
-      oldSelected.length === 0 ? ['1', '2', '3', '4', '5', '6', '7', '8', '9'] : [],
-    );
   };
 
   const { data, loading, error } = useAllLessonsQuery({
@@ -97,6 +85,7 @@ export const Catalog = ({ viewer }: Props) => {
               aria-label="controlled"
               defaultCollapseIcon={<ExpandMoreIcon />}
               defaultExpandIcon={<ChevronRightIcon />}
+              defaultEndIcon={<></>}
               expanded={expanded}
               selected={selected}
               onNodeToggle={handleToggle}

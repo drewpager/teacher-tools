@@ -119,7 +119,10 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
                     ))}
                   </CardContent>
                   <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-                    <IconButton aria-label="play/pause" sx={{ color: "#FAF9F6" }}>
+                    <IconButton
+                      aria-label="play/pause"
+                      sx={{ color: "#FAF9F6" }}
+                    >
                       <UseVideoModal video={`${l.video}`} />
                     </IconButton>
                     <IconButton
