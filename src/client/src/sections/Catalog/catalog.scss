@@ -29,6 +29,11 @@
       box-shadow: .5px 1px 1.75px 1.75px white;
     }
   }
+  &.play--button {
+    &:hover {
+      color: library.$darkGreen;
+    }
+  }
 }
 
 .MuiGrid-root {

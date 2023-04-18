@@ -120,6 +120,7 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
                   </CardContent>
                   <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
                     <IconButton
+                      className="play--button"
                       aria-label="play/pause"
                       sx={{ color: "#FAF9F6" }}
                     >

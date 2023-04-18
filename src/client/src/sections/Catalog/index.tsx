@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, CircularProgress, Grid, Typography, Chip } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import AdjustIcon from '@mui/icons-material/Adjust';
 import TreeView from '@mui/lab/TreeView';
 import TreeItem from '@mui/lab/TreeItem';
 import { useAllLessonsQuery, Viewer } from '../../graphql/generated';
@@ -85,7 +86,7 @@ export const Catalog = ({ viewer }: Props) => {
               aria-label="controlled"
               defaultCollapseIcon={<ExpandMoreIcon />}
               defaultExpandIcon={<ChevronRightIcon />}
-              defaultEndIcon={<></>}
+              defaultEndIcon={<AdjustIcon />}
               expanded={expanded}
               selected={selected}
               onNodeToggle={handleToggle}
@@ -98,13 +99,15 @@ export const Catalog = ({ viewer }: Props) => {
                     {titleCase(cat)}
                   </Typography>
                 }>
-                  {combinedCategories.map((i: any) => i.main === `${cat}` && !!i.secondary && (
+                  {combinedCategories.map((i: any) => i.main === `${cat}` && !!i.secondary ? (
                     <TreeItem nodeId={`${i.secondary}`} label={
                       <Typography variant='h4'>
                         {titleCase(`${i.secondary}`)}
                       </Typography>
                     }
                       key={`${i.secondary}`} />
+                  ) : (
+                    <></>
                   ))}
                 </TreeItem>
               ))}
