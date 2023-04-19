@@ -27,7 +27,13 @@ type props = {
   viewer: Viewer;
 }
 
-const InitialPlaylist: LessonPlanInput = {
+type InputLessonPlan = {
+  name: string,
+  creator: string,
+  plan: Plan[]
+}
+
+const InitialPlaylist: InputLessonPlan = {
   name: "",
   creator: "",
   plan: []
@@ -69,7 +75,7 @@ export const EditPlaylist = ({ viewer }: props) => {
       setPlaylist({
         name: `${PlaylistData?.playlist.name}`,
         creator: `${PlaylistData?.playlist.creator}`,
-        plan: PlaylistData?.playlist.plan,
+        plan: PlaylistData?.playlist.plan
       })
     }
   }, [PlaylistData])
@@ -97,7 +103,7 @@ export const EditPlaylist = ({ viewer }: props) => {
       page: page
     }
   })
-
+  
   const [updatePlan, { loading: updatePlanLoading, error: updatePlanError }] = useUpdatePlanMutation({
     variables: {
       input: playlist,
@@ -257,9 +263,8 @@ export const EditPlaylist = ({ viewer }: props) => {
   const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log(playlist)
-
-    if (playlist && params.id) {
+    console.log(playlist.plan.length)
+    if (playlist.plan.length !== 0) {
       await updatePlan({
         variables: {
           input: playlist,
