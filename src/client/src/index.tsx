@@ -149,7 +149,7 @@ export {
 };
 
 const httpLink = createHttpLink({
-  uri: '/api'
+  uri: '/api',
 });
 
 const authLink = setContext((_, { headers }) => {

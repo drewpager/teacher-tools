@@ -204,7 +204,7 @@ export const EditPlaylist = ({ viewer }: props) => {
       playlist.plan[destination.index] = reorderedPlaylistItem;
       playlist.plan.splice((destination.index + 1), 0, ...displacedPlaylistItem);
 
-      return { ...playlist }
+      setPlaylist(playlist);
     }
 
     // if dragging and dropping within lessons simply return items unchanged
@@ -231,6 +231,7 @@ export const EditPlaylist = ({ viewer }: props) => {
     if (destination.droppableId === "lessons") {
       const [reorderedPlay] = playlist.plan.splice(source.index, 1);
       const displacedPlay = items.slice(destination.index, (destination.index + 1));
+      playlist.plan[destination.index] = reorderedPlay;
       // items[destination.index] = reorderedPlay;
       items.push(...displacedPlay)
 

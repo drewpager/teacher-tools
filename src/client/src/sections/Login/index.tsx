@@ -108,18 +108,6 @@ export const Login = ({ setViewer }: Props) => {
     )
   }
 
-  // if (open) {
-  //   return (
-  //     <Box>
-  //       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-  //         <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-  //           Logged In Successfully!
-  //         </Alert>
-  //       </Snackbar>
-  //     </Box>
-  //   )
-  // }
-
   if (document.location.href.indexOf("user") > -1) {
     return (
       <Box>

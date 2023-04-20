@@ -16,8 +16,8 @@ const cookieOptions = {
   httpOnly: true,
   sameSite: true,
   signed: true,
-  secure: false,
-  domain: "localhost",
+  secure: process.env.NODE_ENV === "development" ? false : true,
+  // domain: "localhost",
 };
 
 const logInViaGoogle = async (
