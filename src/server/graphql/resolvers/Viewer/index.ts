@@ -12,11 +12,12 @@ import crypto from "crypto";
 import { Response, Request } from "express";
 import { authorize } from "../../../lib/utils";
 
+// TODO: When in production w/ HTTPS, add secure setting
 const cookieOptions = {
   httpOnly: true,
   sameSite: true,
   signed: true,
-  secure: process.env.NODE_ENV === "development" ? false : true,
+  // secure: process.env.NODE_ENV === "development" ? false : true,
   // domain: "localhost",
 };
 
