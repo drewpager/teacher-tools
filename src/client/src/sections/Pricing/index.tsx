@@ -1,14 +1,76 @@
-import { Box, Typography, Divider, Container, Tabs, Fade, Tab, Button, Paper } from '@mui/material';
+import { Box, Typography, Chip, FormGroup, FormControlLabel, Divider, Container, Tabs, Fade, Tab, Button, Paper } from '@mui/material';
+import Switch, { SwitchProps } from '@mui/material/Switch';
+import { styled } from '@mui/material/styles';
 import KeyboardArrowRightRounded from '@mui/icons-material/KeyboardArrowRightOutlined';
 import React, { useState, forwardRef, useEffect } from 'react';
 import { CheckoutForm } from '../../lib/components/CheckoutForm/CheckoutForm';
 import { Stripe, loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 import './pricing.scss'
+import theme from '../../theme';
 
 export const Pricing = () => {
   const [stripePromise, setStripePromise] = useState<Stripe | null>(null);
   const [clientSecret, setClientSecret] = useState<string | undefined>("")
+  const [monthlyCadence, setMonthlyCadence] = useState<"monthly" | "yearly" | null>("monthly");
+
+  const handleChange = (cadence: "monthly" | "yearly") => {
+    setMonthlyCadence(cadence)
+  }
+
+  const PricingSwitch = styled(Switch)(() => ({
+    width: 100,
+    height: 35,
+    padding: 0,
+    margin: 12,
+    borderRadius: "20% / 50%",
+    '& .MuiSwitch-switchBase': {
+      margin: 0,
+      padding: 0,
+      transform: 'translateX(-1px)',
+      '&.Mui-checked': {
+        color: '#fff',
+        transform: 'translateX(35px)',
+        '& .MuiSwitch-thumb:before': {
+          content: "'Yearly'",
+          onchange: () => handleChange("yearly"),
+          position: 'relative',
+          width: '100%',
+          height: '100%',
+          left: 5,
+          top: 5,
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+        },
+        '& + .MuiSwitch-track': {
+          opacity: 1,
+          backgroundColor: theme.palette.mode === 'dark' ? '#8796A5' : '#aab4be',
+        },
+      },
+    },
+    '& .MuiSwitch-thumb': {
+      backgroundColor: theme.palette.mode === 'dark' ? '#003892' : '#001e3c',
+      width: 65,
+      height: 35,
+      borderRadius: 30,
+      fontSize: 16,
+      '&:before': {
+        content: "'Monthly'",
+        onchange: () => handleChange("monthly"),
+        position: 'relative',
+        width: '100%',
+        height: '100%',
+        left: 5,
+        top: 5,
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+      },
+    },
+    '& .MuiSwitch-track': {
+      opacity: 1,
+      backgroundColor: theme.palette.mode === 'dark' ? '#8796A5' : '#aab4be',
+    },
+  }));
 
   useEffect(() => {
     fetch('/config').then(async (r) => {
@@ -30,13 +92,22 @@ export const Pricing = () => {
 
   return (
     <Box sx={{ marginTop: 10 }}>
-      <h2>Payment Page</h2>
-      <h3>Plato's Peach Socrates Solo Plan = $3.99/month</h3>
-      {stripePromise && clientSecret && (
-        <Elements stripe={stripePromise} options={{ clientSecret }}>
-          <CheckoutForm />
-        </Elements>
-      )}
+      <h2>Sign Up Now!</h2>
+      <h3>Monthly Cadence: {monthlyCadence}</h3>
+      <Box sx={{ border: '1px solid black', padding: 5 }}>
+        <Box sx={{ backgroundColor: '#ecf4ff', borderRadius: 4, padding: 5 }}>
+          <FormGroup>
+            <FormControlLabel control={<PricingSwitch sx={{ m: 1 }} />} label="" />
+          </FormGroup>
+          <Chip label="Socrates Plan" color="primary" />
+          <Typography variant="h5" sx={{ fontWeight: 600, marginTop: 2 }}>$3.99/mo</Typography>
+        </Box>
+        {stripePromise && clientSecret && (
+          <Elements stripe={stripePromise} options={{ clientSecret }}>
+            <CheckoutForm />
+          </Elements>
+        )}
+      </Box>
     </Box>
   )
 }
