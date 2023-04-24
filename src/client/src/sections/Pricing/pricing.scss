@@ -4,6 +4,13 @@
   &.pricing--heading {
     color: library.$darkGreen;
   }
+
+  &.pricing--box {
+    background-color: #ecf4ff; 
+    border-radius: 0.5em; 
+    padding: 1em;
+    width: 33%;
+  }
 }
 
 .MuiTypography-root {
