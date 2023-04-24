@@ -47,7 +47,7 @@ export const UserProfile = ({ user, viewerIsUser }: Props) => {
       <Divider sx={{ margin: 1 }} />
       <Typography variant="h5" className="user--text-details">Subscription Details</Typography>
       <Typography variant='body1' className="user--text-details">Thank you for subscribing!</Typography>
-      <Button className='stripe--button' variant="contained" onClick={() => handleSubscription(user)}>Edit Subscription!</Button>
+      {/* <Button className='stripe--button' variant="contained" onClick={() => handleSubscription(user)}>Edit Subscription!</Button> */}
       <Button className='stripe--button' variant="contained" href='https://billing.stripe.com/p/login/test_dR65mV9VY2ty3fifYY'>Manage Subscription!</Button>
     </>
   )
