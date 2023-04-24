@@ -5,11 +5,34 @@
     color: library.$darkGreen;
   }
 
+  &.pricing--card-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
   &.pricing--box {
     background-color: #ecf4ff; 
     border-radius: 0.5em; 
     padding: 1em;
     width: 33%;
+    margin: 1em 0;
+    
+    @media (max-width: 768px) {
+      width: 90%;
+    }
+  }
+}
+
+.MuiButton-root {
+  &.pricing--button {
+    margin: 1em 0;
   }
 }
 

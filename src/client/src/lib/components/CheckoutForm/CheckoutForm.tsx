@@ -43,7 +43,7 @@ export const CheckoutForm = () => {
       <form id="payment-form" onSubmit={handleSubmit}>
         <PaymentElement />
         <Button disabled={isProcessing} type="submit" variant="contained" sx={{ marginTop: 2 }}>
-          {isProcessing ? "Processing..." : "Pay Now"}
+          {isProcessing ? "Processing..." : "Join Now"}
         </Button>
 
         {message && (
