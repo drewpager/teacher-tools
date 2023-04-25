@@ -5,7 +5,7 @@
     "module": "CommonJS",
     "jsx": "react-jsx",
     "rootDirs": ["./"],
-    "outDir": "build",
+    "outDir": "src/build",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "strict": true,
