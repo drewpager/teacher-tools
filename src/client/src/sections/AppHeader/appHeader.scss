@@ -2,6 +2,22 @@
 
 .MuiAppBar-root {
   position: sticky;
+  display: flex;
+  justify-content: space-between;
+  background-color: #ffffff;
+  padding: 10px 20px;
+}
+
+.navbar--icon {
+  display: none;
+}
+
+.desktop--menu-items {
+  display: flex;
+}
+
+.mobile--menu {
+  display: none;
 }
 
 .MuiTypography-root {
@@ -31,5 +47,37 @@
     color: library.$white;
     width: 47px;
     height: 47px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  /* Navbar Icon Styles */
+  .navbar--icon {
+    display: flex;
+    align-items: center;
+    color: library.$white;
+    font-size: 28px;
+    cursor: pointer;
+  }
+  
+  /* Navbar Icon Hover Styles */
+  .navbar--icon:hover {
+    color: #999999;
+  }
+
+  .nav--user-actions {
+    display: none;
+  }
+
+  .header--menu {
+    display: none;
+  }
+
+  .mobile--menu {
+    display: flex;
+  }
+
+  .desktop--menu-items {
+    display: none;
   }
 }

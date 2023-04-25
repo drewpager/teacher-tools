@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useLogOutMutation } from '../../graphql/generated';
-import { AppBar, Box, Toolbar, IconButton, Typography, Button, Avatar, Tooltip, Menu, MenuItem, SvgIcon } from '@mui/material';
+import { AppBar, Box, Toolbar, IconButton, Typography, Button, Avatar, Tooltip, Menu, MenuItem, SvgIcon, Divider } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import MenuIcon from '@mui/icons-material/Menu';
 import { Viewer } from '../../graphql/generated';
 import { DisplaySuccess } from '../../lib/utils';
 import { Link, useNavigate } from 'react-router-dom'
@@ -92,85 +93,140 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
           </Link>
         </Typography>
         {viewer && viewer.avatar ? (
-          <>
-            <Link to={`/catalog`} style={{ textDecoration: "none" }}>
-              <p style={{ color: `${theme.palette.info.light}` }}>Catalog</p>
-            </Link>
-            <Tooltip title="User Actions">
-              <IconButton onClick={handleOpenActionMenu}>
-                <AddCircleIcon className="nav--user-actions" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="action-appbar"
-              anchorEl={anchorElAction}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right'
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right'
-              }}
-              open={Boolean(anchorElAction)}
-              onClose={handleCloseActionMenu}
-              className="header--menu"
-            >
-              <Link to={`/lesson/create`} style={{ textDecoration: 'none' }}>
+          <Box>
+            <Box className="desktop--menu-items">
+              <Link to={`/catalog`} style={{ textDecoration: "none" }}>
+                <p style={{ color: `${theme.palette.info.light}` }}>Catalog</p>
+              </Link>
+              <Tooltip title="User Actions">
+                <IconButton onClick={handleOpenActionMenu}>
+                  <AddCircleIcon className="nav--user-actions" />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: '45px' }}
+                id="action-appbar"
+                anchorEl={anchorElAction}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right'
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right'
+                }}
+                open={Boolean(anchorElAction)}
+                onClose={handleCloseActionMenu}
+                className="header--menu"
+              >
                 <MenuItem onClick={handleCloseActionMenu} className="dropdown--buttons">
-                  <Typography textAlign="center">Create Lesson</Typography>
+                  <Link to={`/lesson/create`} style={{ textDecoration: 'none' }}>
+                    <Typography textAlign="center">Create Lesson</Typography>
+                  </Link>
                 </MenuItem>
-              </Link>
-              <MenuItem onClick={handleCloseActionMenu} className="dropdown--buttons">
-                <Link to={'/quiz/create'} style={{ textDecoration: 'none' }}>
-                  <Typography textAlign="center">Create Asessment</Typography>
+                <MenuItem onClick={handleCloseActionMenu} className="dropdown--buttons">
+                  <Link to={`/quiz/create`} style={{ textDecoration: 'none' }}>
+                    <Typography textAlign="center">Create Asessment</Typography>
+                  </Link>
+                </MenuItem>
+                <MenuItem onClick={handleCloseActionMenu} className="dropdown--buttons">
+                  <Link to={`/playlist/create`} style={{ textDecoration: 'none' }}>
+                    <Typography textAlign="center">Create Lesson Plan</Typography>
+                  </Link>
+                </MenuItem>
+              </Menu>
+              <Tooltip title="User Settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="logged in user avatar" src={viewer.avatar} />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: '45px' }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right'
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right'
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+                className="header--menu"
+              >
+                <Link to={`/user/${viewer.id}`} style={{ textDecoration: 'none' }}>
+                  <MenuItem onClick={handleCloseUserMenu} className="dropdown--buttons">
+                    <Typography textAlign="center">Profile</Typography>
+                  </MenuItem>
                 </Link>
-              </MenuItem>
-              <MenuItem onClick={handleCloseActionMenu} className="dropdown--buttons">
-                <Link to={'/playlist/create'} style={{ textDecoration: 'none' }}>
-                  <Typography textAlign="center">Create Lesson Plan</Typography>
+                <Link to={`/catalog`} style={{ textDecoration: 'none' }}>
+                  <MenuItem onClick={handleCloseUserMenu} className="dropdown--buttons">
+                    <Typography textAlign="center">Catalog</Typography>
+                  </MenuItem>
                 </Link>
-              </MenuItem>
-            </Menu>
-            <Tooltip title="User Settings">
+                <MenuItem onClick={handleLogOut} className="dropdown--buttons">
+                  <Typography textAlign="center">Logout</Typography>
+                </MenuItem>
+              </Menu>
+            </Box>
+            {/* Mobile Responsive Icon Menu */}
+            <Box className='navbar--icon'>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="logged in user avatar" src={viewer.avatar} />
+                <MenuIcon sx={{ color: "white" }} />
               </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right'
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right'
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-              className="header--menu"
-            >
-              <Link to={`/user/${viewer.id}`} style={{ textDecoration: 'none' }}>
-                <MenuItem onClick={handleCloseUserMenu} className="dropdown--buttons">
-                  <Typography textAlign="center">Profile</Typography>
+              <Menu
+                sx={{ mt: '45px' }}
+                id="mobile-menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right'
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right'
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+                className="mobile--menu"
+              >
+                <Link to={`/user/${viewer.id}`} style={{ textDecoration: 'none' }}>
+                  <MenuItem onClick={handleCloseUserMenu} className="dropdown--buttons">
+                    <Typography textAlign="center">Profile</Typography>
+                  </MenuItem>
+                </Link>
+                <Link to={`/catalog`} style={{ textDecoration: 'none' }}>
+                  <MenuItem onClick={handleCloseUserMenu} className="dropdown--buttons">
+                    <Typography textAlign="center">Catalog</Typography>
+                  </MenuItem>
+                </Link>
+                <MenuItem onClick={handleLogOut} className="dropdown--buttons">
+                  <Typography textAlign="center">Logout</Typography>
                 </MenuItem>
-              </Link>
-              <Link to={`/catalog`} style={{ textDecoration: 'none' }}>
-                <MenuItem onClick={handleCloseUserMenu} className="dropdown--buttons">
-                  <Typography textAlign="center">Catalog</Typography>
+                <Divider />
+                <MenuItem onClick={handleCloseActionMenu} className="dropdown--buttons">
+                  <Link to={`/lesson/create`} style={{ textDecoration: 'none' }}>
+                    <Typography textAlign="center">Create Lesson</Typography>
+                  </Link>
                 </MenuItem>
-              </Link>
-              <MenuItem onClick={handleLogOut} className="dropdown--buttons">
-                <Typography textAlign="center">Logout</Typography>
-              </MenuItem>
-            </Menu>
-          </>
+                <MenuItem onClick={handleCloseActionMenu} className="dropdown--buttons">
+                  <Link to={`/quiz/create`} style={{ textDecoration: 'none' }}>
+                    <Typography textAlign="center">Create Asessment</Typography>
+                  </Link>
+                </MenuItem>
+                <MenuItem onClick={handleCloseActionMenu} className="dropdown--buttons">
+                  <Link to={`/playlist/create`} style={{ textDecoration: 'none' }}>
+                    <Typography textAlign="center">Create Lesson Plan</Typography>
+                  </Link>
+                </MenuItem>
+              </Menu>
+            </Box>
+          </Box>
         ) : (
           <>
             <Link to={`/catalog`} style={{ textDecoration: "none" }}>
