@@ -1,10 +1,11 @@
-import { Box, Typography, Chip, FormGroup, FormControlLabel, Divider, Container, Tabs, Fade, Tab, Button, Paper } from '@mui/material';
+import { Box, Typography, Chip, FormGroup, FormControlLabel, Alert, Divider, Container, Tabs, Fade, Tab, Button, Paper } from '@mui/material';
 import Switch, { SwitchProps } from '@mui/material/Switch';
 import { styled } from '@mui/material/styles';
 import React, { useState, forwardRef, useEffect } from 'react';
-import { CheckoutForm } from '../../lib/components/CheckoutForm/CheckoutForm';
+import { FAQ, Footer } from '../../lib/components/';
 import { Stripe, loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
+import CheckIcon from '@mui/icons-material/Check';
 import './pricing.scss'
 import theme from '../../theme';
 
@@ -13,6 +14,25 @@ export const Pricing = () => {
   const [clientSecret, setClientSecret] = useState<string | undefined>("")
   // const [monthlyCadence, setMonthlyCadence] = useState<"monthly" | "yearly">("monthly");
   const [monthlyCadence, setMonthlyCadence] = useState<boolean>(false);
+
+  const pricingFAQ = [
+    {
+      question: "What is the difference between the Socrates and Plato plans?",
+      answer: "The Socrates plan is best for home schoolers and the Plato plan is best for teachers. The Socrates plan allows you to create up to 5 student accounts and the Plato plan allows you to create up to 30 student accounts. The Socrates plan is billed monthly and the Plato plan is billed annually."
+    },
+    {
+      question: "What is the difference between the Socrates and Plato plans?",
+      answer: "The Socrates plan is best for home schoolers and the Plato plan is best for teachers. The Socrates plan allows you to create up to 5 student accounts and the Plato plan allows you to create up to 30 student accounts. The Socrates plan is billed monthly and the Plato plan is billed annually."
+    },
+    {
+      question: "What is the difference between the Socrates and Plato plans?",
+      answer: "The Socrates plan is best for home schoolers and the Plato plan is best for teachers. The Socrates plan allows you to create up to 5 student accounts and the Plato plan allows you to create up to 30 student accounts. The Socrates plan is billed monthly and the Plato plan is billed annually."
+    },
+    {
+      question: "What is the difference between the Socrates and Plato plans?",
+      answer: "The Socrates plan is best for home schoolers and the Plato plan is best for teachers. The Socrates plan allows you to create up to 5 student accounts and the Plato plan allows you to create up to 30 student accounts. The Socrates plan is billed monthly and the Plato plan is billed annually."
+    }
+  ]
 
   const PricingSwitch = styled(Switch)(() => ({
     width: 100,
@@ -85,8 +105,7 @@ export const Pricing = () => {
   }, [])
 
   return (
-    <Box sx={{ marginTop: 10 }}>
-      <h2>All Plans Include a 7 Day Free Trial!</h2>
+    <Box sx={{ marginTop: 12 }}>
       <FormGroup sx={{ alignItems: 'flex-end', marginRight: 2 }}>
         <FormControlLabel control={<PricingSwitch sx={{ m: 1 }} checked={monthlyCadence} onChange={() => setMonthlyCadence(!monthlyCadence)} />} label="" />
       </FormGroup>
@@ -94,7 +113,7 @@ export const Pricing = () => {
         <Box className="pricing--box">
           <h3>Socrates Plan</h3>
           <Chip label="Best for Home School" color="primary" />
-          <Typography variant="h5" sx={{ fontWeight: 600, marginTop: 2 }}>{monthlyCadence ? "$48 billed annually ($4/mo)" : "$6.99 billed Monthly"}</Typography>
+          <Typography variant="h5" color={theme.palette.info.light} sx={{ fontWeight: 600, marginTop: 2 }}>{monthlyCadence ? "$48 billed annually ($4/mo)" : "$6.99 billed Monthly"}</Typography>
           <Button
             variant='contained'
             target="_blank"
@@ -106,7 +125,7 @@ export const Pricing = () => {
         <Box className="pricing--box">
           <h3>Plato's Plan</ h3>
           <Chip label="Best For Teachers" color="primary" />
-          <Typography variant="h5" sx={{ fontWeight: 600, marginTop: 2 }}>{monthlyCadence ? "$60 billed annually ($5/mo)" : "$7.99 billed Monthly"}</Typography>
+          <Typography variant="h5" color={theme.palette.info.light} sx={{ fontWeight: 600, marginTop: 2 }}>{monthlyCadence ? "$60 billed annually ($5/mo)" : "$7.99 billed Monthly"}</Typography>
           <Button
             variant='contained'
             target="_blank"
@@ -117,7 +136,7 @@ export const Pricing = () => {
         <Box className="pricing--box">
           <h3>Aristotle Plan</h3>
           <Chip label="Best for Districts" color="primary" />
-          <Typography variant="h5" sx={{ fontWeight: 600, marginTop: 2 }}>{monthlyCadence ? "$84 billed annually ($7/mo)" : "$9.99 billed Monthly"}</Typography>
+          <Typography variant="h5" color={theme.palette.info.light} sx={{ fontWeight: 600, marginTop: 2 }}>{monthlyCadence ? "$84 billed annually ($7/mo)" : "$9.99 billed Monthly"}</Typography>
           <Button
             variant='contained'
             target="_blank"
@@ -126,11 +145,40 @@ export const Pricing = () => {
           >Choose Plan</Button>
         </Box>
       </Box>
+      <Alert severity="success">All Plans Include a 7-Day Free Trial!</Alert>
+      <Box className='pricing--card-box'>
+        <Box className="pricing-details--box">
+          <h3>Socrates Plan</h3>
+          <div style={{ display: 'flex', alignContent: "center" }}><CheckIcon color='secondary' fontSize='small' /><p>Up to 5 Class Accounts</p></div>
+          <div style={{ display: 'flex', alignContent: "center" }}><CheckIcon color='secondary' fontSize='small' /><p>Unlimited Teacher Accounts</p></div>
+          <div style={{ display: 'flex', alignContent: "center" }}><CheckIcon color='secondary' fontSize='small' /><p>Unlimited Classes</p></div>
+          <div style={{ display: 'flex', alignContent: "center" }}><CheckIcon color='secondary' fontSize='small' /><p>Unlimited Assignments</p></div>
+        </Box>
+        <Box className="pricing-details--box">
+          <h3>Plato's Plan</ h3>
+          <div style={{ display: 'flex', alignContent: "center" }}><CheckIcon color='secondary' fontSize='small' /><p>Up to 5 Class Accounts</p></div>
+          <div style={{ display: 'flex', alignContent: "center" }}><CheckIcon color='secondary' fontSize='small' /><p>Unlimited Teacher Accounts</p></div>
+          <div style={{ display: 'flex', alignContent: "center" }}><CheckIcon color='secondary' fontSize='small' /><p>Unlimited Classes</p></div>
+          <div style={{ display: 'flex', alignContent: "center" }}><CheckIcon color='secondary' fontSize='small' /><p>Unlimited Assignments</p></div>
+        </Box>
+        <Box className="pricing-details--box">
+          <h3>Aristotle Plan</h3>
+          <div style={{ display: 'flex', alignContent: "center" }}><CheckIcon color='secondary' fontSize='small' /><p>Up to 5 Class Accounts</p></div>
+          <div style={{ display: 'flex', alignContent: "center" }}><CheckIcon color='secondary' fontSize='small' /><p>Unlimited Teacher Accounts</p></div>
+          <div style={{ display: 'flex', alignContent: "center" }}><CheckIcon color='secondary' fontSize='small' /><p>Unlimited Classes</p></div>
+          <div style={{ display: 'flex', alignContent: "center" }}><CheckIcon color='secondary' fontSize='small' /><p>Unlimited Assignments</p></div>
+        </Box>
+        <Box className="pricing-faq--box">
+          <h2>Frequently Asked Questions</h2>
+          <FAQ questionAnswers={pricingFAQ} />
+        </Box>
+      </Box>
       {/* {stripePromise && clientSecret && (
         <Elements stripe={stripePromise} options={{ clientSecret }}>
           <CheckoutForm />
         </Elements>
       )} */}
+      <Footer />
     </Box>
   )
 }

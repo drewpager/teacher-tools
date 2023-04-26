@@ -18,12 +18,37 @@
   }
 
   &.pricing--box {
-    background-color: #ecf4ff; 
+    background-color: library.$coral; 
     border-radius: 0.5em; 
     padding: 1em;
     width: 33%;
     margin: 1em 0;
+    color: library.$white;
     
+    @media (max-width: 768px) {
+      width: 90%;
+    }
+  }
+
+  &.pricing-details--box {
+    border: 2px solid black;
+    border-radius: 0.5em; 
+    padding: 1em;
+    width: 33%;
+    margin: 1em 0;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  &.pricing-faq--box {
+    width: 50%;
+    display: block; 
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.25em;
+
     @media (max-width: 768px) {
       width: 90%;
     }

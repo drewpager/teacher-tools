@@ -17,4 +17,5 @@ export * from "./ProductValues";
 export * from "./ProductDetails";
 export * from "./TimelineEl";
 export * from "./CTA";
+export * from "./FAQ";
 export * from "./Footer";
