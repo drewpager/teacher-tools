@@ -229,24 +229,64 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
           </Box>
         ) : (
           <>
-            <Link to={`/catalog`} style={{ textDecoration: "none" }}>
-              <p style={{ color: `${theme.palette.info.light}` }}>Catalog</p>
-            </Link>
-            <Link to={`/login`} style={{ textDecoration: "none", color: "white" }}>
-              <Tooltip title="Account Login">
-                <IconButton
-                  size="large"
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleOpenNavMenu}
-                  color="inherit"
-                >
-                  <AccountCircleIcon />
-                </IconButton>
-              </Tooltip>
-              <Button className="login--button">Start free</Button>
-            </Link>
+            <Box className='navbar--icon'>
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <MenuIcon sx={{ color: "white" }} />
+              </IconButton>
+              <Menu
+                sx={{ mt: '45px' }}
+                id="mobile-menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right'
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right'
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+                className="mobile--menu"
+              >
+                <Link to={`/login`} style={{ textDecoration: 'none' }}>
+                  <MenuItem onClick={handleCloseUserMenu} className="dropdown--buttons">
+                    <Typography textAlign="center">Login</Typography>
+                  </MenuItem>
+                </Link>
+                <Link to={`/catalog`} style={{ textDecoration: 'none' }}>
+                  <MenuItem onClick={handleCloseUserMenu} className="dropdown--buttons">
+                    <Typography textAlign="center">Catalog</Typography>
+                  </MenuItem>
+                </Link>
+                <Link to={`/login`} style={{ textDecoration: 'none' }}>
+                  <MenuItem onClick={handleCloseUserMenu} className="dropdown--buttons">
+                    <Typography textAlign="center">Sign Up</Typography>
+                  </MenuItem>
+                </Link>
+              </Menu>
+            </Box>
+            <Box className="desktop--menu-items">
+              <Link to={`/catalog`} style={{ textDecoration: "none" }}>
+                <p style={{ color: `${theme.palette.info.light}` }}>Catalog</p>
+              </Link>
+              <Link to={`/login`} style={{ textDecoration: "none", color: "white" }}>
+                <Tooltip title="Account Login">
+                  <IconButton
+                    size="large"
+                    aria-label="account of current user"
+                    aria-controls="menu-appbar"
+                    aria-haspopup="true"
+                    onClick={handleOpenNavMenu}
+                    color="inherit"
+                  >
+                    <AccountCircleIcon />
+                  </IconButton>
+                </Tooltip>
+                <Button className="login--button">Start free</Button>
+              </Link>
+            </Box>
           </>
         )}
       </Toolbar>
