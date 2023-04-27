@@ -171,6 +171,7 @@ export const Pricing = () => {
         <Box className="pricing-faq--box">
           <h2>Frequently Asked Questions</h2>
           <FAQ questionAnswers={pricingFAQ} />
+          {/* TODO: Add pull quote: "In order to seek one’s own direction, we must simplify the mechanics of ordinary, everyday life." Plato */}
         </Box>
       </Box>
       {/* {stripePromise && clientSecret && (
