@@ -66,4 +66,25 @@
     color: library.$coral;
     font-weight: 800;
   }
+
+  &.pull-quote {
+    border-left: 5px solid #000; /* Change the color to your preference */
+    margin: 0 0 20px 30px; /* Adjust the margin as needed */
+    padding: 10px 20px; /* Adjust the padding as needed */
+    font-style: italic; /* Change the font style to your preference */
+  }
+}
+
+li.warning {
+  color: library.$orange;
+  list-style-type:"☠";
+  margin: 0.5em 0;
+  padding: 0.1em;
+}
+
+li.success {
+  list-style-type: "✔";
+  color: library.$coral;
+  margin: 0.5em 0;
+  padding: 0.1em;
 }

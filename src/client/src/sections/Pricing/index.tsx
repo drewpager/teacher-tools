@@ -149,28 +149,37 @@ export const Pricing = () => {
       <Box className='pricing--card-box'>
         <Box className="pricing-details--box">
           <h3>Socrates Plan</h3>
-          <div style={{ display: 'flex', alignContent: "center" }}><CheckIcon color='secondary' fontSize='small' /><p>Up to 5 Class Accounts</p></div>
-          <div style={{ display: 'flex', alignContent: "center" }}><CheckIcon color='secondary' fontSize='small' /><p>Unlimited Teacher Accounts</p></div>
-          <div style={{ display: 'flex', alignContent: "center" }}><CheckIcon color='secondary' fontSize='small' /><p>Unlimited Classes</p></div>
-          <div style={{ display: 'flex', alignContent: "center" }}><CheckIcon color='secondary' fontSize='small' /><p>Unlimited Assignments</p></div>
+          <ul>
+            <li className="success">Up to 5 Class Accounts</li>
+            <li className="success">Unlimited Teacher Accounts</li>
+            <li className="warning">10 Classes</li>
+            <li className="warning">50 Assignments</li>
+          </ul>
         </Box>
         <Box className="pricing-details--box">
           <h3>Plato's Plan</ h3>
-          <div style={{ display: 'flex', alignContent: "center" }}><CheckIcon color='secondary' fontSize='small' /><p>Up to 5 Class Accounts</p></div>
-          <div style={{ display: 'flex', alignContent: "center" }}><CheckIcon color='secondary' fontSize='small' /><p>Unlimited Teacher Accounts</p></div>
-          <div style={{ display: 'flex', alignContent: "center" }}><CheckIcon color='secondary' fontSize='small' /><p>Unlimited Classes</p></div>
-          <div style={{ display: 'flex', alignContent: "center" }}><CheckIcon color='secondary' fontSize='small' /><p>Unlimited Assignments</p></div>
+          <ul>
+            <li className="success">Up to 5 Class Accounts</li>
+            <li className="success">Unlimited Teacher Accounts</li>
+            <li className="success">Unlimited Classes</li>
+            <li className="warning">100 Assignments</li>
+          </ul>
         </Box>
         <Box className="pricing-details--box">
           <h3>Aristotle Plan</h3>
-          <div style={{ display: 'flex', alignContent: "center" }}><CheckIcon color='secondary' fontSize='small' /><p>Up to 5 Class Accounts</p></div>
-          <div style={{ display: 'flex', alignContent: "center" }}><CheckIcon color='secondary' fontSize='small' /><p>Unlimited Teacher Accounts</p></div>
-          <div style={{ display: 'flex', alignContent: "center" }}><CheckIcon color='secondary' fontSize='small' /><p>Unlimited Classes</p></div>
-          <div style={{ display: 'flex', alignContent: "center" }}><CheckIcon color='secondary' fontSize='small' /><p>Unlimited Assignments</p></div>
+          <ul>
+            <li className="success">Up to 5 Class Accounts</li>
+            <li className="success">Unlimited Teacher Accounts</li>
+            <li className="success">Unlimited Classes</li>
+            <li className="success">Unlimited Assignments</li>
+          </ul>
         </Box>
         <Box className="pricing-faq--box">
           <h2>Frequently Asked Questions</h2>
           <FAQ questionAnswers={pricingFAQ} />
+          <Divider sx={{ marginBottom: "1em" }} />
+          <Typography variant="h5" fontSize={28} className='pullQuote'>"In order to seek one’s own direction, we must simplify the mechanics of ordinary, everyday life." -Plato</Typography>
+          <Divider sx={{ marginTop: "1em" }} />
           {/* TODO: Add pull quote: "In order to seek one’s own direction, we must simplify the mechanics of ordinary, everyday life." Plato */}
         </Box>
       </Box>
