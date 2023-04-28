@@ -304,7 +304,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
                         onChange={titleHandler}
                       />
                       {playlist.plan.map((i, indices) => (
-                        <Draggable draggableId={`${i._id}`} index={indices} key={`${i._id}`}>
+                        <Draggable draggableId={`${i.id}`} index={indices} key={`${i.id}`}>
                           {(provided, snapshot) => (
                             <Grid item xs={12} md={12} lg={12}>
                               <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
@@ -362,8 +362,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
                       />
                       <Grid container>
                         {plans.map((i, index) => (
-                          yourContent && (bookmarkQuery?.find((val) => val?.id === i._id) || (i.creator === viewer.id)) ? (
-                            <Draggable draggableId={`${i._id}`} index={index} key={`${i._id}`}>
+                          yourContent && (bookmarkQuery?.find((val) => val?.id === i.id) || (i.creator === viewer.id)) ? (
+                            <Draggable draggableId={`${i.id}`} index={index} key={`${i.id}`}>
                               {(provided) => (
                                 <Grid item xs={12} md={12} lg={12}>
                                   {/* {!i && <Link to="/create/lesson"><Typography variant="h5">You haven't added any content yet, click here to add your first lesson.</Typography></Link>} */}
@@ -380,7 +380,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
                               )}
                             </Draggable>
                           ) : !yourContent && i.creator !== viewer.id && (
-                            <Draggable draggableId={`${i._id}`} index={index} key={`${i._id}`}>
+                            <Draggable draggableId={`${i.id}`} index={index} key={`${i.id}`}>
                               {(provided) => (
                                 <Grid item xs={12} md={12} lg={12}>
                                   <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
