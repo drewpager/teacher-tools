@@ -217,10 +217,10 @@ export type CreateQuizInput = {
 };
 
 export type FullLessonInput = {
-  _id?: InputMaybe<Scalars['ID']>;
   category?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   creator?: InputMaybe<Scalars['String']>;
   endDate?: InputMaybe<Scalars['DateScalar']>;
+  id?: InputMaybe<Scalars['ID']>;
   image?: InputMaybe<Scalars['String']>;
   meta?: InputMaybe<Scalars['String']>;
   startDate?: InputMaybe<Scalars['DateScalar']>;
@@ -229,8 +229,8 @@ export type FullLessonInput = {
 };
 
 export type FullLessonQuiz = {
-  _id?: InputMaybe<Scalars['ID']>;
   creator?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
   questions?: InputMaybe<Array<InputMaybe<QuizQuestions>>>;
   title?: InputMaybe<Scalars['String']>;
 };
@@ -337,10 +337,10 @@ export type MutationUpdatePlanArgs = {
 };
 
 export type Plan = {
-  _id?: InputMaybe<Scalars['ID']>;
   category?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   creator?: InputMaybe<Scalars['String']>;
   endDate?: InputMaybe<Scalars['DateScalar']>;
+  id?: InputMaybe<Scalars['ID']>;
   image?: InputMaybe<Scalars['String']>;
   meta?: InputMaybe<Scalars['String']>;
   questions?: InputMaybe<Array<InputMaybe<QuizQuestions>>>;
