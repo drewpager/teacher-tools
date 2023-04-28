@@ -67,6 +67,7 @@ const logInViaGoogle = async (
         name: userName,
         avatar: userAvatar,
         contact: userEmail,
+        paymentId: "undefined",
         watched: [],
         playlists: [],
       },
@@ -82,6 +83,7 @@ const logInViaGoogle = async (
         name: userName,
         avatar: userAvatar,
         contact: userEmail,
+        paymentId: "undefined",
         watched: [],
         playlists: [],
       });
