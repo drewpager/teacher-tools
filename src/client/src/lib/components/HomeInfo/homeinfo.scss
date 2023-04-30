@@ -13,6 +13,10 @@
     position: absolute;
     top: 50%;
     margin-top: -150px;
+
+    @media (max-width: 768px) {
+        display: none;
+    }
 }
 
 .grid--container {
@@ -21,11 +25,12 @@
 
 .MuiTypography-root {
     &.title--text {
+        width: 90%;
         margin-top: 10rem;
         margin-right: 2rem;
         margin-left: 2rem;
         padding: 1rem 0;
-        font-size: clamp(2rem, 3rem, 3.25rem);
+        font-size: clamp(1.5rem, 3rem, 3.25rem);
         color: library.$peachy;
         align-self: baseline;
         font-weight: bold;
@@ -43,6 +48,9 @@
 
 .grid--buttons {
     margin-top: 3rem;
+    display: flex;
+    align-items: baseline;
+    margin: 0 0.5em;
 }
 
 .MuiLink-root {

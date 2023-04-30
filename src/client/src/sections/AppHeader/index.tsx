@@ -77,7 +77,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
   }
 
   return (
-    <AppBar className="main--navigation">
+    <AppBar>
       <Toolbar>
         <IconButton
           size="small"
