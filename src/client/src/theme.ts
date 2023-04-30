@@ -113,33 +113,6 @@ const theme = createTheme({
     error: {
       main: colors.primary[450],
     },
-    // primary: {
-    //   // main: '#5560b9',
-    //   // Coral https://www.canva.com/colors/color-palettes/toasted-peach/
-    //   main: "#F67B50",
-    //   light: "#283618",
-    //   // Testing new palette
-    //   // brown: "#bc6c25"
-    //   // peachy: "#dda15e"
-    //   // white: "#fefae0"
-    //   // darkGreen: "#283618"
-    //   // lightGreen: "#606c38"
-    // },
-    // secondary: {
-    //   // main: '#FFE5B4',
-    //   // White-ish
-    //   light: "#fefae0",
-    //   // Peachy
-    //   main: "#dda15e",
-    // },
-    // error: {
-    //   // Brown
-    //   main: "#bc6c25",
-    // },
-    // info: {
-    //   // lightGreen
-    //   main: "#606c38",
-    // },
   },
 });
 

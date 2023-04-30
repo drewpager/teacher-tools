@@ -1,11 +1,15 @@
 @use "../../library";
 
 .MuiAppBar-root {
-  position: sticky;
-  display: flex;
-  justify-content: space-between;
-  background-color: #ffffff;
-  padding: 10px 20px;
+  &.main--navigation {   
+    position: sticky;
+    display: flex;
+    justify-content: space-between;
+    // background-color: #ffffff;
+    padding: 10px 20px;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
 }
 
 .navbar--icon {
