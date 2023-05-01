@@ -101,12 +101,12 @@ export const UserPlaylistsCard = ({ playlist }: Props) => {
                 {playlist.plan.length} {playlist.plan.length === 1 ? " Item" : " Items"}
               </Typography>
             </Link>
-            {UpdatePlanLoading ? updatePlanLoadingMessage : (
+            {/* {UpdatePlanLoading ? updatePlanLoadingMessage : (
               <Tooltip title="Edit contents of playlist!">
                 <Button onClick={() => handleUpdate(playlist.id)}><EditIcon /></Button>
               </Tooltip>
             )}
-            {UpdatePlanError ? updatePlanErrorMessage : null}
+            {UpdatePlanError ? updatePlanErrorMessage : null} */}
             {DeletePlaylistLoading ? deletePlaylistLoadingMessage : (
               <Tooltip title="Delete playlist!">
                 <Button onClick={() => handleDelete(playlist.id)}><DeleteIcon /></Button>

@@ -337,10 +337,10 @@ export type MutationUpdatePlanArgs = {
 };
 
 export type Plan = {
+  _id?: InputMaybe<Scalars['ID']>;
   category?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   creator?: InputMaybe<Scalars['String']>;
   endDate?: InputMaybe<Scalars['DateScalar']>;
-  id?: InputMaybe<Scalars['ID']>;
   image?: InputMaybe<Scalars['String']>;
   meta?: InputMaybe<Scalars['String']>;
   questions?: InputMaybe<Array<InputMaybe<QuizQuestions>>>;

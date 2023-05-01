@@ -181,7 +181,7 @@ export const typeDefs = gql`
   }
 
   input Plan {
-    id: ID
+    _id: ID
     category: [String]
     title: String
     meta: String

@@ -103,7 +103,7 @@ export const EditPlaylist = ({ viewer }: props) => {
       page: page
     }
   })
-  
+
   const [updatePlan, { loading: updatePlanLoading, error: updatePlanError }] = useUpdatePlanMutation({
     variables: {
       input: playlist,
@@ -186,8 +186,9 @@ export const EditPlaylist = ({ viewer }: props) => {
   const titleHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     e.preventDefault();
     setPlaylist({
-      ...playlist,
       name: `${e.target.value}`,
+      creator: `${playlist.creator}`,
+      plan: playlist.plan
     })
   }
 
@@ -309,14 +310,14 @@ export const EditPlaylist = ({ viewer }: props) => {
                         fullWidth
                         onChange={titleHandler}
                       />
-                      {playlist.plan.map((i: any, indices: number) => (
-                        <Draggable draggableId={`${i.id}`} index={indices} key={`${i.id}`}>
+                      {playlist.plan.map((i, indices) => (
+                        <Draggable draggableId={`${i?._id}`} index={indices} key={`${i?._id}`}>
                           {(provided, snapshot) => (
                             <Grid item xs={12} md={12} lg={12}>
                               <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                                {i.questions ? (
+                                {i?.questions ? (
                                   <Card className="lesson--card">
-                                    {i.title} <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                                    {i?.title} <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
                                   </Card>
                                 ) : (
                                   <CreatePlaylistCard {...i} />
@@ -367,9 +368,9 @@ export const EditPlaylist = ({ viewer }: props) => {
                         className="createPlaylist--search"
                       />
                       <Grid container>
-                        {plans.map((i: any, index: number) => (
-                          yourContent && (bookmarkQuery?.find((val) => val?.id === i.id) || (i.creator === viewer.id)) ? (
-                            <Draggable draggableId={`${i.id}`} index={index} key={`${i.id}`}>
+                        {plans.map((i, index) => (
+                          yourContent && (bookmarkQuery?.find((val) => (val?.id === `${i._id}`)) || (i.creator === viewer.id)) ? (
+                            <Draggable draggableId={`${i._id}`} index={index} key={`${i._id}`}>
                               {(provided) => (
                                 <Grid item xs={12} md={12} lg={12}>
                                   {/* {!i && <Link to="/create/lesson"><Typography variant="h5">You haven't added any content yet, click here to add your first lesson.</Typography></Link>} */}
@@ -386,7 +387,7 @@ export const EditPlaylist = ({ viewer }: props) => {
                               )}
                             </Draggable>
                           ) : !yourContent && i.creator !== viewer.id && (
-                            <Draggable draggableId={`${i.id}`} index={index} key={`${i.id}`}>
+                            <Draggable draggableId={`${i._id}`} index={index} key={`${i._id}`}>
                               {(provided) => (
                                 <Grid item xs={12} md={12} lg={12}>
                                   <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
