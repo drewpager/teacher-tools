@@ -1,4 +1,4 @@
-import { Playlist, Lesson, Quiz, LessonPlan } from "../../../lib/types";
+import { Playlist, Lesson, Quiz, LessonPlan, Viewer } from "../../../lib/types";
 export interface PlaylistArgs {
   id: string;
 }
@@ -21,6 +21,7 @@ export interface LessonPlanInput {
 
 export interface CreatePlanArgs {
   input: LessonPlanInput;
+  viewerId: string;
 }
 
 export interface UpdatePlanArgs {

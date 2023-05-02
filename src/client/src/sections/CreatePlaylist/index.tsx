@@ -104,7 +104,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
   const [lessonPlan, { loading, error }] = useLessonPlanMutation({
     variables: {
-      input: playlist
+      input: playlist,
+      viewerId: `${viewer.id}`
     }
   })
 
@@ -257,7 +258,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
     if (playlist && playlist.plan) {
       await lessonPlan({
         variables: {
-          input: playlist
+          input: playlist,
+          viewerId: `${viewer.id}`
         }
       });
     }

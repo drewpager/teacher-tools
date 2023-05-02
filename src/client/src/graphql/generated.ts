@@ -323,6 +323,7 @@ export type MutationDeletePlaylistArgs = {
 
 export type MutationLessonPlanArgs = {
   input?: InputMaybe<LessonPlanInput>;
+  viewerId?: InputMaybe<Scalars['ID']>;
 };
 
 
@@ -509,6 +510,7 @@ export type CreateLessonMutation = { __typename?: 'Mutation', createLesson: { __
 
 export type LessonPlanMutationVariables = Exact<{
   input: LessonPlanInput;
+  viewerId: Scalars['ID'];
 }>;
 
 
@@ -670,8 +672,8 @@ export type CreateLessonMutationHookResult = ReturnType<typeof useCreateLessonMu
 export type CreateLessonMutationResult = Apollo.MutationResult<CreateLessonMutation>;
 export type CreateLessonMutationOptions = Apollo.BaseMutationOptions<CreateLessonMutation, CreateLessonMutationVariables>;
 export const LessonPlanDocument = gql`
-    mutation LessonPlan($input: LessonPlanInput!) {
-  lessonPlan(input: $input) {
+    mutation LessonPlan($input: LessonPlanInput!, $viewerId: ID!) {
+  lessonPlan(input: $input, viewerId: $viewerId) {
     id
   }
 }
@@ -692,6 +694,7 @@ export type LessonPlanMutationFn = Apollo.MutationFunction<LessonPlanMutation, L
  * const [lessonPlanMutation, { data, loading, error }] = useLessonPlanMutation({
  *   variables: {
  *      input: // value for 'input'
+ *      viewerId: // value for 'viewerId'
  *   },
  * });
  */

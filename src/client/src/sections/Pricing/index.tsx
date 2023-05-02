@@ -180,7 +180,6 @@ export const Pricing = () => {
           <Divider sx={{ marginBottom: "1em" }} />
           <Typography variant="h5" fontSize={28} className='pullQuote'>"In order to seek one’s own direction, we must simplify the mechanics of ordinary, everyday life." -Plato</Typography>
           <Divider sx={{ marginTop: "1em" }} />
-          {/* TODO: Add pull quote: "In order to seek one’s own direction, we must simplify the mechanics of ordinary, everyday life." Plato */}
         </Box>
       </Box>
       {/* {stripePromise && clientSecret && (

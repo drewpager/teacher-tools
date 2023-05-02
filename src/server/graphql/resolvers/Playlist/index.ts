@@ -77,7 +77,7 @@ export const playlistResolvers = {
   Mutation: {
     lessonPlan: async (
       _root: undefined,
-      { input }: CreatePlanArgs,
+      { input, viewerId }: CreatePlanArgs,
       { db }: { db: Database }
     ): Promise<Playlist> => {
       const id = new ObjectId();
@@ -96,9 +96,8 @@ export const playlistResolvers = {
           throw new Error("Failed to insert new lesson plan!");
         }
 
-        // TODO: get viewer id instead of hardcoded value
         await db.users.updateOne(
-          { _id: "116143759549242008910" },
+          { _id: viewerId },
           { $push: { playlists: insertedResult } }
         );
 
