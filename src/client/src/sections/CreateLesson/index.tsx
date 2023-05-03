@@ -5,7 +5,7 @@ import { FieldArray, Formik, Field, Form } from 'formik';
 import * as yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCreateLessonMutation, Viewer } from '../../graphql/generated';
-import { categories, DisplayError, DisplaySuccess } from '../../lib/utils';
+import { categories, DisplayError, DisplaySuccess, titleCase } from '../../lib/utils';
 import { Footer } from '../../lib/components';
 import theme from '../../theme';
 import Moment from 'moment';
@@ -99,7 +99,7 @@ export const CreateLesson = ({ viewer }: Props) => {
   const handleVideoUpload = (files: FileList | null) => {
 
     const file = files ? files[0] : null;
-    // Set your cloud name and unsigned upload preset here:
+    // cloud name and unsigned upload preset here:
     var YOUR_CLOUD_NAME = "drewpager";
     var YOUR_UNSIGNED_UPLOAD_PRESET = "platos-peach";
 
@@ -408,7 +408,6 @@ export const CreateLesson = ({ viewer }: Props) => {
                     <Typography variant="body2" style={{ color: "gray" }}>Select All That Apply</Typography>
                     <FieldArray name="category">
                       {({ insert, remove, push }) => (
-                        // TODO: Render categories
                         <div className="field--checkboxes">
                           {categories.map((cat, index) => (
                             <label
@@ -422,7 +421,7 @@ export const CreateLesson = ({ viewer }: Props) => {
                                 className="field--checkbox"
                                 error={touched.category && errors.category ? true : false}
                               />
-                              {cat.name}
+                              {titleCase(`${cat.name}`)}
                             </label>
                           ))}
                         </div>
