@@ -12,7 +12,7 @@ import {
   Plan,
   useUserQuery
 } from '../../graphql/generated';
-import { DisplayError } from '../../lib/utils';
+import { DisplayError, titleCase } from '../../lib/utils';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useNavigate } from 'react-router-dom';
 import { UseModal } from '../Modal';
@@ -64,8 +64,9 @@ export const CreatePlaylist = ({ viewer }: props) => {
   let navigate = useNavigate();
   const [searchInput, setSearchInput] = useState<string>("")
   const [variant, setVariant] = useState<boolean>(true)
+  const [cater, setCater] = useState<Array<boolean>>([])
   const [variantAssessment, setVariantAssessment] = useState<boolean>(true)
-  const [variants, setVariants] = useState<boolean[]>([variant, variantAssessment])
+  const [filled, setFilled] = useState<boolean>(true)
   const [lessons, setLessons] = useState<Array<Plan>>([])
   const [quizzes, setQuizzes] = useState<Array<Plan>>([])
   const [plans, setPlans] = useState<Array<Plan>>([])
@@ -164,6 +165,33 @@ export const CreatePlaylist = ({ viewer }: props) => {
     )
   }
 
+  // Filtering functions
+  function onlyUnique(value: any, index: number, self: any) {
+    return self.indexOf(value) === index;
+  }
+
+  function onlyDefined(value: { main: string, secondary: undefined | string }, index: number, self: any) {
+    return value.secondary !== undefined
+  }
+
+  // Isolate the main and any secondary categories
+  const categor = lessonData?.allLessons.result;
+  const mainCategoryArray: any[] = [];
+  const secondaryCategory: any = [{}];
+  const allCategories: any[] = [];
+  categor?.map((i) => mainCategoryArray.push(i?.category ? i.category[0]?.trim() : undefined))
+  categor?.map((i) => allCategories.push(i?.category ? i.category.map(item => item?.trim()) : undefined))
+  categor?.map((i) => secondaryCategory.push(i?.category ? { main: i.category[0], secondary: i.category[1]?.trim() } : undefined))
+  categor?.map((i) => secondaryCategory.push(i?.category ? { main: i.category[0], secondary: i.category[2]?.trim() } : undefined))
+  categor?.map((i) => secondaryCategory.push(i?.category ? { main: i.category[0], secondary: i.category[3]?.trim() } : undefined))
+  const mainCategories = mainCategoryArray.filter(onlyUnique)
+  let secCategories = secondaryCategory.filter(onlyDefined)
+  const secondaryCategories = new Map(secCategories.map((item: any) =>
+    [item["secondary"], item])).values();
+
+  const combinedCategories = Array.from(secondaryCategories)
+  // const selectedSecondary = allCategories.filter((b) => b.includes(selected[0]));
+  // setCater(mainCategories.map((i) => false))
   const titleHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     e.preventDefault();
     const name = e.target.value;
@@ -273,6 +301,18 @@ export const CreatePlaylist = ({ viewer }: props) => {
     dispatch({ type: "lessonOnly" })
   }
 
+  const handleCategoryClick = (i: string, index: number) => {
+    if (i === "All") {
+      setPlans(plans)
+    }
+    setFilled(!filled)
+    setPlans([...filter.filter((e) => e.category?.includes(i))])
+  }
+
+  const handleCategoryDelete = () => {
+    setVariant(!variant)
+  }
+
   const handleAssessmentClick = () => {
     setVariantAssessment(!variantAssessment)
     dispatch({ type: "quizOnly" })
@@ -309,7 +349,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
                         <Draggable draggableId={`${i._id}`} index={indices} key={`${i._id}`}>
                           {(provided, snapshot) => (
                             <Grid item xs={12} md={12} lg={12}>
-                              {console.log(playlist.plan)}
                               <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
                                 {i.questions ? (
                                   <Card className="lesson--card">
@@ -339,6 +378,27 @@ export const CreatePlaylist = ({ viewer }: props) => {
                       />}
                       label={yourContent ? "Viewing Your Content Only" : "Viewing All Public Content"}
                     />
+                    {/* <Chip
+                      key={1000}
+                      label={"All"}
+                      variant={"outlined"}
+                      onClick={() => handleCategoryClick("All", 1000)}
+                      onDelete={() => handleCategoryDelete()}
+                      deleteIcon={variant ? undefined : <DoneIcon />}
+                    /> */}
+                    {mainCategories.map((i: any, index) => (
+                      <>
+                        <Chip
+                          key={index}
+                          label={titleCase(i)}
+                          variant={variant ? "filled" : "outlined"}
+                          onClick={() => handleCategoryClick(i.toString(), index)}
+                          onDelete={() => handleCategoryDelete()}
+                          deleteIcon={variant ? <DoneIcon /> : undefined}
+                          sx={{ m: "1px" }}
+                        />
+                      </>
+                    ))}
                     {/* <Chip
                     label="Lessons"
                     variant={variant ? "filled" : "outlined"}
