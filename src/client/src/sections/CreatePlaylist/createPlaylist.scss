@@ -5,18 +5,18 @@
     margin: 5rem 0;
     overflow-y: hidden;
     overflow-x: hidden;
-    
+    padding-right: 2rem;
     .createPlaylist--h1, .createPlaylist--button {
-      margin-left: 3rem;
+      margin-left: 2rem;
     }
   }
 }
 
 .MuiPaper-root {
   &.createPlaylist--card {
-    min-height: 40rem;
+    min-height: 30%;
     max-height: 40rem;
-    min-width: 30rem;
+    min-width: 25rem;
     padding: 2rem;
     margin-top: 1rem;
     overflow-y: scroll;
@@ -50,5 +50,6 @@
     top: 0;
     position: sticky;
     z-index: 1;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
   }
 }

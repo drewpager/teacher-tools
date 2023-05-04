@@ -303,7 +303,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
   const handleCategoryClick = (i: string, index: number) => {
     if (i === "All") {
-      setPlans(plans)
+      setPlans([...filter])
+      DisplayError({ title: "All" })
     }
     setFilled(!filled)
     setPlans([...filter.filter((e) => e.category?.includes(i))])
@@ -335,7 +336,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
             <Grid container>
               <Droppable droppableId='playlist'>
                 {(provided, snapshot) => (
-                  <Grid item xs={12} sm={6} md={8} lg={8}>
+                  <Grid item xs={12} sm={7} md={7} lg={7}>
                     <Card variant="outlined" sx={{ minHeight: "750px", padding: 5, margin: 2 }} {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
                       <TextField
                         label="Lesson Plan Title"
@@ -348,7 +349,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
                       {playlist.plan.map((i, indices) => (
                         <Draggable draggableId={`${i._id}`} index={indices} key={`${i._id}`}>
                           {(provided, snapshot) => (
-                            <Grid item xs={12} md={12} lg={12}>
+                            <Grid item xs={12} md={12} lg={12} className="playlist--dropbox">
                               <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
                                 {i.questions ? (
                                   <Card className="lesson--card">
@@ -369,7 +370,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
               </Droppable>
               <Droppable droppableId='lessons'>
                 {(provided, snapshot) => (
-                  <Grid item xs={12} sm={6} md={4} lg={4}>
+                  <Grid item xs={12} sm={5} md={5} lg={5}>
                     <FormControlLabel
                       control={<Switch
                         sx={{ m: 1 }}
@@ -378,14 +379,13 @@ export const CreatePlaylist = ({ viewer }: props) => {
                       />}
                       label={yourContent ? "Viewing Your Content Only" : "Viewing All Public Content"}
                     />
-                    {/* <Chip
+                    <br />
+                    <Chip
                       key={1000}
                       label={"All"}
                       variant={"outlined"}
                       onClick={() => handleCategoryClick("All", 1000)}
-                      onDelete={() => handleCategoryDelete()}
-                      deleteIcon={variant ? undefined : <DoneIcon />}
-                    /> */}
+                    />
                     {mainCategories.map((i: any, index) => (
                       <>
                         <Chip
@@ -393,8 +393,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
                           label={titleCase(i)}
                           variant={variant ? "filled" : "outlined"}
                           onClick={() => handleCategoryClick(i.toString(), index)}
-                          onDelete={() => handleCategoryDelete()}
-                          deleteIcon={variant ? <DoneIcon /> : undefined}
                           sx={{ m: "1px" }}
                         />
                       </>
