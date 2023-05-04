@@ -65,6 +65,7 @@ export const Catalog = ({ viewer }: Props) => {
   const mainCategoryArray: any[] = [];
   const secondaryCategory: any = [{}];
   const allCategories: any[] = [];
+  // categor?.sort((a, b) => a.startDate - b.startDate)
   categor?.map((i) => mainCategoryArray.push(i?.category ? i.category[0]?.trim() : undefined))
   categor?.map((i) => allCategories.push(i?.category ? i.category.map(item => item?.trim()) : undefined))
   categor?.map((i) => secondaryCategory.push(i?.category ? { main: i.category[0], secondary: i.category[1]?.trim() } : undefined))
@@ -81,7 +82,7 @@ export const Catalog = ({ viewer }: Props) => {
     <Box>
       <Grid container>
         <Grid item sm={12} md={2} lg={3}>
-          <Box sx={{ height: "auto", flexGrow: 1, maxWidth: 400, overflowY: 'auto', marginTop: 15, position: "sticky", top: 80 }}>
+          <Box className="catalogGrid--categories">
             <TreeView
               aria-label="controlled"
               defaultCollapseIcon={<ExpandMoreIcon />}

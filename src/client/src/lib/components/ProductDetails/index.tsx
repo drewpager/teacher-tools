@@ -11,7 +11,7 @@ export const ProductDetails = () => {
       <Grid container>
         <Grid item xs={12} sm={12} md={6}>
           <Typography variant="h2" sx={{ pb: "2rem", pr: "2rem", fontWeight: 50 }}>
-            Drag and Drop Interactive Lesson Plans Together in Seconds
+          Create Drag and Drop Interactive Lesson Plans in Seconds
           </Typography>
           <Typography variant="body2" sx={{ pb: "2rem", pr: "2rem", fontSize: 20 }}>
             Using our <Link to="/playlist/create">lesson plan creation tool</Link> you can quickly construct lesson plans with the content you choose and assessments you create.
@@ -22,7 +22,7 @@ export const ProductDetails = () => {
         </Grid>
         <Grid item xs={12} sm={12} md={6}>
           <Typography variant="h2" sx={{ pb: "2rem", pr: "2rem", mt: "2rem", fontWeight: 50 }}>
-            Easily Share Lesson Plan Playlists With Your Students
+            Easily Share Lesson Plan Playlists With Your Students and Other Teachers
           </Typography>
           <Typography variant="body2" sx={{ pb: "2rem", pr: "2rem", fontSize: 20 }}>
             Using our <Link to="/playlist/create">lesson plan creation tool</Link> you can quickly construct lesson plans with the content you choose and assessments you create.

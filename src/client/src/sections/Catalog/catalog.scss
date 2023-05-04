@@ -44,16 +44,12 @@
 }
 
 .MuiPaper-root {
-  &.catalog--item {
-    border: 1px solid red;
-  }
-  
   &.keenSlider--item {
     display: flex;
     background-color: #535ac8;
     border-radius: 0.4em; 
-    height: 200px;
-    padding: 0.25em 0;
+    height: 180px;
+    padding: 0.25em 0.25em;
   }
 }
 
@@ -72,5 +68,15 @@
   
   &.category--box {
     margin-top: 0.5rem;
+  }
+
+  &.catalogGrid--categories {
+    height: 100vh;
+    flex-grow: 1;
+    max-width: 400px; 
+    overflow-y: scroll; 
+    margin: 5em 0.5em; 
+    top: 5em; 
+    position: sticky; 
   }
 }
