@@ -59,11 +59,18 @@
 }
 
 .MuiBox-root {
+  // Desktop
   &.catalogBackground {
-    margin-top: 5rem;
+    margin-top: 5em;
     max-width: max-content;
     overflow-y: visible;
     left: 0;
+
+    // Mobile
+    @media (max-width: 900px) {
+      width: 100%;
+      margin-top: 2em;
+    }
   }
   
   &.category--box {
@@ -74,9 +81,17 @@
     height: 100vh;
     flex-grow: 1;
     max-width: 400px; 
-    overflow-y: scroll; 
-    margin: 5em 0.5em; 
+    overflow-y: scroll;
+    overflow-x: hidden; 
+    margin: 6em 0.5em; 
     top: 5em; 
-    position: sticky; 
+    position: sticky;
+    
+    @media (max-width: 900px) {
+      height: auto;
+      margin-top: 5em;
+      margin-bottom: 0.5em;
+      width: 100%; 
+    }
   }
 }

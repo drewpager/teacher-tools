@@ -23,8 +23,11 @@ export const Catalog = ({ viewer }: Props) => {
     setExpanded(nodeIds);
   };
 
-  const handleSelect = (event: React.SyntheticEvent, nodeIds: string[]) => {
-    setSelected(nodeIds);
+  const handleSelect = async (event: React.SyntheticEvent, nodeIds: string[]) => {
+    await setSelected(nodeIds);
+    if (window.innerWidth > 900) {
+      window.location.replace(`/catalog/#${nodeIds}`)
+    }
   };
 
   const { data, loading, error } = useAllLessonsQuery({
@@ -81,7 +84,7 @@ export const Catalog = ({ viewer }: Props) => {
   return (
     <Box>
       <Grid container>
-        <Grid item sm={12} md={2} lg={3}>
+        <Grid item sm={12} md={3} lg={3}>
           <Box className="catalogGrid--categories">
             <TreeView
               aria-label="controlled"
@@ -115,8 +118,8 @@ export const Catalog = ({ viewer }: Props) => {
             </TreeView>
           </Box>
         </Grid>
-        <Grid item sm={12} md={10} lg={9}>
-          <Box className="catalogBackground" sx={{ marginBottom: "80px" }}>
+        <Grid item sm={12} md={9} lg={9}>
+          <Box className="catalogBackground" sx={{ marginBottom: "80px" }} id={`${selected[0]}`}>
             <h1 className="catalogTitle">Catalog <Chip label={data?.allLessons.total} color="primary" size="medium" /></h1>
             {selected && data && (
               <div className="catalog--item">
