@@ -268,11 +268,13 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
               </Menu>
             </Box>
             <Box className="desktop--menu-items">
-              <Link to={`/catalog`} style={{ textDecoration: "none" }}>
+              <Link to={`/catalog`} style={{ textDecoration: "none", marginRight: 10 }}>
                 <p style={{ color: `${theme.palette.info.light}` }}>Catalog</p>
               </Link>
-              <Link to={`/login`} style={{ textDecoration: "none", color: "white" }}>
-                <Tooltip title="Account Login">
+              <Link to={`/login`} style={{ textDecoration: "none", marginRight: 10 }}>
+                <p style={{ color: `${theme.palette.info.light}` }}>Login</p>
+              </Link>
+              {/* <Tooltip title="Account Login">
                   <IconButton
                     size="large"
                     aria-label="account of current user"
@@ -283,7 +285,8 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                   >
                     <AccountCircleIcon />
                   </IconButton>
-                </Tooltip>
+                </Tooltip> */}
+              <Link to={`/login`} style={{ textDecoration: "none", color: "white" }}>
                 <Button className="login--button">Start free</Button>
               </Link>
             </Box>
