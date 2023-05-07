@@ -26,7 +26,8 @@ export const Catalog = ({ viewer }: Props) => {
   const handleSelect = async (event: React.SyntheticEvent, nodeIds: string[]) => {
     await setSelected(nodeIds);
     if (window.innerWidth > 900) {
-      window.location.replace(`/catalog/#${nodeIds}`)
+      // window.location.replace(`/catalog#${nodeIds}`)
+      window.scrollTo(0, 0)
     }
   };
 
@@ -74,12 +75,12 @@ export const Catalog = ({ viewer }: Props) => {
   categor?.map((i) => secondaryCategory.push(i?.category ? { main: i.category[0], secondary: i.category[1]?.trim() } : undefined))
   categor?.map((i) => secondaryCategory.push(i?.category ? { main: i.category[0], secondary: i.category[2]?.trim() } : undefined))
   categor?.map((i) => secondaryCategory.push(i?.category ? { main: i.category[0], secondary: i.category[3]?.trim() } : undefined))
-  const mainCategories = mainCategoryArray.filter(onlyUnique)
+  let mainCategories = mainCategoryArray.filter(onlyUnique).sort()
   let secCategories = secondaryCategory.filter(onlyDefined)
   const secondaryCategories = new Map(secCategories.map((item: any) =>
     [item["secondary"], item])).values();
 
-  const combinedCategories = Array.from(secondaryCategories)
+  let combinedCategories = Array.from(secondaryCategories).sort((a: any, b: any) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime())
   const selectedSecondary = allCategories.filter((b) => b.includes(selected[0]));
   return (
     <Box>
@@ -123,12 +124,12 @@ export const Catalog = ({ viewer }: Props) => {
             <h1 className="catalogTitle">Catalog <Chip label={data?.allLessons.total} color="primary" size="medium" /></h1>
             {selected && data && (
               <div className="catalog--item">
-                <CatalogItem viewer={`${viewer.id}`} name={`${selected[0]}`} category={data.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0]))} key={`${selected[0]}`} />
+                <CatalogItem viewer={`${viewer.id}`} name={`${selected[0]}`} category={data.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0])).sort((a: any, b: any) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime())} key={`${selected[0]}`} />
               </div>
             )}
             {data && categories.map((cater) => (
               <div className="catalog--item">
-                <CatalogItem viewer={`${viewer.id}`} name={cater.name} category={data.allLessons.result.filter((b) => b.category?.includes(cater.name))} key={cater.name} />
+                <CatalogItem viewer={`${viewer.id}`} name={cater.name} category={data.allLessons.result.filter((b) => b.category?.includes(cater.name)).sort((a: any, b: any) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime())} key={cater.name} />
               </div>
             ))}
           </Box >
