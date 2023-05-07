@@ -36,7 +36,7 @@ export const Pricing = () => {
 
   const PricingSwitch = styled(Switch)(() => ({
     width: 100,
-    height: 35,
+    height: 45,
     padding: 0,
     margin: 12,
     borderRadius: "20% / 50%",
@@ -52,8 +52,8 @@ export const Pricing = () => {
           position: 'relative',
           width: '100%',
           height: '100%',
-          left: 5,
-          top: 5,
+          left: 6,
+          top: 7,
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
         },
@@ -65,17 +65,17 @@ export const Pricing = () => {
     },
     '& .MuiSwitch-thumb': {
       backgroundColor: theme.palette.mode === 'dark' ? '#003892' : '#001e3c',
-      width: 65,
-      height: 35,
+      width: 75,
+      height: 45,
       borderRadius: 30,
-      fontSize: 16,
+      fontSize: 18,
       '&:before': {
         content: "'Monthly'",
         position: 'relative',
         width: '100%',
         height: '100%',
-        left: 5,
-        top: 5,
+        left: 6,
+        top: 7,
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
       },
@@ -106,7 +106,7 @@ export const Pricing = () => {
 
   return (
     <Box sx={{ marginTop: 12 }}>
-      <FormGroup sx={{ alignItems: 'flex-end', marginRight: 2 }}>
+      <FormGroup sx={{ alignItems: 'center', marginRight: 2 }}>
         <FormControlLabel control={<PricingSwitch sx={{ m: 1 }} checked={monthlyCadence} onChange={() => setMonthlyCadence(!monthlyCadence)} />} label="" />
       </FormGroup>
       <Box className='pricing--card-box'>
