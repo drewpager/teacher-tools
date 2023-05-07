@@ -1,4 +1,4 @@
-import { CircularProgress, Grid, Box, Card, TextField, Button, Switch, FormControlLabel, Chip, Avatar } from '@mui/material';
+import { CircularProgress, Grid, Box, Card, TextField, Button, Switch, FormControlLabel, Chip, Avatar, Typography } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import DoneIcon from '@mui/icons-material/Done';
 import React, { useState, ChangeEvent, useRef, useEffect, useReducer } from 'react';
@@ -422,7 +422,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
                         className="createPlaylist--search"
                       />
                       <Grid container>
-                        {plans.map((i, index) => (
+                        {plans.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime()).map((i, index) => (
                           yourContent && (bookmarkQuery?.find((val) => (val?.id === `${i._id}`)) || (i.creator === viewer.id)) ? (
                             <Draggable draggableId={`${i._id}`} index={index} key={`${i._id}`}>
                               {(provided) => (

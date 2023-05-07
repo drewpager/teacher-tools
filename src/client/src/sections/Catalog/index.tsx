@@ -132,7 +132,7 @@ export const Catalog = ({ viewer }: Props) => {
           <Box className="catalogBackground" sx={{ marginBottom: "80px" }} id={`${selected[0]}`}>
             <h1 className="catalogTitle">Catalog <Chip label={data?.allLessons.total} color="primary" size="medium" /></h1>
             <Box sx={{ display: 'flex' }}>
-              <Switch checked={ascending} onChange={() => setAscending(!ascending)} /><Typography variant='h3'>{ascending ? "Chronological" : "Reverse Chronological"}</Typography>
+              <Switch checked={ascending} onClick={() => setAscending(!ascending)} /><Typography variant='h3'>{ascending ? "Chronological" : "Reverse Chronological"}</Typography>
             </Box>
             {selected && data && (
               <div className="catalog--item">
