@@ -18,6 +18,7 @@
     "cors": "^2.8.5",
     "d3": "^7.3.0",
     "express": "^4.17.2",
+    "express-sslify": "^1.2.0",
     "googleapis": "^95.0.0",
     "graphql": "^16.6.0",
     "graphql-scalars": "^1.18.0",

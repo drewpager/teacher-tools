@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const stripe = require("stripe")(`${process.env.S_SECRET_KEY}`);
+const enforce = require("express-sslify");
 import express, { Application } from "express";
 import { ApolloServer } from "apollo-server-express";
 // import { ApolloServer } from "@apollo/server";
@@ -34,6 +35,7 @@ const mount = async (app: Application) => {
   app.use(cors(corsOptions));
 
   // DEPLOY TODO: UNCOMMENT FOR PRODUCTION
+  // app.use(enforce.HTTPS({ trustProtoHeader: true }));
   // app.use(express.static(`${__dirname}/`));
   // app.get("/*", (_req, res) => res.sendFile(`${__dirname}/index.html`));
 
