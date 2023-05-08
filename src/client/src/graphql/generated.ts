@@ -276,6 +276,7 @@ export type Mutation = {
   createQuiz: Quiz;
   deleteLesson: Scalars['Boolean'];
   deletePlaylist: Scalars['Boolean'];
+  deleteQuiz: Scalars['Boolean'];
   disconnectStripe: Viewer;
   lessonPlan: Playlist;
   logIn: Viewer;
@@ -317,6 +318,11 @@ export type MutationDeleteLessonArgs = {
 
 
 export type MutationDeletePlaylistArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
+
+export type MutationDeleteQuizArgs = {
   id?: InputMaybe<Scalars['ID']>;
 };
 

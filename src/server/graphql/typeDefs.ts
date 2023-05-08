@@ -110,6 +110,7 @@ export const typeDefs = gql`
     updatePlan(input: LessonPlanInput, id: ID): Playlist!
     deleteLesson(id: ID): Boolean!
     deletePlaylist(id: ID): Boolean!
+    deleteQuiz(id: ID): Boolean!
     bookmarkLesson(id: ID!, viewer: String!): Boolean
     addPayment(paymentId: String, viewer: String): Boolean
   }

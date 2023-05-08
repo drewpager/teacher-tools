@@ -1,4 +1,4 @@
-import { Database, Quiz } from "../../../lib/types";
+import { Database, Quiz, Viewer } from "../../../lib/types";
 import { QuizArgs, QuizzesArgs, QuizzesData, CreateQuizArgs } from "./types";
 import { ObjectId } from "mongodb";
 
@@ -70,6 +70,25 @@ export const quizResolvers = {
         return insertedQuiz;
       } catch (err) {
         throw new Error(`Failed with error: ${err}`);
+      }
+    },
+    deleteQuiz: async (
+      _root: undefined,
+      { id }: QuizArgs,
+      { db }: { db: Database }
+    ): Promise<boolean | undefined> => {
+      try {
+        const deletedQuiz = await db.quizzes.deleteOne({
+          _id: new ObjectId(id),
+        });
+
+        if (!deletedQuiz) {
+          throw new Error("Failed to delete quiz");
+        }
+
+        return deletedQuiz.acknowledged;
+      } catch (error) {
+        throw new Error(`Failed to start deleting quiz: ${error}`);
       }
     },
   },
