@@ -4,6 +4,12 @@
 .box--title {
     width: 100%;
     margin-left: 2rem;
+
+    @media (max-width: 768px) {
+        margin-left: 0;
+        // font-size: 2.25rem;
+        // line-height: 2.5rem;
+    }
 }
 
 .contain {
@@ -26,53 +32,76 @@
 .MuiTypography-root {
     &.title--text {
         width: 90%;
-        margin-top: 10rem;
-        margin-right: 2rem;
-        margin-left: 2rem;
+        margin-top: 8rem;
+        margin-right: 1.5rem;
+        margin-left: 1.5rem;
         padding: 1rem 0;
         font-size: clamp(1.5rem, 3rem, 3.25rem);
         color: library.$peachy;
         align-self: baseline;
-        font-weight: bold;
+        font-size: 2.25rem;
+        font-weight: 700;
+        line-height: 2.5rem;
     }
 
     &.subtitle--text {
         width: 70%;
-        padding: 0 2rem;
+        padding: 0 1.5rem;
         margin: 1rem 0;
-        font-size: clamp(0.75rem, 1.25rem, 1.5rem);
+        // font-size: clamp(0.75rem, 1.25rem, 1.5rem);
         color: library.$peachy;
         align-self: baseline;
+
+        @media (max-width: 768px) {
+            width: 100%;
+            line-height: 1.5rem;
+            font-size: 1.25rem;
+        }
     }
 }
 
 .grid--buttons {
-    margin-top: 3rem;
+    // margin-top: 3rem;
     display: flex;
-    align-items: baseline;
-    margin: 0 0.5em;
+    flex-direction: column;
+    // align-items: baseline;
+    margin: 2rem 1.5rem;
+    gap: 1rem;
 }
 
 .MuiLink-root {
-    &.link--start {
-        background: library.$coral;
-        color: library.$white;
-        border: 1px solid library.$darkGreen;
-        border-radius: 4px;
+    &.startTeaching--button {
+        background: #57996A;
+        color: #ffffff;
+        font-weight: 600;
+        border-radius: 100px;
+        height: 4rem;
+        width: 100%;
+        text-transform: capitalize;
+        text-align: center;
         text-decoration: none;
-        padding: 1.5rem;
-        margin: 2rem 0;
+        padding: 1rem;
         &:hover {
-            background: library.$peachy;
+            color: #ffffff;
+            background-color: #557669;
         }
-
-        &:first-of-type {
-            // margin-right: 1rem;
-            margin: 0 2rem;
-            background: library.$lightGreen;
-            &:hover {
-                background: library.$darkGreen;
-            }
+    }
+    
+    &.pricing--button {
+        background: #FAF9F6;
+        color: #000;
+        font-weight: 600;
+        border-radius: 100px;
+        height: 4rem;
+        width: 100%;
+        text-transform: capitalize;
+        text-align: center;
+        text-decoration: none;
+        padding: 1rem;
+        border: 1px solid black;
+        &:hover {
+            color: #FAF9F6;
+            background-color: #000;
         }
     }
 }
