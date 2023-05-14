@@ -1,23 +1,67 @@
 @use "../../library";
 
+.MuiPaper-root {
+  &.NavBar-container {
+    background-color: #fff; 
+    overflow: hidden; 
+    border-bottom: 1px solid #182742;
+    display: flex;
+    box-shadow: none;
+  }
+}
+
 .MuiAppBar-root {
   position: sticky;
-  display: flex;
   justify-content: space-between;
-  // background-color: #ffffff;
-  padding: 10px 20px;
+  background-color: #ffffff;
+  padding: 0.5rem 3rem;
   max-width: 100%;
   overflow-x: hidden;
+  height: 80px;
+  vertical-align: baseline;
+
+  @media (max-width: 768px) {
+    padding: 0.5rem 0;
+    justify-content: center;
+  }
 }
 
 .navbar--icon {
-  display: none;
+  width: 70px; 
+  height: 70px;
+  margin-top: 0.875rem;
+  margin-right: -0.5rem;
+}
+
+.desktop--loggedIn-items {
+  display: flex;
+  margin-top: 4rem;
+  justify-content: space-between;
+
+  @media (max-width: 1288px) {
+    justify-content: space-between;
+  }
 }
 
 .desktop--menu-items {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 1288px) {
+    justify-content: space-between;
+  }
+}
+
+.desktop--mid-menu-items {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+
+  @media (max-width: 1288px) {
+    display: none;
+  }
 }
 
 .mobile--menu {
@@ -26,17 +70,39 @@
 
 .MuiTypography-root {
   &.nav--title {
-    margin-left: 1rem;
-    flex-grow: 1;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-left: 0.01rem;
+    flex-grow: 0.5;
+
+    @media (max-width: 1288px) {
+      flex-grow: 1;
+    }
   }
 }
 
 .MuiButton-root {
   &.login--button {
-    color: library.$white;
+    color: #000;
     text-decoration: none;
     text-transform: none;
-    padding: 0.5em;
+    padding: 1.25rem;
+    margin-right: 0.5rem;
+  }
+
+  &.getStarted--button {
+    background: #57996A;
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: 100px;
+    height: 3rem;
+    text-transform: capitalize;
+    padding: 1.25em;
+    &:hover {
+      color: #ffffff;
+      background-color: #557669;
+    }
   }
 }
 
@@ -48,20 +114,42 @@
 
 .MuiSvgIcon-root {
   &.nav--user-actions {
-    color: library.$white;
+    color: library.$darkGreen;
     width: 47px;
     height: 47px;
   }
 }
 
-@media only screen and (max-width: 768px) {
+.navburger--icon {
+  display: none;
+}
+
+@media (max-width: 768px) {
   /* Navbar Icon Styles */
-  .navbar--icon {
+  .navburger--icon {
     display: flex;
     align-items: center;
-    color: library.$white;
-    font-size: 28px;
+    color: library.$darkGreen;
+    font-size: 2rem;
     cursor: pointer;
+  }
+
+  .MuiBox-root {
+    .mobileStarted--button {
+      display: flex;
+      background: #57996A;
+      color: #ffffff;
+      font-weight: 600;
+      border-radius: 100px;
+      height: 1.875rem;
+      text-transform: capitalize;
+      padding: 1.25em;
+      margin-right: 0.875rem;
+      &:hover {
+        color: #ffffff;
+        background-color: #557669;
+      }
+    }
   }
 
   .logged-out--nav {
@@ -69,9 +157,9 @@
   }
   
   /* Navbar Icon Hover Styles */
-  .navbar--icon:hover {
-    color: #999999;
-  }
+  // .navbar--icon:hover {
+  //   color: #999999;
+  // }
 
   .nav--user-actions {
     display: none;

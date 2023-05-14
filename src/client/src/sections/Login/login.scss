@@ -22,10 +22,15 @@
 .MuiButton-root {
   &.login--button {
     margin: 0 auto;
-    background: library.$lightGreen;
-    color: library.$white;
+    background: #ffffff;
+    color: #000000;
+    border: 1px solid black;
+    font-weight: 700;
+    border-radius: 100px;
+    height: 3rem;
     &:hover {
-      box-shadow:inset 0px 0px 0px 1px library.$coral;
+      color: #fff;
+      background-color: #000000;
     }
   }
   &.google--button {

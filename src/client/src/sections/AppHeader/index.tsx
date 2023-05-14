@@ -11,7 +11,6 @@ import { ReactComponent as PeachIcon } from '../../lib/assets/peach-logo.svg';
 // import { ReactComponent as PlatosPeachIcon } from '../../lib/assets/platos-peach-logo.svg';
 import { ReactComponent as PlatosPeachIcon } from '../../lib/assets/peach-logo.svg';
 import theme from '../../theme';
-import zIndex from '@mui/material/styles/zIndex';
 import './appHeader.scss';
 
 interface Props {
@@ -77,34 +76,42 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
   }
 
   return (
-    <AppBar>
+    <AppBar className='NavBar-container'>
       <Toolbar>
         <IconButton
           size="small"
           edge="start"
-          color="info"
+          color="primary"
           aria-label="home"
+          className="navbar--icon"
+          sx={{ ml: 3 }}
+          disableFocusRipple
+          disableRipple
         >
-          <HomeIcon />
+          <PeachIcon className="navbar--icon" />
         </IconButton>
         <Typography variant="h1" className="nav--title">
-          <Link to="/" style={{ color: `${theme.palette.info.light}`, textDecoration: "none", fontSize: 32, fontWeight: 800 }}>
+          <Link to="/" style={{ color: `${theme.palette.info.dark}`, textDecoration: "none" }}>
             Plato's Peach
           </Link>
         </Typography>
         {viewer && viewer.avatar ? (
           <Box>
-            <Box className="desktop--menu-items">
+            <Box className="desktop--loggedIn-items">
               <Link to={`/catalog`} style={{ textDecoration: "none" }}>
-                <p style={{ color: `${theme.palette.info.light}` }}>Catalog</p>
+                <p style={{ color: `${theme.palette.info.dark}` }}>Catalog</p>
               </Link>
-              <Tooltip title="User Actions">
-                <IconButton onClick={handleOpenActionMenu}>
+              {/* <Tooltip title="Create Content!">
+                <IconButton
+                  onClick={handleOpenActionMenu}
+                  disableFocusRipple
+                  disableRipple
+                >
                   <AddCircleIcon className="nav--user-actions" />
                 </IconButton>
               </Tooltip>
               <Menu
-                sx={{ mt: '45px' }}
+                sx={{ mt: '30px' }}
                 id="action-appbar"
                 anchorEl={anchorElAction}
                 anchorOrigin={{
@@ -135,9 +142,13 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                     <Typography textAlign="center">Create Lesson Plan</Typography>
                   </Link>
                 </MenuItem>
-              </Menu>
-              <Tooltip title="User Settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              </Menu> */}
+              <Tooltip title="Click For User Options">
+                <IconButton
+                  onClick={handleOpenUserMenu} sx={{ p: 1 }}
+                  disableFocusRipple
+                  disableRipple
+                >
                   <Avatar alt="logged in user avatar" src={viewer.avatar} />
                 </IconButton>
               </Tooltip>
@@ -229,12 +240,20 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
           </Box>
         ) : (
           <>
-            <Box className='navbar--icon'>
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <MenuIcon sx={{ color: "white" }} />
+            <Box className='navburger--icon'>
+              <Link to={`/login`} style={{ textDecoration: "none" }}>
+                <Button className="mobileStarted--button">Get Started</Button>
+              </Link>
+              <IconButton
+                onClick={handleOpenUserMenu}
+                sx={{ p: 0 }}
+                disableFocusRipple
+                disableRipple
+              >
+                <MenuIcon sx={{ color: `${theme.palette.info.dark}` }} />
               </IconButton>
               <Menu
-                sx={{ mt: '45px' }}
+                sx={{ mt: '30px' }}
                 id="mobile-menu-appbar"
                 anchorEl={anchorElUser}
                 anchorOrigin={{
@@ -268,11 +287,22 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
               </Menu>
             </Box>
             <Box className="desktop--menu-items">
-              <Link to={`/catalog`} style={{ textDecoration: "none", marginRight: 10 }}>
-                <p style={{ color: `${theme.palette.info.light}` }}>Catalog</p>
-              </Link>
-              <Link to={`/login`} style={{ textDecoration: "none", marginRight: 10 }}>
-                <p style={{ color: `${theme.palette.info.light}` }}>Login</p>
+              <div className="desktop--mid-menu-items">
+                <Link to={`/catalog`} style={{ textDecoration: "none", marginRight: 32 }}>
+                  <p style={{ color: `${theme.palette.info.dark}` }}>Teacher Tools</p>
+                </Link>
+                <Link to={`/catalog`} style={{ textDecoration: "none", marginRight: 32 }}>
+                  <p style={{ color: `${theme.palette.info.dark}` }}>Video Catalog</p>
+                </Link>
+                <Link to={`/pricing`} style={{ textDecoration: "none", marginRight: 32 }}>
+                  <p style={{ color: `${theme.palette.info.dark}` }}>Pricing</p>
+                </Link>
+                <Link to={`/`} style={{ textDecoration: "none", marginRight: 110 }}>
+                  <p style={{ color: `${theme.palette.info.dark}` }}>Contact Us</p>
+                </Link>
+              </div>
+              <Link to={`/login`} style={{ textDecoration: "none" }}>
+                <Button className="login--button">Login</Button>
               </Link>
               {/* <Tooltip title="Account Login">
                   <IconButton
@@ -286,8 +316,8 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                     <AccountCircleIcon />
                   </IconButton>
                 </Tooltip> */}
-              <Link to={`/login`} style={{ textDecoration: "none", color: "white" }}>
-                <Button className="login--button">Start free</Button>
+              <Link to={`/login`} style={{ textDecoration: "none" }}>
+                <Button className="getStarted--button">Get Started for Free</Button>
               </Link>
             </Box>
           </>
