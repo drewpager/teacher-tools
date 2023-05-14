@@ -2,8 +2,8 @@
 
 .MuiBox-root {
   &.details--box {
-    padding-left: 2rem;
-    padding-right: 2rem;
+    // padding-left: 2rem;
+    // padding-right: 2rem;
 
     @include sm {
       padding: 0 2rem;
@@ -21,4 +21,122 @@
       padding: 0 4rem;
     }
   }
+}
+
+.MuiTypography-root {
+  &.productDetails-title--font {
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.875rem;
+    font-weight: 600;
+    line-height: 2.5rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: black;
+  }
+
+  &.productDetails-subtitle--font {
+    text-align: left;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.375rem;
+    font-weight: 700;
+    line-height: 1.75rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: black;
+  }
+}
+
+.details-blue--box {
+  background-color: rgba(60, 117, 214, 0.1);;
+  border: 1px solid #182742;
+  border-radius: 1.5rem;
+  padding: 2rem 1.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.details-green--box {
+  background-color: #57996A1A;
+  border: 1px solid #182742;
+  border-radius: 1.5rem;
+  padding: 2rem 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.details-biege--box {
+  background-color: #DFAF4E1A;
+  border: 1px solid #182742;
+  border-radius: 1.5rem;
+  padding: 2rem 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.details-pink--box {
+  background-color: #9929591A;
+  border: 1px solid #182742;
+  border-radius: 1.5rem;
+  padding: 2rem 1.5rem;
+}
+
+.MuiButton-root {
+  &.pricing--button {
+    background-color: inherit;
+    color: #000;
+    font-weight: 600;
+    border-radius: 100px;
+    height: 4rem;
+    width: 100%;
+    text-transform: capitalize;
+    text-align: center;
+    text-decoration: none;
+    padding: 1rem;
+    border: 1px solid black;
+    &:hover {
+        color: #FAF9F6;
+        background-color: #000;
+    }
+  }
+}
+
+.blue--box {
+  height: 8rem;
+  width: 95%;
+  border-radius: 0.5rem;
+  background-color: #3A70CD4D;
+  margin: 2rem auto;
+}
+
+.green--box {
+  height: 8rem;
+  width: 95%;
+  border-radius: 0.5rem;
+  background-color: #57996A33;
+  margin: 2rem auto;
+}
+
+.biege--box {
+  height: 8rem;
+  width: 95%;
+  border-radius: 0.5rem;
+  background-color: #DFAF4E33;
+  margin: 2rem auto;
+}
+
+.pink--box {
+  height: 8rem;
+  width: 95%;
+  border-radius: 0.5rem;
+  background-color:#99295933;
+  margin: 2rem auto;
+}
+
+.img--overlay {
+  width: auto;
+  position: relative;
+  height: 11rem;
+  margin: -2rem 3rem;
+  top: 0;
+  border-radius: 0.5rem;
+  border-bottom: 1rem solid #000;
 }
