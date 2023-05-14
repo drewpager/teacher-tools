@@ -34,7 +34,7 @@
   width: 70px; 
   height: 70px;
   margin-top: 0.875rem;
-  margin-right: -0.5rem;
+  margin-right: -0.875rem;
 }
 
 .desktop--loggedIn-items {
@@ -74,9 +74,11 @@
 
 .MuiTypography-root {
   &.nav--title {
-    font-family: "Source Sans Pro", sans-serif;
+    // font-family: "Source Sans Pro", sans-serif;
+    // font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: "Source Serif Pro", serif;
+    font-weight: 900;
     font-size: 1.5rem;
-    font-weight: 700;
     margin-left: 0.01rem;
     flex-grow: 0.5;
 

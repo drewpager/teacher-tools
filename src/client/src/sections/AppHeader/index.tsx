@@ -84,7 +84,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
           color="primary"
           aria-label="home"
           className="navbar--icon"
-          sx={{ ml: 3 }}
+          // sx={{ ml: 3 }}
           disableFocusRipple
           disableRipple
         >

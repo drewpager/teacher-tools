@@ -1,21 +1,16 @@
 @use '../../../library';
 @import '../../../mixins';
 
-.MuiAvatar-root {
-  &.product--icons {
-    width: 90px;
-    height: 90px;
-    background-color: library.$coral;
-    transition: .5s;
-    &:hover {
-      transform: scale(1.25);
-    }
-  }
-}
-
 .values--container {
-  padding: 2rem 0;
+  padding-top: 3.5rem;
+  padding-bottom: 0;
+  margin: 3rem auto;
   align-items: flex-start;
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.03);
+  box-shadow: 0px 20px 25px -3px rgba(0, 0, 0, 0.03);
+
   
   @include sm {
     align-items: center;
@@ -25,5 +20,28 @@
 .MuiGrid-root {
   @include sm {
     margin-left: 2rem;
+  }
+}
+
+.MuiTypography-root {
+  &.productValues-title--font {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.875rem;
+    font-weight: 600;
+    line-height: 2.5rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: black;
+  }
+
+  &.productValues-subtitle--font {
+    width: 100%;
+    margin-bottom: 4.5rem;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 400;
+    line-height: 1.75rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: black;
   }
 }

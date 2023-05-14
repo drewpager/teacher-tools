@@ -26,7 +26,7 @@ export const Home = ({ viewer }: Props) => {
   return (
     <Box>
       <HomeInfo />
-      <HomeDetails />
+      {/* <HomeDetails /> */}
       <ProductValues />
       <ProductDetails />
       {data && <PlaylistCard playlist={data?.playlist} />}

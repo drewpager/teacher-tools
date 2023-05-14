@@ -7,8 +7,6 @@
 
     @media (max-width: 768px) {
         margin-left: 0;
-        // font-size: 2.25rem;
-        // line-height: 2.5rem;
     }
 }
 
@@ -31,7 +29,7 @@
 
 .MuiTypography-root {
     &.title--text {
-        width: 90%;
+        width: 70%;
         margin-top: 8rem;
         margin-right: 1.5rem;
         margin-left: 1.5rem;
@@ -39,9 +37,14 @@
         font-size: clamp(1.5rem, 3rem, 3.25rem);
         color: library.$peachy;
         align-self: baseline;
-        font-size: 2.25rem;
-        font-weight: 700;
+        font-size: 2.5rem;
         line-height: 2.5rem;
+        font-family: "Source Serif Pro", serif;
+        font-weight: bolder;
+
+        @media (max-width: 768px) {
+            width: 90%;
+        }
     }
 
     &.subtitle--text {
@@ -54,7 +57,7 @@
 
         @media (max-width: 768px) {
             width: 100%;
-            line-height: 1.5rem;
+            line-height: 1.875rem;
             font-size: 1.25rem;
         }
     }
