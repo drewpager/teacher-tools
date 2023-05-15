@@ -6,15 +6,15 @@
     // min-width: 75%;
     display: flex;
     align-self: center;
-    padding: 2rem;
+    padding: 1.5rem;
     margin: 4rem;
-    border-radius: 1rem;
+    border-radius: 1.5rem;
     border: 1px solid black;
 
     @media (max-width: 768px) {
       width: 100%;
       margin: 2rem 0;
-      padding: 4rem 2rem;
+      padding: 3rem 2rem;
     }
   }
 }
@@ -33,11 +33,13 @@
   &.callAction--buttonFirst {
     background: #57996A;
     color: #ffffff;
-    font-weight: 600;
+    font-size: 1.125rem;
+    font-weight: bold;
     border-radius: 100px;
-    height: 3rem;
+    height: 4rem;
     text-transform: capitalize;
-    padding: 1.25em;
+    padding: 1.25rem;
+    width: 100%;
     &:hover {
       color: #ffffff;
       background-color: #557669;
@@ -57,15 +59,16 @@
     text-decoration: none; 
     font-size: clamp(1rem, 2rem, 2.5rem); 
     font-weight: 800;
+    line-height: 2.75rem;
   }
 
   &.callAction--subText {
     font-family: 'Source Sans Pro', sans-serif;
     color: #182742;
     text-decoration: none; 
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 400;
-    line-height: 1.5rem;
+    line-height: 1.75rem;
     margin: 1rem 0;
   }
 }

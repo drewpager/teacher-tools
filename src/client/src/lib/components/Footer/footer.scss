@@ -2,38 +2,73 @@
 
 .MuiBox-root {
   &.footer--box {
-    background: library.$lightGreen;
+    background: #ffffff;
+    border-top: 1px solid #182742;
     bottom: 0;
     padding: 3rem;
     margin-left: -25px;
     margin-right: -24px;
+    margin-top: 2rem;
+    align-items: center;
   }
 }
 
 .MuiTypography-root {
   &.footer--text {
-    color: library.$white;
+    color: #182742;
     text-decoration: none;
-    text-emphasis: bold;
+    font-size: 1.25rem;
+    font-weight: bold;
     margin-bottom: 1rem;
+    text-align: center;
   }
 
   &.footer--link-text {
-    color: library.$white;
+    color: #8d8c8c;
     text-decoration: none;
     margin: 4px 0;
+    text-align: center;
+    line-height: 1.6875rem;
+    font-size: 1.2rem;
     &:hover {
-      text-decoration: underline;
+      text-decoration: none;
+      color: #182742;
     }
   }
 
+  &.footer--title {
+    font-size: 2rem;
+    font-family: "Source Serif Pro", serif;
+    font-weight: bold;
+  }
+
   &.footer--text-center {
-    color: library.$white;
+    color: #182742;
     text-decoration: none;
-    text-align: center;
   }
 }
 
-.footer--icon-center {
+.subfooter--center {
+  // background-color: #182742;
+  // color: #ffffff;
+  background-color: #ffffff;
   text-align: center;
+  padding: 3rem;
+  margin-top: 2rem;
+  width: 100%;
+  bottom: 0;
+}
+
+.navbar--icon {
+  width: 80px; 
+  height: 80px;
+  margin-top: 0.875rem;
+  margin-right: -0.875rem;
+}
+
+.footer--logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
 }

@@ -1,7 +1,8 @@
-import { Box, CssBaseline, Container, Typography, Grid, Chip, SvgIcon } from '@mui/material';
+import { Box, CssBaseline, Container, Typography, Grid, Chip, SvgIcon, IconButton } from '@mui/material';
 import { Viewer } from '../../../graphql/generated';
 import { Copyright } from '@mui/icons-material';
 import { ReactComponent as PlatosPeachIcon } from '../../assets/peach-logo.svg';
+import { ReactComponent as PeachIcon } from '../../assets/peach-logo.svg';
 import theme from '../../../theme';
 import './footer.scss';
 import { Link } from 'react-router-dom';
@@ -17,21 +18,43 @@ export const Footer = ({ viewer }: Props) => {
       className="footer--box"
     >
       <Grid container spacing={2}>
-        <Grid item xs={12} md={6} lg={4}>
+        <Grid item xs={12} md={12} lg={12}>
+          <Box className="footer--logo">
+            <IconButton
+              size="small"
+              edge="start"
+              color="primary"
+              aria-label="home"
+              className="navbar--icon"
+              // sx={{ ml: 3 }}
+              disableFocusRipple
+              disableRipple
+              href='/'
+            >
+              <PeachIcon className="navbar--icon" />
+            </IconButton>
+            <Typography variant="h1" className="footer--title">
+              <Link to="/" style={{ color: `${theme.palette.info.dark}`, textDecoration: "none" }}>
+                Plato's Peach
+              </Link>
+            </Typography>
+          </Box>
+        </Grid>
+        <Grid item xs={12} md={6} lg={3}>
           <Typography variant="h5" className='footer--text'>
             Teacher Tools
           </Typography>
           <Link to="/lesson/create" style={{ textDecoration: "none" }}>
-            <Typography variant='body1' className='footer--link-text'>Create Lesson</Typography>
+            <Typography variant='body1' className='footer--link-text'>Create Lessons</Typography>
           </Link>
           <Link to="/quiz/create" style={{ textDecoration: "none" }}>
-            <Typography variant='body1' className='footer--link-text'>Create Assessment</Typography>
+            <Typography variant='body1' className='footer--link-text'>Create Assessments</Typography>
           </Link>
           <Link to="/playlist/create" style={{ textDecoration: "none" }}>
-            <Typography variant='body1' className='footer--link-text'>Create Lesson Plan</Typography>
+            <Typography variant='body1' className='footer--link-text'>Create Lesson Plans</Typography>
           </Link>
         </Grid>
-        <Grid item xs={12} md={6} lg={4}>
+        <Grid item xs={12} md={6} lg={3}>
           <Typography variant="h5" className='footer--text'>
             Resources
           </Typography>
@@ -45,9 +68,9 @@ export const Footer = ({ viewer }: Props) => {
             <Typography variant='body1' className='footer--link-text'>{viewer && viewer.id ? "Profile" : "Login"}</Typography>
           </Link>) : (<></>)}
         </Grid>
-        <Grid item xs={12} md={6} lg={4}>
+        <Grid item xs={12} md={6} lg={3}>
           <Typography variant="h5" className='footer--text'>
-            Categories
+            Popular Categories
           </Typography>
           <Link to="/" style={{ textDecoration: "none" }}>
             <Typography variant='body1' className='footer--link-text'>World War II <Chip label="Coming Soon!" size="small" sx={{ textDecoration: "none", backgroundColor: "#dda15e" }} /></Typography>
@@ -59,14 +82,30 @@ export const Footer = ({ viewer }: Props) => {
             <Typography variant='body1' className='footer--link-text'>World History <Chip label="Coming Soon!" size="small" sx={{ textDecoration: "none", backgroundColor: "#dda15e" }} /></Typography>
           </Link>
         </Grid>
+        <Grid item xs={12} md={6} lg={3}>
+          <Typography variant="h5" className='footer--text'>
+            General
+          </Typography>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <Typography variant='body1' className='footer--link-text'>How It Works</Typography>
+          </Link>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <Typography variant='body1' className='footer--link-text'>Contact Us</Typography>
+          </Link>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <Typography variant='body1' className='footer--link-text'>FAQ</Typography>
+          </Link>
+        </Grid>
+        <Grid item xs={12} md={12} lg={12}>
+          <Box className="subfooter--center">
+            <Typography className='footer--text-center'>
+              All Rights Reserved
+              <Copyright fontSize='small' />
+              Plato's Peach
+            </Typography>
+          </Box>
+        </Grid>
       </Grid>
-      <Box className="footer--icon-center">
-        <SvgIcon component={PlatosPeachIcon} inheritViewBox sx={{ fontSize: 150, color: `${theme.palette.primary.light}` }} />
-        <Typography className='footer--text-center'>
-          Plato's Peach
-          <Copyright fontSize='small' />
-        </Typography>
-      </Box>
     </Box>
   )
 }

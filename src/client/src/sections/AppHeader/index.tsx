@@ -87,6 +87,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
           // sx={{ ml: 3 }}
           disableFocusRipple
           disableRipple
+          href='/'
         >
           <PeachIcon className="navbar--icon" />
         </IconButton>
