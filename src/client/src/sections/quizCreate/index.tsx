@@ -5,9 +5,11 @@ import { Box, TextField, FormLabel, FormControlLabel, Radio, RadioGroup, Typogra
 import { Cancel, ControlPoint, Remove } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { DisplayError } from '../../lib/utils';
+import { ReactComponent as PeachIcon } from '../../lib/assets/peach-logo.svg';
 import { Footer } from '../../lib/components';
 import './createQuiz.scss';
 import * as yup from 'yup';
+import { Link } from 'react-router-dom';
 interface props {
   viewer: Viewer
 }
@@ -94,6 +96,12 @@ export const QuizCreate = ({ viewer }: props) => {
 
   return (
     <div>
+      <Box className="breadcrumb">
+        <Link to={`../user/${viewer.id}`}>
+          <p>⟨ Back to dashboard</p>
+        </Link>
+        <h1>Create Assessment</h1>
+      </Box>
       <Box className="quizCreate--form">
         <Formik
           initialValues={{
@@ -121,9 +129,11 @@ export const QuizCreate = ({ viewer }: props) => {
           }}
         >
           {({ values, errors, touched, handleSubmit, handleChange }) => (
-
             <form onSubmit={handleSubmit}>
-              <h1>Create Assessment</h1>
+              {/* <div className="assessment--heading">
+                <h1>Create Assessment</h1>
+                <PeachIcon className="peach--icon" />
+              </div> */}
               <TextField
                 fullWidth
                 type="text"
