@@ -7,7 +7,7 @@
     margin: 0.5rem 2rem;
 
     @media (max-width: 768px) {
-      border-top: 1px solid rgba(0, 0, 0, 0.12);
+      // border-top: 1px solid rgba(0, 0, 0, 0.12);
       display: grid;
       grid-template-columns: 100%;
       margin: 0.5rem 1rem;
@@ -17,7 +17,7 @@
   .button--cancel {
     grid-auto-flow: column;
     grid-column: 2 / -1;
-    color: library.$coral;
+    color: library.$blue;
     :hover {
       cursor: pointer;
       color: library.$peachy;
@@ -25,8 +25,8 @@
   }
 
   .quiz--modicons {
-    color: library.$coral;
-    margin: 1rem;
+    color: #c7c7c7;
+    margin: 0.25rem;
     :hover {
       cursor: pointer;
       color: library.$peachy;
@@ -35,25 +35,34 @@
 
   .quiz--button-add {
     margin-top: 1rem;
-    background-color: library.$coral;
-    color: library.$white;
-    border: 1px solid library.$coral;
+    padding-left: 0;
+    padding-right: 0.25rem;
+    // background-color: library.$coral;
+    color: library.$blue;
     
     &:hover {
-      background-color: library.$peachy;
-      border: 1px solid library.$peachy;
+      color: library.$black;
     }
   }
 
+  .add--question-box {
+    display: flex;
+    align-items: center;
+  }
+
   .quiz--button-submit {
-    background-color: library.$lightGreen;
+    background-color: library.$blue;
     color: library.$white;
-    border: 1px solid library.$lightGreen;
+    border: 1px solid library.$blue;
+    text-transform: capitalize;
     margin-top: 1rem;
+    border-radius: 100px;
+    font-weight: 600;
+    padding: 0.75rem 1.25rem;
     
     &:hover {
-      background-color: library.$darkGreen;
-      border: 1px solid library.$darkGreen;
+      background-color: library.$black;
+      border: 1px solid library.$black;
     }
   }
 
@@ -85,6 +94,10 @@
     background-color: red;
     grid-column-start: 2;
     grid-column-end: 3;
+  }
+
+  &.quizCreate--title {
+    margin-bottom: 2rem;
   }
 }
 
@@ -129,4 +142,14 @@
   align-items: flex-start;
   margin-top: 10px;
   margin-left: -1px;
+}
+
+.MuiTypography-root {
+  &.addQuestion--text {
+    color: library.$blue;
+    margin-left: 0.25rem;
+    &:hover {
+      color: library.$black;
+    }
+  }
 }

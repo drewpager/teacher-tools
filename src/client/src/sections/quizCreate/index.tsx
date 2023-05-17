@@ -1,8 +1,11 @@
 import React from 'react';
 import { FieldArray, Formik, getIn, FieldProps, Field } from 'formik';
 import { useCreateQuizMutation, Viewer, AnswerFormat } from '../../graphql/generated';
-import { Box, TextField, FormLabel, FormControlLabel, Radio, RadioGroup, Typography, Tooltip, Button, CircularProgress, InputAdornment } from '@mui/material'
+import { Box, TextField, FormLabel, FormControlLabel, Radio, RadioGroup, Typography, Tooltip, Button, CircularProgress, InputAdornment, IconButton } from '@mui/material'
 import { Cancel, ControlPoint, Remove } from '@mui/icons-material';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import { useNavigate } from 'react-router-dom';
 import { DisplayError } from '../../lib/utils';
 import { ReactComponent as PeachIcon } from '../../lib/assets/peach-logo.svg';
@@ -138,11 +141,13 @@ export const QuizCreate = ({ viewer }: props) => {
                 fullWidth
                 type="text"
                 name="title"
-                label="Assessment Title"
+                label="Enter assessment title"
                 value={values.title}
                 onChange={handleChange}
                 error={Boolean(errors.title)}
                 helperText={errors.title}
+                className="quizCreate--title"
+                variant="standard"
                 sx={{
                   gridColumn: 3
                 }}
@@ -156,7 +161,7 @@ export const QuizCreate = ({ viewer }: props) => {
                           <div className='row' key={index}>
                             <div className='col' key={index}>
                               <TextField
-                                placeholder={`Question/Prompt`}
+                                placeholder={`Question`}
                                 fullWidth
                                 sx={{ paddingTop: "0.5rem", gridColumn: 4 }}
                                 name={`questions[${index}].question`}
@@ -164,7 +169,7 @@ export const QuizCreate = ({ viewer }: props) => {
                                 InputProps={{
                                   endAdornment: (
                                     <InputAdornment position="end">
-                                      <Cancel onClick={() => remove(index)} className="button--cancel" />
+                                      <DeleteForeverIcon onClick={() => remove(index)} className="button--cancel" />
                                     </InputAdornment>
                                   )
                                 }}
@@ -215,7 +220,7 @@ export const QuizCreate = ({ viewer }: props) => {
                                                 </>
                                               ) : (
                                                 <Tooltip title="Remove answer option" className="quiz--modicons">
-                                                  <Remove onClick={() => remove(indy)} />
+                                                  <RemoveCircleOutlineIcon onClick={() => remove(indy)} />
                                                 </Tooltip>
                                               )}
                                             </div>
@@ -257,18 +262,22 @@ export const QuizCreate = ({ viewer }: props) => {
                           </div>
                         )
                       })}
-                    <Button
-                      variant="outlined"
-                      className="quiz--button-add"
-                      onClick={() => push({
-                        question: '', answerType: AnswerFormat,
-                        answerOptions: [
-                          { answerText: "", isCorrect: true },
-                        ]
-                      })}
-                    >
-                      Add Question
-                    </Button>
+                    <div className="add--question-box">
+                      <IconButton
+                        className="quiz--button-add"
+                        onClick={() => push({
+                          question: '', answerType: AnswerFormat,
+                          answerOptions: [
+                            { answerText: "", isCorrect: true },
+                          ]
+                        })}
+                        disableRipple
+                        disableFocusRipple
+                      >
+                        <AddCircleIcon fontSize='large' />
+                        <Typography variant="h4" className="addQuestion--text">Add Question</Typography>
+                      </IconButton>
+                    </div>
                   </div>
                 )}
               </FieldArray>
@@ -276,7 +285,7 @@ export const QuizCreate = ({ viewer }: props) => {
                 variant="outlined"
                 type="submit"
                 className="quiz--button-submit"
-              >Submit</Button>
+              >Save Assessment</Button>
               {/* UNCOMMENT TO DISPLAY MUTATION CONSTRUCTION
               <pre>
                 {JSON.stringify(values, null, 2)}
