@@ -62,6 +62,11 @@
   border-radius: 1.5rem;
   padding: 2rem 1.5rem;
   margin-bottom: 2rem;
+  
+  &.details-green--box > img {
+    border: 2px solid red;
+    justify-content: center;
+  }
 }
 
 .details-biege--box {
@@ -99,44 +104,11 @@
   }
 }
 
-.blue--box {
-  height: 8rem;
-  width: 95%;
-  border-radius: 0.5rem;
-  background-color: #3A70CD4D;
-  margin: 2rem auto;
-}
-
-.green--box {
-  height: 8rem;
-  width: 95%;
-  border-radius: 0.5rem;
-  background-color: #57996A33;
-  margin: 2rem auto;
-}
-
-.biege--box {
-  height: 8rem;
-  width: 95%;
-  border-radius: 0.5rem;
-  background-color: #DFAF4E33;
-  margin: 2rem auto;
-}
-
-.pink--box {
-  height: 8rem;
-  width: 95%;
-  border-radius: 0.5rem;
-  background-color:#99295933;
-  margin: 2rem auto;
-}
-
 .img--overlay {
-  width: auto;
-  position: relative;
-  height: 11rem;
-  margin: -2rem 3rem;
-  top: 0;
-  border-radius: 0.5rem;
-  border-bottom: 1rem solid #000;
+  display: block;
+  width: 92%;
+  height: auto;
+  margin-bottom: 2.5rem;
+  margin-left: auto;
+  margin-right: auto;
 }

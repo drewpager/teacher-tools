@@ -3,7 +3,10 @@ import { CardGrid } from '../CardGrid';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import dragDrop from '../../assets/drag-and-drop.gif'
-import sistine from '../../assets/sistine.png'
+import sistine from '../../assets/how-it-works-1.png'
+import works2 from '../../assets/how-it-works-2.png'
+import works3 from '../../assets/how-it-works-3.png'
+import works4 from '../../assets/how-it-works-4.png'
 import './productDetails.scss';
 
 export const ProductDetails = () => {
@@ -14,9 +17,7 @@ export const ProductDetails = () => {
         <Grid item xs={12} sm={12} md={8}>
           <Box className="details-blue--box">
             <Box>
-              <div className="blue--box">
-                <img src={sistine} alt="Sistine Chapel" className="img--overlay" />
-              </div>
+              <img src={sistine} alt="Plato's Peach Video Player of Sistine Chapel" className="img--overlay" />
             </Box>
             <Box sx={{ position: "relative" }}>
               <svg width="69" height="60" viewBox="0 0 109 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -39,9 +40,7 @@ export const ProductDetails = () => {
         <Grid item xs={12} sm={12} md={8}>
           <Box className="details-green--box">
             <Box>
-              <div className="green--box">
-                <img src={sistine} alt="Sistine Chapel" className="img--overlay" />
-              </div>
+              <img src={works2} alt="Plato's Peach Teacher Quiz Creator" className="img--overlay" />
             </Box>
             <Box sx={{ position: "relative" }}>
               <svg width="69" height="60" viewBox="0 0 109 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -62,9 +61,7 @@ export const ProductDetails = () => {
         <Grid item xs={12} sm={12} md={8}>
           <Box className="details-biege--box">
             <Box>
-              <div className="biege--box">
-                <img src={sistine} alt="Sistine Chapel" className="img--overlay" />
-              </div>
+              <img src={works3} alt="Plato's Peach Interactive Drag and Drop Lesson Plan Creator" className="img--overlay" />
             </Box>
             <Box sx={{ position: "relative" }}>
               <svg width="69" height="60" viewBox="0 0 109 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -84,9 +81,7 @@ export const ProductDetails = () => {
         <Grid item xs={12} sm={12} md={8}>
           <Box className="details-pink--box">
             <Box>
-              <div className="pink--box">
-                <img src={sistine} alt="Sistine Chapel" className="img--overlay" />
-              </div>
+              <img src={works4} alt="Plato's Peach Lesson Plan Playlist Sharing" className="img--overlay" />
             </Box>
             <Box sx={{ position: "relative" }}>
               <svg width="69" height="60" viewBox="0 0 109 100" fill="none" xmlns="http://www.w3.org/2000/svg">
