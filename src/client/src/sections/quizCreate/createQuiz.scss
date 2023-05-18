@@ -59,6 +59,7 @@
     border-radius: 100px;
     font-weight: 600;
     padding: 0.75rem 1.25rem;
+    width: 100%;
     
     &:hover {
       background-color: library.$black;
@@ -98,6 +99,12 @@
 
   &.quizCreate--title {
     margin-bottom: 2rem;
+  }
+}
+
+.MuiInputBase-root {
+  &.quizCreate--answerType-select {
+    margin-top: 1rem;
   }
 }
 

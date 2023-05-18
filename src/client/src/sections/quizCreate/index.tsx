@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FieldArray, Formik, getIn, FieldProps, Field } from 'formik';
 import { useCreateQuizMutation, Viewer, AnswerFormat } from '../../graphql/generated';
-import { Box, TextField, FormLabel, FormControlLabel, Radio, RadioGroup, Typography, Tooltip, Button, CircularProgress, InputAdornment, IconButton } from '@mui/material'
+import {
+  Box,
+  TextField,
+  FormLabel,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+  Typography,
+  Tooltip,
+  Button,
+  CircularProgress,
+  InputAdornment,
+  IconButton,
+  Select,
+  MenuItem
+} from '@mui/material'
 import { Cancel, ControlPoint, Remove } from '@mui/icons-material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useNavigate } from 'react-router-dom';
 import { DisplayError } from '../../lib/utils';
 import { ReactComponent as PeachIcon } from '../../lib/assets/peach-logo.svg';
@@ -46,7 +62,7 @@ const Input = ({ field, form: { errors, touched } }: FieldProps) => {
     <>
       <TextField
         {...field}
-        placeholder={`Question/Prompt`}
+        placeholder={`Question`}
         fullWidth
         sx={{ paddingTop: "0.5rem", gridColumn: 4 }}
       />
@@ -58,14 +74,22 @@ const Input = ({ field, form: { errors, touched } }: FieldProps) => {
 // TODO: Click to switch answerOption value from True to False
 const checkInput = ({ field, form: { errors, touched } }: FieldProps) => {
   const errorMessage = getIn(errors, field.name)
+
   return (
     <div>
-      <Field
-        type="checkbox"
-        name={field.name}
-        default={true}
-        sx={{ padding: "0.5rem", gridColumn: 4 }}
-      />
+      <IconButton
+        // onClick={() => { field.value = !field.value && console.log(field.value) }}
+        onClick={() => { return field.value = !field.value }}
+        disableRipple
+        disableFocusRipple
+      >
+        <CheckCircleIcon
+          {...field}
+          name={field.name}
+          className="button--check"
+          color={field.value ? "success" : "primary"}
+        />
+      </IconButton>
       <Typography>{`${field.value}`}</Typography>
       {!!touched && errors && <div>{errorMessage}</div>}
     </div>
@@ -112,7 +136,7 @@ export const QuizCreate = ({ viewer }: props) => {
             questions: [
               {
                 question: "",
-                answerType: AnswerFormat.Truefalse || AnswerFormat.Multiplechoice,
+                answerType: AnswerFormat.Multiplechoice || AnswerFormat.Truefalse,
                 answerOptions: [
                   { answerText: "", isCorrect: true },
                 ]
@@ -163,7 +187,7 @@ export const QuizCreate = ({ viewer }: props) => {
                               <TextField
                                 placeholder={`Question`}
                                 fullWidth
-                                sx={{ paddingTop: "0.5rem", gridColumn: 4 }}
+                                sx={{ paddingTop: "1rem", gridColumn: 4 }}
                                 name={`questions[${index}].question`}
                                 onChange={handleChange}
                                 InputProps={{
@@ -175,23 +199,19 @@ export const QuizCreate = ({ viewer }: props) => {
                                 }}
                               />
                             </div>
-                            <FormLabel>Answer Type</FormLabel>
-                            <RadioGroup defaultValue={"TRUEFALSE"}>
-                              <FormControlLabel
-                                name={`questions[${index}].answerType`}
-                                value="TRUEFALSE"
-                                control={<Radio />}
-                                label="True/False"
-                                onChange={handleChange}
-                              />
-                              <FormControlLabel
-                                name={`questions[${index}].answerType`}
-                                value="MULTIPLECHOICE"
-                                control={<Radio />}
-                                label="Multiple Choice"
-                                onChange={handleChange}
-                              />
-                            </RadioGroup>
+                            <Select
+                              variant='outlined'
+                              onChange={handleChange}
+                              fullWidth
+                              defaultValue={`MULTIPLECHOICE`}
+                              inputProps={{
+                                name: `questions[${index}].answerType`,
+                              }}
+                              className="quizCreate--answerType-select"
+                            >
+                              <MenuItem value={`MULTIPLECHOICE`}>Multiple Choice</MenuItem>
+                              <MenuItem value={`TRUEFALSE`}>True/False</MenuItem>
+                            </Select>
                             {question.answerType === "MULTIPLECHOICE" ? (
                               <FieldArray name={`questions[${index}].answerOptions`}>
                                 {({ insert, remove, push }) => (
@@ -215,14 +235,9 @@ export const QuizCreate = ({ viewer }: props) => {
                                               <Tooltip title="Add another answer option" className="quiz--modicons">
                                                 <ControlPoint onClick={() => push({ answerText: "", isCorrect: false })} />
                                               </Tooltip>
-                                              {(indy === 0) ? (
-                                                <>
-                                                </>
-                                              ) : (
-                                                <Tooltip title="Remove answer option" className="quiz--modicons">
-                                                  <RemoveCircleOutlineIcon onClick={() => remove(indy)} />
-                                                </Tooltip>
-                                              )}
+                                              <Tooltip title="Remove answer option" className="quiz--modicons">
+                                                <RemoveCircleOutlineIcon onClick={() => remove(indy)} />
+                                              </Tooltip>
                                             </div>
                                           </div>
                                         )
@@ -266,7 +281,7 @@ export const QuizCreate = ({ viewer }: props) => {
                       <IconButton
                         className="quiz--button-add"
                         onClick={() => push({
-                          question: '', answerType: AnswerFormat,
+                          question: '', answerType: AnswerFormat.Multiplechoice,
                           answerOptions: [
                             { answerText: "", isCorrect: true },
                           ]
