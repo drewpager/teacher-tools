@@ -158,12 +158,11 @@
 .quiz__multiAnswerArea {
   display: flex;
   flex-direction: column;
-  text-align: center;
 }
 
 .quiz__multiAnswers {
   display: flex;
-  align-items: center;
+  align-items: baseline;
 }
 
 .quiz__answers {
