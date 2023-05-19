@@ -72,14 +72,14 @@ const Input = ({ field, form: { errors, touched } }: FieldProps) => {
 }
 
 // TODO: Click to switch answerOption value from True to False
-const checkInput = ({ field, form: { errors, touched } }: FieldProps) => {
+const checkInput = ({ field, form: { errors, touched, setFieldValue } }: FieldProps) => {
   const errorMessage = getIn(errors, field.name)
 
   return (
     <div>
       <IconButton
-        // onClick={() => { field.value = !field.value && console.log(field.value) }}
-        onClick={() => { return field.value = !field.value }}
+        // onClick={() => field.name = !field.value}
+        onClick={() => setFieldValue(field.name, !field.value)}
         disableRipple
         disableFocusRipple
       >
@@ -87,10 +87,9 @@ const checkInput = ({ field, form: { errors, touched } }: FieldProps) => {
           {...field}
           name={field.name}
           className="button--check"
-          color={field.value ? "success" : "primary"}
+          color={field.value ? "success" : "info"}
         />
       </IconButton>
-      <Typography>{`${field.value}`}</Typography>
       {!!touched && errors && <div>{errorMessage}</div>}
     </div>
   )
@@ -296,11 +295,16 @@ export const QuizCreate = ({ viewer }: props) => {
                   </div>
                 )}
               </FieldArray>
-              <Button
-                variant="outlined"
-                type="submit"
-                className="quiz--button-submit"
-              >Save Assessment</Button>
+              <div className="quiz--button-area">
+                <Link to={`../user/${viewer.id}`} style={{ textDecoration: "none" }}>
+                  <Typography variant="h4" className="quiz--button-cancel">Cancel</Typography>
+                </Link>
+                <Button
+                  variant="outlined"
+                  type="submit"
+                  className="quiz--button-submit"
+                >Save Assessment</Button>
+              </div>
               {/* UNCOMMENT TO DISPLAY MUTATION CONSTRUCTION
               <pre>
                 {JSON.stringify(values, null, 2)}

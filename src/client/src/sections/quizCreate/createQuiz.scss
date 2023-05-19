@@ -7,10 +7,12 @@
     margin: 0.5rem 2rem;
 
     @media (max-width: 768px) {
-      // border-top: 1px solid rgba(0, 0, 0, 0.12);
+      // border: 1px solid rgba(0, 0, 0, 0.12);
+      // border-radius: 10px;
+      // padding: 0.875rem;
       display: grid;
       grid-template-columns: 100%;
-      margin: 0.5rem 1rem;
+      margin: 0.5rem 0.5rem;
     }
   }
 
@@ -48,6 +50,8 @@
   .add--question-box {
     display: flex;
     align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   }
 
   .quiz--button-submit {
@@ -59,11 +63,30 @@
     border-radius: 100px;
     font-weight: 600;
     padding: 0.75rem 1.25rem;
-    width: 100%;
+    justify-self: flex-end;
+    // width: 100%;
     
     &:hover {
       background-color: library.$black;
       border: 1px solid library.$black;
+    }
+  }
+
+  .quiz--button-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: 1rem;
+    // margin-bottom: 1rem;
+
+    .quiz--button-cancel {
+      color: library.$black;
+      font-weight: 600;
+  
+      &:hover {
+        color: library.$blue;
+        text-decoration: none;
+      }
     }
   }
 
@@ -92,7 +115,6 @@
 
 .MuiFormControl-root {
   &.quiz__answerType {
-    background-color: red;
     grid-column-start: 2;
     grid-column-end: 3;
   }
@@ -158,5 +180,11 @@
     &:hover {
       color: library.$black;
     }
+  }
+}
+
+.quiz__multiAnswerArea {
+  &:last-child {
+    margin-bottom: 1rem;
   }
 }
