@@ -6,11 +6,17 @@
     margin-left: 2rem;
 
     @media (min-width: 1500px) {
-        padding-left: 4rem;
+        margin-left: 12rem;
     }
+
+    @media (max-width: 1499px) {
+        margin-left: 4rem;
+    }
+
 
     @media (max-width: 768px) {
         margin-left: 0;
+        padding-left: 0;
     }
 }
 

@@ -4,7 +4,7 @@
   &.details--box {
     // padding-left: 2rem;
     // padding-right: 2rem;
-
+    // width: 100%;
     @include sm {
       padding: 0 2rem;
     }
@@ -24,6 +24,17 @@
 }
 
 .MuiTypography-root {
+  &.productDetails-heading--font {
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.875rem;
+    font-weight: 600;
+    line-height: 2.5rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: black;
+  }
+
   &.productDetails-title--font {
     text-align: center;
     margin-top: 2rem;
@@ -33,6 +44,10 @@
     line-height: 2.5rem;
     font-family: 'Source Sans Pro', sans-serif;
     color: black;
+
+    @media (min-width: 900px) {
+      grid-column: 1 / 2;
+    }
   }
 
   &.productDetails-subtitle--font {
@@ -44,6 +59,37 @@
     line-height: 1.75rem;
     font-family: 'Source Sans Pro', sans-serif;
     color: black;
+
+    @media (min-width: 900px) {
+      width: 60%;
+      grid-column-start: 1;
+      grid-column-end: 2;
+    }
+  }
+
+  &.productDetails-description--font {
+    text-align: left;
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: black;
+
+    @media (min-width: 900px) {
+      width: 60%;
+      grid-column: 1 / 2;
+    }
+  }
+}
+
+.productDetails-number--box {
+  position: relative;
+
+  @media (min-width: 900px) {
+    display: grid;
+    grid-column: 1 / 2;
   }
 }
 
@@ -54,6 +100,12 @@
   padding: 2rem 1.5rem;
   margin-top: 2.5rem;
   margin-bottom: 2rem;
+
+  @media (min-width: 900px) {
+    display: grid;
+    padding: 6rem 4rem;
+    grid-template-columns: 50% 50%;
+  }
 }
 
 .details-green--box {
@@ -62,11 +114,6 @@
   border-radius: 1.5rem;
   padding: 2rem 1.5rem;
   margin-bottom: 2rem;
-  
-  &.details-green--box > img {
-    border: 2px solid red;
-    justify-content: center;
-  }
 }
 
 .details-biege--box {
@@ -101,6 +148,11 @@
         color: #FAF9F6;
         background-color: #000;
     }
+
+    @media (min-width: 900px) {
+      width: 10rem;
+      grid-column: 1 / 2;
+    }
   }
 }
 
@@ -111,4 +163,10 @@
   margin-bottom: 2.5rem;
   margin-left: auto;
   margin-right: auto;
+
+  @media (min-width: 900px) {
+    // display: none;
+    display: grid;
+    grid-column: 2 / 3;
+  }
 }
