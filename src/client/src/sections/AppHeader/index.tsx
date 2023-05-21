@@ -97,12 +97,12 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
           </Link>
         </Typography>
         {viewer && viewer.avatar ? (
-          <Box>
+          <Box sx={{ width: "100%" }}>
             <Box className="desktop--loggedIn-items">
               <Link to={`/catalog`} style={{ textDecoration: "none" }}>
                 <p style={{ color: `${theme.palette.info.dark}` }}>Catalog</p>
               </Link>
-              {/* <Tooltip title="Create Content!">
+              <Tooltip title="Create Content!">
                 <IconButton
                   onClick={handleOpenActionMenu}
                   disableFocusRipple
@@ -143,7 +143,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                     <Typography textAlign="center">Create Lesson Plan</Typography>
                   </Link>
                 </MenuItem>
-              </Menu> */}
+              </Menu>
               <Tooltip title="Click For User Options">
                 <IconButton
                   onClick={handleOpenUserMenu} sx={{ p: 1 }}

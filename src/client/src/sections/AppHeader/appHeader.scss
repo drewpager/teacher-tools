@@ -39,11 +39,15 @@
 
 .desktop--loggedIn-items {
   display: flex;
-  margin-top: 4rem;
-  justify-content: space-between;
+  margin-top: 5rem;
+  justify-content: flex-end;
 
   @media (max-width: 1288px) {
-    justify-content: space-between;
+    justify-content: flex-end;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
   }
 }
 
