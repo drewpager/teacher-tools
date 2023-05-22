@@ -97,7 +97,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
           </Link>
         </Typography>
         {viewer && viewer.avatar ? (
-          <Box sx={{ width: "100%" }}>
+          <Box>
             <Box className="desktop--loggedIn-items">
               <Link to={`/catalog`} style={{ textDecoration: "none" }}>
                 <p style={{ color: `${theme.palette.info.dark}` }}>Catalog</p>
@@ -186,9 +186,9 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
               </Menu>
             </Box>
             {/* Mobile Responsive Icon Menu */}
-            <Box className='navbar--icon'>
+            <Box className='navburger--icon'>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <MenuIcon sx={{ color: "white" }} />
+                {viewer ? <Avatar alt="logged in user avatar" src={viewer.avatar} /> : <MenuIcon />}
               </IconButton>
               <Menu
                 sx={{ mt: '45px' }}
