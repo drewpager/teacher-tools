@@ -30,7 +30,7 @@ export const HomeInfo = () => {
             <Link variant="subtitle1" href="/playlist/create" className='startTeaching--button'>
               Start Teaching
             </Link>
-            <Link variant="subtitle1" href="/catalog/" className='pricing--button'>
+            <Link variant="subtitle1" href="/pricing/" className='pricing--button'>
               View Pricing
             </Link>
           </div>

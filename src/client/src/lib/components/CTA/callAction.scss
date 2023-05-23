@@ -60,6 +60,10 @@
     font-size: clamp(1rem, 2rem, 2.5rem); 
     font-weight: 800;
     line-height: 2.75rem;
+
+    @media (min-width: 1000px) {
+      margin-top: 1rem;
+    }
   }
 
   &.callAction--subText {
@@ -80,10 +84,13 @@
     justify-content: left;
     margin-top: -4rem;
     margin-left: -4rem;
+
+    @media (min-width: 1000px) {
+      justify-content: center;
+      align-content: center;
+      width: 18rem;
+      margin-left: -2rem;
+      margin-top: 0.875rem;
+    }
   }
-  // @media screen and (max-width: 1200px) {
-  //   .containCTA {
-  //     display: none;
-  //   }
-  // }
 }

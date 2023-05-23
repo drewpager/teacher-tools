@@ -2,6 +2,7 @@
 
 .MuiBox-root {
   &.createLesson--page {
+    max-width: 100%;
     margin: 5rem 2rem;
     display: grid;
     // grid-template-columns: repeat(6, 4fr);

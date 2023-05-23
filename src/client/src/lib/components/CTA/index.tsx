@@ -19,9 +19,11 @@ export const CTA = () => {
   return (
     <Card className="callAction--home">
       <Grid container className="grid--container">
-        <Grid item xs={12} sm={12} md={12} lg={9}>
-          <div>
-            <div className="containCTA" ref={containCTA} />
+        <Grid item xs={12} sm={12} md={12} lg={4}>
+          <div className="containCTA" ref={containCTA} />
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} lg={8}>
+          <div className="grid--text">
             <Typography variant='h3' className='callAction--text'>Start Creating Interactive Lesson Plans for Free!</Typography>
             <Typography variant='h5' className='callAction--subText'>Porem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent.</Typography>
             <div className='callAction--buttonDiv'>
@@ -30,10 +32,10 @@ export const CTA = () => {
             </div>
           </div>
         </Grid>
-        {/* <Grid item xs={0} sm={0} md={0} lg={3}>
+      </Grid>
+      {/* <Grid item xs={0} sm={0} md={0} lg={3}>
           <div className="containCTA" ref={containCTA} />
         </Grid> */}
-      </Grid>
-    </Card>
+    </Card >
   )
 }
