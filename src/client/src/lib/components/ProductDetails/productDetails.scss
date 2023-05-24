@@ -82,6 +82,15 @@
     line-height: 1.5rem;
     font-family: 'Source Sans Pro', sans-serif;
     color: black;
+    line-break: normal;
+
+    & > a {
+      color: black;
+      text-decoration: underline;
+      font-weight: 600;
+      line-break: normal;
+      white-space: nowrap;
+    }
 
     @media (min-width: 900px) {
       display: grid;

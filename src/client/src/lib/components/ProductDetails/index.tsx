@@ -29,7 +29,7 @@ export const ProductDetails = () => {
               Browse Our Growing Library of History Documentaries
             </Typography>
             <Typography variant="body2" className="productDetails-description--font">
-              Using our <Link to="/playlist/create">lesson plan creation tool</Link> you can quickly construct lesson plans with the content you choose and assessments you create.
+              Our catalog of short history documentaries are the perfect puzzle pieces for you to construct lesson plans with the content you choose.
             </Typography>
             <Button href='/catalog' className="pricing--button">View Catalog</Button>
           </Box>
@@ -49,12 +49,12 @@ export const ProductDetails = () => {
               <Typography variant="h4" className="productDetails-title--font" sx={{ position: "absolute", top: "-30%", left: "7%", fontSize: 70 }}>2.</Typography>
             </Box>
             <Typography variant="h2" className="productDetails-subtitle--font">
-              Drag and Drop Custom Lessons and Assessments
+              Create Custom Assessment Questions
             </Typography>
             <Typography variant="body2" className="productDetails-description--font">
-              Using our <Link to="/playlist/create">lesson plan creation tool</Link> you can quickly construct lesson plans with the content you choose and assessments you create.
+              Using our quiz creation tool you can customize assessments to fit the content within your lesson plans.
             </Typography>
-            <Button href='/catalog' className="pricing--button">View Catalog</Button>
+            <Button href='/quiz/create' className="pricing--button">Create Quiz</Button>
           </Box>
         </Grid>
 
@@ -70,12 +70,12 @@ export const ProductDetails = () => {
               <Typography variant="h4" className="productDetails-title--font" sx={{ position: "absolute", top: "-30%", left: "7%", fontSize: 70 }}>3.</Typography>
             </Box>
             <Typography variant="h2" className="productDetails-subtitle--font">
-              Drag and Drop Custom Lessons and Assessments
+              Drag and Drop Custom Lesson Plans With Assessments
             </Typography>
             <Typography variant="body2" className="productDetails-description--font">
-              Using our <Link to="/playlist/create">lesson plan creation tool</Link> you can quickly construct lesson plans with the content you choose and assessments you create.
+              Using our lesson plan creation tool you can quickly construct lesson plans with the content you choose and assessments you create.
             </Typography>
-            <Button href='/catalog' className="pricing--button">View Catalog</Button>
+            <Button href='/playlist/create' className="pricing--button">Create Plan</Button>
           </Box>
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={10}>
@@ -90,10 +90,10 @@ export const ProductDetails = () => {
               <Typography variant="h4" className="productDetails-title--font" sx={{ position: "absolute", top: "-30%", left: "7%", fontSize: 70 }}>4.</Typography>
             </Box>
             <Typography variant="h2" className="productDetails-subtitle--font">
-              Drag and Drop Custom Lessons and Assessments
+              Share Lesson Plans With Students and Other Teachers
             </Typography>
             <Typography variant="body2" className="productDetails-description--font">
-              Using our lesson plan creation tool you can quickly construct lesson plans with the content you choose and assessments you create.
+              Assign your custom lesson plans to your students or share it with other teachers. Rev sharing coming soon!
             </Typography>
             <Button href='/catalog' className="pricing--button">View Catalog</Button>
           </Box>

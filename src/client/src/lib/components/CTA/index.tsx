@@ -25,7 +25,7 @@ export const CTA = () => {
         <Grid item xs={12} sm={12} md={12} lg={8}>
           <div className="grid--text">
             <Typography variant='h3' className='callAction--text'>Start Creating Interactive Lesson Plans for Free!</Typography>
-            <Typography variant='h5' className='callAction--subText'>Porem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent.</Typography>
+            <Typography variant='h5' className='callAction--subText'>Use our 7-Day Free Trial to browse and bookmark our catalog, create lesson plans for your curriculum, custom assessments, and test with students.</Typography>
             <div className='callAction--buttonDiv'>
               <Link to="/login" style={{ textDecoration: 'none' }}><Button variant="contained" className="callAction--buttonFirst">Get Started For Free</Button></Link>
               {/* <Link to="/pricing" style={{ textDecoration: 'none' }}><Button variant="outlined" className="callAction--buttonSecond">Pricing</Button></Link> */}
