@@ -83,12 +83,14 @@ const checkInput = ({ field, form: { errors, touched, setFieldValue } }: FieldPr
         disableRipple
         disableFocusRipple
       >
-        <CheckCircleIcon
-          {...field}
-          name={field.name}
-          className="button--check"
-          color={field.value ? "success" : "info"}
-        />
+        <Tooltip title={field.value ? "This is a true/correct answer" : "This is a false/incorrect answer"}>
+          <CheckCircleIcon
+            {...field}
+            name={field.name}
+            className="button--check"
+            color={field.value ? "success" : "info"}
+          />
+        </Tooltip>
       </IconButton>
       {!!touched && errors && <div>{errorMessage}</div>}
     </div>

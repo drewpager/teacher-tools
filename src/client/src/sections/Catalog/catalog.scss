@@ -26,7 +26,7 @@
 .MuiButtonBase-root {
   &.bookmark--button {
     &:hover {
-      box-shadow: .5px 1px 1.75px 1.75px white;
+      color: library.$darkGreen;
     }
   }
   &.play--button {
@@ -47,8 +47,9 @@
   &.keenSlider--item {
     display: flex;
     background-color: #3d5189;
-    border-radius: 0.4em; 
-    height: 180px;
+    border-radius: 0.875em; 
+    height: 331px;
+    width: 323px;
     padding: 0.25em 0.25em;
   }
 }
@@ -56,6 +57,7 @@
 .keenSlider--content {
   flex: '1 0 auto';
   font-size: clamp(0.2em, 0.5em, 1em);
+  align-content: flex-end;
 }
 
 .MuiBox-root {

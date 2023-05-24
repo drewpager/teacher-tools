@@ -106,23 +106,25 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
               <Card className="keenSlider--item" key={index}>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                   <CardContent className="keenSlider--content">
+                    {l.category?.map((c, idx) => (
+                      idx !== 0 && <Chip label={titleCase(`${c}`)} color="primary" key={idx} />
+                    ))}
                     <Link to={`/lesson/${l.id}`} style={{ textDecoration: "none" }}>
-                      <Typography component="div" variant="h3" style={{ color: "#FAF9F6" }}>
+                      <Typography component="div" variant="h4" style={{ color: "#FAF9F6" }}>
                         {l.title}
                       </Typography>
                     </Link>
                     <Typography variant="subtitle1" color="#e0e0e0" component="div">
                       {(l.startDate === l.endDate) ? (l.startDate) : (`${l.startDate} to ${l.endDate}`)}
                     </Typography>
-                    {l.category?.map((c, idx) => (
-                      idx !== 0 && <Chip label={titleCase(`${c}`)} color="primary" key={idx} />
-                    ))}
                   </CardContent>
                   <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
                     <IconButton
                       className="play--button"
                       aria-label="play/pause"
                       sx={{ color: "#FAF9F6" }}
+                      disableRipple
+                      disableFocusRipple
                     >
                       <UseVideoModal video={`${l.video}`} />
                     </IconButton>
@@ -130,6 +132,8 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
                       className="bookmark--button"
                       aria-label="bookmark"
                       sx={{ color: "#FAF9F6" }}
+                      disableRipple
+                      disableFocusRipple
                     >
                       <BookmarkAddIcon onClick={() => onBookmark(`${l.id}`, viewer)} />
                     </IconButton>
