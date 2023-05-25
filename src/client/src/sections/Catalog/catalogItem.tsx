@@ -12,6 +12,8 @@ import 'keen-slider/keen-slider.min.css';
 import "./catalog.scss";
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
+import { placeholder } from '@cloudinary/react';
+import { CloudinaryImage } from '@cloudinary/url-gen';
 
 type props = {
   name: string;
@@ -104,6 +106,13 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
           {category.map((l, index) => (
             <div className="keen-slider__slide">
               <Card className="keenSlider--item" key={index}>
+                <CardMedia
+                  component="img"
+                  height="340"
+                  image={l.video?.substring(0, l.video.lastIndexOf('.')) + '.png'}
+                  alt={`${l.title}`}
+                  sx={{ objectFit: 'cover', opacity: '0.5' }}
+                />
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                   <CardContent className="keenSlider--content">
                     {l.category?.map((c, idx) => (

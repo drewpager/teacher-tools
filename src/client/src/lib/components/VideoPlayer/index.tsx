@@ -1,5 +1,5 @@
 import React from 'react';
-import { AdvancedVideo, responsive } from '@cloudinary/react';
+import { AdvancedVideo, placeholder, responsive } from '@cloudinary/react';
 import { CloudinaryVideo } from "@cloudinary/url-gen";
 
 // Import required actions and qualifiers.
@@ -45,7 +45,7 @@ export const VideoPlayer = ({ url }: props) => {
 
   return (
     <Box className='tt-video-wrapper' >
-      <AdvancedVideo cldVid={cldUrl} sources={sources} controls autoPlay plugins={[responsive({ steps: 200 })]} />
+      <AdvancedVideo cldVid={cldUrl} sources={sources} controls autoPlay plugins={[responsive({ steps: 200 }), placeholder()]} />
     </Box>
   )
 };

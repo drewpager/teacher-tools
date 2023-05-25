@@ -96,12 +96,8 @@ import image from '../../lib/assets/classroom.jpg';
 
 export const TestElement = () => {
   return (
-    <div style={{
-      marginTop: 150, width: "550px", height: "auto", border: "5px solid red",
-      boxShadow: "2px 2px 10px rgba(0,0,0,0.5)",
-      // filter: "drop-shadow(2px 2px 10px rgba(0,0,0,0.5)"
-    }}>
-      <img src={image} alt="classroom" style={{ transition: ".5s filter", filter: `sepia() saturate(4) hue-rotate(195deg)` }} />
+    <div style={{ marginTop: 150 }}>
+      <h1>Hi There</h1>
     </div>
   )
 }
