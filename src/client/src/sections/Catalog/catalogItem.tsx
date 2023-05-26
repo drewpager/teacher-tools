@@ -37,7 +37,7 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
   const [sliderRef, instanceRef] = useKeenSlider(
     {
       breakpoints: {
-        "(min-width: 1000px)": {
+        "(min-width: 768px)": {
           slides: { perView: 2 },
         },
         "(min-width: 1350px)": {
