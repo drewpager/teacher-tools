@@ -25,11 +25,13 @@
 
 .MuiButtonBase-root {
   &.bookmark--button {
+    margin-bottom: 1rem;
     &:hover {
       color: library.$darkGreen;
     }
   }
   &.play--button {
+    margin-bottom: 0.875rem;
     &:hover {
       color: library.$darkGreen;
     }
@@ -50,7 +52,7 @@
     border-radius: 0.875em; 
     height: 331px;
     width: 323px;
-    // padding: 0.25em 0.25em;
+    margin-right: 1rem;
   }
 }
 
@@ -62,6 +64,10 @@
 }
 
 .MuiBox-root {
+  &.card--grid {
+    display: grid;
+    grid-template-rows: max-content 75px 1fr;
+  }
   // Desktop
   &.catalogBackground {
     margin-top: 5em;

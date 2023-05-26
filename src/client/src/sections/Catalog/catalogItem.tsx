@@ -36,10 +36,19 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [sliderRef, instanceRef] = useKeenSlider(
     {
-      slides: {
-        origin: "auto",
-        perView: 3,
-        spacing: 10,
+      breakpoints: {
+        "(min-width: 1000px)": {
+          slides: { perView: 2 },
+        },
+        "(min-width: 1350px)": {
+          slides: { perView: 3 },
+        },
+        "(min-width: 1777px)": {
+          slides: { perView: 4 },
+        },
+        "(min-width: 2200px)": {
+          slides: { perView: 5 },
+        }
       },
       initial: 0,
       mode: "snap",
@@ -98,7 +107,7 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
       <Grid
         container
         gap={1}
-        spacing={2}
+        spacing={1}
         direction="row"
         ml={5}
       >
@@ -106,18 +115,20 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
           {category.map((l, index) => (
             <div className="keen-slider__slide">
               <Card className="keenSlider--item" key={index}>
-                <CardMedia
-                  component="img"
-                  height="340"
-                  image={l.video?.substring(0, l.video.lastIndexOf('.')) + '.png'}
-                  alt={`${l.title}`}
-                  sx={{ objectFit: 'cover', opacity: '0.5' }}
-                />
-                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                {/* <Box sx={{ display: 'flex', flexDirection: 'column' }}> */}
+                <Box className="card--grid">
+                  <CardMedia
+                    component="img"
+                    height="auto"
+                    image={l.video?.substring(0, l.video.lastIndexOf('.')) + '.png'}
+                    alt={`${l.title}`}
+                    sx={{ objectFit: 'cover', opacity: '0.5', height: '100%', width: '100%' }}
+                    loading='lazy'
+                  />
                   <CardContent className="keenSlider--content">
-                    {l.category?.map((c, idx) => (
+                    {/* {l.category?.map((c, idx) => (
                       idx !== 0 && <Chip label={titleCase(`${c}`)} color="primary" key={idx} />
-                    ))}
+                    ))} */}
                     <Link to={`/lesson/${l.id}`} style={{ textDecoration: "none" }}>
                       <Typography component="div" variant="h4" style={{ color: "#FAF9F6" }}>
                         {l.title}
@@ -127,7 +138,7 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
                       {(l.startDate === l.endDate) ? (l.startDate) : (`${l.startDate} to ${l.endDate}`)}
                     </Typography>
                   </CardContent>
-                  <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, justifyContent: 'flex-end' }}>
                     <IconButton
                       className="play--button"
                       aria-label="play/pause"
