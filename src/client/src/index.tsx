@@ -48,6 +48,13 @@ import theme from './theme';
 // import { Viewer } from './lib/types';
 import { Viewer, useLogInMutation } from './graphql/generated';
 import { ScrollToTop } from './lib/utils/scrollToTop';
+var webFont = require("webfontloader");
+
+webFont.load({
+  google: {
+    families: ['Source Serif Pro', 'Source Sans Pro']
+  }
+})
 
 
 const initialViewer: Viewer = {

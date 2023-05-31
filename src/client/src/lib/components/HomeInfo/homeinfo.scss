@@ -60,13 +60,13 @@
         margin-right: 1.5rem;
         margin-left: 1.5rem;
         padding: 1rem 0;
-        font-size: clamp(1.5rem, 3rem, 3.25rem);
+        font-size: clamp(2.75rem, 3rem, 3.25rem);
         color: library.$peachy;
         align-self: baseline;
-        font-size: 2.5rem;
-        line-height: 2.5rem;
-        font-family: "Source Serif Pro", serif;
-        font-weight: bolder;
+        line-height: 115%;
+        font-family: "Source Serif Pro";
+        font-style: normal;
+        font-weight: bold;
 
         @media (max-width: 768px) {
             width: 90%;
@@ -106,7 +106,7 @@
         color: #ffffff;
         font-weight: 600;
         border-radius: 100px;
-        height: 4rem;
+        height: 2.5rem;
         width: 100%;
         text-transform: capitalize;
         text-align: center;
@@ -127,7 +127,7 @@
         color: #000;
         font-weight: 600;
         border-radius: 100px;
-        height: 4rem;
+        height: 2.5rem;
         width: 100%;
         text-transform: capitalize;
         text-align: center;

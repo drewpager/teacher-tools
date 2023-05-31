@@ -80,9 +80,10 @@
   &.nav--title {
     // font-family: "Source Sans Pro", sans-serif;
     // font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-family: "Source Serif Pro", serif;
-    font-weight: 900;
-    font-size: 1.5rem;
+    font-family: "Source Serif Pro";
+    font-style: normal;
+    font-weight: bolder;
+    font-size: 2rem;
     margin-left: 0.01rem;
     flex-grow: 1;
     flex-wrap: nowrap;
@@ -120,6 +121,7 @@
 .MuiButtonBase-root {
   &.dropdown--buttons {
     border: 10px solid transparent;
+    transform: none;
   }
 }
 
