@@ -2,28 +2,25 @@
 
 .MuiButtonBase-root {
     &.active {
-        background: library.$coral;
+        background: library.$blue;
         box-shadow: 0 0 0 1px library.$darkGreen;
         border-radius: 4px;
         padding: 0.7rem;
-        &.span {
+        
+        .MuiListItemText-primary {
             color: white;
         }
+    }
+
+    .MuiListItemText-root {
+        padding-left: 1rem;
     }
 }
 
 .MuiListItemButton-root {
     &.active:hover {
-        background: library.$coral;
+        background: library.$blue;
     }
-    
-    &.active:hover + span {
-        color: white !important;
-    }
-}
-
-.MuiListItemText-root {
-    padding-left: 1rem;
 }
 
 .MuiTypography-root {

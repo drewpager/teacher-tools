@@ -51,15 +51,16 @@ input[type="checkbox"] {
   appearance: none;
   background-color: library.$white;
   font: inherit;
-  color: library.$coral;
+  color: library.$blue;
   width: 1.25rem;
   height: 1.25rem;
-  border: 0.15rem solid library.$coral;
+  border: 0.15rem solid library.$blue;
   border-radius: 0.15rem;
   transform: translateY(-0.075rem);
   display: grid;
   place-content: center;
   cursor: pointer;
+  margin-right: 0.75rem;
 }
 
 input[type="checkbox"]::before {
@@ -68,7 +69,7 @@ input[type="checkbox"]::before {
   height: 0.80rem;
   transform: scale(0);
   transition: 120ms transform ease-in-out;
-  box-shadow: inset 1.10rem 1.10rem library.$coral;
+  box-shadow: inset 1.10rem 1.10rem library.$blue;
 }
 
 input[type="checkbox"]:checked::before {
