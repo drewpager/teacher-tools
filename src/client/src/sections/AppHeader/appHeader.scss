@@ -77,19 +77,22 @@
 }
 
 .MuiTypography-root {
+  /* LOGO TEXT */
   &.nav--title {
-    // font-family: "Source Sans Pro", sans-serif;
-    // font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-family: "Source Serif Pro";
     font-style: normal;
     font-weight: bolder;
-    font-size: 2rem;
+    font-size: clamp(0.75rem, 1.5rem, 2rem);
     margin-left: 0.01rem;
     flex-grow: 1;
     flex-wrap: nowrap;
 
     @media (max-width: 1288px) {
       flex-grow: 1;
+    }
+
+    @media (max-width: 768px) {
+      margin-left: -0.75rem;
     }
   }
 }
@@ -148,17 +151,25 @@
     justify-content: flex-end;
   }
 
+  .navbar--icon {
+    margin-left: -1rem;
+    padding: 0;
+  }
+
   .MuiBox-root {
     .mobileStarted--button {
       display: flex;
       background: #57996A;
       color: #ffffff;
       font-weight: 600;
+      font-size: 1rem;
+      width: fit-content;
+      flex-wrap: nowrap;
       border-radius: 100px;
       height: 1.875rem;
       text-transform: capitalize;
-      padding: 1.25em;
-      margin-right: 0.875rem;
+      padding: 1rem;
+      margin-right: 0.5rem;
       &:hover {
         color: #ffffff;
         background-color: #557669;

@@ -106,10 +106,8 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
       }
       <Grid
         container
-        gap={1}
-        spacing={1}
         direction="row"
-        ml={5}
+        ml={2}
       >
         <div ref={sliderRef} className="keen-slider">
           {category.map((l, index) => (

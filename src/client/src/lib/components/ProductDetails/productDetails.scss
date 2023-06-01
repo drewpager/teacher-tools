@@ -24,17 +24,18 @@
 }
 
 .MuiTypography-root {
+  /* HOW PLATOS WORKS */
   &.productDetails-heading--font {
     text-align: center;
     margin-top: 2rem;
     margin-bottom: 1rem;
-    font-size: 1.875rem;
-    font-weight: 600;
+    font-size: clamp(2rem, 2.5rem, 3rem);
+    font-weight: 700;
     line-height: 2.5rem;
     font-family: 'Source Sans Pro', sans-serif;
     color: black;
   }
-
+  /* NUMBERS */
   &.productDetails-title--font {
     text-align: center;
     margin-top: 2rem;
@@ -49,18 +50,26 @@
       display: grid;
       grid-column: 1 / 2;
       grid-row: 1 / 2;
-      align-self: start;
+      align-self: center;
       margin-left: -1rem;
+    }
+
+    @media (max-width: 900px) {
+      display: grid;
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+      align-self: center;
     }
   }
 
+  /* H1 DETAIL BOX TEXT */
   &.productDetails-subtitle--font {
     text-align: left;
     margin-top: 1rem;
-    margin-bottom: 1rem;
-    font-size: 1.375rem;
+    margin-bottom: 1.5rem;
+    font-size: clamp(1.375rem, 2rem, 2.5rem);
     font-weight: 700;
-    line-height: 1.75rem;
+    line-height: 2rem;
     font-family: 'Source Sans Pro', sans-serif;
     color: black;
 
@@ -73,9 +82,10 @@
     }
   }
 
+  /* description copy */
   &.productDetails-description--font {
     text-align: left;
-    margin-top: 0.75rem;
+    margin-top: 1.5rem;
     margin-bottom: 0.75rem;
     font-size: 1.25rem;
     font-weight: 400;
@@ -97,7 +107,7 @@
       grid-column: 1 / 2;
       grid-row: 1 / 2;
       align-self: center;
-      padding-top: 5rem;
+      padding-top: 6rem;
     }
   }
 }

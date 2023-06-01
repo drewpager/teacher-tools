@@ -70,7 +70,7 @@ export const ProductDetails = () => {
               <Typography variant="h4" className="productDetails-title--font" sx={{ position: "absolute", top: "-30%", left: "7%", fontSize: 70 }}>3.</Typography>
             </Box>
             <Typography variant="h2" className="productDetails-subtitle--font">
-              Drag and Drop Custom Lesson Plans With Assessments
+              Drag & Drop Custom Lesson Plans With Assessments
             </Typography>
             <Typography variant="body2" className="productDetails-description--font">
               Using our lesson plan creation tool you can quickly construct lesson plans with the content you choose and assessments you create.

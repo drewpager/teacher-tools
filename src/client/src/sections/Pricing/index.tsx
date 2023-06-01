@@ -113,7 +113,7 @@ export const Pricing = () => {
         <Box className="pricing--box">
           <h3>Socrates Plan</h3>
           <Chip label="Best for Home School" color="primary" />
-          <Typography variant="h5" color={theme.palette.info.light} sx={{ fontWeight: 600, marginTop: 2 }}>{monthlyCadence ? "$48 billed annually ($4/mo)" : "$6.99 billed Monthly"}</Typography>
+          <Typography variant="h5" color={theme.palette.info.dark} sx={{ fontWeight: 600, marginTop: 2 }}>{monthlyCadence ? "$48 billed annually ($4/mo)" : "$6.99 billed Monthly"}</Typography>
           <Button
             variant='contained'
             target="_blank"
@@ -125,7 +125,7 @@ export const Pricing = () => {
         <Box className="pricing--box">
           <h3>Plato's Plan</ h3>
           <Chip label="Best For Teachers" color="primary" />
-          <Typography variant="h5" color={theme.palette.info.light} sx={{ fontWeight: 600, marginTop: 2 }}>{monthlyCadence ? "$60 billed annually ($5/mo)" : "$7.99 billed Monthly"}</Typography>
+          <Typography variant="h5" color={theme.palette.info.dark} sx={{ fontWeight: 600, marginTop: 2 }}>{monthlyCadence ? "$60 billed annually ($5/mo)" : "$7.99 billed Monthly"}</Typography>
           <Button
             variant='contained'
             target="_blank"
@@ -136,7 +136,7 @@ export const Pricing = () => {
         <Box className="pricing--box">
           <h3>Aristotle Plan</h3>
           <Chip label="Best for Districts" color="primary" />
-          <Typography variant="h5" color={theme.palette.info.light} sx={{ fontWeight: 600, marginTop: 2 }}>{monthlyCadence ? "$84 billed annually ($7/mo)" : "$9.99 billed Monthly"}</Typography>
+          <Typography variant="h5" color={theme.palette.info.dark} sx={{ fontWeight: 600, marginTop: 2 }}>{monthlyCadence ? "$84 billed annually ($7/mo)" : "$9.99 billed Monthly"}</Typography>
           <Button
             variant='contained'
             target="_blank"

@@ -18,12 +18,25 @@
   }
 
   &.pricing--box {
-    background-color: library.$coral; 
+    background-color: library.$blue; 
     border-radius: 0.5em; 
     padding: 1em;
     width: 33%;
     margin: 1em 0;
-    color: library.$white;
+    color: library.$black;
+    border: 2px solid black;
+
+    &:nth-child(1) {
+      background-color: #3A70CD4D;
+    }
+
+    &:nth-child(2) {
+      background-color: #57996A33;
+    }
+
+    &:nth-child(3) {
+      background-color: #DFAF4E33;
+    }
     
     @media (max-width: 768px) {
       width: 90%;
@@ -63,7 +76,7 @@
 
 .MuiTypography-root {
   &.pricing--font {
-    color: library.$coral;
+    color: library.$blue;
     font-weight: 800;
   }
 
@@ -84,7 +97,7 @@ li.warning {
 
 li.success {
   list-style-type: "✔";
-  color: library.$coral;
+  color: library.$blue;
   margin: 0.5em 0;
   padding: 0.1em;
 }

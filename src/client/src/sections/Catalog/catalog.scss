@@ -1,16 +1,5 @@
 @use '../../library';
 
-
-.MuiDataGrid-root {
-  &.catalog--dataTable {
-      margin-top: 6rem; 
-      min-height: 40rem;
-      width: auto;
-      height: 100%;
-      max-height: 100%;
-  }
-}
-
 .MuiButton-root {
   &.catalogFilters--button {
     background: library.$lightGreen;

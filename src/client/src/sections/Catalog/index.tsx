@@ -93,7 +93,7 @@ export const Catalog = ({ viewer }: Props) => {
   const selectedSecondary = allCategories.filter((b) => b.includes(selected[0]));
   return (
     <Box>
-      <Grid container>
+      <Grid container maxWidth={"100%"} overflow={"hidden"}>
         <Grid item sm={12} md={3} lg={3}>
           <Box className="catalogGrid--categories">
             <TreeView
