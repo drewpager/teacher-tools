@@ -34,7 +34,7 @@ export const Catalog = ({ viewer }: Props) => {
 
   const { data, loading, error } = useAllLessonsQuery({
     variables: {
-      limit: 687,
+      limit: 1000,
       page: 1
     }
   });
