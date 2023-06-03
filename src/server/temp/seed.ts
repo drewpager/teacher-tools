@@ -8954,7 +8954,7 @@ const seed = async () => {
         startDate: "1881",
         endDate: "1881",
         category: ["westward expansion", " american history"],
-        meta: "Infamous 1881 shootout at O.K. Corral: Legendary Wild West clash between lawmen and outlaws in Tombstone, Arizona. Gunslinger showdown with lasting historical impact.",
+        meta: "Infamous 1881 shootout at O.K. Corral where Legendary Wild West clash between lawmen and outlaws in Tombstone, Arizona. Gunslinger showdown with lasting historical impact.",
         creator: "116143759549242008910",
       },
       {
@@ -9226,7 +9226,7 @@ const seed = async () => {
           "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
         startDate: "1122",
         endDate: "1204",
-        category: ["Biography", " European History"],
+        category: ["biography", " european History"],
         meta: "Eleanor of Aquitaine (1122-1204) was a powerful queen consort of France and England, known for her intelligence, political savvy, and patronage of the arts.",
         creator: "116143759549242008910",
       },
@@ -9528,7 +9528,7 @@ const seed = async () => {
         image:
           "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
         startDate: "-3000",
-        endDate: "present",
+        endDate: "Present",
         category: ["world history"],
         meta: "A brief overview of the history of toilets, from ancient civilizations to modern times.",
         creator: "116143759549242008910",
@@ -9567,7 +9567,7 @@ const seed = async () => {
         image:
           "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
         startDate: "1955",
-        endDate: "present",
+        endDate: "Present",
         category: ["science", " medicine"],
         meta: "Alice in Wonderland Syndrome is a rare neurological condition that causes distorted perception of body size, time, and space. It is named after Lewis Carroll's book 'Alice's Adventures in Wonderland' because the main character experiences similar symptoms.",
         creator: "116143759549242008910",
@@ -9593,7 +9593,7 @@ const seed = async () => {
         image:
           "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
         startDate: "650",
-        endDate: "present",
+        endDate: "Present",
         category: ["world history"],
         meta: "Freemasons are a fraternal organization that originated in the late 16th or early 17th century. They are known for their secrecy and rituals, and have been the subject of conspiracy theories and speculation. The organization is based on the principles of brotherhood, charity, and truth.",
         creator: "116143759549242008910",

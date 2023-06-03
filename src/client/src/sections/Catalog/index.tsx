@@ -50,6 +50,7 @@ export const Catalog = ({ viewer }: Props) => {
   if (error) {
     return (
       <Box>
+        {console.log("Error: ", error.message)}
         <DisplayError title='Failed to load Content Catalog' />
       </Box>
     )
@@ -93,6 +94,7 @@ export const Catalog = ({ viewer }: Props) => {
   const selectedSecondary = allCategories.filter((b) => b.includes(selected[0]));
   return (
     <Box>
+      {console.log(data?.allLessons.result[722])}
       <Grid container maxWidth={"100%"} overflow={"hidden"}>
         <Grid item sm={12} md={3} lg={3}>
           <Box className="catalogGrid--categories">
