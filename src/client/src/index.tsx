@@ -36,7 +36,8 @@ import {
   Quiz,
   TestElement,
   Billing,
-  Stripe
+  Stripe,
+  SignUp
 } from './sections';
 import { DisplayError } from './lib/utils';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -122,6 +123,7 @@ const App = () => {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/billing" element={<Billing viewer={viewer} />} />
           <Route path="/login" children={(props: any) => (<Login {...props} setViewer={setViewer} />)} element={<Login setViewer={setViewer} />} />
+          <Route path="/signup" children={(props: any) => (<SignUp {...props} setViewer={setViewer} />)} element={<SignUp setViewer={setViewer} />} />
           <Route path="/playlist/:id" element={<Playlist />} />
           <Route path="/playlist/create" element={<CreatePlaylist viewer={viewer} />} />
           <Route path="/quiz/:id" element={<Quiz />} />

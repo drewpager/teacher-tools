@@ -8,6 +8,11 @@
     max-width: 60%; 
     height: auto;
     margin: 6em auto;
+
+    @media (max-width: 768px) {
+      min-width: 100%;
+      max-width: 100%;
+    }
   }
   &.login--box { 
     display: flex;
@@ -21,7 +26,7 @@
 
 .MuiButton-root {
   &.login--button {
-    margin: 0 auto;
+    margin: 0 0.5rem;
     background: #ffffff;
     color: #000000;
     border: 1px solid black;

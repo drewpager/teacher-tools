@@ -280,7 +280,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                     <Typography textAlign="center">Catalog</Typography>
                   </MenuItem>
                 </Link>
-                <Link to={`/login`} style={{ textDecoration: 'none' }}>
+                <Link to={`/signup`} style={{ textDecoration: 'none' }}>
                   <MenuItem onClick={handleCloseUserMenu} className="dropdown--buttons">
                     <Typography textAlign="center">Sign Up</Typography>
                   </MenuItem>
@@ -317,7 +317,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                     <AccountCircleIcon />
                   </IconButton>
                 </Tooltip> */}
-              <Link to={`/login`} style={{ textDecoration: "none" }}>
+              <Link to={`/signup`} style={{ textDecoration: "none" }}>
                 <Button className="getStarted--button">Get Started for Free</Button>
               </Link>
             </Box>

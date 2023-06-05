@@ -1,0 +1,52 @@
+@use '../../library';
+
+.MuiPaper-root {
+  &.login--card {
+    border: 1px solid black;
+    text-align: center;
+    min-width: 33%;
+    max-width: 60%; 
+    height: auto;
+    margin: 6em auto;
+
+    @media (max-width: 768px) {
+      min-width: 100%;
+      max-width: 100%;
+    }
+  }
+  &.login--box { 
+    display: flex;
+    flex-direction: column;
+    color: white;
+  }
+  &.login--text {
+    color: library.$darkGreen;
+  }
+}
+
+.signUp--faq {
+  min-width: 33%;
+  max-width: 60%; 
+  height: auto;
+  margin: 6rem auto;
+  
+  @media (max-width: 768px) {
+    min-width: 100%;
+    max-width: 100%;
+  }
+}
+
+// .MuiButton-root {
+//   &.google--button {
+//     margin: 0 auto;
+//     padding: 0.75em;
+//     color: library.$darkGreen;
+//     background: white;
+//     box-shadow:inset 0px 0px 0px 2px library.$darkGreen;
+//     text-transform: capitalize;
+//     &:hover {
+//       box-shadow:inset 0px 0px 0px 3px library.$blue;
+//       background: white;
+//     }
+//   }
+// }
