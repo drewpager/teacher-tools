@@ -9,6 +9,7 @@ import { useAllLessonsQuery, Viewer } from '../../graphql/generated';
 import { categories, titleCase, DisplayError } from '../../lib/utils';
 import { CatalogItem } from './catalogItem';
 import { Footer } from '../../lib/components';
+import { CatalogSkeleton } from './catalogSkeleton';
 import "./catalog.scss";
 
 type Props = {
@@ -40,11 +41,12 @@ export const Catalog = ({ viewer }: Props) => {
   });
 
   if (loading) {
-    return (
-      <Box marginTop={70} marginLeft={"50%"}>
-        <CircularProgress />
-      </Box>
-    )
+    return <CatalogSkeleton />
+    // return (
+    //   <Box marginTop={70} marginLeft={"50%"}>
+    //     <CircularProgress />
+    //   </Box>
+    // )
   }
 
   if (error) {
@@ -92,9 +94,10 @@ export const Catalog = ({ viewer }: Props) => {
 
   const combinedCategories = Array.from(secondaryCategories)
   const selectedSecondary = allCategories.filter((b) => b.includes(selected[0]));
+
+  // return <CatalogSkeleton />
   return (
     <Box>
-      {console.log(data?.allLessons.result[722])}
       <Grid container maxWidth={"100%"} overflow={"hidden"}>
         <Grid item sm={12} md={3} lg={3}>
           <Box className="catalogGrid--categories">
