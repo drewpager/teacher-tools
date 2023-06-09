@@ -16,13 +16,15 @@
   &.bookmark--button {
     margin-bottom: 1rem;
     &:hover {
-      color: library.$darkGreen;
+      // color: library.$blue;
+      color: #57996A;
     }
   }
   &.play--button {
     margin-bottom: 0.875rem;
     &:hover {
-      color: library.$darkGreen;
+      // color: library.$blue;
+      color: #57996A;
     }
   }
 }
@@ -36,26 +38,47 @@
 
 .MuiPaper-root {
   &.keenSlider--item {
-    display: flex;
-    background-color: #3d5189;
+    display: grid;
+    // background-color: #3d5189;
     border-radius: 0.875em; 
-    height: 331px;
-    width: 323px;
+    max-height: 200px;
+    // height: 331px;
+    // width: 323px;
     margin-right: 1rem;
   }
 }
 
 .keenSlider--content {
-  flex: '1 0 auto';
-  font-size: clamp(0.2em, 0.5em, 1em);
-  align-content: flex-end;
-  z-index: 1;
+  // flex: '1 0 auto';
+  grid-row: 1 / -1;
+  grid-column: 1 / -1;
+  font-size: clamp(0.5rem, 0.75rem, 1rem);
+  align-content: flex-start;
+  z-index: 2;
 }
 
 .MuiBox-root {
   &.card--grid {
     display: grid;
-    grid-template-rows: max-content 75px 1fr;
+    grid-template-rows: 25% 50% 25%;
+    grid-template-columns: 100%;
+
+    > img {
+      grid-row: 1 / -1;
+      grid-column: 1 / -1;
+      object-fit: cover; 
+      opacity: 40%; 
+      height: 100%; 
+      width: 100%;
+    }
+
+    .keenSlider--buttons {
+      grid-row: 3 / 4;
+      grid-column: 1 / -1;
+      align-items: center;
+      justify-content: start;
+      z-index: 10;
+    }
   }
   // Desktop
   &.catalogBackground {

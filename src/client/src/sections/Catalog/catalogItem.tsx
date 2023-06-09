@@ -120,7 +120,6 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
                     height="auto"
                     image={l.video?.substring(0, l.video.lastIndexOf('.')) + '.png'}
                     alt={`${l.title}`}
-                    sx={{ objectFit: 'cover', opacity: '0.5', height: '100%', width: '100%' }}
                     loading='lazy'
                   />
                   <CardContent className="keenSlider--content">
@@ -136,7 +135,9 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
                       {(l.startDate === l.endDate) ? (l.startDate) : (`${l.startDate} to ${l.endDate}`)}
                     </Typography>
                   </CardContent>
-                  <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, justifyContent: 'flex-end' }}>
+                  <Box
+                    className="keenSlider--buttons"
+                    sx={{ display: 'flex', alignItems: 'center', pl: 1, justifyContent: 'center' }}>
                     <IconButton
                       className="play--button"
                       aria-label="play/pause"
