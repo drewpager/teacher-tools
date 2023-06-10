@@ -36,40 +36,32 @@ export const CatalogSkeleton = () => {
             </Box>
             <div className="skeletonGrid">
               <div className="skeletonGrid--item1">
-                <Skeleton variant='rectangular' width="100%" height={100} />
+                <Skeleton variant='rectangular' width="100%" height={200} />
               </div>
               <div className="skeletonGrid--item2">
-                <Skeleton variant='rectangular' width="100%" height={100} />
+                <Skeleton variant='rectangular' width="100%" height={200} />
               </div>
               <div className="skeletonGrid--item3">
-                <Skeleton variant='rectangular' width="100%" height={100} />
+                <Skeleton variant='rectangular' width="100%" height={200} />
+              </div>
+              <div className="skeletonGrid--item4">
+                <Skeleton variant='rectangular' width="100%" height={200} />
               </div>
             </div>
             <div className="catalogGrid--item">
               <Skeleton variant="text" sx={{ fontSize: "1rem", width: "200px" }} /><Chip label={"xxx"} color="primary" size="medium" />
               <div className="skeletonGrid">
                 <div className="skeletonGrid--item1">
-                  <Skeleton variant='rectangular' width="100%" height={100} />
+                  <Skeleton variant='rectangular' width="100%" height={200} />
                 </div>
                 <div className="skeletonGrid--item2">
-                  <Skeleton variant='rectangular' width="100%" height={100} />
+                  <Skeleton variant='rectangular' width="100%" height={200} />
                 </div>
                 <div className="skeletonGrid--item3">
-                  <Skeleton variant='rectangular' width="100%" height={100} />
+                  <Skeleton variant='rectangular' width="100%" height={200} />
                 </div>
-              </div>
-            </div>
-            <div className="catalogGrid--item">
-              <Skeleton variant="text" sx={{ fontSize: "1rem", width: "200px" }} /><Chip label={"xxx"} color="primary" size="medium" />
-              <div className="skeletonGrid">
-                <div className="skeletonGrid--item1">
-                  <Skeleton variant='rectangular' width="100%" height={100} />
-                </div>
-                <div className="skeletonGrid--item2">
-                  <Skeleton variant='rectangular' width="100%" height={100} />
-                </div>
-                <div className="skeletonGrid--item3">
-                  <Skeleton variant='rectangular' width="100%" height={100} />
+                <div className="skeletonGrid--item4">
+                  <Skeleton variant='rectangular' width="100%" height={200} />
                 </div>
               </div>
             </div>
@@ -77,13 +69,16 @@ export const CatalogSkeleton = () => {
               <Skeleton variant="text" sx={{ fontSize: "1rem", width: "200px" }} /><Chip label={"xxx"} color="primary" size="medium" />
               <div className="skeletonGrid">
                 <div className="skeletonGrid--item1">
-                  <Skeleton variant='rectangular' width="100%" height={100} />
+                  <Skeleton variant='rectangular' width="100%" height={200} />
                 </div>
                 <div className="skeletonGrid--item2">
-                  <Skeleton variant='rectangular' width="100%" height={100} />
+                  <Skeleton variant='rectangular' width="100%" height={200} />
                 </div>
                 <div className="skeletonGrid--item3">
-                  <Skeleton variant='rectangular' width="100%" height={100} />
+                  <Skeleton variant='rectangular' width="100%" height={200} />
+                </div>
+                <div className="skeletonGrid--item4">
+                  <Skeleton variant='rectangular' width="100%" height={200} />
                 </div>
               </div>
             </div>
@@ -91,13 +86,33 @@ export const CatalogSkeleton = () => {
               <Skeleton variant="text" sx={{ fontSize: "1rem", width: "200px" }} /><Chip label={"xxx"} color="primary" size="medium" />
               <div className="skeletonGrid">
                 <div className="skeletonGrid--item1">
-                  <Skeleton variant='rectangular' width="100%" height={100} />
+                  <Skeleton variant='rectangular' width="100%" height={200} />
                 </div>
                 <div className="skeletonGrid--item2">
-                  <Skeleton variant='rectangular' width="100%" height={100} />
+                  <Skeleton variant='rectangular' width="100%" height={200} />
                 </div>
                 <div className="skeletonGrid--item3">
-                  <Skeleton variant='rectangular' width="100%" height={100} />
+                  <Skeleton variant='rectangular' width="100%" height={200} />
+                </div>
+                <div className="skeletonGrid--item4">
+                  <Skeleton variant='rectangular' width="100%" height={200} />
+                </div>
+              </div>
+            </div>
+            <div className="catalogGrid--item">
+              <Skeleton variant="text" sx={{ fontSize: "1rem", width: "200px" }} /><Chip label={"xxx"} color="primary" size="medium" />
+              <div className="skeletonGrid">
+                <div className="skeletonGrid--item1">
+                  <Skeleton variant='rectangular' width="100%" height={200} />
+                </div>
+                <div className="skeletonGrid--item2">
+                  <Skeleton variant='rectangular' width="100%" height={200} />
+                </div>
+                <div className="skeletonGrid--item3">
+                  <Skeleton variant='rectangular' width="100%" height={200} />
+                </div>
+                <div className="skeletonGrid--item4">
+                  <Skeleton variant='rectangular' width="100%" height={200} />
                 </div>
               </div>
             </div>

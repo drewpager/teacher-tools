@@ -42,11 +42,6 @@ export const Catalog = ({ viewer }: Props) => {
 
   if (loading) {
     return <CatalogSkeleton />
-    // return (
-    //   <Box marginTop={70} marginLeft={"50%"}>
-    //     <CircularProgress />
-    //   </Box>
-    // )
   }
 
   if (error) {
