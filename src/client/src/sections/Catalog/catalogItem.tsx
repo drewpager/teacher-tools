@@ -12,8 +12,6 @@ import 'keen-slider/keen-slider.min.css';
 import "./catalog.scss";
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
-import { placeholder } from '@cloudinary/react';
-import { CloudinaryImage } from '@cloudinary/url-gen';
 
 type props = {
   name: string;
@@ -76,7 +74,6 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
   const [bookmarkLesson, { loading: BookmarkLessonLoading, error: BookmarkLessonError }] = useMutation<BookmarkLessonData, BookmarkLessonVariables>(BOOKMARK_LESSON);
 
   const onBookmark = async (id: string, viewer: string) => {
-    console.log(viewer === "null")
     if (viewer === "null") {
       setBookmarkError(true)
       setOpen(true)
@@ -197,6 +194,7 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
           onClose={handleClose}
           anchorOrigin={{ vertical: "top", horizontal: 'center' }}
         >
+          {/* If not logged in, throw error/prompt when bookmark button clicked, otherwise bookmark successfully */}
           {bookmarkError || (viewer === "null") ?
             (
               <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>

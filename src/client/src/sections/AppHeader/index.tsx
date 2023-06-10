@@ -36,14 +36,17 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
   const [anchorElAction, setAnchorElAction] = useState(null);
 
   const handleOpenNavMenu = (event: any) => {
+    console.log("event: ", event.currentTarget)
     setAnchorElNav(event.currentTarget);
   }
 
   const handleOpenUserMenu = (event: any) => {
+    console.log("event: ", event.currentTarget)
     setAnchorElUser(event.currentTarget);
   }
 
   const handleOpenActionMenu = (event: any) => {
+    console.log("event: ", event.currentTarget)
     setAnchorElAction(event.currentTarget);
   }
 
@@ -100,7 +103,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
           <Box>
             <Box className="desktop--loggedIn-items">
               <Link to={`/catalog`} style={{ textDecoration: "none" }}>
-                <p style={{ color: `${theme.palette.info.dark}` }}>Catalog</p>
+                <p style={{ color: "#000" }}>Catalog</p>
               </Link>
               <Tooltip title="Create Content!">
                 <IconButton
@@ -129,17 +132,17 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                 className="header--menu"
               >
                 <MenuItem onClick={handleCloseActionMenu} className="dropdown--buttons">
-                  <Link to={`/lesson/create`} style={{ textDecoration: 'none' }}>
+                  <Link to={`/lesson/create`} style={{ textDecoration: 'none', color: "#000" }}>
                     <Typography textAlign="center">Create Lesson</Typography>
                   </Link>
                 </MenuItem>
                 <MenuItem onClick={handleCloseActionMenu} className="dropdown--buttons">
-                  <Link to={`/quiz/create`} style={{ textDecoration: 'none' }}>
+                  <Link to={`/quiz/create`} style={{ textDecoration: 'none', color: "#000" }}>
                     <Typography textAlign="center">Create Asessment</Typography>
                   </Link>
                 </MenuItem>
                 <MenuItem onClick={handleCloseActionMenu} className="dropdown--buttons">
-                  <Link to={`/playlist/create`} style={{ textDecoration: 'none' }}>
+                  <Link to={`/playlist/create`} style={{ textDecoration: 'none', color: "#000" }}>
                     <Typography textAlign="center">Create Lesson Plan</Typography>
                   </Link>
                 </MenuItem>
@@ -170,12 +173,12 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                 onClose={handleCloseUserMenu}
                 className="header--menu"
               >
-                <Link to={`/user/${viewer.id}`} style={{ textDecoration: 'none' }}>
+                <Link to={`/user/${viewer.id}`} style={{ textDecoration: 'none', color: "#000" }}>
                   <MenuItem onClick={handleCloseUserMenu} className="dropdown--buttons">
                     <Typography textAlign="center">Profile</Typography>
                   </MenuItem>
                 </Link>
-                <Link to={`/catalog`} style={{ textDecoration: 'none' }}>
+                <Link to={`/catalog`} style={{ textDecoration: 'none', color: "#000" }}>
                   <MenuItem onClick={handleCloseUserMenu} className="dropdown--buttons">
                     <Typography textAlign="center">Catalog</Typography>
                   </MenuItem>
