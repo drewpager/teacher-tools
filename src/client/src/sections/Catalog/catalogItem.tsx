@@ -32,6 +32,7 @@ type BookmarkLessonVariables = {
 
 export const CatalogItem = ({ name, category, viewer }: props) => {
   const [open, setOpen] = useState<boolean>(false);
+  const [bookmarkError, setBookmarkError] = useState<boolean>(false);
   const [loaded, setLoaded] = useState<boolean>(false);
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [sliderRef, instanceRef] = useKeenSlider(
@@ -63,6 +64,7 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
 
   const handleClose = () => {
     setOpen(false)
+    setBookmarkError(false)
   }
 
   const BOOKMARK_LESSON = gql`
@@ -74,13 +76,19 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
   const [bookmarkLesson, { loading: BookmarkLessonLoading, error: BookmarkLessonError }] = useMutation<BookmarkLessonData, BookmarkLessonVariables>(BOOKMARK_LESSON);
 
   const onBookmark = async (id: string, viewer: string) => {
-    let res = await bookmarkLesson({
-      variables: {
-        id,
-        viewer
-      }
-    })
-    res && setOpen(true)
+    console.log(viewer === "null")
+    if (viewer === "null") {
+      setBookmarkError(true)
+      setOpen(true)
+    } else {
+      let res = await bookmarkLesson({
+        variables: {
+          id,
+          viewer
+        }
+      })
+      res && setOpen(true)
+    }
   }
 
   BookmarkLessonLoading && (
@@ -185,12 +193,21 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
       <>
         <Snackbar
           open={open}
-          autoHideDuration={2000}
+          autoHideDuration={5000}
           onClose={handleClose}
+          anchorOrigin={{ vertical: "top", horizontal: 'center' }}
         >
-          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-            Bookmarked!
-          </Alert>
+          {bookmarkError || (viewer === "null") ?
+            (
+              <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                Please sign up or login to bookmark!
+              </Alert>
+            ) :
+            (
+              <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                Bookmarked!
+              </Alert>
+            )}
         </Snackbar>
       </>
     </Box>
