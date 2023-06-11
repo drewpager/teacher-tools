@@ -29,6 +29,13 @@
   }
 }
 
+.keen--scroll-buttons {
+  display: contents;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .MuiGrid-root {
   &.catalogGrid--item {
     margin-top: 5.5rem;
@@ -42,8 +49,7 @@
     // background-color: #3d5189;
     border-radius: 0.875em; 
     max-height: 200px;
-    // height: 331px;
-    // width: 323px;
+    width: 100%;
     margin-right: 1rem;
   }
 }
@@ -71,7 +77,7 @@
       height: 100%; 
       width: 100%;
     }
-
+    // Play + Bookmark Buttons
     .keenSlider--buttons {
       grid-row: 3 / 4;
       grid-column: 1 / -1;
@@ -90,7 +96,7 @@
     // Mobile
     @media (max-width: 900px) {
       width: 100%;
-      margin-top: 2em;
+      margin-top: 2rem;
     }
   }
   

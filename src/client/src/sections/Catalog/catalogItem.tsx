@@ -51,6 +51,7 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
       },
       initial: 0,
       mode: "snap",
+      dragSpeed: 0.6,
       slideChanged(slider) {
         setCurrentSlide(slider.track.details.rel)
       },
@@ -117,6 +118,7 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
         <div ref={sliderRef} className="keen-slider">
           {category.map((l, index) => (
             <div className="keen-slider__slide">
+              {console.log(instanceRef.current?.track.details.slides.length)}
               <Card className="keenSlider--item" key={index}>
                 {/* <Box sx={{ display: 'flex', flexDirection: 'column' }}> */}
                 <Box className="card--grid">
@@ -164,28 +166,30 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
                   </Box>
                 </Box>
               </Card>
-              {loaded && instanceRef.current && (
-                <>
-                  <IconButton
-                    onClick={() =>
-                      instanceRef.current?.prev()
-                    }
-                    disabled={currentSlide === 0}
-                  >
-                    <ChevronLeftIcon />
-                  </IconButton>
-
-                  <IconButton
-                    onClick={() => instanceRef.current?.next()}
-                    disabled={currentSlide === instanceRef.current.track.details.slides.length - 1}
-                  >
-                    <ChevronRightIcon />
-                  </IconButton>
-                </>
-              )}
             </div>
           ))}
         </div>
+        {
+          loaded && instanceRef.current && category.length > 0 && (
+            <Box className="keen--scroll-buttons">
+              <IconButton
+                onClick={() =>
+                  instanceRef.current?.prev()
+                }
+                disabled={currentSlide === 0}
+              >
+                <ChevronLeftIcon />
+              </IconButton>
+
+              <IconButton
+                onClick={() => instanceRef.current?.next()}
+                disabled={currentSlide === instanceRef.current?.track.details.slides.length - 1}
+              >
+                <ChevronRightIcon />
+              </IconButton>
+            </Box>
+          )
+        }
       </Grid>
       <>
         <Snackbar
