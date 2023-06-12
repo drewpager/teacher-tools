@@ -33,15 +33,26 @@
   display: contents;
   justify-content: center;
   align-items: center;
-  width: 100%;
-}
+  min-width: 100%;
 
-.MuiGrid-root {
-  &.catalogGrid--item {
-    margin-top: 5.5rem;
-    padding-left: 0.5rem;
+  @media (max-width: 768px) {
+    display: block;
+    position: absolute;
+    margin-top: 200px;
+    margin-left: 15rem;
+    justify-content: space-around;
+    min-height: 100px;
+    min-width: 100%;
   }
 }
+
+// .MuiGrid-root {
+//   &.catalogGrid--item {
+//     // margin-top: 15.5rem;
+//     // padding-left: 0.5rem;
+//     // border: 2px solid red;
+//   }
+// }
 
 .MuiPaper-root {
   &.keenSlider--item {
@@ -55,10 +66,10 @@
 }
 
 .keenSlider--content {
-  // flex: '1 0 auto';
+  flex: '1 0 auto';
   grid-row: 1 / -1;
   grid-column: 1 / -1;
-  font-size: clamp(0.5rem, 0.75rem, 1rem);
+  font-size: clamp(0.75rem, 1rem, 1.25rem);
   align-content: flex-start;
   z-index: 2;
 }
@@ -85,6 +96,7 @@
       justify-content: start;
       z-index: 10;
     }
+
   }
   // Desktop
   &.catalogBackground {

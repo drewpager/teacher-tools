@@ -36,6 +36,9 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
   const [sliderRef, instanceRef] = useKeenSlider(
     {
       breakpoints: {
+        "(min-width: 1px)": {
+          slides: { perView: 1 },
+        },
         "(min-width: 768px)": {
           slides: { perView: 2 },
         },
@@ -50,7 +53,7 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
         }
       },
       initial: 0,
-      mode: "snap",
+      mode: "free-snap",
       dragSpeed: 0.6,
       slideChanged(slider) {
         setCurrentSlide(slider.track.details.rel)
@@ -116,9 +119,9 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
         ml={2}
       >
         <div ref={sliderRef} className="keen-slider">
+          {console.log(instanceRef.current)}
           {category.map((l, index) => (
             <div className="keen-slider__slide">
-              {console.log(instanceRef.current?.track.details.slides.length)}
               <Card className="keenSlider--item" key={index}>
                 {/* <Box sx={{ display: 'flex', flexDirection: 'column' }}> */}
                 <Box className="card--grid">
@@ -170,7 +173,7 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
           ))}
         </div>
         {
-          loaded && instanceRef.current && category.length > 0 && (
+          instanceRef.current && (category.length > 0) && (
             <Box className="keen--scroll-buttons">
               <IconButton
                 onClick={() =>

@@ -21,16 +21,16 @@ export const Pricing = () => {
       answer: "The Socrates plan is best for home schoolers and the Plato plan is best for teachers. The Socrates plan allows you to create up to 5 student accounts and the Plato plan allows you to create up to 30 student accounts. The Socrates plan is billed monthly and the Plato plan is billed annually."
     },
     {
-      question: "What is the difference between the Socrates and Plato plans?",
-      answer: "The Socrates plan is best for home schoolers and the Plato plan is best for teachers. The Socrates plan allows you to create up to 5 student accounts and the Plato plan allows you to create up to 30 student accounts. The Socrates plan is billed monthly and the Plato plan is billed annually."
+      question: "What are custom assessments?",
+      answer: "Plato's Peach custom assessments allow teachers to create their own multiple choice or True/False questions. Teachers can create custom assessments to understand retention within lesson plans."
     },
     {
-      question: "What is the difference between the Socrates and Plato plans?",
-      answer: "The Socrates plan is best for home schoolers and the Plato plan is best for teachers. The Socrates plan allows you to create up to 5 student accounts and the Plato plan allows you to create up to 30 student accounts. The Socrates plan is billed monthly and the Plato plan is billed annually."
+      question: "What does teacher to teacher sharing entail?",
+      answer: "Teachers have the option to make the assessments, lesson plans and other content they create available to other teachers. Teachers can also search for and use content created by other teachers."
     },
     {
-      question: "What is the difference between the Socrates and Plato plans?",
-      answer: "The Socrates plan is best for home schoolers and the Plato plan is best for teachers. The Socrates plan allows you to create up to 5 student accounts and the Plato plan allows you to create up to 30 student accounts. The Socrates plan is billed monthly and the Plato plan is billed annually."
+      question: "Is Plato's Peach only for history teachers?",
+      answer: "Currenlty, our content catalog and suite of tools targets history teachers. If you teach another subject and have interest in our product, please reach out to drew@greadings.com to discuss how we can help."
     }
   ]
 
@@ -113,36 +113,36 @@ export const Pricing = () => {
         <Box className="pricing--box">
           <h3>Socrates Plan</h3>
           <Chip label="Best for Home School" color="primary" />
-          <Typography variant="h5" color={theme.palette.info.dark} sx={{ fontWeight: 600, marginTop: 2 }}>{monthlyCadence ? "$48 billed annually ($4/mo)" : "$6.99 billed Monthly"}</Typography>
+          <Typography variant="h5" color={theme.palette.info.dark} sx={{ fontWeight: 600, marginTop: 2 }}>{monthlyCadence ? "$70 billed annually ($5.83/mo)" : "$6.99 billed Monthly"}</Typography>
           <Button
             variant='contained'
             target="_blank"
             // href={monthlyCadence ? "/yearly" : "/monthly"}
-            href={monthlyCadence ? "https://buy.stripe.com/test_dR64i1aXa8BfeU88wA" : "https://buy.stripe.com/test_fZeg0JaXa8Bf5jy4gj"}
+            href={monthlyCadence ? "https://buy.stripe.com/6oEcNPcVnbNOevSdQR" : "https://buy.stripe.com/14k1571cFbNObjGdQQ"}
             className='pricing--button'
           >Choose Plan</Button>
         </Box>
         <Box className="pricing--box">
           <h3>Plato's Plan</ h3>
           <Chip label="Best For Teachers" color="primary" />
-          <Typography variant="h5" color={theme.palette.info.dark} sx={{ fontWeight: 600, marginTop: 2 }}>{monthlyCadence ? "$60 billed annually ($5/mo)" : "$7.99 billed Monthly"}</Typography>
+          <Typography variant="h5" color={theme.palette.info.dark} sx={{ fontWeight: 600, marginTop: 2 }}>{monthlyCadence ? "$80 billed annually ($6.67/mo)" : "$7.99 billed Monthly"}</Typography>
           <Button
             variant='contained'
             target="_blank"
-            href={monthlyCadence ? "https://buy.stripe.com/test_bIYaGpghueZDaDSbIN" : "https://buy.stripe.com/test_4gw4i1d5i04JeU814a"}
+            href={monthlyCadence ? "https://buy.stripe.com/3cs29bcVng449by8wA" : "https://buy.stripe.com/fZe157dZr2deevS6ot"}
             className='pricing--button'
           >Choose Plan</Button>
         </Box>
         <Box className="pricing--box">
           <h3>Aristotle Plan</h3>
           <Chip label="Best for Districts" color="primary" />
-          <Typography variant="h5" color={theme.palette.info.dark} sx={{ fontWeight: 600, marginTop: 2 }}>{monthlyCadence ? "$84 billed annually ($7/mo)" : "$9.99 billed Monthly"}</Typography>
+          <Typography variant="h5" color={theme.palette.info.dark} sx={{ fontWeight: 600, marginTop: 2 }}>{monthlyCadence ? "Contact for custom pricing" : "Contact for custom pricing"}</Typography>
           <Button
             variant='contained'
             target="_blank"
-            href={monthlyCadence ? "https://buy.stripe.com/test_8wM15Pfdqg3H5jyaEG" : "https://buy.stripe.com/test_00g7ud3uI4kZ5jy7ss"}
+            href={monthlyCadence ? "mailto:drew@greadings.com" : "mailto:drew@greadings.com"}
             className='pricing--button'
-          >Choose Plan</Button>
+          >Contact Sales</Button>
         </Box>
       </Box>
       <Alert severity="success">All Plans Include a 7-Day Free Trial!</Alert>
@@ -150,28 +150,31 @@ export const Pricing = () => {
         <Box className="pricing-details--box">
           <h3>Socrates Plan</h3>
           <ul>
-            <li className="success">Up to 5 Class Accounts</li>
-            <li className="success">Unlimited Teacher Accounts</li>
-            <li className="warning">10 Classes</li>
-            <li className="warning">50 Assignments</li>
+            <li className="success">Unlimited Custom Assessments</li>
+            <li className="success">Teacher To Teacher Sharing</li>
+            <li className="warning">Up To 30 Lesson Plans</li>
+            <li className="warning">Up To 10 Classes</li>
           </ul>
         </Box>
         <Box className="pricing-details--box">
           <h3>Plato's Plan</ h3>
           <ul>
-            <li className="success">Up to 5 Class Accounts</li>
-            <li className="success">Unlimited Teacher Accounts</li>
+            <li className="success">Unlimited Custom Assessments</li>
+            <li className="success">Teacher To Teacher Sharing</li>
+            <li className="success">Unlimited Lesson Plans</li>
             <li className="success">Unlimited Classes</li>
-            <li className="warning">100 Assignments</li>
+            <li className="warning">Up To 40 students</li>
           </ul>
         </Box>
         <Box className="pricing-details--box">
           <h3>Aristotle Plan</h3>
           <ul>
-            <li className="success">Up to 5 Class Accounts</li>
-            <li className="success">Unlimited Teacher Accounts</li>
+            <li className="success">Unlimited Custom Assessments</li>
+            <li className="success">Inter-District Sharing</li>
+            <li className="success">Unlimited Lesson Plans</li>
             <li className="success">Unlimited Classes</li>
-            <li className="success">Unlimited Assignments</li>
+            <li className="success">Unlimited Teachers</li>
+            <li className="success">Unlimited Students</li>
           </ul>
         </Box>
         <Box className="pricing-faq--box">

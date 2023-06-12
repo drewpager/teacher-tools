@@ -81,8 +81,9 @@ export const ProductValues = () => {
                 Freedom To Create
               </Typography>
               <Typography variant="h5" className='productValues-subtitle--font'>
-                {'By registering, you will access specially negotiated rates '}
-                {'that you will not find anywhere else.'}
+                {
+                  'With Teacher to Teacher sharing enabled, you will be able to share your custom lesson plans with other teachers in your school, district, state and more. You can also share your lesson plans with the entire world, and in return, you will be able to access lesson plans created by other teachers.'
+                }
               </Typography>
             </Box>
           </Grid>
