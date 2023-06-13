@@ -25,12 +25,12 @@ export const Pricing = () => {
       answer: "Plato's Peach custom assessments allow teachers to create their own multiple choice or True/False questions. Teachers can create custom assessments to understand retention within lesson plans."
     },
     {
-      question: "What does teacher to teacher sharing entail?",
+      question: "What does 'teacher-to-teacher' sharing entail?",
       answer: "Teachers have the option to make the assessments, lesson plans and other content they create available to other teachers. Teachers can also search for and use content created by other teachers."
     },
     {
       question: "Is Plato's Peach only for history teachers?",
-      answer: "Currenlty, our content catalog and suite of tools targets history teachers. If you teach another subject and have interest in our product, please reach out to drew@greadings.com to discuss how we can help."
+      answer: "Currently, our content catalog and suite of tools is built primarily for history teachers. If you teach another subject and have interest in our product, please reach out to drew@greadings.com to discuss how we can help."
     }
   ]
 
@@ -163,7 +163,7 @@ export const Pricing = () => {
             <li className="success">Teacher To Teacher Sharing</li>
             <li className="success">Unlimited Lesson Plans</li>
             <li className="success">Unlimited Classes</li>
-            <li className="warning">Up To 40 students</li>
+            <li className="warning">Up To 300 students</li>
           </ul>
         </Box>
         <Box className="pricing-details--box">

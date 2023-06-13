@@ -30,7 +30,10 @@ export const CatalogSkeleton = () => {
         </Grid>
         <Grid item xs={12} sm={12} md={9} lg={9}>
           <Box className="catalogBackground" sx={{ marginBottom: "80px" }}>
-            <h1 className="catalogTitle">Catalog <Chip label={"xxx"} color="primary" size="medium" /></h1>
+            <Box className="catalogSkeleton--header">
+              <h1 className="catalogTitle">Catalog <Chip label={"xxx"} color="primary" size="medium" /></h1>
+              <Skeleton variant='rectangular' width="236px" height={59} className="skeleton--search" />
+            </Box>
             <Box sx={{ display: 'flex' }}>
               <Switch checked /><Skeleton variant="text" sx={{ fontSize: "1rem", width: "150px" }} />
             </Box>

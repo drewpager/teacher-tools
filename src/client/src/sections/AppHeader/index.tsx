@@ -36,17 +36,14 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
   const [anchorElAction, setAnchorElAction] = useState(null);
 
   const handleOpenNavMenu = (event: any) => {
-    console.log("event: ", event.currentTarget)
     setAnchorElNav(event.currentTarget);
   }
 
   const handleOpenUserMenu = (event: any) => {
-    console.log("event: ", event.currentTarget)
     setAnchorElUser(event.currentTarget);
   }
 
   const handleOpenActionMenu = (event: any) => {
-    console.log("event: ", event.currentTarget)
     setAnchorElAction(event.currentTarget);
   }
 

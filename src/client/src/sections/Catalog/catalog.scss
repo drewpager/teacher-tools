@@ -29,6 +29,32 @@
   }
 }
 
+.catalogHeader--container {
+  display: flex;
+  // justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0.5rem;
+  padding: 0.5rem;
+  border-bottom: 1px solid #e0e0e0;
+
+  @media screen and (max-width: 600px) {
+    display: contents;
+  }
+
+  .catalog--search {
+    margin-left: 1rem;
+    
+    @media screen and (max-width: 600px) {
+      margin-bottom: 1rem;
+      margin-left: 0;
+    }
+  }
+}
+
+.MuiInputAdornment-root {
+  cursor: pointer;
+}
+
 .keen--scroll-buttons {
   display: contents;
   justify-content: center;
@@ -75,6 +101,7 @@
 }
 
 .MuiBox-root {
+  max-width: 100%;
   &.card--grid {
     display: grid;
     grid-template-rows: 25% 50% 25%;

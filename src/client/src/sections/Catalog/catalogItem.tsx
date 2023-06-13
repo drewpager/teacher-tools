@@ -119,7 +119,6 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
         ml={2}
       >
         <div ref={sliderRef} className="keen-slider">
-          {console.log(instanceRef.current)}
           {category.map((l, index) => (
             <div className="keen-slider__slide">
               <Card className="keenSlider--item" key={index}>

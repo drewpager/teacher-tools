@@ -1,7 +1,8 @@
-import React from 'react';
-import { Box, CircularProgress, Grid, Typography, Chip, Switch } from '@mui/material'
+import React, { useState, useRef, useEffect, ChangeEvent } from 'react';
+import { Box, CircularProgress, Grid, Typography, Chip, Switch, TextField, InputAdornment } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { Close } from '@mui/icons-material';
 import AdjustIcon from '@mui/icons-material/Adjust';
 import TreeView from '@mui/lab/TreeView';
 import TreeItem from '@mui/lab/TreeItem';
@@ -16,10 +17,25 @@ type Props = {
   viewer: Viewer;
 }
 
+export const useSearchFocus = () => {
+  const ref = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    ref.current?.focus();
+  }, [])
+
+  return ref;
+}
+
+
 export const Catalog = ({ viewer }: Props) => {
-  const [expanded, setExpanded] = React.useState<string[]>([]);
-  const [selected, setSelected] = React.useState<string[]>(['ancient history']);
-  const [ascending, setAscending] = React.useState<boolean>(true);
+  const [expanded, setExpanded] = useState<string[]>([]);
+  const [selected, setSelected] = useState<string[]>(['ancient history']);
+  const [ascending, setAscending] = useState<boolean>(true);
+  const [searchInput, setSearchInput] = useState<string>("");
+  const [filteredLesson, setFilteredLesson] = useState<any>();
+  const [searchError, setSearchError] = useState<boolean>(false);
+  const inputRef = useSearchFocus();
 
   const handleToggle = (event: React.SyntheticEvent, nodeIds: string[]) => {
     setExpanded(nodeIds);
@@ -33,6 +49,34 @@ export const Catalog = ({ viewer }: Props) => {
     }
     window.scrollTo(0, 0)
   };
+
+  const inputHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    e.preventDefault();
+    // let enteredSearch = e.target.value;
+    if (searchInput.length > 0) {
+      setFilteredLesson(data?.allLessons.result.filter((lesson) => lesson?.title?.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1));
+      setSearchError(false);
+    }
+
+    if (searchInput.length > 0 && filteredLesson.length === 0) {
+      setSearchError(true);
+    }
+    // if (enteredSearch) {
+    //   setSearchInput(enteredSearch);
+    //   setFilteredLesson(data?.allLessons.result.filter((lesson) => lesson?.title?.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1));
+    // }
+
+    if (e.target.value === '') {
+      setFilteredLesson([]);
+      setSearchError(false);
+    }
+  }
+
+  const resetSearch = () => {
+    setSearchInput("");
+    setFilteredLesson([]);
+    setSearchError(false);
+  }
 
   const { data, loading, error } = useAllLessonsQuery({
     variables: {
@@ -131,10 +175,36 @@ export const Catalog = ({ viewer }: Props) => {
         </Grid>
         <Grid item sm={12} md={9} lg={9}>
           <Box className="catalogBackground" sx={{ marginBottom: "80px" }} id={`${selected[0]}`}>
-            <h1 className="catalogTitle">Catalog <Chip label={data?.allLessons.total} color="primary" size="medium" /></h1>
+            <Box className="catalogHeader--container">
+              <h1 className="catalogTitle">Catalog
+                {" "}<Chip label={data?.allLessons.total} color="primary" size="medium" />
+              </h1><TextField
+                variant='outlined'
+                // id="catalog-search"
+                label="Search Catalog"
+                value={searchInput}
+                onChange={(e) => { setSearchInput(e.target.value); inputHandler(e) }}
+                ref={inputRef}
+                className="catalog--search"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <Close onClick={resetSearch} />
+                    </InputAdornment>
+                  )
+                }}
+                helperText={searchError ? "No results found" : null}
+                error={searchError}
+              />
+            </Box>
             <Box sx={{ display: 'flex' }}>
               <Switch checked={ascending} onClick={() => setAscending(!ascending)} /><Typography variant='h3'>{ascending ? "Chronological" : "Reverse Chronological"}</Typography>
             </Box>
+            {filteredLesson && (
+              <div className="catalog--item">
+                <CatalogItem viewer={`${viewer.id}`} name="Search Results" category={filteredLesson} key={filteredLesson.length} />
+              </div>
+            )}
             {selected && data && (
               <div className="catalog--item">
                 <CatalogItem viewer={`${viewer.id}`} name={`${selected[0]}`} category={data.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0])).sort(ascending ? ascend : descend)} key={`${selected[0]}`} />

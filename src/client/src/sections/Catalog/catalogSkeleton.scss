@@ -67,6 +67,28 @@
 //   z-index: 1;
 // }
 
+.catalogSkeleton--header {
+  display: flex;
+  // justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0.5rem;
+  padding: 0.5rem;
+  border-bottom: 1px solid #e0e0e0;
+
+  @media screen and (max-width: 600px) {
+    display: contents;
+  }
+
+  .skeleton--search {
+    margin-left: 1rem;
+    
+    @media screen and (max-width: 600px) {
+      margin-bottom: 1rem;
+      margin-left: 0;
+    }
+  }
+}
+
 .MuiBox-root {
   &.card--grid {
     display: grid;
