@@ -6,7 +6,7 @@ body {
   font-family: "noto-serif", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #FAF9F6;
+  background-color: #FAF9F6 !important;
   overflow-x: hidden;
   max-width: 100vw;
 }
@@ -14,12 +14,13 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-  background-color: #FAF9F6;
+  /* background-color: #FAF9F6; */
 }
 
 html, 
 .mainPanel {
   background-color: #FAF9F6;
+  /* max-width: 100%; */
 }
 
 ::-webkit-scrollbar {

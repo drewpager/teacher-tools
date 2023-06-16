@@ -84,7 +84,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
           color="primary"
           aria-label="home"
           className="navbar--icon"
-          // sx={{ ml: 3 }}
+          sx={{ ml: 1 }}
           disableFocusRipple
           disableRipple
           href='/'
@@ -222,17 +222,17 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                 </MenuItem>
                 <Divider />
                 <MenuItem onClick={handleCloseActionMenu} className="dropdown--buttons">
-                  <Link to={`/lesson/create`} style={{ textDecoration: 'none' }}>
+                  <Link to={`/lesson/create`} style={{ textDecoration: 'none', color: "#000"  }}>
                     <Typography textAlign="center">Create Lesson</Typography>
                   </Link>
                 </MenuItem>
                 <MenuItem onClick={handleCloseActionMenu} className="dropdown--buttons">
-                  <Link to={`/quiz/create`} style={{ textDecoration: 'none' }}>
+                  <Link to={`/quiz/create`} style={{ textDecoration: 'none', color: "#000"  }}>
                     <Typography textAlign="center">Create Asessment</Typography>
                   </Link>
                 </MenuItem>
                 <MenuItem onClick={handleCloseActionMenu} className="dropdown--buttons">
-                  <Link to={`/playlist/create`} style={{ textDecoration: 'none' }}>
+                  <Link to={`/playlist/create`} style={{ textDecoration: 'none', color: "#000"  }}>
                     <Typography textAlign="center">Create Lesson Plan</Typography>
                   </Link>
                 </MenuItem>
@@ -254,7 +254,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                 <MenuIcon sx={{ color: `${theme.palette.info.dark}` }} />
               </IconButton>
               <Menu
-                sx={{ mt: '30px' }}
+                sx={{ mt: '45px' }}
                 id="mobile-menu-appbar"
                 anchorEl={anchorElUser}
                 anchorOrigin={{
@@ -262,25 +262,25 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                   horizontal: 'right'
                 }}
                 keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right'
-                }}
+                // transformOrigin={{
+                //   vertical: 'top',
+                //   horizontal: 1px
+                // }}
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
                 className="mobile--menu"
               >
-                <Link to={`/login`} style={{ textDecoration: 'none' }}>
+                <Link to={`/login`} style={{ textDecoration: 'none', color: "#000" }}>
                   <MenuItem onClick={handleCloseUserMenu} className="dropdown--buttons">
                     <Typography textAlign="center">Login</Typography>
                   </MenuItem>
                 </Link>
-                <Link to={`/catalog`} style={{ textDecoration: 'none' }}>
+                <Link to={`/catalog`} style={{ textDecoration: 'none', color: "#000" }}>
                   <MenuItem onClick={handleCloseUserMenu} className="dropdown--buttons">
                     <Typography textAlign="center">Catalog</Typography>
                   </MenuItem>
                 </Link>
-                <Link to={`/signup`} style={{ textDecoration: 'none' }}>
+                <Link to={`/signup`} style={{ textDecoration: 'none', color: "#000" }}>
                   <MenuItem onClick={handleCloseUserMenu} className="dropdown--buttons">
                     <Typography textAlign="center">Sign Up</Typography>
                   </MenuItem>

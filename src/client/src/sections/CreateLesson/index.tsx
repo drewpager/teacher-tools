@@ -336,7 +336,7 @@ export const CreateLesson = ({ viewer }: Props) => {
                     variant="outlined"
                     label="Title"
                     helperText={errors.title ? `${errors.title}` : "Add a Lesson Title (Max Character Count of 160)"}
-                    sx={{ width: "45%" }}
+                    sx={{ width: "75%" }}
                     value={values.title}
                     name="title"
                     onChange={handleChange}
@@ -350,7 +350,7 @@ export const CreateLesson = ({ viewer }: Props) => {
                     variant='outlined'
                     helperText={errors.video ? `${errors.video}` : "Upload a Video or Lecture"}
                     className='file--upload'
-                    sx={{ width: "45%", marginTop: 1 }}
+                    sx={{ width: "75%", marginTop: 1 }}
                     name="video"
                     onChange={async (e: ChangeEvent<HTMLInputElement>) => { setFieldValue("video", await handleVideoUpload(e.target.files)) }}
                     InputProps={{
@@ -373,7 +373,7 @@ export const CreateLesson = ({ viewer }: Props) => {
                     id="image"
                     variant='outlined'
                     helperText="Image"
-                    sx={{ width: "45%", marginTop: 1 }}
+                    sx={{ width: "75%", marginTop: 1 }}
                     name="image"
                     onChange={async (e: ChangeEvent<HTMLInputElement>) => { setFieldValue("image", await handleImageUpload(e.target.files)) }}
                     InputProps={{
@@ -396,7 +396,7 @@ export const CreateLesson = ({ viewer }: Props) => {
                     label="Description"
                     multiline rows={3}
                     helperText="Min Character Count of 160"
-                    sx={{ width: "45%", marginTop: 1 }}
+                    sx={{ width: "75%", marginTop: 1 }}
                     value={values.meta}
                     name="meta"
                     onChange={handleChange}
@@ -433,7 +433,7 @@ export const CreateLesson = ({ viewer }: Props) => {
                     name="startDate"
                     label="Start Date or Year"
                     helperText={errors.startDate ? `${errors.startDate}` : "Add a time period start date as YYYY-MM-DD or -33,000 for 33,000 BCE"}
-                    sx={{ width: "45%", marginTop: 1 }}
+                    sx={{ width: "75%", marginTop: 1 }}
                     value={values.startDate}
                     onChange={handleChange}
                     error={touched.startDate && errors.startDate ? true : false}
@@ -444,7 +444,7 @@ export const CreateLesson = ({ viewer }: Props) => {
                     name="endDate"
                     label="End Date or Year"
                     helperText="YYYY-MM-DD, 1052 or Present"
-                    sx={{ width: "45%", marginTop: 1 }}
+                    sx={{ width: "75%", marginTop: 1 }}
                     value={values.endDate}
                     onChange={handleChange}
                     required

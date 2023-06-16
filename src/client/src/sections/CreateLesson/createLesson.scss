@@ -2,11 +2,15 @@
 
 .MuiBox-root {
   &.createLesson--page {
-    max-width: 100%;
+    width: 100vw;
     margin: 5rem 2rem;
     display: grid;
-    // grid-template-columns: repeat(6, 4fr);
-    grid-template-columns: repeat(auto-fit, minmax(800px, 1fr));
+    grid-template-columns: 100%;
+    // grid-template-columns: repeat(auto-fit, minmax(fit-content, 1fr));
+
+    @media (max-width: 768px) {
+      margin: 5rem 1rem;
+    }
   }
   &.createLesson--form {
     grid-column: 1 / -1
@@ -23,22 +27,10 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  // margin: 0.4em 0;
-  // align-items: center;
-  width: 50%;
-  // display: grid;
-  // grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  // grid-template-rows: min-content;
-  // cursor: pointer;
-  // font-size: large;
-  // -webkit-user-select: none;
-  // -moz-user-select: none;
-  // -ms-user-select: none;
-  // user-select: none;
+  width: 70%;
+
 
   .field--checkboxes-label {
-    // display: block;
-    // margin: 1rem 0;
     display: flex;
     align-items: center;
     margin: 5px 0;

@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect, ChangeEvent } from 'react';
-import { Box, CircularProgress, Grid, Typography, Chip, Switch, TextField, InputAdornment } from '@mui/material'
+import { Box, CircularProgress, Grid, Typography, Chip, Switch, TextField, InputAdornment, Icon } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Close } from '@mui/icons-material';
 import AdjustIcon from '@mui/icons-material/Adjust';
+import Pipe from '../../lib/assets/pipe.svg';
 import TreeView from '@mui/lab/TreeView';
 import TreeItem from '@mui/lab/TreeItem';
 import { useAllLessonsQuery, Viewer } from '../../graphql/generated';
@@ -138,14 +139,14 @@ export const Catalog = ({ viewer }: Props) => {
   // return <CatalogSkeleton />
   return (
     <Box>
-      <Grid container maxWidth={"100%"} overflow={"hidden"}>
+      <Grid container maxWidth="100%" overflow="hidden">
         <Grid item sm={12} md={3} lg={3}>
           <Box className="catalogGrid--categories">
             <TreeView
               aria-label="controlled"
               defaultCollapseIcon={<ExpandMoreIcon />}
               defaultExpandIcon={<ChevronRightIcon />}
-              defaultEndIcon={<AdjustIcon />}
+              defaultEndIcon={<Icon sx={{ color: "black" }}><img alt="catalog pipe" src={Pipe} /></Icon>}
               expanded={expanded}
               selected={selected}
               onNodeToggle={handleToggle}
@@ -217,8 +218,8 @@ export const Catalog = ({ viewer }: Props) => {
             ))}
           </Box >
         </Grid>
-      </Grid>
       <Footer viewer={viewer} />
-    </Box>
+      </Grid>
+    </Box> 
   )
 }

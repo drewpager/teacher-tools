@@ -3,11 +3,12 @@
 .MuiPaper-root {
   &.NavBar-container {
     background-color: #fff; 
-    overflow: hidden; 
+    overflow: hidden;
     border-bottom: 1px solid #182742;
     display: flex;
     box-shadow: none;
-    max-width: 100%;
+    max-width: 100vw;
+    left: 0;
   }
 }
 
@@ -148,7 +149,7 @@
     color: library.$darkGreen;
     font-size: 2rem;
     cursor: pointer;
-    justify-content: flex-end;
+    justify-self: flex-end;
   }
 
   .navbar--icon {
@@ -193,7 +194,7 @@
   .header--menu {
     display: none;
   }
-
+  
   .mobile--menu {
     display: flex;
   }
