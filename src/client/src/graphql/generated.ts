@@ -174,6 +174,12 @@ export type Scalars = {
   _FieldSet: any;
 };
 
+export type AddPaymentInput = {
+  paymentId?: InputMaybe<Scalars['String']>;
+  user?: InputMaybe<UserInput>;
+  viewer?: InputMaybe<Scalars['String']>;
+};
+
 export enum AnswerFormat {
   Multiplechoice = 'MULTIPLECHOICE',
   Truefalse = 'TRUEFALSE'
@@ -269,7 +275,7 @@ export type LogInInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  addPayment?: Maybe<Viewer>;
+  addPayment: Viewer;
   bookmarkLesson?: Maybe<Scalars['Boolean']>;
   connectStripe: Viewer;
   createLesson: Lesson;
@@ -286,9 +292,7 @@ export type Mutation = {
 
 
 export type MutationAddPaymentArgs = {
-  paymentId?: InputMaybe<Scalars['String']>;
-  user?: InputMaybe<UserInput>;
-  viewer?: InputMaybe<Scalars['String']>;
+  input?: InputMaybe<AddPaymentInput>;
 };
 
 

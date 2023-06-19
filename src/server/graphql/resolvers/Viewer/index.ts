@@ -56,6 +56,9 @@ const logInViaGoogle = async (
   const userEmail =
     userEmailList && userEmailList[0].value ? userEmailList[0].value : null;
 
+  const existingUser = await db.users.findOne({ _id: userId?.toString() });
+  const userPaymentId = existingUser ? `${existingUser.paymentId}` : null;
+
   if (!userName || !userId || !userAvatar || !userEmail) {
     throw new Error("Google Log In Error!");
   }
@@ -68,7 +71,7 @@ const logInViaGoogle = async (
         name: userName,
         avatar: userAvatar,
         contact: userEmail,
-        paymentId: "undefined",
+        paymentId: userPaymentId,
         watched: [],
         playlists: [],
       },
@@ -183,7 +186,7 @@ export const viewerResolvers = {
       viewer: Viewer,
       { id }: PaymentArgs,
       { db }: { db: Database }
-    ): Promise<boolean> => {
+    ): Promise<Viewer | string> => {
       const user = await db.users.findOne({ _id: `${viewer._id}` });
       const customer = await stripe.customers.search({
         query: `email:\'${user?.contact}\'`,
@@ -195,14 +198,16 @@ export const viewerResolvers = {
             { _id: `${viewer._id}` },
             { $set: { paymentId: `${customer.data[0].id}` } }
           );
-          return customerPay.value ? true : false;
+          viewer.paymentId = customer.data[0].id;
+          return customerPay.value ? `${viewer.paymentId}` : "undefined";
         }
 
         const userPay = await db.users.findOneAndUpdate(
           { _id: `${viewer._id}` },
           { $set: { paymentId: `${id}` } }
         );
-        return userPay.value ? true : false;
+        viewer.paymentId = id;
+        return userPay.value ? `${id}` : "undefined";
       } catch (err) {
         throw new Error(`Error adding payment in Mutation: ${err}`);
       }
@@ -229,7 +234,7 @@ export const viewerResolvers = {
 
         const updateRes = await db.users.findOneAndUpdate(
           { _id: viewer._id },
-          { $set: { paymentId: `${viewer.paymentId}` } }
+          { $set: { paymentId: `${wallet}` } }
         );
 
         if (!updateRes) {
@@ -242,7 +247,7 @@ export const viewerResolvers = {
           _id: viewer?._id,
           token: viewer?.token,
           avatar: viewer?.avatar,
-          paymentId: viewer?.paymentId,
+          paymentId: wallet,
           didRequest: true,
         };
       } catch (e) {
@@ -263,7 +268,7 @@ export const viewerResolvers = {
 
         const updateRes = await db.users.findOneAndUpdate(
           { _id: viewer._id },
-          { $set: { paymentId: null } }
+          { $set: { paymentId: "undefined" } }
         );
 
         if (!updateRes.value) {

@@ -12,7 +12,7 @@ import {
   UserPaymentArgs,
 } from "./types";
 import { authorize } from "../../../lib/utils";
-import { User, Database, Lesson } from "../../../lib/types";
+import { User, Database, Lesson, Viewer } from "../../../lib/types";
 import { ObjectId } from "mongodb";
 const stripe = require("stripe")(`${process.env.S_SECRET_KEY}`);
 
@@ -169,7 +169,7 @@ export const userResolvers = {
       _root: undefined,
       { paymentId, viewer, user }: UserPaymentArgs,
       { db }: { db: Database }
-    ): Promise<boolean> => {
+    ): Promise<Viewer | string> => {
       const customer = await stripe.customers.search({
         query: `email:\'${user.contact}\'`,
       });
@@ -183,7 +183,7 @@ export const userResolvers = {
           { _id: `${viewer}` },
           { $set: { paymentId: `${customer.data[0].id}` } }
         );
-        return customerPay.value ? true : false;
+        return customerPay.value ? `${customer.data[0].id}` : "undefined";
 
         // const userPay = await db.users.findOneAndUpdate(
         //   { _id: `${viewer}` },

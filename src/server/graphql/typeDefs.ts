@@ -112,7 +112,7 @@ export const typeDefs = gql`
     deletePlaylist(id: ID): Boolean!
     deleteQuiz(id: ID): Boolean!
     bookmarkLesson(id: ID!, viewer: String!): Boolean
-    addPayment(paymentId: String, viewer: String, user: UserInput): Viewer
+    addPayment(input: AddPaymentInput): Viewer!
   }
 
   input LogInInput {
@@ -121,6 +121,12 @@ export const typeDefs = gql`
 
   input ConnectStripeInput {
     code: String!
+  }
+
+  input AddPaymentInput {
+    paymentId: String
+    viewer: String
+    user: UserInput
   }
 
   input CreateLessonInput {

@@ -36,7 +36,7 @@ import {
   Quiz,
   TestElement,
   Billing,
-  Stripe,
+  // Stripe,
   SignUp
 } from './sections';
 import { DisplayError } from './lib/utils';
@@ -113,7 +113,7 @@ const App = () => {
           <Route path="/" element={<Home viewer={viewer} />} />
           <Route path="/teach" element={<Teach />} />
           <Route path="/test" element={<TestElement />} />
-          <Route path="/stripe" children={(props: any) => (<Stripe {...props} setViewer={setViewer} />)} element={<Stripe viewer={viewer} setViewer={setViewer} />} />
+          {/* <Route path="/stripe" children={(props: any) => (<Stripe {...props} setViewer={setViewer} />)} element={<Stripe viewer={viewer} setViewer={setViewer} />} /> */}
           <Route path="/catalog" element={<Catalog viewer={viewer} />} />
           <Route path="/lesson/:id" element={<Lesson />} />
           <Route path="/lessons/:filter?" element={<Lessons title="Plato's Peach" />} />

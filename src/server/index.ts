@@ -62,7 +62,7 @@ const mount = async (app: Application) => {
   // }
 
   const customer = await stripe.customers.search({
-    query: "email:'drew@greadings.com'",
+    query: "email:'drewpagerrr@gmail.com'",
   });
 
   console.log(customer.data[0].id);

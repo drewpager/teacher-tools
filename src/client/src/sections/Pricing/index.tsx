@@ -129,7 +129,9 @@ export const Pricing = () => {
           <Button
             variant='contained'
             target="_blank"
-            href={monthlyCadence ? "https://buy.stripe.com/3cs29bcVng449by8wA" : "https://buy.stripe.com/fZe157dZr2deevS6ot"}
+            // Test + Production Stripe Links
+            href={monthlyCadence ? "https://buy.stripe.com/test_bIYaGpghueZDaDSbIN" : "https://buy.stripe.com/test_4gw4i1d5i04JeU814a"}
+            // href={monthlyCadence ? "https://buy.stripe.com/3cs29bcVng449by8wA" : "https://buy.stripe.com/fZe157dZr2deevS6ot"}
             className='pricing--button'
           >Choose Plan</Button>
         </Box>
