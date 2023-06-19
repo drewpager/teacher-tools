@@ -11,6 +11,7 @@ import {
 import crypto from "crypto";
 import { Response, Request } from "express";
 import { authorize } from "../../../lib/utils";
+const stripe = require("stripe")(`${process.env.S_SECRET_KEY}`);
 
 // DEPLOY TODO: When in production w/ HTTPS, add secure setting
 const cookieOptions = {
@@ -182,17 +183,28 @@ export const viewerResolvers = {
       viewer: Viewer,
       { id }: PaymentArgs,
       { db }: { db: Database }
-    ): Promise<number> => {
+    ): Promise<boolean> => {
+      const user = await db.users.findOne({ _id: `${viewer._id}` });
+      const customer = await stripe.customers.search({
+        query: `email:\'${user?.contact}\'`,
+      });
+
       try {
-        const user = await db.users.findOneAndUpdate(
-          { _id: viewer._id },
-          { paymentId: id }
+        if (!!customer) {
+          const customerPay = await db.users.findOneAndUpdate(
+            { _id: `${viewer._id}` },
+            { $set: { paymentId: `${customer.data[0].id}` } }
+          );
+          return customerPay.value ? true : false;
+        }
+
+        const userPay = await db.users.findOneAndUpdate(
+          { _id: `${viewer._id}` },
+          { $set: { paymentId: `${id}` } }
         );
-        viewer.paymentId = id;
-        console.log(viewer);
-        return user.ok;
-      } catch (e) {
-        throw new Error(`Failed to save paymentID: ${e}`);
+        return userPay.value ? true : false;
+      } catch (err) {
+        throw new Error(`Error adding payment in Mutation: ${err}`);
       }
     },
     connectStripe: async (
@@ -217,7 +229,7 @@ export const viewerResolvers = {
 
         const updateRes = await db.users.findOneAndUpdate(
           { _id: viewer._id },
-          { $set: { paymentId: wallet } }
+          { $set: { paymentId: `${viewer.paymentId}` } }
         );
 
         if (!updateRes) {

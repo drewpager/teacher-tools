@@ -1,4 +1,4 @@
-import { Request } from "express";
+import e, { Request } from "express";
 import {
   UserArgs,
   UserPlaylistArgs,
@@ -14,6 +14,7 @@ import {
 import { authorize } from "../../../lib/utils";
 import { User, Database, Lesson } from "../../../lib/types";
 import { ObjectId } from "mongodb";
+const stripe = require("stripe")(`${process.env.S_SECRET_KEY}`);
 
 export const userResolvers = {
   Query: {
@@ -166,15 +167,29 @@ export const userResolvers = {
   Mutation: {
     addPayment: async (
       _root: undefined,
-      { paymentId, viewer }: UserPaymentArgs,
+      { paymentId, viewer, user }: UserPaymentArgs,
       { db }: { db: Database }
     ): Promise<boolean> => {
+      const customer = await stripe.customers.search({
+        query: `email:\'${user.contact}\'`,
+      });
+
       try {
-        const userPay = await db.users.findOneAndUpdate(
+        if (!customer) {
+          throw new Error("Customer not found");
+        }
+
+        const customerPay = await db.users.findOneAndUpdate(
           { _id: `${viewer}` },
-          { $set: { paymentId: `${paymentId}` } }
+          { $set: { paymentId: `${customer.data[0].id}` } }
         );
-        return userPay.value ? true : false;
+        return customerPay.value ? true : false;
+
+        // const userPay = await db.users.findOneAndUpdate(
+        //   { _id: `${viewer}` },
+        //   { $set: { paymentId: `${paymentId}` } }
+        // );
+        // return userPay.value ? true : false;
       } catch (err) {
         throw new Error(`Error adding payment in Mutation: ${err}`);
       }

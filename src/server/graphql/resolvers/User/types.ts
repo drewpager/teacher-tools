@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb";
-import { Playlist, Lesson, Quiz } from "../../../lib/types";
+import { Playlist, Lesson, Quiz, User } from "../../../lib/types";
 
 export interface UserArgs {
   id: string;
@@ -51,4 +51,5 @@ export interface BookmarkLessonData {
 export interface UserPaymentArgs {
   paymentId: string;
   viewer: string;
+  user: User;
 }

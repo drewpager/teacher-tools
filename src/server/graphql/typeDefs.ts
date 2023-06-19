@@ -112,7 +112,7 @@ export const typeDefs = gql`
     deletePlaylist(id: ID): Boolean!
     deleteQuiz(id: ID): Boolean!
     bookmarkLesson(id: ID!, viewer: String!): Boolean
-    addPayment(paymentId: String, viewer: String): Boolean
+    addPayment(paymentId: String, viewer: String, user: UserInput): Viewer
   }
 
   input LogInInput {
@@ -198,6 +198,10 @@ export const typeDefs = gql`
     name: String!
     creator: String!
     plan: [Plan]!
+  }
+
+  input UserInput {
+    contact: String
   }
 
   union LessonPlanUnion = Quiz | Lesson

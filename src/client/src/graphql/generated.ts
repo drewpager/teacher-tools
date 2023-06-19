@@ -269,7 +269,7 @@ export type LogInInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  addPayment?: Maybe<Scalars['Boolean']>;
+  addPayment?: Maybe<Viewer>;
   bookmarkLesson?: Maybe<Scalars['Boolean']>;
   connectStripe: Viewer;
   createLesson: Lesson;
@@ -287,6 +287,7 @@ export type Mutation = {
 
 export type MutationAddPaymentArgs = {
   paymentId?: InputMaybe<Scalars['String']>;
+  user?: InputMaybe<UserInput>;
   viewer?: InputMaybe<Scalars['String']>;
 };
 
@@ -487,6 +488,10 @@ export type UserQuizzesArgs = {
   page: Scalars['Int'];
 };
 
+export type UserInput = {
+  contact?: InputMaybe<Scalars['String']>;
+};
+
 export type Viewer = {
   __typename?: 'Viewer';
   avatar?: Maybe<Scalars['String']>;
@@ -539,7 +544,7 @@ export type LogInMutation = { __typename?: 'Mutation', logIn: { __typename?: 'Vi
 export type LogOutMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type LogOutMutation = { __typename?: 'Mutation', logOut: { __typename?: 'Viewer', id?: string | null, token?: string | null, avatar?: string | null, paymentId?: string | null, didRequest: boolean } };
+export type LogOutMutation = { __typename?: 'Mutation', logOut: { __typename?: 'Viewer', id?: string | null, token?: string | null, avatar?: string | null, didRequest: boolean } };
 
 export type UpdatePlanMutationVariables = Exact<{
   input: LessonPlanInput;
@@ -787,7 +792,6 @@ export const LogOutDocument = gql`
     id
     token
     avatar
-    paymentId
     didRequest
   }
 }
