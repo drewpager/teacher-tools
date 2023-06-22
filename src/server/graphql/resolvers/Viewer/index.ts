@@ -182,78 +182,78 @@ export const viewerResolvers = {
         throw new Error(`Failed to log out user: ${err}`);
       }
     },
-    addPayment: async (
-      viewer: Viewer,
-      { id }: PaymentArgs,
-      { db }: { db: Database }
-    ): Promise<Viewer | string> => {
-      const user = await db.users.findOne({ _id: `${viewer._id}` });
-      const customer = await stripe.customers.search({
-        query: `email:\'${user?.contact}\'`,
-      });
+    // addPayment: async (
+    //   viewer: Viewer,
+    //   { id }: PaymentArgs,
+    //   { db }: { db: Database }
+    // ): Promise<Viewer | string> => {
+    //   const user = await db.users.findOne({ _id: `${viewer._id}` });
+    //   const customer = await stripe.customers.search({
+    //     query: `email:\'${user?.contact}\'`,
+    //   });
 
-      try {
-        if (!!customer) {
-          const customerPay = await db.users.findOneAndUpdate(
-            { _id: `${viewer._id}` },
-            { $set: { paymentId: `${customer.data[0].id}` } }
-          );
-          viewer.paymentId = customer.data[0].id;
-          return customerPay.value ? `${viewer.paymentId}` : "undefined";
-        }
+    //   try {
+    //     if (!!customer) {
+    //       const customerPay = await db.users.findOneAndUpdate(
+    //         { _id: `${viewer._id}` },
+    //         { $set: { paymentId: `${customer.data[0].id}` } }
+    //       );
+    //       viewer.paymentId = customer.data[0].id;
+    //       return customerPay.value ? `${viewer.paymentId}` : "undefined";
+    //     }
 
-        const userPay = await db.users.findOneAndUpdate(
-          { _id: `${viewer._id}` },
-          { $set: { paymentId: `${id}` } }
-        );
-        viewer.paymentId = id;
-        return userPay.value ? `${id}` : "undefined";
-      } catch (err) {
-        throw new Error(`Error adding payment in Mutation: ${err}`);
-      }
-    },
-    connectStripe: async (
-      _root: undefined,
-      { input }: ConnectStripeArgs,
-      { db, req }: { db: Database; req: Request }
-    ): Promise<Viewer> => {
-      try {
-        const { code } = input;
+    //     const userPay = await db.users.findOneAndUpdate(
+    //       { _id: `${viewer._id}` },
+    //       { $set: { paymentId: `${id}` } }
+    //     );
+    //     viewer.paymentId = id;
+    //     return userPay.value ? `${id}` : "undefined";
+    //   } catch (err) {
+    //     throw new Error(`Error adding payment in Mutation: ${err}`);
+    //   }
+    // },
+    // connectStripe: async (
+    //   _root: undefined,
+    //   { input }: ConnectStripeArgs,
+    //   { db, req }: { db: Database; req: Request }
+    // ): Promise<Viewer> => {
+    //   try {
+    //     const { code } = input;
 
-        let viewer = await authorize(db, req);
+    //     let viewer = await authorize(db, req);
 
-        if (!viewer) {
-          throw new Error(`Viewer cannot be found!`);
-        }
+    //     if (!viewer) {
+    //       throw new Error(`Viewer cannot be found!`);
+    //     }
 
-        const wallet = await Stripe.connect(code);
+    //     const wallet = await Stripe.connect(code);
 
-        if (!wallet) {
-          throw new Error("Stripe grant error");
-        }
+    //     if (!wallet) {
+    //       throw new Error("Stripe grant error");
+    //     }
 
-        const updateRes = await db.users.findOneAndUpdate(
-          { _id: viewer._id },
-          { $set: { paymentId: `${wallet}` } }
-        );
+    //     const updateRes = await db.users.findOneAndUpdate(
+    //       { _id: viewer._id },
+    //       { $set: { paymentId: `${wallet}` } }
+    //     );
 
-        if (!updateRes) {
-          throw new Error(`Failed to update user with payment information`);
-        }
+    //     if (!updateRes) {
+    //       throw new Error(`Failed to update user with payment information`);
+    //     }
 
-        viewer = updateRes.value;
+    //     viewer = updateRes.value;
 
-        return {
-          _id: viewer?._id,
-          token: viewer?.token,
-          avatar: viewer?.avatar,
-          paymentId: wallet,
-          didRequest: true,
-        };
-      } catch (e) {
-        throw new Error(`Failed to connect with stripe: ${e}`);
-      }
-    },
+    //     return {
+    //       _id: viewer?._id,
+    //       token: viewer?.token,
+    //       avatar: viewer?.avatar,
+    //       paymentId: wallet,
+    //       didRequest: true,
+    //     };
+    //   } catch (e) {
+    //     throw new Error(`Failed to connect with stripe: ${e}`);
+    //   }
+    // },
     disconnectStripe: async (
       _root: undefined,
       _args: Record<string, unknown>,

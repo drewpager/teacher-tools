@@ -1,9 +1,7 @@
 import { useEffect } from 'react';
 import { Card, Typography, Avatar, Box, Button, Divider } from '@mui/material';
 // import { User as UserData } from '../../../../lib/graphql/queries/User/__generated__/User'
-import { User, MutationAddPaymentArgs } from '../../../../graphql/generated';
-import { ADD_PAYMENT } from '../../../../lib/graphql/mutations/AddPayment/index';
-import { useMutation } from '@apollo/client';
+import { User, useAddPaymentMutation } from '../../../../graphql/generated';
 import './userProfile.scss';
 import { DisplayError } from '../../../../lib/utils';
 // require("dotenv").config();
@@ -15,19 +13,33 @@ interface Props {
 // const stripeAuthUrl = `https://connect.stripe.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_S_CLIENT_ID}&scope=read_write`
 
 export const UserProfile = ({ user, viewerIsUser }: Props) => {
-  // useMutation(ADD_PAYMENT, {
-  //   variables: {
-  //     input: {
-  //       paymentId: `${user.paymentId}`,
-  //       viewer: `${user.id}`,
-  //       user: {
-  //         contact: `${user.contact}`,
-  //       }
-  //     }
-  //   }
-  // })
 
-  console.log(user.paymentId);
+  const [addPayment, { data, loading, error }] = useAddPaymentMutation({
+    variables: {
+      id: user.id,
+    }
+  });
+
+  useEffect(() => {
+    addPayment({
+      variables: {
+        id: `${user.id}`,
+      }
+    });
+  }, [user.id, addPayment]);
+
+  if (data) {
+    console.log(user.paymentId);
+  }
+
+  if (loading) {
+    console.log("loading");
+  }
+
+  if (error) {
+    console.log("Error: ", error);
+  }
+
   // const redirectToStripe = () => {
   //   window.location.href = stripeAuthUrl;
   // }

@@ -1,10 +1,10 @@
 import React, { useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useUserQuery, Viewer } from '../../graphql/generated';
-import { UserProfile, UserLessons, UserPlaylists, UserQuizzes, UserBookmarks } from './components/';
+import { UserProfile, UserLessons, UserPlaylists, UserQuizzes, UserBookmarks } from './components';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
-import { PageSkeleton } from '../../lib/components/';
-import { Footer } from '../../lib/components/';
+import { PageSkeleton } from '../../lib/components';
+import { Footer } from '../../lib/components';
 
 interface Props {
   viewer: Viewer

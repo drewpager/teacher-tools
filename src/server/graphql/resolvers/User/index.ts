@@ -1,4 +1,4 @@
-import e, { Request } from "express";
+import { Request } from "express";
 import {
   UserArgs,
   UserPlaylistArgs,
@@ -167,29 +167,43 @@ export const userResolvers = {
   Mutation: {
     addPayment: async (
       _root: undefined,
-      { paymentId, viewer, user }: UserPaymentArgs,
+      { id }: UserPaymentArgs,
       { db }: { db: Database }
     ): Promise<Viewer | string> => {
-      const customer = await stripe.customers.search({
-        query: `email:\'${user.contact}\'`,
-      });
+      // const viewerId = "118302753872778003967";
+      const viewerId = id;
 
       try {
-        if (!customer) {
-          throw new Error("Customer not found");
+        const userObj = await db.users.findOne({
+          _id: viewerId,
+        });
+
+        if (!userObj) {
+          throw new Error("User can't be found");
         }
 
-        const customerPay = await db.users.findOneAndUpdate(
-          { _id: `${viewer}` },
-          { $set: { paymentId: `${customer.data[0].id}` } }
-        );
-        return customerPay.value ? `${customer.data[0].id}` : "undefined";
+        const contactEmail = userObj.contact;
 
-        // const userPay = await db.users.findOneAndUpdate(
-        //   { _id: `${viewer}` },
-        //   { $set: { paymentId: `${paymentId}` } }
-        // );
-        // return userPay.value ? true : false;
+        const customer = await stripe.customers.search({
+          query: `email:\'${contactEmail}\'`,
+        });
+
+        if (!customer) {
+          throw new Error("Customer can't be found");
+        }
+
+        const customerId = customer && customer.data[0].id;
+
+        const customerPay = await db.users.findOneAndUpdate(
+          { _id: `${viewerId}` },
+          {
+            $set: {
+              paymentId: customerId,
+            },
+          }
+        );
+
+        return customerPay.value ? customerId : "undefined";
       } catch (err) {
         throw new Error(`Error adding payment in Mutation: ${err}`);
       }

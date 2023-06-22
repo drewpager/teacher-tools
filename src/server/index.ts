@@ -61,11 +61,17 @@ const mount = async (app: Application) => {
   //   console.log(values.subscriptions.data[0].plan.amount);
   // }
 
+  const contact = "drewpagerrr@gmail.com";
+
   const customer = await stripe.customers.search({
-    query: "email:'drewpagerrr@gmail.com'",
+    query: `email:\'${contact}\'`,
   });
 
-  console.log(customer.data[0].id);
+  // const subs = await stripe.customers.retrieve(customer.data[0].id, {
+  //   expand: ["customer", "invoice.subscription"],
+  // });
+
+  // console.log(subs);
 
   // app.get("/config", (req, res) => {
   //   res.send({

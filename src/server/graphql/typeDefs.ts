@@ -102,7 +102,6 @@ export const typeDefs = gql`
   type Mutation {
     logIn(input: LogInInput): Viewer!
     logOut: Viewer!
-    connectStripe(input: ConnectStripeInput!): Viewer!
     disconnectStripe: Viewer!
     createLesson(input: CreateLessonInput): Lesson!
     createQuiz(input: CreateQuizInput): Quiz!
@@ -112,21 +111,11 @@ export const typeDefs = gql`
     deletePlaylist(id: ID): Boolean!
     deleteQuiz(id: ID): Boolean!
     bookmarkLesson(id: ID!, viewer: String!): Boolean
-    addPayment(input: AddPaymentInput): Viewer!
+    addPayment(id: ID!): Viewer
   }
 
   input LogInInput {
     code: String!
-  }
-
-  input ConnectStripeInput {
-    code: String!
-  }
-
-  input AddPaymentInput {
-    paymentId: String
-    viewer: String
-    user: UserInput
   }
 
   input CreateLessonInput {
@@ -204,10 +193,6 @@ export const typeDefs = gql`
     name: String!
     creator: String!
     plan: [Plan]!
-  }
-
-  input UserInput {
-    contact: String
   }
 
   union LessonPlanUnion = Quiz | Lesson

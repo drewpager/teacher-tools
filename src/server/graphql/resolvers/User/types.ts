@@ -49,7 +49,5 @@ export interface BookmarkLessonData {
   totalCount: number;
 }
 export interface UserPaymentArgs {
-  paymentId: string;
-  viewer: string;
-  user: User;
+  id: string;
 }
