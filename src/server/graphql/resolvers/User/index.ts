@@ -12,7 +12,7 @@ import {
   UserPaymentArgs,
 } from "./types";
 import { authorize } from "../../../lib/utils";
-import { User, Database, Lesson, Viewer } from "../../../lib/types";
+import { User, Database, Lesson, Viewer, Package } from "../../../lib/types";
 import { ObjectId } from "mongodb";
 const stripe = require("stripe")(`${process.env.S_SECRET_KEY}`);
 
@@ -163,6 +163,9 @@ export const userResolvers = {
         throw new Error(`Failed to bookmark anything ${e}`);
       }
     },
+    package: (user: User) => {
+      return user.package;
+    },
   },
   Mutation: {
     addPayment: async (
@@ -192,6 +195,19 @@ export const userResolvers = {
           throw new Error("Customer can't be found");
         }
 
+        const subscriptions = await stripe.customers.retrieve(
+          `${customer.data[0].id}`,
+          {
+            expand: ["subscriptions"],
+          }
+        );
+
+        const amount = subscriptions.subscriptions.data[0].plan.amount;
+        const cadence = subscriptions.subscriptions.data[0].plan.interval;
+        const status = subscriptions.subscriptions.data[0].status;
+        const since = subscriptions.subscriptions.data[0].created;
+        const trial_end = subscriptions.subscriptions.data[0].trial_end;
+
         const customerId = customer && customer.data[0].id;
 
         const customerPay = await db.users.findOneAndUpdate(
@@ -199,6 +215,13 @@ export const userResolvers = {
           {
             $set: {
               paymentId: customerId,
+              package: {
+                amount: amount,
+                cadence: cadence,
+                status: status,
+                since: since,
+                trialEnd: trial_end,
+              },
             },
           }
         );

@@ -26,10 +26,19 @@ export const typeDefs = gql`
     avatar: String!
     contact: String!
     paymentId: String
+    package: Package
     playlists(limit: Int!, page: Int!): Playlists
     lessons(limit: Int!, page: Int!): Lessons
     quizzes(limit: Int!, page: Int!): Quizzes
     bookmarks: [Lesson]
+  }
+
+  type Package {
+    amount: Int
+    cadence: String
+    status: String
+    since: Int
+    trialEnd: Int
   }
 
   type Lesson {

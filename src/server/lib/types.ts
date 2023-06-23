@@ -53,6 +53,14 @@ export interface Playlist {
   authorized?: boolean; // https://www.newline.co/courses/tinyhouse-react-masterclass-part-2/building-the-listing-resolvers
 }
 
+export interface Package {
+  amount: number;
+  cadence: string;
+  status: string;
+  since: number;
+  trialEnd: number;
+}
+
 export interface User {
   _id: string;
   token: string;
@@ -66,6 +74,7 @@ export interface User {
   quizzes?: Quiz[];
   authorized?: boolean;
   bookmarks?: any[];
+  package?: Package;
 }
 
 export interface Database {

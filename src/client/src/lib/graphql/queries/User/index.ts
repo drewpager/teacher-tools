@@ -14,6 +14,13 @@ export const USER = gql`
       avatar
       contact
       paymentId
+      package {
+        amount
+        cadence
+        status
+        since
+        trialEnd
+      }
       bookmarks {
         id
         category
