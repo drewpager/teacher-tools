@@ -10,6 +10,20 @@ interface Props {
   viewerIsUser: boolean;
 }
 
+const formatStripeAmount = (amount: number | undefined | null) => {
+  if (amount !== undefined && !!amount) {
+    return `$${(amount / 100).toFixed(2)}`;
+  }
+  return "$0.00";
+}
+
+const formatStripeDate = (date: number | undefined | null) => {
+  if (date !== undefined && !!date) {
+    return new Date(date * 1000).toLocaleDateString();
+  }
+  return "N/A";
+}
+
 // const stripeAuthUrl = `https://connect.stripe.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_S_CLIENT_ID}&scope=read_write`
 
 export const UserProfile = ({ user, viewerIsUser }: Props) => {
@@ -60,8 +74,18 @@ export const UserProfile = ({ user, viewerIsUser }: Props) => {
     <>
       <Divider sx={{ margin: 1 }} />
       <Typography variant="h5" className="user--text-details">Subscription Details</Typography>
-      <Typography variant='body1' className="user--text-details">Thank you for subscribing!</Typography>
-      <Typography variant='body1' className="user--text-details">Payment ID: {user.paymentId}</Typography>
+      <Typography variant='body1' className="user--text-details">{formatStripeAmount(user.package?.amount)} per {user.package?.cadence}</Typography>
+      {(user?.package?.status === "trialing") ? (
+        <>
+          <Typography variant='body1' className="user--text-details">Status: {user.package?.status}</Typography>
+          <Typography variant='body1' className="user--text-details">Trial Ends: {formatStripeDate(user.package?.trialEnd)}</Typography>
+        </>
+      ) : (
+        <>
+          <Typography variant='body1' className="user--text-details">Status: {user.package?.status}</Typography>
+          <Typography variant='body1' className="user--text-details">Thank you for being a subscriber since {formatStripeDate(user.package?.since)}!</Typography>
+        </>
+      )}
       {/* <Button className='stripe--button' variant="contained" onClick={() => handleSubscription(user)}>Edit Subscription!</Button> */}
       <Button className='stripe--button' variant="contained" href='https://billing.stripe.com/p/login/test_dR65mV9VY2ty3fifYY'>Manage Subscription!</Button>
     </>

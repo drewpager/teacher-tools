@@ -109,6 +109,7 @@ export const Pricing = () => {
       <FormGroup sx={{ alignItems: 'center', marginRight: 2 }}>
         <FormControlLabel control={<PricingSwitch sx={{ m: 1 }} checked={monthlyCadence} onChange={() => setMonthlyCadence(!monthlyCadence)} />} label="" />
       </FormGroup>
+      <Alert severity="success">All Plans Include a 7-Day Free Trial!</Alert>
       <Box className='pricing--card-box'>
         <Box className="pricing--box">
           <h3>Socrates Plan</h3>
@@ -130,8 +131,8 @@ export const Pricing = () => {
             variant='contained'
             target="_blank"
             // Test + Production Stripe Links
-            href={monthlyCadence ? "https://buy.stripe.com/test_bIYaGpghueZDaDSbIN" : "https://buy.stripe.com/test_4gw4i1d5i04JeU814a"}
-            // href={monthlyCadence ? "https://buy.stripe.com/3cs29bcVng449by8wA" : "https://buy.stripe.com/fZe157dZr2deevS6ot"}
+            // href={monthlyCadence ? "https://buy.stripe.com/test_bIYaGpghueZDaDSbIN" : "https://buy.stripe.com/test_4gw4i1d5i04JeU814a"}
+            href={monthlyCadence ? "https://buy.stripe.com/3cs29bcVng449by8wA" : "https://buy.stripe.com/fZe157dZr2deevS6ot"}
             className='pricing--button'
           >Choose Plan</Button>
         </Box>
@@ -147,15 +148,15 @@ export const Pricing = () => {
           >Contact Sales</Button>
         </Box>
       </Box>
-      <Alert severity="success">All Plans Include a 7-Day Free Trial!</Alert>
+      {/* <Alert severity="success">All Plans Include a 7-Day Free Trial!</Alert> */}
       <Box className='pricing--card-box'>
         <Box className="pricing-details--box">
           <h3>Socrates Plan</h3>
           <ul>
             <li className="success">Unlimited Custom Assessments</li>
             <li className="success">Teacher To Teacher Sharing</li>
-            <li className="warning">Up To 30 Lesson Plans</li>
-            <li className="warning">Up To 10 Classes</li>
+            <li className="warning">Limited To 30 Lesson Plans</li>
+            <li className="warning">Limited To 10 Classes</li>
           </ul>
         </Box>
         <Box className="pricing-details--box">
@@ -165,7 +166,7 @@ export const Pricing = () => {
             <li className="success">Teacher To Teacher Sharing</li>
             <li className="success">Unlimited Lesson Plans</li>
             <li className="success">Unlimited Classes</li>
-            <li className="warning">Up To 300 students</li>
+            <li className="warning">Limited To 300 students</li>
           </ul>
         </Box>
         <Box className="pricing-details--box">
