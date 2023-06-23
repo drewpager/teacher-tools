@@ -67,11 +67,16 @@ const mount = async (app: Application) => {
     query: `email:\'${contact}\'`,
   });
 
-  // const subs = await stripe.customers.retrieve(customer.data[0].id, {
-  //   expand: ["customer", "invoice.subscription"],
-  // });
+  if (customer) {
+    const subscriptions = await stripe.customers.retrieve(
+      `${customer.data[0].id}`,
+      {
+        expand: ["subscriptions"],
+      }
+    );
 
-  // console.log(subs);
+    console.log(subscriptions.subscriptions.data[0].plan.amount);
+  }
 
   // app.get("/config", (req, res) => {
   //   res.send({
