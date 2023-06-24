@@ -61,22 +61,22 @@ const mount = async (app: Application) => {
   //   console.log(values.subscriptions.data[0].plan.amount);
   // }
 
-  const contact = "drewpagerrr@gmail.com";
+  // const contact = "drewpagerrr@gmail.com";
 
-  const customer = await stripe.customers.search({
-    query: `email:\'${contact}\'`,
-  });
+  // const customer = await stripe.customers.search({
+  //   query: `email:\'${contact}\'`,
+  // });
 
-  if (customer) {
-    const subscriptions = await stripe.customers.retrieve(
-      `${customer.data[0].id}`,
-      {
-        expand: ["subscriptions"],
-      }
-    );
+  // if (customer) {
+  //   const subscriptions = await stripe.customers.retrieve(
+  //     `${customer.data[0].id}`,
+  //     {
+  //       expand: ["subscriptions"],
+  //     }
+  //   );
 
-    console.log(subscriptions.subscriptions.data[0].plan.amount);
-  }
+  //   console.log(subscriptions.subscriptions.data[0].plan.amount);
+  // }
 
   // app.get("/config", (req, res) => {
   //   res.send({
