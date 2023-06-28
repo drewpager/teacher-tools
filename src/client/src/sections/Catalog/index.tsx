@@ -1,15 +1,18 @@
 import React, { useState, useRef, useEffect, ChangeEvent } from 'react';
-import { Box, CircularProgress, Grid, Typography, Chip, Switch, TextField, InputAdornment, Icon } from '@mui/material'
+import { Box, CircularProgress, Grid, Typography, Chip, Switch, TextField, InputAdornment, Icon, Tooltip } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { Close } from '@mui/icons-material';
+import { Close, ViewModule } from '@mui/icons-material';
 import AdjustIcon from '@mui/icons-material/Adjust';
 import Pipe from '../../lib/assets/pipe.svg';
 import TreeView from '@mui/lab/TreeView';
 import TreeItem from '@mui/lab/TreeItem';
+import AppsIcon from '@mui/icons-material/Apps';
+import TableRowsIcon from '@mui/icons-material/TableRows';
 import { useAllLessonsQuery, Viewer } from '../../graphql/generated';
 import { categories, titleCase, DisplayError } from '../../lib/utils';
 import { CatalogItem } from './catalogItem';
+import { CatalogList } from './catalogList';
 import { Footer } from '../../lib/components';
 import { CatalogSkeleton } from './catalogSkeleton';
 import "./catalog.scss";
@@ -36,6 +39,7 @@ export const Catalog = ({ viewer }: Props) => {
   const [searchInput, setSearchInput] = useState<string>("");
   const [filteredLesson, setFilteredLesson] = useState<any>();
   const [searchError, setSearchError] = useState<boolean>(false);
+  const [view, setView] = useState<'grid' | 'list'>('grid')
   const inputRef = useSearchFocus();
 
   const handleToggle = (event: React.SyntheticEvent, nodeIds: string[]) => {
@@ -200,6 +204,9 @@ export const Catalog = ({ viewer }: Props) => {
             </Box>
             <Box sx={{ display: 'flex' }}>
               <Switch checked={ascending} onClick={() => setAscending(!ascending)} /><Typography variant='h3'>{ascending ? "Chronological" : "Reverse Chronological"}</Typography>
+              {" "}
+              <Tooltip title="Grid view"><AppsIcon onClick={() => setView('grid')} className='catalog--view-button' /></Tooltip>
+              <Tooltip title="List view"><TableRowsIcon onClick={() => setView('list')} className='catalog--view-button' /></Tooltip>
             </Box>
             {filteredLesson && (
               <div className="catalog--item">
@@ -208,18 +215,27 @@ export const Catalog = ({ viewer }: Props) => {
             )}
             {selected && data && (
               <div className="catalog--item">
-                <CatalogItem viewer={`${viewer.id}`} name={`${selected[0]}`} category={data.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0])).sort(ascending ? ascend : descend)} key={`${selected[0]}`} />
+                {view === 'grid' ? (
+                  <CatalogItem viewer={`${viewer.id}`} name={`${selected[0]}`} category={data.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0])).sort(ascending ? ascend : descend)} key={`${selected[0]}`} />
+                ) : (
+                  <CatalogList viewer={`${viewer.id}`} name={`${selected[0]}`} category={data.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0])).sort(ascending ? ascend : descend)} key={`${selected[0]}`} />
+                )}
               </div>
             )}
             {data && categories.map((cater) => (
               <div className="catalog--item">
-                <CatalogItem viewer={`${viewer.id}`} name={cater.name} category={data.allLessons.result.filter((b) => b.category?.includes(cater.name)).sort(ascending ? ascend : descend)} key={cater.name} />
+                {view === 'grid' ? (
+                  <CatalogItem viewer={`${viewer.id}`} name={cater.name} category={data.allLessons.result.filter((b) => b.category?.includes(cater.name)).sort(ascending ? ascend : descend)} key={cater.name} />
+                ) : (
+                  <CatalogList viewer={`${viewer.id}`} name={cater.name} category={data.allLessons.result.filter((b) => b.category?.includes(cater.name)).sort(ascending ? ascend : descend)} key={cater.name} />
+                )}
+
               </div>
             ))}
           </Box >
         </Grid>
-      <Footer viewer={viewer} />
+        <Footer viewer={viewer} />
       </Grid>
-    </Box> 
+    </Box>
   )
 }
