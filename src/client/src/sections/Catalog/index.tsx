@@ -9,6 +9,7 @@ import TreeView from '@mui/lab/TreeView';
 import TreeItem from '@mui/lab/TreeItem';
 import AppsIcon from '@mui/icons-material/Apps';
 import TableRowsIcon from '@mui/icons-material/TableRows';
+import SortByAlphaIcon from '@mui/icons-material/SortByAlpha';
 import { useAllLessonsQuery, Viewer } from '../../graphql/generated';
 import { categories, titleCase, DisplayError } from '../../lib/utils';
 import { CatalogItem } from './catalogItem';
@@ -36,6 +37,7 @@ export const Catalog = ({ viewer }: Props) => {
   const [expanded, setExpanded] = useState<string[]>([]);
   const [selected, setSelected] = useState<string[]>(['ancient history']);
   const [ascending, setAscending] = useState<boolean>(true);
+  const [alphabetical, setAlphabetical] = useState<boolean>(false);
   const [searchInput, setSearchInput] = useState<string>("");
   const [filteredLesson, setFilteredLesson] = useState<any>();
   const [searchError, setSearchError] = useState<boolean>(false);
@@ -121,6 +123,17 @@ export const Catalog = ({ viewer }: Props) => {
     return new Date(b.startDate).getTime() - new Date(a.startDate).getTime();
   }
 
+  function alpha(a: any, b: any) {
+    if (a.title[0] < b.title[0]) {
+      return -1;
+    }
+    if (a.title[0] > b.title[0]) {
+      return 1;
+    }
+    return 0;
+  }
+
+
   // Isolate the main and any secondary categories
   const categor = data?.allLessons.result;
   const mainCategoryArray: any[] = [];
@@ -203,10 +216,12 @@ export const Catalog = ({ viewer }: Props) => {
               />
             </Box>
             <Box sx={{ display: 'flex' }}>
-              <Switch checked={ascending} onClick={() => setAscending(!ascending)} /><Typography variant='h3'>{ascending ? "Chronological" : "Reverse Chronological"}</Typography>
+              <Tooltip title={alphabetical ? "Turn sort alphabetically off" : "Reverse chronological order"}>
+                <Switch checked={ascending} disabled={alphabetical} onClick={() => setAscending(!ascending)} /></Tooltip><Typography variant='h3'>{ascending ? "Chronological" : "Reverse Chronological"}</Typography>
               {" "}
-              <Tooltip title="Grid view"><AppsIcon onClick={() => setView('grid')} className='catalog--view-button' /></Tooltip>
-              <Tooltip title="List view"><TableRowsIcon onClick={() => setView('list')} className='catalog--view-button' /></Tooltip>
+              <Tooltip title="Sort alphabetically"><SortByAlphaIcon onClick={() => setAlphabetical(!alphabetical)} className='catalog--view-button' color={alphabetical ? "secondary" : "info"} /></Tooltip>
+              <Tooltip title="Grid view"><AppsIcon onClick={() => setView('grid')} className='catalog--view-button' color={view === 'grid' ? "secondary" : "info"} /></Tooltip>
+              <Tooltip title="List view"><TableRowsIcon onClick={() => setView('list')} className='catalog--view-button' color={view === 'list' ? "secondary" : "info"} /></Tooltip>
             </Box>
             {filteredLesson && (
               <div className="catalog--item">
@@ -216,18 +231,18 @@ export const Catalog = ({ viewer }: Props) => {
             {selected && data && (
               <div className="catalog--item">
                 {view === 'grid' ? (
-                  <CatalogItem viewer={`${viewer.id}`} name={`${selected[0]}`} category={data.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0])).sort(ascending ? ascend : descend)} key={`${selected[0]}`} />
+                  <CatalogItem viewer={`${viewer.id}`} name={`${selected[0]}`} category={data.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0])).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={`${selected[0]}`} />
                 ) : (
-                  <CatalogList viewer={`${viewer.id}`} name={`${selected[0]}`} category={data.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0])).sort(ascending ? ascend : descend)} key={`${selected[0]}`} />
+                  <CatalogList viewer={`${viewer.id}`} name={`${selected[0]}`} category={data.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0])).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={`${selected[0]}`} />
                 )}
               </div>
             )}
             {data && categories.map((cater) => (
               <div className="catalog--item">
                 {view === 'grid' ? (
-                  <CatalogItem viewer={`${viewer.id}`} name={cater.name} category={data.allLessons.result.filter((b) => b.category?.includes(cater.name)).sort(ascending ? ascend : descend)} key={cater.name} />
+                  <CatalogItem viewer={`${viewer.id}`} name={cater.name} category={data.allLessons.result.filter((b) => b.category?.includes(cater.name)).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={cater.name} />
                 ) : (
-                  <CatalogList viewer={`${viewer.id}`} name={cater.name} category={data.allLessons.result.filter((b) => b.category?.includes(cater.name)).sort(ascending ? ascend : descend)} key={cater.name} />
+                  <CatalogList viewer={`${viewer.id}`} name={cater.name} category={data.allLessons.result.filter((b) => b.category?.includes(cater.name)).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={cater.name} />
                 )}
 
               </div>
