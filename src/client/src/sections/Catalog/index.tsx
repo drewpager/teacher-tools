@@ -217,7 +217,7 @@ export const Catalog = ({ viewer }: Props) => {
             </Box>
             <Box sx={{ display: 'flex' }}>
               <Tooltip title={alphabetical ? "Turn sort alphabetically off" : "Reverse chronological order"}>
-                <Switch checked={ascending} disabled={alphabetical} onClick={() => setAscending(!ascending)} /></Tooltip><Typography variant='h3'>{ascending ? "Chronological" : "Reverse Chronological"}</Typography>
+                <Switch checked={ascending} disabled={alphabetical} onClick={() => setAscending(!ascending)} /></Tooltip><Typography variant='h3'>{ascending ? "Chronological" : "Reverse"}</Typography>
               {" "}
               <Tooltip title="Sort alphabetically"><SortByAlphaIcon onClick={() => setAlphabetical(!alphabetical)} className='catalog--view-button' color={alphabetical ? "secondary" : "info"} /></Tooltip>
               <Tooltip title="Grid view"><AppsIcon onClick={() => setView('grid')} className='catalog--view-button' color={view === 'grid' ? "secondary" : "info"} /></Tooltip>
@@ -237,7 +237,7 @@ export const Catalog = ({ viewer }: Props) => {
                 )}
               </div>
             )}
-            {data && categories.map((cater) => (
+            {data && categories.map((cater) => (cater.name !== selected[0]) && (
               <div className="catalog--item">
                 {view === 'grid' ? (
                   <CatalogItem viewer={`${viewer.id}`} name={cater.name} category={data.allLessons.result.filter((b) => b.category?.includes(cater.name)).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={cater.name} />
