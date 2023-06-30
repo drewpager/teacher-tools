@@ -156,7 +156,7 @@ export const Catalog = ({ viewer }: Props) => {
   // return <CatalogSkeleton />
   return (
     <Box>
-      <Grid container maxWidth="100%" overflow="hidden">
+      <Grid container maxWidth="100vw" overflow-x="hidden">
         <Grid item sm={12} md={3} lg={3}>
           <Box className="catalogGrid--categories">
             <TreeView

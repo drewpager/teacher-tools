@@ -84,7 +84,7 @@ export const CatalogList = ({ name, category, viewer }: props) => {
       {category.map((lesson, index) => (
         <Box className="category--list-box" key={index}>
           <Link to={`/lesson/${lesson.id}`} style={{ textDecoration: "none", color: "#fff" }}>
-            <Typography variant="h5" className="category--list-title">{lesson.title}</Typography>
+            <Typography variant="h4" className="category--list-title">{lesson.title}</Typography>
           </Link>
           <IconButton
             className="list-play--button"

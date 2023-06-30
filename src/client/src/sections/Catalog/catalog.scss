@@ -14,28 +14,29 @@
 
 .MuiButtonBase-root {
   &.bookmark--button {
-    margin-bottom: 1rem;
+    // margin-bottom: 1rem;
     &:hover {
-      // color: library.$blue;
       color: black;
     }
   }
   &.list-bookmark--button {
+    align-self: start;
+    padding: 0.33rem;
+    grid-column: 3 / -1;
     &:hover {
-      // color: library.$blue;
       color: black;
     }
   }
   &.play--button {
-    margin-bottom: 0.875rem;
     &:hover {
-      // color: library.$blue;
       color: black;
     }
   }
   &.list-play--button {
+    align-self: center;
+    padding: 0;
+    grid-column: 2 / 3;
     &:hover {
-      // color: library.$blue;
       color: black;
     }
   }
@@ -93,14 +94,6 @@
     min-width: 100%;
   }
 }
-
-// .MuiGrid-root {
-//   &.catalogGrid--item {
-//     // margin-top: 15.5rem;
-//     // padding-left: 0.5rem;
-//     // border: 2px solid red;
-//   }
-// }
 
 .MuiPaper-root {
   &.keenSlider--item {
@@ -168,14 +161,15 @@
 
   &.catalogGrid--categories {
     position: sticky;
-    top: 5rem;
-    margin: 6rem 0.5rem; 
+    top: 6rem;
+    margin-right: 0.5rem; 
     overflow-y: scroll;
-    height: 100vh;
+    height: auto;
     overflow-x: hidden; 
-    flex-grow: 1;
+    // flex-grow: 1;
     max-width: 100vw; 
     
+
     @media (max-width: 900px) {
       height: auto;
       margin-top: 5rem;
@@ -186,19 +180,30 @@
 
   // Catalog "List" view item styling
   &.category--list-box {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 50px 50px;
+    align-items: start;
     background-color: library.$blue;
     color: library.$white;
     border-radius: 10px;
     padding: 0.5rem;
-    max-height: 40px;
-    width: 95%;
+    max-height: auto;
+    height: 40px;
+    width: 90vw;
     margin-bottom: 0.5rem;
-    margin-right: 1rem;
-
+    margin-right: 1.5rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border: 1px solid black;
+    
+    // Shorten width of elements to accommodate category list
+    @media (min-width: 900px) {
+      width: 70vw;
+      margin-right: 1rem;
+    }
     & > button {
-      justify-content: flex-end;
+      flex-wrap: wrap;
+      top: -0.5rem;
     }
   }
 }
