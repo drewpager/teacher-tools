@@ -62,20 +62,29 @@ const mount = async (app: Application) => {
   // }
 
   // const contact = "drewpagerrr@gmail.com";
+  // const contact = "drew@greadings.com";
 
   // const customer = await stripe.customers.search({
   //   query: `email:\'${contact}\'`,
   // });
 
-  // if (customer) {
-  //   const subscriptions = await stripe.customers.retrieve(
-  //     `${customer.data[0].id}`,
-  //     {
-  //       expand: ["subscriptions"],
-  //     }
-  //   );
+  // if (!customer) {
+  //   console.log("no customer");
+  // }
 
-  //   console.log(subscriptions.subscriptions.data[0].plan.amount);
+  // if (customer) {
+  //   if (customer.data.length === 0) {
+  //     console.log("customer not found");
+  //   } else {
+  //     const subscriptions = await stripe.customers.retrieve(
+  //       `${customer.data[0].id}`,
+  //       {
+  //         expand: ["subscriptions"],
+  //       }
+  //     );
+
+  //     console.log(subscriptions);
+  //   }
   // }
 
   // app.get("/config", (req, res) => {

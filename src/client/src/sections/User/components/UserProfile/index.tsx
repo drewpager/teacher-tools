@@ -40,7 +40,7 @@ export const UserProfile = ({ user, viewerIsUser }: Props) => {
         id: `${user.id}`,
       }
     });
-  }, [user.id, addPayment]);
+  }, [user, addPayment]);
 
   if (data) {
     console.log(user.paymentId);
@@ -83,11 +83,15 @@ export const UserProfile = ({ user, viewerIsUser }: Props) => {
       ) : (
         <>
           <Typography variant='body1' className="user--text-details">Status: {user.package?.status}</Typography>
-          <Typography variant='body1' className="user--text-details">Thank you for being a subscriber since {formatStripeDate(user.package?.since)}!</Typography>
+          {user.package?.status !== "Inactive" && <Typography variant='body1' className="user--text-details">Thank you for being a subscriber since {formatStripeDate(user.package?.since)}!</Typography>}
         </>
       )}
       {/* <Button className='stripe--button' variant="contained" onClick={() => handleSubscription(user)}>Edit Subscription!</Button> */}
-      <Button className='stripe--button' variant="contained" href='https://billing.stripe.com/p/login/test_dR65mV9VY2ty3fifYY'>Manage Subscription!</Button>
+      {user.package?.status !== "Inactive"
+        // https://billing.stripe.com/p/login/5kA8zH7cq8eIdWMcMM || https://billing.stripe.com/p/login/test_dR65mV9VY2ty3fifYY
+        ? (<Button className='stripe--button' variant="contained" href='https://billing.stripe.com/p/login/5kA8zH7cq8eIdWMcMM'>Manage Subscription!</Button>)
+        : (<Button className='stripe--button' variant="contained" href="/pricing">View Pricing!</Button>)
+      }
     </>
   )
   return (

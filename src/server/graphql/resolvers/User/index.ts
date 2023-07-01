@@ -195,6 +195,33 @@ export const userResolvers = {
           throw new Error("Customer can't be found");
         }
 
+        if (customer.data.length === 0) {
+          const customerId = undefined;
+          const amount = 0;
+          const cadence = "N/A";
+          const status = "Inactive";
+          const since = 0;
+          const trial_end = 0;
+
+          const customerPay = await db.users.findOneAndUpdate(
+            { _id: `${viewerId}` },
+            {
+              $set: {
+                paymentId: customerId,
+                package: {
+                  amount: amount,
+                  cadence: cadence,
+                  status: status,
+                  since: since,
+                  trialEnd: trial_end,
+                },
+              },
+            }
+          );
+
+          return customerPay ? viewerId : "Payment details unavailable";
+        }
+
         const subscriptions = await stripe.customers.retrieve(
           `${customer.data[0].id}`,
           {
