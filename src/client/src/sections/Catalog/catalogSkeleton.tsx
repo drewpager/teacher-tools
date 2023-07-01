@@ -38,6 +38,7 @@ export const CatalogSkeleton = () => {
               <Switch checked /><Skeleton variant="text" sx={{ fontSize: "1rem", width: "150px" }} />
               <Skeleton variant="text" sx={{ fontSize: "1rem", width: "20px", marginLeft: "1rem" }} />
               <Skeleton variant="text" sx={{ fontSize: "1rem", width: "20px", marginLeft: "1rem" }} />
+              <Skeleton variant="text" sx={{ fontSize: "1rem", width: "20px", marginLeft: "1rem" }} />
             </Box>
             <div className="skeletonGrid">
               <div className="skeletonGrid--item1">
