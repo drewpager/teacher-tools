@@ -10,6 +10,7 @@ import { Footer } from '../../lib/components';
 import theme from '../../theme';
 import Moment from 'moment';
 import './createLesson.scss';
+import { FeedbackModal } from '../Contact/FeedbackModal';
 
 interface Props {
   viewer: Viewer
@@ -302,6 +303,7 @@ export const CreateLesson = ({ viewer }: Props) => {
     return (
       <div>
         <Box className='createLesson--page'>
+          <FeedbackModal />
           <Box className='createLesson--form'>
             <h2>Create a New Lesson</h2>
             <Formik

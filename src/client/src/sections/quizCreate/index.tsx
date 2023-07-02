@@ -29,6 +29,8 @@ import { Footer } from '../../lib/components';
 import './createQuiz.scss';
 import * as yup from 'yup';
 import { Link } from 'react-router-dom';
+import { FeedbackModal } from '../Contact/FeedbackModal';
+
 interface props {
   viewer: Viewer
 }
@@ -124,6 +126,7 @@ export const QuizCreate = ({ viewer }: props) => {
 
   return (
     <div>
+      <FeedbackModal />
       <Box className="breadcrumb">
         <Link to={`../user/${viewer.id}`}>
           <p>⟨ Back to dashboard</p>

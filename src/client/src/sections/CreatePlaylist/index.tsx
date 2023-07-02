@@ -20,6 +20,7 @@ import './createPlaylist.scss';
 import { Link } from 'react-router-dom';
 import { CreatePlaylistCard, Footer } from '../../lib/components';
 import theme from '../../theme';
+import { FeedbackModal } from '../Contact/FeedbackModal';
 
 type props = {
   viewer: Viewer;
@@ -330,6 +331,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
   return (
     <div>
       <Box className="createPlaylist--box">
+        <FeedbackModal />
         <h1 className='createPlaylist--h1'>Create Lesson Plan</h1>
         <form onSubmit={handleSubmit}>
           <DragDropContext onDragEnd={onDragEndHandler}>
