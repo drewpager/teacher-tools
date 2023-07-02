@@ -1,0 +1,29 @@
+@use '../../library';
+
+.MuiButton-root {
+  &.contact--button {
+    background: library.$blue;
+    color: white;
+    padding: 0.5rem;
+    margin: 1rem 0;
+    &:hover {
+      background: library.$lightGreen;
+    }
+  }
+}
+
+.MuiBox-root {
+  &.contact--box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 2rem;
+    margin-right: 2rem;
+    padding: 2rem;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+}

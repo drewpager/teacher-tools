@@ -1,0 +1,42 @@
+@use '../../library';
+
+.feedback-modal {
+  position: absolute;
+  top: 50%;  
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  max-height: 100%;
+  background-color: library.$white;
+  color: library.$darkGreen;
+  border: 2px solid library.$darkGreen;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+}
+
+.MuiFab-root {
+  &.feedback-modal--button {
+    margin: 2rem;
+    background-color: library.$coral;
+    color: library.$white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    &:hover {
+      background-color: library.$peachy;
+      color: library.$white;
+    }
+  }
+}
+
+.MuiButtonBase-root {
+  &.feedback-modal--close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
