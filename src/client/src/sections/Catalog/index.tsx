@@ -16,6 +16,7 @@ import { CatalogItem } from './catalogItem';
 import { CatalogList } from './catalogList';
 import { Footer } from '../../lib/components';
 import { CatalogSkeleton } from './catalogSkeleton';
+import { FeedbackModal } from '../Contact/FeedbackModal';
 import "./catalog.scss";
 
 type Props = {
@@ -156,6 +157,7 @@ export const Catalog = ({ viewer }: Props) => {
   // return <CatalogSkeleton />
   return (
     <Box>
+      <FeedbackModal />
       <Grid container maxWidth="100vw" overflow-x="hidden">
         <Grid item sm={12} md={3} lg={3}>
           <Box className="catalogGrid--categories">

@@ -21,9 +21,9 @@
 .MuiFab-root {
   &.feedback-modal--button {
     margin: 2rem;
-    background-color: library.$coral;
+    background-color: #57996A;
     color: library.$white;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     &:hover {
