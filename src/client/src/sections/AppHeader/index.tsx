@@ -222,17 +222,17 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                 </MenuItem>
                 <Divider />
                 <MenuItem onClick={handleCloseActionMenu} className="dropdown--buttons">
-                  <Link to={`/lesson/create`} style={{ textDecoration: 'none', color: "#000"  }}>
+                  <Link to={`/lesson/create`} style={{ textDecoration: 'none', color: "#000" }}>
                     <Typography textAlign="center">Create Lesson</Typography>
                   </Link>
                 </MenuItem>
                 <MenuItem onClick={handleCloseActionMenu} className="dropdown--buttons">
-                  <Link to={`/quiz/create`} style={{ textDecoration: 'none', color: "#000"  }}>
+                  <Link to={`/quiz/create`} style={{ textDecoration: 'none', color: "#000" }}>
                     <Typography textAlign="center">Create Asessment</Typography>
                   </Link>
                 </MenuItem>
                 <MenuItem onClick={handleCloseActionMenu} className="dropdown--buttons">
-                  <Link to={`/playlist/create`} style={{ textDecoration: 'none', color: "#000"  }}>
+                  <Link to={`/playlist/create`} style={{ textDecoration: 'none', color: "#000" }}>
                     <Typography textAlign="center">Create Lesson Plan</Typography>
                   </Link>
                 </MenuItem>
@@ -298,7 +298,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                 <Link to={`/pricing`} style={{ textDecoration: "none", marginRight: 32 }}>
                   <p style={{ color: `${theme.palette.info.dark}` }}>Pricing</p>
                 </Link>
-                <Link to={`/`} style={{ textDecoration: "none", marginRight: 110 }}>
+                <Link to={`/contact`} style={{ textDecoration: "none", marginRight: 110 }}>
                   <p style={{ color: `${theme.palette.info.dark}` }}>Contact Us</p>
                 </Link>
               </div>

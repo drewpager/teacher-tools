@@ -14,6 +14,7 @@ export * from "./Playlist";
 export * from "./Billing";
 export * from "./CreatePlaylist";
 export * from "./Catalog";
+export * from "./Contact";
 export * from "./CreateLesson";
 export * from "./CreateQuiz";
 export * from "./EditPlaylist";

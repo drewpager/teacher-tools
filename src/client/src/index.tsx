@@ -33,6 +33,7 @@ import {
   CreateQuiz,
   EditPlaylist,
   Catalog,
+  Contact,
   Quiz,
   TestElement,
   Billing,
@@ -121,6 +122,7 @@ const App = () => {
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/pricing" element={<Pricing />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/billing" element={<Billing viewer={viewer} />} />
           <Route path="/login" children={(props: any) => (<Login {...props} setViewer={setViewer} />)} element={<Login setViewer={setViewer} />} />
           <Route path="/signup" children={(props: any) => (<SignUp {...props} setViewer={setViewer} />)} element={<SignUp setViewer={setViewer} />} />

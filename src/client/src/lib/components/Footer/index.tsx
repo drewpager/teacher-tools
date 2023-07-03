@@ -89,7 +89,7 @@ export const Footer = ({ viewer }: Props) => {
           <Link to="/" style={{ textDecoration: "none" }}>
             <Typography variant='body1' className='footer--link-text'>How It Works</Typography>
           </Link>
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link to="/contact" style={{ textDecoration: "none" }}>
             <Typography variant='body1' className='footer--link-text'>Contact Us</Typography>
           </Link>
           <Link to="/" style={{ textDecoration: "none" }}>
