@@ -35,9 +35,9 @@ const mount = async (app: Application) => {
   app.use(cors(corsOptions));
 
   // DEPLOY TODO: UNCOMMENT FOR PRODUCTION
-  app.use(enforce.HTTPS({ trustProtoHeader: true }));
-  app.use(express.static(`${__dirname}/`));
-  app.get("/*", (_req, res) => res.sendFile(`${__dirname}/index.html`));
+  // app.use(enforce.HTTPS({ trustProtoHeader: true }));
+  // app.use(express.static(`${__dirname}/`));
+  // app.get("/*", (_req, res) => res.sendFile(`${__dirname}/index.html`));
 
   const contactEmail = nodemailer.createTransport({
     host: "smtp-relay.sendinblue.com",
