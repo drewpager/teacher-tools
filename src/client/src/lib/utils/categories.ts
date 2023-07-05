@@ -30,7 +30,10 @@ export const categories = [
     name: "art",
   },
   {
-    name: "science & technology",
+    name: "science",
+  },
+  {
+    name: "technology",
   },
   {
     name: "literature",
