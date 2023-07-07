@@ -134,6 +134,16 @@ export const Catalog = ({ viewer }: Props) => {
     return 0;
   }
 
+  function alphabetize(a: any, b: any) {
+    if (a < b) {
+      return -1;
+    }
+    if (a > b) {
+      return 1;
+    }
+    return 0;
+  }
+
 
   // Isolate the main and any secondary categories
   const categor = data?.allLessons.result;
@@ -146,12 +156,12 @@ export const Catalog = ({ viewer }: Props) => {
   categor?.map((i) => secondaryCategory.push(i?.category ? { main: i.category[0], secondary: i.category[1]?.trim() } : undefined))
   categor?.map((i) => secondaryCategory.push(i?.category ? { main: i.category[0], secondary: i.category[2]?.trim() } : undefined))
   categor?.map((i) => secondaryCategory.push(i?.category ? { main: i.category[0], secondary: i.category[3]?.trim() } : undefined))
-  const mainCategories = mainCategoryArray.filter(onlyUnique).sort()
-  let secCategories = secondaryCategory.filter(onlyDefined)
+  const mainCategories = mainCategoryArray.filter(onlyUnique).sort(alphabetize)
+  let secCategories = secondaryCategory.filter(onlyDefined).sort(alphabetize)
   const secondaryCategories = new Map(secCategories.map((item: any) =>
-    [item["secondary"], item])).values();
+    [item["secondary"], item]).sort(alphabetize)).values();
 
-  const combinedCategories = Array.from(secondaryCategories)
+  const combinedCategories = Array.from(secondaryCategories);
   const selectedSecondary = allCategories.filter((b) => b.includes(selected[0]));
 
   // return <CatalogSkeleton />
@@ -178,7 +188,7 @@ export const Catalog = ({ viewer }: Props) => {
                     {titleCase(cat)}
                   </Typography>
                 }>
-                  {combinedCategories.map((i: any) => i.main === `${cat}` && !!i.secondary ? (
+                  {combinedCategories.sort().map((i: any) => i.main === `${cat}` && !!i.secondary ? (
                     <TreeItem nodeId={`${i.secondary}`} label={
                       <Typography variant='h4'>
                         {titleCase(`${i.secondary}`)}
