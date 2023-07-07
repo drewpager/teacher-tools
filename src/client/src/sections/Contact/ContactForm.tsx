@@ -36,9 +36,9 @@ export const ContactForm = () => {
     //   }
     // })
     if (!mail) {
-      setStatus("Not Sending Quite Yet...");
+      setStatus("Not Sent: Contact Form Will Be Active Soon!");
     } else {
-      setStatus("Not Sending Quite Yet...");
+      setStatus("Not Sent: Contact Form Will Be Active Soon!");
     }
 
     console.log(mail);
