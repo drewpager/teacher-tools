@@ -31,6 +31,7 @@ type BookmarkLessonVariables = {
 export const CatalogItem = ({ name, category, viewer }: props) => {
   const [open, setOpen] = useState<boolean>(false);
   const [bookmarkError, setBookmarkError] = useState<boolean>(false);
+  const [bookmarkStatus, setBookmarkStatus] = useState<string>('');
   const [loaded, setLoaded] = useState<boolean>(false);
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [sliderRef, instanceRef] = useKeenSlider(
@@ -88,6 +89,7 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
           viewer
         }
       })
+      setBookmarkStatus(`${res.data?.bookmarkLesson}`)
       res && setOpen(true)
     }
   }
@@ -209,7 +211,7 @@ export const CatalogItem = ({ name, category, viewer }: props) => {
             ) :
             (
               <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                Bookmarked!
+                {bookmarkStatus}
               </Alert>
             )}
         </Snackbar>

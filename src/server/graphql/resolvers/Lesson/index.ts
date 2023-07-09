@@ -210,22 +210,41 @@ export const lessonResolvers = {
       _root: undefined,
       { id, viewer }: BookmarkLesson,
       { db }: { db: Database }
-    ): Promise<boolean | Lesson[]> => {
+    ): Promise<string | Lesson[]> => {
       try {
         const data = await db.lessons.findOne({
           _id: new ObjectId(id),
         });
 
-        const bookmark = await db.users.updateOne(
-          { _id: viewer },
-          { $push: { bookmarks: data } }
-        );
+        const exists = await db.users.findOne({ _id: viewer });
+        if (
+          data &&
+          exists?.bookmarks
+            ?.map((lesson) => lesson["_id"].toString() === `${data._id}`)
+            .includes(true)
+        ) {
+          const unBookmark = await db.users.updateOne(
+            { _id: viewer },
+            { $pull: { bookmarks: data } }
+          );
 
-        if (!bookmark) {
-          throw new Error("Failed to bookmark lesson!");
+          if (!unBookmark) {
+            throw new Error("Failed to unbookmark lesson!");
+          }
+
+          return unBookmark ? "unbookmarked" : "null";
+        } else {
+          const bookmark = await db.users.updateOne(
+            { _id: viewer },
+            { $push: { bookmarks: data } }
+          );
+
+          if (!bookmark) {
+            throw new Error("Failed to bookmark lesson!");
+          }
+
+          return bookmark ? "bookmarked" : "null";
         }
-
-        return bookmark.acknowledged;
       } catch (error) {
         throw new Error(`Failed to bookmark lesson entirely: ${error}`);
       }

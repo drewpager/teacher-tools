@@ -266,7 +266,7 @@ export type LogInInput = {
 export type Mutation = {
   __typename?: 'Mutation';
   addPayment?: Maybe<Viewer>;
-  bookmarkLesson?: Maybe<Scalars['Boolean']>;
+  bookmarkLesson?: Maybe<Scalars['String']>;
   createLesson: Lesson;
   createQuiz: Quiz;
   deleteLesson: Scalars['Boolean'];
