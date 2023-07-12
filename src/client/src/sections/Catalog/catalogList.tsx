@@ -17,6 +17,7 @@ type props = {
   name: string;
   category: Lesson[];
   viewer: string;
+  bookmarks: string[] | undefined;
 }
 
 type BookmarkLessonData = {
@@ -28,9 +29,10 @@ type BookmarkLessonVariables = {
   viewer: string;
 }
 
-export const CatalogList = ({ name, category, viewer }: props) => {
+export const CatalogList = ({ name, category, viewer, bookmarks }: props) => {
   const [open, setOpen] = useState<boolean>(false);
   const [bookmarkError, setBookmarkError] = useState<boolean>(false);
+  const [bookmarked, setBookmarked] = useState<any[]>(bookmarks ? bookmarks : []);
 
   const handleClose = () => {
     setOpen(false)
@@ -102,7 +104,7 @@ export const CatalogList = ({ name, category, viewer }: props) => {
             disableRipple
             disableFocusRipple
           >
-            <BookmarkAddIcon onClick={() => onBookmark(`${lesson.id}`, viewer)} />
+            <BookmarkAddIcon color={bookmarked[0]?.includes(`${lesson.id}`) ? "success" : "inherit"} onClick={() => onBookmark(`${lesson.id}`, viewer)} />
           </IconButton>
         </Box>
       ))}
