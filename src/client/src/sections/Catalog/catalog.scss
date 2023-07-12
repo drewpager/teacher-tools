@@ -14,7 +14,15 @@
 
 .MuiButtonBase-root {
   &.bookmark--button {
-    // margin-bottom: 1rem;
+    color: #FAF9F6;
+
+    &:hover {
+      color: black;
+    }
+  }
+  &.bookmarked--button {
+    color: library.$lightGreen;
+
     &:hover {
       color: black;
     }

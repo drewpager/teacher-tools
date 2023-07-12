@@ -10,7 +10,7 @@ import TreeItem from '@mui/lab/TreeItem';
 import AppsIcon from '@mui/icons-material/Apps';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import SortByAlphaIcon from '@mui/icons-material/SortByAlpha';
-import { useAllLessonsQuery, Viewer } from '../../graphql/generated';
+import { useAllLessonsQuery, Viewer, useUserQuery } from '../../graphql/generated';
 import { categories, titleCase, DisplayError } from '../../lib/utils';
 import { CatalogItem } from './catalogItem';
 import { CatalogList } from './catalogList';
@@ -43,7 +43,30 @@ export const Catalog = ({ viewer }: Props) => {
   const [filteredLesson, setFilteredLesson] = useState<any>();
   const [searchError, setSearchError] = useState<boolean>(false);
   const [view, setView] = useState<'grid' | 'list'>('grid')
+  const [userBookmarks, setUserBookmarks] = useState<any[]>([])
   const inputRef = useSearchFocus();
+
+  const { data: userData, loading: userLoading, error: userError } = useUserQuery({
+    variables: {
+      id: `${viewer.id}`,
+      playlistsPage: 1,
+      lessonsPage: 1,
+      quizzesPage: 1,
+      limit: 10
+    }
+  });
+
+  if (userLoading) {
+    console.log("Loading user data...")
+  }
+
+  if (userError) {
+    console.log("Error: ", userError.message)
+  }
+
+  useEffect(() => {
+    setUserBookmarks([userData?.user.bookmarks?.map((bookmark) => bookmark?.id)])
+  }, [userData])
 
   const handleToggle = (event: React.SyntheticEvent, nodeIds: string[]) => {
     setExpanded(nodeIds);
@@ -237,13 +260,13 @@ export const Catalog = ({ viewer }: Props) => {
             </Box>
             {filteredLesson && (
               <div className="catalog--item">
-                <CatalogItem viewer={`${viewer.id}`} name="Search Results" category={filteredLesson} key={filteredLesson.length} />
+                <CatalogItem viewer={`${viewer.id}`} name="Search Results" category={filteredLesson} key={filteredLesson.length} bookmarks={userBookmarks} />
               </div>
             )}
             {selected && data && (
               <div className="catalog--item">
                 {view === 'grid' ? (
-                  <CatalogItem viewer={`${viewer.id}`} name={`${selected[0]}`} category={data.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0])).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={`${selected[0]}`} />
+                  <CatalogItem viewer={`${viewer.id}`} name={`${selected[0]}`} category={data.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0])).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={`${selected[0]}`} bookmarks={userBookmarks} />
                 ) : (
                   <CatalogList viewer={`${viewer.id}`} name={`${selected[0]}`} category={data.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0])).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={`${selected[0]}`} />
                 )}
@@ -252,7 +275,7 @@ export const Catalog = ({ viewer }: Props) => {
             {data && categories.map((cater) => (cater.name !== selected[0]) && (
               <div className="catalog--item">
                 {view === 'grid' ? (
-                  <CatalogItem viewer={`${viewer.id}`} name={cater.name} category={data.allLessons.result.filter((b) => b.category?.includes(cater.name)).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={cater.name} />
+                  <CatalogItem viewer={`${viewer.id}`} name={cater.name} category={data.allLessons.result.filter((b) => b.category?.includes(cater.name)).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={cater.name} bookmarks={userBookmarks} />
                 ) : (
                   <CatalogList viewer={`${viewer.id}`} name={cater.name} category={data.allLessons.result.filter((b) => b.category?.includes(cater.name)).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={cater.name} />
                 )}

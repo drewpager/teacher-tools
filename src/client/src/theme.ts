@@ -31,6 +31,7 @@ export const colors = {
     300: "#94e2cd",
     400: "#70d8bd",
     500: "#4cceac",
+    550: "#57996A",
     600: "#3da58a",
     700: "#2e7c67",
     800: "#1e5245",
@@ -113,6 +114,9 @@ const theme = createTheme({
     },
     error: {
       main: colors.primary[450],
+    },
+    success: {
+      main: colors.greenAccent[550],
     },
   },
 });
