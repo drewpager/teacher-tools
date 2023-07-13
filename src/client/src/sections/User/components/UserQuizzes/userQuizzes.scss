@@ -1,4 +1,8 @@
 .user--quizzes {
   margin-left: 2rem;
   margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    margin-left: 0.5rem;
+  }
 }

@@ -91,7 +91,7 @@ export const UserPlaylistsCard = ({ playlist }: Props) => {
   return (
     <Grid item lg={4} md={6} sm={12} xs={12} key={playlist.id}>
       <ListItem key={playlist.id}>
-        <Card sx={{ minWidth: 350 }}>
+        <Card sx={{ width: "90vw" }}>
           <CardContent>
             <Link to={`/playlist/${playlist.id}`} style={{ textDecoration: "none" }}>
               <Typography variant='h4' style={{ color: "#000" }}>

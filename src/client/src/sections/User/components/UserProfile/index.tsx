@@ -100,7 +100,8 @@ export const UserProfile = ({ user, viewerIsUser }: Props) => {
       <Box className="user--text">
         <FeedbackModal />
         <h1>User Profile</h1>
-        <Card sx={{ width: 350, boxShadow: 1, padding: 5 }}>
+        {/* <Card sx={{ width: "90vw", boxShadow: 1, padding: 5 }}> */}
+        <Card className="user-profile--card">
           <Avatar src={user.avatar} sx={{ width: 56, height: 56, marginLeft: "40%" }} />
           <Divider sx={{ margin: 1 }} />
           <Typography variant="h5" className="user--text-details">Details</Typography>

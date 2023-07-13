@@ -62,7 +62,7 @@ export const UserQuizzesCard = ({ quiz }: Props) => {
   return (
     <Grid item lg={4} md={6} sm={12} xs={12} key={quiz.id}>
       <ListItem key={quiz.id}>
-        <Card sx={{ minWidth: 350 }}>
+        <Card sx={{ width: "90vw" }}>
           <CardContent>
             <Link to={`/quiz/${quiz.id}`} style={{ textDecoration: "none" }}>
               <Typography variant='h4' style={{ color: "#000" }}>

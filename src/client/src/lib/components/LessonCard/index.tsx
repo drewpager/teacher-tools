@@ -56,7 +56,7 @@ export const LessonCard = ({ lesson }: Props) => {
 
   return (
     <Grid item lg={4} md={6} sm={12} xs={12}>
-      <Card sx={{ minWidth: 350, boxShadow: 1, padding: 3 }}>
+      <Card sx={{ minWidth: "90vw", boxShadow: 1, padding: 3 }}>
         <Link to={`/lesson/${id}`} style={{ textDecoration: "none", color: "black" }}>
           <Typography variant="h5">{title}</Typography>
           <Typography variant="h6">{category}</Typography>
