@@ -43,7 +43,7 @@ export const Catalog = ({ viewer }: Props) => {
   const [filteredLesson, setFilteredLesson] = useState<any>();
   const [searchError, setSearchError] = useState<boolean>(false);
   const [view, setView] = useState<'grid' | 'list'>('grid')
-  const [userBookmarks, setUserBookmarks] = useState<any[]>([])
+  const [userBookmarks, setUserBookmarks] = useState<any[]>()
   const inputRef = useSearchFocus();
 
   const { data: userData, loading: userLoading, error: userError } = useUserQuery({
@@ -52,7 +52,7 @@ export const Catalog = ({ viewer }: Props) => {
       playlistsPage: 1,
       lessonsPage: 1,
       quizzesPage: 1,
-      limit: 10
+      limit: 1
     }
   });
 
@@ -66,7 +66,7 @@ export const Catalog = ({ viewer }: Props) => {
 
   useEffect(() => {
     setUserBookmarks([userData?.user.bookmarks?.map((bookmark) => bookmark?.id)])
-  }, [userData])
+  }, [userData?.user.bookmarks])
 
   const handleToggle = (event: React.SyntheticEvent, nodeIds: string[]) => {
     setExpanded(nodeIds);
@@ -78,7 +78,7 @@ export const Catalog = ({ viewer }: Props) => {
       // window.location.replace(`/catalog#${nodeIds}`)
       window.scrollTo(0, 0)
     }
-    window.scrollTo(0, 0)
+    // window.scrollTo(0, 0)
   };
 
   const inputHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -189,7 +189,7 @@ export const Catalog = ({ viewer }: Props) => {
 
   // return <CatalogSkeleton />
   return (
-    <Box>
+    <Box maxWidth="100vw" overflow-x="hidden">
       <FeedbackModal />
       <Grid container maxWidth="100vw" overflow-x="hidden">
         <Grid item sm={12} md={3} lg={3}>
@@ -264,7 +264,7 @@ export const Catalog = ({ viewer }: Props) => {
               </div>
             )}
             {selected && data && (
-              <div className="catalog--item">
+              <div className="catalog--item" id={`${selected[0]}`}>
                 {view === 'grid' ? (
                   <CatalogItem viewer={`${viewer.id}`} name={`${selected[0]}`} category={data.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0])).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={`${selected[0]}`} bookmarks={userBookmarks} />
                 ) : (
@@ -273,7 +273,7 @@ export const Catalog = ({ viewer }: Props) => {
               </div>
             )}
             {data && categories.map((cater) => (cater.name !== selected[0]) && (
-              <div className="catalog--item">
+              <div className="catalog--item" id={`${cater.name}`}>
                 {view === 'grid' ? (
                   <CatalogItem viewer={`${viewer.id}`} name={cater.name} category={data.allLessons.result.filter((b) => b.category?.includes(cater.name)).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={cater.name} bookmarks={userBookmarks} />
                 ) : (
