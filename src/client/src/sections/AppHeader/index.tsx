@@ -99,8 +99,8 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
         {viewer && viewer.avatar ? (
           <Box>
             <Box className="desktop--loggedIn-items">
-              <Link to={`/catalog`} style={{ textDecoration: "none" }}>
-                <p style={{ color: "#000" }}>Catalog</p>
+              <Link to={`/catalog`} style={{ textDecoration: "none", color: "#000" }}>
+                <p>Catalog</p>
               </Link>
               <Tooltip title="Create Content!">
                 <IconButton
@@ -207,12 +207,12 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                 onClose={handleCloseUserMenu}
                 className="mobile--menu"
               >
-                <Link to={`/user/${viewer.id}`} style={{ textDecoration: 'none' }}>
+                <Link to={`/user/${viewer.id}`} style={{ textDecoration: 'none', color: "#000" }}>
                   <MenuItem onClick={handleCloseUserMenu} className="dropdown--buttons">
                     <Typography textAlign="center">Profile</Typography>
                   </MenuItem>
                 </Link>
-                <Link to={`/catalog`} style={{ textDecoration: 'none' }}>
+                <Link to={`/catalog`} style={{ textDecoration: 'none', color: "#000" }}>
                   <MenuItem onClick={handleCloseUserMenu} className="dropdown--buttons">
                     <Typography textAlign="center">Catalog</Typography>
                   </MenuItem>
