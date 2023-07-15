@@ -35,25 +35,31 @@ const mount = async (app: Application) => {
   app.use(cors(corsOptions));
 
   // DEPLOY TODO: UNCOMMENT FOR PRODUCTION
-  // app.use(enforce.HTTPS({ trustProtoHeader: true }));
-  // app.use(express.static(`${__dirname}/`));
-  // app.get("/*", (_req, res) => res.sendFile(`${__dirname}/index.html`));
+  app.use(enforce.HTTPS({ trustProtoHeader: true }));
+  app.use(express.static(`${__dirname}/`));
+  app.get("/*", (_req, res) => res.sendFile(`${__dirname}/index.html`));
 
-  const contactEmail = nodemailer.createTransport({
-    host: "smtp-relay.sendinblue.com",
-    port: 587,
-    auth: {
-      user: "drew@greadings.com",
-      pass: `${process.env.EMAILPASSWORD}`,
-    },
-  });
+  app.post("/contact", async (req, res) => {
+    console.log(req.body);
 
-  contactEmail.verify((error: any) => {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log("Ready to Send");
-    }
+    const contactEmail = nodemailer.createTransport({
+      host: "smtp-relay.sendinblue.com",
+      port: 587,
+      auth: {
+        user: "drew@greadings.com",
+        pass: `${process.env.EMAILPASSWORD}`,
+      },
+    });
+
+    contactEmail.sendMail(req.body, (error: any, info: any) => {
+      if (error) {
+        console.log(error);
+        res.send("error");
+      } else {
+        console.log("Email sent: " + info.response);
+        res.send("success");
+      }
+    });
   });
 
   const server = new ApolloServer({

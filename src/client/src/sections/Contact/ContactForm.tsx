@@ -1,7 +1,6 @@
 import React, { FormEvent, useState } from "react";
 import { Button, TextField, Box } from "@mui/material"
 import './contact.scss';
-import { DisplaySuccess } from "../../lib/utils";
 
 export const ContactForm = () => {
   const [name, setName] = useState("");
@@ -12,15 +11,8 @@ export const ContactForm = () => {
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-
-    // let messageObject = {
-    //   name: name,
-    //   email: email,
-    //   message: message,
-    // }
-
     const mail = {
-      from: name,
+      from: email,
       to: 'drew@greadings.com',
       subject: 'User Message from Plato\'s Peach',
       html: `<p>Name: ${name}</p>
@@ -28,21 +20,19 @@ export const ContactForm = () => {
       <p>Message: ${message}</p>`,
     }
 
-    // contactEmail.sendMail(mail, (error: any) => {
-    //   if (error) {
-    //     throw new Error("Failed to send message")
-    //   } else {
-    //     return (<DisplaySuccess title="Message sent successfully!" />)
-    //   }
-    // })
-    if (!mail) {
-      setStatus("Not Sent: Contact Form Will Be Active Soon!");
-    } else {
-      setStatus("Not Sent: Contact Form Will Be Active Soon!");
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', "/contact");
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function () {
+      console.log(xhr.responseText)
+      if (xhr.responseText == 'success') {
+        setStatus("Sent");
+      } else {
+        setStatus("Not Sent, try again or send an email drew@greadings.com");
+      }
     }
 
-    console.log(mail);
-    // Send the form data to your server
+    xhr.send(JSON.stringify(mail))
   };
 
   return (
@@ -51,11 +41,11 @@ export const ContactForm = () => {
         <Box className="contact--box">
           <h1>Contact Us</h1>
           <label htmlFor="name">Name</label>
-          <TextField type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
+          <TextField type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
           <label htmlFor="email">Email</label>
-          <TextField type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <TextField type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
           <label htmlFor="message">Message</label>
-          <TextField multiline rows={3} maxRows={25} id="message" value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Send product feedback, feature requests, or any other correspondence for the Plato's Peach team!" />
+          <TextField multiline rows={3} maxRows={25} id="message" value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Send product feedback, feature requests, or any other correspondence for the Plato's Peach team!" required />
           <Button variant="contained" className="contact--button" type="submit">Submit</Button>
           {status && <p>Message {status}!</p>}
         </Box>
