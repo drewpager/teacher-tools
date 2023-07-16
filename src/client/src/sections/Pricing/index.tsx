@@ -86,24 +86,6 @@ export const Pricing = () => {
     },
   }));
 
-  useEffect(() => {
-    fetch('/config').then(async (r) => {
-      const { publishableKey } = await r.json();
-      const stripeConfig = await loadStripe(`${publishableKey}`)
-      setStripePromise(stripeConfig);
-    })
-  }, [])
-
-  useEffect(() => {
-    fetch('/create-payment-intent', {
-      method: "POST",
-      body: JSON.stringify({}),
-    }).then(async (r) => {
-      const { clientSecret } = await r.json();
-      setClientSecret(clientSecret);
-    })
-  }, [])
-
   return (
     <Box sx={{ marginTop: 12 }}>
       <FormGroup sx={{ alignItems: 'center', marginRight: 2 }}>
@@ -142,8 +124,7 @@ export const Pricing = () => {
           <Typography variant="h5" color={theme.palette.info.dark} sx={{ fontWeight: 600, marginTop: 2 }}>{monthlyCadence ? "Contact for custom pricing" : "Contact for custom pricing"}</Typography>
           <Button
             variant='contained'
-            target="_blank"
-            href={monthlyCadence ? "mailto:drew@greadings.com" : "mailto:drew@greadings.com"}
+            href="/contact"
             className='pricing--button'
           >Contact Sales</Button>
         </Box>

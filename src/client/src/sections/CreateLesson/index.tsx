@@ -11,6 +11,7 @@ import theme from '../../theme';
 import Moment from 'moment';
 import './createLesson.scss';
 import { FeedbackModal } from '../Contact/FeedbackModal';
+import { SignUpPrompt } from '../SignupPrompt';
 
 interface Props {
   viewer: Viewer
@@ -294,10 +295,11 @@ export const CreateLesson = ({ viewer }: Props) => {
 
   if (!viewer.id) {
     return (
-      <Box className='createLesson--error'>
-        <Typography variant="h3">You Must Be <Link style={{ textDecoration: 'none', color: "#F67B50" }} to="/login">Logged In</Link> Using an Active Account.</Typography>
-        <Typography variant="h4">We require content creators to be paying users to avoid fraudulent content.</Typography>
-      </Box>
+      <SignUpPrompt />
+      // <Box className='createLesson--error'>
+      //   <Typography variant="h3">You Must <Link style={{ textDecoration: 'none', color: "#57996a" }} to="/login">Login</Link> or <Link style={{ textDecoration: 'none', color: "#57996a" }} to="/signup">Signup</Link> Using an Active Account.</Typography>
+      //   <Typography variant="h4">We require content creators to be paying users to avoid fraudulent content.</Typography>
+      // </Box>
     )
   } else {
     return (
