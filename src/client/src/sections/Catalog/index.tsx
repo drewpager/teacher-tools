@@ -1,9 +1,8 @@
 import React, { useState, useRef, useEffect, ChangeEvent } from 'react';
-import { Box, CircularProgress, Grid, Typography, Chip, Switch, TextField, InputAdornment, Icon, Tooltip } from '@mui/material'
+import { Alert, Box, CircularProgress, Grid, Typography, Chip, Switch, TextField, InputAdornment, Icon, Tooltip } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Close, ViewModule } from '@mui/icons-material';
-import AdjustIcon from '@mui/icons-material/Adjust';
 import Pipe from '../../lib/assets/pipe.svg';
 import TreeView from '@mui/lab/TreeView';
 import TreeItem from '@mui/lab/TreeItem';
@@ -18,6 +17,7 @@ import { Footer } from '../../lib/components';
 import { CatalogSkeleton } from './catalogSkeleton';
 import { FeedbackModal } from '../Contact/FeedbackModal';
 import "./catalog.scss";
+import { Link } from 'react-router-dom';
 
 type Props = {
   viewer: Viewer;
@@ -36,12 +36,13 @@ export const useSearchFocus = () => {
 
 export const Catalog = ({ viewer }: Props) => {
   const [expanded, setExpanded] = useState<string[]>([]);
-  const [selected, setSelected] = useState<string[]>(['ancient history']);
+  const [selected, setSelected] = useState<string[]>(['biography']);
   const [ascending, setAscending] = useState<boolean>(true);
   const [alphabetical, setAlphabetical] = useState<boolean>(false);
   const [searchInput, setSearchInput] = useState<string>("");
   const [filteredLesson, setFilteredLesson] = useState<any>();
   const [searchError, setSearchError] = useState<boolean>(false);
+  const [searchInfo, setSearchInfo] = useState<boolean>(true);
   const [view, setView] = useState<'grid' | 'list'>('grid')
   const [userBookmarks, setUserBookmarks] = useState<any[]>()
   const inputRef = useSearchFocus();
@@ -107,6 +108,7 @@ export const Catalog = ({ viewer }: Props) => {
     setSearchInput("");
     setFilteredLesson([]);
     setSearchError(false);
+    setSearchInfo(false);
   }
 
   const { data, loading, error } = useAllLessonsQuery({
@@ -179,6 +181,7 @@ export const Catalog = ({ viewer }: Props) => {
   categor?.map((i) => secondaryCategory.push(i?.category ? { main: i.category[0], secondary: i.category[1]?.trim() } : undefined))
   categor?.map((i) => secondaryCategory.push(i?.category ? { main: i.category[0], secondary: i.category[2]?.trim() } : undefined))
   categor?.map((i) => secondaryCategory.push(i?.category ? { main: i.category[0], secondary: i.category[3]?.trim() } : undefined))
+  categor?.map((i) => secondaryCategory.push(i?.category ? { main: i.category[0], secondary: i.category[4]?.trim() } : undefined))
   const mainCategories = mainCategoryArray.filter(onlyUnique).sort(alphabetize)
   let secCategories = secondaryCategory.filter(onlyDefined).sort(alphabetize)
   const secondaryCategories = new Map(secCategories.map((item: any) =>
@@ -229,7 +232,7 @@ export const Catalog = ({ viewer }: Props) => {
         <Grid item sm={12} md={9} lg={9}>
           <Box className="catalogBackground" sx={{ marginBottom: "80px" }} id={`${selected[0]}`}>
             <Box className="catalogHeader--container">
-              <h1 className="catalogTitle">Catalog
+              <h1 className="catalogTitle">Documentary Catalog
                 {" "}<Chip label={data?.allLessons.total} color="primary" size="medium" />
               </h1><TextField
                 variant='outlined'
@@ -260,15 +263,24 @@ export const Catalog = ({ viewer }: Props) => {
             </Box>
             {filteredLesson && (
               <div className="catalog--item">
-                <CatalogItem viewer={`${viewer.id}`} name="Search Results" category={filteredLesson} key={filteredLesson.length} bookmarks={userBookmarks} />
+                <>
+                  <CatalogItem viewer={`${viewer.id}`} name="Search Results" category={filteredLesson} key={filteredLesson.length} bookmarks={userBookmarks} />
+                  {searchInfo && <Alert variant="outlined" severity="info" style={{ marginTop: "0.875rem" }}>Still not finding a topic you want? You can add it <Link to="/lesson/create" style={{ color: "#000" }}>here</Link>.</Alert>}
+                </>
               </div>
             )}
             {selected && data && (
               <div className="catalog--item" id={`${selected[0]}`}>
                 {view === 'grid' ? (
-                  <CatalogItem viewer={`${viewer.id}`} name={`${selected[0]}`} category={data.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0])).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={`${selected[0]}`} bookmarks={userBookmarks} />
+                  <>
+                    <CatalogItem viewer={`${viewer.id}`} name={`${selected[0]}`} category={data.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0])).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={`${selected[0]}`} bookmarks={userBookmarks} />
+                    <Alert variant="outlined" severity="info" style={{ marginTop: "0.875rem" }}>Not seeing what you're looking for? It might be in another category or try using the search bar above!</Alert>
+                  </>
                 ) : (
-                  <CatalogList viewer={`${viewer.id}`} name={`${selected[0]}`} category={data.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0])).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={`${selected[0]}`} bookmarks={userBookmarks} />
+                  <>
+                    <CatalogList viewer={`${viewer.id}`} name={`${selected[0]}`} category={data.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0])).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={`${selected[0]}`} bookmarks={userBookmarks} />
+                    <Alert variant="outlined" severity="info">Not seeing what you're looking for? It might be in another category or try using the search bar above!</Alert>
+                  </>
                 )}
               </div>
             )}
