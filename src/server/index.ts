@@ -62,6 +62,23 @@ const mount = async (app: Application) => {
     });
   });
 
+  // const customer = await stripe.customers.search({
+  //   query: `email:'drew@greadings.com'`,
+  // });
+
+  // if (customer) {
+  //   const subscriptions = await stripe.customers.retrieve(
+  //     `${customer.data[0].id}`,
+  //     {
+  //       expand: ["subscriptions"],
+  //     }
+  //   );
+
+  //   const amount = subscriptions.subscriptions.data[0].plan.amount;
+
+  //   console.log(subscriptions.subscriptions.data[0]);
+  // }
+
   const server = new ApolloServer({
     typeDefs: [typeDefs, scalarTypeDefs],
     resolvers: [resolvers, scalarResolvers],

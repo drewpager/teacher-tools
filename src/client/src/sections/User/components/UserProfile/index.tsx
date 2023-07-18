@@ -44,7 +44,7 @@ export const UserProfile = ({ user, viewerIsUser }: Props) => {
   }, [user, addPayment]);
 
   if (data) {
-    console.log(user.paymentId);
+    console.log(user.package);
   }
 
   if (loading) {
