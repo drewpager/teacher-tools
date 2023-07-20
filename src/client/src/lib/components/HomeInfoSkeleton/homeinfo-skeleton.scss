@@ -1,0 +1,198 @@
+@use '../../../library';
+@import '../../../mixins';
+
+.box--title {
+    width: 100%;
+    margin-left: 2rem;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+
+    @media (min-width: 1500px) {
+        margin-left: 12rem;
+        gap: 1rem;
+    }
+
+    @media (max-width: 1499px) {
+        margin-left: 4rem;
+        gap: 1rem;
+    }
+
+
+    @media (max-width: 768px) {
+        margin-left: 0;
+        padding-left: 0;
+        gap: 1rem;
+    }
+}
+
+.animation--box {
+    width: 90%;
+    height: 90%;
+    max-width: 500px;
+    margin-top: 1rem;
+    margin-right: 5rem;
+    position: relative;
+    // justify-content: baseline;
+    align-items: baseline;
+
+    @media (max-width: 900px) {
+        display: none;
+    }
+}
+
+.grid--container {
+    position: relative;
+}
+
+.MuiTypography-root {
+    &.title--text {
+        width: 70%;
+        margin-top: 8rem;
+        margin-right: 1.5rem;
+        margin-left: 1.5rem;
+        padding: 1rem 0;
+        font-size: clamp(2.75rem, 3rem, 3.25rem);
+        color: library.$peachy;
+        align-self: baseline;
+        line-height: 115%;
+        font-family: "Source Serif Pro";
+        font-style: normal;
+        font-weight: bold;
+
+        @media (max-width: 768px) {
+            width: 90%;
+        }
+    }
+
+    &.subtitle--text {
+        width: 70%;
+        padding: 0 1.5rem;
+        margin: 1rem 0;
+        // font-size: clamp(0.75rem, 1.25rem, 1.5rem);
+        color: library.$peachy;
+        align-self: baseline;
+
+        @media (max-width: 768px) {
+            width: 100%;
+            line-height: 1.875rem;
+            font-size: 1.25rem;
+        }
+    }
+}
+
+.grid--buttons {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 0;
+    gap: 1rem;
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+    }
+}
+
+.MuiLink-root {
+    &.startTeaching--button {
+        background: #57996A;
+        color: #ffffff;
+        font-weight: 600;
+        border-radius: 100px;
+        height: 4rem;
+        width: 100%;
+        text-transform: capitalize;
+        text-align: center;
+        text-decoration: none;
+        padding: 1rem;
+        &:hover {
+            color: #ffffff;
+            background-color: #557669;
+        }
+
+        @media (min-width: 768px) {
+            width: 12rem;
+        }
+    }
+    
+    &.pricing--button {
+        background: #FAF9F6;
+        color: #000;
+        font-weight: 600;
+        border-radius: 100px;
+        height: 4rem;
+        width: 100%;
+        text-transform: capitalize;
+        text-align: center;
+        text-decoration: none;
+        padding: 1rem;
+        border: 1px solid black;
+        &:hover {
+            color: #FAF9F6;
+            background-color: #000;
+        }
+
+        @media (min-width: 768px) {
+            width: 12rem;
+        }
+    }
+}
+
+.values--container {
+    width: 100%;
+    padding-top: 3.5rem;
+    padding-bottom: 0;
+    margin: 3rem auto;
+    align-items: flex-start;
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.03);
+    box-shadow: 0px 20px 25px -3px rgba(0, 0, 0, 0.03);
+
+  
+  @include sm {
+    align-items: center;
+  }
+
+  @include md {
+    align-items: center;
+  }
+}
+
+.MuiGrid-root {
+  @include sm {
+    margin-left: 2rem;
+  }
+}
+
+.MuiTypography-root {
+  &.productValues-title--font {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.875rem;
+    font-weight: 600;
+    line-height: 2.5rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: black;
+    text-align: center;
+  }
+
+  &.productValues-subtitle--font {
+    width: 100%;
+    margin-bottom: 4.5rem;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 400;
+    line-height: 1.75rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: black;
+  }
+}
+
+.MuiBox-root {
+    &.item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 2rem;
+        justify-content: space-between;
+    }
+}

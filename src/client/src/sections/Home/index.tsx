@@ -1,6 +1,16 @@
 import React from 'react';
 import { Box, CircularProgress } from '@mui/material';
-import { HomeInfo, CardGrid, ProductValues, Footer, HomeDetails, CTA, ProductDetails } from '../../lib/components/'
+import { 
+  HomeInfo, 
+  CardGrid, 
+  ProductValues, 
+  Footer, 
+  HomeDetails, 
+  CTA, 
+  ProductDetails, 
+  HomeDetailsSkeleton, 
+  HomeInfoSkeleton 
+} from '../../lib/components/'
 import { Viewer, usePlaylistQuery } from '../../graphql/generated';
 import { PlaylistCard } from '../../lib/components/';
 
@@ -16,7 +26,12 @@ export const Home = ({ viewer }: Props) => {
   })
 
   if (loading) {
-    return (<>Loading...</>)
+    return (
+      <Box>
+        <HomeInfoSkeleton />
+        <HomeDetailsSkeleton />
+      </Box>
+    )
   }
 
   if (error) {
