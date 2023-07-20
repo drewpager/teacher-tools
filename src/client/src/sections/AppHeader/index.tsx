@@ -242,7 +242,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
         ) : (
           <>
             <Box className='navburger--icon'>
-              <Link to={`/login`} style={{ textDecoration: "none" }}>
+              <Link to={`/signup`} style={{ textDecoration: "none" }}>
                 <Button className="mobileStarted--button">Get Started</Button>
               </Link>
               <IconButton
