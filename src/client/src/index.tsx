@@ -40,6 +40,7 @@ import {
   // Stripe,
   SignUp
 } from './sections';
+import { HomeInfoSkeleton } from './lib/components';
 import { DisplayError } from './lib/utils';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import "@fontsource/noto-serif/";
@@ -92,10 +93,9 @@ const App = () => {
   if (!viewer.didRequest && !error) {
     return (
       <Box sx={{ backgroundColor: "#FAF9F6" }}>
-        <Skeleton variant="rectangular" animation="wave" width="100%" height="50px" />
-        <Box sx={{ textAlign: "center" }}>
-          <CircularProgress color="primary" />
-        </Box>
+        <Skeleton variant="rectangular" animation="wave" width="100%" height="84px" />
+        <br />
+        <HomeInfoSkeleton />
       </Box>
     )
   }

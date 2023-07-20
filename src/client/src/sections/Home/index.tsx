@@ -27,7 +27,7 @@ export const Home = ({ viewer }: Props) => {
 
   if (loading) {
     return (
-      <Box>
+      <Box sx={{ marginTop: 15 }}>
         <HomeInfoSkeleton />
         <HomeDetailsSkeleton />
       </Box>
