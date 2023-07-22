@@ -120,6 +120,19 @@
       background-color: #557669;
     }
   }
+
+  &.catalog--button {
+    margin: 0.5rem 0.5rem;
+    height: 3rem;
+    text-transform: none;
+    text-decoration: none;
+    color: #000;
+    
+    &:hover {
+      background-color: #57996A;
+      color: #ffffff;
+    }
+  }
 }
 
 .MuiButtonBase-root {

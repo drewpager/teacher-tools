@@ -99,9 +99,9 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
         {viewer && viewer.avatar ? (
           <Box>
             <Box className="desktop--loggedIn-items">
-              <Link to={`/catalog`} style={{ textDecoration: "none", color: "#000" }}>
-                <p>Catalog</p>
-              </Link>
+                <Button variant="outlined" className="catalog--button" href="/catalog">
+                    Catalog
+                </Button>
               <Tooltip title="Create Content!">
                 <IconButton
                   onClick={handleOpenActionMenu}
