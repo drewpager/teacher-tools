@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, ChangeEvent } from 'react';
+import React, { useState, useRef, useEffect, ChangeEvent, useMemo } from 'react';
 import { Alert, Box, CircularProgress, Grid, Typography, Chip, Switch, TextField, InputAdornment, Icon, Tooltip } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -86,7 +86,7 @@ export const Catalog = ({ viewer }: Props) => {
     e.preventDefault();
     // let enteredSearch = e.target.value;
     if (searchInput.length > 0) {
-      setFilteredLesson(data?.allLessons.result.filter((lesson) => lesson?.title?.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1));
+      setFilteredLesson(datum?.allLessons.result.filter((lesson) => lesson?.title?.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1));
       setSearchError(false);
     }
 
@@ -117,6 +117,8 @@ export const Catalog = ({ viewer }: Props) => {
       page: 1
     }
   });
+
+  const datum = useMemo(() => { return data }, [data])
 
   if (loading) {
     return <CatalogSkeleton />
@@ -171,7 +173,7 @@ export const Catalog = ({ viewer }: Props) => {
 
 
   // Isolate the main and any secondary categories
-  const categor = data?.allLessons.result;
+  const categor = datum?.allLessons.result
   const mainCategoryArray: any[] = [];
   const secondaryCategory: any = [{}];
   const allCategories: any[] = [];
@@ -233,7 +235,7 @@ export const Catalog = ({ viewer }: Props) => {
           <Box className="catalogBackground" sx={{ marginBottom: "80px" }} id={`${selected[0]}`}>
             <Box className="catalogHeader--container">
               <h1 className="catalogTitle">Documentary Catalog
-                {" "}<Chip label={data?.allLessons.total} color="primary" size="medium" />
+                {" "}<Chip label={datum?.allLessons.total} color="primary" size="medium" />
               </h1><TextField
                 variant='outlined'
                 // id="catalog-search"
@@ -269,27 +271,27 @@ export const Catalog = ({ viewer }: Props) => {
                 </>
               </div>
             )}
-            {selected && data && (
+            {selected && datum && (
               <div className="catalog--item" id={`${selected[0]}`}>
                 {view === 'grid' ? (
                   <>
-                    <CatalogItem viewer={`${viewer.id}`} name={`${selected[0]}`} category={data.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0])).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={`${selected[0]}`} bookmarks={userBookmarks} />
+                    <CatalogItem viewer={`${viewer.id}`} name={`${selected[0]}`} category={datum.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0])).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={`${selected[0]}`} bookmarks={userBookmarks} />
                     <Alert variant="outlined" severity="info" style={{ marginTop: "0.875rem" }}>Not seeing what you're looking for? It might be in another category or try using the search bar above!</Alert>
                   </>
                 ) : (
                   <>
-                    <CatalogList viewer={`${viewer.id}`} name={`${selected[0]}`} category={data.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0])).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={`${selected[0]}`} bookmarks={userBookmarks} />
+                    <CatalogList viewer={`${viewer.id}`} name={`${selected[0]}`} category={datum.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0])).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={`${selected[0]}`} bookmarks={userBookmarks} />
                     <Alert variant="outlined" severity="info">Not seeing what you're looking for? It might be in another category or try using the search bar above!</Alert>
                   </>
                 )}
               </div>
             )}
-            {data && categories.map((cater) => (cater.name !== selected[0]) && (
+            {datum && categories.map((cater) => (cater.name !== selected[0]) && (
               <div className="catalog--item" id={`${cater.name}`}>
                 {view === 'grid' ? (
-                  <CatalogItem viewer={`${viewer.id}`} name={cater.name} category={data.allLessons.result.filter((b) => b.category?.includes(cater.name)).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={cater.name} bookmarks={userBookmarks} />
+                  <CatalogItem viewer={`${viewer.id}`} name={cater.name} category={datum.allLessons.result.filter((b) => b.category?.includes(cater.name)).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={cater.name} bookmarks={userBookmarks} />
                 ) : (
-                  <CatalogList viewer={`${viewer.id}`} name={cater.name} category={data.allLessons.result.filter((b) => b.category?.includes(cater.name)).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={cater.name} bookmarks={userBookmarks} />
+                  <CatalogList viewer={`${viewer.id}`} name={cater.name} category={datum.allLessons.result.filter((b) => b.category?.includes(cater.name)).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={cater.name} bookmarks={userBookmarks} />
                 )}
 
               </div>
