@@ -99,9 +99,9 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
         {viewer && viewer.avatar ? (
           <Box>
             <Box className="desktop--loggedIn-items">
-                <Button variant="outlined" className="catalog--button" href="/catalog">
-                    Catalog
-                </Button>
+              <Button variant="outlined" className="catalog--button" href="/catalog">
+                Catalog
+              </Button>
               <Tooltip title="Create Content!">
                 <IconButton
                   onClick={handleOpenActionMenu}
@@ -292,9 +292,9 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                 <Link to={`/catalog`} style={{ textDecoration: "none", marginRight: 32 }}>
                   <p style={{ color: `${theme.palette.info.dark}` }}>Teacher Tools</p>
                 </Link>
-                <Link to={`/catalog`} style={{ textDecoration: "none", marginRight: 32 }}>
+                {/* <Link to={`/catalog`} style={{ textDecoration: "none", marginRight: 32 }}>
                   <p style={{ color: `${theme.palette.info.dark}` }}>Video Catalog</p>
-                </Link>
+                </Link> */}
                 <Link to={`/pricing`} style={{ textDecoration: "none", marginRight: 32 }}>
                   <p style={{ color: `${theme.palette.info.dark}` }}>Pricing</p>
                 </Link>
@@ -302,8 +302,14 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                   <p style={{ color: `${theme.palette.info.dark}` }}>Contact Us</p>
                 </Link>
               </div>
+              {/* <Link to={`/catalog`} style={{ textDecoration: "none", marginRight: 16 }}>
+                <p style={{ color: `${theme.palette.info.dark}` }}>Video Catalog</p>
+              </Link> */}
+              <Button disableFocusRipple disableRipple variant="outlined" className="catalog--button" href="/catalog">
+                Video Catalog
+              </Button>
               <Link to={`/login`} style={{ textDecoration: "none" }}>
-                <Button className="login--button">Login</Button>
+                <Button disableFocusRipple disableRipple className="login--button">Login</Button>
               </Link>
               {/* <Tooltip title="Account Login">
                   <IconButton
@@ -318,7 +324,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                   </IconButton>
                 </Tooltip> */}
               <Link to={`/signup`} style={{ textDecoration: "none" }}>
-                <Button className="getStarted--button">Get Started for Free</Button>
+                <Button disableFocusRipple disableRipple className="getStarted--button">Get Started for Free</Button>
               </Link>
             </Box>
           </>
