@@ -95,10 +95,6 @@ export const Catalog = ({ viewer }: Props) => {
     if (searchInput.length > 0 && filteredLesson.length === 0) {
       setSearchError(true);
     }
-    // if (enteredSearch) {
-    //   setSearchInput(enteredSearch);
-    //   setFilteredLesson(data?.allLessons.result.filter((lesson) => lesson?.title?.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1));
-    // }
 
     if (e.target.value === '') {
       setFilteredLesson([]);
@@ -242,8 +238,8 @@ export const Catalog = ({ viewer }: Props) => {
                 variant='outlined'
                 // id="catalog-search"
                 label="Search Catalog"
-                value={`${searchInput}`}
                 onChange={(e) => inputHandler(e)}
+                value={`${searchInput}`}
                 ref={inputRef}
                 className="catalog--search"
                 InputProps={{
