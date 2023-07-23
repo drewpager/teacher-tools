@@ -146,11 +146,12 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
               </Menu>
               <Tooltip title="Click For User Options">
                 <IconButton
-                  onClick={handleOpenUserMenu} sx={{ p: 1 }}
+                  onClick={handleOpenUserMenu}
+                  sx={{ p: 1 }}
                   disableFocusRipple
                   disableRipple
                 >
-                  <Avatar alt="logged in user avatar" src={viewer.avatar} />
+                  <Avatar alt="logged in user avatar" src={viewer.avatar} sx={{ border: `1px solid #000` }} />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -188,7 +189,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
             {/* Mobile Responsive Icon Menu */}
             <Box className='navburger--icon'>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                {viewer ? <Avatar alt="logged in user avatar" src={viewer.avatar} /> : <MenuIcon />}
+                {viewer ? <Avatar alt="logged in user avatar" src={viewer.avatar} sx={{ border: `1px solid #000` }} /> : <MenuIcon />}
               </IconButton>
               <Menu
                 sx={{ mt: '45px' }}

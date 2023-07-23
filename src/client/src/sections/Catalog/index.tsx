@@ -82,9 +82,11 @@ export const Catalog = ({ viewer }: Props) => {
     // window.scrollTo(0, 0)
   };
 
+  // Catalog Search Bar Feature
   const inputHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     e.preventDefault();
-    // let enteredSearch = e.target.value;
+    setSearchInput(e.target.value)
+
     if (searchInput.length > 0) {
       setFilteredLesson(datum?.allLessons.result.filter((lesson) => lesson?.title?.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1));
       setSearchError(false);
@@ -240,8 +242,8 @@ export const Catalog = ({ viewer }: Props) => {
                 variant='outlined'
                 // id="catalog-search"
                 label="Search Catalog"
-                value={searchInput}
-                onChange={(e) => { setSearchInput(e.target.value); inputHandler(e) }}
+                value={`${searchInput}`}
+                onChange={(e) => inputHandler(e)}
                 ref={inputRef}
                 className="catalog--search"
                 InputProps={{
