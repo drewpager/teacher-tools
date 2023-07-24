@@ -13,7 +13,7 @@ import { Response, Request } from "express";
 import { authorize } from "../../../lib/utils";
 const stripe = require("stripe")(`${process.env.S_SECRET_KEY}`);
 
-// DEPLOY TODO: When in production w/ HTTPS, add secure setting
+// When in production w/ HTTPS, add secure setting
 const cookieOptions = {
   httpOnly: true,
   sameSite: true,
