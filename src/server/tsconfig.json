@@ -5,7 +5,7 @@
     "module": "CommonJS",
     "jsx": "react-jsx",
     "rootDirs": ["./"],
-    "outDir": "src/src",
+    "outDir": "../platos-peach/src",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "strict": true,
