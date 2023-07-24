@@ -22,7 +22,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { DisplayError } from '../../lib/utils';
 import { ReactComponent as PeachIcon } from '../../lib/assets/peach-logo.svg';
 import { Footer } from '../../lib/components';
@@ -101,6 +101,9 @@ const checkInput = ({ field, form: { errors, touched, setFieldValue } }: FieldPr
 
 export const QuizCreate = ({ viewer }: props) => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  const quizCreatePage: boolean = pathname === "/quiz/create";
 
   const [createQuiz, { loading, error }] = useCreateQuizMutation({
     variables: {
@@ -126,11 +129,13 @@ export const QuizCreate = ({ viewer }: props) => {
 
   return (
     <div>
-      <FeedbackModal />
+      {quizCreatePage ? (<FeedbackModal />) : (<></>)}
       <Box className="breadcrumb">
-        <Link to={`../user/${viewer.id}`}>
-          <p>⟨ Back to dashboard</p>
-        </Link>
+        {quizCreatePage ? (
+          <Link to={`../user/${viewer.id}`}>
+            <p>⟨ Back to dashboard</p>
+          </Link>
+        ) : (<></>)}
         <h1>Create Assessment</h1>
       </Box>
       <Box className="quizCreate--form">
@@ -155,8 +160,11 @@ export const QuizCreate = ({ viewer }: props) => {
                 input: values
               }
             });
-
-            navigate(`../user/${viewer.id}`, { replace: true })
+            if (pathname === "/quiz/create") {
+              navigate(`../user/${viewer.id}`, { replace: true })
+            } else {
+              window.location.reload();
+            }
           }}
         >
           {({ values, errors, touched, handleSubmit, handleChange }) => (
@@ -236,12 +244,16 @@ export const QuizCreate = ({ viewer }: props) => {
                                                 name={`questions[${index}].answerOptions[${indy}].answerText`}
                                                 onChange={handleChange}
                                               />
-                                              <Tooltip title="Add another answer option" className="quiz--modicons">
-                                                <ControlPoint onClick={() => push({ answerText: "", isCorrect: false })} />
-                                              </Tooltip>
-                                              <Tooltip title="Remove answer option" className="quiz--modicons">
-                                                <RemoveCircleOutlineIcon onClick={() => remove(indy)} />
-                                              </Tooltip>
+                                              <Button onClick={() => push({ answerText: "", isCorrect: false })} className="quiz--modicon-button" disableRipple disableFocusRipple>
+                                                <Tooltip title="Add another answer option" className="quiz--modicons">
+                                                  <ControlPoint />
+                                                </Tooltip>
+                                              </Button>
+                                              <Button onClick={() => remove(indy)} className="quiz--modicon-button" disableRipple disableFocusRipple>
+                                                <Tooltip title="Remove answer option" className="quiz--modicons">
+                                                  <RemoveCircleOutlineIcon />
+                                                </Tooltip>
+                                              </Button>
                                             </div>
                                           </div>
                                         )
@@ -301,7 +313,7 @@ export const QuizCreate = ({ viewer }: props) => {
                 )}
               </FieldArray>
               <div className="quiz--button-area">
-                <Link to={`../user/${viewer.id}`} style={{ textDecoration: "none" }}>
+                <Link to={quizCreatePage ? `../user/${viewer.id}` : `/playlist/create`} style={{ textDecoration: "none" }}>
                   <Typography variant="h4" className="quiz--button-cancel">Cancel</Typography>
                 </Link>
                 <Button

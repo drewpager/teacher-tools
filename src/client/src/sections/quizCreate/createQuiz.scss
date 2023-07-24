@@ -28,7 +28,7 @@
 
   .quiz--modicons {
     color: #c7c7c7;
-    margin: 0.25rem;
+    // margin: 0.25rem;
     :hover {
       cursor: pointer;
       color: library.$peachy;
@@ -185,5 +185,18 @@
 .quiz__multiAnswerArea {
   &:last-child {
     margin-bottom: 1rem;
+  }
+}
+
+.MuiButtonBase-root {
+  &.quiz--modicon-button {
+    background-color: transparent;
+    &:hover {
+      background-color: transparent;
+      color: library.$black;
+      > .quiz--modicons {
+        fill: library.$black;
+      }
+    }
   }
 }

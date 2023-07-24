@@ -1,7 +1,7 @@
 import { CircularProgress, Grid, Box, Card, TextField, Button, Switch, FormControlLabel, Chip, Avatar, Typography } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import DoneIcon from '@mui/icons-material/Done';
-import React, { useState, ChangeEvent, useRef, useEffect, useReducer } from 'react';
+import React, { useState, ChangeEvent, useRef, useEffect, useReducer, useMemo } from 'react';
 import {
   FullLessonInput,
   useLessonPlanMutation,
@@ -111,12 +111,24 @@ export const CreatePlaylist = ({ viewer }: props) => {
     }
   })
 
-
-  const lessonQuery = lessonData ? lessonData.allLessons.result : null;
-  const quizQuery = quizData ? quizData.allquizzes.result : null;
-  const bookmarkQuery = userData ? userData.user.bookmarks : null;
+  const lessonQuery = useMemo(() => { return lessonData?.allLessons.result }, [lessonData])
+  // let lessonQuery = lessonData ? lessonData.allLessons.result : null;
+  let quizQuery = quizData ? quizData.allquizzes.result : null;
+  let bookmarkQuery = userData ? userData.user.bookmarks : null;
 
   useEffect(() => {
+    if (window.localStorage.getItem("playlist")?.length) {
+      setPlaylist(JSON.parse(`${window?.localStorage?.getItem("playlist")}`))
+    } else {
+      setPlaylist(initialData);
+    }
+  }, [])
+
+  useEffect(() => {
+    if (window.localStorage.getItem("playlist")?.length) {
+      setPlaylist(JSON.parse(`${window?.localStorage?.getItem("playlist")}`))
+    }
+
     if (lessonQuery) {
       const lessonInput: FullLessonInput[] = []
       lessonQuery.forEach(i => {
@@ -154,7 +166,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       setPlans(p => [...p, ...quizInput])
       setQuizzes(quizInput)
     }
-  }, [lessonQuery, quizQuery])
+  }, [lessonQuery, quizQuery, quizData, lessonData])
 
   if (!viewer.id) {
     return (
@@ -195,12 +207,13 @@ export const CreatePlaylist = ({ viewer }: props) => {
   // setCater(mainCategories.map((i) => false))
   const titleHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     e.preventDefault();
-    const name = e.target.value;
+    let name = e.target.value;
     setPlaylist({
       plan: [...playlist.plan],
       name: name,
       creator: viewer && viewer.id ? viewer.id : "0"
     })
+    window.localStorage.setItem('playlist', JSON.stringify(playlist));
   }
 
   if (lessonLoading || quizLoading) {
@@ -252,6 +265,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       playlist.plan.push(...displacedItem)
 
       setPlaylist(playlist)
+      window.localStorage.setItem('playlist', JSON.stringify(playlist));
     }
 
     if (destination.droppableId === "lessons") {
@@ -262,6 +276,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
       setPlans([...items])
       setPlaylist(playlist)
+      window.localStorage.setItem('playlist', JSON.stringify(playlist));
     }
   }
 
@@ -293,7 +308,9 @@ export const CreatePlaylist = ({ viewer }: props) => {
       });
     }
     // Remove items from playlist plan field for next visit and Navigate to User Profile Page
-    playlist.plan.length = 0;
+    // playlist.plan.length = 0;
+    setPlaylist(initialData);
+    window.localStorage.removeItem('playlist');
     navigate(`../user/${viewer.id}`, { replace: true })
   }
 
@@ -333,6 +350,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       <Box className="createPlaylist--box">
         <FeedbackModal />
         <h1 className='createPlaylist--h1'>Create Lesson Plan</h1>
+        <Button sx={{ marginLeft: "2rem" }} variant="contained" onClick={() => { setPlaylist(initialData); window.localStorage.removeItem('playlist') }}>Reset</Button>
         <form onSubmit={handleSubmit}>
           <DragDropContext onDragEnd={onDragEndHandler}>
             <Grid container>
@@ -347,6 +365,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
                         ref={inputRef}
                         fullWidth
                         onChange={titleHandler}
+                        value={playlist.name}
                       />
                       {playlist.plan.map((i, indices) => (
                         <Draggable draggableId={`${i._id}`} index={indices} key={`${i._id}`}>
