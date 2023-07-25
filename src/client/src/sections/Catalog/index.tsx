@@ -43,7 +43,7 @@ export const Catalog = ({ viewer }: Props) => {
   const [filteredLesson, setFilteredLesson] = useState<any>();
   const [searchError, setSearchError] = useState<boolean>(false);
   const [searchInfo, setSearchInfo] = useState<boolean>(true);
-  const [view, setView] = useState<'grid' | 'list'>('grid')
+  const [view, setView] = useState<'grid' | 'list'>('list')
   const [userBookmarks, setUserBookmarks] = useState<any[]>()
   const inputRef = useSearchFocus();
 
