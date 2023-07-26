@@ -62,20 +62,19 @@
     box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.03);
     box-shadow: 0px 20px 25px -3px rgba(0, 0, 0, 0.03);
 
-  
-  @include sm {
-    align-items: center;
-  }
+    @include sm {
+        align-items: center;
+    }
 
-  @include md {
-    align-items: center;
-  }
+    @include md {
+        align-items: center;
+    }
 }
 
 .MuiGrid-root {
-  @include sm {
-    margin-left: 2rem;
-  }
+    @include sm {
+        margin-left: 2rem;
+    }
 }
 
 .MuiBox-root {

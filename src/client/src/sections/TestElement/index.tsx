@@ -7,9 +7,8 @@ import { HomeInfoSkeleton } from "../../lib/components";
 
 export const TestElement = () => {
   return (
-    <h1>Hello Testing!</h1>
-    // <Box sx={{ marginTop: 15 }}>
-    //   <HomeInfoSkeleton />
-    // </Box>
+    <Box sx={{ marginTop: 15 }}>
+      <HomeInfoSkeleton />
+    </Box>
   )
 }
