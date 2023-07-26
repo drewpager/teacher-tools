@@ -6,7 +6,7 @@ import { Footer } from '../../lib/components';
 import './catalogSkeleton.scss';
 // import './catalog.scss';
 
-export const CatalogSkeleton = () => {
+export const CatalogSkeletonGrid = () => {
   return (
     <Box width="100%">
       <Grid container overflow={"hidden"}>

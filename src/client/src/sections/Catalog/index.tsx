@@ -14,7 +14,8 @@ import { categories, titleCase, DisplayError } from '../../lib/utils';
 import { CatalogItem } from './catalogItem';
 import { CatalogList } from './catalogList';
 import { Footer } from '../../lib/components';
-import { CatalogSkeleton } from './catalogSkeleton';
+import { CatalogSkeletonGrid } from './catalogSkeletonGrid';
+import { CatalogSkeletonList } from './listCatalogSkeleton';
 import { FeedbackModal } from '../Contact/FeedbackModal';
 import "./catalog.scss";
 import { Link } from 'react-router-dom';
@@ -118,8 +119,12 @@ export const Catalog = ({ viewer }: Props) => {
 
   const datum = useMemo(() => { return data }, [data])
 
-  if (loading) {
-    return <CatalogSkeleton />
+  if (loading && view === 'grid') {
+    return <CatalogSkeletonGrid />
+  }
+
+  if (loading && view === 'list') {
+    return <CatalogSkeletonList />
   }
 
   if (error) {
@@ -258,8 +263,8 @@ export const Catalog = ({ viewer }: Props) => {
                 <Switch checked={ascending} disabled={alphabetical} onClick={() => setAscending(!ascending)} /></Tooltip><Typography variant='h3'>{ascending ? "Chronological" : "Reverse"}</Typography>
               {" "}
               <Tooltip title="Sort alphabetically"><SortByAlphaIcon onClick={() => setAlphabetical(!alphabetical)} className='catalog--view-button' color={alphabetical ? "secondary" : "info"} /></Tooltip>
-              <Tooltip title="Grid view"><AppsIcon onClick={() => setView('grid')} className='catalog--view-button' color={view === 'grid' ? "secondary" : "info"} /></Tooltip>
               <Tooltip title="List view"><TableRowsIcon onClick={() => setView('list')} className='catalog--view-button' color={view === 'list' ? "secondary" : "info"} /></Tooltip>
+              <Tooltip title="Grid view"><AppsIcon onClick={() => setView('grid')} className='catalog--view-button' color={view === 'grid' ? "secondary" : "info"} /></Tooltip>
             </Box>
             {filteredLesson && (
               <div className="catalog--item">
