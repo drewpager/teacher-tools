@@ -5,9 +5,15 @@
     margin: 5rem 0;
     overflow-y: hidden;
     overflow-x: hidden;
-    padding-right: 2rem;
+    // padding-right: 2rem;
     .createPlaylist--h1, .createPlaylist--button {
-      margin-left: 2rem;
+      margin-left: 1rem;
+
+      @media (max-width: 768px) {
+        margin: 0;
+        margin-bottom: 0.5rem;
+        width: 100%;
+      }
     }
   }
 }
@@ -15,12 +21,18 @@
 .MuiPaper-root {
   &.createPlaylist--card {
     min-height: 30%;
-    max-height: 40rem;
-    min-width: 25rem;
+    max-height: 37.1rem;
+    width: 100%;
     padding: 2rem;
     margin-top: 1rem;
     overflow-y: scroll;
     overflow-x: hidden;
+
+    @media (max-width: 768px) {
+      height: 50%;
+      width: 100%;
+      margin: 0.25rem;
+    }
   }
   &.createQuiz--card {
     min-height: 6rem;
@@ -32,12 +44,33 @@
     align-items: center;
     text-align: center;
   }
+
   &.lesson--card {
     background-color: library.$coral;
     padding: 1rem; 
-    margin: 0.5rem -1rem;
+    margin: 0.25rem -0.25rem;
     width: 95%;
     color: library.$white;
+
+    @media (max-width: 768px) {
+      width: 95%;
+      margin: 0.25rem -0.25rem;
+    }
+  }
+
+  &.createPlaylist-drop--card {
+    height: 750px;
+    margin: 1rem;
+    margin-left: -1rem;
+    padding: 2rem;
+    overflow-y: scroll;
+    
+    @media (max-width: 768px) {
+      width: 100%;
+      max-height: 50vh;
+      margin: 0;
+      overflow-y: scroll;
+    }
   }
 }
 

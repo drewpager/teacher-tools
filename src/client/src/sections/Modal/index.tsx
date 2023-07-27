@@ -16,17 +16,22 @@ export const UseModal = ({ viewer }: Props) => {
 
   return (
     <Box>
-    <Button onClick={handleOpen} className="modal--button">Add Assessment Questions</Button>
-    <Modal
-      open={open}
-      onClose={handleClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
-      <Box className="modal">
-        <QuizCreate viewer={viewer} />
-      </Box>
-    </Modal>
-  </Box>
+      <Button
+        onClick={handleOpen}
+        className="modal--button"
+        disableFocusRipple
+        disableRipple
+      >Add Assessment Questions</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box className="modal">
+          <QuizCreate viewer={viewer} />
+        </Box>
+      </Modal>
+    </Box>
   )
 }
