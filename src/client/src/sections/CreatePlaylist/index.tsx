@@ -1,6 +1,5 @@
-import { CircularProgress, Grid, Box, Card, TextField, Button, Switch, FormControlLabel, Chip, Avatar, Typography, CardMedia } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
-import DoneIcon from '@mui/icons-material/Done';
+import { CircularProgress, Grid, Box, Card, TextField, Button, Switch, FormControlLabel, Chip, Avatar, Typography, CardMedia, InputAdornment } from '@mui/material';
+import { Close } from '@mui/icons-material';
 import React, { useState, ChangeEvent, useRef, useEffect, useReducer, useMemo } from 'react';
 import {
   FullLessonInput,
@@ -65,6 +64,7 @@ function reducer(state: any, action: any) {
 export const CreatePlaylist = ({ viewer }: props) => {
   let navigate = useNavigate();
   const [searchInput, setSearchInput] = useState<string>("")
+  const [searchError, setSearchError] = useState<boolean>(false)
   const [variant, setVariant] = useState<boolean>(true)
   const [cater, setCater] = useState<Array<boolean>>([])
   const [variantAssessment, setVariantAssessment] = useState<boolean>(true)
@@ -78,7 +78,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const [playlist, setPlaylist] = useState<InputLessonPlan>(initialData)
   const [state, dispatch] = useReducer(reducer, { lessons: [...lessons], quizzes: [...quizzes] })
 
-  const limit: number = 700;
+  const limit: number = 1000;
   const page: number = 1;
 
   const { data: userData, loading: userLoading, error: userError } = useUserQuery({
@@ -276,6 +276,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       items.push(...displacedPlay)
 
       setPlans([...items])
+      setFilter([...items])
       setPlaylist(playlist)
       window.localStorage.setItem('playlist', JSON.stringify(playlist));
     }
@@ -287,14 +288,31 @@ export const CreatePlaylist = ({ viewer }: props) => {
     setSearchInput(enteredSearch)
 
     if (enteredSearch) {
-      const filteredLessons = plans.filter((plan) => plan?.title?.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1);
+      const filteredLessons = plans.filter((plan) => plan?.category?.includes(`${searchInput.toLowerCase()}`) || plan?.title?.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1);
+      if (!filteredLessons.length) {
+        setSearchError(true)
+      }
       setPlans(filteredLessons)
     }
 
     if (enteredSearch === '') {
+      // if value is already from plan, remove from lessons
+      setSearchError(false)
       setPlans(filter.filter(val => !playlist.plan.includes(val)))
+      // setSearchError(true)
       // setFilter(lessons)
     }
+  }
+
+  const handleReset = () => {
+    window.localStorage.removeItem('playlist');
+    setPlaylist(initialData);
+  }
+
+  const resetSearch = () => {
+    setSearchInput("");
+    setPlans(filter.filter(val => !playlist.plan.includes(val)))
+    setSearchError(false);
   }
 
   const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
@@ -315,11 +333,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
     navigate(`../user/${viewer.id}`, { replace: true })
   }
 
-  const handleLessonClick = () => {
-    setVariant(!variant)
-    dispatch({ type: "lessonOnly" })
-  }
-
   const handleCategoryClick = (i: string, index: number) => {
     if (i === "All") {
       setPlans([...filter])
@@ -327,15 +340,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
     }
     setFilled(!filled)
     setPlans([...filter.filter((e) => e.category?.includes(i))])
-  }
-
-  const handleCategoryDelete = () => {
-    setVariant(!variant)
-  }
-
-  const handleAssessmentClick = () => {
-    setVariantAssessment(!variantAssessment)
-    dispatch({ type: "quizOnly" })
   }
 
   if (error) {
@@ -349,11 +353,10 @@ export const CreatePlaylist = ({ viewer }: props) => {
   return (
     <div>
       <Box className="createPlaylist--box">
-        <FeedbackModal />
+        {/* <FeedbackModal /> */}
         <h1 className='createPlaylist--h1'>Create Lesson Plan</h1>
-        <Button className='createPlaylist--button' variant="contained" onClick={() => { setPlaylist(initialData); window.localStorage.removeItem('playlist') }}>Reset</Button>
-        <Button className="createPlaylist--button" variant='contained' type='submit'>Create</Button>
         <form onSubmit={handleSubmit}>
+          <Button className='createPlaylist--button' variant="contained" onClick={handleReset}>Reset</Button>
           <DragDropContext onDragEnd={onDragEndHandler}>
             <Grid container>
               <Droppable droppableId='playlist'>
@@ -444,6 +447,15 @@ export const CreatePlaylist = ({ viewer }: props) => {
                         onChange={inputHandler}
                         ref={inputRef}
                         className="createPlaylist--search"
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <Close onClick={resetSearch} />
+                            </InputAdornment>
+                          )
+                        }}
+                        helperText={searchError ? "No results found" : null}
+                        error={searchError}
                       />
                       <Grid container>
                         {plans.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime()).map((i, index) => (
@@ -493,7 +505,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
               </Droppable>
             </Grid>
           </DragDropContext>
-          {/* <Button className="createPlaylist--button" variant='contained' type='submit'>Create</Button> */}
+          <Button className="createPlaylist--button" variant='contained' type='submit'>Create</Button>
         </form >
       </Box>
       <Footer viewer={viewer} />
