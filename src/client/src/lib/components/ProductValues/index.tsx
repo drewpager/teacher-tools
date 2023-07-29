@@ -31,7 +31,7 @@ export const ProductValues = () => {
             <Box sx={item} >
               <Box sx={{ position: "relative" }}>
                 <svg width="129" height="120" viewBox="0 0 109 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0.824206 52.6526C0.390436 32.7863 11.1055 14.338 29.6406 7.01791C52.847 -2.14699 81.5221 -4.87401 96.9357 14.6952C113.727 36.0129 111.01 67.3815 93.551 88.159C78.8336 105.674 52.9055 100.751 31.5083 92.558C14.1551 85.9132 1.22866 71.1762 0.824206 52.6526Z" fill="#DFAF4E" fill-opacity="0.2" />
+                  <path fillRule="evenodd" clipRule="evenodd" d="M0.824206 52.6526C0.390436 32.7863 11.1055 14.338 29.6406 7.01791C52.847 -2.14699 81.5221 -4.87401 96.9357 14.6952C113.727 36.0129 111.01 67.3815 93.551 88.159C78.8336 105.674 52.9055 100.751 31.5083 92.558C14.1551 85.9132 1.22866 71.1762 0.824206 52.6526Z" fill="#DFAF4E" fillOpacity="0.2" />
                 </svg>
                 <ConstructionIcon sx={{ color: "#DFAF4E", position: "absolute", top: "20%", left: "22%", fontSize: 70 }} />
               </Box>
@@ -55,7 +55,7 @@ export const ProductValues = () => {
             <Box sx={item}>
               <Box sx={{ position: "relative" }}>
                 <svg width="129" height="120" viewBox="0 0 109 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M108.176 47.3474C108.61 67.2137 97.8946 85.662 79.3595 92.9821C56.1531 102.147 27.478 104.874 12.0644 85.3048C-4.72641 63.9871 -2.01006 32.6185 15.4491 11.841C30.1665 -5.67369 56.0946 -0.751328 77.4918 7.44197C94.845 14.0868 107.771 28.8238 108.176 47.3474Z" fill="#DFAF4E" fill-opacity="0.2" />
+                  <path fillRule="evenodd" clipRule="evenodd" d="M108.176 47.3474C108.61 67.2137 97.8946 85.662 79.3595 92.9821C56.1531 102.147 27.478 104.874 12.0644 85.3048C-4.72641 63.9871 -2.01006 32.6185 15.4491 11.841C30.1665 -5.67369 56.0946 -0.751328 77.4918 7.44197C94.845 14.0868 107.771 28.8238 108.176 47.3474Z" fill="#DFAF4E" fillOpacity="0.2" />
                 </svg>
                 <LockIcon sx={{ color: "#DFAF4E", position: "absolute", top: "20%", left: "22%", fontSize: 70 }} />
               </Box>
@@ -73,7 +73,7 @@ export const ProductValues = () => {
             <Box sx={item}>
               <Box sx={{ position: "relative" }}>
                 <svg width="129" height="120" viewBox="0 0 109 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0.824206 52.6526C0.390436 32.7863 11.1055 14.338 29.6406 7.01791C52.847 -2.14699 81.5221 -4.87401 96.9357 14.6952C113.727 36.0129 111.01 67.3815 93.551 88.159C78.8336 105.674 52.9055 100.751 31.5083 92.558C14.1551 85.9132 1.22866 71.1762 0.824206 52.6526Z" fill="#DFAF4E" fill-opacity="0.2" />
+                  <path fillRule="evenodd" clipRule="evenodd" d="M0.824206 52.6526C0.390436 32.7863 11.1055 14.338 29.6406 7.01791C52.847 -2.14699 81.5221 -4.87401 96.9357 14.6952C113.727 36.0129 111.01 67.3815 93.551 88.159C78.8336 105.674 52.9055 100.751 31.5083 92.558C14.1551 85.9132 1.22866 71.1762 0.824206 52.6526Z" fill="#DFAF4E" fillOpacity="0.2" />
                 </svg>
                 <PaletteIcon sx={{ color: "#DFAF4E", position: "absolute", top: "20%", left: "22%", fontSize: 70 }} />
               </Box>
