@@ -288,7 +288,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
     setSearchInput(enteredSearch)
 
     if (enteredSearch) {
-      const filteredLessons = plans.filter((plan) => plan?.category?.includes(`${searchInput.toLowerCase()}`) || plan?.title?.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1);
+      const filteredLessons = plans.filter((plan) => plan.category?.find((p) => p?.includes(searchInput.toLowerCase())) || plan?.title?.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1);
       if (!filteredLessons.length) {
         setSearchError(true)
       }
