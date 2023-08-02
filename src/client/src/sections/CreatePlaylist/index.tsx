@@ -74,6 +74,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const [filter, setFilter] = useState<Array<Plan>>([])
   const [yourContent, setYourContent] = useState<boolean>(false);
   const inputRef = useFocus();
+  const searchRef = useFocus();
   const [playlist, setPlaylist] = useState<InputLessonPlan>(initialData)
 
   const limit: number = 1000;
@@ -368,6 +369,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
     setSearchInput("");
     setPlans(filter.filter(val => !playlist.plan.includes(val)))
     setSearchError(false);
+    document.getElementById("lesson-search")?.focus();
   }
 
   const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
@@ -502,7 +504,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
                         label="Search Lessons"
                         value={searchInput}
                         onChange={inputHandler}
-                        ref={inputRef}
+                        ref={searchRef}
                         className="createPlaylist--search"
                         InputProps={{
                           endAdornment: (
