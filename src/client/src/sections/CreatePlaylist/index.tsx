@@ -350,8 +350,12 @@ export const CreatePlaylist = ({ viewer }: props) => {
   }
 
   const handleReset = () => {
-    window.localStorage.removeItem('playlist');
     setPlaylist(initialData);
+    playlist.plan.length = 0;
+    setPlans(playlist.plan);
+    if (!!window.localStorage.getItem('playlist')) {
+      window.localStorage.removeItem('playlist');
+    }
     handleCategoryClick("All", 0)
   }
 
@@ -378,8 +382,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
       });
     }
     // Remove items from playlist plan field for next visit and Navigate to User Profile Page
-    // playlist.plan.length = 0;
     setPlaylist(initialData);
+    playlist.plan.length = 0;
     window.localStorage.removeItem('playlist');
     navigate(`../user/${viewer.id}`, { replace: true })
   }
@@ -387,9 +391,15 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const handleCategoryClick = (i: string, index: number) => {
     if (i === "All") {
       setPlans([...filter])
-      DisplayError({ title: "All" })
+      return { ...filter }
+      // DisplayError({ title: "All" })
     }
-    setFilled(!filled)
+
+    if (i === "Quizzes") {
+      setPlans([...filter.filter((e) => e.questions && e.questions?.length > 0)])
+      return { ...filter }
+    }
+    // setFilled(!filled)
     setPlans([...filter.filter((e) => e.category?.includes(i))])
   }
 
@@ -464,7 +474,15 @@ export const CreatePlaylist = ({ viewer }: props) => {
                       key={1000}
                       label={"All"}
                       variant={"outlined"}
-                      onClick={() => handleCategoryClick("All", 1000)}
+                      onClick={() => handleCategoryClick("All", 0)}
+                      sx={{ m: "1px" }}
+                    />
+                    <Chip
+                      key={1001}
+                      label={"Quizzes"}
+                      variant={"outlined"}
+                      onClick={() => handleCategoryClick("Quizzes", 1)}
+                      sx={{ m: "1px" }}
                     />
                     {mainCategories.map((i: any, index) => (
                       <>
