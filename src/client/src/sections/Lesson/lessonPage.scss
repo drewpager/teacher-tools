@@ -6,3 +6,17 @@
   margin-bottom: 1rem;
   margin-right: 0.5rem;
 }
+
+.MuiBox-root {
+  &.lesson-video--section {
+    width: 80%;
+
+    @media (max-width: 1000px) {
+      width: 100%;
+    }
+
+    @media (min-width: 2000px) {
+      width: 60%;
+    }
+  }
+}

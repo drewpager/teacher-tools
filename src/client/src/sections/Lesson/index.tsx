@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { LinearProgress, Box, Chip } from '@mui/material';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
 import { VideoPlayer } from '../../lib/components';
+import { titleCase } from '../../lib/utils';
 import './lessonPage.scss';
 
 export const Lesson = () => {
@@ -29,12 +30,14 @@ export const Lesson = () => {
   }
 
   const lesson = data ? data.lesson : null;
-  
+
   return (
     <Box className="lesson--page">
       <h1>{lesson?.title}</h1>
-      {lesson?.category?.map((i, ind) => (<Chip variant='outlined' label={i} key={ind} color="error" className='lesson--category'/>))}
-      <VideoPlayer url={`${lesson?.video}`} />
+      {lesson?.category?.map((i, ind) => (<Chip variant='outlined' label={titleCase(`${i}`)} key={ind} color="error" className='lesson--category' />))}
+      <Box className="lesson-video--section">
+        <VideoPlayer url={`${lesson?.video}`} />
+      </Box>
       {/* <img src={`${lesson?.image}`} alt={`Text overlay of ${lesson?.title}`} /> */}
     </Box>
   )
