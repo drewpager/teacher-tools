@@ -33,6 +33,7 @@ export const CatalogList = ({ name, category, viewer, bookmarks }: props) => {
   const [open, setOpen] = useState<boolean>(false);
   const [bookmarkError, setBookmarkError] = useState<boolean>(false);
   const [bookmarked, setBookmarked] = useState<any[]>(bookmarks ? bookmarks : []);
+  const [bookmarkStatus, setBookmarkStatus] = useState<string>('');
 
   const handleClose = () => {
     setOpen(false)
@@ -58,6 +59,17 @@ export const CatalogList = ({ name, category, viewer, bookmarks }: props) => {
           viewer
         }
       })
+      setBookmarkStatus(`${res.data?.bookmarkLesson}`)
+
+      // if (res && `${res.data?.bookmarkLesson}` === "bookmarked") {
+      //   setBookmarked([...bookmarked, id])
+      // }
+
+      // if (res && `${res.data?.bookmarkLesson}` === "unbookmarked") {
+      //   const indy = bookmarked.indexOf(id);
+      //   setBookmarked(bookmarked.splice(indy, 1))
+      // }
+
       res && setOpen(true)
     }
   }
@@ -124,7 +136,7 @@ export const CatalogList = ({ name, category, viewer, bookmarks }: props) => {
             ) :
             (
               <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                Bookmarked!
+                {bookmarkStatus}!
               </Alert>
             )}
         </Snackbar>

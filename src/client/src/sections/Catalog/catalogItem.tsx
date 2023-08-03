@@ -223,7 +223,7 @@ export const CatalogItem = ({ name, category, viewer, bookmarks }: props) => {
             ) :
             (
               <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                {bookmarkStatus}
+                {bookmarkStatus}!
               </Alert>
             )}
         </Snackbar>
