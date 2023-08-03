@@ -155,10 +155,10 @@ export const Catalog = ({ viewer }: Props) => {
   }
 
   function alpha(a: any, b: any) {
-    if (a.title[0] < b.title[0]) {
+    if (a.title < b.title) {
       return -1;
     }
-    if (a.title[0] > b.title[0]) {
+    if (a.title > b.title) {
       return 1;
     }
     return 0;
