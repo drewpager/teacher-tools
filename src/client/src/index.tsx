@@ -113,7 +113,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home viewer={viewer} />} />
           <Route path="/teach" element={<Teach />} />
-          <Route path="/test" element={<TestElement />} />
+          <Route path="/test" element={<TestElement viewer={viewer} />} />
           {/* <Route path="/stripe" children={(props: any) => (<Stripe {...props} setViewer={setViewer} />)} element={<Stripe viewer={viewer} setViewer={setViewer} />} /> */}
           <Route path="/catalog" element={<Catalog viewer={viewer} />} />
           <Route path="/lesson/:id" element={<Lesson />} />
