@@ -435,6 +435,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
                         fullWidth
                         onChange={titleHandler}
                         value={playlist.name}
+                        onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
                       />
                       {playlist.plan.length === 0 && <CardMedia component="img" image={HowItWorks} sx={{ width: "95%", opacity: "50%" }} />}
                       {playlist.plan.map((i, indices) => (
@@ -516,6 +517,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
                         }}
                         helperText={searchError ? "No results found" : null}
                         error={searchError}
+                        onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
                       />
                       <Grid container>
                         {/* {plans.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime()).map((i, index) => ( */}
