@@ -67,6 +67,7 @@ const Input = ({ field, form: { errors, touched } }: FieldProps) => {
         placeholder={`Question`}
         fullWidth
         sx={{ paddingTop: "0.5rem", gridColumn: 4 }}
+        onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
       />
       {!!touched && errors && <div>{errorMessage}</div>}
     </>
@@ -116,7 +117,7 @@ export const QuizCreate = ({ viewer }: props) => {
   })
 
   if (loading) {
-    <Box>
+    <Box sx={{ marginTop: 15 }}>
       <CircularProgress color='primary' />
     </Box>
   }
@@ -187,6 +188,7 @@ export const QuizCreate = ({ viewer }: props) => {
                 sx={{
                   gridColumn: 3
                 }}
+                onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
               />
               <FieldArray name="questions">
                 {({ insert, remove, push }) => (
@@ -243,6 +245,7 @@ export const QuizCreate = ({ viewer }: props) => {
                                                 sx={{ marginTop: 2 }}
                                                 name={`questions[${index}].answerOptions[${indy}].answerText`}
                                                 onChange={handleChange}
+                                                onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
                                               />
                                               <Button onClick={() => push({ answerText: "", isCorrect: false })} className="quiz--modicon-button" disableRipple disableFocusRipple>
                                                 <Tooltip title="Add another answer option" className="quiz--modicons">
