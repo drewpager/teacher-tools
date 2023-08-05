@@ -20,9 +20,9 @@
   &.pricing--box {
     background-color: library.$blue; 
     border-radius: 0.5em; 
-    padding: 1em;
-    width: 33%;
-    margin: 1em 0;
+    padding: 1rem;
+    width: 24%;
+    margin: 1rem 0;
     color: library.$black;
     border: 2px solid black;
 
@@ -37,6 +37,10 @@
     &:nth-child(3) {
       background-color: #DFAF4E33;
     }
+
+    &:nth-child(4) {
+      background-color: #9929591A;
+    }
     
     @media (max-width: 768px) {
       width: 90%;
@@ -46,9 +50,9 @@
   &.pricing-details--box {
     border: 2px solid black;
     border-radius: 0.5em; 
-    padding: 1em;
-    width: 33%;
-    margin: 1em 0;
+    padding: 1.5rem;
+    width: 24%;
+    margin: 1rem 0;
 
     @media (max-width: 768px) {
       display: none;

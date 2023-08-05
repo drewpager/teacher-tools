@@ -94,6 +94,16 @@ export const Pricing = () => {
       <Alert severity="success">All Plans Include a 7-Day Free Trial!</Alert>
       <Box className='pricing--card-box'>
         <Box className="pricing--box">
+          <h3>Free Plan</h3>
+          <Chip label="Best for Trial" color="primary" />
+          <Typography variant="h5" color={theme.palette.info.dark} sx={{ fontWeight: 600, marginTop: 2 }}>Free with Limitations</Typography>
+          <Button
+            variant='contained'
+            href={"/signup"}
+            className='pricing--button'
+          >Try Free</Button>
+        </Box>
+        <Box className="pricing--box">
           <h3>Socrates Plan</h3>
           <Chip label="Best for Home School" color="primary" />
           <Typography variant="h5" color={theme.palette.info.dark} sx={{ fontWeight: 600, marginTop: 2 }}>{monthlyCadence ? "$70 billed annually ($5.83/mo)" : "$6.99 billed Monthly"}</Typography>
@@ -131,6 +141,15 @@ export const Pricing = () => {
       </Box>
       {/* <Alert severity="success">All Plans Include a 7-Day Free Trial!</Alert> */}
       <Box className='pricing--card-box'>
+        <Box className="pricing-details--box">
+          <h3>Free Plan</h3>
+          <ul>
+            <li className="success">Unlimited Bookmarks</li>
+            <li className="warning">Limited to 6 Lesson Plans</li>
+            <li className="warning">Limited To 6 Assessments</li>
+            <li className="warning">Limited To 6 Custom Lessons</li>
+          </ul>
+        </Box>
         <Box className="pricing-details--box">
           <h3>Socrates Plan</h3>
           <ul>

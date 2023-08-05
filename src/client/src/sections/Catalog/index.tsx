@@ -37,7 +37,7 @@ export const useSearchFocus = () => {
 
 export const Catalog = ({ viewer }: Props) => {
   const [expanded, setExpanded] = useState<string[]>([]);
-  const [selected, setSelected] = useState<string[]>(['biography']);
+  const [selected, setSelected] = useState<string[]>(['american history']);
   const [ascending, setAscending] = useState<boolean>(true);
   const [alphabetical, setAlphabetical] = useState<boolean>(false);
   const [searchInput, setSearchInput] = useState<string>("");
@@ -68,6 +68,9 @@ export const Catalog = ({ viewer }: Props) => {
 
   useEffect(() => {
     setUserBookmarks([userData?.user.bookmarks?.map((bookmark) => bookmark?.id)])
+    if (window.location.hash) {
+      setSelected([window.location.hash.slice(1).replace("%20", " ")])
+    }
   }, [userData?.user.bookmarks])
 
   const handleToggle = (event: React.SyntheticEvent, nodeIds: string[]) => {
@@ -77,7 +80,7 @@ export const Catalog = ({ viewer }: Props) => {
   const handleSelect = async (event: React.SyntheticEvent, nodeIds: string[]) => {
     await setSelected(nodeIds);
     if (window.innerWidth > 900) {
-      // window.location.replace(`/catalog#${nodeIds}`)
+      window.location.replace(`/catalog#${nodeIds}`)
       window.scrollTo(0, 0)
     }
     // window.scrollTo(0, 0)
