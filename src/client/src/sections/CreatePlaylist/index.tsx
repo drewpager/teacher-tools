@@ -22,6 +22,7 @@ import { CreatePlaylistCard, Footer } from '../../lib/components';
 import theme from '../../theme';
 import { FeedbackModal } from '../Contact/FeedbackModal';
 import HowItWorks from '../../lib/assets/how-it-works-3.png';
+import { CreatePlaylistSkeleton } from './createPlaylistSkeleton';
 
 type props = {
   viewer: Viewer;
@@ -264,7 +265,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
   }
 
   if (lessonLoading || quizLoading) {
-    return <CircularProgress />
+    return <CreatePlaylistSkeleton />
   }
 
   if (lessonError || quizError) {
@@ -410,7 +411,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
   }
 
   if (loading) {
-    return <CircularProgress color='primary' />
+    return <CreatePlaylistSkeleton />
   }
 
   return (
