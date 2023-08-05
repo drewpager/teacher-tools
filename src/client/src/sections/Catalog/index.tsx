@@ -69,7 +69,7 @@ export const Catalog = ({ viewer }: Props) => {
   useEffect(() => {
     setUserBookmarks([userData?.user.bookmarks?.map((bookmark) => bookmark?.id)])
     if (window.location.hash) {
-      setSelected([window.location.hash.slice(1).replace("%20", " ")])
+      setSelected([window.location.hash.slice(1).replaceAll("%20", " ")])
     }
   }, [userData?.user.bookmarks])
 
