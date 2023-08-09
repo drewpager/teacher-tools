@@ -1,5 +1,18 @@
 @use '../../library';
 
+.MuiFormControl-root {
+  &.file--upload {
+    :hover {
+      cursor: pointer;
+    }
+  }
+
+  &.image--upload {
+    :hover {
+      cursor: pointer;
+    }
+  }
+}
 .MuiBox-root {
   &.createLesson--page {
     width: 100vw;

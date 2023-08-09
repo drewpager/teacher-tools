@@ -114,10 +114,10 @@ export const CreateLesson = ({ viewer }: Props) => {
 
     function handleVideoUpload(file: File) {
       var size = file ? file.size : 0;
-      var sliceSize = 19000000;
+      var sliceSize = 10000000;
       var start = 0;
       setProgress(1);
-      setTimeout(loop, 3);
+      setTimeout(loop, 1);
 
       function loop() {
         let end = start + sliceSize;
@@ -130,7 +130,7 @@ export const CreateLesson = ({ viewer }: Props) => {
         send(s, start, end - 1, size);
         if (end < size) {
           start += sliceSize;
-          setTimeout(loop, 3);
+          setTimeout(loop, 1);
 
           setProgress((end / size) * 100)
         }
@@ -150,7 +150,7 @@ export const CreateLesson = ({ viewer }: Props) => {
       formdata.append("file", piece);
       formdata.append("cloud_name", YOUR_CLOUD_NAME);
       formdata.append("upload_preset", YOUR_UNSIGNED_UPLOAD_PRESET);
-      formdata.append("chunk_size", "19000000");
+      formdata.append("chunk_size", "10000000");
       formdata.append("public_id", publicId);
 
       var xhr = new XMLHttpRequest();
@@ -203,8 +203,8 @@ export const CreateLesson = ({ viewer }: Props) => {
       var size = file ? file.size : 0;
       var sliceSize = 10000000;
       var start = 0;
-      setProgress(1);
-      setTimeout(loop, 3);
+      setImageProgress(1);
+      setTimeout(loop, 1);
 
       function loop() {
         let end = start + sliceSize;
@@ -217,7 +217,7 @@ export const CreateLesson = ({ viewer }: Props) => {
         send(s, start, end - 1, size);
         if (end < size) {
           start += sliceSize;
-          setTimeout(loop, 3);
+          setTimeout(loop, 1);
 
           setImageProgress((end / size) * 100)
         }
@@ -227,6 +227,8 @@ export const CreateLesson = ({ viewer }: Props) => {
     function send(piece: any, start: number, end: number, size: number) {
       console.log("start ", start);
       console.log("end", end);
+      console.log("size", size)
+      console.log("name", file!.name)
 
       var formdata = new FormData();
       console.log(XUniqueUploadId);
@@ -270,13 +272,13 @@ export const CreateLesson = ({ viewer }: Props) => {
   const LabelProgress = ({ progress }: { progress: number }) => {
     return (
       <Box sx={{ position: 'relative', display: 'inline-flex' }}>
-        <CircularProgress color="primary" variant='determinate' value={progress} />
+        <CircularProgress color={progress < 100 ? "primary" : "success"} variant='determinate' value={progress} />
         <Box
           sx={{
             top: 0,
             left: 0,
             bottom: 0,
-            right: 2,
+            right: 3,
             position: 'absolute',
             display: 'flex',
             alignItems: 'center',
@@ -376,6 +378,7 @@ export const CreateLesson = ({ viewer }: Props) => {
                     type="file"
                     id="image"
                     variant='outlined'
+                    className='image--upload'
                     helperText="Image"
                     sx={{ width: "75%", marginTop: 1 }}
                     name="image"
