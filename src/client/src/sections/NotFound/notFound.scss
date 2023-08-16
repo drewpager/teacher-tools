@@ -1,0 +1,152 @@
+@use '../../library';
+@import '../../mixins';
+
+.box--title {
+    width: 100%;
+    margin-left: 2rem;
+
+    @media (min-width: 1500px) {
+        margin-left: 12rem;
+    }
+
+    @media (max-width: 1499px) {
+        margin-left: 4rem;
+    }
+
+
+    @media (max-width: 768px) {
+        margin-left: 0;
+        padding-left: 0;
+    }
+}
+
+.container {
+    max-width: 500px;
+    min-width: 400px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    margin-top: -20.375rem;
+    margin-left: -2.5rem;
+
+    @media (max-width: 900px) {
+        width: 90%;
+        margin-top: 0;
+        margin-left: 0;
+        position: absolute;
+    }
+}
+
+.animation--box {
+    width: 90%;
+    height: 90%;
+    max-width: 500px;
+    margin-top: 7.375rem;
+    margin-right: 5rem;
+    position: relative;
+    // justify-content: baseline;
+    align-items: baseline;
+
+    @media (max-width: 900px) {
+        width: 90%;
+        margin-top: 0;
+        margin-right: 0;
+        position: absolute;
+    }
+}
+
+.grid--container {
+    position: relative;
+}
+
+.MuiTypography-root {
+    &.title--text {
+        width: 70%;
+        margin-top: 8rem;
+        margin-right: 1.5rem;
+        margin-left: 1.5rem;
+        padding: 1rem 0;
+        font-size: clamp(2.75rem, 3rem, 3.25rem);
+        color: library.$peachy;
+        align-self: baseline;
+        line-height: 115%;
+        font-family: "Source Serif Pro";
+        font-style: normal;
+        font-weight: bold;
+
+        @media (max-width: 768px) {
+            width: 90%;
+        }
+    }
+
+    &.subtitle--text {
+        width: 70%;
+        padding: 0 1.5rem;
+        margin: 1rem 0;
+        // font-size: clamp(0.75rem, 1.25rem, 1.5rem);
+        color: library.$peachy;
+        align-self: baseline;
+
+        @media (max-width: 768px) {
+            width: 100%;
+            line-height: 1.875rem;
+            font-size: 1.25rem;
+        }
+    }
+}
+
+.grid--buttons {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 1.5rem;
+    gap: 1rem;
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+    }
+}
+
+.MuiLink-root {
+    &.startTeaching--button {
+        background: #57996A;
+        color: #ffffff;
+        font-weight: 600;
+        border-radius: 100px;
+        height: 4rem;
+        width: 100%;
+        text-transform: capitalize;
+        text-align: center;
+        text-decoration: none;
+        padding: 1rem;
+        &:hover {
+            color: #ffffff;
+            background-color: #557669;
+        }
+
+        @media (min-width: 768px) {
+            width: 12rem;
+        }
+    }
+    
+    &.pricing--button {
+        background: #FAF9F6;
+        color: #000;
+        font-weight: 600;
+        border-radius: 100px;
+        height: 4rem;
+        width: 100%;
+        text-transform: capitalize;
+        text-align: center;
+        text-decoration: none;
+        padding: 1rem;
+        border: 1px solid black;
+        &:hover {
+            color: #FAF9F6;
+            background-color: #000;
+        }
+
+        @media (min-width: 768px) {
+            width: 12rem;
+        }
+    }
+}

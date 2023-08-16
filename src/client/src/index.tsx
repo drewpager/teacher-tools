@@ -37,7 +37,6 @@ import {
   Quiz,
   TestElement,
   Billing,
-  // Stripe,
   SignUp
 } from './sections';
 import { HomeInfoSkeleton } from './lib/components';
@@ -132,7 +131,7 @@ const App = () => {
           <Route path="/quiz/create" element={<CreateQuiz viewer={viewer} />} />
           <Route path="/edit/:id" element={<EditPlaylist viewer={viewer} />} />
           <Route path="/lesson/create" children={(props: any) => (<CreateLesson {...props} viewer={viewer} />)} element={<CreateLesson viewer={viewer} />} />
-          <Route element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
     </Router>
