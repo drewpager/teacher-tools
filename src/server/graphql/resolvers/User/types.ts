@@ -51,3 +51,14 @@ export interface BookmarkLessonData {
 export interface UserPaymentArgs {
   id: string;
 }
+
+export interface AllUsersArgs {
+  limit: number;
+  page: number;
+}
+
+export interface AllUsersData {
+  total: number;
+  result: User[];
+  totalCount: number;
+}

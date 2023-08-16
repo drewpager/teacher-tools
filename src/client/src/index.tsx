@@ -17,7 +17,7 @@ import omitDeep from 'omit-deep-lodash';
 import { setContext } from '@apollo/client/link/context';
 import {
   Home,
-  Teach,
+  Dashboard,
   Lesson,
   Lessons,
   NotFound,
@@ -111,7 +111,7 @@ const App = () => {
       <main className='mainPanel'>
         <Routes>
           <Route path="/" element={<Home viewer={viewer} />} />
-          <Route path="/teach" element={<Teach />} />
+          <Route path="/dash" element={<Dashboard viewer={viewer} />} />
           <Route path="/test" element={<TestElement viewer={viewer} />} />
           {/* <Route path="/stripe" children={(props: any) => (<Stripe {...props} setViewer={setViewer} />)} element={<Stripe viewer={viewer} setViewer={setViewer} />} /> */}
           <Route path="/catalog" element={<Catalog viewer={viewer} />} />

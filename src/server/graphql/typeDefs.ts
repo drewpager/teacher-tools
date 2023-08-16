@@ -97,6 +97,12 @@ export const typeDefs = gql`
     totalCount: Int!
   }
 
+  type Users {
+    total: Int!
+    result: [User!]!
+    totalCount: Int!
+  }
+
   type Query {
     authUrl: String!
     user(id: ID!): User!
@@ -104,6 +110,7 @@ export const typeDefs = gql`
     playlist(id: ID!): Playlist!
     allplaylists(limit: Int!, page: Int!): Playlists!
     allLessons(limit: Int!, page: Int!): Lessons!
+    allUsers(limit: Int!, page: Int!): Users!
     quiz(id: ID!): Quiz!
     allquizzes(limit: Int!, page: Int!): Quizzes!
   }

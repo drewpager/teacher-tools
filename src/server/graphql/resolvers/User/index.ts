@@ -10,6 +10,8 @@ import {
   BookmarkLessonArgs,
   BookmarkLessonData,
   UserPaymentArgs,
+  AllUsersArgs,
+  AllUsersData,
 } from "./types";
 import { authorize } from "../../../lib/utils";
 import { User, Database, Lesson, Viewer, Package } from "../../../lib/types";
@@ -40,6 +42,29 @@ export const userResolvers = {
       } catch (error) {
         throw new Error(`Failed to query user: ${error}`);
       }
+    },
+    allUsers: async (
+      _root: undefined,
+      { page, limit }: AllUsersArgs,
+      { db }: { db: Database }
+    ): Promise<AllUsersData> => {
+      const data: AllUsersData = {
+        total: 0,
+        result: [],
+        totalCount: 0,
+      };
+
+      let cursor = await db.users.find({});
+      const count = cursor;
+
+      cursor = cursor.skip(page > 1 ? (page - 1) * limit : 0);
+      cursor = cursor.limit(limit);
+
+      data.total = await cursor.count();
+      data.result = await cursor.toArray();
+      data.totalCount = await count.count();
+
+      return data;
     },
   },
   User: {

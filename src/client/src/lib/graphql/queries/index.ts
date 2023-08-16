@@ -1,6 +1,7 @@
 export * from "./Lesson";
 export * from "./Lessons";
 export * from "./User";
+export * from "./Users";
 export * from "./Playlist";
 export * from "./Playlists";
 export * from "./Quiz";
