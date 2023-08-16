@@ -59,7 +59,7 @@ const initial = {
     "lesson-column": {
       id: "lesson-column",
       title: "Lesson Column",
-      items: () => GetLessons,
+      items: getItems(1000),
     },
   },
   columnOrder: ["playlist-column", "lesson-column"],
