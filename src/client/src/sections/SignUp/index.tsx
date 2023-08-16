@@ -9,6 +9,7 @@ import { Navigate } from 'react-router-dom';
 import { DisplayError, DisplaySuccess } from '../../lib/utils';
 import './signup.scss';
 import { FAQ, Footer } from '../../lib/components';
+import { Helmet } from 'react-helmet';
 
 interface Props {
   setViewer: (viewer: Viewer) => void;
@@ -134,6 +135,10 @@ export const SignUp = ({ setViewer }: Props) => {
   return (
     // <Box sx={{ minWidth: 275, width: 500, height: 500, margin: 5, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
     <div>
+      <Helmet>
+        <title>{`New User Signup | Plato's Peach`}</title>
+        <meta name="description" content={`Signup to leverage our catalog of short documentaries and custom assessments to create interactive lesson plans.`} />
+      </Helmet>
       <Box className="login--box">
         <Card className="login--card">
           <CardContent>

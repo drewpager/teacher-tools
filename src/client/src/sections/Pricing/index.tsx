@@ -8,6 +8,7 @@ import { Elements } from '@stripe/react-stripe-js'
 import CheckIcon from '@mui/icons-material/Check';
 import './pricing.scss'
 import theme from '../../theme';
+import { Helmet } from 'react-helmet';
 
 export const Pricing = () => {
   const [stripePromise, setStripePromise] = useState<Stripe | null>(null);
@@ -88,6 +89,10 @@ export const Pricing = () => {
 
   return (
     <Box sx={{ marginTop: 12 }}>
+      <Helmet>
+        <title>{`Pricing for Teachers, Homeschool, and School Districts | Plato's Peach`}</title>
+        <meta name="description" content={`Pay annually or monthly to leverage our catalog of short documentaries and custom assessments to create interactive lesson plans.`} />
+      </Helmet>
       <FormGroup sx={{ alignItems: 'center', marginRight: 2 }}>
         <FormControlLabel control={<PricingSwitch sx={{ m: 1 }} checked={monthlyCadence} onChange={() => setMonthlyCadence(!monthlyCadence)} />} label="" />
       </FormGroup>

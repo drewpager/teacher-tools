@@ -5,6 +5,7 @@ import { User, useAddPaymentMutation } from '../../../../graphql/generated';
 import './userProfile.scss';
 import { DisplayError } from '../../../../lib/utils';
 import { FeedbackModal } from '../../../Contact/FeedbackModal';
+import { Helmet } from 'react-helmet';
 // require("dotenv").config();
 interface Props {
   user: User;
@@ -98,6 +99,10 @@ export const UserProfile = ({ user, viewerIsUser }: Props) => {
   return (
     <>
       <Box className="user--text">
+        <Helmet>
+          <title>{`${user.name}'s Profile | Plato's Peach`}</title>
+          <meta name="robots" content="noindex" />
+        </Helmet>
         <FeedbackModal />
         <h1>User Profile</h1>
         {/* <Card sx={{ width: "90vw", boxShadow: 1, padding: 5 }}> */}

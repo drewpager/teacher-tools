@@ -5,6 +5,8 @@ import { LinearProgress, Box, Chip } from '@mui/material';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
 import { VideoPlayer } from '../../lib/components';
 import { titleCase } from '../../lib/utils';
+import { Helmet } from 'react-helmet';
+
 import './lessonPage.scss';
 
 export const Lesson = () => {
@@ -33,6 +35,10 @@ export const Lesson = () => {
 
   return (
     <Box className="lesson--page">
+      <Helmet>
+        <title>{lesson?.title}</title>
+        <meta name="description" content={`A short documentary of ${lesson?.title} from ${lesson?.startDate} to ${lesson?.endDate}.`} />
+      </Helmet>
       <h1>{lesson?.title}</h1>
       {lesson?.category?.map((i, ind) => (<Chip variant='outlined' label={titleCase(`${i}`)} key={ind} color="error" className='lesson--category' />))}
       <Box className="lesson-video--section">

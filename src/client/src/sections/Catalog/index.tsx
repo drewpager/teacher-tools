@@ -19,6 +19,7 @@ import { CatalogSkeletonList } from './listCatalogSkeleton';
 import { FeedbackModal } from '../Contact/FeedbackModal';
 import "./catalog.scss";
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 type Props = {
   viewer: Viewer;
@@ -201,6 +202,10 @@ export const Catalog = ({ viewer }: Props) => {
   // return <CatalogSkeleton />
   return (
     <Box maxWidth="100vw" overflow-x="hidden">
+      <Helmet>
+        <title>{`Catalog of ${datum?.allLessons.total} Short History Documentaries | Plato's Peach`}</title>
+        <meta name="description" content={`${datum?.allLessons.total} Short Documentaries for Teachers to Leverage Trusted Content and Engage Students While Adhering to Widely Accepted Curriculum Standards.`} />
+      </Helmet>
       <FeedbackModal />
       <Grid container maxWidth="100vw" overflow-x="hidden">
         <Grid item sm={12} md={3} lg={3}>

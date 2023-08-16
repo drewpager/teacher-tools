@@ -12,6 +12,7 @@ import Moment from 'moment';
 import './createLesson.scss';
 import { FeedbackModal } from '../Contact/FeedbackModal';
 import { SignUpPrompt } from '../SignupPrompt';
+import { Helmet } from 'react-helmet';
 
 interface Props {
   viewer: Viewer
@@ -306,6 +307,10 @@ export const CreateLesson = ({ viewer }: Props) => {
   } else {
     return (
       <div>
+        <Helmet>
+          <title>{`Create Lesson | Plato's Peach`}</title>
+          <meta name="description" content={`Add a new lesson to use within a lesson plan or to share publicly with other teachers.`} />
+        </Helmet>
         <Box className='createLesson--page'>
           <FeedbackModal />
           <Box className='createLesson--form'>

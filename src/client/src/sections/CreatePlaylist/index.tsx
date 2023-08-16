@@ -23,6 +23,7 @@ import theme from '../../theme';
 import { FeedbackModal } from '../Contact/FeedbackModal';
 import HowItWorks from '../../lib/assets/how-it-works-3.png';
 import { CreatePlaylistSkeleton } from './createPlaylistSkeleton';
+import { Helmet } from 'react-helmet';
 
 type props = {
   viewer: Viewer;
@@ -416,6 +417,10 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
   return (
     <div>
+      <Helmet>
+        <title>{`Lesson Plan Tool | Plato's Peach`}</title>
+        <meta name="description" content={`Leverage our catalog of short documentaries and custom assessments to create interactive lesson plans.`} />
+      </Helmet>
       <Box className="createPlaylist--box">
         {/* <FeedbackModal /> */}
         <h1 className='createPlaylist--h1'>Create Lesson Plan</h1>

@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Box, LinearProgress } from '@mui/material';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
 import { PlaylistCard, Search, Footer } from '../../lib/components/';
+import { Helmet } from 'react-helmet';
 
 export const Playlist = () => {
   const params = useParams();
@@ -36,6 +37,10 @@ export const Playlist = () => {
   if (playlist) {
     return (
       <>
+        <Helmet>
+          <title>{`${playlist.name} Lesson Plan | Plato's Peach`}</title>
+          <meta name="description" content={`Interactive lesson plan teaching ${playlist.name} including ${playlist.plan.length} educational items.`} />
+        </Helmet>
         <PlaylistCard playlist={playlist} />
         <Footer />
       </>
