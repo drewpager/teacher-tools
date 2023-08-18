@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Card, CardContent, CardActions, Typography, Button, Box, CircularProgress, Alert, Snackbar, IconButton, Icon, Divider } from '@mui/material';
+import { Card, CardContent, CardActions, Typography, Button, Box, CircularProgress, Alert, Snackbar, IconButton, Icon, Divider, TextField } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import { useApolloClient } from '@apollo/react-hooks';
 import { AUTH_URL } from '../../lib/graphql/queries/AuthUrl/index';
 import { AuthUrl as AuthUrlData } from '../../lib/graphql/queries/AuthUrl/__generated__/AuthUrl';
 import { useLogInMutation, Viewer } from '../../graphql/generated';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { DisplayError, DisplaySuccess } from '../../lib/utils';
 import './signup.scss';
-import { FAQ, Footer } from '../../lib/components';
+import { FAQ, Footer, SignUpForm } from '../../lib/components';
 import { Helmet } from 'react-helmet';
 
 interface Props {
@@ -147,9 +147,13 @@ export const SignUp = ({ setViewer }: Props) => {
             <CardActions>
               <Button className="google--button" onClick={handleAuthorize} size="medium"><GoogleIcon fontSize='medium' /> Sign Up With Google!</Button>
             </CardActions>
-            <Divider sx={{ margin: 2 }} />
             <Typography sx={{ fontStyle: 'italic' }}>Note: By signing up, you'll be redirected to the Google consent form to sign in
               with your Google account.</Typography>
+            <Divider sx={{ margin: 2 }} />
+            <Typography sx={{ fontStyle: 'italic' }}>Or</Typography>
+            <Typography variant="h5">Sign Up With Email</Typography>
+            <SignUpForm />
+            <Typography variant="h5">Returning User? <Link to="/login" style={{ color: "#000" }}>Login Here.</Link></Typography>
           </CardContent>
         </Card>
         <Box className='signUp--faq'>

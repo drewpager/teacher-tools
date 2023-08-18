@@ -19,3 +19,4 @@ export * from "./ProductDetails";
 export * from "./CTA";
 export * from "./FAQ";
 export * from "./Footer";
+export * from "./SignUpForm";
