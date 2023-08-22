@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Typography, Button, Box, Divider, TextField, IconButton } from '@mui/material';
+import { Typography, Button, Box, TextField, IconButton } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { Formik, Field, Form, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
+import { useLogInMutation } from '../../../graphql/generated';
+import { Navigate } from 'react-router-dom';
 
 import './signUpForm.scss';
 
@@ -30,6 +32,15 @@ export const SignUpForm = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
 
+  const [logIn, { data, loading, error }] = useLogInMutation({
+    variables: {
+      input: {
+        email: "",
+        password: ""
+      }
+    }
+  })
+
   return (
     <Box className='signup-form'>
       <Formik
@@ -40,10 +51,32 @@ export const SignUpForm = () => {
         }}
         validationSchema={SignupSchema}
         onSubmit={(values: Values, { setSubmitting }: FormikHelpers<Values>) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
+          // setTimeout(() => {
+          //   alert(JSON.stringify(values, null, 2));
+          //   setSubmitting(false);
+          // }, 500);
+          logIn({
+            variables: {
+              input: {
+                email: values.email,
+                password: values.password
+              }
+            }
+          })
+          if (loading) {
+            setSubmitting(true);
+          }
+
+          if (data) {
+            console.log(data.logIn.id);
+            // Redirect to user page
             setSubmitting(false);
-          }, 500);
+            <Navigate to={`/user/${data.logIn.id}`} replace={true} />
+          }
+
+          if (error) {
+            console.log(error);
+          }
         }}
       >
         {({ errors, touched }) => (
@@ -94,9 +127,6 @@ export const SignUpForm = () => {
             <Button variant="contained" type='submit' disabled={errors.confirmPassword ? true : false}>Sign Up</Button>
           </Form>
         )}
-        {/* <TextField className="signup-input" id="outlined-basic" label="Email" variant="outlined" />
-        <TextField className="signup-input" id="outlined-basic" label="Password" variant="outlined" onChange={() => setPasswordConfirm(true)} />
-        {passwordConfirm ? <TextField className="signup-input" id="outlined-basic" label="Confirm Password" variant="outlined" /> : null} */}
       </Formik>
     </Box>
   )

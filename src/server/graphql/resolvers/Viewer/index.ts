@@ -7,11 +7,13 @@ import {
   PlaylistArgs,
   PlaylistArgsData,
   PaymentArgs,
+  LogInEmailArgs,
 } from "./types";
 import crypto from "crypto";
 import { Response, Request } from "express";
 import { authorize } from "../../../lib/utils";
 const stripe = require("stripe")(`${process.env.S_SECRET_KEY}`);
+const bcrypt = require("bcrypt");
 
 // When in production w/ HTTPS, add secure setting
 const cookieOptions = {
@@ -131,6 +133,60 @@ const logInViaCookie = async (
   }
 };
 
+const logInViaEmail = async (
+  { input }: LogInArgs,
+  res: Response,
+  db: Database
+): Promise<User | undefined> => {
+  if (!input?.email || !input?.password) {
+    throw new Error("Invalid Email or Password!");
+  }
+
+  const user = await db?.users?.findOne({ contact: `${input?.email}` });
+
+  if (user) {
+    const passwordCorrect = await bcrypt.compare(input.password, user.token);
+    if (passwordCorrect) {
+      return user;
+    }
+    throw new Error(
+      "Email already in use. Try logging in with your password or using Google to login instead."
+    );
+  }
+
+  const userId = new ObjectId().toHexString();
+  const userName = input.email.split("@")[0];
+  const userPass = await bcrypt.hash(input.password, 10);
+  const userAvatar =
+    "https://img.freepik.com/free-icon/user-image-with-black-background_318-34564.jpg";
+  // const token = crypto.randomBytes(16).toString("hex");
+
+  const insertUser = await db.users.insertOne({
+    _id: userId,
+    token: userPass,
+    name: userName,
+    avatar: userAvatar,
+    contact: input.email,
+    paymentId: "undefined",
+    watched: [],
+    playlists: [],
+    bookmarks: [],
+    lessons: [],
+  });
+
+  const viewer = await db.users.findOne({ _id: insertUser.insertedId });
+
+  if (viewer) {
+    res.cookie("viewer", userId, {
+      ...cookieOptions,
+      maxAge: 365 * 24 * 60 * 60 * 1000,
+    });
+  } else {
+    throw new Error("Failed to return viewer object!");
+  }
+  return viewer;
+};
+
 export const viewerResolvers = {
   Query: {
     authUrl: (): string => {
@@ -156,7 +212,17 @@ export const viewerResolvers = {
           : await logInViaCookie(token, db, req, res);
 
         if (!viewer) {
-          return { didRequest: true };
+          const email = input?.email;
+          const password = input?.password;
+          const emailInput = { input: { email: email, password: password } };
+          const emailLogin = await logInViaEmail(emailInput, res, db);
+          return {
+            _id: emailLogin?._id,
+            token: emailLogin?.token,
+            avatar: emailLogin?.avatar,
+            paymentId: emailLogin?.paymentId,
+            didRequest: true,
+          };
         }
 
         return {

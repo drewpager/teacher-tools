@@ -1,7 +1,7 @@
 import { Playlist } from "../../../lib/types";
 
 export interface LogInArgs {
-  input: { code: string } | null;
+  input: { code?: string; email?: string; password?: string } | null;
 }
 
 export interface ConnectStripeArgs {
@@ -20,4 +20,9 @@ export interface PlaylistArgsData {
 
 export interface PaymentArgs {
   id: string;
+}
+
+export interface LogInEmailArgs {
+  email: string | null;
+  password: string | null;
 }

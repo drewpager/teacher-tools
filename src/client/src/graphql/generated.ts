@@ -260,7 +260,9 @@ export type Lessons = {
 };
 
 export type LogInInput = {
-  code: Scalars['String'];
+  code?: InputMaybe<Scalars['String']>;
+  email?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
 };
 
 export type Mutation = {

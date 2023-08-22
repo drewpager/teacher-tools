@@ -131,7 +131,9 @@ export const typeDefs = gql`
   }
 
   input LogInInput {
-    code: String!
+    code: String
+    email: String
+    password: String
   }
 
   input CreateLessonInput {
