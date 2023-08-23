@@ -10,6 +10,8 @@ import { DisplayError, DisplaySuccess } from '../../lib/utils';
 import './login.scss';
 import { Footer } from '../../lib/components';
 import { Helmet } from 'react-helmet';
+import { LogInForm } from '../../lib/components/LogInForm';
+import { Link } from 'react-router-dom';
 
 interface Props {
   setViewer: (viewer: Viewer) => void;
@@ -136,9 +138,13 @@ export const Login = ({ setViewer }: Props) => {
             <CardActions>
               <Button className="google--button" onClick={handleAuthorize} size="medium"><GoogleIcon fontSize='medium' /> Sign In With Google!</Button>
             </CardActions>
-            <Divider sx={{ margin: 2 }} />
             <Typography sx={{ fontStyle: 'italic' }}>Note: By signing in, you'll be redirected to the Google consent form to sign in
               with your Google account.</Typography>
+            <Divider sx={{ margin: 2 }} />
+            <Typography sx={{ fontStyle: 'italic' }}>Or</Typography>
+            <Typography variant="h5">Login With Email</Typography>
+            <LogInForm />
+            <Typography variant="h5">New User? <Link to="/signup" style={{ color: "#000" }}>Sign Up Here.</Link></Typography>
           </CardContent>
         </Card>
       </Box>

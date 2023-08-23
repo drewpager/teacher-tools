@@ -1,0 +1,25 @@
+@use '../../../library';
+
+.MuiBox-root {
+  &.signup-form {
+    display: flex;
+    flex-flow: column;
+    margin: 10px auto;
+    padding: 0 1.5rem;
+    max-width: 60%;
+    justify-items: center;
+
+    @media (max-width: 1000px) {
+      min-width: 100%;
+      max-width: 100%;
+    }
+  }
+}
+
+.MuiFormControl-root {
+  &.signup-input {
+    flex: 1;
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+}

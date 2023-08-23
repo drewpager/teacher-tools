@@ -119,14 +119,18 @@ const logInViaCookie = async (
   req: Request,
   res: Response
 ): Promise<User | undefined> => {
+  const userRes = await db.users.findOne({ _id: req.signedCookies.viewer });
+  if (userRes?.token && userRes.token.length > 33) {
+    // res.cookie("viewer", userRes._id, { ...cookieOptions });
+    return userRes;
+  }
   const updateCook = await db.users.findOneAndUpdate(
     { _id: req.signedCookies.viewer },
     { $set: { token } }
   );
-
   const viewer = updateCook.value;
 
-  if (!viewer) {
+  if (!viewer || !userRes) {
     res.clearCookie("viewer", { ...cookieOptions });
   } else {
     return viewer;
@@ -138,8 +142,8 @@ const logInViaEmail = async (
   res: Response,
   db: Database
 ): Promise<User | undefined> => {
-  if (!input?.email || !input?.password) {
-    throw new Error("Invalid Email or Password!");
+  if (!input?.email?.length || !input?.password?.length) {
+    throw new Error("Please enter your email and password!");
   }
 
   const user = await db?.users?.findOne({ contact: `${input?.email}` });
@@ -147,8 +151,17 @@ const logInViaEmail = async (
   if (user) {
     const passwordCorrect = await bcrypt.compare(input.password, user.token);
     if (passwordCorrect) {
+      res.cookie("viewer", user._id, {
+        ...cookieOptions,
+        maxAge: 365 * 24 * 60 * 60 * 1000,
+      });
       return user;
     }
+
+    if (!passwordCorrect) {
+      throw new Error("Invalid Password or Combination!");
+    }
+
     throw new Error(
       "Email already in use. Try logging in with your password or using Google to login instead."
     );
@@ -204,25 +217,29 @@ export const viewerResolvers = {
       { db, req, res }: { db: Database; req: Request; res: Response }
     ): Promise<Viewer> => {
       try {
-        const code = input ? input.code : null;
-        const token = crypto.randomBytes(16).toString("hex");
-
-        const viewer: User | undefined = code
-          ? await logInViaGoogle(code, token, db, res)
-          : await logInViaCookie(token, db, req, res);
-
-        if (!viewer) {
+        if (!input?.code && input?.email && input?.password) {
           const email = input?.email;
           const password = input?.password;
           const emailInput = { input: { email: email, password: password } };
           const emailLogin = await logInViaEmail(emailInput, res, db);
           return {
             _id: emailLogin?._id,
-            token: emailLogin?.token,
+            token: emailInput?.input?.password,
             avatar: emailLogin?.avatar,
             paymentId: emailLogin?.paymentId,
             didRequest: true,
           };
+        }
+
+        const code = input ? input.code : null;
+        const tokener = crypto.randomBytes(16).toString("hex");
+
+        const viewer: User | undefined = code
+          ? await logInViaGoogle(code, tokener, db, res)
+          : await logInViaCookie(tokener, db, req, res);
+
+        if (!viewer) {
+          return { didRequest: true };
         }
 
         return {
@@ -233,7 +250,7 @@ export const viewerResolvers = {
           didRequest: true,
         };
       } catch (error) {
-        throw new Error(`Failed to log in: ${error}`);
+        throw new Error(`${error}`);
       }
     },
     logOut: (

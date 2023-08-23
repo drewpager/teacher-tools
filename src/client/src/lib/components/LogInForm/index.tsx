@@ -1,42 +1,37 @@
 import React, { useState } from 'react';
-import { Typography, Button, Box, TextField, IconButton } from '@mui/material';
+import { Typography, Button, Box, TextField, IconButton, CircularProgress } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { Formik, Field, Form, FormikHelpers } from 'formik';
+import { Formik, Field, Form, FormikHelpers, replace } from 'formik';
 import * as Yup from 'yup';
 import { useLogInMutation } from '../../../graphql/generated';
 import { useNavigate } from 'react-router-dom';
 
-import './signUpForm.scss';
-import { DisplayError } from '../../utils';
+import './logInForm.scss';
+import { refresh } from '@cloudinary/url-gen/qualifiers/artisticFilter';
 
 interface Values {
   email: string;
   password: string;
-  confirmPassword: string;
 }
-
 
 const MuiInput = ({ field, form, ...props }: any) => {
   return <TextField className="signup-input" variant="outlined" {...field} {...props} />;
 }
 
 const SignupSchema = Yup.object({
-  email: Yup.string().email('Invalid email').required('Valid email required'),
+  email: Yup.string().email('Invalid email').required('Enter Your Email Address.'),
   password: Yup.string()
-    .min(8, 'Password must be 8 characters or longer!')
-    .required('Password required'),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Passwords must match')
+    .min(8, 'Your Password Would Be 8 Characters or longer!')
+    .required('Enter Your Password.')
 });
 
-export const SignUpForm = () => {
+export const LogInForm = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
   const [submissionError, setSubmissionError] = useState<string | null>(null);
   const navigation = useNavigate();
 
-  const [logIn, { data, loading, error }] = useLogInMutation({
+  const [logIn, { data: logInData, loading, error }] = useLogInMutation({
     variables: {
       input: {
         email: "",
@@ -45,21 +40,15 @@ export const SignUpForm = () => {
     }
   })
 
-
   return (
     <Box className='signup-form'>
       <Formik
         initialValues={{
           email: '',
           password: '',
-          confirmPassword: ''
         }}
         validationSchema={SignupSchema}
-        onSubmit={(values: Values, { setSubmitting }: FormikHelpers<Values>) => {
-          // setTimeout(() => {
-          //   alert(JSON.stringify(values, null, 2));
-          //   setSubmitting(false);
-          // }, 500);
+        onSubmit={(values: Values) => {
           logIn({
             variables: {
               input: {
@@ -69,20 +58,16 @@ export const SignUpForm = () => {
             }
           })
           if (loading) {
-            setSubmitting(true);
+            console.log("loading")
           }
 
           if (error) {
-            console.log(error.message);
             setSubmissionError(error.message);
           }
 
-          if (data) {
-            setSubmitting(false);
-            navigation(`/user/${data?.logIn.id}`)
+          if (logInData) {
+            navigation(`/user/${logInData.logIn.id}`);
           }
-
-          navigation(`/`)
         }}
       >
         {({ errors, touched }) => (
@@ -109,29 +94,10 @@ export const SignUpForm = () => {
             {errors.password && touched.password ? (
               <Typography variant='h6' sx={{ color: "red" }}>{errors.password}</Typography>
             ) : null}
-            {touched.password && !errors.password ? (
-              <>
-                <Field
-                  component={MuiInput}
-                  id="confirm-password"
-                  name="confirmPassword"
-                  label="Confirm Password"
-                  type={showConfirmPassword ? "text" : "password"}
-                  InputProps={{
-                    endAdornment: <IconButton disableFocusRipple disableTouchRipple disableRipple onClick={() => {
-                      setShowConfirmPassword(!showConfirmPassword)
-                    }}>
-                      {showConfirmPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
-                    </IconButton>
-                  }}
-                />
-                {errors.confirmPassword && touched.confirmPassword ? (
-                  <Typography variant='h6' sx={{ color: "red" }}>{errors.confirmPassword}</Typography>
-                ) : null}
-              </>
+            <Button variant="contained" type='submit' disabled={errors.password ? true : false}>Login {loading && <CircularProgress sx={{ color: "red" }} />}</Button>
+            {!!submissionError ? (
+              <Typography variant='h6' sx={{ color: "red" }}>{submissionError}</Typography>
             ) : null}
-            <Button variant="contained" type='submit' disabled={errors.confirmPassword ? true : false}>Sign Up</Button>
-            {!!submissionError ? <DisplayError title={submissionError} /> : null}
           </Form>
         )}
       </Formik>
