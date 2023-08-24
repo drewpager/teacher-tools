@@ -26,7 +26,7 @@ export const ProductDetails = () => {
               <Typography variant="h4" className="productDetails-title--font" sx={{ position: "absolute", top: "-30%", left: "7%", fontSize: 70 }}>1.</Typography>
             </Box>
             <Typography variant="h2" className="productDetails-subtitle--font">
-              Browse Our Growing Library of History Documentaries
+              Browse Our Growing Library of Social Studies Documentaries
             </Typography>
             <Typography variant="body2" className="productDetails-description--font">
               Our catalog of short history documentaries are the perfect puzzle pieces for you to construct lesson plans with the content you choose.

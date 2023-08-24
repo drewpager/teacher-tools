@@ -13,7 +13,7 @@
 body {
   background: var(--black);
   font-family: "Vibur", cursive;
-  user-select: none;
+  // user-select: none;
   margin-top: 15px;
 }
 
@@ -82,7 +82,7 @@ body {
   border-radius: var(--borderRadius);
   color: #cdd5ee;
   font-size: 30px;
-  user-select: none;
+  // user-select: none;
 
   /* center align text */
   display: flex;
