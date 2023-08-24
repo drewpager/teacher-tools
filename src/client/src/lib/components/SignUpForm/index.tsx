@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Typography, Button, Box, TextField, IconButton } from '@mui/material';
+import { Typography, Button, Box, TextField, IconButton, CircularProgress } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { Formik, Field, Form, FormikHelpers } from 'formik';
@@ -8,7 +8,6 @@ import { useLogInMutation } from '../../../graphql/generated';
 import { useNavigate } from 'react-router-dom';
 
 import './signUpForm.scss';
-import { DisplayError } from '../../utils';
 
 interface Values {
   email: string;
@@ -33,10 +32,9 @@ const SignupSchema = Yup.object({
 export const SignUpForm = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
-  const [submissionError, setSubmissionError] = useState<string | null>(null);
   const navigation = useNavigate();
 
-  const [logIn, { data, loading, error }] = useLogInMutation({
+  const [logInMutation, { data, loading, error }] = useLogInMutation({
     variables: {
       input: {
         email: "",
@@ -45,6 +43,19 @@ export const SignUpForm = () => {
     }
   })
 
+  if (loading) {
+    console.log('loading sign up');
+  }
+
+  if (error) {
+    console.log(error.message)
+  }
+
+  if (data) {
+    navigation(`/user/${data.logIn.id}`)
+    window.location.reload();
+    // navigation(`/catalog/`)
+  }
 
   return (
     <Box className='signup-form'>
@@ -55,12 +66,8 @@ export const SignUpForm = () => {
           confirmPassword: ''
         }}
         validationSchema={SignupSchema}
-        onSubmit={(values: Values, { setSubmitting }: FormikHelpers<Values>) => {
-          // setTimeout(() => {
-          //   alert(JSON.stringify(values, null, 2));
-          //   setSubmitting(false);
-          // }, 500);
-          logIn({
+        onSubmit={async (values: Values) => {
+          await logInMutation({
             variables: {
               input: {
                 email: values.email,
@@ -68,21 +75,6 @@ export const SignUpForm = () => {
               }
             }
           })
-          if (loading) {
-            setSubmitting(true);
-          }
-
-          if (error) {
-            console.log(error.message);
-            setSubmissionError(error.message);
-          }
-
-          if (data) {
-            setSubmitting(false);
-            navigation(`/user/${data?.logIn.id}`)
-          }
-
-          navigation(`/`)
         }}
       >
         {({ errors, touched }) => (
@@ -109,29 +101,27 @@ export const SignUpForm = () => {
             {errors.password && touched.password ? (
               <Typography variant='h6' sx={{ color: "red" }}>{errors.password}</Typography>
             ) : null}
-            {touched.password && !errors.password ? (
-              <>
-                <Field
-                  component={MuiInput}
-                  id="confirm-password"
-                  name="confirmPassword"
-                  label="Confirm Password"
-                  type={showConfirmPassword ? "text" : "password"}
-                  InputProps={{
-                    endAdornment: <IconButton disableFocusRipple disableTouchRipple disableRipple onClick={() => {
-                      setShowConfirmPassword(!showConfirmPassword)
-                    }}>
-                      {showConfirmPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
-                    </IconButton>
-                  }}
-                />
-                {errors.confirmPassword && touched.confirmPassword ? (
-                  <Typography variant='h6' sx={{ color: "red" }}>{errors.confirmPassword}</Typography>
-                ) : null}
-              </>
-            ) : null}
-            <Button variant="contained" type='submit' disabled={errors.confirmPassword ? true : false}>Sign Up</Button>
-            {!!submissionError ? <DisplayError title={submissionError} /> : null}
+            <>
+              <Field
+                component={MuiInput}
+                id="confirm-password"
+                name="confirmPassword"
+                label="Confirm Password"
+                type={showConfirmPassword ? "text" : "password"}
+                InputProps={{
+                  endAdornment: <IconButton disableFocusRipple disableTouchRipple disableRipple onClick={() => {
+                    setShowConfirmPassword(!showConfirmPassword)
+                  }}>
+                    {showConfirmPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                  </IconButton>
+                }}
+              />
+              {errors.confirmPassword && touched.confirmPassword ? (
+                <Typography variant='h6' sx={{ color: "red" }}>{errors.confirmPassword}</Typography>
+              ) : null}
+            </>
+            <Button variant="contained" type='submit' disabled={errors.confirmPassword ? true : false}>Sign Up {loading && <CircularProgress sx={{ color: "red" }} size="small" />}</Button>
+            {error && <Typography variant='h6' sx={{ color: "red" }}>{error.message}</Typography>}
           </Form>
         )}
       </Formik>
