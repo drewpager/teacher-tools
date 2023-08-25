@@ -27,39 +27,39 @@ export const UserBookmarks = ({ user, setBookmarksPage }: Props) => {
   const bookmarks = user.bookmarks;
   const totalCount = bookmarks.length;
   const limit = 3;
-//   const [open, setOpen] = useState<boolean>(false);
-//   const [bookmarkError, setBookmarkError] = useState<boolean>(false);
-//   const [bookmarkStatus, setBookmarkStatus] = useState<string>('');
+  //   const [open, setOpen] = useState<boolean>(false);
+  //   const [bookmarkError, setBookmarkError] = useState<boolean>(false);
+  //   const [bookmarkStatus, setBookmarkStatus] = useState<string>('');
 
-//   const BOOKMARK_LESSON = gql`
-//     mutation BookmarkLesson($id: ID!, $viewer: String!) {
-//       bookmarkLesson(id: $id, viewer: $viewer)
-//     }
-//   `;
+  //   const BOOKMARK_LESSON = gql`
+  //     mutation BookmarkLesson($id: ID!, $viewer: String!) {
+  //       bookmarkLesson(id: $id, viewer: $viewer)
+  //     }
+  //   `;
 
-// const [bookmarkLesson, { loading: BookmarkLessonLoading, error: BookmarkLessonError }] = useMutation<BookmarkLessonData, BookmarkLessonVariables>(BOOKMARK_LESSON);
+  // const [bookmarkLesson, { loading: BookmarkLessonLoading, error: BookmarkLessonError }] = useMutation<BookmarkLessonData, BookmarkLessonVariables>(BOOKMARK_LESSON);
 
-// const onBookmark = async (id: string, viewer: string) => {
-//   if (viewer === "null") {
-//     setBookmarkError(true)
-//     setOpen(true)
-//   } else {
-//     let res = await bookmarkLesson({
-//       variables: {
-//         id,
-//         viewer
-//       }
-//     })
-//     setBookmarkStatus(`${res.data?.bookmarkLesson}`)
+  // const onBookmark = async (id: string, viewer: string) => {
+  //   if (viewer === "null") {
+  //     setBookmarkError(true)
+  //     setOpen(true)
+  //   } else {
+  //     let res = await bookmarkLesson({
+  //       variables: {
+  //         id,
+  //         viewer
+  //       }
+  //     })
+  //     setBookmarkStatus(`${res.data?.bookmarkLesson}`)
 
-//     res && setOpen(true)
-//   }
-// }
+  //     res && setOpen(true)
+  //   }
+  // }
 
-// const handleClose = () => {
-//   setOpen(false)
-//   setBookmarkError(false)
-// }
+  // const handleClose = () => {
+  //   setOpen(false)
+  //   setBookmarkError(false)
+  // }
   // const handleChange = (event: ChangeEvent<unknown>, page: number) => {
   //   setBookmarksPage(page)
   // }
@@ -83,7 +83,9 @@ export const UserBookmarks = ({ user, setBookmarksPage }: Props) => {
           <Grid item lg={4} md={6} sm={6} xs={12} key={index}>
             <ListItem key={index}>
               <Box>
-                <Typography variant="h3">{b.title}</Typography>
+                <Link to={`/lesson/${b.id}`} style={{ color: "#000" }}>
+                  <Typography variant="h3">{b.title}</Typography>
+                </Link>
               </Box>
             </ListItem>
           </Grid>
