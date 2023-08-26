@@ -101,7 +101,7 @@ export const Pricing = () => {
         <Box className="pricing--box">
           <h3>Free Plan</h3>
           <Chip label="Best for Trial" color="primary" />
-          <Typography variant="h5" color={theme.palette.info.dark} sx={{ fontWeight: 600, marginTop: 2 }}>Free with Limitations</Typography>
+          <Typography variant="h5" color={theme.palette.info.dark} sx={{ fontWeight: 600, marginTop: 2 }}>$0 with Limitations</Typography>
           <Button
             variant='contained'
             href={"/signup"}

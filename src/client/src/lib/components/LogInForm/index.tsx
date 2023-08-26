@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typography, Button, Box, TextField, IconButton, CircularProgress } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { Formik, Field, Form, FormikErrors, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { useLogInMutation } from '../../../graphql/generated';
+import { useLogInMutation, useAllUsersQuery } from '../../../graphql/generated';
 import { useNavigate } from 'react-router-dom';
 
 import './logInForm.scss';
@@ -18,16 +18,34 @@ const MuiInput = ({ field, form, ...props }: any) => {
   return <TextField className="signup-input" variant="outlined" {...field} {...props} />;
 }
 
-const SignupSchema = Yup.object({
-  email: Yup.string().email('Invalid email').required('Enter Your Email Address.'),
-  password: Yup.string()
-    .min(8, 'Your Password Would Be 8 Characters or longer!')
-    .required('Enter Your Password.')
-});
-
 export const LogInForm = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [emailData, setEmailData] = useState<string[]>([]);
   const navigation = useNavigate();
+
+  const { data, loading, error } = useAllUsersQuery({
+    variables: {
+      page: 1,
+      limit: 1000
+    }
+  })
+
+  useEffect(() => {
+    const allEmails = data?.allUsers?.result?.map((user) => user.contact)
+    if (allEmails?.length) {
+      setEmailData(allEmails)
+    }
+  }, [data])
+
+  const SignupSchema = Yup.object({
+    email: Yup.string()
+      .email('Invalid email')
+      .oneOf([...emailData], 'Email not found, sign up instead.')
+      .required('Enter Your Email Address.'),
+    password: Yup.string()
+      .min(8, 'Your Password Would Be 8 Characters or longer!')
+      .required('Enter Your Password.')
+  });
 
   const [logIn, { data: logInData, loading: logInLoading, error: logInError }] = useLogInMutation({
     variables: {
@@ -95,7 +113,7 @@ export const LogInForm = () => {
             {errors.password && touched.password ? (
               <Typography variant='h6' sx={{ color: "red" }}>{errors.password}</Typography>
             ) : null}
-            <Button variant="contained" type='submit' disabled={errors.password ? true : false}>Login {logInLoading && <CircularProgress sx={{ color: "red" }} size="small" />}</Button>
+            <Button variant="contained" type='submit' disabled={errors.password || errors.email ? true : false}>Login {logInLoading && <CircularProgress sx={{ color: "red" }} size="small" />}</Button>
             {logInError && <Typography variant='h6' sx={{ color: "red" }}>{logInError.message}</Typography>}
           </Form>
         )}
