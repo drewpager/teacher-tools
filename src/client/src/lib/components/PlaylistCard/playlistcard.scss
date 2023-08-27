@@ -56,17 +56,24 @@
             display: none;
         }
     }
+    @media (max-width: 443px) {
+        &.MuiTimelineContent-root {
+            display: none;
+        }
+    }
 }
 
 .MuiGrid-root {
     grid-template-columns: 20% 20% 1fr;
     &.playlistcard--grid__list {
         grid-column: 1 / 2;
-        grid-row: auto;
+        // grid-row: auto;
+        flex: 1 0 0%;
     }
     &.playlistcard--grid__video {
         grid-column: 2 / 3;
-        grid-row: auto;
+        // grid-row: auto;
+        flex: 1 0 80%;
     }
 
     @media (min-width: 900px ) {
@@ -94,6 +101,10 @@
     flex: 0 1 0%;
     &.playist--grid__timeline {
         grid-column: 0 / 1;
+    }
+
+    @media (max-width: 410px) {
+        margin-left: -10rem;
     }
 
     @media (min-width: 900px ) {
