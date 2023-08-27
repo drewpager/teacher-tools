@@ -86,7 +86,7 @@ export const QuizPlayer = ({ quiz }: Props) => {
               <Divider sx={{ margin: "0.5em" }} />
             </form>
           ))}
-          <Button type="submit" variant="outlined" onClick={() => setFinalResult(true)}>Show Results!</Button>
+          <Button type="submit" variant="outlined" onClick={() => { setFinalResult(true); window.moveTo(0, 0) }}>Show Results!</Button>
         </div>
       )}
     </Box>
