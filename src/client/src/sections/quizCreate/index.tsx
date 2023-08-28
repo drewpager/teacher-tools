@@ -316,14 +316,16 @@ export const QuizCreate = ({ viewer }: props) => {
                 )}
               </FieldArray>
               <div className="quiz--button-area">
-                <Link to={quizCreatePage ? `../user/${viewer.id}` : `/playlist/create`} style={{ textDecoration: "none" }}>
-                  <Typography variant="h4" className="quiz--button-cancel">Cancel</Typography>
-                </Link>
                 <Button
                   variant="outlined"
                   type="submit"
                   className="quiz--button-submit"
                 >Save Assessment</Button>
+                {quizCreatePage ? (
+                  <Link to={`../user/${viewer.id}`} style={{ textDecoration: "none" }}>
+                    <Typography variant="h4" className="quiz--button-cancel">Cancel</Typography>
+                  </Link>
+                ) : (<Typography variant="h5">Click away to close</Typography>)}
               </div>
               {/* UNCOMMENT TO DISPLAY MUTATION CONSTRUCTION
               <pre>
