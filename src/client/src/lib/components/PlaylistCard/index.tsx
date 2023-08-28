@@ -59,9 +59,18 @@ export const PlaylistCard = ({ playlist }: Props) => {
         <Timeline position="left" className='playist--grid__timeline'>
           {playlist?.plan?.map((item, id) => (
             <TimelineItem>
-              <TimelineOppositeContent>{item?.__typename === "Lesson" ? handleDateFormat(item.endDate) : ""}</TimelineOppositeContent>
+              {/* <TimelineOppositeContent>{item?.__typename === "Lesson" ? handleDateFormat(item.endDate) : ""}</TimelineOppositeContent> */}
+              <ListItem disableGutters key={id}>
+                <ListItemButton
+                  disableGutters
+                  className={active === `${item?.id}` ? 'playlistCard--button active' : 'playlistCard--button'}
+                  onClick={() => handleChange({ ...item })}
+                >
+                  <ListItemText primary={item?.title} />
+                </ListItemButton>
+              </ListItem>
               <TimelineSeparator>
-                <TimelineDot sx={{ mx: 2 }} color={active === `${item?.id}` ? "secondary" : "primary"} onClick={() => handleChange({ ...item })}>
+                <TimelineDot sx={{ mx: 1 }} color={active === `${item?.id}` ? "secondary" : "primary"} onClick={() => handleChange({ ...item })}>
                   {item?.__typename === "Lesson" ? <PlayCircleIcon sx={{ fontSize: 20 }} /> : <QuizIcon sx={{ fontSize: 20 }} />}
                 </TimelineDot>
                 {playlist.plan.length !== (id + 1) ? <TimelineConnector /> : <></>}
@@ -70,7 +79,7 @@ export const PlaylistCard = ({ playlist }: Props) => {
             </TimelineItem>
           ))}
         </Timeline>
-        <Grid className='playlistcard--grid__list'>
+        {/* <Grid className='playlistcard--grid__list'>
           <List>
             {playlist?.plan?.map((item, id) => (
               <ListItem disableGutters key={id}>
@@ -84,7 +93,7 @@ export const PlaylistCard = ({ playlist }: Props) => {
               </ListItem>
             ))}
           </List>
-        </Grid>
+        </Grid> */}
         <Grid className='playlistcard--grid__video'>
           {playlist.plan?.filter((item) => item?.id === active).map((iter, index) => {
             if (iter?.__typename === "Quiz") {

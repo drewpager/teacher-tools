@@ -22,7 +22,7 @@ type Props = {
 export const Home = ({ viewer }: Props) => {
   const { data, loading, error } = usePlaylistQuery({
     variables: {
-      id: "6436c2965c489f0612b0b2ef"
+      id: "64bd4da2f5dcf743baacdc36"
     }
   })
 
