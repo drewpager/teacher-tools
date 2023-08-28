@@ -75,7 +75,7 @@ export const PlaylistCard = ({ playlist }: Props) => {
                 </TimelineDot>
                 {playlist.plan.length !== (id + 1) ? <TimelineConnector /> : <></>}
               </TimelineSeparator>
-              <TimelineContent>{item?.__typename === "Lesson" ? handleDateFormat(item.startDate) : "Quiz"}</TimelineContent>
+              <TimelineContent>{item?.__typename === "Lesson" ? `${handleDateFormat(item.startDate)} - ${handleDateFormat(item.endDate)}` : "Quiz"}</TimelineContent>
             </TimelineItem>
           ))}
         </Timeline>
