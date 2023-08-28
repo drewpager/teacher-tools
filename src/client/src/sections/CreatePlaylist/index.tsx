@@ -1,7 +1,7 @@
-import { CircularProgress, Grid, Box, Card, TextField, Button, Switch, FormControlLabel, Chip, Avatar, Typography, CardMedia, InputAdornment, Skeleton, Tooltip } from '@mui/material';
+import { CircularProgress, Grid, Box, Card, TextField, Button, Switch, FormControlLabel, Chip, Avatar, Typography, CardMedia, InputAdornment, Skeleton, Tooltip, Alert, Snackbar, IconButton } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
-import React, { useState, ChangeEvent, useRef, useEffect, useReducer, useMemo, Suspense, lazy } from 'react';
+import React, { useState, ChangeEvent, useRef, useEffect, useMemo, SyntheticEvent } from 'react';
 import {
   FullLessonInput,
   useLessonPlanMutation,
@@ -68,6 +68,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
   let navigate = useNavigate();
   const [searchInput, setSearchInput] = useState<string>("")
   const [searchError, setSearchError] = useState<boolean>(false)
+  const [autoSaved, setAutoSaved] = useState<boolean>(false)
   const [variant, setVariant] = useState<boolean>(true)
   const [filled, setFilled] = useState<boolean>(true)
   const [lessons, setLessons] = useState<Array<Plan>>([])
@@ -263,6 +264,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       creator: viewer && viewer.id ? viewer.id : "0"
     })
     window.localStorage.setItem('playlist', JSON.stringify(playlist));
+    setAutoSaved(true);
   }
 
   if (lessonLoading || quizLoading) {
@@ -291,7 +293,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       const displacedPlaylistItem = playlist.plan.slice(destination.index, (destination.index + 1));
       playlist.plan[destination.index] = reorderedPlaylistItem;
       playlist.plan.splice((destination.index + 1), 0, ...displacedPlaylistItem);
-
+      setAutoSaved(true);
       return { ...playlist }
     }
 
@@ -315,6 +317,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
       setPlaylist(playlist)
       window.localStorage.setItem('playlist', JSON.stringify(playlist));
+      setAutoSaved(true);
     }
 
     if (destination.droppableId === "lessons") {
@@ -327,6 +330,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       setFilter(items)
       setPlaylist(playlist)
       window.localStorage.setItem('playlist', JSON.stringify(playlist));
+      setAutoSaved(true);
     }
   }
 
@@ -358,6 +362,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
     setPlans(playlist.plan);
     if (!!window.localStorage.getItem('playlist')) {
       window.localStorage.removeItem('playlist');
+      setAutoSaved(false);
     }
     handleCategoryClick("All", 0)
   }
@@ -389,6 +394,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
     setPlaylist(initialData);
     playlist.plan.length = 0;
     window.localStorage.removeItem('playlist');
+    setAutoSaved(false);
     navigate(`../user/${viewer.id}`, { replace: true })
   }
 
@@ -415,6 +421,14 @@ export const CreatePlaylist = ({ viewer }: props) => {
     return <CreatePlaylistSkeleton />
   }
 
+  const handleAutoSavedClose = (event: SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setAutoSaved(false);
+  };
+
   return (
     <div>
       <Helmet>
@@ -424,8 +438,23 @@ export const CreatePlaylist = ({ viewer }: props) => {
       <Box className="createPlaylist--box">
         {/* <FeedbackModal /> */}
         <h1 className='createPlaylist--h1'>Create Lesson Plan</h1>
+
+        <Snackbar
+          open={autoSaved}
+          autoHideDuration={3000}
+          onClose={handleAutoSavedClose}
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        >
+          <Alert
+            severity="success"
+            sx={{ maxWidth: 'max-content' }}
+          >Auto saved!
+          </Alert>
+        </Snackbar>
         <form onSubmit={handleSubmit}>
-          <Button disableRipple disableTouchRipple className='createPlaylist--button' variant="contained" onClick={handleReset}>Reset</Button>
+          <Box sx={{ justifyContent: 'baseline' }}>
+            <Button disableRipple disableTouchRipple className='createPlaylist--button' variant="contained" onClick={handleReset}>Reset</Button>
+          </Box>
           <DragDropContext onDragEnd={onDragEndHandler}>
             <Grid container>
               <Droppable droppableId='playlist'>
