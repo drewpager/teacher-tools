@@ -207,6 +207,16 @@
       width: 70vw;
       margin-right: 1rem;
     }
+
+    @media (max-width: 775px) {
+      height: fit-content;
+      align-items: center;
+
+      & > .MuiButtonBase-root {
+        align-items: center;
+        top: 0;
+      }
+    }
     & > button {
       flex-wrap: wrap;
       top: -0.5rem;

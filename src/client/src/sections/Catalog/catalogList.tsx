@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Grid, Card, Box, CardMedia, CardContent, IconButton, Typography, Chip, CircularProgress, Alert, Snackbar, Button } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, IconButton, Typography, Chip, CircularProgress, Alert, Snackbar, Tooltip } from '@mui/material';
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Link } from 'react-router-dom';
 import { Lesson } from '../../graphql/generated';
 import { titleCase } from '../../lib/utils';
-import { useKeenSlider } from 'keen-slider/react';
 import { UseVideoModal } from '../../lib/components/VideoModal';
-import 'keen-slider/keen-slider.min.css';
 import "./catalog.scss";
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
@@ -100,24 +96,28 @@ export const CatalogList = ({ name, category, viewer, bookmarks }: props) => {
           <Link to={`/lesson/${lesson.id}`} style={{ textDecoration: "none", color: "#fff" }}>
             <Typography variant="h4" className="category--list-title">{lesson.title}</Typography>
           </Link>
-          <IconButton
-            className="list-play--button"
-            aria-label="play/pause"
-            sx={{ color: "#FAF9F6" }}
-            disableRipple
-            disableFocusRipple
-          >
-            <UseVideoModal video={`${lesson.video}`} />
-          </IconButton>
-          <IconButton
-            className="list-bookmark--button"
-            aria-label="bookmark"
-            sx={{ color: "#FAF9F6" }}
-            disableRipple
-            disableFocusRipple
-          >
-            <BookmarkAddIcon color={bookmarked[0]?.includes(`${lesson.id}`) ? "success" : "inherit"} onClick={() => onBookmark(`${lesson.id}`, viewer)} />
-          </IconButton>
+          <Tooltip title="View video" placement="top">
+            <IconButton
+              className="list-play--button"
+              aria-label="play/pause"
+              sx={{ color: "#FAF9F6" }}
+              disableRipple
+              disableFocusRipple
+            >
+              <UseVideoModal video={`${lesson.video}`} />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Bookmark for lesson plan" placement="top">
+            <IconButton
+              className="list-bookmark--button"
+              aria-label="bookmark"
+              sx={{ color: "#FAF9F6" }}
+              disableRipple
+              disableFocusRipple
+            >
+              <BookmarkAddIcon color={bookmarked[0]?.includes(`${lesson.id}`) ? "success" : "inherit"} onClick={() => onBookmark(`${lesson.id}`, viewer)} />
+            </IconButton>
+          </Tooltip>
         </Box>
       ))}
       <>
