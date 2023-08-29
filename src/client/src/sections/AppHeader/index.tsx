@@ -103,23 +103,32 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                 Catalog
               </Button>
               <Tooltip title="Create Content!">
-                <IconButton
+                {/* <IconButton
                   onClick={handleOpenActionMenu}
                   disableFocusRipple
                   disableRipple
+                > */}
+                <Button
+                  variant='outlined'
+                  className="catalog--button"
+                  onClick={handleOpenActionMenu}
+                  disableRipple
+                  disableFocusRipple
                 >
-                  <AddCircleIcon className="nav--user-actions" />
-                </IconButton>
+                  Create
+                </Button>
+                {/* <AddCircleIcon className="nav--user-actions" /> */}
+                {/* </IconButton> */}
               </Tooltip>
               <Menu
-                sx={{ mt: '30px' }}
+                sx={{ mt: '50px' }}
                 id="action-appbar"
                 anchorEl={anchorElAction}
                 anchorOrigin={{
                   vertical: 'top',
                   horizontal: 'right'
                 }}
-                keepMounted
+                // keepMounted
                 transformOrigin={{
                   vertical: 'top',
                   horizontal: 'right'
@@ -162,7 +171,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                   vertical: 'top',
                   horizontal: 'right'
                 }}
-                keepMounted
+                // keepMounted
                 transformOrigin={{
                   vertical: 'top',
                   horizontal: 'right'
@@ -199,7 +208,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                   vertical: 'top',
                   horizontal: 'right'
                 }}
-                keepMounted
+                // keepMounted
                 transformOrigin={{
                   vertical: 'top',
                   horizontal: 'right'
@@ -262,15 +271,16 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                   vertical: 'top',
                   horizontal: 'right'
                 }}
-                keepMounted
-                // transformOrigin={{
-                //   vertical: 'top',
-                //   horizontal: 1px
-                // }}
+                // keepMounted
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
                 className="mobile--menu"
               >
+                <Link to={`/signup`} style={{ textDecoration: 'none', color: "#000" }}>
+                  <MenuItem onClick={handleCloseUserMenu} className="dropdown--buttons">
+                    <Typography textAlign="center">Sign Up</Typography>
+                  </MenuItem>
+                </Link>
                 <Link to={`/login`} style={{ textDecoration: 'none', color: "#000" }}>
                   <MenuItem onClick={handleCloseUserMenu} className="dropdown--buttons">
                     <Typography textAlign="center">Login</Typography>
@@ -281,11 +291,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                     <Typography textAlign="center">Catalog</Typography>
                   </MenuItem>
                 </Link>
-                <Link to={`/signup`} style={{ textDecoration: 'none', color: "#000" }}>
-                  <MenuItem onClick={handleCloseUserMenu} className="dropdown--buttons">
-                    <Typography textAlign="center">Sign Up</Typography>
-                  </MenuItem>
-                </Link>
+
               </Menu>
             </Box>
             <Box className="desktop--menu-items">
