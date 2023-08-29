@@ -271,6 +271,7 @@ export type Mutation = {
   bookmarkLesson?: Maybe<Scalars['String']>;
   createLesson: Lesson;
   createQuiz: Quiz;
+  deleteAllBookmarks?: Maybe<Scalars['String']>;
   deleteLesson: Scalars['Boolean'];
   deletePlaylist: Scalars['Boolean'];
   deleteQuiz: Scalars['Boolean'];
@@ -300,6 +301,11 @@ export type MutationCreateLessonArgs = {
 
 export type MutationCreateQuizArgs = {
   input?: InputMaybe<CreateQuizInput>;
+};
+
+
+export type MutationDeleteAllBookmarksArgs = {
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 
@@ -544,6 +550,13 @@ export type CreateQuizMutationVariables = Exact<{
 
 export type CreateQuizMutation = { __typename?: 'Mutation', createQuiz: { __typename?: 'Quiz', id?: string | null } };
 
+export type DeleteAllBookmarksMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type DeleteAllBookmarksMutation = { __typename?: 'Mutation', deleteAllBookmarks?: string | null };
+
 export type LogInMutationVariables = Exact<{
   input?: InputMaybe<LogInInput>;
 }>;
@@ -767,6 +780,37 @@ export function useCreateQuizMutation(baseOptions?: Apollo.MutationHookOptions<C
 export type CreateQuizMutationHookResult = ReturnType<typeof useCreateQuizMutation>;
 export type CreateQuizMutationResult = Apollo.MutationResult<CreateQuizMutation>;
 export type CreateQuizMutationOptions = Apollo.BaseMutationOptions<CreateQuizMutation, CreateQuizMutationVariables>;
+export const DeleteAllBookmarksDocument = gql`
+    mutation DeleteAllBookmarks($id: ID!) {
+  deleteAllBookmarks(id: $id)
+}
+    `;
+export type DeleteAllBookmarksMutationFn = Apollo.MutationFunction<DeleteAllBookmarksMutation, DeleteAllBookmarksMutationVariables>;
+
+/**
+ * __useDeleteAllBookmarksMutation__
+ *
+ * To run a mutation, you first call `useDeleteAllBookmarksMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteAllBookmarksMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteAllBookmarksMutation, { data, loading, error }] = useDeleteAllBookmarksMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteAllBookmarksMutation(baseOptions?: Apollo.MutationHookOptions<DeleteAllBookmarksMutation, DeleteAllBookmarksMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteAllBookmarksMutation, DeleteAllBookmarksMutationVariables>(DeleteAllBookmarksDocument, options);
+      }
+export type DeleteAllBookmarksMutationHookResult = ReturnType<typeof useDeleteAllBookmarksMutation>;
+export type DeleteAllBookmarksMutationResult = Apollo.MutationResult<DeleteAllBookmarksMutation>;
+export type DeleteAllBookmarksMutationOptions = Apollo.BaseMutationOptions<DeleteAllBookmarksMutation, DeleteAllBookmarksMutationVariables>;
 export const LogInDocument = gql`
     mutation LogIn($input: LogInInput) {
   logIn(input: $input) {

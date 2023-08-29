@@ -1,68 +1,37 @@
 import React, { useState, ChangeEvent } from 'react';
-import { Box, Grid, Pagination, ListItem, Tooltip, Typography, Button, Snackbar, Alert } from '@mui/material';
+import { Box, Grid, ListItem, Tooltip, Typography, Button, Dialog, DialogContent, DialogTitle, DialogContentText, DialogActions } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { LessonCard } from '../../../../lib/components';
-import { User, Lesson } from '../../../../graphql/generated';
-import { CatalogItem } from '../../../Catalog/catalogItem';
+import { User, Lesson, useDeleteAllBookmarksMutation } from '../../../../graphql/generated';
 import { Link } from 'react-router-dom';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
+import { Cancel } from '@mui/icons-material';
 
 interface Props {
   user: User | any;
   setBookmarksPage: (page: number) => void;
 }
 
-// type BookmarkLessonData = {
-//   bookmarkLesson: Lesson;
-// }
-
-// type BookmarkLessonVariables = {
-//   id: string;
-//   viewer: string;
-// }
-
 export const UserBookmarks = ({ user, setBookmarksPage }: Props) => {
-  let bookmarksPage = 1;
+  // let bookmarksPage = 1;
   const bookmarks = user.bookmarks;
   const totalCount = bookmarks.length;
-  const limit = 3;
-  //   const [open, setOpen] = useState<boolean>(false);
-  //   const [bookmarkError, setBookmarkError] = useState<boolean>(false);
-  //   const [bookmarkStatus, setBookmarkStatus] = useState<string>('');
+  // const limit = 3;
+  const [open, setOpen] = useState<boolean>(false);
 
-  //   const BOOKMARK_LESSON = gql`
-  //     mutation BookmarkLesson($id: ID!, $viewer: String!) {
-  //       bookmarkLesson(id: $id, viewer: $viewer)
-  //     }
-  //   `;
+  const [deleteBookmarks] = useDeleteAllBookmarksMutation({
+    variables: {
+      id: user.id
+    }
+  })
 
-  // const [bookmarkLesson, { loading: BookmarkLessonLoading, error: BookmarkLessonError }] = useMutation<BookmarkLessonData, BookmarkLessonVariables>(BOOKMARK_LESSON);
-
-  // const onBookmark = async (id: string, viewer: string) => {
-  //   if (viewer === "null") {
-  //     setBookmarkError(true)
-  //     setOpen(true)
-  //   } else {
-  //     let res = await bookmarkLesson({
-  //       variables: {
-  //         id,
-  //         viewer
-  //       }
-  //     })
-  //     setBookmarkStatus(`${res.data?.bookmarkLesson}`)
-
-  //     res && setOpen(true)
-  //   }
-  // }
-
-  // const handleClose = () => {
-  //   setOpen(false)
-  //   setBookmarkError(false)
-  // }
-  // const handleChange = (event: ChangeEvent<unknown>, page: number) => {
-  //   setBookmarksPage(page)
-  // }
+  const handleRemoveAllBookmarks = () => {
+    deleteBookmarks(user.id);
+    setOpen(false);
+  }
+  const handleClose = () => {
+    setOpen(false);
+  }
 
   const userBookmarksList = (
     <Box sx={{ marginLeft: "2rem" }}>
@@ -77,6 +46,34 @@ export const UserBookmarks = ({ user, setBookmarksPage }: Props) => {
             </Tooltip>
           </Link>
         </Grid>
+        {totalCount !== 0 && (
+          <Grid item>
+            <Tooltip title="Remove all bookmarks">
+              <Cancel sx={{ color: "#BC4710", cursor: 'pointer' }} onClick={() => setOpen(true)} />
+            </Tooltip>
+            <Dialog
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title">
+                <Typography variant="h3">Are you sure you want to remove all bookmarks?</Typography>
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  This action cannot be undone and you will need to re-bookmark all desired content.
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose}>Cancel</Button>
+                <Button onClick={handleRemoveAllBookmarks} autoFocus>
+                  Remove All Bookmarks
+                </Button>
+              </DialogActions>
+            </Dialog>
+          </Grid>
+        )}
       </Grid>
       <Grid container>
         {bookmarks.map((b: Lesson, index: number) => (
@@ -91,32 +88,6 @@ export const UserBookmarks = ({ user, setBookmarksPage }: Props) => {
           </Grid>
         ))}
       </Grid>
-      {/* <Pagination 
-        // Take total number of playlists divided by number of playlists per page
-        count={Math.ceil(totalCount/limit)} 
-        page={bookmarksPage}
-        onChange={handleChange}
-      /> */}
-      {/* <>
-        <Snackbar
-          open={open}
-          autoHideDuration={5000}
-          onClose={handleClose}
-          anchorOrigin={{ vertical: "top", horizontal: 'center' }}
-        >
-          {bookmarkError || (user === "null") ?
-            (
-              <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-                Please sign up or login to bookmark!
-              </Alert>
-            ) :
-            (
-              <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                {bookmarkStatus}
-              </Alert>
-            )}
-        </Snackbar>
-      </> */}
     </Box>
   );
 

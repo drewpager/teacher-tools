@@ -27,8 +27,8 @@ export const HomeInfo = () => {
             We’re an educational film company with a mission to provide short, world-class documentary films, lesson plans and assessment questions for students, teachers and life-long learners.
           </Typography>
           <div className="grid--buttons">
-            <Link variant="subtitle1" href="/playlist/create" className='startTeaching--button'>
-              Start Teaching
+            <Link variant="subtitle1" href="/catalog" className='startTeaching--button'>
+              View Catalog
             </Link>
             <Link variant="subtitle1" href="/pricing/" className='pricing--button'>
               View Pricing
