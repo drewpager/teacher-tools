@@ -21,6 +21,7 @@ import QuizIcon from '@mui/icons-material/Quiz';
 import { Playlist, Lesson, LessonPlanUnion } from '../../../graphql/generated';
 import { VideoPlayer, QuizPlayer } from '../index';
 import './playlistcard.scss';
+import { formatDate } from '../../utils';
 
 interface Props {
   playlist: Playlist
@@ -38,16 +39,6 @@ export const PlaylistCard = ({ playlist }: Props) => {
     setActive(`${item.id}`)
   };
 
-  const handleDateFormat = (date: string) => {
-    if (date === "Present") {
-      return "Present"
-    }
-
-    if (date.startsWith("-")) {
-      return `${date.split("-")[1]} BCE`
-    }
-    return new Date(date).toLocaleDateString('en-us', { year: "numeric", month: "short", day: "numeric" })
-  }
 
   return (
     <>
@@ -75,7 +66,7 @@ export const PlaylistCard = ({ playlist }: Props) => {
                 </TimelineDot>
                 {playlist.plan.length !== (id + 1) ? <TimelineConnector /> : <></>}
               </TimelineSeparator>
-              <TimelineContent>{item?.__typename === "Lesson" ? `${handleDateFormat(item.startDate)} - ${handleDateFormat(item.endDate)}` : "Quiz"}</TimelineContent>
+              <TimelineContent>{item?.__typename === "Lesson" ? `${formatDate(item.startDate)} - ${formatDate(item.endDate)}` : "Quiz"}</TimelineContent>
             </TimelineItem>
           ))}
         </Timeline>
