@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Box, CardContent, Typography, IconButton, Chip, Grid } from '@mui/material';
-import { titleCase } from '../../utils';
+import { titleCase, formatDate } from '../../utils';
 import { UseVideoModal } from '../VideoModal';
 import { Lesson } from '../../../graphql/generated';
 
@@ -12,7 +12,7 @@ export const CreatePlaylistCard = (props: Lesson) => {
           {props.title}
         </Typography>
         <Typography variant="subtitle1" color="#e0e0e0" component="div">
-          {(props.startDate === props.endDate) ? (props.startDate) : (`${props.startDate} to ${props.endDate}`)}
+          {(props.startDate === props.endDate) ? (formatDate(props.startDate)) : (`${formatDate(props.startDate)} to ${formatDate(props.endDate)}`)}
         </Typography>
       </CardContent>
       <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>

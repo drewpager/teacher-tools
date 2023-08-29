@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { LinearProgress, Box, Chip } from '@mui/material';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
 import { VideoPlayer } from '../../lib/components';
-import { titleCase } from '../../lib/utils';
+import { titleCase, formatDate } from '../../lib/utils';
 import { Helmet } from 'react-helmet';
 
 import './lessonPage.scss';
@@ -37,7 +37,7 @@ export const Lesson = () => {
     <Box className="lesson--page">
       <Helmet>
         <title>{lesson?.title}</title>
-        <meta name="description" content={`A short documentary of ${lesson?.title} from ${lesson?.startDate} to ${lesson?.endDate}.`} />
+        <meta name="description" content={`A short documentary of ${lesson?.title} from ${formatDate(lesson?.startDate)} to ${formatDate(lesson?.endDate)}.`} />
       </Helmet>
       <h1>{lesson?.title}</h1>
       {lesson?.category?.map((i, ind) => (<Chip variant='outlined' label={titleCase(`${i}`)} key={ind} color="error" className='lesson--category' />))}
