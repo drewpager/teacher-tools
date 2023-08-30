@@ -123,19 +123,19 @@ export const CatalogList = ({ name, category, viewer, bookmarks }: props) => {
       <>
         <Snackbar
           open={open}
-          autoHideDuration={5000}
+          autoHideDuration={6000}
           onClose={handleClose}
           anchorOrigin={{ vertical: "top", horizontal: 'center' }}
         >
           {/* If not logged in, throw error/prompt when bookmark button clicked, otherwise bookmark successfully */}
           {bookmarkError || (viewer === "null") ?
             (
-              <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+              <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }} variant="filled">
                 Please sign up or login to bookmark!
               </Alert>
             ) :
             (
-              <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+              <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }} variant="filled">
                 {bookmarkStatus}!
               </Alert>
             )}

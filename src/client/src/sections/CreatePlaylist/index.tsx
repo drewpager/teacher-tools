@@ -264,7 +264,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       creator: viewer && viewer.id ? viewer.id : "0"
     })
     window.localStorage.setItem('playlist', JSON.stringify(playlist));
-    setAutoSaved(true);
+    e.target.onmouseleave = () => { setAutoSaved(true) }
   }
 
   if (lessonLoading || quizLoading) {
