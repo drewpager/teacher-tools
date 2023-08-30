@@ -13,8 +13,8 @@ interface Props {
   setPlaylistsPage: (page: number) => void;
 }
 
-export const UserPlaylists = ({ userPlaylists, playlistsPage, limit, setPlaylistsPage}: Props) => {
-  
+export const UserPlaylists = ({ userPlaylists, playlistsPage, limit, setPlaylistsPage }: Props) => {
+
   const { result, totalCount } = userPlaylists;
 
   const handleChange = (event: ChangeEvent<unknown>, page: number) => {
@@ -25,7 +25,7 @@ export const UserPlaylists = ({ userPlaylists, playlistsPage, limit, setPlaylist
     <Box className="user--playlists">
       <Grid container spacing={2} sx={{ alignItems: "center" }}>
         <Grid item>
-          <h2>{totalCount} Playlists</h2>
+          <h2>{totalCount} Lesson Plans</h2>
         </Grid>
         <Grid item>
           <Link to={`/playlist/create`}>
@@ -40,8 +40,8 @@ export const UserPlaylists = ({ userPlaylists, playlistsPage, limit, setPlaylist
           <UserPlaylistsCard playlist={value} key={index} />
         ))}
       </Grid>
-      <Pagination 
-        count={Math.ceil(totalCount/limit)} 
+      <Pagination
+        count={Math.ceil(totalCount / limit)}
         page={playlistsPage}
         onChange={handleChange}
       />
