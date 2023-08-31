@@ -9,7 +9,8 @@ import {
   CTA,
   ProductDetails,
   HomeDetailsSkeleton,
-  HomeInfoSkeleton
+  HomeInfoSkeleton,
+  HomeDemo
 } from '../../lib/components/'
 import { Viewer, usePlaylistQuery } from '../../graphql/generated';
 import { PlaylistCard } from '../../lib/components/';
@@ -46,6 +47,7 @@ export const Home = ({ viewer }: Props) => {
         <meta name="description" content="Short History Documentaries and Tools for Teachers to Leverage Trusted Content and Engage Students While Adhering to Widely Accepted Curriculum Standards." />
       </Helmet>
       <HomeInfo />
+      <HomeDemo />
       {/* <HomeDetails /> */}
       <ProductValues />
       <ProductDetails />
