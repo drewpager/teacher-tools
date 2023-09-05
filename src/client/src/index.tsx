@@ -28,6 +28,7 @@ import {
   Login,
   AppHeader,
   Playlist,
+  Playlists,
   CreatePlaylist,
   CreateLesson,
   CreateQuiz,
@@ -127,6 +128,7 @@ const App = () => {
           <Route path="/signup" children={(props: any) => (<SignUp {...props} setViewer={setViewer} />)} element={<SignUp setViewer={setViewer} />} />
           <Route path="/playlist/:id" element={<Playlist />} />
           <Route path="/playlist/create" element={<CreatePlaylist viewer={viewer} />} />
+          <Route path="/playlists" element={<Playlists viewer={viewer} />} />
           <Route path="/quiz/:id" element={<Quiz />} />
           <Route path="/quiz/create" element={<CreateQuiz viewer={viewer} />} />
           <Route path="/edit/:id" element={<EditPlaylist viewer={viewer} />} />

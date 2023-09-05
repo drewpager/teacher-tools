@@ -11,6 +11,7 @@ export * from "./Pricing";
 export * from "./Login";
 export * from "./AppHeader";
 export * from "./Playlist";
+export * from "./Playlists";
 export * from "./Billing";
 export * from "./CreatePlaylist";
 export * from "./Catalog";

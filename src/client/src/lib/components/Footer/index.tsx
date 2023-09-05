@@ -61,8 +61,8 @@ export const Footer = ({ viewer }: Props) => {
           <Link to="/catalog" style={{ textDecoration: "none" }}>
             <Typography variant='body1' className='footer--link-text'>Lesson Catalog</Typography>
           </Link>
-          <Link to="/" style={{ textDecoration: "none" }}>
-            <Typography variant='body1' className='footer--link-text'>Playlist Search <Chip label="Coming Soon!" size="small" sx={{ textDecoration: "none", backgroundColor: "#dda15e" }} /></Typography>
+          <Link to="/playlists" style={{ textDecoration: "none" }}>
+            <Typography variant='body1' className='footer--link-text'>Playlist Catalog <Chip label="New!" size="small" sx={{ textDecoration: "none", backgroundColor: "#57996A" }} /></Typography>
           </Link>
           {viewer ? (<Link to={viewer && viewer.id ? `/user/${viewer.id}` : `/login`} style={{ textDecoration: "none" }}>
             <Typography variant='body1' className='footer--link-text'>{viewer && viewer.id ? "Profile" : "Login"}</Typography>

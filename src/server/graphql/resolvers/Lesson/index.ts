@@ -129,30 +129,30 @@ export const lessonResolvers = {
     id: (playlist: Playlist) => {
       return playlist._id;
     },
-    creator: async (
-      playlist: Playlist,
-      _args: Record<string, unknown>,
-      { db, req }: { db: Database; req: Request }
-    ): Promise<string> => {
-      try {
-        const creator = await db.users.findOne({ _id: playlist.creator });
+    // creator: async (
+    //   playlist: Playlist,
+    //   _args: Record<string, unknown>,
+    //   { db, req }: { db: Database; req: Request }
+    // ): Promise<string> => {
+    //   try {
+    //     const creator = await db.users.findOne({ _id: playlist.creator });
 
-        if (!creator) {
-          throw new Error("Creator can't be found!");
-        }
+    //     if (!creator) {
+    //       throw new Error("Creator can't be found!");
+    //     }
 
-        const viewer = await authorize(db, req);
-        if (viewer && viewer._id === playlist.creator) {
-          playlist.authorized = true;
-        }
+    //     const viewer = await authorize(db, req);
+    //     if (viewer && viewer._id === playlist.creator) {
+    //       playlist.authorized = true;
+    //     }
 
-        return creator._id;
-      } catch (err) {
-        throw new Error(
-          `You are either not the creator or not logged in: ${err}!`
-        );
-      }
-    },
+    //     return creator._id;
+    //   } catch (err) {
+    //     throw new Error(
+    //       `You are either not the creator or not logged in: ${err}!`
+    //     );
+    //   }
+    // },
   },
   Mutation: {
     createLesson: async (
