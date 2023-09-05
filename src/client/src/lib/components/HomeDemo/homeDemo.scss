@@ -1,0 +1,17 @@
+.MuiBox-root {
+  &.details-green--box {
+    background-color: #57996A1A;
+    border: 1px solid #182742;
+    border-radius: 1.5rem;
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+  
+    @media (min-width: 900px) {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      grid-template-rows: 400px;
+      align-items: center;
+      padding: 4rem;
+    }
+  }
+}
