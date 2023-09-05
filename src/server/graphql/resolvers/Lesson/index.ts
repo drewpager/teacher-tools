@@ -1,4 +1,4 @@
-import { Database, Lesson, Playlist, User, Viewer } from "../../../lib/types";
+import { Database, Lesson, Playlist, Viewer } from "../../../lib/types";
 import {
   AllLessonsArgs,
   AllLessonsData,
@@ -70,9 +70,11 @@ const verifyCreateLessonInput = ({
     throw new Error("Please format date as Year-Month-Day (YYYY-MM-DD)");
   }
 
-  // if (meta.length < 160) {
-  //   throw new Error("Please add more information to provide students with context about this lesson.")
-  // }
+  if (meta.length < 1) {
+    throw new Error(
+      "Please add a brief description to provide students with context about this lesson."
+    );
+  }
 
   if (video.length < 1) {
     throw new Error("Please add a video!");
