@@ -11,6 +11,7 @@ import {
   PlaylistsData,
   CreatePlanArgs,
   UpdateParams,
+  CopyPlaylistArgs,
 } from "./types";
 import { ObjectId } from "mongodb";
 
@@ -158,6 +159,36 @@ export const playlistResolvers = {
         return deletePlaylist.acknowledged;
       } catch (error) {
         throw new Error(`Failed to delete playlist: ${error}`);
+      }
+    },
+    copyPlaylist: async (
+      _root: undefined,
+      { id, viewerId }: CopyPlaylistArgs,
+      { db }: { db: Database }
+    ): Promise<Playlist | undefined> => {
+      const newId = new ObjectId();
+      const playlist = await db.playlists.findOne({ _id: new ObjectId(id) });
+      try {
+        if (playlist) {
+          const insertResult = await db.playlists.insertOne({
+            _id: new ObjectId(newId),
+            creator: viewerId,
+            name: playlist.name,
+            plan: [...playlist.plan],
+          });
+
+          const insertedResult = insertResult
+            ? await db.playlists.findOne({ _id: insertResult.insertedId })
+            : false;
+
+          if (!insertedResult) {
+            throw new Error("Failed to insert new lesson plan!");
+          }
+
+          return insertedResult;
+        }
+      } catch (e) {
+        throw new Error(`Failed to copy playlist: ${e}`);
       }
     },
   },

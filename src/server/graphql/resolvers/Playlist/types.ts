@@ -34,3 +34,8 @@ export interface UpdateParams {
   input: UpdatePlanArgs;
   id: string;
 }
+
+export interface CopyPlaylistArgs {
+  id: string;
+  viewerId: string;
+}

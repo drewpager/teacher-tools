@@ -269,6 +269,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   addPayment?: Maybe<Viewer>;
   bookmarkLesson?: Maybe<Scalars['String']>;
+  copyPlaylist?: Maybe<Playlist>;
   createLesson: Lesson;
   createQuiz: Quiz;
   deleteAllBookmarks?: Maybe<Scalars['String']>;
@@ -291,6 +292,12 @@ export type MutationAddPaymentArgs = {
 export type MutationBookmarkLessonArgs = {
   id: Scalars['ID'];
   viewer: Scalars['String'];
+};
+
+
+export type MutationCopyPlaylistArgs = {
+  id: Scalars['ID'];
+  viewerId: Scalars['String'];
 };
 
 
