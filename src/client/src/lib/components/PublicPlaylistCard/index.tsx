@@ -1,12 +1,11 @@
-import React from 'react';
-import { Card, CardContent, ListItem, Typography, Grid, Button, CircularProgress, Alert, Tooltip } from '@mui/material';
+import React, { useState } from 'react';
+import { Card, CardContent, ListItem, Typography, Grid, Button, CircularProgress, Alert, Tooltip, Snackbar, Chip } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { LessonPlanUnion, Viewer } from '../../../graphql/generated';
 import { useMutation } from '@apollo/client';
 import { gql } from 'graphql-tag';
 import { DisplayError, DisplaySuccess } from '../../utils';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import theme from '../../../theme';
 
 type Props = {
   id?: string | null | undefined;
@@ -39,15 +38,16 @@ interface CopyPlaylistVariables {
 export const PublicPlaylistCard = ({ id, name, plan, creator, viewer }: Props) => {
   const navigation = useNavigate();
   const [copyPlaylist, { loading: CopyPlaylistLoading, error: CopyPlaylistError }] = useMutation<CopyPlaylistData, CopyPlaylistVariables>(COPY_PLAYLIST);
+  const [open, setOpen] = useState<boolean>(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  }
 
   const handleCopy = async (id: string, viewerId: string) => {
     if (viewerId === 'null' || viewerId === null) {
-      console.log("Please sign up or log in to copy a playlist!");
-      return (
-        <Alert variant="filled" severity="error" sx={{ width: "100%" }}>
-          Please sign up or log in to copy a playlist!
-        </Alert>
-      )
+      setOpen(true);
+      return;
     }
     const res = await copyPlaylist({
       variables: {
@@ -92,12 +92,23 @@ export const PublicPlaylistCard = ({ id, name, plan, creator, viewer }: Props) =
             </Link>
             {CopyPlaylistLoading ? copyPlaylistLoadingMessage : (
               <Tooltip title="Copy playlist!">
-                {creator === viewer?.id ? (<></>) : (
+                {creator === viewer?.id ? (<Chip variant='filled' label="Your Content" />) : (
                   <Button onClick={() => handleCopy(`${id}`, `${viewer?.id}`)}><ContentCopyIcon /></Button>
                 )}
               </Tooltip>
             )}
             {CopyPlaylistError ? copyPlaylistErrorMessage : null}
+            <Snackbar
+              anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+              autoHideDuration={6000}
+              open={open}
+              onClose={handleClose}
+              key={id}
+            >
+              <Alert variant="filled" severity="error" sx={{ width: '100%' }}>
+                Please sign up or log in to copy a playlist!
+              </Alert>
+            </Snackbar>
           </CardContent>
         </Card>
       </ListItem>
