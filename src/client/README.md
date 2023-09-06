@@ -1,3 +1,3 @@
-# Teacher Tools
+# Plato's Peach
 
-Building tools to make the lives of teachers easier when building lesson plans, leveraging interactive content, and more. 
+Building content and tools to make the lives of teachers easier when building lesson plans, leveraging interactive content, and more.
