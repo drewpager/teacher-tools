@@ -1,6 +1,6 @@
-import { Box, Grid, Typography, Button } from '@mui/material';
+import { Box, Grid, Typography, Button, Modal, Fab } from '@mui/material';
 import { CardGrid } from '../CardGrid';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import dragDrop from '../../assets/drag-and-drop.gif'
 import sistine from '../../assets/how-it-works-1.png'
@@ -8,16 +8,43 @@ import works2 from '../../assets/how-it-works-2.png'
 import works3 from '../../assets/how-it-works-3.png'
 import works4 from '../../assets/how-it-works-4.png'
 import './productDetails.scss';
+import { VideoPlayer } from '../VideoPlayer';
 
 export const ProductDetails = () => {
+  const [open, setOpen] = useState<boolean>(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  }
+
+  const handlePlayVideo = () => {
+    setOpen(true);
+  }
   return (
     <Box className="details--box">
       <Typography variant="h2" className="productDetails-heading--font">How Plato's Peach Works</Typography>
       <Grid container sx={{ justifyContent: "center" }}>
         <Grid item xs={12} sm={12} md={12} lg={10}>
           <Box className="details-blue--box">
-            <Box>
+            <Box className='playImage'>
+              <button className="play-btn" onClick={handlePlayVideo} />
               <img src={sistine} alt="Plato's Peach Video Player of Sistine Chapel" className="img--overlay" />
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="platos-peach-demo-videon"
+                aria-describedby="platos-peach-demo-video-description"
+              >
+                <Box className="demo-video--modal">
+                  <Box>
+                    <Fab aria-label="cancel" onClick={handleClose} sx={{ justifySelf: "right", mb: "5px" }}>
+                      {/* <CancelIcon /> */}
+                      X
+                    </Fab>
+                  </Box>
+                  <VideoPlayer url="https://res.cloudinary.com/drewpager/video/upload/v1693489768/platos-peach-video/how-to-use-platos-peach_wvdqui.mp4" />
+                </Box>
+              </Modal>
             </Box>
             <Box className="productDetails-number--box">
               <svg width="69" height="60" viewBox="0 0 109 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,12 +53,12 @@ export const ProductDetails = () => {
               <Typography variant="h4" className="productDetails-title--font" sx={{ position: "absolute", top: "-30%", left: "7%", fontSize: 70 }}>1.</Typography>
             </Box>
             <Typography variant="h2" className="productDetails-subtitle--font">
-              Browse Our Growing Library of Social Studies Documentaries
+              Learn How it Works in 4 Minutes — Watch The Video Now!
             </Typography>
             <Typography variant="body2" className="productDetails-description--font">
               Our catalog of short history documentaries are the perfect puzzle pieces for you to construct lesson plans with the content you choose.
             </Typography>
-            <Button href='/catalog' className="pricing--button">View Catalog</Button>
+            <Button onClick={handlePlayVideo} className="pricing--button">Watch Demo</Button>
           </Box>
         </Grid>
         {/* <Grid item xs={12} sm={12} md={6}>

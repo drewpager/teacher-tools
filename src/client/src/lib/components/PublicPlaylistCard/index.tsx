@@ -91,11 +91,13 @@ export const PublicPlaylistCard = ({ id, name, plan, creator, viewer }: Props) =
               </Typography>
             </Link>
             {CopyPlaylistLoading ? copyPlaylistLoadingMessage : (
-              <Tooltip title="Copy playlist!">
-                {creator === viewer?.id ? (<Chip variant='filled' label="Your Content" />) : (
-                  <Button onClick={() => handleCopy(`${id}`, `${viewer?.id}`)}><ContentCopyIcon /></Button>
-                )}
-              </Tooltip>
+              creator === viewer?.id ? (<Chip variant='filled' label="Your Content" />) : (
+                <Tooltip title="Copy playlist!">
+                  <Button onClick={() => handleCopy(`${id}`, `${viewer?.id}`)}>
+                    <ContentCopyIcon />
+                  </Button>
+                </Tooltip>
+              )
             )}
             {CopyPlaylistError ? copyPlaylistErrorMessage : null}
             <Snackbar
