@@ -249,13 +249,13 @@
   width: 70px;
   height: 70px;
   background: radial-gradient(
-    rgba(0, 115, 255, 1) 100%,
-    rgba(255, 255, 255, 1) 60%
+    rgba(58, 112, 205, 1) 100%,
+    rgba(58, 112, 205, 1) 60%
   );
   border-radius: 50%;
   display: block;
   margin: 100px auto;
-  box-shadow: 0px 0px 25px 3px rgba(0, 115, 255, 0.9);
+  box-shadow: 0px 0px 25px 3px rgba(58, 112, 205, 1);
   margin-top: 40px;
 }
 
@@ -296,10 +296,10 @@
   animation-timing-function: steps;
   opacity: 1;
   border-radius: 50%;
-  border: 5px solid rgba(255, 255, 255, 0.75);
+  border: 5px solid rgba(25, 25, 225, 0.5);
   top: -25%;
   left: -25%;
-  background: rgba(198, 16, 0, 0);
+  background: rgba(25, 25, 225, 0.5);
   cursor: pointer;
 }
 
@@ -308,8 +308,8 @@
     -webkit-transform: scale(0.6);
     transform: scale(0.6);
     opacity: 1;
-    box-shadow: inset 0px 0px 25px 3px rgba(255, 255, 255, 0.75),
-      0px 0px 25px 10px rgba(255, 255, 255, 0.75);
+    box-shadow: inset 0px 0px 25px 3px rgba(25, 25, 225, 0.5),
+      0px 0px 25px 10px rgba(25, 25, 225, 0.5);
   }
 
   100% {
@@ -325,8 +325,8 @@
     -webkit-transform: scale(0.6);
     transform: scale(0.6);
     opacity: 1;
-    box-shadow: inset 0px 0px 25px 3px rgba(255, 255, 255, 0.75),
-      0px 0px 25px 10px rgba(255, 255, 255, 0.75);
+    box-shadow: inset 0px 0px 25px 3px rgba(25, 25, 225, 0.5),
+      0px 0px 25px 10px rgba(25, 25, 225, 0.5);
   }
 
   100% {
