@@ -109,9 +109,9 @@ export const playlistResolvers = {
     },
     updatePlan: async (
       _root: undefined,
-      { id, input }: UpdateParams,
+      { input, id }: UpdateParams,
       { db }: { db: Database }
-    ): Promise<Playlist> => {
+    ): Promise<Playlist | string> => {
       const ide = new ObjectId(id);
       try {
         const playlist = await db.playlists.findOneAndUpdate(
@@ -119,25 +119,30 @@ export const playlistResolvers = {
           {
             $set: {
               name: input.name,
-              creator: input.creator,
               plan: input.plan,
             },
           }
         );
 
-        // if (!playlist) {
-        //   throw new Error(`Playlist Database update failed`);
-        // }
+        if (!playlist) {
+          throw new Error(`Playlist Database update failed`);
+        }
 
-        const insertedResult = playlist
+        const upsertedResult = playlist
           ? await db.playlists.findOne({ _id: ide })
           : false;
 
-        if (!insertedResult) {
+        if (!upsertedResult) {
           throw new Error(`Sorry, but I Failed to update this playlist!`);
         }
 
-        return { ...insertedResult };
+        return {
+          _id: upsertedResult._id,
+          name: upsertedResult.name,
+          plan: upsertedResult.plan,
+          creator: upsertedResult.creator,
+          authorized: true,
+        };
       } catch (e) {
         throw new Error(`Failed to update playlist ${e}`);
       }

@@ -31,7 +31,7 @@ export interface UpdatePlanArgs {
 }
 
 export interface UpdateParams {
-  input: UpdatePlanArgs;
+  input: LessonPlanInput;
   id: string;
 }
 

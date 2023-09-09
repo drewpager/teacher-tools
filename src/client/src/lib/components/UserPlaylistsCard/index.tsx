@@ -28,11 +28,11 @@ export const UserPlaylistsCard = ({ playlist }: Props) => {
   }
 `;
 
-  const UPDATE_PLAN = gql`
-    mutation UpdatePlan($input: playlist) {
-      updatePlan(input: $input)
-    }
-  `;
+  // const UPDATE_PLAN = gql`
+  //   mutation UpdatePlan($input: Playlist, $id: ID) {
+  //     updatePlan(input: $input, id: $id)
+  //   }
+  // `;
 
   interface DeletePlaylistData {
     deletePlaylist: Playlist
@@ -41,15 +41,15 @@ export const UserPlaylistsCard = ({ playlist }: Props) => {
   interface DeletePlaylistVariables {
     id: string
   }
-  interface UpdatePlaylistData {
-    updatePlaylist: Playlist
-  }
+  // interface UpdatePlaylistData {
+  //   updatePlaylist: Playlist
+  // }
 
-  interface UpdatePlaylistVariables {
-    id: string
-  }
+  // interface UpdatePlaylistVariables {
+  //   id: string
+  // }
   const [deletePlaylist, { loading: DeletePlaylistLoading, error: DeletePlaylistError }] = useMutation<DeletePlaylistData, DeletePlaylistVariables>(DELETE_PLAYLIST);
-  const [updatePlan, { loading: UpdatePlanLoading, error: UpdatePlanError }] = useMutation<UpdatePlaylistData, UpdatePlaylistVariables>(UPDATE_PLAN);
+  // const [updatePlan, { loading: UpdatePlanLoading, error: UpdatePlanError }] = useMutation<UpdatePlaylistData, UpdatePlaylistVariables>(UPDATE_PLAN);
 
   const handleDelete = async (id: string) => {
     const res = await deletePlaylist({ variables: { id } })
@@ -59,9 +59,9 @@ export const UserPlaylistsCard = ({ playlist }: Props) => {
     }
   }
 
-  const handleUpdate = async (id: string) => {
+  const handleUpdate = async ( id: string) => {
     navigation(`/edit/${id}`)
-    await updatePlan({ variables: { id } })
+    // await updatePlan({ variables: { id} })
   }
 
   const deletePlaylistLoadingMessage = (
@@ -74,7 +74,7 @@ export const UserPlaylistsCard = ({ playlist }: Props) => {
     }} />
   );
 
-  const updatePlanLoadingMessage = deletePlaylistLoadingMessage;
+  // const updatePlanLoadingMessage = deletePlaylistLoadingMessage;
 
   const deletePlaylistErrorMessage = (
     <Alert variant="outlined" severity="error">
@@ -82,11 +82,11 @@ export const UserPlaylistsCard = ({ playlist }: Props) => {
     </Alert>
   );
 
-  const updatePlanErrorMessage = (
-    <Alert variant="outlined" severity="error">
-      Oops, unable to edit playlist right now!
-    </Alert>
-  );
+  // const updatePlanErrorMessage = (
+  //   <Alert variant="outlined" severity="error">
+  //     Oops, unable to edit playlist right now!
+  //   </Alert>
+  // );
 
   return (
     <Grid item lg={4} md={6} sm={12} xs={12} key={playlist.id}>
@@ -101,12 +101,9 @@ export const UserPlaylistsCard = ({ playlist }: Props) => {
                 {playlist.plan.length} {playlist.plan.length === 1 ? " Item" : " Items"}
               </Typography>
             </Link>
-            {/* {UpdatePlanLoading ? updatePlanLoadingMessage : (
-              <Tooltip title="Edit contents of playlist!">
-                <Button onClick={() => handleUpdate(playlist.id)}><EditIcon /></Button>
-              </Tooltip>
-            )}
-            {UpdatePlanError ? updatePlanErrorMessage : null} */}
+            <Tooltip title="Edit contents of playlist!">
+              <Button onClick={() => handleUpdate(playlist.id)}><EditIcon /></Button>
+            </Tooltip>
             {DeletePlaylistLoading ? deletePlaylistLoadingMessage : (
               <Tooltip title="Delete playlist!">
                 <Button onClick={() => handleDelete(playlist.id)}><DeleteIcon /></Button>
