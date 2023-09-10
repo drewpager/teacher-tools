@@ -51,6 +51,448 @@ const seed = async () => {
 
     // Don't worry about space in categories [" renaissance"]. Dates must be checked.
     const lessons: Lesson[] = [
+      // {
+      //   _id: new ObjectId(),
+      //   title: "The Great Fire of New York",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1690996386/platos-peach-video/The_Great_Fire_of_New_York_City_hntv8i.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1776-09-21",
+      //   endDate: "1776-09-22",
+      //   category: ["american history", " revolution & independence"],
+      //   meta: "The Great Fire of New York City was a devastating fire that occurred in 1835, destroying a large portion of the city and leading to significant changes in fire safety regulations and infrastructure.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "The Last Cape Horners",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1690999846/platos-peach-video/The_Last_Cape_Horners_om5ztq.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1818",
+      //   endDate: "1947",
+      //   category: ["world history"],
+      //   meta: "A group of sailors known as the Last Cape Horners are celebrated for being the last to sail around Cape Horn, a treacherous route in South America. Their bravery and skill in navigating the dangerous waters is admired by many.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "The Library of Alexandria",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1691000100/platos-peach-video/The_Library_of_Alexandria_zq9rdk.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "-295",
+      //   endDate: "Present",
+      //   category: ["geography"],
+      //   meta: "The Library of Alexandria was a renowned ancient library in Egypt that housed a vast collection of knowledge and literature from various civilizations. It was a center of learning and research, attracting scholars from all over the world. Unfortunately, it was destroyed and its contents lost to history.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "The Mystic Massacre",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1691000506/platos-peach-video/The_Mystic_Massacre_kchjjb.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1636",
+      //   endDate: "1637",
+      //   category: ["american history", " american indian wars"],
+      //   meta: "The Mystic Massacre was a violent attack on the Pequot tribe by English colonists in 1637. It resulted in the deaths of hundreds of Native Americans and marked a turning point in the colonization of New England.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "Adoptive Cell Transfer Therapy",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1692473021/platos-peach-video/Adoptive_Cell_Transfer_Therapy_p9kko3.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1990",
+      //   endDate: "Present",
+      //   category: ["science", " medicine"],
+      //   meta: "Adoptive Cell Transfer Therapy is a treatment that involves collecting and modifying a patient's own immune cells to target and kill cancer cells. This personalized approach has shown promising results in treating certain types of cancer.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "Bonfire of the Vanities",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1692473601/platos-peach-video/Bonfire_of_the_Vanities_kgixzv.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1497-02-07",
+      //   endDate: "1497-02-07",
+      //   category: ["european history", " renaissance"],
+      //   meta: "Bonfire of the Vanities is a novel by Tom Wolfe that explores the greed, corruption, and social divisions of 1980s New York City. The story follows a bond trader named Sherman McCoy who becomes entangled in a hit-and-run accident, leading to a high-profile trial and media frenzy.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "Bomba Puertorriqueña",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1692473623/platos-peach-video/Bomba_Puertorrique%C3%B1a_n1gmca.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1600",
+      //   endDate: "Present",
+      //   category: ["world history"],
+      //   meta: "The Bomba Puertorriqueña is a traditional Puerto Rican dance and music style that originated from African rhythms and traditions. It is characterized by the use of drums, call-and-response singing, and improvisation.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "The Compromise of 1850",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1692473627/platos-peach-video/Compromise_of_1850_skvcvi.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1850",
+      //   endDate: "1877",
+      //   category: ["american history", " abolition"],
+      //   meta: "As the US expanded west, the debate over slavery in new territories led to the Compromise of 1850, leaving many states and citizens divided — particularly over the Fugitive Slave Act.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "Eleanor Roosevelt",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1692474050/platos-peach-video/Eleanor_Roosevelt_gftl88.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1884-10-11",
+      //   endDate: "1962-11-07",
+      //   category: ["biography", " american history"],
+      //   meta: "Eleanor Roosevelt was a prominent American political figure and activist. She served as the First Lady of the United States from 1933 to 1945 and played a significant role in advancing human rights and social justice causes.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "High Score U.S. Submarines of WWII",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1692474057/platos-peach-video/High_Score_U.S._Submarines_of_WW2_mxuvyq.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1941-12-08",
+      //   endDate: "1945-09-02",
+      //   category: ["world military history", " world war two"],
+      //   meta: "The output is a list or ranking of the highest-scoring U.S. submarines during World War II.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "Hippocrates",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1692474465/platos-peach-video/Hippocrates_fudem4.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "-460",
+      //   endDate: "-377",
+      //   category: ["biography"],
+      //   meta: "Hippocrates was an ancient Greek physician who is often referred to as the 'Father of Medicine.' He is known for his contributions to the field of medicine, including the development of the Hippocratic Oath and the belief in the importance of observing and recording symptoms.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "Joseph Lister: The Father of Modern Surgery",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1692474481/platos-peach-video/Joseph_Lister_The_Father_of_Modern_Surgery_xglfmv.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1827-04-05",
+      //   endDate: "1912-02-10",
+      //   category: ["biography"],
+      //   meta: "Joseph Lister is known as the Father of Modern Surgery. He introduced antiseptic techniques to prevent infection during surgeries, revolutionizing the field of medicine. His contributions have greatly improved patient outcomes and set the foundation for modern surgical practices.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "The First Men on the Moon",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1692475746/platos-peach-video/The_First_Men_on_the_Moon_hjcuiu.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1969-07-16",
+      //   endDate: "1969-07-24",
+      //   category: ["world history", " space race"],
+      //   meta: "The first men to land on the moon are discussed.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "The Zhou Dynasty",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1692475754/platos-peach-video/The_Zhou_Dynasty_pdenye.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "-1046",
+      //   endDate: "-256",
+      //   category: ["ancient history", " china"],
+      //   meta: "The Zhou Dynasty was a Chinese dynasty that ruled from 1046 to 256 BCE. It is known for its feudal system, the Mandate of Heaven, and the development of Confucianism and Taoism. The dynasty eventually declined due to internal conflicts and external invasions.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "The Little Ice Age",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1692475778/platos-peach-video/The_Little_Ice_Age_zfwi97.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1303",
+      //   endDate: "1850",
+      //   category: ["world history"],
+      //   meta: "The Little Ice Age was a period of cooling temperatures that occurred from the 14th to the 19th century. It resulted in colder winters, shorter growing seasons, and other climate changes, impacting agriculture, economies, and societies around the world.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "The Pequot War",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1692475848/platos-peach-video/The_Pequot_War_jujzxr.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1636",
+      //   endDate: "1638",
+      //   category: ["american history", " colonial"],
+      //   meta: "The Pequot War was a conflict between the Pequot tribe and English colonists in 1637. It resulted in the near destruction of the Pequot tribe and solidified English control over the region.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "The Qin Dynasty",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1692475863/platos-peach-video/The_Qin_Dynasty_nyo0xu.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "-221",
+      //   endDate: "-210",
+      //   category: ["ancient history", " china"],
+      //   meta: "The Qin Dynasty was the first imperial dynasty of China, ruling from 221 to 206 BC. It was known for its centralized government, legal reforms, and construction of the Great Wall of China. The dynasty ended with the death of its first emperor, Qin Shi Huang.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "The Massachusetts Bay Colony",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1692475864/platos-peach-video/The_Massachusetts_Bay_Colony_ui1l6u.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1628",
+      //   endDate: "1691",
+      //   category: ["american history", " colonial"],
+      //   meta: "The Massachusetts Bay Colony was an English settlement in the 17th century that became a major center of Puritanism. It was established by the Massachusetts Bay Company and played a significant role in the development of the American colonies.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "The Reichstag Fire",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1692475886/platos-peach-video/The_Reichstag_Fire_ykplt0.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1933-02-27",
+      //   endDate: "1945-09-02",
+      //   category: ["european history"],
+      //   meta: "The Reichstag Fire was a pivotal event in Nazi Germany in 1933, where the German parliament building was set on fire. The Nazis used this incident as a pretext to suspend civil liberties and consolidate their power, ultimately leading to the establishment of a totalitarian regime.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "Gunpowder Plot",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1692477464/platos-peach-video/The_Gunpowder_Plot_wz1fm6.mov",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1605-11-05",
+      //   endDate: "1605-11-05",
+      //   category: ["european history"],
+      //   meta: "Known as the Gunpowder Plot, on November 5th, 1605, Guy Fawkes and fellow Catholic conspirators attempted to eradicate England's Protestant-led government with 36 barrels of gunpowder rigged beneath the House of Lords.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "The Ming Dynasty",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1692477696/platos-peach-video/The_Ming_Dynasty_hndamy.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1368",
+      //   endDate: "1644",
+      //   category: ["world history", " china"],
+      //   meta: "The Ming Dynasty was a ruling dynasty in China from 1368 to 1644. It was known for its economic prosperity, cultural achievements, and the construction of the Great Wall of China. However, it also faced challenges such as corruption and rebellions.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "Click Chemistry Fights Cancer",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1693672327/platos-peach-video/Click_Chemistry_Fights_Cancer_uzmait.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1950",
+      //   endDate: "Present",
+      //   category: ["science", " medicine", " disease"],
+      //   meta: "Click chemistry is being used to develop new drugs that can specifically target cancer cells. This method allows for the creation of molecules that can selectively bind to cancer cells, leading to more effective and less toxic treatments for cancer patients.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "Credible UFO Sightings of the 21st Century",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1693672482/platos-peach-video/Credible_UFO_Sightings_of_the_21st_Century_d2ycbo.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "2000",
+      //   endDate: "Present",
+      //   category: ["world history"],
+      //   meta: "A compilation of credible UFO sightings that have occurred in the 21st century, providing evidence and accounts from reliable sources.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "Louis Pasteur",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1693672911/platos-peach-video/Louis_Pasteur_xdzafr.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1822-12-27",
+      //   endDate: "1895-09-28",
+      //   category: ["biography"],
+      //   meta: "Louis Pasteur was a French scientist who made significant contributions to the fields of microbiology and immunology. He is best known for his discoveries on the principles of vaccination, pasteurization, and the germ theory of disease.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "Irwin Rommel",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1693672913/platos-peach-video/Irwin_Rommel_inbzlj.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1891-11-15",
+      //   endDate: "1944-10-14",
+      //   category: ["biography"],
+      //   meta: "Irwin Rommel was a German general during World War II known for his tactical brilliance and leadership. He earned the nickname 'Desert Fox' for his successful campaigns in North Africa. Rommel was highly respected by both his allies and enemies for his military strategies.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "Squanto and the Pilgrims",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1693673465/platos-peach-video/Squanto_and_the_Pilgrims_thjwg9.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1580",
+      //   endDate: "1622",
+      //   category: ["biography"],
+      //   meta: "Squanto, a Native American, helped the Pilgrims survive in the New World by teaching them how to plant crops and hunt. His assistance was crucial in their survival and the establishment of the Plymouth Colony.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "Robert Koch",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1693673485/platos-peach-video/Robert_Koch_efwifx.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1843-12-11",
+      //   endDate: "1910-05-27",
+      //   category: ["biography"],
+      //   meta: "Robert Koch was a German physician and microbiologist who is known for his work in the field of bacteriology. He is credited with discovering the bacteria that causes tuberculosis and developing techniques for isolating and studying bacteria.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "The Life of Whales",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1693674366/platos-peach-video/The_Life_of_Whales_zsp0jb.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "-54000000",
+      //   endDate: "Present",
+      //   category: ["science", " zoology"],
+      //   meta: "Whales, marine mammals descended from land relatives like the hippopotamus, vary greatly in size, with the massive blue whale being the largest known animal on Earth. They have diverse reproductive habits and migration patterns. Two whale groups are Mysticeti (baleen whales) and Odontoceti (toothed whales), with distinct feeding methods. Whales are known for their complex communication and were heavily hunted for resources in the past.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "The Hawthorne Effect",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1693674388/platos-peach-video/The_Hawthorne_Effect_fpgkey.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1924",
+      //   endDate: "Present",
+      //   category: ["science"],
+      //   meta: "The Hawthorne Effect refers to the phenomenon where individuals modify their behavior when they are aware of being observed. This effect can lead to improved performance and productivity in various settings, such as workplaces and research studies.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "The Life of Flies",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1693674396/platos-peach-video/The_Life_of_Flies_h9igpy.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "-54000000",
+      //   endDate: "Present",
+      //   category: ["science", " zoology"],
+      //   meta: "Flies, a diverse insect order known as Diptera, typically have one set of wings and Halteres for balance. They lay hundreds of eggs in moist environments, with a short life cycle. Some benefit humans through pollination and pest control, while others, like mosquitoes, spread diseases like malaria and yellow fever. Flies have played both positive and negative roles in human history.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "The French Revolution",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1693674469/platos-peach-video/The_French_Revolution_vluogz.mov",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "1789-05-05",
+      //   endDate: "1799-11-09",
+      //   category: ["european history"],
+      //   meta: "The French Revolution was caused by civil unrest on behalf of the impoverished majority versus the aristocratic minority. Rumors of a military coup led citizens to storm the bastille as various groups vied for political control. ",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "The Tang Dynasty",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1693680536/platos-peach-video/The_Tang_Dynasty_luecx3.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "618",
+      //   endDate: "907",
+      //   category: ["ancient history", " china"],
+      //   meta: "The Tang Dynasty was a Chinese dynasty that ruled from 618 to 907 AD. It was known for its advancements in art, literature, and technology, as well as its expansion of trade and influence. The dynasty also saw the rise of Buddhism and the establishment of a centralized government.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "The Sui Dynasty",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1693680560/platos-peach-video/The_Sui_Dynasty_wt1qh5.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "581",
+      //   endDate: "618",
+      //   category: ["ancient history", " china"],
+      //   meta: "The Sui Dynasty was a short-lived Chinese dynasty that ruled from 581 to 618. It was founded by Emperor Wen and is known for its unification of China, construction of the Grand Canal, and military campaigns. However, it faced economic and social issues, leading to its downfall.",
+      //   creator: "116143759549242008910",
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "The Lighthouse of Alexandria",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1693680578/platos-peach-video/The_Lighthouse_of_Alexandria_bn3npl.mp4",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "-332",
+      //   endDate: "1323",
+      //   category: ["ancient history", " egypt"],
+      //   meta: "The Lighthouse of Alexandria was a towering structure built in ancient Egypt to guide ships into the harbor. It was one of the Seven Wonders of the Ancient World and served as a symbol of the city's wealth and power.",
+      //   creator: "116143759549242008910",
+      // },
       // {_id: new ObjectId(), title:"Diphtheria", video:"https://res.cloudinary.com/drewpager/video/upload/v1690993685/platos-peach-video/Diphtheria_cudu0w.mp4", image:"https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png", startDate:"-50000", endDate:"Present", category:['science', ' disease'], meta:"Diphtheria is a bacterial infection that primarily affects the throat and nose. It can cause a thick, gray coating to form in the throat, making it difficult to breathe. It can also lead to complications such as heart and nerve damage. Vaccination is the most effective way to prevent diphtheria.",creator: '116143759549242008910'},
       // {_id: new ObjectId(), title:"Failed Warbirds of World War Two", video:"https://res.cloudinary.com/drewpager/video/upload/v1690993864/platos-peach-video/Failed_Warbirds_of_World_War_Two_vzyiur.mp4", image:"https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png", startDate:"1939-09-01", endDate:"1945-09-02", category:['world military history', ' world war two'], meta:"A collection of warplanes from World War Two that were unsuccessful in their missions or did not meet expectations.",creator: '116143759549242008910'},
       // {_id: new ObjectId(), title:"Francis Bacon", video:"https://res.cloudinary.com/drewpager/video/upload/v1690994110/platos-peach-video/Francis_Bacon_qzf658.mp4", image:"https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png", startDate:"1561-01-22", endDate:"1626-04-09", category:['biography'], meta:"Francis Bacon was an English philosopher, statesman, and scientist who is known for his contributions to the scientific method and his influential works on philosophy and politics. He is considered one of the founders of modern science.",creator: '116143759549242008910'},
