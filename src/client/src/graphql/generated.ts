@@ -577,12 +577,12 @@ export type LogOutMutationVariables = Exact<{ [key: string]: never; }>;
 export type LogOutMutation = { __typename?: 'Mutation', logOut: { __typename?: 'Viewer', id?: string | null, token?: string | null, avatar?: string | null, didRequest: boolean } };
 
 export type UpdatePlanMutationVariables = Exact<{
-  input: LessonPlanInput;
-  id: Scalars['ID'];
+  input?: InputMaybe<LessonPlanInput>;
+  id?: InputMaybe<Scalars['ID']>;
 }>;
 
 
-export type UpdatePlanMutation = { __typename?: 'Mutation', updatePlan: { __typename?: 'Playlist', id?: string | null, name: string, creator: string, plan: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null } | { __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> } | null> } };
+export type UpdatePlanMutation = { __typename?: 'Mutation', updatePlan: { __typename?: 'Playlist', id?: string | null } };
 
 export type AuthUrlQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -891,37 +891,9 @@ export type LogOutMutationHookResult = ReturnType<typeof useLogOutMutation>;
 export type LogOutMutationResult = Apollo.MutationResult<LogOutMutation>;
 export type LogOutMutationOptions = Apollo.BaseMutationOptions<LogOutMutation, LogOutMutationVariables>;
 export const UpdatePlanDocument = gql`
-    mutation UpdatePlan($input: LessonPlanInput!, $id: ID!) {
+    mutation UpdatePlan($input: LessonPlanInput, $id: ID) {
   updatePlan(input: $input, id: $id) {
     id
-    name
-    plan {
-      ... on Quiz {
-        id
-        title
-        questions {
-          question
-          answerOptions {
-            answerText
-            isCorrect
-          }
-          answerType
-        }
-        creator
-      }
-      ... on Lesson {
-        id
-        category
-        title
-        meta
-        video
-        image
-        startDate
-        endDate
-        creator
-      }
-    }
-    creator
   }
 }
     `;

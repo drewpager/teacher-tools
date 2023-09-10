@@ -1,4 +1,4 @@
-import { CircularProgress, Grid, Box, Card, TextField, Button, Chip, FormControlLabel, Switch } from '@mui/material';
+import { CircularProgress, Grid, Box, Card, TextField, Button, Chip, FormControlLabel, Switch, Snackbar, Alert } from '@mui/material';
 import React, { useState, ChangeEvent, useRef, useEffect, useMemo } from 'react';
 import {
   useAllLessonsQuery,
@@ -86,7 +86,7 @@ export const EditPlaylist = ({ viewer }: props) => {
       setPlaylist({
         name: `${PlaylistData?.playlist.name}`,
         creator: `${PlaylistData?.playlist.creator}`,
-        plan: PlaylistData?.playlist ? [...PlaylistData.playlist.plan] : []
+        plan: PlaylistData?.playlist ? [...PlaylistData.playlist.plan] : [],
       })
     }
   }, [PlaylistData])
@@ -355,20 +355,28 @@ export const EditPlaylist = ({ viewer }: props) => {
   const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const variables = {
-      input: playlist,
-      id: `${params.id}`
+    function renameKeys(obj: any, newKeys: any) {
+      const keyValues = Object.keys(obj).map((key: any) => {
+        const newKey = newKeys[key] || key;
+        return { [newKey]: obj[key] };
+      });
+      return Object.assign({}, ...keyValues);
     }
-    console.log(variables)
-    // await updatePlanMutation({
-    //   variables: {
-    //     input: playlist,
-    //     id: `${params.id}`
-    //   }
-    // });
 
-    // Navigate to User Profile Page
-    // navigate(`../user/${viewer.id}`, { replace: true })
+    const newKey = { id: "_id" }
+    const newPlan: any = []
+    playlist.plan.map((i) => newPlan.push(renameKeys(i, newKey)))
+    playlist.plan = newPlan;
+
+    await updatePlanMutation({
+      variables: {
+        input: playlist,
+        id: `${params.id}`
+      }
+    });
+
+    // // Navigate to User Profile Page
+    navigate(`../user/${viewer.id}`, { replace: true })
   }
 
   const handleReset = () => {
