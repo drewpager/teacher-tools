@@ -1,5 +1,5 @@
-import React from 'react';
-import { Card, CardContent, ListItem, Typography, Grid, Button, CircularProgress, Alert, Tooltip } from '@mui/material';
+import React, { useState } from 'react';
+import { Card, CardContent, ListItem, Typography, Grid, Button, CircularProgress, Alert, Tooltip, Dialog, DialogContent, DialogTitle, DialogContentText, DialogActions, IconButton } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { Playlist, Lesson, Quiz, Questions, Quizzes } from '../../../graphql/generated';
 import { useMutation } from '@apollo/client';
@@ -19,6 +19,7 @@ interface Props {
 }
 
 export const UserQuizzesCard = ({ quiz }: Props) => {
+  const [open, setOpen] = useState<boolean>(false);
 
   const DELETE_QUIZ = gql`
     mutation DeleteQuiz($id: ID) {
@@ -57,6 +58,11 @@ export const UserQuizzesCard = ({ quiz }: Props) => {
       return (<DisplaySuccess title="Deletion Successful!" />);
     }
   }
+
+  const handleClose = () => {
+    setOpen(false);
+  }
+
   // const navigation = useNavigate();
   const [deleteQuiz, { loading: deleteQuizLoading, error: deleteQuizError }] = useMutation<DeleteQuizData, DeleteQuizVariables>(DELETE_QUIZ);
   return (
@@ -73,8 +79,31 @@ export const UserQuizzesCard = ({ quiz }: Props) => {
               </Typography>
             </Link>
             {deleteQuizLoading ? deleteQuizLoadingMessage : (
-              <Tooltip title="Delete Lesson!">
-                <Button onClick={() => handleDelete(quiz.id)}><DeleteIcon /></Button>
+              <Tooltip title="Delete Quiz!">
+                <IconButton sx={{ color: "#000" }}>
+                  <DeleteIcon onClick={() => setOpen(true)} />
+                  <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                  >
+                    <DialogTitle id="alert-dialog-title">
+                      <Typography variant="h3">Are you sure you want to delete this quiz?</Typography>
+                    </DialogTitle>
+                    <DialogContent>
+                      <DialogContentText id="alert-dialog-description">
+                        This action cannot be undone.
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={handleClose}>Cancel</Button>
+                      <Button onClick={() => handleDelete(quiz.id)} autoFocus>
+                        Delete Quiz
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
+                </IconButton>
               </Tooltip>
             )}
             {deleteQuizError ? deleteQuizErrorMessage : null}
