@@ -18,6 +18,7 @@ export * from "./Catalog";
 export * from "./Contact";
 export * from "./CreateLesson";
 export * from "./CreateQuiz";
+export * from "./CreateArticle";
 export * from "./EditPlaylist";
 export * from "./Quiz";
 export * from "./QuizCreate";

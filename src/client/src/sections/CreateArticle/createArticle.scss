@@ -1,0 +1,36 @@
+.MuiBox-root {
+  &.createArticle-heading {
+    // margin-top: 8rem;
+    // margin-left: 2rem;
+    // margin-right: 2rem;
+    margin: 8rem 2rem 0 2rem;
+
+    @media (max-width: 900px) {
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+    }
+  }
+
+  &.previewArticle {
+    margin: 8rem 2rem 0 2rem;
+
+    @media (max-width: 900px) {
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+      margin-top: 0.5rem;
+    }
+  }
+}
+
+.createArticle-editor {
+  border: 1px solid #000;
+  min-height: 50vh;
+  max-height: 80vh;
+  overflow-y: scroll;
+  padding-left: 0.5rem;
+  margin-bottom: 1rem;
+
+  .p > #span {
+    background-color: inherit;
+  }
+}
