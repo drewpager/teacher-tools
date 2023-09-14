@@ -121,6 +121,18 @@ export const typeDefs = gql`
 
   type Content {
     blocks: [Blocks]
+    entityMap: [EntityMap]
+  }
+
+  type EntityMap {
+    type: String
+    mutability: String
+    data: EntityMapData
+  }
+
+  type EntityMapData {
+    url: String
+    targetOption: String
   }
 
   type Blocks {
@@ -150,7 +162,7 @@ export const typeDefs = gql`
     lesson(id: ID!): Lesson!
     playlist(id: ID!): Playlist!
     article(id: ID!): Article!
-    allArticles(limit: Int!, page: Int!): Articles!
+    allarticles(limit: Int!, page: Int!): Articles!
     allplaylists(limit: Int!, page: Int!): Playlists!
     allLessons(limit: Int!, page: Int!): Lessons!
     allUsers(limit: Int!, page: Int!): Users!
@@ -212,7 +224,7 @@ export const typeDefs = gql`
   }
 
   input DataObject {
-    src: String
+    url: String
   }
 
   input DataInput {

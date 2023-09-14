@@ -20,7 +20,7 @@ export const articleResolvers = {
       }
       return article;
     },
-    allArticles: async (
+    allarticles: async (
       _root: undefined,
       { limit, page }: ArticlesArgs,
       { db }: { db: Database }

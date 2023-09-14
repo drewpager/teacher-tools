@@ -195,6 +195,60 @@ export type Answers = {
   isCorrect?: InputMaybe<Scalars['Boolean']>;
 };
 
+export type Article = {
+  __typename?: 'Article';
+  content?: Maybe<Content>;
+  creator?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['ID']>;
+  public?: Maybe<Scalars['Boolean']>;
+  title?: Maybe<Scalars['String']>;
+};
+
+export type Articles = {
+  __typename?: 'Articles';
+  result: Array<Article>;
+  total: Scalars['Int'];
+  totalCount: Scalars['Int'];
+};
+
+export type Blocks = {
+  __typename?: 'Blocks';
+  depth?: Maybe<Scalars['Int']>;
+  entityRanges?: Maybe<Array<Maybe<EntityRanges>>>;
+  inlineStyleRanges?: Maybe<Array<Maybe<InlineStyleRanges>>>;
+  key?: Maybe<Scalars['String']>;
+  text?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type BlocksInput = {
+  data?: InputMaybe<DataObject>;
+  depth?: InputMaybe<Scalars['Int']>;
+  entityRanges?: InputMaybe<Array<InputMaybe<EntityRangesInput>>>;
+  inlineStyleRanges?: InputMaybe<Array<InputMaybe<InlineStyleRangesInput>>>;
+  key?: InputMaybe<Scalars['String']>;
+  text?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<Scalars['String']>;
+};
+
+export type Content = {
+  __typename?: 'Content';
+  blocks?: Maybe<Array<Maybe<Blocks>>>;
+  entityMap?: Maybe<Array<Maybe<EntityMap>>>;
+};
+
+export type ContentInput = {
+  blocks?: InputMaybe<Array<InputMaybe<BlocksInput>>>;
+  entityMap?: InputMaybe<Array<InputMaybe<EntityMapInput>>>;
+};
+
+export type CreateArticleInput = {
+  content?: InputMaybe<ContentInput>;
+  creator?: InputMaybe<Scalars['String']>;
+  public?: InputMaybe<Scalars['Boolean']>;
+  title?: InputMaybe<Scalars['String']>;
+};
+
 export type CreateLessonInput = {
   category: Array<Scalars['String']>;
   creator: Scalars['String'];
@@ -210,6 +264,47 @@ export type CreateQuizInput = {
   creator?: InputMaybe<Scalars['String']>;
   questions?: InputMaybe<Array<InputMaybe<QuestionInput>>>;
   title?: InputMaybe<Scalars['String']>;
+};
+
+export type DataInput = {
+  targetOption?: InputMaybe<Scalars['String']>;
+  url?: InputMaybe<Scalars['String']>;
+};
+
+export type DataObject = {
+  url?: InputMaybe<Scalars['String']>;
+};
+
+export type EntityMap = {
+  __typename?: 'EntityMap';
+  data?: Maybe<EntityMapData>;
+  mutability?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type EntityMapData = {
+  __typename?: 'EntityMapData';
+  targetOption?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+};
+
+export type EntityMapInput = {
+  data?: InputMaybe<DataInput>;
+  mutability?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<Scalars['String']>;
+};
+
+export type EntityRanges = {
+  __typename?: 'EntityRanges';
+  key?: Maybe<Scalars['Int']>;
+  length?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+export type EntityRangesInput = {
+  key?: InputMaybe<Scalars['Int']>;
+  length?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
 };
 
 export type FullLessonInput = {
@@ -229,6 +324,19 @@ export type FullLessonQuiz = {
   id?: InputMaybe<Scalars['ID']>;
   questions?: InputMaybe<Array<InputMaybe<QuizQuestions>>>;
   title?: InputMaybe<Scalars['String']>;
+};
+
+export type InlineStyleRanges = {
+  __typename?: 'InlineStyleRanges';
+  length?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  style?: Maybe<Scalars['String']>;
+};
+
+export type InlineStyleRangesInput = {
+  length?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  style?: InputMaybe<Scalars['String']>;
 };
 
 export type Lesson = {
@@ -270,6 +378,7 @@ export type Mutation = {
   addPayment?: Maybe<Viewer>;
   bookmarkLesson?: Maybe<Scalars['String']>;
   copyPlaylist?: Maybe<Playlist>;
+  createArticle: Article;
   createLesson: Lesson;
   createQuiz: Quiz;
   deleteAllBookmarks?: Maybe<Scalars['String']>;
@@ -298,6 +407,11 @@ export type MutationBookmarkLessonArgs = {
 export type MutationCopyPlaylistArgs = {
   id: Scalars['ID'];
   viewerId: Scalars['String'];
+};
+
+
+export type MutationCreateArticleArgs = {
+  input?: InputMaybe<CreateArticleInput>;
 };
 
 
@@ -389,8 +503,10 @@ export type Query = {
   __typename?: 'Query';
   allLessons: Lessons;
   allUsers: Users;
+  allarticles: Articles;
   allplaylists: Playlists;
   allquizzes: Quizzes;
+  article: Article;
   authUrl: Scalars['String'];
   lesson: Lesson;
   playlist: Playlist;
@@ -411,6 +527,12 @@ export type QueryAllUsersArgs = {
 };
 
 
+export type QueryAllarticlesArgs = {
+  limit: Scalars['Int'];
+  page: Scalars['Int'];
+};
+
+
 export type QueryAllplaylistsArgs = {
   limit: Scalars['Int'];
   page: Scalars['Int'];
@@ -420,6 +542,11 @@ export type QueryAllplaylistsArgs = {
 export type QueryAllquizzesArgs = {
   limit: Scalars['Int'];
   page: Scalars['Int'];
+};
+
+
+export type QueryArticleArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -478,6 +605,7 @@ export type Quizzes = {
 
 export type User = {
   __typename?: 'User';
+  articles?: Maybe<Articles>;
   avatar: Scalars['String'];
   bookmarks?: Maybe<Array<Maybe<Lesson>>>;
   contact: Scalars['String'];
@@ -488,6 +616,12 @@ export type User = {
   paymentId?: Maybe<Scalars['String']>;
   playlists?: Maybe<Playlists>;
   quizzes?: Maybe<Quizzes>;
+};
+
+
+export type UserArticlesArgs = {
+  limit: Scalars['Int'];
+  page: Scalars['Int'];
 };
 
 
@@ -517,6 +651,7 @@ export type Users = {
 
 export type Viewer = {
   __typename?: 'Viewer';
+  articles?: Maybe<Array<Maybe<Article>>>;
   avatar?: Maybe<Scalars['String']>;
   bookmarks?: Maybe<Array<Maybe<Lesson>>>;
   didRequest: Scalars['Boolean'];
@@ -534,6 +669,13 @@ export type AddPaymentMutationVariables = Exact<{
 
 
 export type AddPaymentMutation = { __typename?: 'Mutation', addPayment?: { __typename?: 'Viewer', paymentId?: string | null } | null };
+
+export type CreateArticleMutationVariables = Exact<{
+  input: CreateArticleInput;
+}>;
+
+
+export type CreateArticleMutation = { __typename?: 'Mutation', createArticle: { __typename?: 'Article', id?: string | null } };
 
 export type CreateLessonMutationVariables = Exact<{
   input: CreateLessonInput;
@@ -583,6 +725,21 @@ export type UpdatePlanMutationVariables = Exact<{
 
 
 export type UpdatePlanMutation = { __typename?: 'Mutation', updatePlan: { __typename?: 'Playlist', id?: string | null } };
+
+export type ArticleQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type ArticleQuery = { __typename?: 'Query', article: { __typename?: 'Article', id?: string | null, title?: string | null, creator?: string | null, public?: boolean | null, content?: { __typename?: 'Content', blocks?: Array<{ __typename?: 'Blocks', key?: string | null, text?: string | null, type?: string | null, depth?: number | null, inlineStyleRanges?: Array<{ __typename?: 'InlineStyleRanges', style?: string | null, offset?: number | null, length?: number | null } | null> | null, entityRanges?: Array<{ __typename?: 'EntityRanges', offset?: number | null, length?: number | null, key?: number | null } | null> | null } | null> | null, entityMap?: Array<{ __typename?: 'EntityMap', type?: string | null, mutability?: string | null, data?: { __typename?: 'EntityMapData', url?: string | null } | null } | null> | null } | null } };
+
+export type AllArticlesQueryVariables = Exact<{
+  limit: Scalars['Int'];
+  page: Scalars['Int'];
+}>;
+
+
+export type AllArticlesQuery = { __typename?: 'Query', allarticles: { __typename?: 'Articles', total: number, result: Array<{ __typename?: 'Article', id?: string | null, title?: string | null, creator?: string | null, public?: boolean | null, content?: { __typename?: 'Content', blocks?: Array<{ __typename?: 'Blocks', key?: string | null, text?: string | null, type?: string | null, depth?: number | null, inlineStyleRanges?: Array<{ __typename?: 'InlineStyleRanges', style?: string | null, offset?: number | null, length?: number | null } | null> | null, entityRanges?: Array<{ __typename?: 'EntityRanges', offset?: number | null, length?: number | null, key?: number | null } | null> | null } | null> | null, entityMap?: Array<{ __typename?: 'EntityMap', type?: string | null, mutability?: string | null, data?: { __typename?: 'EntityMapData', url?: string | null } | null } | null> | null } | null }> } };
 
 export type AuthUrlQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -687,6 +844,39 @@ export function useAddPaymentMutation(baseOptions?: Apollo.MutationHookOptions<A
 export type AddPaymentMutationHookResult = ReturnType<typeof useAddPaymentMutation>;
 export type AddPaymentMutationResult = Apollo.MutationResult<AddPaymentMutation>;
 export type AddPaymentMutationOptions = Apollo.BaseMutationOptions<AddPaymentMutation, AddPaymentMutationVariables>;
+export const CreateArticleDocument = gql`
+    mutation CreateArticle($input: CreateArticleInput!) {
+  createArticle(input: $input) {
+    id
+  }
+}
+    `;
+export type CreateArticleMutationFn = Apollo.MutationFunction<CreateArticleMutation, CreateArticleMutationVariables>;
+
+/**
+ * __useCreateArticleMutation__
+ *
+ * To run a mutation, you first call `useCreateArticleMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateArticleMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createArticleMutation, { data, loading, error }] = useCreateArticleMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateArticleMutation(baseOptions?: Apollo.MutationHookOptions<CreateArticleMutation, CreateArticleMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateArticleMutation, CreateArticleMutationVariables>(CreateArticleDocument, options);
+      }
+export type CreateArticleMutationHookResult = ReturnType<typeof useCreateArticleMutation>;
+export type CreateArticleMutationResult = Apollo.MutationResult<CreateArticleMutation>;
+export type CreateArticleMutationOptions = Apollo.BaseMutationOptions<CreateArticleMutation, CreateArticleMutationVariables>;
 export const CreateLessonDocument = gql`
     mutation CreateLesson($input: CreateLessonInput!) {
   createLesson(input: $input) {
@@ -924,6 +1114,136 @@ export function useUpdatePlanMutation(baseOptions?: Apollo.MutationHookOptions<U
 export type UpdatePlanMutationHookResult = ReturnType<typeof useUpdatePlanMutation>;
 export type UpdatePlanMutationResult = Apollo.MutationResult<UpdatePlanMutation>;
 export type UpdatePlanMutationOptions = Apollo.BaseMutationOptions<UpdatePlanMutation, UpdatePlanMutationVariables>;
+export const ArticleDocument = gql`
+    query Article($id: ID!) {
+  article(id: $id) {
+    id
+    title
+    creator
+    content {
+      blocks {
+        key
+        text
+        type
+        depth
+        inlineStyleRanges {
+          style
+          offset
+          length
+        }
+        entityRanges {
+          offset
+          length
+          key
+        }
+      }
+      entityMap {
+        type
+        mutability
+        data {
+          url
+        }
+      }
+    }
+    public
+  }
+}
+    `;
+
+/**
+ * __useArticleQuery__
+ *
+ * To run a query within a React component, call `useArticleQuery` and pass it any options that fit your needs.
+ * When your component renders, `useArticleQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useArticleQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useArticleQuery(baseOptions: Apollo.QueryHookOptions<ArticleQuery, ArticleQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ArticleQuery, ArticleQueryVariables>(ArticleDocument, options);
+      }
+export function useArticleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ArticleQuery, ArticleQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ArticleQuery, ArticleQueryVariables>(ArticleDocument, options);
+        }
+export type ArticleQueryHookResult = ReturnType<typeof useArticleQuery>;
+export type ArticleLazyQueryHookResult = ReturnType<typeof useArticleLazyQuery>;
+export type ArticleQueryResult = Apollo.QueryResult<ArticleQuery, ArticleQueryVariables>;
+export const AllArticlesDocument = gql`
+    query AllArticles($limit: Int!, $page: Int!) {
+  allarticles(limit: $limit, page: $page) {
+    total
+    result {
+      id
+      title
+      creator
+      content {
+        blocks {
+          key
+          text
+          type
+          depth
+          inlineStyleRanges {
+            style
+            offset
+            length
+          }
+          entityRanges {
+            offset
+            length
+            key
+          }
+        }
+        entityMap {
+          type
+          mutability
+          data {
+            url
+          }
+        }
+      }
+      public
+    }
+  }
+}
+    `;
+
+/**
+ * __useAllArticlesQuery__
+ *
+ * To run a query within a React component, call `useAllArticlesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllArticlesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllArticlesQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      page: // value for 'page'
+ *   },
+ * });
+ */
+export function useAllArticlesQuery(baseOptions: Apollo.QueryHookOptions<AllArticlesQuery, AllArticlesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllArticlesQuery, AllArticlesQueryVariables>(AllArticlesDocument, options);
+      }
+export function useAllArticlesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllArticlesQuery, AllArticlesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllArticlesQuery, AllArticlesQueryVariables>(AllArticlesDocument, options);
+        }
+export type AllArticlesQueryHookResult = ReturnType<typeof useAllArticlesQuery>;
+export type AllArticlesLazyQueryHookResult = ReturnType<typeof useAllArticlesLazyQuery>;
+export type AllArticlesQueryResult = Apollo.QueryResult<AllArticlesQuery, AllArticlesQueryVariables>;
 export const AuthUrlDocument = gql`
     query AuthUrl {
   authUrl

@@ -8,7 +8,31 @@ export const ALL_ARTICLES = gql`
         id
         title
         creator
-        content
+        content {
+          blocks {
+            key
+            text
+            type
+            depth
+            inlineStyleRanges {
+              style
+              offset
+              length
+            }
+            entityRanges {
+              offset
+              length
+              key
+            }
+          }
+          entityMap {
+            type
+            mutability
+            data {
+              url
+            }
+          }
+        }
         public
       }
     }
