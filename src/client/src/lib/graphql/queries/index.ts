@@ -7,3 +7,5 @@ export * from "./Playlists";
 export * from "./Quiz";
 export * from "./Quizzes";
 export * from "./AuthUrl";
+export * from "./Article";
+export * from "./Articles";

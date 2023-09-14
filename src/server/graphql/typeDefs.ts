@@ -202,6 +202,22 @@ export const typeDefs = gql`
 
   input ContentInput {
     blocks: [BlocksInput]
+    entityMap: [EntityMapInput]
+  }
+
+  input EntityMapInput {
+    type: String
+    mutability: String
+    data: DataInput
+  }
+
+  input DataObject {
+    src: String
+  }
+
+  input DataInput {
+    url: String
+    targetOption: String
   }
 
   input BlocksInput {
@@ -211,6 +227,7 @@ export const typeDefs = gql`
     depth: Int
     inlineStyleRanges: [InlineStyleRangesInput]
     entityRanges: [EntityRangesInput]
+    data: DataObject
   }
 
   input InlineStyleRangesInput {
