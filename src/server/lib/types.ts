@@ -72,9 +72,18 @@ export interface User {
   playlists?: Playlist[];
   lessons?: Lesson[];
   quizzes?: Quiz[];
+  articles?: Article[];
   authorized?: boolean;
   bookmarks?: any[];
   package?: Package;
+}
+
+export interface Article {
+  _id: ObjectId;
+  title: string;
+  content: any;
+  creator: string;
+  public: boolean;
 }
 
 export interface Database {
@@ -82,6 +91,7 @@ export interface Database {
   users: Collection<User>;
   playlists: Collection<Playlist>;
   quizzes: Collection<Quiz>;
+  articles: Collection<Article>;
 }
 
 export interface Viewer {
@@ -93,5 +103,6 @@ export interface Viewer {
   playlists?: Playlist[];
   lessons?: Lesson[];
   quizzes?: Quiz[];
+  articles?: Article[];
   bookmarks?: any[];
 }

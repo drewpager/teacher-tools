@@ -17,6 +17,7 @@ export const typeDefs = gql`
     playlists: [Playlist]
     lessons: [Lesson]
     quizzes: [Quiz]
+    articles: [Article]
     bookmarks: [Lesson]
   }
 
@@ -30,6 +31,7 @@ export const typeDefs = gql`
     playlists(limit: Int!, page: Int!): Playlists
     lessons(limit: Int!, page: Int!): Lessons
     quizzes(limit: Int!, page: Int!): Quizzes
+    articles(limit: Int!, page: Int!): Articles
     bookmarks: [Lesson]
   }
 
@@ -103,11 +105,52 @@ export const typeDefs = gql`
     totalCount: Int!
   }
 
+  type Article {
+    id: ID
+    title: String
+    content: Content
+    creator: String
+    public: Boolean
+  }
+
+  type Articles {
+    total: Int!
+    result: [Article!]!
+    totalCount: Int!
+  }
+
+  type Content {
+    blocks: [Blocks]
+  }
+
+  type Blocks {
+    key: String
+    text: String
+    type: String
+    depth: Int
+    inlineStyleRanges: [InlineStyleRanges]
+    entityRanges: [EntityRanges]
+  }
+
+  type InlineStyleRanges {
+    offset: Int
+    length: Int
+    style: String
+  }
+
+  type EntityRanges {
+    offset: Int
+    length: Int
+    key: Int
+  }
+
   type Query {
     authUrl: String!
     user(id: ID!): User!
     lesson(id: ID!): Lesson!
     playlist(id: ID!): Playlist!
+    article(id: ID!): Article!
+    allArticles(limit: Int!, page: Int!): Articles!
     allplaylists(limit: Int!, page: Int!): Playlists!
     allLessons(limit: Int!, page: Int!): Lessons!
     allUsers(limit: Int!, page: Int!): Users!
@@ -121,6 +164,7 @@ export const typeDefs = gql`
     disconnectStripe: Viewer!
     createLesson(input: CreateLessonInput): Lesson!
     createQuiz(input: CreateQuizInput): Quiz!
+    createArticle(input: CreateArticleInput): Article!
     lessonPlan(input: LessonPlanInput, viewerId: ID): Playlist!
     updatePlan(input: LessonPlanInput, id: ID): Playlist!
     deleteLesson(id: ID): Boolean!
@@ -147,6 +191,38 @@ export const typeDefs = gql`
     startDate: DateScalar!
     endDate: DateScalar!
     creator: String!
+  }
+
+  input CreateArticleInput {
+    title: String
+    content: ContentInput
+    creator: String
+    public: Boolean
+  }
+
+  input ContentInput {
+    blocks: [BlocksInput]
+  }
+
+  input BlocksInput {
+    key: String
+    text: String
+    type: String
+    depth: Int
+    inlineStyleRanges: [InlineStyleRangesInput]
+    entityRanges: [EntityRangesInput]
+  }
+
+  input InlineStyleRangesInput {
+    offset: Int
+    length: Int
+    style: String
+  }
+
+  input EntityRangesInput {
+    offset: Int
+    length: Int
+    key: Int
   }
 
   input CreateQuizInput {
