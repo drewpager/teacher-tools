@@ -1,31 +1,24 @@
 import React, { useState } from 'react';
-import { Box, Button, Grid, TextField, Typography, Chip, Switch, Tooltip } from '@mui/material';
+import { Box, Button, Grid, TextField, Typography, Chip, Switch, Tooltip, CircularProgress } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import './createArticle.scss';
-import { Viewer } from '../../graphql/generated';
-import { Editor, EditorState, RawDraftContentState } from 'react-draft-wysiwyg';
+import { Viewer, Article, useCreateArticleMutation } from '../../graphql/generated';
+import { Editor, EditorState } from 'react-draft-wysiwyg';
 import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { convertToRaw } from 'draft-js';
 import { Footer } from '../../lib/components';
 import draftToHtml from 'draftjs-to-html';
-import theme from '../../theme';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
   viewer: Viewer;
-}
-
-interface Article {
-  title: string;
-  content: RawDraftContentState;
-  creator: string;
-  public: boolean;
 }
 
 let initialArticle: Article = {
   title: '',
   content: {
     blocks: [],
-    entityMap: {}
+    entityMap: []
   },
   creator: '',
   public: true
@@ -83,21 +76,55 @@ export const CreateArticle = ({ viewer }: Props) => {
   const rawContent = editorState && convertToRaw(editorState.getCurrentContent())
   const [title, setTitle] = useState<string | undefined>(undefined);
   const [locked, setLocked] = useState<boolean>(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [createArticle, { data, loading, error }] = useCreateArticleMutation({
+    variables: {
+      input: {
+        title: "",
+        content: {
+          blocks: [],
+          entityMap: [],
+        },
+        creator: `${viewer.id}`,
+        public: !locked
+      }
+    }
+  })
+
+  if (loading) {
+    return <CircularProgress />
+  }
+
+  if (error) {
+    return <Typography variant="h3" color="error">{error.message}</Typography>
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (rawContent && title) {
+      let entityMapLength = Object.keys(rawContent.entityMap).length;
+      let entityMapArray = [];
+      for (let i = 0; i < entityMapLength; i++) {
+        entityMapArray.push(rawContent.entityMap[i])
+      }
       initialArticle.title = `${title}`;
       initialArticle.content = {
-        blocks: [...rawContent?.blocks],
-        entityMap: rawContent?.entityMap
+        blocks: [...rawContent.blocks],
+        entityMap: [...entityMapArray],
       };
       initialArticle.creator = `${viewer.id}`;
       initialArticle.public = !locked;
     }
 
-    console.log(initialArticle);
+    await createArticle({
+      variables: {
+        input: initialArticle
+      }
+    })
+
+    navigate(`/user/${viewer.id}`, { replace: true })
   }
 
 

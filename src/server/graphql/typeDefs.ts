@@ -2,6 +2,7 @@ import { gql } from "apollo-server-express";
 
 export const typeDefs = gql`
   scalar DateScalar
+  scalar JSON
 
   enum AnswerFormat {
     MULTIPLECHOICE
@@ -131,6 +132,10 @@ export const typeDefs = gql`
   }
 
   type EntityMapData {
+    src: String
+    width: String
+    alignment: String
+    height: String
     url: String
     targetOption: String
   }
@@ -228,6 +233,10 @@ export const typeDefs = gql`
   }
 
   input DataInput {
+    src: String
+    width: String
+    alignment: String
+    height: String
     url: String
     targetOption: String
   }

@@ -27,7 +27,12 @@ export const ARTICLE = gql`
           type
           mutability
           data {
+            src
+            width
+            alignment
+            height
             url
+            targetOption
           }
         }
       }
