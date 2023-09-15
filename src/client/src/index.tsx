@@ -39,7 +39,8 @@ import {
   Quiz,
   TestElement,
   Billing,
-  SignUp
+  SignUp,
+  Article
 } from './sections';
 import { HomeInfoSkeleton } from './lib/components';
 import { DisplayError } from './lib/utils';
@@ -133,6 +134,7 @@ const App = () => {
           <Route path="/quiz/:id" element={<Quiz />} />
           <Route path="/quiz/create" element={<CreateQuiz viewer={viewer} />} />
           <Route path="/article/create" element={<CreateArticle viewer={viewer} />} />
+          <Route path="/article/:id" element={<Article />} />
           <Route path="/edit/:id" element={<EditPlaylist viewer={viewer} />} />
           <Route path="/lesson/create" children={(props: any) => (<CreateLesson {...props} viewer={viewer} />)} element={<CreateLesson viewer={viewer} />} />
           <Route path="*" element={<NotFound />} />

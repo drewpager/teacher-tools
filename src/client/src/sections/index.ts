@@ -24,4 +24,5 @@ export * from "./Quiz";
 export * from "./QuizCreate";
 export * from "./Modal";
 export * from "./SignUp";
+export * from "./Article";
 // export * from "./Stripe";
