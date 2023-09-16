@@ -33,6 +33,42 @@ export const ALL_PLAYLISTS = gql`
             }
             creator
           }
+          ... on Article {
+            id
+            title
+            creator
+            content {
+              blocks {
+                key
+                text
+                type
+                depth
+                inlineStyleRanges {
+                  style
+                  offset
+                  length
+                }
+                entityRanges {
+                  offset
+                  length
+                  key
+                }
+              }
+              entityMap {
+                type
+                mutability
+                data {
+                  src
+                  width
+                  alignment
+                  height
+                  url
+                  targetOption
+                }
+              }
+            }
+            public
+          }
         }
       }
     }

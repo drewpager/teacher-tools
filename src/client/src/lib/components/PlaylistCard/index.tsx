@@ -18,8 +18,9 @@ import {
 } from '@mui/lab';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import QuizIcon from '@mui/icons-material/Quiz';
+import ArticleIcon from '@mui/icons-material/Article';
 import { Playlist, Lesson, LessonPlanUnion } from '../../../graphql/generated';
-import { VideoPlayer, QuizPlayer } from '../index';
+import { VideoPlayer, QuizPlayer, ArticlePlayer } from '../index';
 import './playlistcard.scss';
 import { formatDate } from '../../utils';
 
@@ -62,11 +63,11 @@ export const PlaylistCard = ({ playlist }: Props) => {
               </ListItem>
               <TimelineSeparator>
                 <TimelineDot sx={{ mx: 1 }} color={active === `${item?.id}` ? "secondary" : "primary"} onClick={() => handleChange({ ...item })}>
-                  {item?.__typename === "Lesson" ? <PlayCircleIcon sx={{ fontSize: 20 }} /> : <QuizIcon sx={{ fontSize: 20 }} />}
+                  {item?.__typename === "Lesson" ? <PlayCircleIcon sx={{ fontSize: 20 }} /> : item?.__typename === "Quiz" ? <QuizIcon sx={{ fontSize: 20 }} /> : item?.__typename === "Article" ? (<ArticleIcon sx={{ fontSize: 20 }} />) : <></>}
                 </TimelineDot>
                 {playlist.plan.length !== (id + 1) ? <TimelineConnector /> : <></>}
               </TimelineSeparator>
-              <TimelineContent>{item?.__typename === "Lesson" ? `${formatDate(item.startDate)} - ${formatDate(item.endDate)}` : "Quiz"}</TimelineContent>
+              <TimelineContent>{item?.__typename === "Lesson" ? `${formatDate(item.startDate)} - ${formatDate(item.endDate)}` : item?.__typename === "Quiz" ? "Quiz" : item?.__typename === "Article" ? "Article" : ""}</TimelineContent>
             </TimelineItem>
           ))}
         </Timeline>
@@ -96,6 +97,12 @@ export const PlaylistCard = ({ playlist }: Props) => {
             if (iter?.__typename === "Lesson") {
               return (
                 <VideoPlayer url={`${iter?.video}`} key={index} />
+              )
+            }
+
+            if (iter?.__typename === "Article") {
+              return (
+                <ArticlePlayer article={iter} key={index} />
               )
             }
             return (

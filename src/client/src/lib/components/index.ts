@@ -12,6 +12,7 @@ export * from "./PlaylistCard";
 export * from "./VideoPlayer";
 export * from "./VideoModal";
 export * from "./QuizPlayer";
+export * from "./ArticlePlayer";
 export * from "./UserPlaylistsCard";
 export * from "./UserQuizzesCard";
 export * from "./PlaylistDetails";

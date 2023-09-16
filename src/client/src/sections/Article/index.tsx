@@ -86,7 +86,7 @@ export const Article = () => {
         </Helmet>
         <Box className="article--section">
           <h2>{article.title}</h2>
-          {newRawContent && (<div dangerouslySetInnerHTML={{ __html: draftToHtml(newRawContent) }} />)}
+          {newRawContent && (<div className="article--body" dangerouslySetInnerHTML={{ __html: draftToHtml(newRawContent) }} />)}
         </Box>
         <Footer />
       </Box>

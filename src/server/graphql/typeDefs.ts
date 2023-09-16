@@ -321,6 +321,8 @@ export const typeDefs = gql`
     endDate: DateScalar
     questions: [QuizQuestions]
     creator: String
+    content: ContentInput
+    public: Boolean
   }
 
   input LessonPlanInput {
@@ -329,5 +331,5 @@ export const typeDefs = gql`
     plan: [Plan]!
   }
 
-  union LessonPlanUnion = Quiz | Lesson
+  union LessonPlanUnion = Quiz | Lesson | Article
 `;

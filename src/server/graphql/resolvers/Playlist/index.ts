@@ -72,6 +72,10 @@ export const playlistResolvers = {
         return "Quiz";
       }
 
+      if (obj.content) {
+        return "Article";
+      }
+
       return null;
     },
   },

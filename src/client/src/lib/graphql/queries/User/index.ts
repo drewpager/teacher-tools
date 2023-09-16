@@ -40,6 +40,42 @@ export const USER = gql`
           creator
           plan {
             __typename
+            ... on Article {
+              id
+              title
+              creator
+              content {
+                blocks {
+                  key
+                  text
+                  type
+                  depth
+                  inlineStyleRanges {
+                    style
+                    offset
+                    length
+                  }
+                  entityRanges {
+                    offset
+                    length
+                    key
+                  }
+                }
+                entityMap {
+                  type
+                  mutability
+                  data {
+                    src
+                    width
+                    alignment
+                    height
+                    url
+                    targetOption
+                  }
+                }
+              }
+              public
+            }
             ... on Lesson {
               id
               category

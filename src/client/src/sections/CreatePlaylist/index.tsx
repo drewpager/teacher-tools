@@ -7,6 +7,7 @@ import {
   useLessonPlanMutation,
   useAllLessonsQuery,
   useAllQuizzesQuery,
+  useAllArticlesQuery,
   Viewer,
   FullLessonQuiz,
   Plan,
@@ -73,6 +74,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const [filled, setFilled] = useState<boolean>(true)
   const [lessons, setLessons] = useState<Array<Plan>>([])
   const [quizzes, setQuizzes] = useState<Array<Plan>>([])
+  const [articles, setArticles] = useState<Array<Plan>>([])
   const [plans, setPlans] = useState<Array<Plan>>([])
   const [filter, setFilter] = useState<Array<Plan>>([])
   const [yourContent, setYourContent] = useState<boolean>(false);
@@ -101,6 +103,13 @@ export const CreatePlaylist = ({ viewer }: props) => {
   })
 
   const { data: quizData, loading: quizLoading, error: quizError } = useAllQuizzesQuery({
+    variables: {
+      limit: limit,
+      page: page
+    }
+  })
+
+  const { data: articleData, loading: articleLoading, error: articleError } = useAllArticlesQuery({
     variables: {
       limit: limit,
       page: page
@@ -164,6 +173,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const lessonQuery = useMemo(() => { return lessonData?.allLessons.result }, [lessonData])
   // let lessonQuery = lessonData ? lessonData.allLessons.result : null;
   let quizQuery = useMemo(() => { return quizData?.allquizzes?.result }, [quizData])
+  let articleQuery = useMemo(() => { return articleData?.allarticles?.result }, [articleData])
   let bookmarkQuery = userData ? userData.user.bookmarks : null;
 
   useEffect(() => {
@@ -216,7 +226,24 @@ export const CreatePlaylist = ({ viewer }: props) => {
       setFilter((f) => [...f, ...quizInput])
       setPlans((p) => [...p, ...quizInput])
     }
-  }, [lessonQuery, quizQuery, quizData, lessonData])
+    if (articleQuery) {
+      const articleInput: any[] = []
+      articleQuery.forEach(a => {
+        let articleObj = {
+          creator: a.creator,
+          _id: a.id,
+          title: a.title,
+          // questions: [...q.questions]
+          content: a.content,
+          public: a.public
+        }
+        articleInput.push(articleObj)
+      })
+      setArticles(articleInput)
+      setFilter((f) => [...f, ...articleInput])
+      setPlans((p) => [...p, ...articleInput])
+    }
+  }, [lessonQuery, quizQuery, articleQuery, articleData, quizData, lessonData])
 
   if (!viewer.id) {
     return (
@@ -267,11 +294,11 @@ export const CreatePlaylist = ({ viewer }: props) => {
     e.target.onmouseleave = () => { setAutoSaved(true) }
   }
 
-  if (lessonLoading || quizLoading) {
+  if (lessonLoading || quizLoading || articleLoading) {
     return <CreatePlaylistSkeleton />
   }
 
-  if (lessonError || quizError) {
+  if (lessonError || quizError || articleError) {
     return <DisplayError title="Failed to query lesson plan items" />
   }
 
@@ -409,6 +436,11 @@ export const CreatePlaylist = ({ viewer }: props) => {
       setPlans([...filter.filter((e) => e.questions && e.questions?.length > 0)])
       return { ...filter }
     }
+
+    if (i === "Articles") {
+      setPlans([...filter.filter((c) => c.content && c.content.blocks)])
+      return { ...filter }
+    }
     // setFilled(!filled)
     setPlans([...filter.filter((e) => e.category?.includes(i))])
   }
@@ -481,7 +513,10 @@ export const CreatePlaylist = ({ viewer }: props) => {
                                   <Card className="lesson--card">
                                     {i.title} <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
                                   </Card>
-                                ) : (
+                                ) : i.content ? (
+                                  <Card className="lesson--card">
+                                    {i.title} <Chip label="Article" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                                  </Card>) : (
                                   <CreatePlaylistCard {...i} />
                                 )}
                               </div>
@@ -520,6 +555,13 @@ export const CreatePlaylist = ({ viewer }: props) => {
                       label={"Quizzes"}
                       variant={"outlined"}
                       onClick={() => handleCategoryClick("Quizzes", 1)}
+                      sx={{ m: "1px" }}
+                    />
+                    <Chip
+                      key={1002}
+                      label={"Articles"}
+                      variant={"outlined"}
+                      onClick={() => handleCategoryClick("Articles", 1)}
                       sx={{ m: "1px" }}
                     />
                     {mainCategories.map((i: any, index) => (
@@ -566,6 +608,10 @@ export const CreatePlaylist = ({ viewer }: props) => {
                                       <Card className="lesson--card">
                                         {JSON.parse(JSON.stringify(i)).title} <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
                                       </Card>
+                                    ) : i.content ? (
+                                      <Card className="lesson--card">
+                                        {JSON.parse(JSON.stringify(i)).title} <Chip label="Article" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                                      </Card>
                                     ) : (
                                       <CreatePlaylistCard {...i} />
                                     )}
@@ -578,9 +624,20 @@ export const CreatePlaylist = ({ viewer }: props) => {
                               {(provided) => (
                                 <Grid item xs={12} md={12} lg={12}>
                                   <Box {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                                    {/* {i.questions ? (
+                                      <Card className="lesson--card">
+                                        {JSON.parse(JSON.stringify(i)).title} <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                                      </Card>
+                                    ) : (
+                                      <CreatePlaylistCard {...i} />
+                                    )} */}
                                     {i.questions ? (
                                       <Card className="lesson--card">
                                         {JSON.parse(JSON.stringify(i)).title} <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                                      </Card>
+                                    ) : i.content ? (
+                                      <Card className="lesson--card">
+                                        {JSON.parse(JSON.stringify(i)).title} <Chip label="Article" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
                                       </Card>
                                     ) : (
                                       <CreatePlaylistCard {...i} />
