@@ -50,6 +50,9 @@ export const Footer = ({ viewer }: Props) => {
           <Link to="/quiz/create" style={{ textDecoration: "none" }}>
             <Typography variant='body1' className='footer--link-text'>Create Assessments</Typography>
           </Link>
+          <Link to="/article/create" style={{ textDecoration: "none" }}>
+            <Typography variant='body1' className='footer--link-text'>Create Article</Typography>
+          </Link>
           <Link to="/playlist/create" style={{ textDecoration: "none" }}>
             <Typography variant='body1' className='footer--link-text'>Create Lesson Plans</Typography>
           </Link>

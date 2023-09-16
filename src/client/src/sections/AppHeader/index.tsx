@@ -148,6 +148,11 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                   </Link>
                 </MenuItem>
                 <MenuItem onClick={handleCloseActionMenu} className="dropdown--buttons">
+                  <Link to={`/article/create`} style={{ textDecoration: 'none', color: "#000" }}>
+                    <Typography textAlign="center">Create Article</Typography>
+                  </Link>
+                </MenuItem>
+                <MenuItem onClick={handleCloseActionMenu} className="dropdown--buttons">
                   <Link to={`/playlist/create`} style={{ textDecoration: 'none', color: "#000" }}>
                     <Typography textAlign="center">Create Lesson Plan</Typography>
                   </Link>
@@ -241,6 +246,12 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                     <Typography textAlign="center">Create Asessment</Typography>
                   </Link>
                 </MenuItem>
+                <MenuItem onClick={handleCloseActionMenu} className="dropdown--buttons">
+                  <Link to={`/article/create`} style={{ textDecoration: 'none', color: "#000" }}>
+                    <Typography textAlign="center">Create Article</Typography>
+                  </Link>
+                </MenuItem>
+
                 <MenuItem onClick={handleCloseActionMenu} className="dropdown--buttons">
                   <Link to={`/playlist/create`} style={{ textDecoration: 'none', color: "#000" }}>
                     <Typography textAlign="center">Create Lesson Plan</Typography>
