@@ -233,15 +233,14 @@ export const CreatePlaylist = ({ viewer }: props) => {
           creator: a.creator,
           _id: a.id,
           title: a.title,
-          // questions: [...q.questions]
           content: a.content,
           public: a.public
         }
         articleInput.push(articleObj)
       })
       setArticles(articleInput)
-      setFilter((f) => [...f, ...articleInput])
-      setPlans((p) => [...p, ...articleInput])
+      setFilter((filter) => [...filter, ...articleInput])
+      setPlans((plan) => [...plan, ...articleInput])
     }
   }, [lessonQuery, quizQuery, articleQuery, articleData, quizData, lessonData])
 
@@ -426,6 +425,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
   }
 
   const handleCategoryClick = (i: string, index: number) => {
+    setPlans([])
     if (i === "All") {
       setPlans([...filter])
       return { ...filter }
@@ -509,16 +509,16 @@ export const CreatePlaylist = ({ viewer }: props) => {
                           {(provided, snapshot) => (
                             <Grid item xs={12} md={12} lg={12} className="playlist--dropbox">
                               <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                                {i.questions ? (
+                                {(i.startDate) ? (
+                                  <CreatePlaylistCard {...i} />
+                                ) : (i.questions && !i.content) ? (
                                   <Card className="lesson--card">
                                     {i.title} <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
                                   </Card>
-                                ) : i.content ? (
+                                ) : (i.content && (!i.questions || !i.startDate)) && (
                                   <Card className="lesson--card">
                                     {i.title} <Chip label="Article" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
-                                  </Card>) : (
-                                  <CreatePlaylistCard {...i} />
-                                )}
+                                  </Card>)}
                               </div>
                             </Grid>
                           )}
@@ -561,7 +561,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
                       key={1002}
                       label={"Articles"}
                       variant={"outlined"}
-                      onClick={() => handleCategoryClick("Articles", 1)}
+                      onClick={() => handleCategoryClick("Articles", 2)}
                       sx={{ m: "1px" }}
                     />
                     {mainCategories.map((i: any, index) => (
@@ -604,43 +604,36 @@ export const CreatePlaylist = ({ viewer }: props) => {
                                 <Grid item xs={12} md={12} lg={12}>
                                   {!i && <Link to="/catalog"><Typography variant="h5">You haven't added or bookmarked any content here yet, click here to add your first lesson.</Typography></Link>}
                                   <Box {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                                    {i.questions ? (
+                                    {i.startDate ? (
+                                      <CreatePlaylistCard {...i} />
+                                    ) : (i.questions && !i.content) ? (
                                       <Card className="lesson--card">
                                         {JSON.parse(JSON.stringify(i)).title} <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
                                       </Card>
-                                    ) : i.content ? (
+                                    ) : i.content && (
                                       <Card className="lesson--card">
                                         {JSON.parse(JSON.stringify(i)).title} <Chip label="Article" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
                                       </Card>
-                                    ) : (
-                                      <CreatePlaylistCard {...i} />
                                     )}
                                   </Box>
                                 </Grid>
                               )}
                             </Draggable>
-                          ) : !yourContent && (
+                          ) : (!yourContent) && (
                             <Draggable draggableId={`${i._id}`} index={index} key={i._id}>
                               {(provided) => (
                                 <Grid item xs={12} md={12} lg={12}>
                                   <Box {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                                    {/* {i.questions ? (
-                                      <Card className="lesson--card">
-                                        {JSON.parse(JSON.stringify(i)).title} <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
-                                      </Card>
-                                    ) : (
+                                    {i.startDate ? (
                                       <CreatePlaylistCard {...i} />
-                                    )} */}
-                                    {i.questions ? (
+                                    ) : (i.questions && !i.content) ? (
                                       <Card className="lesson--card">
                                         {JSON.parse(JSON.stringify(i)).title} <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
                                       </Card>
-                                    ) : i.content ? (
+                                    ) : (!i.questions && !i.startDate && i.public) && (
                                       <Card className="lesson--card">
                                         {JSON.parse(JSON.stringify(i)).title} <Chip label="Article" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
                                       </Card>
-                                    ) : (
-                                      <CreatePlaylistCard {...i} />
                                     )}
                                   </Box>
                                 </Grid>
