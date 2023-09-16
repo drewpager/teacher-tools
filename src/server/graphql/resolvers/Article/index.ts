@@ -16,7 +16,7 @@ export const articleResolvers = {
     ): Promise<Article> => {
       const article = await db.articles.findOne({ _id: new ObjectId(id) });
       if (!article) {
-        throw new Error("Failed to query quiz");
+        throw new Error("Failed to query article");
       }
       return article;
     },

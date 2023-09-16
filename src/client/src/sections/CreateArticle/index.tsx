@@ -125,6 +125,8 @@ export const CreateArticle = ({ viewer }: Props) => {
     })
 
     navigate(`/user/${viewer.id}`, { replace: true })
+
+    // console.log(initialArticle);
   }
 
 

@@ -27,6 +27,10 @@ export interface Content {
   entityMap: any;
 }
 
+export interface EntityMapping {
+  entityMap: EntityMap;
+}
+
 export interface Blocks {
   key: string;
   text: string;
@@ -34,6 +38,21 @@ export interface Blocks {
   depth: number;
   inlineStyleRanges: InlineStyleRanges[];
   entityRanges: EntityRanges[];
+}
+
+export interface EntityMap {
+  type: string;
+  mutability: string;
+  data: DataInput;
+}
+
+export interface DataInput {
+  src: string;
+  width: string;
+  alignment: string;
+  height: string;
+  url: string;
+  targetOption: string;
 }
 
 export interface InlineStyleRanges {

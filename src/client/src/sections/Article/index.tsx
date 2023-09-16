@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useArticleQuery, Viewer } from '../../graphql/generated';
 import { useParams } from 'react-router-dom';
 import { Box, LinearProgress } from '@mui/material';
@@ -6,6 +6,7 @@ import { DisplayError } from '../../lib/utils/alerts/displayError';
 import { Search, Footer } from '../../lib/components/';
 import { Helmet } from 'react-helmet';
 import draftToHtml from 'draftjs-to-html';
+import './article.scss';
 
 export const Article = () => {
   const params = useParams();
@@ -35,20 +36,60 @@ export const Article = () => {
 
   const article = data ? data.article : null;
 
+  function reverseEntityMapArray(entityMapArray: Array<any>) {
+    let rawEntity: any = {
+      entityMap: {}
+    };
+
+    for (let i = 0; i < entityMapArray.length; i++) {
+      rawEntity.entityMap[i] = entityMapArray[i];
+    }
+
+    return rawEntity;
+  }
+
+  function removeTypenameFields(obj: any): any {
+    if (typeof obj !== "object" || obj === null) {
+      return obj;
+    }
+
+    if (Array.isArray(obj)) {
+      return obj.map((item: any) => removeTypenameFields(item));
+    }
+
+    const newObj: any = {};
+
+    for (const key in obj) {
+      if (key !== "__typename") {
+        newObj[key] = removeTypenameFields(obj[key]);
+      }
+    }
+
+    return newObj;
+  }
+
   if (article) {
+    let newEntityMap = reverseEntityMapArray([article?.content?.entityMap])
+    let rawContent = {
+      blocks: article?.content?.blocks,
+      entityMap: newEntityMap.entityMap[0]
+    }
+
+    let newRawContent = removeTypenameFields(rawContent);
+    console.log(newRawContent);
+
     return (
-      <>
+      <Box>
         <Helmet>
           <title>{`${article.title} Article | Plato's Peach`}</title>
           <meta name="description" content={`Article explaining ${article.title}.`} />
         </Helmet>
-        <h2>{article.title}</h2>
-        <h2>{article.id}</h2>
-        <h2>{article.creator}</h2>
-        <h2>{article.public}</h2>
-        {/* <PlaylistCard playlist={playlist} /> */}
+        <Box className="article--section">
+          <h2>{article.title}</h2>
+          {newRawContent && (<div dangerouslySetInnerHTML={{ __html: draftToHtml(newRawContent) }} />)}
+        </Box>
         <Footer />
-      </>
+      </Box>
     )
   }
 

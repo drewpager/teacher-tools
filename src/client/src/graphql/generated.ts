@@ -267,8 +267,12 @@ export type CreateQuizInput = {
 };
 
 export type DataInput = {
+  alignment?: InputMaybe<Scalars['String']>;
+  height?: InputMaybe<Scalars['String']>;
+  src?: InputMaybe<Scalars['String']>;
   targetOption?: InputMaybe<Scalars['String']>;
   url?: InputMaybe<Scalars['String']>;
+  width?: InputMaybe<Scalars['String']>;
 };
 
 export type DataObject = {
@@ -284,8 +288,12 @@ export type EntityMap = {
 
 export type EntityMapData = {
   __typename?: 'EntityMapData';
+  alignment?: Maybe<Scalars['String']>;
+  height?: Maybe<Scalars['String']>;
+  src?: Maybe<Scalars['String']>;
   targetOption?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
+  width?: Maybe<Scalars['String']>;
 };
 
 export type EntityMapInput = {
@@ -731,7 +739,7 @@ export type ArticleQueryVariables = Exact<{
 }>;
 
 
-export type ArticleQuery = { __typename?: 'Query', article: { __typename?: 'Article', id?: string | null, title?: string | null, creator?: string | null, public?: boolean | null, content?: { __typename?: 'Content', blocks?: Array<{ __typename?: 'Blocks', key?: string | null, text?: string | null, type?: string | null, depth?: number | null, inlineStyleRanges?: Array<{ __typename?: 'InlineStyleRanges', style?: string | null, offset?: number | null, length?: number | null } | null> | null, entityRanges?: Array<{ __typename?: 'EntityRanges', offset?: number | null, length?: number | null, key?: number | null } | null> | null } | null> | null, entityMap?: Array<{ __typename?: 'EntityMap', type?: string | null, mutability?: string | null, data?: { __typename?: 'EntityMapData', url?: string | null } | null } | null> | null } | null } };
+export type ArticleQuery = { __typename?: 'Query', article: { __typename?: 'Article', id?: string | null, title?: string | null, creator?: string | null, public?: boolean | null, content?: { __typename?: 'Content', blocks?: Array<{ __typename?: 'Blocks', key?: string | null, text?: string | null, type?: string | null, depth?: number | null, inlineStyleRanges?: Array<{ __typename?: 'InlineStyleRanges', style?: string | null, offset?: number | null, length?: number | null } | null> | null, entityRanges?: Array<{ __typename?: 'EntityRanges', offset?: number | null, length?: number | null, key?: number | null } | null> | null } | null> | null, entityMap?: Array<{ __typename?: 'EntityMap', type?: string | null, mutability?: string | null, data?: { __typename?: 'EntityMapData', src?: string | null, width?: string | null, alignment?: string | null, height?: string | null, url?: string | null, targetOption?: string | null } | null } | null> | null } | null } };
 
 export type AllArticlesQueryVariables = Exact<{
   limit: Scalars['Int'];
@@ -739,7 +747,7 @@ export type AllArticlesQueryVariables = Exact<{
 }>;
 
 
-export type AllArticlesQuery = { __typename?: 'Query', allarticles: { __typename?: 'Articles', total: number, result: Array<{ __typename?: 'Article', id?: string | null, title?: string | null, creator?: string | null, public?: boolean | null, content?: { __typename?: 'Content', blocks?: Array<{ __typename?: 'Blocks', key?: string | null, text?: string | null, type?: string | null, depth?: number | null, inlineStyleRanges?: Array<{ __typename?: 'InlineStyleRanges', style?: string | null, offset?: number | null, length?: number | null } | null> | null, entityRanges?: Array<{ __typename?: 'EntityRanges', offset?: number | null, length?: number | null, key?: number | null } | null> | null } | null> | null, entityMap?: Array<{ __typename?: 'EntityMap', type?: string | null, mutability?: string | null, data?: { __typename?: 'EntityMapData', url?: string | null } | null } | null> | null } | null }> } };
+export type AllArticlesQuery = { __typename?: 'Query', allarticles: { __typename?: 'Articles', total: number, result: Array<{ __typename?: 'Article', id?: string | null, title?: string | null, creator?: string | null, public?: boolean | null, content?: { __typename?: 'Content', blocks?: Array<{ __typename?: 'Blocks', key?: string | null, text?: string | null, type?: string | null, depth?: number | null, inlineStyleRanges?: Array<{ __typename?: 'InlineStyleRanges', style?: string | null, offset?: number | null, length?: number | null } | null> | null, entityRanges?: Array<{ __typename?: 'EntityRanges', offset?: number | null, length?: number | null, key?: number | null } | null> | null } | null> | null, entityMap?: Array<{ __typename?: 'EntityMap', type?: string | null, mutability?: string | null, data?: { __typename?: 'EntityMapData', src?: string | null, width?: string | null, alignment?: string | null, height?: string | null, targetOption?: string | null } | null } | null> | null } | null }> } };
 
 export type AuthUrlQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1141,7 +1149,12 @@ export const ArticleDocument = gql`
         type
         mutability
         data {
+          src
+          width
+          alignment
+          height
           url
+          targetOption
         }
       }
     }
@@ -1206,7 +1219,11 @@ export const AllArticlesDocument = gql`
           type
           mutability
           data {
-            url
+            src
+            width
+            alignment
+            height
+            targetOption
           }
         }
       }
