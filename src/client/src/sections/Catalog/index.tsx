@@ -55,6 +55,7 @@ export const Catalog = ({ viewer }: Props) => {
       playlistsPage: 1,
       lessonsPage: 1,
       quizzesPage: 1,
+      articlesPage: 1,
       limit: 1
     }
   });

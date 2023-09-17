@@ -806,11 +806,12 @@ export type UserQueryVariables = Exact<{
   playlistsPage: Scalars['Int'];
   lessonsPage: Scalars['Int'];
   quizzesPage: Scalars['Int'];
+  articlesPage: Scalars['Int'];
   limit: Scalars['Int'];
 }>;
 
 
-export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, name: string, avatar: string, contact: string, paymentId?: string | null, package?: { __typename?: 'Package', amount?: number | null, cadence?: string | null, status?: string | null, since?: number | null, trialEnd?: number | null } | null, bookmarks?: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null } | null> | null, playlists?: { __typename?: 'Playlists', total: number, totalCount: number, result: Array<{ __typename?: 'Playlist', id?: string | null, name: string, creator: string, plan: Array<{ __typename: 'Article', id?: string | null, title?: string | null, creator?: string | null, public?: boolean | null, content?: { __typename?: 'Content', blocks?: Array<{ __typename?: 'Blocks', key?: string | null, text?: string | null, type?: string | null, depth?: number | null, inlineStyleRanges?: Array<{ __typename?: 'InlineStyleRanges', style?: string | null, offset?: number | null, length?: number | null } | null> | null, entityRanges?: Array<{ __typename?: 'EntityRanges', offset?: number | null, length?: number | null, key?: number | null } | null> | null } | null> | null, entityMap?: Array<{ __typename?: 'EntityMap', type?: string | null, mutability?: string | null, data?: { __typename?: 'EntityMapData', src?: string | null, width?: string | null, alignment?: string | null, height?: string | null, url?: string | null, targetOption?: string | null } | null } | null> | null } | null } | { __typename: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null } | { __typename: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> } | null> }> } | null, lessons?: { __typename?: 'Lessons', total: number, totalCount: number, result: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null }> } | null, quizzes?: { __typename?: 'Quizzes', total: number, totalCount: number, result: Array<{ __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> }> } | null } };
+export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, name: string, avatar: string, contact: string, paymentId?: string | null, package?: { __typename?: 'Package', amount?: number | null, cadence?: string | null, status?: string | null, since?: number | null, trialEnd?: number | null } | null, bookmarks?: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null } | null> | null, playlists?: { __typename?: 'Playlists', total: number, totalCount: number, result: Array<{ __typename?: 'Playlist', id?: string | null, name: string, creator: string, plan: Array<{ __typename: 'Article', id?: string | null, title?: string | null, creator?: string | null, public?: boolean | null, content?: { __typename?: 'Content', blocks?: Array<{ __typename?: 'Blocks', key?: string | null, text?: string | null, type?: string | null, depth?: number | null, inlineStyleRanges?: Array<{ __typename?: 'InlineStyleRanges', style?: string | null, offset?: number | null, length?: number | null } | null> | null, entityRanges?: Array<{ __typename?: 'EntityRanges', offset?: number | null, length?: number | null, key?: number | null } | null> | null } | null> | null, entityMap?: Array<{ __typename?: 'EntityMap', type?: string | null, mutability?: string | null, data?: { __typename?: 'EntityMapData', src?: string | null, width?: string | null, alignment?: string | null, height?: string | null, url?: string | null, targetOption?: string | null } | null } | null> | null } | null } | { __typename: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null } | { __typename: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> } | null> }> } | null, lessons?: { __typename?: 'Lessons', total: number, totalCount: number, result: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null }> } | null, quizzes?: { __typename?: 'Quizzes', total: number, totalCount: number, result: Array<{ __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> }> } | null, articles?: { __typename?: 'Articles', total: number, totalCount: number, result: Array<{ __typename?: 'Article', id?: string | null, title?: string | null, creator?: string | null, public?: boolean | null, content?: { __typename?: 'Content', blocks?: Array<{ __typename?: 'Blocks', key?: string | null, text?: string | null, type?: string | null, depth?: number | null, inlineStyleRanges?: Array<{ __typename?: 'InlineStyleRanges', style?: string | null, offset?: number | null, length?: number | null } | null> | null, entityRanges?: Array<{ __typename?: 'EntityRanges', offset?: number | null, length?: number | null, key?: number | null } | null> | null } | null> | null, entityMap?: Array<{ __typename?: 'EntityMap', type?: string | null, mutability?: string | null, data?: { __typename?: 'EntityMapData', src?: string | null, width?: string | null, alignment?: string | null, height?: string | null, url?: string | null, targetOption?: string | null } | null } | null> | null } | null }> } | null } };
 
 export type AllUsersQueryVariables = Exact<{
   limit: Scalars['Int'];
@@ -1681,7 +1682,7 @@ export type AllQuizzesQueryHookResult = ReturnType<typeof useAllQuizzesQuery>;
 export type AllQuizzesLazyQueryHookResult = ReturnType<typeof useAllQuizzesLazyQuery>;
 export type AllQuizzesQueryResult = Apollo.QueryResult<AllQuizzesQuery, AllQuizzesQueryVariables>;
 export const UserDocument = gql`
-    query User($id: ID!, $playlistsPage: Int!, $lessonsPage: Int!, $quizzesPage: Int!, $limit: Int!) {
+    query User($id: ID!, $playlistsPage: Int!, $lessonsPage: Int!, $quizzesPage: Int!, $articlesPage: Int!, $limit: Int!) {
   user(id: $id) {
     id
     name
@@ -1809,6 +1810,46 @@ export const UserDocument = gql`
       }
       totalCount
     }
+    articles(limit: $limit, page: $articlesPage) {
+      total
+      result {
+        id
+        title
+        creator
+        content {
+          blocks {
+            key
+            text
+            type
+            depth
+            inlineStyleRanges {
+              style
+              offset
+              length
+            }
+            entityRanges {
+              offset
+              length
+              key
+            }
+          }
+          entityMap {
+            type
+            mutability
+            data {
+              src
+              width
+              alignment
+              height
+              url
+              targetOption
+            }
+          }
+        }
+        public
+      }
+      totalCount
+    }
   }
 }
     `;
@@ -1829,6 +1870,7 @@ export const UserDocument = gql`
  *      playlistsPage: // value for 'playlistsPage'
  *      lessonsPage: // value for 'lessonsPage'
  *      quizzesPage: // value for 'quizzesPage'
+ *      articlesPage: // value for 'articlesPage'
  *      limit: // value for 'limit'
  *   },
  * });

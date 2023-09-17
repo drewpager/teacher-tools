@@ -6,6 +6,7 @@ export const USER = gql`
     $playlistsPage: Int!
     $lessonsPage: Int!
     $quizzesPage: Int!
+    $articlesPage: Int!
     $limit: Int!
   ) {
     user(id: $id) {
@@ -132,6 +133,46 @@ export const USER = gql`
             answerType
           }
           creator
+        }
+        totalCount
+      }
+      articles(limit: $limit, page: $articlesPage) {
+        total
+        result {
+          id
+          title
+          creator
+          content {
+            blocks {
+              key
+              text
+              type
+              depth
+              inlineStyleRanges {
+                style
+                offset
+                length
+              }
+              entityRanges {
+                offset
+                length
+                key
+              }
+            }
+            entityMap {
+              type
+              mutability
+              data {
+                src
+                width
+                alignment
+                height
+                url
+                targetOption
+              }
+            }
+          }
+          public
         }
         totalCount
       }

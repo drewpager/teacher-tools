@@ -91,6 +91,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       playlistsPage: 0,
       lessonsPage: 0,
       quizzesPage: 0,
+      articlesPage: 0,
       limit: 0
     }
   });

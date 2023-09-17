@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useUserQuery, Viewer } from '../../graphql/generated';
-import { UserProfile, UserLessons, UserPlaylists, UserQuizzes, UserBookmarks } from './components';
+import { UserProfile, UserLessons, UserPlaylists, UserQuizzes, UserBookmarks, UserArticles } from './components';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
 import { PageSkeleton } from '../../lib/components';
 import { Footer } from '../../lib/components';
@@ -15,6 +15,7 @@ export const User = ({ viewer }: Props) => {
   const [lessonsPage, setLessonsPage] = useState(1);
   const [quizzesPage, setQuizzesPage] = useState(1);
   const [bookmarksPage, setBookmarksPage] = useState(1);
+  const [articlesPage, setArticlesPage] = useState(1);
 
   const pageLimit = 3;
 
@@ -26,6 +27,7 @@ export const User = ({ viewer }: Props) => {
       playlistsPage: playlistsPage,
       lessonsPage: lessonsPage,
       quizzesPage: quizzesPage,
+      articlesPage: articlesPage,
       limit: pageLimit
     },
     pollInterval: 200
@@ -40,6 +42,7 @@ export const User = ({ viewer }: Props) => {
   const userPlaylists = user ? user.playlists : null;
   const userQuizzes = user ? user.quizzes : null;
   const userBookmarks = user ? user.bookmarks : null;
+  const userArticles = user ? user.articles : null;
 
   const userLessonsElement = useMemo(() => userLessons ? (
     <UserLessons
@@ -68,6 +71,15 @@ export const User = ({ viewer }: Props) => {
     />
   ) : (<h2>Failed to load quizzes</h2>), [userQuizzes, quizzesPage])
 
+  const userArticlesElement = useMemo(() => userArticles ? (
+    <UserArticles
+      userArticles={userArticles}
+      articlesPage={articlesPage}
+      limit={pageLimit}
+      setArticlesPage={setArticlesPage}
+    />
+  ) : (<h2>Failed to load articles</h2>), [userArticles, articlesPage])
+
   const userBookmarksElement = useMemo(() => userBookmarks ? (
     <UserBookmarks user={user} setBookmarksPage={setBookmarksPage} />
   ) : (<h2>Failed to load bookmarks</h2>), [userBookmarks, user])
@@ -91,6 +103,7 @@ export const User = ({ viewer }: Props) => {
       {userLessonsElement}
       {userPlaylistsElement}
       {userQuizzesElement}
+      {userArticlesElement}
       {userBookmarksElement}
       <Footer viewer={viewer} />
     </>

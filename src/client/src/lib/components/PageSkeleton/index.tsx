@@ -59,7 +59,30 @@ export const PageSkeleton = () => {
             <Skeleton variant="rectangular" width={"25vw"} height={150} />
           </Grid>
         </Grid>
-
+        <h2>XX Articles</h2>
+        <Grid container spacing={4}>
+          <Grid item lg={4} md={6} sm={12} xs={12}>
+            <Skeleton variant="rectangular" width={"25vw"} height={150} />
+          </Grid>
+          <Grid item lg={4} md={6} sm={12} xs={12}>
+            <Skeleton variant="rectangular" width={"25vw"} height={150} />
+          </Grid>
+          <Grid item lg={4} md={6} sm={12} xs={12}>
+            <Skeleton variant="rectangular" width={"25vw"} height={150} />
+          </Grid>
+        </Grid>
+        <h2>XX Bookmarks</h2>
+        <Grid container spacing={4}>
+          <Grid item lg={4} md={6} sm={12} xs={12}>
+            <Skeleton variant="rectangular" width={"25vw"} height={150} />
+          </Grid>
+          <Grid item lg={4} md={6} sm={12} xs={12}>
+            <Skeleton variant="rectangular" width={"25vw"} height={150} />
+          </Grid>
+          <Grid item lg={4} md={6} sm={12} xs={12}>
+            <Skeleton variant="rectangular" width={"25vw"} height={150} />
+          </Grid>
+        </Grid>
       </Box>
     </>
   )
