@@ -390,6 +390,7 @@ export type Mutation = {
   createLesson: Lesson;
   createQuiz: Quiz;
   deleteAllBookmarks?: Maybe<Scalars['String']>;
+  deleteArticle: Scalars['Boolean'];
   deleteLesson: Scalars['Boolean'];
   deletePlaylist: Scalars['Boolean'];
   deleteQuiz: Scalars['Boolean'];
@@ -434,6 +435,11 @@ export type MutationCreateQuizArgs = {
 
 
 export type MutationDeleteAllBookmarksArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
+
+export type MutationDeleteArticleArgs = {
   id?: InputMaybe<Scalars['ID']>;
 };
 

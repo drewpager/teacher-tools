@@ -79,22 +79,22 @@ export const articleResolvers = {
         throw new Error(`Failed with error: ${err}`);
       }
     },
-    // deleteArticle: async (
-    //   _root: undefined,
-    //   { id }: ArticleArgs,
-    //   { db }: { db: Database }
-    // ): Promise<boolean | undefined> => {
-    //   try {
-    //     const deletedArticle = await db.articles.deleteOne({
-    //       _id: new ObjectId(id),
-    //     });
-    //     if (!deletedArticle) {
-    //       throw new Error("Failed to delete quiz");
-    //     }
-    //     return deletedArticle.acknowledged;
-    //   } catch (error) {
-    //     throw new Error(`Failed to start deleting article: ${error}`);
-    //   }
-    // },
+    deleteArticle: async (
+      _root: undefined,
+      { id }: ArticleArgs,
+      { db }: { db: Database }
+    ): Promise<boolean | undefined> => {
+      try {
+        const deletedArticle = await db.articles.deleteOne({
+          _id: new ObjectId(id),
+        });
+        if (!deletedArticle) {
+          throw new Error("Failed to delete quiz");
+        }
+        return deletedArticle.acknowledged;
+      } catch (error) {
+        throw new Error(`Failed to start deleting article: ${error}`);
+      }
+    },
   },
 };
