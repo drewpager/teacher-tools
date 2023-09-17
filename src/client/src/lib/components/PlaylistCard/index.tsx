@@ -50,7 +50,7 @@ export const PlaylistCard = ({ playlist }: Props) => {
       <Grid container className='playlistcard--grid'>
         <Timeline position="left" className='playist--grid__timeline'>
           {playlist?.plan?.map((item, id) => (
-            <TimelineItem>
+            <TimelineItem key={id}>
               {/* <TimelineOppositeContent>{item?.__typename === "Lesson" ? handleDateFormat(item.endDate) : ""}</TimelineOppositeContent> */}
               <ListItem disableGutters key={id}>
                 <ListItemButton
@@ -101,6 +101,7 @@ export const PlaylistCard = ({ playlist }: Props) => {
             }
 
             if (iter?.__typename === "Article") {
+              console.log("ITER", iter);
               return (
                 <ArticlePlayer article={iter} key={index} />
               )

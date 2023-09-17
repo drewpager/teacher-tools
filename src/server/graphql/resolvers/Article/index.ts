@@ -44,6 +44,17 @@ export const articleResolvers = {
     id: (article: Article) => {
       return article._id;
     },
+    content: (article: Article) => {
+      if (article.content.entityMap.type === "IMAGE") {
+        return article.content.entityMap.data.src;
+      }
+
+      if (article.content.entityMap.type === "LINK") {
+        return article.content.entityMap.data.url;
+      }
+
+      return article.content;
+    },
   },
   Mutation: {
     createArticle: async (

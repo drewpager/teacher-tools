@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Button, FormControl, Radio, RadioGroup, Chip, Divider } from '@mui/material';
+import { Box, Button, FormControl, Radio, RadioGroup, Chip, Divider, Typography } from '@mui/material';
 import QuizIcon from '@mui/icons-material/Quiz';
 import { Quiz, AnswerOptions } from '../../../graphql/generated';
 import { Formik, Field, Form } from "formik";
@@ -52,24 +52,19 @@ export const QuizPlayer = ({ quiz }: Props) => {
       <Divider sx={{ margin: "0.5em" }} />
       {showFinalResult ? (
         <div>
-          <p>Result: <Chip
-            label={score > 0 ? `${(score / totalCorrect) * 100}%` : "0%"}
-            variant="outlined"
-            color="secondary"
-          /></p>
-
+          <Typography style={{ fontSize: 100 }} variant="h2">{score > 0 ? `${Math.round((score / totalCorrect) * 100)}%` : "0%"}</Typography>
           <Button type="submit" variant="outlined" onClick={() => resetQuiz()}>Retake!</Button>
         </div>
       ) : (
         <div>
           {quiz.questions.map((q, index) => (
-            <form onSubmit={() => console.log(score)}>
+            <form key={index} onSubmit={() => console.log(score)}>
               <Chip
                 label={`Question ${index + 1} out of ${quiz.questions.length}`}
                 variant="outlined"
                 color="secondary"
               />
-              <h2>{q.question}</h2>
+              <h2 key={index}>{q.question}</h2>
               {q.answerOptions && q.answerOptions.map((choice, inder) => (
                 <div key={inder} className='quiz--div'>
                   <label className='quiz--label'>

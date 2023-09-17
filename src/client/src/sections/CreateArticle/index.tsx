@@ -75,7 +75,7 @@ export const CreateArticle = ({ viewer }: Props) => {
   const [editorState, setEditorState] = useState<EditorState | undefined>(undefined);
   const rawContent = editorState && convertToRaw(editorState.getCurrentContent())
   const [title, setTitle] = useState<string | undefined>(undefined);
-  const [locked, setLocked] = useState<boolean>(false);
+  const [locked, setLocked] = useState<boolean>();
   const navigate = useNavigate();
 
   const [createArticle, { data, loading, error }] = useCreateArticleMutation({
@@ -87,7 +87,7 @@ export const CreateArticle = ({ viewer }: Props) => {
           entityMap: [],
         },
         creator: `${viewer.id}`,
-        public: !locked
+        public: true
       }
     }
   })
@@ -129,7 +129,6 @@ export const CreateArticle = ({ viewer }: Props) => {
     // console.log(initialArticle);
   }
 
-
   return (
     <Box>
       <Grid container>
@@ -142,18 +141,23 @@ export const CreateArticle = ({ viewer }: Props) => {
                 label="Article Title"
                 sx={{ width: '100%' }}
                 onChange={(e) => setTitle(e.target.value)}
+                required
               />
               <Editor
                 editorClassName='createArticle-editor'
                 editorState={editorState}
                 onEditorStateChange={setEditorState}
               />
-              <Button variant="contained" type='submit'>Create</Button>
-              <Tooltip title={locked ? "Private" : "Public"}>
-                <LockSwitch
-                  checked={locked}
-                  onChange={() => setLocked(!locked)}
-                /></Tooltip>
+              <Box className="button--slider">
+                <Button variant="contained" type='submit' disabled={!title}>Create</Button>
+                <Tooltip title={locked ? "Private" : "Public"}>
+                  <LockSwitch
+                    // checked={locked}
+                    onChange={() => setLocked(!locked)}
+                  />
+                </Tooltip>
+                <Typography variant="body1" color={locked ? "error" : "success"}>{locked ? "Private" : "Public"}</Typography>
+              </Box>
             </form>
           </Box>
         </Grid>

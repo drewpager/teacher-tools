@@ -1,7 +1,9 @@
 import React from 'react';
 import { Article } from '../../../graphql/generated';
-import { Box } from '@mui/material';
+import { Box, Divider, Typography } from '@mui/material';
 import draftToHtml from 'draftjs-to-html';
+import ArticleIcon from '@mui/icons-material/Article';
+import './articlePlayer.scss';
 
 interface Props {
   article: Article
@@ -48,8 +50,12 @@ export const ArticlePlayer = ({ article }: Props) => {
   let newRawContent = removeTypenameFields(rawContent);
 
   return (
-    <Box>
-      <h2>{article.title}</h2>
+    <Box className="article--player-section">
+      <Box className="article--player-header">
+        <ArticleIcon color='secondary' sx={{ marginRight: '5px', fontSize: '40px' }} />
+        <h2 className='article--title'>{article.title}</h2>
+      </Box>
+      <Divider />
       <div className="article--body" dangerouslySetInnerHTML={{ __html: draftToHtml(newRawContent) }} />
     </Box>
   )

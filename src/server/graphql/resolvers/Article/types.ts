@@ -24,7 +24,7 @@ export interface CreateArticleInput {
 
 export interface Content {
   blocks: Blocks[];
-  entityMap: EntityMapping;
+  entityMap: EntityMap[];
 }
 
 export interface EntityMapping {

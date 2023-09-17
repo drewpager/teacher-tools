@@ -1,0 +1,15 @@
+.MuiBox-root {
+  &.article--player-section {
+    max-width: 70%;
+  }
+
+  &.article--player-header {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.article--title {
+  font-size: 2em;
+  font-weight: 600;
+}
