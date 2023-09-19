@@ -128,7 +128,7 @@ const App = () => {
           <Route path="/billing" element={<Billing viewer={viewer} />} />
           <Route path="/login" children={(props: any) => (<Login {...props} setViewer={setViewer} />)} element={<Login setViewer={setViewer} />} />
           <Route path="/signup" children={(props: any) => (<SignUp {...props} setViewer={setViewer} />)} element={<SignUp setViewer={setViewer} />} />
-          <Route path="/playlist/:id" element={<Playlist />} />
+          <Route path="/playlist/:id" element={<Playlist viewer={viewer} />} />
           <Route path="/playlist/create" element={<CreatePlaylist viewer={viewer} />} />
           <Route path="/playlists" element={<Playlists viewer={viewer} />} />
           <Route path="/quiz/:id" element={<Quiz />} />

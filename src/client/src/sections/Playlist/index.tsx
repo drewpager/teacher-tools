@@ -6,7 +6,11 @@ import { DisplayError } from '../../lib/utils/alerts/displayError';
 import { PlaylistCard, Search, Footer } from '../../lib/components/';
 import { Helmet } from 'react-helmet';
 
-export const Playlist = () => {
+interface Props {
+  viewer?: Viewer;
+}
+
+export const Playlist = ({ viewer }: Props) => {
   const params = useParams();
   const { data, loading, error } = usePlaylistQuery({
     variables: {
@@ -41,7 +45,7 @@ export const Playlist = () => {
           <title>{`${playlist.name} Lesson Plan | Plato's Peach`}</title>
           <meta name="description" content={`Interactive lesson plan teaching ${playlist.name} including ${playlist.plan.length} educational items.`} />
         </Helmet>
-        <PlaylistCard playlist={playlist} />
+        <PlaylistCard playlist={playlist} viewer={viewer} />
         <Footer />
       </>
     )

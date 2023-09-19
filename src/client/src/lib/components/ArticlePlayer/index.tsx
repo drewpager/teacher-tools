@@ -52,7 +52,7 @@ export const ArticlePlayer = ({ article }: Props) => {
   return (
     <Box className="article--player-section">
       <Box className="article--player-header">
-        <ArticleIcon color='secondary' sx={{ marginRight: '5px', fontSize: '40px' }} />
+        <ArticleIcon color='secondary' sx={{ marginRight: '5px', fontSize: '40px', marginTop: "41px" }} />
         <h2 className='article--title'>{article.title}</h2>
       </Box>
       <Divider />

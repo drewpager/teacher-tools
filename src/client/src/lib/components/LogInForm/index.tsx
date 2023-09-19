@@ -61,7 +61,6 @@ export const LogInForm = () => {
   }
 
   if (logInError) {
-    console.log("Error name: ", logInError.name);
     console.log("Error message: ", logInError.message);
   }
 

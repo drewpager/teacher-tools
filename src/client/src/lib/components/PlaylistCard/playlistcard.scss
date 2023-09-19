@@ -1,4 +1,11 @@
-@use '../../../library';
+@use "../../../library";
+
+.MuiBox-root {
+    &.title-button--section {
+        display: flex;
+        align-items: first baseline;
+    }
+}
 
 .MuiButtonBase-root {
     &.playlistCard--button {
@@ -13,7 +20,7 @@
             box-shadow: 0 0 0 1px library.$darkGreen;
             border-radius: 4px;
             max-width: max-content;
-            
+
             .MuiListItemText-primary {
                 color: white;
             }
@@ -41,15 +48,20 @@
         font-weight: 800;
         color: library.$peachy;
 
+        // @media (min-width: 1300px) {
+        //     position: sticky;
+        //     top: 5.8rem;
+        // }
+
         @media (max-width: 600px) {
-            font-size: 1.75rem;
+            font-size: 2rem;
             margin-left: 0;
         }
     }
 
     &.MuiTimelineContent-root {
         padding: 1rem;
-        min-width: 15rem;
+        min-width: 10rem;
     }
 
     @media (max-width: 443px) {
@@ -67,14 +79,14 @@
         flex: 1 1 60%;
     }
 
-    @media (min-width: 900px ) {
+    @media (min-width: 900px) {
         &.playlistcard--grid__video {
             flex: 1 1 30%;
             margin-right: 1rem;
         }
     }
 
-    @media (max-width: 1300px ) {
+    @media (max-width: 1300px) {
         &.playlistcard--grid__video {
             flex: 1 1 60%;
         }
@@ -84,13 +96,24 @@
 .MuiTimeline-root {
     margin-left: 0rem;
     flex: 1 1 30%;
+    height: fit-content;
+    min-height: max-content;
+
     &.playist--grid__timeline {
         grid-column: 0 / 1;
         flex: 1 1 30%;
     }
 
-    @media (min-width: 900px ) {
+    // sticky sidebar 
+    @media (min-width: 1300px) {
+        position: sticky;
+        top: 10rem;
+        overflow-y: scroll;
+    }
+
+    @media (min-width: 900px) {
         margin-left: 1rem;
+
         &.playist--grid__timeline {
             flex: 1 1 20%;
         }

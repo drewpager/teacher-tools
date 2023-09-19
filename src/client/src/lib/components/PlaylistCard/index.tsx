@@ -6,6 +6,13 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  Tooltip,
+  Button,
+  Chip,
+  CircularProgress,
+  Alert,
+  Box,
+  Snackbar
 } from '@mui/material';
 import Timeline from '@mui/lab/Timeline';
 import {
@@ -17,36 +24,120 @@ import {
   TimelineOppositeContent,
 } from '@mui/lab';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import QuizIcon from '@mui/icons-material/Quiz';
 import ArticleIcon from '@mui/icons-material/Article';
-import { Playlist, Lesson, LessonPlanUnion } from '../../../graphql/generated';
+import { Playlist, Lesson, LessonPlanUnion, Viewer } from '../../../graphql/generated';
 import { VideoPlayer, QuizPlayer, ArticlePlayer } from '../index';
 import './playlistcard.scss';
 import { formatDate } from '../../utils';
+import { useNavigate } from 'react-router-dom';
+import { gql } from 'graphql-tag';
+import { DisplaySuccess } from '../../utils';
+import { useMutation } from '@apollo/client';
 
 interface Props {
   playlist: Playlist
+  viewer?: Viewer;
 }
 
+const COPY_PLAYLIST = gql`
+  mutation CopyPlaylist($id: ID!, $viewerId: String!) {
+    copyPlaylist(id: $id, viewerId: $viewerId) {
+      id
+    }
+  }
+`;
+
+interface CopyPlaylistData {
+  id: string;
+  name: string;
+  plan: LessonPlanUnion[];
+}
+
+interface CopyPlaylistVariables {
+  id: string;
+  viewerId: string;
+}
 
 // NOTE: Pass lessons object instead of single lesson for Accordion to work correctly
-export const PlaylistCard = ({ playlist }: Props) => {
+export const PlaylistCard = ({ playlist, viewer }: Props) => {
   // const [video, setVideo] = useState<string>()
+  const [open, setOpen] = useState<boolean>(false);
+  const navigation = useNavigate();
   const [itemName, setItemName] = useState<LessonPlanUnion>(playlist && playlist.plan ? { ...playlist.plan[0] } : {})
   const [active, setActive] = useState<string>(playlist && playlist.plan ? `${playlist?.plan[0]?.id}` : `1`)
+  const [copyPlaylist, { loading: CopyPlaylistLoading, error: CopyPlaylistError }] = useMutation<CopyPlaylistData, CopyPlaylistVariables>(COPY_PLAYLIST);
 
   const handleChange = ({ ...item }: LessonPlanUnion) => {
     setItemName(item)
     setActive(`${item.id}`)
   };
 
+  function handleClose() {
+    setOpen(false);
+  }
+
+  const handleCopy = async (id: string, viewerId: string) => {
+    if (viewerId === null || viewerId === 'null') {
+      setOpen(true);
+      return;
+    }
+    const res = await copyPlaylist({
+      variables: {
+        id: id,
+        viewerId: viewerId
+      }
+    })
+    if (res) {
+      navigation(`/user/${viewerId}`)
+      return (<DisplaySuccess title="Copy Successful!" />);
+    }
+  }
+
+  const copyPlaylistLoadingMessage = (
+    <CircularProgress sx={{
+      color: 'inherit',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      zIndex: 1,
+    }} />
+  );
+
+  const copyPlaylistErrorMessage = (
+    <Alert variant="outlined" severity="error">
+      Unable to copy playlist!
+    </Alert>
+  );
 
   return (
     <>
-      <Typography className='playlist--title' variant="h2" sx={{ py: 1 }}>
-        {playlist.name}
-      </Typography>
-
+      {open && (
+        <Snackbar
+          open={open}
+          autoHideDuration={5000}
+          onClose={handleClose}
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        >
+          <Alert variant="filled" severity="error" onClose={handleClose}>Please Login or Signup to Copy!</Alert>
+        </Snackbar>
+      )}
+      <Box className="title-button--section">
+        <Typography className='playlist--title' variant="h2" sx={{ py: 1 }}>
+          {playlist.name}
+        </Typography>
+        {CopyPlaylistLoading ? copyPlaylistLoadingMessage : (
+          playlist.creator === viewer?.id ? (<Chip variant='filled' label="Your Content" />) : (
+            <Tooltip title="Copy playlist!">
+              <Button onClick={() => handleCopy(`${playlist.id}`, `${viewer?.id}`)}>
+                <ContentCopyIcon />
+              </Button>
+            </Tooltip>
+          )
+        )}
+        {CopyPlaylistError ? copyPlaylistErrorMessage : null}
+      </Box>
       <Grid container className='playlistcard--grid'>
         <Timeline position="left" className='playist--grid__timeline'>
           {playlist?.plan?.map((item, id) => (
@@ -101,7 +192,6 @@ export const PlaylistCard = ({ playlist }: Props) => {
             }
 
             if (iter?.__typename === "Article") {
-              console.log("ITER", iter);
               return (
                 <ArticlePlayer article={iter} key={index} />
               )
