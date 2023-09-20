@@ -45,7 +45,7 @@ export const PublicPlaylistCard = ({ id, name, plan, creator, viewer }: Props) =
   }
 
   const handleCopy = async (id: string, viewerId: string) => {
-    if (viewerId === 'null' || viewerId === null) {
+    if (viewerId === 'null' || viewerId === null || viewerId === undefined || viewerId === "undefined" || viewerId === creator) {
       setOpen(true);
       return;
     }
