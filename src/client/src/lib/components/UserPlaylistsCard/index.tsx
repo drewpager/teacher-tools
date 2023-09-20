@@ -8,6 +8,7 @@ import { DisplaySuccess } from '../../utils';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import theme from '../../../theme';
+import './userPlaylistsCard.scss';
 
 interface Props {
   playlist: {
@@ -90,7 +91,7 @@ export const UserPlaylistsCard = ({ playlist }: Props) => {
   return (
     <Grid item lg={4} md={6} sm={12} xs={12} key={playlist.id}>
       <ListItem key={playlist.id}>
-        <Card sx={{ width: "90vw" }}>
+        <Card className="user-playlists--card">
           <CardContent>
             <Link to={`/playlist/${playlist.id}`} style={{ textDecoration: "none" }}>
               <Typography variant='h4' style={{ color: "#000" }}>
@@ -123,7 +124,7 @@ export const UserPlaylistsCard = ({ playlist }: Props) => {
                     </DialogContent>
                     <DialogActions>
                       <Button onClick={handleClose}>Cancel</Button>
-                      <Button onClick={() => handleDelete(playlist.id)} autoFocus>
+                      <Button onClick={() => { handleDelete(playlist.id); handleClose() }} autoFocus>
                         Delete Lesson Plan
                       </Button>
                     </DialogActions>

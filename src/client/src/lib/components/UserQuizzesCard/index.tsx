@@ -8,6 +8,7 @@ import { DisplaySuccess } from '../../utils';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import theme from '../../../theme';
+import './userQuizzesCard.scss';
 
 interface Props {
   quiz: {
@@ -68,7 +69,7 @@ export const UserQuizzesCard = ({ quiz }: Props) => {
   return (
     <Grid item lg={4} md={6} sm={12} xs={12} key={quiz.id}>
       <ListItem key={quiz.id}>
-        <Card sx={{ width: "90vw" }}>
+        <Card className='user-quiz--card'>
           <CardContent>
             <Link to={`/quiz/${quiz.id}`} style={{ textDecoration: "none" }}>
               <Typography variant='h4' style={{ color: "#000" }}>
@@ -98,7 +99,7 @@ export const UserQuizzesCard = ({ quiz }: Props) => {
                     </DialogContent>
                     <DialogActions>
                       <Button onClick={handleClose}>Cancel</Button>
-                      <Button onClick={() => handleDelete(quiz.id)} autoFocus>
+                      <Button onClick={() => { handleDelete(quiz.id); handleClose() }} autoFocus>
                         Delete Quiz
                       </Button>
                     </DialogActions>
