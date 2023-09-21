@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Card, CardContent, ListItem, Typography, Grid, Button, CircularProgress, Alert, Tooltip, Snackbar, Chip } from '@mui/material';
+import { Box, Card, CardContent, ListItem, Typography, Grid, Button, CircularProgress, Alert, Tooltip, Snackbar, Chip, Avatar } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
-import { LessonPlanUnion, Viewer } from '../../../graphql/generated';
+import { LessonPlanUnion, Viewer, useUserQuery } from '../../../graphql/generated';
 import { useMutation } from '@apollo/client';
 import { gql } from 'graphql-tag';
 import { DisplayError, DisplaySuccess } from '../../utils';
@@ -40,12 +40,29 @@ export const PublicPlaylistCard = ({ id, name, plan, creator, viewer }: Props) =
   const [copyPlaylist, { loading: CopyPlaylistLoading, error: CopyPlaylistError }] = useMutation<CopyPlaylistData, CopyPlaylistVariables>(COPY_PLAYLIST);
   const [open, setOpen] = useState<boolean>(false);
 
+  const { data: userData, loading: userLoading, error: userError } = useUserQuery({
+    variables: {
+      id: `${creator}`,
+      playlistsPage: 1,
+      lessonsPage: 1,
+      quizzesPage: 1,
+      articlesPage: 1,
+      limit: 1
+    }
+  })
+
+  if (userLoading) return (<CircularProgress />);
+  if (userError) return (<DisplayError title={userError.message} />)
+
+  const image = userData?.user?.avatar;
+  const userName = userData?.user?.name;
+
   const handleClose = () => {
     setOpen(false);
   }
 
   const handleCopy = async (id: string, viewerId: string) => {
-    if (viewerId === 'null' || viewerId === null || viewerId === undefined || viewerId === "undefined" || viewerId === creator) {
+    if (viewerId === 'null' || viewerId === null || viewerId === undefined || viewerId === "undefined") {
       setOpen(true);
       return;
     }
@@ -90,27 +107,32 @@ export const PublicPlaylistCard = ({ id, name, plan, creator, viewer }: Props) =
                 {plan.length} {plan.length === 1 ? " Item" : " Items"}
               </Typography>
             </Link>
-            {CopyPlaylistLoading ? copyPlaylistLoadingMessage : (
-              creator === viewer?.id ? (<Chip variant='filled' label="Your Content" />) : (
-                <Tooltip title="Copy playlist!">
-                  <Button onClick={() => handleCopy(`${id}`, `${viewer?.id}`)}>
-                    <ContentCopyIcon />
-                  </Button>
-                </Tooltip>
-              )
-            )}
-            {CopyPlaylistError ? copyPlaylistErrorMessage : null}
-            <Snackbar
-              anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-              autoHideDuration={6000}
-              open={open}
-              onClose={handleClose}
-              key={id}
-            >
-              <Alert variant="filled" severity="error" sx={{ width: '100%' }}>
-                Please sign up or log in to copy a playlist!
-              </Alert>
-            </Snackbar>
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Tooltip title={userName}>
+                <Avatar alt="creator headshot" src={image} sx={{ marginRight: "0.5rem" }} />
+              </Tooltip>
+              {CopyPlaylistLoading ? copyPlaylistLoadingMessage : (
+                creator === viewer?.id ? (<Chip variant='filled' label="Your Content" />) : (
+                  <Tooltip title="Copy playlist!">
+                    <Button onClick={() => handleCopy(`${id}`, `${viewer?.id}`)}>
+                      <ContentCopyIcon />
+                    </Button>
+                  </Tooltip>
+                )
+              )}
+              {CopyPlaylistError ? copyPlaylistErrorMessage : null}
+              <Snackbar
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                autoHideDuration={6000}
+                open={open}
+                onClose={handleClose}
+                key={id}
+              >
+                <Alert variant="filled" severity="error" sx={{ width: '100%' }}>
+                  Please sign up or log in to copy a playlist!
+                </Alert>
+              </Snackbar>
+            </Box>
           </CardContent>
         </Card>
       </ListItem>

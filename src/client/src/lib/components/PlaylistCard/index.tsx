@@ -35,6 +35,7 @@ import { useNavigate } from 'react-router-dom';
 import { gql } from 'graphql-tag';
 import { DisplaySuccess } from '../../utils';
 import { useMutation } from '@apollo/client';
+import { useParams } from 'react-router-dom';
 
 interface Props {
   playlist: Playlist
@@ -64,10 +65,12 @@ interface CopyPlaylistVariables {
 export const PlaylistCard = ({ playlist, viewer }: Props) => {
   // const [video, setVideo] = useState<string>()
   const [open, setOpen] = useState<boolean>(false);
+  const [userError, setUserError] = useState<string>("");
   const navigation = useNavigate();
   const [itemName, setItemName] = useState<LessonPlanUnion>(playlist && playlist.plan ? { ...playlist.plan[0] } : {})
   const [active, setActive] = useState<string>(playlist && playlist.plan ? `${playlist?.plan[0]?.id}` : `1`)
   const [copyPlaylist, { loading: CopyPlaylistLoading, error: CopyPlaylistError }] = useMutation<CopyPlaylistData, CopyPlaylistVariables>(COPY_PLAYLIST);
+  const params = useParams();
 
   const handleChange = ({ ...item }: LessonPlanUnion) => {
     setItemName(item)
@@ -79,10 +82,12 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
   }
 
   const handleCopy = async (id: string, viewerId: string) => {
-    if (viewerId === null || viewerId === 'null') {
+    if (viewerId === 'null' || viewerId === null || viewerId === undefined || viewerId === "undefined") {
+      setUserError("Please Login or Signup to Copy!");
       setOpen(true);
       return;
     }
+
     const res = await copyPlaylist({
       variables: {
         id: id,
@@ -120,7 +125,7 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
           onClose={handleClose}
           anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         >
-          <Alert variant="filled" severity="error" onClose={handleClose}>Please Login or Signup to Copy!</Alert>
+          <Alert variant="filled" severity="error" onClose={handleClose}>{userError}</Alert>
         </Snackbar>
       )}
       <Box className="title-button--section">
@@ -128,10 +133,10 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
           {playlist.name}
         </Typography>
         {CopyPlaylistLoading ? copyPlaylistLoadingMessage : (
-          playlist.creator === viewer?.id ? (<Chip variant='filled' label="Your Content" />) : (
+          (playlist.creator === viewer?.id) ? (<Chip variant='filled' label="Your Content" />) : (
             <Tooltip title="Copy playlist!">
               <Button onClick={() => handleCopy(`${playlist.id}`, `${viewer?.id}`)}>
-                <ContentCopyIcon />
+                {(params.id === undefined) ? <></> : <ContentCopyIcon />}
               </Button>
             </Tooltip>
           )
