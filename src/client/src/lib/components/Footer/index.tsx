@@ -75,14 +75,14 @@ export const Footer = ({ viewer }: Props) => {
           <Typography variant="h5" className='footer--text'>
             Popular Categories
           </Typography>
-          <Link to="/" style={{ textDecoration: "none" }}>
-            <Typography variant='body1' className='footer--link-text'>World War II <Chip label="Coming Soon!" size="small" sx={{ textDecoration: "none", backgroundColor: "#dda15e" }} /></Typography>
+          <Link to="/catalog#world%20war%20two" style={{ textDecoration: "none" }}>
+            <Typography variant='body1' className='footer--link-text'>World War II</Typography>
           </Link>
-          <Link to="/" style={{ textDecoration: "none" }}>
-            <Typography variant='body1' className='footer--link-text'>American History <Chip label="Coming Soon!" size="small" sx={{ textDecoration: "none", backgroundColor: "#dda15e" }} /></Typography>
+          <Link to="/catalog#biography" style={{ textDecoration: "none" }}>
+            <Typography variant='body1' className='footer--link-text'>Biography</Typography>
           </Link>
-          <Link to="/" style={{ textDecoration: "none" }}>
-            <Typography variant='body1' className='footer--link-text'>World History <Chip label="Coming Soon!" size="small" sx={{ textDecoration: "none", backgroundColor: "#dda15e" }} /></Typography>
+          <Link to="/catalog#civil%20rights%20movement" style={{ textDecoration: "none" }}>
+            <Typography variant='body1' className='footer--link-text'>Civil Rights Movement</Typography>
           </Link>
         </Grid>
         <Grid item xs={12} md={6} lg={3}>
