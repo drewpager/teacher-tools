@@ -87,6 +87,7 @@ export const USER = gql`
               startDate
               endDate
               creator
+              public
             }
             ... on Quiz {
               id
@@ -116,6 +117,7 @@ export const USER = gql`
           startDate
           endDate
           creator
+          public
         }
         totalCount
       }

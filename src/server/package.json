@@ -38,6 +38,7 @@
     "build": "tsc -p ./",
     "seed": "ts-node temp/seed.ts",
     "unseed": "ts-node temp/unseed.ts",
+    "upsert": "ts-node temp/upsert.ts",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

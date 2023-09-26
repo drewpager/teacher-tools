@@ -14,6 +14,7 @@ export const ALL_LESSONS = gql`
         startDate
         endDate
         creator
+        public
       }
     }
   }

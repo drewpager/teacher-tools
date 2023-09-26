@@ -93,12 +93,12 @@ export const Catalog = ({ viewer }: Props) => {
     e.preventDefault();
     setSearchInput(e.target.value)
 
-    if (searchInput.length > 0) {
-      setFilteredLesson(datum?.allLessons.result.filter((lesson) => lesson?.title?.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1));
+    if (searchInput !== "") {
+      setFilteredLesson(newDatum?.filter((lesson) => lesson?.title?.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1));
       setSearchError(false);
     }
 
-    if (searchInput.length > 0 && filteredLesson.length === 0) {
+    if (searchInput !== "" && !filteredLesson.length) {
       setSearchError(true);
     }
 
@@ -181,7 +181,7 @@ export const Catalog = ({ viewer }: Props) => {
 
 
   // Isolate the main and any secondary categories
-  const categor = datum?.allLessons.result
+  const categor = datum?.allLessons.result;
   const mainCategoryArray: any[] = [];
   const secondaryCategory: any = [{}];
   const allCategories: any[] = [];
@@ -200,11 +200,12 @@ export const Catalog = ({ viewer }: Props) => {
   const combinedCategories = Array.from(secondaryCategories);
   const selectedSecondary = allCategories.filter((b) => b.includes(selected[0]));
 
+  let newDatum = datum?.allLessons.result.filter((d) => d.public)
   // return <CatalogSkeleton />
   return (
     <Box maxWidth="100vw" overflow-x="hidden">
       <Helmet>
-        <title>{`Catalog of ${datum?.allLessons.total} Short History Documentaries | Plato's Peach`}</title>
+        <title>{`Catalog of ${newDatum?.length} Short History Documentaries | Plato's Peach`}</title>
         <meta name="description" content={`${datum?.allLessons.total} Short Documentaries for Teachers to Leverage Trusted Content and Engage Students While Adhering to Widely Accepted Curriculum Standards.`} />
       </Helmet>
       <FeedbackModal />
@@ -247,7 +248,7 @@ export const Catalog = ({ viewer }: Props) => {
           <Box className="catalogBackground" sx={{ marginBottom: "80px" }} id={`${selected[0]}`}>
             <Box className="catalogHeader--container">
               <h1 className="catalogTitle">Documentary Catalog
-                {" "}<Chip label={datum?.allLessons.total} color="primary" size="medium" />
+                {" "}<Chip label={newDatum?.length} color="primary" size="medium" />
               </h1><TextField
                 variant='outlined'
                 // id="catalog-search"
@@ -283,27 +284,27 @@ export const Catalog = ({ viewer }: Props) => {
                 </>
               </div>
             )}
-            {selected && datum && (
+            {selected && newDatum && (
               <div className="catalog--item" id={`${selected[0]}`}>
                 {view === 'grid' ? (
                   <>
-                    <CatalogItem viewer={`${viewer.id}`} name={`${selected[0]}`} category={datum.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0])).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={`${selected[0]}`} bookmarks={userBookmarks} />
+                    <CatalogItem viewer={`${viewer.id}`} name={`${selected[0]}`} category={newDatum.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0])).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={`${selected[0]}`} bookmarks={userBookmarks} />
                     <Alert variant="outlined" severity="info" style={{ marginTop: "0.875rem" }}>Not seeing what you're looking for? It might be in another category or try using the search bar above!</Alert>
                   </>
                 ) : (
                   <>
-                    <CatalogList viewer={`${viewer.id}`} name={`${selected[0]}`} category={datum.allLessons.result.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0])).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={`${selected[0]}`} bookmarks={userBookmarks} />
+                    <CatalogList viewer={`${viewer.id}`} name={`${selected[0]}`} category={newDatum.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0])).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={`${selected[0]}`} bookmarks={userBookmarks} />
                     <Alert variant="outlined" severity="info">Not seeing what you're looking for? It might be in another category or try using the search bar above!</Alert>
                   </>
                 )}
               </div>
             )}
-            {datum && categories.map((cater) => (cater.name !== selected[0]) && (
+            {newDatum && categories.map((cater) => (cater.name !== selected[0]) && (
               <div className="catalog--item" id={`${cater.name}`}>
-                {view === 'grid' ? (
-                  <CatalogItem viewer={`${viewer.id}`} name={cater.name} category={datum.allLessons.result.filter((b) => b.category?.includes(cater.name)).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={cater.name} bookmarks={userBookmarks} />
-                ) : (
-                  <CatalogList viewer={`${viewer.id}`} name={cater.name} category={datum.allLessons.result.filter((b) => b.category?.includes(cater.name)).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={cater.name} bookmarks={userBookmarks} />
+                {view === 'grid' && newDatum ? (
+                  <CatalogItem viewer={`${viewer.id}`} name={cater.name} category={newDatum.filter((b) => b.category?.includes(cater.name)).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={cater.name} bookmarks={userBookmarks} />
+                ) : newDatum && (
+                  <CatalogList viewer={`${viewer.id}`} name={cater.name} category={newDatum.filter((b) => b.category?.includes(cater.name)).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={cater.name} bookmarks={userBookmarks} />
                 )}
 
               </div>

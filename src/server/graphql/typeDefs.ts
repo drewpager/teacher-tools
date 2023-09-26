@@ -54,6 +54,7 @@ export const typeDefs = gql`
     startDate: DateScalar
     endDate: DateScalar
     creator: String
+    public: Boolean
   }
 
   type AnswerOptions {
@@ -209,6 +210,7 @@ export const typeDefs = gql`
     startDate: DateScalar!
     endDate: DateScalar!
     creator: String!
+    public: Boolean
   }
 
   input CreateArticleInput {
@@ -291,6 +293,7 @@ export const typeDefs = gql`
     startDate: DateScalar
     endDate: DateScalar
     creator: String
+    public: Boolean
   }
 
   input Answers {

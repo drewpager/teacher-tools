@@ -28,6 +28,7 @@ export interface Lesson {
   startDate: string;
   endDate: string;
   creator: string;
+  public: boolean;
 }
 
 export interface Answers {

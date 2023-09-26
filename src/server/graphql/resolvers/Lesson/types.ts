@@ -12,6 +12,7 @@ export interface CreateLessonInput {
   startDate: string;
   endDate: string;
   creator: string;
+  public: boolean;
 }
 
 export interface CreateLessonArgs {

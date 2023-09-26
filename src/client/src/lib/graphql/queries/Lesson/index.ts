@@ -1,4 +1,4 @@
-import { gql } from 'graphql-tag';
+import { gql } from "graphql-tag";
 
 export const LESSON = gql`
   query Lesson($id: ID!) {
@@ -11,6 +11,8 @@ export const LESSON = gql`
       image
       startDate
       endDate
+      creator
+      public
     }
   }
 `;

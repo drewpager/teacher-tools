@@ -37,7 +37,7 @@ export const VideoPlayer = ({ url }: props) => {
   ];
 
   return (
-    <Box className='tt-video-wrapper' >
+    <Box className='tt-video-wrapper'>
       <AdvancedVideo
         cldVid={cldUrl}
         sources={sources}
@@ -46,8 +46,7 @@ export const VideoPlayer = ({ url }: props) => {
         preload='metadata'
         autoPlay
         plugins={[lazyload(), responsive({ steps: 200 }), /* placeholder({ mode: 'blur' }) */]}
-        data-test-id="video-player"
-      />
+        data-test-id="video-player" />
     </Box>
   )
 };
