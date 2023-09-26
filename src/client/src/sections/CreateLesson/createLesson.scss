@@ -13,7 +13,13 @@
     }
   }
 }
+
 .MuiBox-root {
+  &.button--slider {
+    display: flex;
+    align-content: center;
+  }
+
   &.createLesson--page {
     width: 100vw;
     margin: 5rem 2rem;
@@ -25,9 +31,11 @@
       margin: 5rem 1rem;
     }
   }
+
   &.createLesson--form {
     grid-column: 1 / -1
   }
+
   &.createLesson--error {
     margin-top: 5rem;
   }
