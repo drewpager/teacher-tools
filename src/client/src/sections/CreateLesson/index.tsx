@@ -522,7 +522,6 @@ export const CreateLesson = ({ viewer }: Props) => {
                       <Typography variant="body1" color={!locked ? "error" : "success"}>{!locked ? "Private" : "Public"}</Typography>
                     </Tooltip>
                   </Box>
-                  <br />
                   {errors ? setError(true) : setError(false)}
                   {console.log(errors)}
                   <Button sx={{ marginTop: 2 }} disabled={!values.title || !values.endDate || isSubmitting} variant='contained' color='primary' type="submit">Submit</Button>

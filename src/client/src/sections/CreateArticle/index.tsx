@@ -148,7 +148,7 @@ export const CreateArticle = ({ viewer }: Props) => {
                 editorState={editorState}
                 onEditorStateChange={setEditorState}
               />
-              <Box className="button--slider">
+              {/* <Box className="button--slider">
                 <Button variant="contained" type='submit' disabled={!title}>Create</Button>
                 <Tooltip title={locked ? "Private" : "Public"}>
                   <LockSwitch
@@ -157,7 +157,16 @@ export const CreateArticle = ({ viewer }: Props) => {
                   />
                 </Tooltip>
                 <Typography variant="body1" color={locked ? "error" : "success"}>{locked ? "Private" : "Public"}</Typography>
+              </Box> */}
+              <Box className="button--slider">
+                <Tooltip title={viewer.paymentId !== null ? "Make Private/Public" : "Public Content Restricted to Paying Users"}>
+                  <LockSwitch checked={!locked} onChange={() => setLocked(!locked)} disabled={viewer.paymentId === null} />
+                </Tooltip>
+                <Tooltip title={viewer.paymentId !== null ? "Make Private/Public" : "Public Content Restricted to Paying Users"}>
+                  <Typography variant="body1" color={!locked ? "error" : "success"}>{!locked ? "Private" : "Public"}</Typography>
+                </Tooltip>
               </Box>
+              <Button sx={{ marginTop: 2 }} variant="contained" type='submit' disabled={!title}>Create</Button>
             </form>
           </Box>
         </Grid>
