@@ -36,7 +36,7 @@ export const Playlists = ({ viewer }: Props) => {
           // <li key={playlist.id}>
           //   <a href={`/playlist/${playlist.id}`}>{playlist.name}</a>
           // </li>
-          <PublicPlaylistCard {...playlist} viewer={viewer} />
+          (playlist.public || playlist.public === null) && <PublicPlaylistCard {...playlist} viewer={viewer} />
         ))}
       </Box>
       <Footer viewer={viewer} />

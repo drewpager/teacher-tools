@@ -183,10 +183,10 @@ export const playlistResolvers = {
         if (playlist) {
           const insertResult = await db.playlists.insertOne({
             _id: new ObjectId(newId),
+            public: false,
             creator: viewerId,
             name: playlist.name,
             plan: [...playlist.plan],
-            public: false,
           });
 
           const insertedResult = insertResult
