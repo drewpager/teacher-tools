@@ -39,6 +39,7 @@ export const USER = gql`
           id
           name
           creator
+          public
           plan {
             __typename
             ... on Article {

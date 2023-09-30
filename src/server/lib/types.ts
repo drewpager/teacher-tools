@@ -53,6 +53,7 @@ export interface Playlist {
   name: string;
   plan: LessonPlan[];
   creator: string;
+  public: boolean;
   authorized?: boolean; // https://www.newline.co/courses/tinyhouse-react-masterclass-part-2/building-the-listing-resolvers
 }
 

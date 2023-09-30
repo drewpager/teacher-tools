@@ -124,6 +124,7 @@ export const playlistResolvers = {
             $set: {
               name: input.name,
               plan: input.plan,
+              public: input.public,
             },
           }
         );
@@ -145,6 +146,7 @@ export const playlistResolvers = {
           name: upsertedResult.name,
           plan: upsertedResult.plan,
           creator: upsertedResult.creator,
+          public: upsertedResult.public,
           authorized: true,
         };
       } catch (e) {
@@ -184,6 +186,7 @@ export const playlistResolvers = {
             creator: viewerId,
             name: playlist.name,
             plan: [...playlist.plan],
+            public: false,
           });
 
           const insertedResult = insertResult

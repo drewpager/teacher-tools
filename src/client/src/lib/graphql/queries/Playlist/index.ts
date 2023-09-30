@@ -6,6 +6,7 @@ export const PLAYLIST = gql`
       id
       name
       creator
+      public
       plan {
         ... on Lesson {
           id
