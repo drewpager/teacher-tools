@@ -15,9 +15,10 @@
 }
 
 .MuiBox-root {
-  &.button--slider {
+  &.button--slider-lesson {
     display: flex;
     align-content: center;
+    margin: 0.5rem auto;
   }
 
   &.createLesson--page {

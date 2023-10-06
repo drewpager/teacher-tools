@@ -514,7 +514,7 @@ export const CreateLesson = ({ viewer }: Props) => {
                     required
                     error={touched.endDate && errors.endDate ? true : false}
                   /><br />
-                  <Box className="button--slider">
+                  <Box className="button--slider-lesson">
                     <Tooltip title={viewer.paymentId !== null ? "Make Private/Public" : "Public Content Restricted to Paying Users"}>
                       <LockSwitch checked={!locked} onChange={() => setLocked(!locked)} disabled={viewer.paymentId === null} />
                     </Tooltip>
