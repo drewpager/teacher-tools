@@ -107,8 +107,9 @@
     // sticky sidebar 
     @media (min-width: 1300px) {
         position: sticky;
-        top: 10rem;
+        top: 5rem;
         overflow-y: scroll;
+        height: 100vh;
     }
 
     @media (min-width: 900px) {
