@@ -114,8 +114,9 @@ export const CatalogList = ({ name, category, viewer, bookmarks }: props) => {
               sx={{ color: "#FAF9F6" }}
               disableRipple
               disableFocusRipple
+              onClick={() => onBookmark(`${lesson.id}`, viewer)}
             >
-              <BookmarkAddIcon color={bookmarked[0]?.includes(`${lesson.id}`) ? "success" : "inherit"} onClick={() => onBookmark(`${lesson.id}`, viewer)} />
+              <BookmarkAddIcon color={bookmarked[0]?.includes(`${lesson.id}`) ? "success" : "inherit"} />
             </IconButton>
           </Tooltip>
         </Box>
