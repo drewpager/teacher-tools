@@ -3,7 +3,15 @@
 .MuiBox-root {
     &.title-button--section {
         display: flex;
-        align-items: first baseline;
+        align-items: flex-end;
+        margin-left: 3rem;
+        padding: 0 2rem;
+    }
+}
+
+.MuiAvatar-root {
+    &.avatar--creator {
+        border: 1px solid black;
     }
 }
 

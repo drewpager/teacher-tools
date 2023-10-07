@@ -708,7 +708,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
               </Droppable>
             </Grid>
           </DragDropContext>
-          <Box className="button--slider">
+          <Box className="button--slider-playlist">
             <Tooltip title={viewer.paymentId !== null ? "Make Private/Public" : "Public Content Restricted to Paying Users"}>
               <LockSwitch checked={!locked} onChange={handleLock} disabled={viewer.paymentId === null} />
             </Tooltip>

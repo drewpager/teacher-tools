@@ -12,7 +12,8 @@ import {
   CircularProgress,
   Alert,
   Box,
-  Snackbar
+  Snackbar,
+  Avatar
 } from '@mui/material';
 import Timeline from '@mui/lab/Timeline';
 import {
@@ -27,7 +28,7 @@ import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import QuizIcon from '@mui/icons-material/Quiz';
 import ArticleIcon from '@mui/icons-material/Article';
-import { Playlist, Lesson, LessonPlanUnion, Viewer } from '../../../graphql/generated';
+import { Playlist, Lesson, LessonPlanUnion, Viewer, useUserQuery } from '../../../graphql/generated';
 import { VideoPlayer, QuizPlayer, ArticlePlayer } from '../index';
 import './playlistcard.scss';
 import { formatDate } from '../../utils';
@@ -71,6 +72,24 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
   const [active, setActive] = useState<string>(playlist && playlist.plan ? `${playlist?.plan[0]?.id}` : `1`)
   const [copyPlaylist, { loading: CopyPlaylistLoading, error: CopyPlaylistError }] = useMutation<CopyPlaylistData, CopyPlaylistVariables>(COPY_PLAYLIST);
   const params = useParams();
+
+  const { data, loading, error } = useUserQuery({
+    variables: {
+      id: `${playlist?.creator}`,
+      playlistsPage: 1,
+      lessonsPage: 1,
+      articlesPage: 1,
+      quizzesPage: 1,
+      limit: 1
+    }
+  });
+
+  if (loading) return (<CircularProgress />);
+
+  if (error) return (<Alert severity="error">{error.message}</Alert>)
+
+  let userImage = data?.user.avatar;
+  let userName = data?.user.name;
 
   const handleChange = ({ ...item }: LessonPlanUnion) => {
     setItemName(item)
@@ -129,10 +148,13 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
           <Alert variant="filled" severity="error" onClose={handleClose}>{userError}</Alert>
         </Snackbar>
       )}
-      <Box className="title-button--section">
         <Typography className='playlist--title' variant="h2" sx={{ py: 1 }}>
           {playlist.name}
         </Typography>
+        <Box className="title-button--section">
+        <Tooltip title={`Created by ${userName}`}>
+          <Avatar alt="User Image" src={userImage} sx={{ mr: 2 }} className="avatar--creator" />
+        </Tooltip>
         {CopyPlaylistLoading ? copyPlaylistLoadingMessage : (
           (playlist.creator === viewer?.id) ? (<Chip variant='filled' label="Your Content" />) : (
             <Tooltip title="Copy playlist!">
