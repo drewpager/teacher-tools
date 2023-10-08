@@ -148,10 +148,10 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
           <Alert variant="filled" severity="error" onClose={handleClose}>{userError}</Alert>
         </Snackbar>
       )}
-        <Typography className='playlist--title' variant="h2" sx={{ py: 1 }}>
+      <Box className="title-button--section">
+        <Typography className='playlist--title' variant="h2">
           {playlist.name}
         </Typography>
-        <Box className="title-button--section">
         <Tooltip title={`Created by ${userName}`}>
           <Avatar alt="User Image" src={userImage} sx={{ mr: 2 }} className="avatar--creator" />
         </Tooltip>

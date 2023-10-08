@@ -3,9 +3,10 @@
 .MuiBox-root {
     &.title-button--section {
         display: flex;
-        align-items: flex-end;
+        align-items: center;
         margin-left: 3rem;
-        padding: 0 2rem;
+        padding-top: 5rem;
+        padding-left: 2rem;
     }
 }
 
@@ -49,7 +50,7 @@
 
 .MuiTypography-root {
     &.playlist--title {
-        margin-top: 5rem;
+        // margin-top: 5rem;
         margin-left: 3rem;
         padding: 1rem 2rem;
         font-size: clamp(2rem, 2.5vw, 2.5rem);
