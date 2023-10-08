@@ -1,15 +1,21 @@
-import React from 'react';
-import { Box, Grid } from '@mui/material';
-import { Viewer, useAllPlaylistsQuery } from '../../graphql/generated';
+import React, { useState, useRef, ChangeEvent } from 'react';
+import { Box, Grid, TextField, InputAdornment } from '@mui/material';
+import { Close } from '@mui/icons-material';
+import { Playlist, Viewer, useAllPlaylistsQuery } from '../../graphql/generated';
 import { PublicPlaylistCard } from '../../lib/components/PublicPlaylistCard';
 import { Footer } from '../../lib/components';
 import { PlaylistsSkeleton } from './playlistsSkeleton';
+import './playlistsCatalog.scss';
 
 type Props = {
   viewer: Viewer
 }
 
 export const Playlists = ({ viewer }: Props) => {
+  const [searchInput, setSearchInput] = useState<string>('');
+  const [searchError, setSearchError] = useState<boolean>(false);
+  const [filteredPlaylists, setFilteredPlaylists] = useState<Playlist[]>([]);
+  const inputRef = useRef<HTMLInputElement>(null);
   const { data, loading, error } = useAllPlaylistsQuery({
     variables: {
       limit: 1000,
@@ -29,12 +35,67 @@ export const Playlists = ({ viewer }: Props) => {
     return <div>No data</div>;
   }
 
+  const resetSearch = () => {
+    setSearchInput("");
+    setFilteredPlaylists([]);
+    setSearchError(false);
+  }
+
+  // Catalog Search Bar Feature
+  const inputHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    e.preventDefault();
+    setSearchInput(e.target.value)
+
+    if (searchInput !== "") {
+      // setFilteredPlaylists(data?.allplaylists.result.filter((playlist) => playlist?.plan?.find((lesson) => lesson?.title?.toLowerCase().includes(searchInput.toLowerCase()))));
+      setFilteredPlaylists(data?.allplaylists.result.filter((playlist) => playlist?.name?.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1) &&
+      data?.allplaylists.result.filter((playlist) => playlist?.plan?.find((lesson) => lesson?.title?.toLowerCase().includes(searchInput.toLowerCase()))))
+      setSearchError(false);
+    }
+
+    if (searchInput !== "" && !filteredPlaylists.length) {
+      setSearchError(true);
+    }
+
+    if (e.target.value === '') {
+      setFilteredPlaylists([]);
+      setSearchError(false);
+    }
+  }
+
   return (
-    <Box sx={{ marginTop: 15 }}>
-      <h2 style={{ marginLeft: "2rem" }}>Playlist Catalog</h2>
+    <Box>
+      <Box className="playlists--header">
+      <h2>Playlist Catalog</h2>
+      <TextField
+        variant='outlined'
+        // id="catalog-search"
+        label="Search Catalog"
+        onChange={(e) => inputHandler(e)}
+        value={`${searchInput}`}
+        ref={inputRef}
+        className="catalog--search"
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <Close onClick={resetSearch} />
+            </InputAdornment>
+          )
+        }}
+        helperText={searchError ? "No results found" : null}
+        error={searchError}
+      />
+      </Box>
       <Box>
         <Grid container>
-          {data.allplaylists.result.map((playlist) => (
+          {/* {data.allplaylists.result.map((playlist) => (
+            (playlist.public || playlist.public === null) && 
+              <PublicPlaylistCard {...playlist} viewer={viewer} />
+            ))} */}
+            {filteredPlaylists.length ? filteredPlaylists.map((playlist) => (
+              (playlist.public || playlist.public === null) && 
+                <PublicPlaylistCard {...playlist} viewer={viewer} />
+              )) : data.allplaylists.result.map((playlist) => (
             (playlist.public || playlist.public === null) && 
               <PublicPlaylistCard {...playlist} viewer={viewer} />
             ))}
