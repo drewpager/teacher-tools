@@ -1,8 +1,9 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { Viewer, useAllPlaylistsQuery } from '../../graphql/generated';
 import { PublicPlaylistCard } from '../../lib/components/PublicPlaylistCard';
 import { Footer } from '../../lib/components';
+import { PlaylistsSkeleton } from './playlistsSkeleton';
 
 type Props = {
   viewer: Viewer
@@ -17,7 +18,7 @@ export const Playlists = ({ viewer }: Props) => {
   });
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (<PlaylistsSkeleton />);
   }
 
   if (error) {
@@ -30,14 +31,14 @@ export const Playlists = ({ viewer }: Props) => {
 
   return (
     <Box sx={{ marginTop: 15 }}>
-      <h2>Playlist Catalog</h2>
+      <h2 style={{ marginLeft: "2rem" }}>Playlist Catalog</h2>
       <Box>
-        {data.allplaylists.result.map((playlist) => (
-          // <li key={playlist.id}>
-          //   <a href={`/playlist/${playlist.id}`}>{playlist.name}</a>
-          // </li>
-          (playlist.public || playlist.public === null) && <PublicPlaylistCard {...playlist} viewer={viewer} />
-        ))}
+        <Grid container>
+          {data.allplaylists.result.map((playlist) => (
+            (playlist.public || playlist.public === null) && 
+              <PublicPlaylistCard {...playlist} viewer={viewer} />
+            ))}
+        </Grid>
       </Box>
       <Footer viewer={viewer} />
     </Box>

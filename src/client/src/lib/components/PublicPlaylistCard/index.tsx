@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Card, CardContent, ListItem, Typography, Grid, Button, CircularProgress, Alert, Tooltip, Snackbar, Chip, Avatar } from '@mui/material';
+import { Box, Card, CardContent, ListItem, Typography, Grid, Button, CircularProgress, Alert, Tooltip, Snackbar, Chip, Avatar, Skeleton } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { LessonPlanUnion, Viewer, useUserQuery } from '../../../graphql/generated';
 import { useMutation } from '@apollo/client';
@@ -51,7 +51,11 @@ export const PublicPlaylistCard = ({ id, name, plan, creator, viewer }: Props) =
     }
   })
 
-  if (userLoading) return (<CircularProgress />);
+  if (userLoading) return (
+    <Grid item lg={4} md={6} sm={12} xs={12} key={id}>
+      <Skeleton variant="rectangular" width="auto" height="auto" />
+    </Grid>
+  );
   if (userError) return (<DisplayError title={userError.message} />)
 
   const image = userData?.user?.avatar;
