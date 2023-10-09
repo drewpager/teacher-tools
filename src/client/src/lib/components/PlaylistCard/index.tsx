@@ -13,7 +13,7 @@ import {
   Alert,
   Box,
   Snackbar,
-  Avatar
+  Avatar,
 } from '@mui/material';
 import Timeline from '@mui/lab/Timeline';
 import {
@@ -26,6 +26,7 @@ import {
 } from '@mui/lab';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import SkipNextIcon from '@mui/icons-material/SkipNext';
 import QuizIcon from '@mui/icons-material/Quiz';
 import ArticleIcon from '@mui/icons-material/Article';
 import { Playlist, Lesson, LessonPlanUnion, Viewer, useUserQuery } from '../../../graphql/generated';
@@ -137,6 +138,23 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
       Unable to copy playlist!
     </Alert>
   );
+  const handleNextButton = (active: string) => {
+    // Create a map of ids to index and iterate through
+    let ids: string[] = [];
+    playlist.plan?.map((item) => ids.push(`${item?.id}`));
+    let index = ids.indexOf(active);
+
+    // when next button clicked setActive to the indexed id
+    if (index === ids.length - 2) {
+      setActive(ids[-1]);
+    }
+    setActive(ids[index + 1]);
+
+    // Scroll to top of page when next button clicked if on playlist page
+    if (params.id !== undefined) {
+      window.scrollTo(0, 0);
+    }
+  }
 
   return (
     <>
@@ -230,6 +248,7 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
               <h2>Failed to load resource</h2>
             )
           })}
+          <Button onClick={() => handleNextButton(active)} variant="outlined">Next <SkipNextIcon /></Button>
         </Grid>
       </Grid>
     </>

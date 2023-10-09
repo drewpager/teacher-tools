@@ -7,6 +7,12 @@
         margin-left: 3rem;
         padding-top: 5rem;
         padding-left: 2rem;
+
+        @media (max-width: 600px) {
+            margin-left: 0;
+            padding-left: 0;
+            padding-top: 1rem;
+        }
     }
 }
 
@@ -118,7 +124,7 @@
         position: sticky;
         top: 5rem;
         overflow-y: scroll;
-        height: 100vh;
+        height: 100%;
     }
 
     @media (min-width: 900px) {
