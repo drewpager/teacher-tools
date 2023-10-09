@@ -40,7 +40,7 @@ const mount = async (app: Application) => {
   // app.get("/*", (_req, res) => res.sendFile(`${__dirname}/index.html`));
 
   app.post("/contact", async (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
 
     const contactEmail = nodemailer.createTransport({
       host: "smtp-relay.sendinblue.com",
@@ -53,10 +53,10 @@ const mount = async (app: Application) => {
 
     contactEmail.sendMail(req.body, (error: any, info: any) => {
       if (error) {
-        console.log(error);
+        // console.log(error);
         res.send("error");
       } else {
-        console.log("Email sent: " + info.response);
+        // console.log("Email sent: " + info.response);
         res.send("success");
       }
     });

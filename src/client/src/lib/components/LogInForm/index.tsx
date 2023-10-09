@@ -57,7 +57,7 @@ export const LogInForm = () => {
   })
 
   if (logInLoading) {
-    console.log("loading")
+    console.log("...")
   }
 
   if (logInError) {
