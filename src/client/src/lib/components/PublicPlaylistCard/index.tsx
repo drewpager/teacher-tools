@@ -53,7 +53,7 @@ export const PublicPlaylistCard = ({ id, name, plan, creator, viewer }: Props) =
 
   if (userLoading) return (
     <Grid item lg={4} md={6} sm={12} xs={12} key={id}>
-      <Skeleton variant="rectangular" width="auto" height="auto" />
+      <Skeleton variant="rectangular" width="100px" height="100px" />
     </Grid>
   );
   if (userError) return (<DisplayError title={userError.message} />)

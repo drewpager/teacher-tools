@@ -92,6 +92,7 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
   let userImage = data?.user.avatar;
   let userName = data?.user.name;
 
+
   const handleChange = ({ ...item }: LessonPlanUnion) => {
     setItemName(item)
     setActive(`${item.id}`)
