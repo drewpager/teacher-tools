@@ -19,6 +19,7 @@ export interface CreateQuizInput {
   title: string;
   questions: Questions[];
   creator: string;
+  public: boolean;
 }
 
 export interface CreateQuizArgs {

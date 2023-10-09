@@ -73,6 +73,7 @@ export const typeDefs = gql`
     title: String
     questions: [Questions!]!
     creator: String
+    public: Boolean
   }
 
   type Lessons {
@@ -271,6 +272,7 @@ export const typeDefs = gql`
     title: String
     questions: [QuestionInput]
     creator: String
+    public: Boolean
   }
 
   input QuestionInput {
