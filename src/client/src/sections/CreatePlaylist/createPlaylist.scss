@@ -5,8 +5,10 @@
     margin: 5rem 0;
     overflow-y: hidden;
     overflow-x: hidden;
+
     // padding-right: 2rem;
-    .createPlaylist--h1, .createPlaylist--button {
+    .createPlaylist--h1,
+    .createPlaylist--button {
       margin-left: 1rem;
 
       @media (max-width: 768px) {
@@ -16,11 +18,11 @@
       }
     }
   }
-  
+
   &.button--slider-playlist {
     margin-bottom: 0.5rem;
-    margin-top: -5rem;
-    margin-left: 0.5rem;
+    margin-top: -3rem;
+    margin-left: 1rem;
   }
 }
 
@@ -40,6 +42,7 @@
       margin: 0.25rem;
     }
   }
+
   &.createQuiz--card {
     min-height: 6rem;
     max-height: 6rem;
@@ -53,7 +56,7 @@
 
   &.lesson--card {
     background-color: library.$coral;
-    padding: 1rem; 
+    padding: 1rem;
     margin: 0.25rem -0.25rem;
     width: 95%;
     color: library.$white;
@@ -70,7 +73,7 @@
     margin-left: -1rem;
     padding: 2rem;
     overflow-y: scroll;
-    
+
     @media (max-width: 768px) {
       width: 100%;
       max-height: 50vh;
@@ -89,6 +92,6 @@
     top: 0;
     position: sticky;
     z-index: 1;
-    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   }
 }

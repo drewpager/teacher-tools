@@ -94,7 +94,9 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
   const handleChange = ({ ...item }: LessonPlanUnion) => {
     setItemName(item)
     setActive(`${item.id}`)
-    window.scrollTo(0, 0)
+    if (params.id !== undefined) {
+      window.scrollTo(0, 0);
+    }
   };
 
   function handleClose() {
