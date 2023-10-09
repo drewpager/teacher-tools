@@ -21,7 +21,7 @@ let initialArticle: Article = {
     entityMap: []
   },
   creator: '',
-  public: true
+  public: false
 }
 
 const LockSwitch = styled(Switch)(({ theme }) => ({
@@ -87,7 +87,7 @@ export const CreateArticle = ({ viewer }: Props) => {
           entityMap: [],
         },
         creator: `${viewer.id}`,
-        public: true
+        public: false
       }
     }
   })

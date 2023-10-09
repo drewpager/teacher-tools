@@ -16,6 +16,7 @@ export const ALL_QUIZZES = gql`
           answerType
         }
         creator
+        public
       }
     }
   }

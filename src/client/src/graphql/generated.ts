@@ -263,6 +263,7 @@ export type CreateLessonInput = {
 
 export type CreateQuizInput = {
   creator?: InputMaybe<Scalars['String']>;
+  public?: InputMaybe<Scalars['Boolean']>;
   questions?: InputMaybe<Array<InputMaybe<QuestionInput>>>;
   title?: InputMaybe<Scalars['String']>;
 };
@@ -608,6 +609,7 @@ export type Quiz = {
   __typename?: 'Quiz';
   creator?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['ID']>;
+  public?: Maybe<Scalars['Boolean']>;
   questions: Array<Questions>;
   title?: Maybe<Scalars['String']>;
 };
@@ -803,7 +805,7 @@ export type QuizQueryVariables = Exact<{
 }>;
 
 
-export type QuizQuery = { __typename?: 'Query', quiz: { __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> } };
+export type QuizQuery = { __typename?: 'Query', quiz: { __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, public?: boolean | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> } };
 
 export type AllQuizzesQueryVariables = Exact<{
   limit: Scalars['Int'];
@@ -811,7 +813,7 @@ export type AllQuizzesQueryVariables = Exact<{
 }>;
 
 
-export type AllQuizzesQuery = { __typename?: 'Query', allquizzes: { __typename?: 'Quizzes', total: number, result: Array<{ __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> }> } };
+export type AllQuizzesQuery = { __typename?: 'Query', allquizzes: { __typename?: 'Quizzes', total: number, result: Array<{ __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, public?: boolean | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> }> } };
 
 export type UserQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -1620,6 +1622,7 @@ export const QuizDocument = gql`
       answerType
     }
     creator
+    public
   }
 }
     `;
@@ -1667,6 +1670,7 @@ export const AllQuizzesDocument = gql`
         answerType
       }
       creator
+      public
     }
   }
 }

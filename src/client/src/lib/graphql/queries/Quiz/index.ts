@@ -14,6 +14,7 @@ export const QUIZ = gql`
         answerType
       }
       creator
+      public
     }
   }
 `;
