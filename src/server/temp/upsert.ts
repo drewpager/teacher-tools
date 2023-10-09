@@ -10,7 +10,7 @@ const upsert = async () => {
 
     console.log("running upsert");
 
-    const updated = db.playlists.updateMany(
+    const updated = db.quizzes.updateMany(
       { creator: "112129642735396482304" },
       { $set: { public: true } }
     );
