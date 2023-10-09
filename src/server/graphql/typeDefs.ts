@@ -313,6 +313,7 @@ export const typeDefs = gql`
     title: String
     questions: [QuizQuestions]
     creator: String
+    public: Boolean
   }
 
   input Plan {

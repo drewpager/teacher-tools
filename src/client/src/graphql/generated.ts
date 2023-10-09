@@ -332,6 +332,7 @@ export type FullLessonInput = {
 export type FullLessonQuiz = {
   creator?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['ID']>;
+  public?: InputMaybe<Scalars['Boolean']>;
   questions?: InputMaybe<Array<InputMaybe<QuizQuestions>>>;
   title?: InputMaybe<Scalars['String']>;
 };
