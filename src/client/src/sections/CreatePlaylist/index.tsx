@@ -55,18 +55,6 @@ export const useFocus = () => {
   return ref;
 }
 
-
-function reducer(state: any, action: any) {
-  switch (action.type) {
-    case "lessonOnly":
-      return { lessons: state.lessons, quizzes: state.quizzes, };
-    case "quizOnly":
-      return { lessons: state.lessons, quizzes: state.quizzes };
-    default:
-      return { lessons: state.lessons, quizzes: state.quizzes };
-  }
-}
-
 const LockSwitch = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
@@ -269,7 +257,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
           _id: q.id,
           title: q.title,
           // questions: [...q.questions]
-          questions: q.questions
+          questions: q.questions,
+          public: q.public
         }
         quizInput.push(quizObj)
       })
@@ -334,15 +323,15 @@ export const CreatePlaylist = ({ viewer }: props) => {
   // setCater(mainCategories.map((i) => false))
   const titleHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     e.preventDefault();
-    let name = e.target.value;
+    // let name = e.target.value;
     setPlaylist({
       plan: [...playlist.plan],
-      name: name,
+      name: e.target.value,
       creator: viewer && viewer.id ? viewer.id : "0",
-      public: false
+      public: locked ? locked : false
     })
     window.localStorage.setItem('playlist', JSON.stringify(playlist));
-    e.target.onmouseleave = () => { setAutoSaved(true) }
+    // e.target.onmouseleave = () => { setAutoSaved(true) }
   }
 
   if (lessonLoading || quizLoading || articleLoading) {
@@ -555,7 +544,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
                         variant="standard"
                         ref={inputRef}
                         fullWidth
-                        onChange={titleHandler}
+                        onChange={(e) => titleHandler(e)}
                         value={playlist.name}
                         onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
                       />
