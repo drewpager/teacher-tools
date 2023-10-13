@@ -10,6 +10,7 @@
 .MuiBox-root {
   &.lesson-video--section {
     width: 80%;
+    height: 80vh;
 
     @media (max-width: 1000px) {
       width: 100%;

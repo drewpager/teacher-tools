@@ -11,6 +11,8 @@ import './lessonPage.scss';
 
 export const Lesson = () => {
   const params = useParams()
+  const screenWidth = window.screen.width;
+  const screenHeight = window.screen.height;
   const { loading, data, error } = useLessonQuery({
     variables: {
       id: `${params.id}`
@@ -42,7 +44,9 @@ export const Lesson = () => {
       <h1>{lesson?.title}</h1>
       {lesson?.category?.map((i, ind) => (<Chip variant='outlined' label={titleCase(`${i}`)} key={ind} color="error" className='lesson--category' />))}
       <Box className="lesson-video--section">
-        <VideoPlayer url={`${lesson?.video}`} />
+        <VideoPlayer 
+          url={`${lesson?.video}`} 
+        />
       </Box>
       {/* <img src={`${lesson?.image}`} alt={`Text overlay of ${lesson?.title}`} /> */}
     </Box>
