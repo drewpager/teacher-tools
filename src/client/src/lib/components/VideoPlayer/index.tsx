@@ -38,34 +38,37 @@ export const VideoPlayer = (props: props) => {
 
   return (
     <Box className='tt-video-wrapper'>
-      <video 
-        ref={videoRef} 
+      <video
+        ref={videoRef}
         data-cld-public-id={`platos-peach-video${fileString[0]}.mp4`}
         controls
-        preload="metadata"
+        // preload="metadata"
+        preload="auto"
         data-cld-colors='{ "base": "#3A70CD", "accent": "#57996A", "text": "#fff" }'
-        // onContextMenu={(e) => e.preventDefault()}
+        max-width={"100%"}
+        max-height={"auto"}
+        className="cld-video-player cld-fluid"
         {...props}
       />
     </Box>
   )
 }
 
-  // Create and configure your Cloudinary instance.
-  // const cldUrl = new CloudinaryVideo(`platos-peach-video${fileString[0]}`, { cloudName: 'drewpager' })
-  // cldUrl.resize(fit(1200, undefined));
+// Create and configure your Cloudinary instance.
+// const cldUrl = new CloudinaryVideo(`platos-peach-video${fileString[0]}`, { cloudName: 'drewpager' })
+// cldUrl.resize(fit(1200, undefined));
 
-  // const sources = [
-  //   {
-  //     type: "mp4",
-  //     codecs: ["avc1.4d002a"],
-  //     transcode: videoCodec(auto())
-  //   },
-    // {
-    //   type: "webm",
-    //   codecs: ["vp8", "vorbis"],
-    //   transcode: videoCodec(vp9())
-    // },
+// const sources = [
+//   {
+//     type: "mp4",
+//     codecs: ["avc1.4d002a"],
+//     transcode: videoCodec(auto())
+//   },
+// {
+//   type: "webm",
+//   codecs: ["vp8", "vorbis"],
+//   transcode: videoCodec(vp9())
+// },
 //   ];
 
 //   return (
