@@ -31,7 +31,7 @@ export const Playlist = ({ viewer }: Props) => {
         <h3>Here are a few available playlists or you can try searching again.</h3>
         <Search />
         <DisplayError title='Failed to load playlist' />
-        <Footer />
+        <Footer viewer={viewer} />
       </Box>
     )
   }
@@ -46,7 +46,7 @@ export const Playlist = ({ viewer }: Props) => {
           <meta name="description" content={`Interactive lesson plan teaching ${playlist.name} including ${playlist.plan.length} educational items.`} />
         </Helmet>
         <PlaylistCard playlist={playlist} viewer={viewer} />
-        <Footer />
+        <Footer viewer={viewer} />
       </>
     )
   }

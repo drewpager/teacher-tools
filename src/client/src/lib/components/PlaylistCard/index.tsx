@@ -31,7 +31,7 @@ import QuizIcon from '@mui/icons-material/Quiz';
 import ArticleIcon from '@mui/icons-material/Article';
 import { Playlist, Lesson, LessonPlanUnion, Viewer, useUserQuery } from '../../../graphql/generated';
 import { QuizPlayer, ArticlePlayer } from '../index';
-import { VideoPlayer } from '../VideoPlayer';
+import { VideosPlayer } from '../VideosPlayer';
 import './playlistcard.scss';
 import { formatDate } from '../../utils';
 import { useNavigate } from 'react-router-dom';
@@ -95,6 +95,9 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
 
 
   const handleChange = ({ ...item }: LessonPlanUnion) => {
+    if (document.contains(document.getElementById("video-player"))) {
+      document.getElementById("video-player")?.remove()
+    }
     setItemName(item)
     setActive(`${item.id}`)
     if (params.id !== undefined) {
@@ -237,7 +240,7 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
 
             if (iter?.__typename === "Lesson") {
               return (
-                <VideoPlayer url={`${iter?.video}`} key={index} />
+                <VideosPlayer url={`${iter.video}`} key={index} />
               )
             }
 
@@ -250,7 +253,7 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
               <h2>Failed to load resource</h2>
             )
           })}
-          <Button onClick={() => handleNextButton(active)} variant="outlined">Next <SkipNextIcon /></Button>
+          <Button className="playlistcard--next_button" onClick={() => handleNextButton(active)} variant="outlined">Next <SkipNextIcon /></Button>
         </Grid>
       </Grid>
     </>

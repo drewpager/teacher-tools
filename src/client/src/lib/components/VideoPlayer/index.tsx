@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 // import { AdvancedVideo, placeholder, responsive, lazyload } from '@cloudinary/react';
 // import { CloudinaryVideo } from "@cloudinary/url-gen";
 
@@ -19,36 +19,37 @@ declare global {
   }
 }
 
-export const VideoPlayer = (props: props) => {
-  let { url } = props;
-  let path = new URL(url)
+export const VideoPlayer = ({ url }: props) => {
+  let path = useMemo(() => new URL(url), [url])
   let pathname = path.pathname;
   let re = new RegExp(/platos-peach-video/gm)
   let filePath = pathname.split(re)
   let fileString = filePath[1].split(".")
   let cloudinaryRef = useRef();
-  let videoRef: any = useRef(props);
+  let videoRef: any = useRef();
 
   useEffect(() => {
     if (cloudinaryRef.current) return;
     cloudinaryRef.current = window.cloudinary.videoPlayer(videoRef.current, {
       cloud_name: 'drewpager',
+      showLogo: false
     });
-  }, [props, videoRef])
+  }, [url, videoRef, fileString, path])
 
   return (
     <Box className='tt-video-wrapper'>
       <video
         ref={videoRef}
         data-cld-public-id={`platos-peach-video${fileString[0]}.mp4`}
+        key={`platos-peach-video${fileString[0]}.mp4`}
         controls
-        // preload="metadata"
-        preload="auto"
+        crossOrigin="anonymous"
+        preload="metadata"
         data-cld-colors='{ "base": "#3A70CD", "accent": "#57996A", "text": "#fff" }'
         max-width={"100%"}
         max-height={"auto"}
         className="cld-video-player cld-fluid"
-        {...props}
+        autoPlay
       />
     </Box>
   )

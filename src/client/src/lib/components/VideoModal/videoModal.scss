@@ -6,9 +6,18 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 70%;
-  height: 90%;
+  height: 80%;
   // background-color: library.$darkGreen;
   color: library.$darkGreen;
+
+  @media (max-width: 768px) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 50%;
+  }
 }
 
 // .MuiButton-root {

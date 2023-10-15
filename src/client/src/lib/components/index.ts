@@ -10,6 +10,7 @@ export * from "./CreatePlaylistCard";
 export * from "./Search";
 export * from "./PlaylistCard";
 export * from "./VideoPlayer";
+export * from "./VideosPlayer";
 export * from "./VideoModal";
 export * from "./QuizPlayer";
 export * from "./ArticlePlayer";
