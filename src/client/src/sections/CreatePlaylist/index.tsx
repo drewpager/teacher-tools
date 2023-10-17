@@ -1,4 +1,4 @@
-import { CircularProgress, Grid, Box, Card, TextField, Button, Switch, FormControlLabel, Chip, Avatar, Typography, CardMedia, InputAdornment, Skeleton, Tooltip, Alert, Snackbar, IconButton } from '@mui/material';
+import { CircularProgress, Grid, Box, Card, TextField, Button, Switch, FormControlLabel, Chip, Avatar, Typography, CardMedia, InputAdornment, Skeleton, Tooltip, Alert, Snackbar, IconButton, Checkbox } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 import React, { useState, ChangeEvent, useRef, useEffect, useMemo, SyntheticEvent } from 'react';
@@ -11,7 +11,8 @@ import {
   Viewer,
   FullLessonQuiz,
   Plan,
-  useUserQuery
+  useUserQuery,
+  Playlist
 } from '../../graphql/generated';
 import { DisplayError, titleCase } from '../../lib/utils';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
@@ -108,10 +109,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const [searchError, setSearchError] = useState<boolean>(false)
   const [autoSaved, setAutoSaved] = useState<boolean>(false)
   const [variant, setVariant] = useState<boolean>(true)
-  const [filled, setFilled] = useState<boolean>(true)
-  const [lessons, setLessons] = useState<Array<Plan>>([])
-  const [quizzes, setQuizzes] = useState<Array<Plan>>([])
-  const [articles, setArticles] = useState<Array<Plan>>([])
   const [plans, setPlans] = useState<Array<Plan>>([])
   const [filter, setFilter] = useState<Array<Plan>>([])
   const [yourContent, setYourContent] = useState<boolean>(false);
@@ -119,6 +116,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const searchRef = useFocus();
   const [playlist, setPlaylist] = useState<InputLessonPlan>(initialData)
   const [locked, setLocked] = useState<boolean>();
+  const [ascending, setAscending] = useState<boolean>(true);
 
   const limit: number = 1000;
   const page: number = 1;
@@ -247,7 +245,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
       setFilter(lessonInput)
       setPlans(lessonInput)
-      setLessons(lessonInput)
     }
     if (quizQuery) {
       const quizInput: FullLessonQuiz[] = []
@@ -262,7 +259,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
         }
         quizInput.push(quizObj)
       })
-      setQuizzes(quizInput)
       setFilter((f) => [...f, ...quizInput])
       setPlans((p) => [...p, ...quizInput])
     }
@@ -278,7 +274,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
         }
         articleInput.push(articleObj)
       })
-      setArticles(articleInput)
       setFilter((filter) => [...filter, ...articleInput])
       setPlans((plan) => [...plan, ...articleInput])
     }
@@ -301,6 +296,23 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
   function onlyDefined(value: { main: string, secondary: undefined | string }, index: number, self: any) {
     return value.secondary !== undefined
+  }
+
+  function ascend(a: any, b: any) {
+    return new Date(a.startDate).getTime() - new Date(b.startDate).getTime();
+  }
+
+  function descend(a: any, b: any) {
+    return new Date(b.startDate).getTime() - new Date(a.startDate).getTime();
+  }
+
+  const handleChron = (plans: Plan[]) => {
+    setAscending(!ascending);
+    if (ascending) {
+      playlist.plan.sort(ascend)
+    } else {
+      setPlaylist(JSON.parse(`${window?.localStorage?.getItem("playlist")}`))
+    }
   }
 
   // Isolate the main and any secondary categories
@@ -432,6 +444,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       setAutoSaved(false);
     }
     handleCategoryClick("All", 0)
+    setAscending(true);
   }
 
   const handleSwitch = () => {
@@ -703,6 +716,18 @@ export const CreatePlaylist = ({ viewer }: props) => {
             </Tooltip>
             <Tooltip title={viewer.paymentId !== null ? "Make Private/Public" : "Public Content Restricted to Paying Users"}>
               <Typography variant="body1" color={!locked ? "error" : "success"}>{!locked ? "Private" : "Public"}</Typography>
+            </Tooltip>
+            <Tooltip title="If two or more items contain dates, sort chronologically">
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    onChange={() => handleChron(playlist.plan)}
+                    disableRipple
+                    disabled={playlist.plan.length <= 1 || playlist.plan.map((e) => !e.startDate).includes(true)}
+                  />}
+                label="Sort by Date"
+                sx={{ ml: 1 }}
+              />
             </Tooltip>
           </Box>
           <Button
