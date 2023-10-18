@@ -85,7 +85,7 @@ export const UserArticlesCard = ({ article }: Props) => {
               </Tooltip>
               {deleteArticleLoading ? deleteArticleLoadingMessage : (
                 <Tooltip title="Delete Article!">
-                  <IconButton sx={{ color: "#000" }}>
+                  <IconButton sx={{ color: "#000" }} disableRipple>
                     <DeleteIcon onClick={() => setOpen(true)} />
                     <Dialog
                       open={open}

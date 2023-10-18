@@ -102,6 +102,7 @@ export const USER = gql`
                 answerType
               }
               creator
+              public
             }
           }
         }
@@ -136,6 +137,7 @@ export const USER = gql`
             answerType
           }
           creator
+          public
         }
         totalCount
       }
