@@ -75,7 +75,7 @@ export const CreateArticle = ({ viewer }: Props) => {
   const [editorState, setEditorState] = useState<EditorState | undefined>(undefined);
   const rawContent = editorState && convertToRaw(editorState.getCurrentContent())
   const [title, setTitle] = useState<string | undefined>(undefined);
-  const [locked, setLocked] = useState<boolean>();
+  const [locked, setLocked] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const [createArticle, { data, loading, error }] = useCreateArticleMutation({
@@ -87,7 +87,7 @@ export const CreateArticle = ({ viewer }: Props) => {
           entityMap: [],
         },
         creator: `${viewer.id}`,
-        public: false
+        public: locked
       }
     }
   })
@@ -115,7 +115,7 @@ export const CreateArticle = ({ viewer }: Props) => {
         entityMap: [...entityMapArray],
       };
       initialArticle.creator = `${viewer.id}`;
-      initialArticle.public = !locked;
+      initialArticle.public = locked;
     }
 
     await createArticle({
