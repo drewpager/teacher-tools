@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, CardContent, ListItem, Typography, Grid, Button, CircularProgress, Alert, Tooltip, Dialog, DialogContent, DialogTitle, DialogContentText, DialogActions, IconButton } from '@mui/material';
+import { Box, Card, CardContent, ListItem, Typography, Grid, Button, CircularProgress, Alert, Tooltip, Dialog, DialogContent, DialogTitle, DialogContentText, DialogActions, IconButton } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { Playlist, Lesson, LessonPlanUnion } from '../../../graphql/generated';
 import { useMutation } from '@apollo/client';
@@ -7,6 +7,8 @@ import { gql } from 'graphql-tag';
 import { DisplaySuccess } from '../../utils';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import LockIcon from '@mui/icons-material/Lock';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
 import theme from '../../../theme';
 import './userPlaylistsCard.scss';
 
@@ -17,6 +19,7 @@ interface Props {
     plan: [LessonPlanUnion]
     creator: string
     authorized: boolean
+    public: boolean
   }
 }
 
@@ -101,37 +104,44 @@ export const UserPlaylistsCard = ({ playlist }: Props) => {
                 {playlist.plan.length} {playlist.plan.length === 1 ? " Item" : " Items"}
               </Typography>
             </Link>
-            <Tooltip title="Edit contents of playlist!">
-              <Button onClick={() => handleUpdate(playlist.id)}><EditIcon /></Button>
-            </Tooltip>
-            {DeletePlaylistLoading ? deletePlaylistLoadingMessage : (
-              <Tooltip title="Delete playlist!">
-                <IconButton sx={{ color: "#000" }}>
-                  <DeleteIcon onClick={() => setOpen(true)} />
-                  <Dialog
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                  >
-                    <DialogTitle id="alert-dialog-title">
-                      <Typography variant="h3">Are you sure you want to delete this lesson plan?</Typography>
-                    </DialogTitle>
-                    <DialogContent>
-                      <DialogContentText id="alert-dialog-description">
-                        This action cannot be undone.
-                      </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                      <Button onClick={handleClose}>Cancel</Button>
-                      <Button onClick={() => { handleDelete(playlist.id); handleClose() }} autoFocus>
-                        Delete Lesson Plan
-                      </Button>
-                    </DialogActions>
-                  </Dialog>
+            <Box className="user-playlists--buttons">
+              <Tooltip title={`${playlist.public ? "Public" : "Private"}`}>
+                {playlist.public ? <LockOpenIcon sx={{ color: theme.palette.primary.main }} /> : <LockIcon sx={{ color: theme.palette.primary.main }} />}
+              </Tooltip>
+              <Tooltip title="Edit contents of playlist!">
+                <IconButton sx={{ color: "#000", ml: 0.5 }} disableRipple>
+                  <EditIcon onClick={() => handleUpdate(playlist.id)} />
                 </IconButton>
               </Tooltip>
-            )}
+              {DeletePlaylistLoading ? deletePlaylistLoadingMessage : (
+                <Tooltip title="Delete playlist!">
+                  <IconButton sx={{ color: "#000" }} disableRipple>
+                    <DeleteIcon onClick={() => setOpen(true)} />
+                    <Dialog
+                      open={open}
+                      onClose={handleClose}
+                      aria-labelledby="alert-dialog-title"
+                      aria-describedby="alert-dialog-description"
+                    >
+                      <DialogTitle id="alert-dialog-title">
+                        <Typography variant="h3">Are you sure you want to delete this lesson plan?</Typography>
+                      </DialogTitle>
+                      <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                          This action cannot be undone.
+                        </DialogContentText>
+                      </DialogContent>
+                      <DialogActions>
+                        <Button onClick={handleClose}>Cancel</Button>
+                        <Button onClick={() => { handleDelete(playlist.id); handleClose() }} autoFocus>
+                          Delete Lesson Plan
+                        </Button>
+                      </DialogActions>
+                    </Dialog>
+                  </IconButton>
+                </Tooltip>
+              )}
+            </Box>
             {DeletePlaylistError ? deletePlaylistErrorMessage : null}
           </CardContent>
         </Card>

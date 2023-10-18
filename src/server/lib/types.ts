@@ -46,6 +46,7 @@ export interface Quiz {
   title: string;
   questions: Questions[];
   creator: string;
+  public: boolean;
 }
 
 export interface Playlist {

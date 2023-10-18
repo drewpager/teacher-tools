@@ -6,3 +6,10 @@
     border-radius: 1.5rem;
   }
 }
+
+.MuiBox-root {
+  &.user-playlists--buttons {
+    display: flex;
+    align-items: last baseline;
+  }
+}
