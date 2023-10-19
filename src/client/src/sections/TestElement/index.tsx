@@ -860,16 +860,39 @@
 //   );
 // }
 
-import React from 'react';
-import { PlaylistsSkeleton } from '../Playlists/playlistsSkeleton';
+import React, { useState } from 'react';
+import { Document, Page } from 'react-pdf';
 import { Viewer } from '../../graphql/generated';
+import { pdfjs } from 'react-pdf';
+import "../../lib/assets/New-Deal-SAC-Student-Materials.pdf";
+import 'react-pdf/dist/Page/AnnotationLayer.css';
+import 'react-pdf/dist/Page/TextLayer.css';
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.js',
+  import.meta.url,
+).toString();
 
 interface Props {
   viewer: Viewer;
 }
 
 export const TestElement = ({ viewer }: Props) => {
+  const [numPages, setNumPages] = useState<number>();
+  const [pageNumber, setPageNumber] = useState<number>(1);
+
+  function onDocumentLoadSuccess({ numPages }: { numPages: number }): void {
+    setNumPages(numPages);
+  }
+
   return (
-    <PlaylistsSkeleton />
+    <div style={{ marginTop: 150 }}>
+      <Document file="https://schoolwires.henry.k12.ga.us/cms/lib/GA01000549/Centricity/Domain/5939/TextBook.pdf" onLoadSuccess={onDocumentLoadSuccess}>
+        <Page pageNumber={pageNumber} />
+      </Document>
+      <p>
+        Page {pageNumber} of {numPages}
+      </p>
+    </div>
   )
 }
