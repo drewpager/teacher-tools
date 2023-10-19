@@ -861,10 +861,10 @@
 // }
 
 import React, { useState } from 'react';
-import { Document, Page } from 'react-pdf';
+import { Document, Page, pdfjs } from 'react-pdf';
 import { Viewer } from '../../graphql/generated';
-import { pdfjs } from 'react-pdf';
-import "../../lib/assets/New-Deal-SAC-Student-Materials.pdf";
+import sample from "../../lib/assets/sample.pdf"
+
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 
@@ -887,7 +887,8 @@ export const TestElement = ({ viewer }: Props) => {
 
   return (
     <div style={{ marginTop: 150 }}>
-      <Document file="https://schoolwires.henry.k12.ga.us/cms/lib/GA01000549/Centricity/Domain/5939/TextBook.pdf" onLoadSuccess={onDocumentLoadSuccess}>
+      {/* <Document file="https://schoolwires.henry.k12.ga.us/cms/lib/GA01000549/Centricity/Domain/5939/TextBook.pdf" onLoadSuccess={onDocumentLoadSuccess}> */}
+      <Document file="sample.pdf" onLoadSuccess={onDocumentLoadSuccess}>
         <Page pageNumber={pageNumber} />
       </Document>
       <p>
