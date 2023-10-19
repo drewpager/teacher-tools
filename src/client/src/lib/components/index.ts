@@ -1,4 +1,5 @@
 export * from "./PageSkeleton";
+export * from "./SkeletonComponent";
 export * from "./LessonCard";
 export * from "./HomeInfo";
 export * from "./HomeInfoSkeleton";
