@@ -16,7 +16,11 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 ).toString();
 // pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
-export const PdfPlayer = () => {
+type Props = {
+  pdf: string;
+}
+
+export const PdfPlayer = ({ pdf }: Props) => {
   const [numPages, setNumPages] = useState<number>();
   const [pageNumber, setPageNumber] = useState<number>(1);
 
@@ -56,7 +60,8 @@ export const PdfPlayer = () => {
   return (
     <Box className="pdf--player-section">
       <Document
-        file={sample}
+        file={pdf}
+        // file={sample}
         loading={<PDFSkeleton />}
         onLoadSuccess={onDocumentLoadSuccess}
       >
@@ -70,22 +75,26 @@ export const PdfPlayer = () => {
         {/* <p>
           Page {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
         </p> */}
-        <IconButton
-          disabled={pageNumber <= 1}
+        <IconButton 
+          disableRipple
           onClick={previousPage}
+        >
+        <Button 
+          disabled={pageNumber <= 1} 
           disableRipple
         >
-        <Button disableRipple>
           <UndoIcon /> Previous
         </Button>
         </IconButton>
         <Chip variant="outlined" className="pdfPage-chip" label={`Page ${pageNumber || (numPages ? 1 : '--')} of ${numPages || '--'}`} />
-        <IconButton
-          disabled={numPages && pageNumber >= numPages ? true : false}
+        <IconButton 
+          disableRipple
           onClick={nextPage}
+        >
+        <Button 
+          disabled={numPages && pageNumber >= numPages ? true : false}
           disableRipple
         >
-        <Button disableRipple>
           Next <RedoIcon />
         </Button>
         </IconButton>

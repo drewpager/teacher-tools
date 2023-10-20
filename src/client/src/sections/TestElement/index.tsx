@@ -861,8 +861,9 @@
 // }
 
 import React, { useState } from 'react';
+import { Box } from '@mui/material';
 import { Viewer } from '../../graphql/generated';
-import { PdfPlayer } from '../../lib/components';
+import { PdfPlayer, PdfUploader } from '../../lib/components';
 
 interface Props {
   viewer: Viewer;
@@ -871,6 +872,9 @@ interface Props {
 export const TestElement = ({ viewer }: Props) => {
   
   return (
-    <PdfPlayer />
+    <Box sx={{ marginTop: 15 }}>
+      <PdfUploader />
+      <PdfPlayer pdf="https://res.cloudinary.com/drewpager/image/upload/v1697814112/platos-peach-pdf/brighton-badge.pdf.pdf" />
+    </Box>
   )
 }

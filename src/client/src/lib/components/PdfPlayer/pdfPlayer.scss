@@ -1,8 +1,9 @@
 .MuiBox-root {
   &.pdf--player-section {
     max-width: 40%;
-    margin: 8rem auto;
+    margin: 1rem 0;
     height: 70vh;
+    width: 100%;
     @media (max-width: 768px) {
       margin-left: 0;
       padding-left: 0;
