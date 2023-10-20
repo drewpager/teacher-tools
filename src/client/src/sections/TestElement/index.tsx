@@ -861,96 +861,16 @@
 // }
 
 import React, { useState } from 'react';
-import { Document, Page, pdfjs } from 'react-pdf';
 import { Viewer } from '../../graphql/generated';
-import sample from "../../lib/assets/sample.pdf"
-import { SkeletonComponent } from '../../lib/components';
-import { DisplayError } from '../../lib/utils';
-
-import 'react-pdf/dist/Page/AnnotationLayer.css';
-import 'react-pdf/dist/Page/TextLayer.css';
-import { Typography } from '@mui/material';
-
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.js',
-  import.meta.url,
-).toString();
-// pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
+import { PdfPlayer } from '../../lib/components';
 
 interface Props {
   viewer: Viewer;
 }
 
 export const TestElement = ({ viewer }: Props) => {
-  const [numPages, setNumPages] = useState<number>();
-  const [pageNumber, setPageNumber] = useState<number>(1);
-
-  function onDocumentLoadSuccess({ numPages }: { numPages: number }): void {
-    setNumPages(numPages);
-    setPageNumber(1);
-  }
-
-  function changePage(offset: number) {
-    setPageNumber(prevPageNumber => prevPageNumber + offset);
-  }
-
-  function previousPage() {
-    changePage(-1);
-  }
-
-  function nextPage() {
-    changePage(1);
-  }
-
-  const PDFError = (error: string) => {
-    return (
-      <Typography variant="body2">{`Failed to load PDF: ${error}`}</Typography>
-    )
-  }
-
-  const PDFSkeleton = () => {
-    return (
-      <>
-        <SkeletonComponent variant="rectangular" width={500} height={"70vh"} />
-        <SkeletonComponent variant="text" width={100} height={150} />
-        <SkeletonComponent variant="rectangular" width={125} height={150} />
-      </>
-    )
-  }
-
+  
   return (
-    <div style={{ marginTop: 150, width: 500 }}>
-      <Document
-        file={sample}
-        loading={<PDFSkeleton />}
-        onLoadSuccess={onDocumentLoadSuccess}
-      >
-        <Page
-          pageNumber={pageNumber}
-          loading={<PDFSkeleton />}
-          onLoadError={(error) => PDFError(error.message)}
-        />
-      </Document>
-      <div>
-        <p>
-          Page {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
-        </p>
-        <button
-          type="button"
-          disabled={pageNumber <= 1}
-          onClick={previousPage}
-        >
-          Previous
-        </button>
-        <button
-          type="button"
-          disabled={numPages && pageNumber >= numPages ? true : false}
-          onClick={nextPage}
-        >
-          Next
-        </button>
-        {PDFError}
-      </div>
-    </div>
+    <PdfPlayer />
   )
 }

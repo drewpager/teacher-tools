@@ -1,0 +1,19 @@
+.MuiBox-root {
+  &.pdf--player-section {
+    max-width: 40%;
+    margin: 8rem auto;
+    height: 70vh;
+    @media (max-width: 768px) {
+      margin-left: 0;
+      padding-left: 0;
+      max-width: 100%;
+    }
+  }
+}
+
+.MuiChip-root {
+  &.pdfPage-chip {
+    color: rgb(58, 112, 205);
+    border: 1px solid rgb(58, 112, 205);
+  }
+}
