@@ -19,6 +19,7 @@ interface Props {
     content: Content;
     title: string;
     public: boolean;
+    pdf: string;
   }
 }
 

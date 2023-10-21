@@ -20,6 +20,7 @@ let initialArticle: Article = {
     blocks: [],
     entityMap: []
   },
+  pdf: '',
   creator: '',
   public: false
 }
@@ -86,6 +87,7 @@ export const CreateArticle = ({ viewer }: Props) => {
           blocks: [],
           entityMap: [],
         },
+        pdf: '',
         creator: `${viewer.id}`,
         public: locked
       }

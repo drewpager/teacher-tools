@@ -16,7 +16,7 @@ export interface LessonPlan {
   questions: Questions[];
   content: Content;
   public: boolean;
-  pdf?: string | undefined;
+  pdf?: string;
 }
 
 export interface Lesson {
@@ -90,7 +90,7 @@ export interface Article {
   content: any;
   creator: string;
   public: boolean;
-  pdf?: string | undefined;
+  pdf?: string;
 }
 
 export interface Database {

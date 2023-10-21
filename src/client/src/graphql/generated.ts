@@ -200,6 +200,7 @@ export type Article = {
   content?: Maybe<Content>;
   creator?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['ID']>;
+  pdf?: Maybe<Scalars['String']>;
   public?: Maybe<Scalars['Boolean']>;
   title?: Maybe<Scalars['String']>;
 };
@@ -245,6 +246,7 @@ export type ContentInput = {
 export type CreateArticleInput = {
   content?: InputMaybe<ContentInput>;
   creator?: InputMaybe<Scalars['String']>;
+  pdf?: InputMaybe<Scalars['String']>;
   public?: InputMaybe<Scalars['Boolean']>;
   title?: InputMaybe<Scalars['String']>;
 };
@@ -498,6 +500,7 @@ export type Plan = {
   endDate?: InputMaybe<Scalars['DateScalar']>;
   image?: InputMaybe<Scalars['String']>;
   meta?: InputMaybe<Scalars['String']>;
+  pdf?: InputMaybe<Scalars['String']>;
   public?: InputMaybe<Scalars['Boolean']>;
   questions?: InputMaybe<Array<InputMaybe<QuizQuestions>>>;
   startDate?: InputMaybe<Scalars['DateScalar']>;
@@ -755,7 +758,7 @@ export type ArticleQueryVariables = Exact<{
 }>;
 
 
-export type ArticleQuery = { __typename?: 'Query', article: { __typename?: 'Article', id?: string | null, title?: string | null, creator?: string | null, public?: boolean | null, content?: { __typename?: 'Content', blocks?: Array<{ __typename?: 'Blocks', key?: string | null, text?: string | null, type?: string | null, depth?: number | null, inlineStyleRanges?: Array<{ __typename?: 'InlineStyleRanges', style?: string | null, offset?: number | null, length?: number | null } | null> | null, entityRanges?: Array<{ __typename?: 'EntityRanges', offset?: number | null, length?: number | null, key?: number | null } | null> | null } | null> | null, entityMap?: Array<{ __typename?: 'EntityMap', type?: string | null, mutability?: string | null, data?: { __typename?: 'EntityMapData', src?: string | null, width?: string | null, alignment?: string | null, height?: string | null, url?: string | null, targetOption?: string | null } | null } | null> | null } | null } };
+export type ArticleQuery = { __typename?: 'Query', article: { __typename?: 'Article', id?: string | null, title?: string | null, creator?: string | null, pdf?: string | null, public?: boolean | null, content?: { __typename?: 'Content', blocks?: Array<{ __typename?: 'Blocks', key?: string | null, text?: string | null, type?: string | null, depth?: number | null, inlineStyleRanges?: Array<{ __typename?: 'InlineStyleRanges', style?: string | null, offset?: number | null, length?: number | null } | null> | null, entityRanges?: Array<{ __typename?: 'EntityRanges', offset?: number | null, length?: number | null, key?: number | null } | null> | null } | null> | null, entityMap?: Array<{ __typename?: 'EntityMap', type?: string | null, mutability?: string | null, data?: { __typename?: 'EntityMapData', src?: string | null, width?: string | null, alignment?: string | null, height?: string | null, url?: string | null, targetOption?: string | null } | null } | null> | null } | null } };
 
 export type AllArticlesQueryVariables = Exact<{
   limit: Scalars['Int'];
@@ -763,7 +766,7 @@ export type AllArticlesQueryVariables = Exact<{
 }>;
 
 
-export type AllArticlesQuery = { __typename?: 'Query', allarticles: { __typename?: 'Articles', total: number, result: Array<{ __typename?: 'Article', id?: string | null, title?: string | null, creator?: string | null, public?: boolean | null, content?: { __typename?: 'Content', blocks?: Array<{ __typename?: 'Blocks', key?: string | null, text?: string | null, type?: string | null, depth?: number | null, inlineStyleRanges?: Array<{ __typename?: 'InlineStyleRanges', style?: string | null, offset?: number | null, length?: number | null } | null> | null, entityRanges?: Array<{ __typename?: 'EntityRanges', offset?: number | null, length?: number | null, key?: number | null } | null> | null } | null> | null, entityMap?: Array<{ __typename?: 'EntityMap', type?: string | null, mutability?: string | null, data?: { __typename?: 'EntityMapData', src?: string | null, width?: string | null, alignment?: string | null, height?: string | null, targetOption?: string | null } | null } | null> | null } | null }> } };
+export type AllArticlesQuery = { __typename?: 'Query', allarticles: { __typename?: 'Articles', total: number, result: Array<{ __typename?: 'Article', id?: string | null, title?: string | null, creator?: string | null, pdf?: string | null, public?: boolean | null, content?: { __typename?: 'Content', blocks?: Array<{ __typename?: 'Blocks', key?: string | null, text?: string | null, type?: string | null, depth?: number | null, inlineStyleRanges?: Array<{ __typename?: 'InlineStyleRanges', style?: string | null, offset?: number | null, length?: number | null } | null> | null, entityRanges?: Array<{ __typename?: 'EntityRanges', offset?: number | null, length?: number | null, key?: number | null } | null> | null } | null> | null, entityMap?: Array<{ __typename?: 'EntityMap', type?: string | null, mutability?: string | null, data?: { __typename?: 'EntityMapData', src?: string | null, width?: string | null, alignment?: string | null, height?: string | null, targetOption?: string | null } | null } | null> | null } | null }> } };
 
 export type AuthUrlQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -790,7 +793,7 @@ export type PlaylistQueryVariables = Exact<{
 }>;
 
 
-export type PlaylistQuery = { __typename?: 'Query', playlist: { __typename?: 'Playlist', id?: string | null, name: string, creator: string, public?: boolean | null, plan: Array<{ __typename?: 'Article', id?: string | null, title?: string | null, creator?: string | null, public?: boolean | null, content?: { __typename?: 'Content', blocks?: Array<{ __typename?: 'Blocks', key?: string | null, text?: string | null, type?: string | null, depth?: number | null, inlineStyleRanges?: Array<{ __typename?: 'InlineStyleRanges', style?: string | null, offset?: number | null, length?: number | null } | null> | null, entityRanges?: Array<{ __typename?: 'EntityRanges', offset?: number | null, length?: number | null, key?: number | null } | null> | null } | null> | null, entityMap?: Array<{ __typename?: 'EntityMap', type?: string | null, mutability?: string | null, data?: { __typename?: 'EntityMapData', src?: string | null, width?: string | null, alignment?: string | null, height?: string | null, url?: string | null, targetOption?: string | null } | null } | null> | null } | null } | { __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null, public?: boolean | null } | { __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> } | null> } };
+export type PlaylistQuery = { __typename?: 'Query', playlist: { __typename?: 'Playlist', id?: string | null, name: string, creator: string, public?: boolean | null, plan: Array<{ __typename?: 'Article', id?: string | null, title?: string | null, creator?: string | null, pdf?: string | null, public?: boolean | null, content?: { __typename?: 'Content', blocks?: Array<{ __typename?: 'Blocks', key?: string | null, text?: string | null, type?: string | null, depth?: number | null, inlineStyleRanges?: Array<{ __typename?: 'InlineStyleRanges', style?: string | null, offset?: number | null, length?: number | null } | null> | null, entityRanges?: Array<{ __typename?: 'EntityRanges', offset?: number | null, length?: number | null, key?: number | null } | null> | null } | null> | null, entityMap?: Array<{ __typename?: 'EntityMap', type?: string | null, mutability?: string | null, data?: { __typename?: 'EntityMapData', src?: string | null, width?: string | null, alignment?: string | null, height?: string | null, url?: string | null, targetOption?: string | null } | null } | null> | null } | null } | { __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null, public?: boolean | null } | { __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> } | null> } };
 
 export type AllPlaylistsQueryVariables = Exact<{
   limit: Scalars['Int'];
@@ -798,7 +801,7 @@ export type AllPlaylistsQueryVariables = Exact<{
 }>;
 
 
-export type AllPlaylistsQuery = { __typename?: 'Query', allplaylists: { __typename?: 'Playlists', total: number, result: Array<{ __typename?: 'Playlist', id?: string | null, name: string, creator: string, public?: boolean | null, plan: Array<{ __typename?: 'Article', id?: string | null, title?: string | null, creator?: string | null, public?: boolean | null, content?: { __typename?: 'Content', blocks?: Array<{ __typename?: 'Blocks', key?: string | null, text?: string | null, type?: string | null, depth?: number | null, inlineStyleRanges?: Array<{ __typename?: 'InlineStyleRanges', style?: string | null, offset?: number | null, length?: number | null } | null> | null, entityRanges?: Array<{ __typename?: 'EntityRanges', offset?: number | null, length?: number | null, key?: number | null } | null> | null } | null> | null, entityMap?: Array<{ __typename?: 'EntityMap', type?: string | null, mutability?: string | null, data?: { __typename?: 'EntityMapData', src?: string | null, width?: string | null, alignment?: string | null, height?: string | null, url?: string | null, targetOption?: string | null } | null } | null> | null } | null } | { __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null, public?: boolean | null } | { __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> } | null> }> } };
+export type AllPlaylistsQuery = { __typename?: 'Query', allplaylists: { __typename?: 'Playlists', total: number, result: Array<{ __typename?: 'Playlist', id?: string | null, name: string, creator: string, public?: boolean | null, plan: Array<{ __typename?: 'Article', id?: string | null, title?: string | null, creator?: string | null, pdf?: string | null, public?: boolean | null, content?: { __typename?: 'Content', blocks?: Array<{ __typename?: 'Blocks', key?: string | null, text?: string | null, type?: string | null, depth?: number | null, inlineStyleRanges?: Array<{ __typename?: 'InlineStyleRanges', style?: string | null, offset?: number | null, length?: number | null } | null> | null, entityRanges?: Array<{ __typename?: 'EntityRanges', offset?: number | null, length?: number | null, key?: number | null } | null> | null } | null> | null, entityMap?: Array<{ __typename?: 'EntityMap', type?: string | null, mutability?: string | null, data?: { __typename?: 'EntityMapData', src?: string | null, width?: string | null, alignment?: string | null, height?: string | null, url?: string | null, targetOption?: string | null } | null } | null> | null } | null } | { __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null, public?: boolean | null } | { __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> } | null> }> } };
 
 export type QuizQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -825,7 +828,7 @@ export type UserQueryVariables = Exact<{
 }>;
 
 
-export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, name: string, avatar: string, contact: string, paymentId?: string | null, package?: { __typename?: 'Package', amount?: number | null, cadence?: string | null, status?: string | null, since?: number | null, trialEnd?: number | null } | null, bookmarks?: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null } | null> | null, playlists?: { __typename?: 'Playlists', total: number, totalCount: number, result: Array<{ __typename?: 'Playlist', id?: string | null, name: string, creator: string, public?: boolean | null, plan: Array<{ __typename: 'Article', id?: string | null, title?: string | null, creator?: string | null, public?: boolean | null, content?: { __typename?: 'Content', blocks?: Array<{ __typename?: 'Blocks', key?: string | null, text?: string | null, type?: string | null, depth?: number | null, inlineStyleRanges?: Array<{ __typename?: 'InlineStyleRanges', style?: string | null, offset?: number | null, length?: number | null } | null> | null, entityRanges?: Array<{ __typename?: 'EntityRanges', offset?: number | null, length?: number | null, key?: number | null } | null> | null } | null> | null, entityMap?: Array<{ __typename?: 'EntityMap', type?: string | null, mutability?: string | null, data?: { __typename?: 'EntityMapData', src?: string | null, width?: string | null, alignment?: string | null, height?: string | null, url?: string | null, targetOption?: string | null } | null } | null> | null } | null } | { __typename: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null, public?: boolean | null } | { __typename: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, public?: boolean | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> } | null> }> } | null, lessons?: { __typename?: 'Lessons', total: number, totalCount: number, result: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null, public?: boolean | null }> } | null, quizzes?: { __typename?: 'Quizzes', total: number, totalCount: number, result: Array<{ __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, public?: boolean | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> }> } | null, articles?: { __typename?: 'Articles', total: number, totalCount: number, result: Array<{ __typename?: 'Article', id?: string | null, title?: string | null, creator?: string | null, public?: boolean | null, content?: { __typename?: 'Content', blocks?: Array<{ __typename?: 'Blocks', key?: string | null, text?: string | null, type?: string | null, depth?: number | null, inlineStyleRanges?: Array<{ __typename?: 'InlineStyleRanges', style?: string | null, offset?: number | null, length?: number | null } | null> | null, entityRanges?: Array<{ __typename?: 'EntityRanges', offset?: number | null, length?: number | null, key?: number | null } | null> | null } | null> | null, entityMap?: Array<{ __typename?: 'EntityMap', type?: string | null, mutability?: string | null, data?: { __typename?: 'EntityMapData', src?: string | null, width?: string | null, alignment?: string | null, height?: string | null, url?: string | null, targetOption?: string | null } | null } | null> | null } | null }> } | null } };
+export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, name: string, avatar: string, contact: string, paymentId?: string | null, package?: { __typename?: 'Package', amount?: number | null, cadence?: string | null, status?: string | null, since?: number | null, trialEnd?: number | null } | null, bookmarks?: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null } | null> | null, playlists?: { __typename?: 'Playlists', total: number, totalCount: number, result: Array<{ __typename?: 'Playlist', id?: string | null, name: string, creator: string, public?: boolean | null, plan: Array<{ __typename: 'Article', id?: string | null, title?: string | null, creator?: string | null, pdf?: string | null, public?: boolean | null, content?: { __typename?: 'Content', blocks?: Array<{ __typename?: 'Blocks', key?: string | null, text?: string | null, type?: string | null, depth?: number | null, inlineStyleRanges?: Array<{ __typename?: 'InlineStyleRanges', style?: string | null, offset?: number | null, length?: number | null } | null> | null, entityRanges?: Array<{ __typename?: 'EntityRanges', offset?: number | null, length?: number | null, key?: number | null } | null> | null } | null> | null, entityMap?: Array<{ __typename?: 'EntityMap', type?: string | null, mutability?: string | null, data?: { __typename?: 'EntityMapData', src?: string | null, width?: string | null, alignment?: string | null, height?: string | null, url?: string | null, targetOption?: string | null } | null } | null> | null } | null } | { __typename: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null, public?: boolean | null } | { __typename: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, public?: boolean | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> } | null> }> } | null, lessons?: { __typename?: 'Lessons', total: number, totalCount: number, result: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null, public?: boolean | null }> } | null, quizzes?: { __typename?: 'Quizzes', total: number, totalCount: number, result: Array<{ __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, public?: boolean | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> }> } | null, articles?: { __typename?: 'Articles', total: number, totalCount: number, result: Array<{ __typename?: 'Article', id?: string | null, title?: string | null, creator?: string | null, pdf?: string | null, public?: boolean | null, content?: { __typename?: 'Content', blocks?: Array<{ __typename?: 'Blocks', key?: string | null, text?: string | null, type?: string | null, depth?: number | null, inlineStyleRanges?: Array<{ __typename?: 'InlineStyleRanges', style?: string | null, offset?: number | null, length?: number | null } | null> | null, entityRanges?: Array<{ __typename?: 'EntityRanges', offset?: number | null, length?: number | null, key?: number | null } | null> | null } | null> | null, entityMap?: Array<{ __typename?: 'EntityMap', type?: string | null, mutability?: string | null, data?: { __typename?: 'EntityMapData', src?: string | null, width?: string | null, alignment?: string | null, height?: string | null, url?: string | null, targetOption?: string | null } | null } | null> | null } | null }> } | null } };
 
 export type AllUsersQueryVariables = Exact<{
   limit: Scalars['Int'];
@@ -1175,6 +1178,7 @@ export const ArticleDocument = gql`
         }
       }
     }
+    pdf
     public
   }
 }
@@ -1244,6 +1248,7 @@ export const AllArticlesDocument = gql`
           }
         }
       }
+      pdf
       public
     }
   }
@@ -1469,6 +1474,7 @@ export const PlaylistDocument = gql`
             }
           }
         }
+        pdf
         public
       }
     }
@@ -1572,6 +1578,7 @@ export const AllPlaylistsDocument = gql`
               }
             }
           }
+          pdf
           public
         }
       }
@@ -1773,6 +1780,7 @@ export const UserDocument = gql`
                 }
               }
             }
+            pdf
             public
           }
           ... on Lesson {
@@ -1874,6 +1882,7 @@ export const UserDocument = gql`
             }
           }
         }
+        pdf
         public
       }
       totalCount
