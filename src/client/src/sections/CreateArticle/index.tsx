@@ -9,6 +9,7 @@ import { convertToRaw } from 'draft-js';
 import { Footer } from '../../lib/components';
 import draftToHtml from 'draftjs-to-html';
 import { useNavigate } from 'react-router-dom';
+import { PdfUploader } from '../../lib/components';
 
 type Props = {
   viewer: Viewer;
@@ -77,6 +78,7 @@ export const CreateArticle = ({ viewer }: Props) => {
   const rawContent = editorState && convertToRaw(editorState.getCurrentContent())
   const [title, setTitle] = useState<string | undefined>(undefined);
   const [locked, setLocked] = useState<boolean>(false);
+  const [pdf, setPdf] = useState<string | undefined>(undefined);
   const navigate = useNavigate();
 
   const [createArticle, { data, loading, error }] = useCreateArticleMutation({
@@ -118,6 +120,7 @@ export const CreateArticle = ({ viewer }: Props) => {
       };
       initialArticle.creator = `${viewer.id}`;
       initialArticle.public = locked;
+      initialArticle.pdf = `${pdf}`;
     }
 
     await createArticle({
@@ -145,6 +148,7 @@ export const CreateArticle = ({ viewer }: Props) => {
                 onChange={(e) => setTitle(e.target.value)}
                 required
               />
+              <PdfUploader />
               <Editor
                 editorClassName='createArticle-editor'
                 editorState={editorState}

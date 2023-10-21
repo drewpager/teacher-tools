@@ -143,7 +143,7 @@ export const PdfUploader = () => {
     onSubmit={async (values) => {
       values.pdf = formData.pdf;
 
-      console.log(values);
+      return values.pdf;
       // await createLesson({
       //   variables: {
       //     input: values
@@ -161,7 +161,7 @@ export const PdfUploader = () => {
           variant='outlined'
           className='image--upload'
           helperText="Upload a PDF Article"
-          sx={{ width: "75%", marginTop: 1 }}
+          sx={{ width: "100%", marginTop: 1 }}
           name="pdf"
           onChange={async (e: ChangeEvent<HTMLInputElement>) => { await handleImageUpload(e.target.files) }}
           InputProps={{
