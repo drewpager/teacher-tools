@@ -69,6 +69,7 @@ export const ALL_PLAYLISTS = gql`
                 }
               }
             }
+            pdf
             public
           }
         }

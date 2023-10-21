@@ -20,6 +20,7 @@ export interface CreateArticleInput {
   content: Content;
   creator: string;
   public: boolean;
+  pdf?: string;
 }
 
 export interface Content {

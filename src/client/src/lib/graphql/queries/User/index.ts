@@ -76,6 +76,7 @@ export const USER = gql`
                   }
                 }
               }
+              pdf
               public
             }
             ... on Lesson {
@@ -177,6 +178,7 @@ export const USER = gql`
               }
             }
           }
+          pdf
           public
         }
         totalCount

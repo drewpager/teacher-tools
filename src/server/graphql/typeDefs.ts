@@ -115,6 +115,7 @@ export const typeDefs = gql`
     content: Content
     creator: String
     public: Boolean
+    pdf: String
   }
 
   type Articles {
@@ -220,6 +221,7 @@ export const typeDefs = gql`
     content: ContentInput
     creator: String
     public: Boolean
+    pdf: String
   }
 
   input ContentInput {
@@ -331,6 +333,7 @@ export const typeDefs = gql`
     creator: String
     content: ContentInput
     public: Boolean
+    pdf: String
   }
 
   input LessonPlanInput {

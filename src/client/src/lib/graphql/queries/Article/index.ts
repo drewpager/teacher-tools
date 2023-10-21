@@ -36,6 +36,7 @@ export const ARTICLE = gql`
           }
         }
       }
+      pdf
       public
     }
   }

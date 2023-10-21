@@ -37,6 +37,7 @@ export const ALL_ARTICLES = gql`
             }
           }
         }
+        pdf
         public
       }
     }
