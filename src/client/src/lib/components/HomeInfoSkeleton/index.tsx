@@ -8,17 +8,17 @@ export const HomeInfoSkeleton = () => {
       <Grid container className='skel-grid--container'>
         <Grid item xs={12} sm={12} md={7} lg={6}>
           <Box className='box--title'>
-            <Skeleton variant="text" width="70%" height="60px" />
-            <Skeleton variant="text" width="70%" height="60px" />
-            <Skeleton variant="text" width="70%" height="60px" />
+            <Skeleton variant="text" className="skeleton--text-big" />
+            <Skeleton variant="text" className="skeleton--text-big" />
+            <Skeleton variant="text" className="skeleton--text-big" />
             <br />
             <Skeleton variant="text" width="70%" height="30px" />
             <Skeleton variant="text" width="70%" height="30px" />
             <Skeleton variant="text" width="70%" height="30px" />
             <Skeleton variant="text" width="70%" height="30px" />
             <div className="skel-grid--buttons">
-              <Skeleton variant="rounded" width="34%" height="70px" className='skel-button1' />
-              <Skeleton variant="rounded" width="34%" height="70px" className='skel-button2' />
+              <Skeleton variant="rounded" className='skel-button1' />
+              <Skeleton variant="rounded" className='skel-button2' />
             </div>
           </Box>
         </Grid>

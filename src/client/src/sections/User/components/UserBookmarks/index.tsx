@@ -1,11 +1,10 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState } from 'react';
 import { Box, Grid, ListItem, Tooltip, Typography, Button, Dialog, DialogContent, DialogTitle, DialogContentText, DialogActions } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { User, Lesson, useDeleteAllBookmarksMutation } from '../../../../graphql/generated';
 import { Link } from 'react-router-dom';
-import gql from 'graphql-tag';
-import { useMutation } from '@apollo/client';
 import { Cancel } from '@mui/icons-material';
+import "./userBookmarks.scss";
 
 interface Props {
   user: User | any;
@@ -34,7 +33,7 @@ export const UserBookmarks = ({ user, setBookmarksPage }: Props) => {
   }
 
   const userBookmarksList = (
-    <Box sx={{ marginLeft: "2rem" }}>
+    <Box className="user--bookmarks">
       <Grid container spacing={2} sx={{ alignItems: "center" }}>
         <Grid item>
           <h2>{totalCount} Bookmarks</h2>

@@ -1,4 +1,4 @@
-import { CircularProgress, Grid, Box, Card, TextField, Button, Switch, FormControlLabel, Chip, Avatar, Typography, CardMedia, InputAdornment, Skeleton, Tooltip, Alert, Snackbar, IconButton, Checkbox } from '@mui/material';
+import { Grid, Box, Card, TextField, Button, Switch, FormControlLabel, Chip, Typography, CardMedia, InputAdornment, Tooltip, Alert, Snackbar, Checkbox } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 import React, { useState, ChangeEvent, useRef, useEffect, useMemo, SyntheticEvent } from 'react';
@@ -12,7 +12,6 @@ import {
   FullLessonQuiz,
   Plan,
   useUserQuery,
-  Playlist
 } from '../../graphql/generated';
 import { DisplayError, titleCase } from '../../lib/utils';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
@@ -22,7 +21,6 @@ import './createPlaylist.scss';
 import { Link } from 'react-router-dom';
 import { CreatePlaylistCard, Footer } from '../../lib/components';
 import theme from '../../theme';
-import { FeedbackModal } from '../Contact/FeedbackModal';
 import HowItWorks from '../../lib/assets/how-it-works-3.png';
 import { CreatePlaylistSkeleton } from './createPlaylistSkeleton';
 import { Helmet } from 'react-helmet';
@@ -115,7 +113,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const inputRef = useFocus();
   const searchRef = useFocus();
   const [playlist, setPlaylist] = useState<InputLessonPlan>(initialData)
-  const [locked, setLocked] = useState<boolean>();
+  const [locked, setLocked] = useState<boolean>(false);
   const [ascending, setAscending] = useState<boolean>(true);
 
   const limit: number = 1000;
@@ -207,10 +205,10 @@ export const CreatePlaylist = ({ viewer }: props) => {
     },
   }));
 
-  const lessonQuery = useMemo(() => { return lessonData?.allLessons.result }, [lessonData])
+  let lessonQuery = useMemo(() => lessonData?.allLessons.result, [lessonData])
   // let lessonQuery = lessonData ? lessonData.allLessons.result : null;
-  let quizQuery = useMemo(() => { return quizData?.allquizzes?.result }, [quizData])
-  let articleQuery = useMemo(() => { return articleData?.allarticles?.result }, [articleData])
+  let quizQuery = useMemo(() => quizData?.allquizzes?.result, [quizData])
+  let articleQuery = useMemo(() => articleData?.allarticles?.result, [articleData])
   let bookmarkQuery = userData ? userData.user.bookmarks : null;
 
   useEffect(() => {
@@ -253,8 +251,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
           creator: q.creator,
           _id: q.id,
           title: q.title,
-          // questions: [...q.questions]
-          questions: q.questions,
+          questions: [...q.questions],
+          // questions: q.questions,
           public: q.public
         }
         quizInput.push(quizObj)
@@ -295,16 +293,12 @@ export const CreatePlaylist = ({ viewer }: props) => {
     return self.indexOf(value) === index;
   }
 
-  function onlyDefined(value: { main: string, secondary: undefined | string }, index: number, self: any) {
-    return value.secondary !== undefined
-  }
+  // function onlyDefined(value: { main: string, secondary: undefined | string }, index: number, self: any) {
+  //   return value.secondary !== undefined
+  // }
 
   function ascend(a: any, b: any) {
     return new Date(a.startDate).getTime() - new Date(b.startDate).getTime();
-  }
-
-  function descend(a: any, b: any) {
-    return new Date(b.startDate).getTime() - new Date(a.startDate).getTime();
   }
 
   const handleChron = (plans: Plan[]) => {
@@ -327,11 +321,11 @@ export const CreatePlaylist = ({ viewer }: props) => {
   categor?.map((i) => secondaryCategory.push(i?.category ? { main: i.category[0], secondary: i.category[2]?.trim() } : undefined))
   categor?.map((i) => secondaryCategory.push(i?.category ? { main: i.category[0], secondary: i.category[3]?.trim() } : undefined))
   const mainCategories = mainCategoryArray.filter(onlyUnique)
-  let secCategories = secondaryCategory.filter(onlyDefined)
-  const secondaryCategories = new Map(secCategories.map((item: any) =>
-    [item["secondary"], item])).values();
+  // let secCategories = secondaryCategory.filter(onlyDefined)
+  // const secondaryCategories = new Map(secCategories.map((item: any) =>
+  //   [item["secondary"], item])).values();
 
-  const combinedCategories = Array.from(secondaryCategories)
+  // const combinedCategories = Array.from(secondaryCategories)
   // const selectedSecondary = allCategories.filter((b) => b.includes(selected[0]));
   // setCater(mainCategories.map((i) => false))
   const titleHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -341,7 +335,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       plan: [...playlist.plan],
       name: e.target.value,
       creator: viewer && viewer.id ? viewer.id : "0",
-      public: locked ? locked : false
+      public: locked
     })
     window.localStorage.setItem('playlist', JSON.stringify(playlist));
     // e.target.onmouseleave = () => { setAutoSaved(true) }
@@ -446,6 +440,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
     }
     handleCategoryClick("All", 0)
     setAscending(true);
+    handleLock()
   }
 
   const handleSwitch = () => {
@@ -455,7 +450,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
   const handleLock = () => {
     setLocked(!locked);
-    setPlaylist({ ...playlist, public: locked ? locked : false });
+    setPlaylist({ ...playlist, public: !locked });
   }
 
   const resetSearch = () => {
@@ -504,11 +499,11 @@ export const CreatePlaylist = ({ viewer }: props) => {
     setPlans([...filter.filter((e) => e.category?.includes(i))])
   }
 
-  if (error) {
+  if (error || userError) {
     return <DisplayError title="Lesson Plan Creation Failed!" />
   }
 
-  if (loading) {
+  if (loading || userLoading) {
     return <CreatePlaylistSkeleton />
   }
 

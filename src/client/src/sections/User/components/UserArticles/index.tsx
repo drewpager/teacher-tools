@@ -1,12 +1,10 @@
-import React, { useState, ChangeEvent } from 'react';
-import { Box, Grid, ListItem, Tooltip, Typography, Button, Dialog, DialogContent, DialogTitle, DialogContentText, DialogActions, Pagination } from '@mui/material';
+import React, { ChangeEvent } from 'react';
+import { Box, Grid, Tooltip, Pagination } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { User, Lesson, useDeleteAllBookmarksMutation, Article, Articles } from '../../../../graphql/generated';
+import { Articles } from '../../../../graphql/generated';
 import { Link } from 'react-router-dom';
-import gql from 'graphql-tag';
-import { useMutation } from '@apollo/client';
-import { Cancel } from '@mui/icons-material';
 import { UserArticlesCard } from '../../../../lib/components/UserArticlesCard';
+import "./userArticles.scss";
 
 interface Props {
   userArticles: Articles;
@@ -24,7 +22,7 @@ export const UserArticles = ({ userArticles, articlesPage, limit, setArticlesPag
   }
 
   const userArticlesList = (
-    <Box sx={{ marginLeft: "2rem" }}>
+    <Box className="user--articles">
       <Grid container spacing={2} sx={{ alignItems: "center" }}>
         <Grid item>
           <h2>{totalCount} Articles</h2>

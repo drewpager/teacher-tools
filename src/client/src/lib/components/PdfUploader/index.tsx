@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent } from "react";
 import { Typography, Box, InputAdornment, TextField, CircularProgress } from "@mui/material";
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
-import { FieldArray, Formik, Field, Form } from 'formik';
+import { Formik, Form } from 'formik';
 import * as yup from 'yup';
 
 const validationSchema = yup.object({
@@ -72,13 +72,13 @@ export const PdfUploader = ({ onData }: PdfUploaderProps) => {
     }
 
     function send(piece: any, start: number, end: number, size: number) {
-      console.log("start ", start);
-      console.log("end", end);
-      console.log("size", size)
-      console.log("name", file!.name)
+      // console.log("start ", start);
+      // console.log("end", end);
+      // console.log("size", size)
+      // console.log("name", file!.name)
 
       var formdata = new FormData();
-      console.log(XUniqueUploadId);
+      // console.log(XUniqueUploadId);
 
       formdata.append("file", piece);
       formdata.append("cloud_name", YOUR_CLOUD_NAME);
@@ -97,9 +97,7 @@ export const PdfUploader = ({ onData }: PdfUploaderProps) => {
       xhr.onload = function () {
         // do something to response
         const res = JSON.parse(this.response);
-        console.log("RES: ", res);
         formData.pdf = res.secure_url;
-        console.log("formData PDF: ", formData.pdf)
         setFormData({ pdf: formData.pdf });
         sendDataToCreateArticle()
       };
@@ -155,13 +153,6 @@ export const PdfUploader = ({ onData }: PdfUploaderProps) => {
         values.pdf = formData.pdf;
 
         sendDataToCreateArticle();
-        // await createLesson({
-        //   variables: {
-        //     input: values
-        //   }
-        // });
-
-        // navigate(`../user/${viewer.id}`, { replace: true })
       }}
     >
       {({ values, errors, touched, isSubmitting, handleSubmit, handleChange, setFieldValue }) => (
@@ -171,7 +162,7 @@ export const PdfUploader = ({ onData }: PdfUploaderProps) => {
             id="pdf"
             variant='outlined'
             className='image--upload'
-            helperText="Optional: Upload a PDF Article"
+            helperText="Upload a PDF Article and/or Use Text Editor Below"
             sx={{ width: "100%", marginTop: 1 }}
             name="pdf"
             onChange={async (e: ChangeEvent<HTMLInputElement>) => { await handleImageUpload(e.target.files) }}

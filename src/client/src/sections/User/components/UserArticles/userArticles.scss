@@ -1,0 +1,7 @@
+.user--articles {
+  margin-left: 2rem;
+
+  @media (max-width: 768px) {
+    margin-left: 0.5rem;
+  }
+}

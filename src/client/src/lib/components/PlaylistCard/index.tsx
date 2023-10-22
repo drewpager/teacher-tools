@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   Grid,
   Typography,
-  List,
   ListItem,
   ListItemButton,
   ListItemText,
@@ -22,14 +21,13 @@ import {
   TimelineConnector,
   TimelineContent,
   TimelineDot,
-  TimelineOppositeContent,
 } from '@mui/lab';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import QuizIcon from '@mui/icons-material/Quiz';
 import ArticleIcon from '@mui/icons-material/Article';
-import { Playlist, Lesson, LessonPlanUnion, Viewer, useUserQuery } from '../../../graphql/generated';
+import { Playlist, LessonPlanUnion, Viewer, useUserQuery } from '../../../graphql/generated';
 import { QuizPlayer, ArticlePlayer } from '../index';
 import { VideosPlayer } from '../VideosPlayer';
 import './playlistcard.scss';
@@ -66,11 +64,10 @@ interface CopyPlaylistVariables {
 
 // NOTE: Pass lessons object instead of single lesson for Accordion to work correctly
 export const PlaylistCard = ({ playlist, viewer }: Props) => {
-  // const [video, setVideo] = useState<string>()
   const [open, setOpen] = useState<boolean>(false);
   const [userError, setUserError] = useState<string>("");
   const navigation = useNavigate();
-  const [itemName, setItemName] = useState<LessonPlanUnion>(playlist && playlist.plan ? { ...playlist.plan[0] } : {})
+  // const [itemName, setItemName] = useState<LessonPlanUnion>(playlist && playlist.plan ? { ...playlist.plan[0] } : {})
   const [active, setActive] = useState<string>(playlist && playlist.plan ? `${playlist?.plan[0]?.id}` : `1`)
   const [copyPlaylist, { loading: CopyPlaylistLoading, error: CopyPlaylistError }] = useMutation<CopyPlaylistData, CopyPlaylistVariables>(COPY_PLAYLIST);
   const params = useParams();
@@ -98,7 +95,6 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
     if (document.contains(document.getElementById("video-player"))) {
       document.getElementById("video-player")?.remove()
     }
-    setItemName(item)
     setActive(`${item.id}`)
     if (params.id !== undefined) {
       window.scrollTo(0, 0);

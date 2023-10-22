@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
-import { Viewer } from '../../../graphql/generated';
-import sample from "../../assets/sample.pdf";
 import { Chip, IconButton, Button, Box, Typography, Skeleton } from '@mui/material';
 import UndoIcon from '@mui/icons-material/Undo';
 import RedoIcon from '@mui/icons-material/Redo';
@@ -46,19 +44,10 @@ export const PdfPlayer = ({ pdf }: Props) => {
     )
   }
 
-  // const PDFSkeleton = () => {
-  //   return (
-  //     <>
-  //       <Skeleton variant="rectangular" width={500} height={900} />
-  //     </>
-  //   )
-  // }
-
   return (
     <Box className="pdf--player-section">
       <Document
         file={pdf}
-        // file={sample}
         loading={<Skeleton variant="rectangular" width={500} height={900} />}
         onLoadSuccess={onDocumentLoadSuccess}
       >
@@ -69,9 +58,6 @@ export const PdfPlayer = ({ pdf }: Props) => {
         />
       </Document>
       <Box className="pdf-button--section">
-        {/* <p>
-          Page {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
-        </p> */}
         <IconButton
           disableRipple
           onClick={previousPage}

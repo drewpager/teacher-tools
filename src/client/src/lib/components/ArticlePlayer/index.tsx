@@ -1,6 +1,6 @@
 import React from 'react';
 import { Article } from '../../../graphql/generated';
-import { Box, Divider, Typography } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 import draftToHtml from 'draftjs-to-html';
 import ArticleIcon from '@mui/icons-material/Article';
 import './articlePlayer.scss';

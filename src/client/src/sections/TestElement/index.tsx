@@ -860,21 +860,23 @@
 //   );
 // }
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Box } from '@mui/material';
 import { Viewer } from '../../graphql/generated';
-import { PdfPlayer, PdfUploader } from '../../lib/components';
+import { HomeInfoSkeleton } from '../../lib/components';
 
 interface Props {
   viewer: Viewer;
 }
 
 export const TestElement = ({ viewer }: Props) => {
+  console.log(viewer);
 
   return (
     <Box sx={{ marginTop: 15 }}>
+      <HomeInfoSkeleton />
       {/* <PdfUploader /> */}
-      <PdfPlayer pdf="https://res.cloudinary.com/drewpager/image/upload/v1697814112/platos-peach-pdf/brighton-badge.pdf.pdf" />
+      {/* <PdfPlayer pdf="https://res.cloudinary.com/drewpager/image/upload/v1697814112/platos-peach-pdf/brighton-badge.pdf.pdf" /> */}
     </Box>
   )
 }

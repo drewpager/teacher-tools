@@ -26,61 +26,57 @@ export const PageSkeleton = () => {
         <h2>XX Lessons</h2>
         <Grid container spacing={4}>
           <Grid item lg={4} md={6} sm={12} xs={12}>
-            <Skeleton variant="rectangular" width={"25vw"} height={150} />
+            <Skeleton variant="rectangular" className="item-skeleton" />
           </Grid>
           <Grid item lg={4} md={6} sm={12} xs={12}>
-            <Skeleton variant="rectangular" width={"25vw"} height={150} />
+            <Skeleton variant="rectangular" className="item-skeleton" />
           </Grid>
           <Grid item lg={4} md={6} sm={12} xs={12}>
-            <Skeleton variant="rectangular" width={"25vw"} height={150} />
+            <Skeleton variant="rectangular" className="item-skeleton" />
           </Grid>
         </Grid>
         <h2>XX Lesson Plans</h2>
         <Grid container spacing={4}>
           <Grid item lg={4} md={6} sm={12} xs={12}>
-            <Skeleton variant="rectangular" width={"25vw"} height={150} />
+            <Skeleton variant="rectangular" className="item-skeleton" />
           </Grid>
           <Grid item lg={4} md={6} sm={12} xs={12}>
-            <Skeleton variant="rectangular" width={"25vw"} height={150} />
+            <Skeleton variant="rectangular" className="item-skeleton" />
           </Grid>
           <Grid item lg={4} md={6} sm={12} xs={12}>
-            <Skeleton variant="rectangular" width={"25vw"} height={150} />
+            <Skeleton variant="rectangular" className="item-skeleton" />
           </Grid>
         </Grid>
         <h2>XX Quizzes</h2>
         <Grid container spacing={4}>
           <Grid item lg={4} md={6} sm={12} xs={12}>
-            <Skeleton variant="rectangular" width={"25vw"} height={150} />
+            <Skeleton variant="rectangular" className="item-skeleton" />
           </Grid>
           <Grid item lg={4} md={6} sm={12} xs={12}>
-            <Skeleton variant="rectangular" width={"25vw"} height={150} />
+            <Skeleton variant="rectangular" className="item-skeleton" />
           </Grid>
           <Grid item lg={4} md={6} sm={12} xs={12}>
-            <Skeleton variant="rectangular" width={"25vw"} height={150} />
+            <Skeleton variant="rectangular" className="item-skeleton" />
           </Grid>
         </Grid>
         <h2>XX Articles</h2>
         <Grid container spacing={4}>
           <Grid item lg={4} md={6} sm={12} xs={12}>
-            <Skeleton variant="rectangular" width={"25vw"} height={150} />
+            <Skeleton variant="rectangular" className="item-skeleton" />
           </Grid>
           <Grid item lg={4} md={6} sm={12} xs={12}>
-            <Skeleton variant="rectangular" width={"25vw"} height={150} />
+            <Skeleton variant="rectangular" className="item-skeleton" />
           </Grid>
           <Grid item lg={4} md={6} sm={12} xs={12}>
-            <Skeleton variant="rectangular" width={"25vw"} height={150} />
+            <Skeleton variant="rectangular" className="item-skeleton" />
           </Grid>
         </Grid>
         <h2>XX Bookmarks</h2>
         <Grid container spacing={4}>
           <Grid item lg={4} md={6} sm={12} xs={12}>
-            <Skeleton variant="rectangular" width={"25vw"} height={150} />
-          </Grid>
-          <Grid item lg={4} md={6} sm={12} xs={12}>
-            <Skeleton variant="rectangular" width={"25vw"} height={150} />
-          </Grid>
-          <Grid item lg={4} md={6} sm={12} xs={12}>
-            <Skeleton variant="rectangular" width={"25vw"} height={150} />
+            <Skeleton variant="text" height={50} />
+            <Skeleton variant="text" height={50} />
+            <Skeleton variant="text" height={50} />
           </Grid>
         </Grid>
       </Box>
