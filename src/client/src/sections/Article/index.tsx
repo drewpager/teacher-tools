@@ -3,7 +3,7 @@ import { useArticleQuery, Viewer } from '../../graphql/generated';
 import { useParams } from 'react-router-dom';
 import { Box, LinearProgress } from '@mui/material';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
-import { Search, Footer } from '../../lib/components/';
+import { Search, Footer, PdfPlayer } from '../../lib/components/';
 import { Helmet } from 'react-helmet';
 import draftToHtml from 'draftjs-to-html';
 import './article.scss';
@@ -87,6 +87,7 @@ export const Article = () => {
         <Box className="article--section">
           <h2>{article.title}</h2>
           {newRawContent && (<div className="article--body" dangerouslySetInnerHTML={{ __html: draftToHtml(newRawContent) }} />)}
+          {article.pdf && (<PdfPlayer pdf={article.pdf} />)}
         </Box>
         <Footer />
       </Box>

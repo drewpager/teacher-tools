@@ -6,7 +6,7 @@ import { Viewer, Article, useCreateArticleMutation } from '../../graphql/generat
 import { Editor, EditorState } from 'react-draft-wysiwyg';
 import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { convertToRaw } from 'draft-js';
-import { Footer } from '../../lib/components';
+import { Footer, PdfPlayer } from '../../lib/components';
 import draftToHtml from 'draftjs-to-html';
 import { useNavigate } from 'react-router-dom';
 import { PdfUploader } from '../../lib/components';
@@ -107,7 +107,7 @@ export const CreateArticle = ({ viewer }: Props) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (rawContent && title) {
+    if (title && rawContent) {
       let entityMapLength = Object.keys(rawContent.entityMap).length;
       let entityMapArray = [];
       for (let i = 0; i < entityMapLength; i++) {
@@ -118,6 +118,11 @@ export const CreateArticle = ({ viewer }: Props) => {
         blocks: [...rawContent.blocks],
         entityMap: [...entityMapArray],
       };
+      initialArticle.creator = `${viewer.id}`;
+      initialArticle.public = locked;
+      initialArticle.pdf = `${pdf}`;
+    } else if (title && pdf) {
+      initialArticle.title = `${title}`;
       initialArticle.creator = `${viewer.id}`;
       initialArticle.public = locked;
       initialArticle.pdf = `${pdf}`;
@@ -134,6 +139,11 @@ export const CreateArticle = ({ viewer }: Props) => {
     // console.log(initialArticle);
   }
 
+  const handleChildData = (data: string) => {
+    setPdf(data);
+    console.log(data); // Do something with the data received from the child
+  };
+
   return (
     <Box>
       <Grid container>
@@ -148,7 +158,7 @@ export const CreateArticle = ({ viewer }: Props) => {
                 onChange={(e) => setTitle(e.target.value)}
                 required
               />
-              <PdfUploader />
+              <PdfUploader onData={handleChildData} />
               <Editor
                 editorClassName='createArticle-editor'
                 editorState={editorState}
@@ -182,6 +192,7 @@ export const CreateArticle = ({ viewer }: Props) => {
             <h2>{title}</h2>
             {/* {rawContent && console.log(draftToHtml(rawContent))} */}
             {rawContent && (<div dangerouslySetInnerHTML={{ __html: draftToHtml(rawContent) }} />)}
+            {pdf && (<PdfPlayer pdf={pdf} />)}
           </Box>
         </Grid>
       </Grid>

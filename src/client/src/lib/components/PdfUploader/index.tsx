@@ -14,13 +14,23 @@ type Props = {
   pdf: string;
 }
 
+interface PdfUploaderProps {
+  onData: (data: string) => void;
+}
+
 const initialData: Props = {
   pdf: ""
 }
 
-export const PdfUploader = () => {
+export const PdfUploader = ({ onData }: PdfUploaderProps) => {
   const [pdfProgress, setPdfProgress] = useState<number>(0);
   const [formData, setFormData] = useState<Props>(initialData);
+
+  const sendDataToCreateArticle = () => {
+    const data: string = formData.pdf;
+    onData(data);
+  };
+
 
   const handleImageUpload = async (files: FileList | null) => {
 
@@ -91,6 +101,7 @@ export const PdfUploader = () => {
         formData.pdf = res.secure_url;
         console.log("formData PDF: ", formData.pdf)
         setFormData({ pdf: formData.pdf });
+        sendDataToCreateArticle()
       };
       xhr.send(formdata);
     }
@@ -136,51 +147,51 @@ export const PdfUploader = () => {
 
   return (
     <Formik
-    initialValues={{
-      pdf: ""
-    }}
-    validationSchema={validationSchema}
-    onSubmit={async (values) => {
-      values.pdf = formData.pdf;
+      initialValues={{
+        pdf: ""
+      }}
+      validationSchema={validationSchema}
+      onSubmit={async (values) => {
+        values.pdf = formData.pdf;
 
-      return values.pdf;
-      // await createLesson({
-      //   variables: {
-      //     input: values
-      //   }
-      // });
+        sendDataToCreateArticle();
+        // await createLesson({
+        //   variables: {
+        //     input: values
+        //   }
+        // });
 
-      // navigate(`../user/${viewer.id}`, { replace: true })
-    }}
-  >
-    {({ values, errors, touched, isSubmitting, handleSubmit, handleChange, setFieldValue }) => (
-      <Form onSubmit={handleSubmit}>
-        <TextField
-          type="file"
-          id="pdf"
-          variant='outlined'
-          className='image--upload'
-          helperText="Upload a PDF Article"
-          sx={{ width: "100%", marginTop: 1 }}
-          name="pdf"
-          onChange={async (e: ChangeEvent<HTMLInputElement>) => { await handleImageUpload(e.target.files) }}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <LabelProgress progress={pdfProgress} />
-              </InputAdornment>
-            ),
-            startAdornment: (
-              <InputAdornment position="start">
-                <PictureAsPdfIcon />
-              </InputAdornment>
-            )
-          }}
-          color="primary"
-          required
-        />
-    </Form>
-  )}
-  </Formik>
+        // navigate(`../user/${viewer.id}`, { replace: true })
+      }}
+    >
+      {({ values, errors, touched, isSubmitting, handleSubmit, handleChange, setFieldValue }) => (
+        <Form onSubmit={handleSubmit}>
+          <TextField
+            type="file"
+            id="pdf"
+            variant='outlined'
+            className='image--upload'
+            helperText="Optional: Upload a PDF Article"
+            sx={{ width: "100%", marginTop: 1 }}
+            name="pdf"
+            onChange={async (e: ChangeEvent<HTMLInputElement>) => { await handleImageUpload(e.target.files) }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <LabelProgress progress={pdfProgress} />
+                </InputAdornment>
+              ),
+              startAdornment: (
+                <InputAdornment position="start">
+                  <PictureAsPdfIcon />
+                </InputAdornment>
+              )
+            }}
+            color="primary"
+            required
+          />
+        </Form>
+      )}
+    </Formik>
   )
 }

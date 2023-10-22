@@ -4,6 +4,7 @@ import { Box, Divider, Typography } from '@mui/material';
 import draftToHtml from 'draftjs-to-html';
 import ArticleIcon from '@mui/icons-material/Article';
 import './articlePlayer.scss';
+import { PdfPlayer } from '../PdfPlayer';
 
 interface Props {
   article: Article
@@ -56,6 +57,7 @@ export const ArticlePlayer = ({ article }: Props) => {
         <h2 className='article--title'>{article.title}</h2>
       </Box>
       <Divider />
+      {article.pdf && <PdfPlayer pdf={article.pdf} />}
       <div className="article--body" dangerouslySetInnerHTML={{ __html: draftToHtml(newRawContent) }} />
     </Box>
   )

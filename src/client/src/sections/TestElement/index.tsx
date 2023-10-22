@@ -870,10 +870,10 @@ interface Props {
 }
 
 export const TestElement = ({ viewer }: Props) => {
-  
+
   return (
     <Box sx={{ marginTop: 15 }}>
-      <PdfUploader />
+      {/* <PdfUploader /> */}
       <PdfPlayer pdf="https://res.cloudinary.com/drewpager/image/upload/v1697814112/platos-peach-pdf/brighton-badge.pdf.pdf" />
     </Box>
   )
