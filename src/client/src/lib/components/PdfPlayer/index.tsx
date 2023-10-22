@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { Viewer } from '../../../graphql/generated';
 import sample from "../../assets/sample.pdf";
-import { SkeletonComponent } from '../SkeletonComponent';
-import { Chip, IconButton, Button, Box, Typography } from '@mui/material';
+import { Chip, IconButton, Button, Box, Typography, Skeleton } from '@mui/material';
 import UndoIcon from '@mui/icons-material/Undo';
 import RedoIcon from '@mui/icons-material/Redo';
 import "./pdfPlayer.scss";
@@ -47,56 +46,56 @@ export const PdfPlayer = ({ pdf }: Props) => {
     )
   }
 
-  const PDFSkeleton = () => {
-    return (
-      <>
-        <SkeletonComponent variant="rectangular" width={500} height={"70vh"} />
-        <SkeletonComponent variant="text" width={100} height={150} />
-        <SkeletonComponent variant="rectangular" width={125} height={150} />
-      </>
-    )
-  }
+  // const PDFSkeleton = () => {
+  //   return (
+  //     <>
+  //       <Skeleton variant="rectangular" width={500} height={900} />
+  //     </>
+  //   )
+  // }
 
   return (
     <Box className="pdf--player-section">
       <Document
         file={pdf}
         // file={sample}
-        loading={<PDFSkeleton />}
+        loading={<Skeleton variant="rectangular" width={500} height={900} />}
         onLoadSuccess={onDocumentLoadSuccess}
       >
         <Page
           pageNumber={pageNumber}
-          loading={<PDFSkeleton />}
+          loading={<Skeleton variant="rectangular" width={500} height={900} />}
           onLoadError={(error: any) => PDFError(error.message)}
         />
       </Document>
-      <Box sx={{ textAlign: "center" }}>
+      <Box className="pdf-button--section">
         {/* <p>
           Page {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
         </p> */}
-        <IconButton 
+        <IconButton
           disableRipple
           onClick={previousPage}
+          disabled={pageNumber <= 1}
         >
-        <Button 
-          disabled={pageNumber <= 1} 
-          disableRipple
-        >
-          <UndoIcon /> Previous
-        </Button>
+          <Button
+            disabled={pageNumber <= 1}
+            disableRipple
+          >
+            <UndoIcon /> Previous
+          </Button>
         </IconButton>
         <Chip variant="outlined" className="pdfPage-chip" label={`Page ${pageNumber || (numPages ? 1 : '--')} of ${numPages || '--'}`} />
-        <IconButton 
+        <IconButton
           disableRipple
           onClick={nextPage}
+          disabled={pageNumber === numPages}
         >
-        <Button 
-          disabled={numPages && pageNumber >= numPages ? true : false}
-          disableRipple
-        >
-          Next <RedoIcon />
-        </Button>
+          <Button
+            disabled={pageNumber === numPages}
+            disableRipple
+          >
+            Next <RedoIcon />
+          </Button>
         </IconButton>
         {PDFError}
       </Box>

@@ -43,6 +43,7 @@ function removeTypenameFields(obj: any): any {
 }
 
 export const ArticlePlayer = ({ article }: Props) => {
+  let pdf = !!article?.pdf ? article?.pdf : '';
   let newEntityMap = reverseEntityMapArray([article?.content?.entityMap])
   let rawContent = {
     blocks: article?.content?.blocks,
@@ -57,7 +58,7 @@ export const ArticlePlayer = ({ article }: Props) => {
         <h2 className='article--title'>{article.title}</h2>
       </Box>
       <Divider />
-      {article.pdf && <PdfPlayer pdf={article.pdf} />}
+      {article.pdf && <PdfPlayer pdf={pdf} />}
       <div className="article--body" dangerouslySetInnerHTML={{ __html: draftToHtml(newRawContent) }} />
     </Box>
   )

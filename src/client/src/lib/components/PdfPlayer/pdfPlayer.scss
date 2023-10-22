@@ -1,14 +1,26 @@
 .MuiBox-root {
   &.pdf--player-section {
     max-width: 40%;
-    margin: 1rem 0;
-    height: 70vh;
+    margin: 2rem 0.5rem;
+    min-height: 80vh;
+    height: 90%;
     width: 100%;
+
     @media (max-width: 768px) {
       margin-left: 0;
       padding-left: 0;
       max-width: 100%;
+      min-height: 70vh;
+      height: 90%;
+      margin-bottom: 2rem;
     }
+  }
+
+  &.pdf-button--section {
+    text-align: center;
+    min-width: max-content;
+    margin-bottom: 1rem;
+    margin-left: 50%;
   }
 }
 

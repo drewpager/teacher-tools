@@ -253,7 +253,9 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
               <h2>Failed to load resource</h2>
             )
           })}
-          <Button className="playlistcard--next_button" onClick={() => handleNextButton(active)} variant="outlined">Next <SkipNextIcon /></Button>
+          <Box sx={{ margin: 2 }}>
+            <Button className="playlistcard--next_button" onClick={() => handleNextButton(active)} variant="outlined">Next <SkipNextIcon /></Button>
+          </Box>
         </Grid>
       </Grid>
     </>

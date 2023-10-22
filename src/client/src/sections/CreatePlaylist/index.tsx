@@ -270,7 +270,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
           _id: a.id,
           title: a.title,
           content: a.content,
-          public: a.public
+          public: a.public,
+          pdf: a.pdf
         }
         articleInput.push(articleObj)
       })
@@ -496,7 +497,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
     }
 
     if (i === "Articles") {
-      setPlans([...filter.filter((c) => c.content && c.content.blocks)])
+      setPlans([...filter.filter((c) => c.pdf || (c.content && c.content.blocks))])
       return { ...filter }
     }
     // setFilled(!filled)
