@@ -863,7 +863,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import { Viewer } from '../../graphql/generated';
-import { HomeInfoSkeleton } from '../../lib/components';
+import { PageSkeleton } from '../../lib/components';
 
 interface Props {
   viewer: Viewer;
@@ -874,7 +874,7 @@ export const TestElement = ({ viewer }: Props) => {
 
   return (
     <Box sx={{ marginTop: 15 }}>
-      <HomeInfoSkeleton />
+      <PageSkeleton />
       {/* <PdfUploader /> */}
       {/* <PdfPlayer pdf="https://res.cloudinary.com/drewpager/image/upload/v1697814112/platos-peach-pdf/brighton-badge.pdf.pdf" /> */}
     </Box>
