@@ -83,7 +83,6 @@ export const UserQuizzesCard = ({ quiz }: Props) => {
               </Typography>
             </Link>
             <Box className="user-quiz--buttons">
-              {console.log(quiz)}
               <Tooltip title={`${quiz.public ? "Public" : "Private"}`}>
                 {quiz.public ? <LockOpenIcon sx={{ color: theme.palette.primary.main }} /> : <LockIcon sx={{ color: theme.palette.primary.main }} />}
               </Tooltip>

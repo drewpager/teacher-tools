@@ -48,7 +48,7 @@ export const PdfUploader = ({ onData }: PdfUploaderProps) => {
 
     function handleImageUpload(file: File) {
       var size = file ? file.size : 0;
-      var sliceSize = 1000000;
+      var sliceSize = 10000000;
       var start = 0;
       setPdfProgress(1);
       setTimeout(loop, 1);
@@ -83,7 +83,7 @@ export const PdfUploader = ({ onData }: PdfUploaderProps) => {
       formdata.append("file", piece);
       formdata.append("cloud_name", YOUR_CLOUD_NAME);
       formdata.append("upload_preset", YOUR_UNSIGNED_UPLOAD_PRESET);
-      formdata.append("chunk_size", "900000");
+      formdata.append("chunk_size", "9000000");
       formdata.append("public_id", file!.name);
 
       var xhr = new XMLHttpRequest();

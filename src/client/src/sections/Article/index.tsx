@@ -76,7 +76,6 @@ export const Article = () => {
     }
 
     let newRawContent = removeTypenameFields(rawContent);
-    console.log(newRawContent);
 
     return (
       <Box>
