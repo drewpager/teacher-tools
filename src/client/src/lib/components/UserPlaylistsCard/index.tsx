@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Card, CardContent, ListItem, Typography, Grid, Button, CircularProgress, Alert, Tooltip, Dialog, DialogContent, DialogTitle, DialogContentText, DialogActions, IconButton } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
-import { Playlist, Lesson, LessonPlanUnion } from '../../../graphql/generated';
+import { Playlist, LessonPlanUnion, LessonPlanInput } from '../../../graphql/generated';
 import { useMutation } from '@apollo/client';
 import { gql } from 'graphql-tag';
 import { DisplaySuccess } from '../../utils';
@@ -28,10 +28,16 @@ export const UserPlaylistsCard = ({ playlist }: Props) => {
   const [open, setOpen] = useState<boolean>(false);
 
   const DELETE_PLAYLIST = gql`
-  mutation DeletePlaylist($id: ID) {
-    deletePlaylist(id: $id)
-  }
-`;
+    mutation DeletePlaylist($id: ID) {
+      deletePlaylist(id: $id)
+    }
+  `;
+
+  // const UPDATE_PLAN = gql`
+  //   mutation UpdatePlan($input: LessonPlanInput, $id: ID) {
+  //     updatePlan(input: $input, id: $id)
+  //   }
+  // `;
 
   interface DeletePlaylistData {
     deletePlaylist: Playlist
@@ -45,6 +51,7 @@ export const UserPlaylistsCard = ({ playlist }: Props) => {
   // }
 
   // interface UpdatePlaylistVariables {
+  //   input: LessonPlanInput
   //   id: string
   // }
   const [deletePlaylist, { loading: DeletePlaylistLoading, error: DeletePlaylistError }] = useMutation<DeletePlaylistData, DeletePlaylistVariables>(DELETE_PLAYLIST);
@@ -62,6 +69,36 @@ export const UserPlaylistsCard = ({ playlist }: Props) => {
     navigation(`/edit/${id}`)
     // await updatePlan({ variables: { id} })
   }
+
+  // const handleUpdatePublic = async (id: string) => {
+  //   console.log({
+  //     name: playlist.name,
+  //     plan: playlist.plan,
+  //     creator: playlist.creator,
+  //     public: !playlist.public
+  //   })
+  //   await updatePlan({
+  //     variables: {
+  //       input: {
+  //         name: playlist.name,
+  //         plan: playlist.plan,
+  //         creator: playlist.creator,
+  //         public: !playlist.public
+  //       },
+  //       id
+  //     }
+  //   })
+
+  //   if (UpdatePlanError) {
+  //     console.log("Update Plan Error: ", UpdatePlanError)
+  //   }
+
+  //   if (UpdatePlanLoading) {
+  //     console.log("Update Plan Loading: ", UpdatePlanLoading)
+  //   }
+
+  //   console.log("Update Plan Apparently Succeeded")
+  // }
 
   const deletePlaylistLoadingMessage = (
     <CircularProgress sx={{
@@ -106,7 +143,9 @@ export const UserPlaylistsCard = ({ playlist }: Props) => {
             </Link>
             <Box className="user-playlists--buttons">
               <Tooltip title={`${playlist.public ? "Public" : "Private"}`}>
+                {/* <IconButton onClick={() => handleUpdatePublic(playlist.id)} disableRipple> */}
                 {playlist.public ? <LockOpenIcon sx={{ color: theme.palette.primary.main }} /> : <LockIcon sx={{ color: theme.palette.primary.main }} />}
+                {/* </IconButton> */}
               </Tooltip>
               <Tooltip title="Edit contents of playlist!">
                 <IconButton sx={{ color: "#000", ml: 0.5 }} disableRipple>
