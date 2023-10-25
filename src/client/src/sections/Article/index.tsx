@@ -7,6 +7,7 @@ import { Search, Footer, PdfPlayer } from '../../lib/components/';
 import { Helmet } from 'react-helmet';
 import draftToHtml from 'draftjs-to-html';
 import './article.scss';
+import sample from '../../lib/assets/sample.pdf';
 
 export const Article = () => {
   const params = useParams();
@@ -86,7 +87,7 @@ export const Article = () => {
         <Box className="article--section">
           <h2>{article.title}</h2>
           {newRawContent && (<div className="article--body" dangerouslySetInnerHTML={{ __html: draftToHtml(newRawContent) }} />)}
-          {article.pdf && (<PdfPlayer pdf={article.pdf} />)}
+          {(article.pdf === "undefined" || article.pdf === null) ? (<></>) : (<PdfPlayer pdf={article.pdf} />)}
         </Box>
         <Footer />
       </Box>

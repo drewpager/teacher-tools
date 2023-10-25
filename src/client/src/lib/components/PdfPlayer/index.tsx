@@ -16,7 +16,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 // pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.js`;
 
 type Props = {
-  pdf: string;
+  pdf: string | null | undefined;
 }
 
 export const PdfPlayer = ({ pdf }: Props) => {
@@ -50,12 +50,12 @@ export const PdfPlayer = ({ pdf }: Props) => {
     <Box className="pdf--player-section">
       <Document
         file={pdf}
-        loading={<Skeleton variant="rectangular" width={500} height={900} />}
+        loading={(<Skeleton variant="rectangular" width={720} height={700} />)}
         onLoadSuccess={onDocumentLoadSuccess}
       >
         <Page
           pageNumber={pageNumber}
-          loading={<Skeleton variant="rectangular" width={500} height={900} />}
+          loading={(<Skeleton variant="rectangular" width={720} height={700} />)}
           onLoadError={(error: any) => PDFError(error.message)}
         />
       </Document>
