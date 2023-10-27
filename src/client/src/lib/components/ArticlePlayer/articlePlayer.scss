@@ -1,19 +1,21 @@
 .MuiBox-root {
   &.article--player-section {
-    max-width: 70%;
+    max-width: 100%;
+    width: 90%;
 
     @media (max-width: 768px) {
       margin-left: 0;
       padding-left: 0;
-      max-width: 100%;
+      width: 100%;
     }
   }
 
   &.article--player-header {
     display: flex;
+    max-width: 100%;
 
     @media (max-width: 768px) {
-      width: 80%;
+      max-width: 100%;
     }
   }
 }

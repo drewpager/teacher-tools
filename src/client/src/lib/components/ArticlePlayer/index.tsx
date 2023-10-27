@@ -57,8 +57,10 @@ export const ArticlePlayer = ({ article }: Props) => {
         <h2 className='article--title'>{article.title}</h2>
       </Box>
       <Divider />
-      {(article.pdf === "undefined" || article.pdf === null) ? (<></>) : (<PdfPlayer pdf={article.pdf} />)}
-      {newRawContent && <div className="article--body" dangerouslySetInnerHTML={{ __html: draftToHtml(newRawContent) }} />}
+      <Box sx={{ maxWidth: "100%" }}>
+        {(article.pdf === "undefined" || article.pdf === null) ? (<></>) : (<PdfPlayer pdf={article.pdf} />)}
+        {newRawContent && <div className="article--body" dangerouslySetInnerHTML={{ __html: draftToHtml(newRawContent) }} />}
+      </Box>
     </Box>
   )
 }
