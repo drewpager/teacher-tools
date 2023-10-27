@@ -1,9 +1,8 @@
 .MuiBox-root {
   &.pdf--player-section {
     margin: 2rem 0.5rem;
-    scale: 1;
     min-height: 75vh;
-    width: 40%;
+    width: 45%;
 
     @media (max-width: 768px) {
       scale: 0.75;
@@ -13,13 +12,31 @@
       max-width: 80%;
       height: auto;
     }
+
+    @media (max-width: 767px) {
+      scale: 0.55;
+      margin-left: -3rem;
+      margin-top: -7rem;
+      margin-right: 0.5rem;
+      max-width: 80%;
+      height: auto;
+    }
+
+    @media (max-width: 471px) {
+      scale: 0.45;
+      margin-left: -3rem;
+      margin-top: -8rem;
+      margin-right: 0.5rem;
+      max-width: 70%;
+      height: auto;
+    }
   }
 
   &.pdf-button--section {
     text-align: center;
     min-width: max-content;
     margin-bottom: 1rem;
-    margin-left: 50%;
+    position: static;
 
     @media (max-width: 768px) {
       margin-left: 0;
