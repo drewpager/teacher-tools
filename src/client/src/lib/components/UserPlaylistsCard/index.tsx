@@ -148,14 +148,18 @@ export const UserPlaylistsCard = ({ playlist }: Props) => {
                 {/* </IconButton> */}
               </Tooltip>
               <Tooltip title="Edit contents of playlist!">
-                <IconButton sx={{ color: "#000", ml: 0.5 }} disableRipple>
-                  <EditIcon onClick={() => handleUpdate(playlist.id)} />
+                <IconButton onClick={() => handleUpdate(playlist.id)} sx={{ color: "#000", ml: 0.5 }} disableRipple>
+                  <EditIcon />
                 </IconButton>
               </Tooltip>
               {DeletePlaylistLoading ? deletePlaylistLoadingMessage : (
                 <Tooltip title="Delete playlist!">
-                  <IconButton sx={{ color: "#000" }} disableRipple>
-                    <DeleteIcon onClick={() => setOpen(true)} />
+                  <IconButton
+                    onClick={() => setOpen(true)}
+                    sx={{ color: "#000" }}
+                    disableRipple
+                  >
+                    <DeleteIcon />
                     <Dialog
                       open={open}
                       onClose={handleClose}

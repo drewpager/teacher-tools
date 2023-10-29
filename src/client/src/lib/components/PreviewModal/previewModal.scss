@@ -1,0 +1,42 @@
+@use '../../../library';
+
+.preview-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 80%;
+  overflow-y: scroll;
+  background-color: library.$white;
+  padding: 2rem;
+  border-radius: 5px;
+  color: library.$darkGreen;
+
+  @media (max-width: 768px) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 50%;
+    overflow-y: scroll;
+  }
+}
+
+.MuiIconButton-root {
+  &.close--modal-button {
+    display: flex;
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: library.$orange;
+  }
+}
+
+.MuiSvgIcon-root {
+  &.preview-modal--button {
+    height: 1.85rem;
+    width: 1.85rem;
+  }
+}

@@ -9,6 +9,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import LockIcon from '@mui/icons-material/Lock';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
+import { UsePreviewModal } from '../PreviewModal';
 import theme from '../../../theme';
 import './userArticlesCard.scss';
 
@@ -80,7 +81,7 @@ export const UserArticlesCard = ({ article }: Props) => {
                 {article.title}
               </Typography>
             </Link>
-            <Box className="user-quiz--buttons">
+            <Box className="user-article--buttons">
               <Tooltip title={`${article.public ? "Public" : "Private"}`}>
                 {article.public ? <LockOpenIcon sx={{ color: theme.palette.primary.main }} /> : <LockIcon sx={{ color: theme.palette.primary.main }} />}
               </Tooltip>
@@ -112,6 +113,7 @@ export const UserArticlesCard = ({ article }: Props) => {
                   </IconButton>
                 </Tooltip>
               )}
+              <UsePreviewModal item={article} color={"#000"} />
             </Box>
             {deleteArticleError ? deleteArticleErrorMessage : null}
           </CardContent>

@@ -13,6 +13,8 @@ import {
   Box,
   Snackbar,
   Avatar,
+  Icon,
+  IconButton,
 } from '@mui/material';
 import Timeline from '@mui/lab/Timeline';
 import {
@@ -179,9 +181,14 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
         {CopyPlaylistLoading ? copyPlaylistLoadingMessage : (
           (playlist.creator === viewer?.id) ? (<Chip variant='filled' label="Your Content" />) : (
             <Tooltip title="Copy playlist!">
-              <Button onClick={() => handleCopy(`${playlist.id}`, `${viewer?.id}`)}>
+              <IconButton
+                onClick={() => handleCopy(`${playlist.id}`, `${viewer?.id}`)}
+                disableRipple
+                disableFocusRipple
+                sx={{ color: "#000" }}
+              >
                 {(params.id === undefined) ? <></> : <ContentCopyIcon />}
-              </Button>
+              </IconButton>
             </Tooltip>
           )
         )}

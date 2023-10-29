@@ -17,6 +17,7 @@ import { DisplayError, titleCase } from '../../lib/utils';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useNavigate } from 'react-router-dom';
 import { UseModal } from '../Modal';
+import { UsePreviewModal } from '../../lib/components';
 import './createPlaylist.scss';
 import { Link } from 'react-router-dom';
 import { CreatePlaylistCard, Footer } from '../../lib/components';
@@ -567,11 +568,30 @@ export const CreatePlaylist = ({ viewer }: props) => {
                                   <CreatePlaylistCard {...i} />
                                 ) : (i.questions && !i.content) ? (
                                   <Card className="lesson--card">
-                                    {i.title} <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                                    {i.title}
+                                    <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                                    <UsePreviewModal color={"#fff"} item={{
+                                      __typename: "Quiz",
+                                      creator: i.creator,
+                                      id: i._id,
+                                      public: i.public,
+                                      title: i.title,
+                                      questions: i?.questions?.map((q) => ({ question: q?.question, answerOptions: q?.answerOptions, answerType: q?.answerType }))
+                                    }} />
                                   </Card>
                                 ) : (i.content && (!i.questions || !i.startDate)) && (
                                   <Card className="lesson--card">
-                                    {i.title} <Chip label="Article" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                                    {i.title}
+                                    <Chip label="Article" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                                    <UsePreviewModal color={"#fff"} item={{
+                                      __typename: "Article",
+                                      content: i.content,
+                                      creator: i.creator,
+                                      id: i._id,
+                                      pdf: i.pdf,
+                                      public: i.public,
+                                      title: i.title
+                                    }} />
                                   </Card>)}
                               </div>
                             </Grid>
@@ -662,11 +682,31 @@ export const CreatePlaylist = ({ viewer }: props) => {
                                       <CreatePlaylistCard {...i} />
                                     ) : (i.questions && !i.content) ? (
                                       <Card className="lesson--card">
-                                        {JSON.parse(JSON.stringify(i)).title} <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                                        {JSON.parse(JSON.stringify(i)).title}
+                                        {console.log({ ...i })}
+                                        <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                                        <UsePreviewModal color={"#fff"} item={{
+                                          __typename: "Quiz",
+                                          creator: i.creator,
+                                          id: i._id,
+                                          public: i.public,
+                                          title: i.title,
+                                          questions: i?.questions?.map((q) => ({ question: q?.question, answerOptions: q?.answerOptions, answerType: q?.answerType }))
+                                        }} />
                                       </Card>
                                     ) : i.content && (
                                       <Card className="lesson--card">
-                                        {JSON.parse(JSON.stringify(i)).title} <Chip label="Article" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                                        {JSON.parse(JSON.stringify(i)).title}
+                                        <Chip label="Article" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                                        <UsePreviewModal color={"#fff"} item={{
+                                          __typename: "Article",
+                                          content: i.content,
+                                          creator: i.creator,
+                                          id: i._id,
+                                          pdf: i.pdf,
+                                          public: i.public,
+                                          title: i.title
+                                        }} />
                                       </Card>
                                     )}
                                   </Box>
@@ -677,16 +717,36 @@ export const CreatePlaylist = ({ viewer }: props) => {
                             <Draggable draggableId={`${i._id}`} index={index} key={i._id}>
                               {(provided) => (
                                 <Grid item xs={12} md={12} lg={12}>
+                                  {console.log(`${i}`)}
                                   <Box {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
                                     {i.startDate ? (
                                       <CreatePlaylistCard {...i} />
                                     ) : (i.questions && !i.content) ? (
                                       <Card className="lesson--card">
-                                        {JSON.parse(JSON.stringify(i)).title} <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                                        {JSON.parse(JSON.stringify(i)).title}
+                                        <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                                        <UsePreviewModal color={"#fff"} item={{
+                                          __typename: "Quiz",
+                                          creator: i.creator,
+                                          id: i._id,
+                                          public: i.public,
+                                          title: i.title,
+                                          questions: i?.questions?.map((q) => ({ question: q?.question, answerOptions: q?.answerOptions, answerType: q?.answerType }))
+                                        }} />
                                       </Card>
                                     ) : (!i.questions && !i.startDate && i.public) && (
                                       <Card className="lesson--card">
-                                        {JSON.parse(JSON.stringify(i)).title} <Chip label="Article" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                                        {JSON.parse(JSON.stringify(i)).title}
+                                        <Chip label="Article" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                                        <UsePreviewModal color={"#fff"} item={{
+                                          __typename: "Article",
+                                          content: i.content,
+                                          creator: i.creator,
+                                          id: i._id,
+                                          pdf: i.pdf,
+                                          public: i.public,
+                                          title: i.title
+                                        }} />
                                       </Card>
                                     )}
                                   </Box>

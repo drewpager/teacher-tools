@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, Card, CardContent, ListItem, Typography, Grid, Button, CircularProgress, Alert, Tooltip, Dialog, DialogContent, DialogTitle, DialogContentText, DialogActions, IconButton } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { Playlist, Lesson, Quiz, Questions, Quizzes } from '../../../graphql/generated';
+import { UsePreviewModal } from '../PreviewModal';
 import { useMutation } from '@apollo/client';
 import { gql } from 'graphql-tag';
 import { DisplaySuccess } from '../../utils';
@@ -114,6 +115,7 @@ export const UserQuizzesCard = ({ quiz }: Props) => {
                   </IconButton>
                 </Tooltip>
               )}
+              <UsePreviewModal item={quiz} color={"#000"} />
             </Box>
             {deleteQuizError ? deleteQuizErrorMessage : null}
           </CardContent>

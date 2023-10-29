@@ -17,6 +17,7 @@ export * from "./QuizPlayer";
 export * from "./ArticlePlayer";
 export * from "./PdfPlayer";
 export * from "./PdfUploader";
+export * from "./PreviewModal";
 export * from "./UserPlaylistsCard";
 export * from "./UserQuizzesCard";
 export * from "./PlaylistDetails";
