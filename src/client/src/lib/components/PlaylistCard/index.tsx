@@ -39,6 +39,7 @@ import { gql } from 'graphql-tag';
 import { DisplaySuccess } from '../../utils';
 import { useMutation } from '@apollo/client';
 import { useParams } from 'react-router-dom';
+import { PlaylistCardSkeleton } from './playlistCardSkeleton';
 
 interface Props {
   playlist: Playlist
@@ -85,7 +86,7 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
     }
   });
 
-  if (loading) return (<CircularProgress />);
+  if (loading) return (<PlaylistCardSkeleton />);
 
   if (error) return (<Alert severity="error">{error.message}</Alert>)
 

@@ -864,6 +864,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 import { Viewer } from '../../graphql/generated';
 import { PageSkeleton } from '../../lib/components';
+import { PlaylistCardSkeleton } from '../../lib/components/PlaylistCard/playlistCardSkeleton';
 
 interface Props {
   viewer: Viewer;
@@ -873,10 +874,11 @@ export const TestElement = ({ viewer }: Props) => {
   console.log(viewer);
 
   return (
-    <Box sx={{ marginTop: 15 }}>
-      <PageSkeleton />
-      {/* <PdfUploader /> */}
-      {/* <PdfPlayer pdf="https://res.cloudinary.com/drewpager/image/upload/v1697814112/platos-peach-pdf/brighton-badge.pdf.pdf" /> */}
-    </Box>
+    <PlaylistCardSkeleton />
+    // <Box sx={{ marginTop: 15 }}>
+    //   <PageSkeleton />
+    //   {/* <PdfUploader /> */}
+    //   {/* <PdfPlayer pdf="https://res.cloudinary.com/drewpager/image/upload/v1697814112/platos-peach-pdf/brighton-badge.pdf.pdf" /> */}
+    // </Box>
   )
 }

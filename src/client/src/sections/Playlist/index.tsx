@@ -5,6 +5,7 @@ import { Box, LinearProgress } from '@mui/material';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
 import { PlaylistCard, Search, Footer } from '../../lib/components/';
 import { Helmet } from 'react-helmet';
+import { PlaylistCardSkeleton } from '../../lib/components/PlaylistCard/playlistCardSkeleton';
 
 interface Props {
   viewer?: Viewer;
@@ -20,7 +21,7 @@ export const Playlist = ({ viewer }: Props) => {
 
   if (loading) {
     return (
-      <LinearProgress />
+      <PlaylistCardSkeleton />
     )
   }
 
