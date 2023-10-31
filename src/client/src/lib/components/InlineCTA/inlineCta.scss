@@ -1,0 +1,118 @@
+@use '../../../library';
+
+.MuiPaper-root {
+  &.incallAction--home {
+    background-color: #e9efe7;
+    min-width: 100%;
+    display: flex;
+    align-self: center;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border: 1px solid black;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      margin: 2rem 0;
+      padding: 3rem 2rem;
+    }
+  }
+}
+
+.grid--container {
+  position: relative;
+}
+
+.MuiButtonBase-root {
+  &.incallAction--buttonFirst {
+    background: #57996A;
+    color: #ffffff;
+    font-size: 1.125rem;
+    font-weight: bold;
+    border-radius: 100px;
+    height: 4rem;
+    text-transform: capitalize;
+    padding: 1.25rem;
+    width: 30%;
+    margin-right: 1rem;
+
+    &:hover {
+      color: #ffffff;
+      background-color: #557669;
+    }
+
+    @media (max-width: 982px) {
+      width: 100%;
+      margin: 0.5rem 0;
+    }
+  }
+
+  &.incallAction--buttonSecond {
+    background: #000;
+    color: #ffffff;
+    font-size: 1.125rem;
+    font-weight: bold;
+    border-radius: 100px;
+    height: 4rem;
+    text-transform: capitalize;
+    padding: 1.25rem;
+    width: 30%;
+
+    &:hover {
+      color: #ffffff;
+      background-color: #8c8a8a;
+    }
+
+    @media (max-width: 982px) {
+      width: 100%;
+      margin: 0.5rem 0;
+    }
+  }
+}
+
+.incallAction--buttonDiv {
+  padding-top: 1.5rem;
+  // justify-content: space-between;
+}
+
+.MuiTypography-root {
+  &.incallAction--text {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #182742;
+    text-decoration: none;
+    font-size: clamp(1rem, 2rem, 2.5rem);
+    font-weight: 800;
+    line-height: 2.75rem;
+
+    @media (min-width: 1000px) {
+      margin-top: 1rem;
+    }
+  }
+
+  &.incallAction--subText {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #182742;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.75rem;
+    margin: 1rem 0;
+  }
+}
+
+.MuiGrid-container {
+  .containCTA {
+    max-width: 18rem;
+    height: auto;
+    justify-content: left;
+    margin-top: -4rem;
+    margin-left: -4rem;
+
+    @media (min-width: 1000px) {
+      justify-content: center;
+      align-content: center;
+      width: 18rem;
+      margin-left: -2rem;
+      margin-top: 0.875rem;
+    }
+  }
+}
