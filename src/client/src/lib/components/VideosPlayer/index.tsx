@@ -23,7 +23,7 @@ export const VideosPlayer = ({ url }: props) => {
     <Box className='tt-video-wrapper'>
       <iframe
         loading="eager"
-        onLoad={() => iframeLoading}
+        // onLoad={() => iframeLoading}
         src={uframe}
         title="Plato's Peach Video"
         className="platos-peach-video-iframe"
