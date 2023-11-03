@@ -2,3 +2,17 @@
   max-width: 100%;
   max-height: auto;
 }
+
+.MuiBox-root {
+  > iframe {
+    &.platos-peach-video-iframe {
+      width: 100%;
+      height: 420px;
+
+      @media (max-width: 768px) {
+        height: 250px;
+        width: 100%;
+      }
+    }
+  }
+}

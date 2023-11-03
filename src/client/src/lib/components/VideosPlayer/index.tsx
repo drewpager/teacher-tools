@@ -14,19 +14,19 @@ export const VideosPlayer = ({ url }: props) => {
   let filePath = pathname.split(re)
   let fileString = filePath[1].split(".")
 
-  const uframe = `https://player.cloudinary.com/embed/?cloud_name=drewpager&public_id=${`platos-peach-video${fileString[0]}.mp4`}&showLogo=false`
+  const uframe = `https://player.cloudinary.com/embed/?cloud_name=drewpager&public_id=${`platos-peach-video${fileString[0]}`}&showLogo=false`
 
   const iframeLoading = (
-    <Skeleton variant="rectangular" width="100%" height={360} />
+    <Skeleton variant="rectangular" width="100%" height={400} />
   )
   return (
     <Box className='tt-video-wrapper'>
       <iframe
         loading="eager"
+        onLoad={() => iframeLoading}
         src={uframe}
         title="Plato's Peach Video"
-        width="100%"
-        height="360"
+        className="platos-peach-video-iframe"
         allow="autoplay; fullscreen"
         style={{ "border": "2px solid #000", "backgroundColor": "#000" }}
       >

@@ -40,13 +40,13 @@ export const VideoPlayer = ({ url }: props) => {
     <Box className='tt-video-wrapper'>
       <video
         ref={videoRef}
-        data-cld-public-id={`platos-peach-video${fileString[0]}.mp4`}
-        key={`platos-peach-video${fileString[0]}.mp4`}
+        data-cld-public-id={`platos-peach-video${fileString[0]}`}
+        key={`platos-peach-video${fileString[0]}`}
         controls
         crossOrigin="anonymous"
         preload="metadata"
         data-cld-colors='{ "base": "#3A70CD", "accent": "#57996A", "text": "#fff" }'
-        max-width={"100%"}
+        // max-width={"100%"}
         max-height={"auto"}
         className="cld-video-player cld-fluid"
         autoPlay
