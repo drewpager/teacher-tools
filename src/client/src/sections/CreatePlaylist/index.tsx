@@ -206,11 +206,11 @@ export const CreatePlaylist = ({ viewer }: props) => {
     },
   }));
 
-  let lessonQuery = useMemo(() => lessonData?.allLessons.result, [lessonData])
+  const lessonQuery = useMemo(() => lessonData?.allLessons.result, [lessonData])
   // let lessonQuery = lessonData ? lessonData.allLessons.result : null;
-  let quizQuery = useMemo(() => quizData?.allquizzes?.result, [quizData])
-  let articleQuery = useMemo(() => articleData?.allarticles?.result, [articleData])
-  let bookmarkQuery = userData ? userData.user.bookmarks : null;
+  const quizQuery = useMemo(() => quizData?.allquizzes?.result, [quizData])
+  const articleQuery = useMemo(() => articleData?.allarticles?.result, [articleData])
+  const bookmarkQuery = userData ? userData.user.bookmarks : null;
 
   useEffect(() => {
     if (window.localStorage.getItem("playlist")?.length) {
@@ -233,7 +233,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
           category: i.category,
           creator: i.creator,
           endDate: i.endDate,
-          image: i.image,
+          // image: i.image,
           meta: i.meta,
           startDate: i.startDate,
           video: i.video,
@@ -252,8 +252,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
           creator: q.creator,
           _id: q.id,
           title: q.title,
-          questions: [...q.questions],
-          // questions: q.questions,
+          questions: q.questions,
           public: q.public
         }
         quizInput.push(quizObj)
@@ -353,6 +352,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
   const onDragEndHandler = (result: any) => {
     const { destination, source } = result;
+    console.log(playlist.plan);
 
     // if there is no droppable destination, simply return.
     if (!destination) {
@@ -369,6 +369,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       playlist.plan[destination.index] = reorderedPlaylistItem;
       playlist.plan.splice((destination.index + 1), 0, ...displacedPlaylistItem);
       setAutoSaved(true);
+      // return playlist;
       return { ...playlist }
     }
 
@@ -379,7 +380,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       items[destination.index] = reorderedLesson;
       items.splice((destination.index + 1), 0, ...displacedLesson)
       // items.push(...displacedLesson);
-
+      // return items;
       return { ...items }
     }
 
@@ -683,7 +684,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
                                     ) : (i.questions && !i.content) ? (
                                       <Card className="lesson--card">
                                         {JSON.parse(JSON.stringify(i)).title}
-                                        {console.log({ ...i })}
                                         <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
                                         <UsePreviewModal color={"#fff"} item={{
                                           __typename: "Quiz",
@@ -717,7 +717,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
                             <Draggable draggableId={`${i._id}`} index={index} key={i._id}>
                               {(provided) => (
                                 <Grid item xs={12} md={12} lg={12}>
-                                  {console.log(`${i}`)}
                                   <Box {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
                                     {i.startDate ? (
                                       <CreatePlaylistCard {...i} />
