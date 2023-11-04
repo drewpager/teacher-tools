@@ -10,6 +10,9 @@
         margin-top: 2rem;
 
         @media (max-width: 600px) {
+            flex: 1 1 30%;
+            align-items: center;
+            flex-wrap: wrap;
             margin-left: 0;
             padding-left: 0;
             padding-top: 1rem;
@@ -21,6 +24,10 @@
 .MuiAvatar-root {
     &.avatar--creator {
         border: 1px solid black;
+
+        @media (max-width: 600px) {
+            margin-left: 2rem;
+        }
     }
 }
 

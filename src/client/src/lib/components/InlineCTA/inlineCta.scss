@@ -5,15 +5,17 @@
     background-color: #e9efe7;
     min-width: 100%;
     display: flex;
-    align-self: center;
+    // align-self: center;
     padding: 1.5rem;
-    margin: 2rem 0;
+    margin: 2rem 2rem 2rem 0;
     border: 1px solid black;
+    text-align: center;
 
     @media (max-width: 768px) {
       width: 100%;
       margin: 2rem 0;
       padding: 3rem 2rem;
+      text-align: start;
     }
   }
 }
@@ -85,6 +87,7 @@
 
     @media (min-width: 1000px) {
       margin-top: 1rem;
+      text-align: center;
     }
   }
 
