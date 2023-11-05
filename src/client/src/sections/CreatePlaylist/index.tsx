@@ -1,4 +1,4 @@
-import { Grid, Box, Card, TextField, Button, Switch, FormControlLabel, Chip, Typography, CardMedia, InputAdornment, Tooltip, Alert, Snackbar, Checkbox } from '@mui/material';
+import { Grid, Box, Card, TextField, Button, IconButton, Fab, Switch, FormControlLabel, Chip, Typography, CardMedia, InputAdornment, Tooltip, Alert, Snackbar, Checkbox, Modal } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 import React, { useState, ChangeEvent, useRef, useEffect, useMemo, SyntheticEvent } from 'react';
@@ -17,7 +17,7 @@ import { DisplayError, titleCase } from '../../lib/utils';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useNavigate } from 'react-router-dom';
 import { UseModal } from '../Modal';
-import { UsePreviewModal } from '../../lib/components';
+import { UsePreviewModal, VideoPlayer } from '../../lib/components';
 import './createPlaylist.scss';
 import { Link } from 'react-router-dom';
 import { CreatePlaylistCard, Footer } from '../../lib/components';
@@ -25,6 +25,7 @@ import theme from '../../theme';
 import HowItWorks from '../../lib/assets/how-it-works-3.png';
 import { CreatePlaylistSkeleton } from './createPlaylistSkeleton';
 import { Helmet } from 'react-helmet';
+import InfoIcon from '@mui/icons-material/Info';
 
 type props = {
   viewer: Viewer;
@@ -116,6 +117,15 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const [playlist, setPlaylist] = useState<InputLessonPlan>(initialData)
   const [locked, setLocked] = useState<boolean>(false);
   const [ascending, setAscending] = useState<boolean>(true);
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  }
+
+  const handlePlayVideo = () => {
+    setOpen(true);
+  }
 
   const limit: number = 1000;
   const page: number = 1;
@@ -525,8 +535,32 @@ export const CreatePlaylist = ({ viewer }: props) => {
       </Helmet>
       <Box className="createPlaylist--box">
         {/* <FeedbackModal /> */}
-        <h1 className='createPlaylist--h1'>Create Lesson Plan</h1>
-
+        <Box sx={{ display: "flex", alignItems: "baseline" }}>
+          <h1 className='createPlaylist--h1'>Create Lesson Plan</h1>
+          {/* <Tooltip title="Watch quick demo">
+            <IconButton
+              disableRipple
+              onClick={handlePlayVideo}
+            >
+              <InfoIcon sx={{ color: "#000", marginLeft: "0.5rem" }} />
+            </IconButton>
+          </Tooltip>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="platos-peach-demo-videon"
+            aria-describedby="platos-peach-demo-video-description"
+          >
+            <Box className="demo-video--modal">
+              <Box>
+                <Fab aria-label="cancel" onClick={handleClose} sx={{ justifySelf: "right", mb: "5px" }}>
+                  X
+                </Fab>
+              </Box>
+              <VideoPlayer url="https://res.cloudinary.com/drewpager/video/upload/v1693489768/platos-peach-video/how-to-use-platos-peach_wvdqui.mp4" />
+            </Box>
+          </Modal> */}
+        </Box>
         <Snackbar
           open={autoSaved}
           autoHideDuration={3000}

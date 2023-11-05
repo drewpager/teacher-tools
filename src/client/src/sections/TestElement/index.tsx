@@ -860,21 +860,60 @@
 //   );
 // }
 
-import React from 'react';
-import { Box } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Modal, Fab, IconButton, Tooltip } from '@mui/material';
 import { Viewer } from '../../graphql/generated';
-import { PageSkeleton } from '../../lib/components';
+import { PageSkeleton, VideoPlayer } from '../../lib/components';
 import { PlaylistCardSkeleton } from '../../lib/components/PlaylistCard/playlistCardSkeleton';
-
+import InfoIcon from '@mui/icons-material/Info';
 interface Props {
   viewer: Viewer;
 }
 
 export const TestElement = ({ viewer }: Props) => {
   console.log(viewer);
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  }
+
+  const handlePlayVideo = () => {
+    setOpen(true);
+  }
 
   return (
-    <PlaylistCardSkeleton />
+    <Box className="createPlaylist--box">
+      {/* <FeedbackModal /> */}
+      <Box sx={{ display: "flex", alignItems: "baseline" }}>
+        <h1 className='createPlaylist--h1'>Create Lesson Plan</h1>
+        <Tooltip title="Watch quick demo">
+          <IconButton
+            disableRipple
+            onClick={handlePlayVideo}
+          >
+            <InfoIcon sx={{ color: "#000", marginLeft: "1rem" }} />
+          </IconButton>
+        </Tooltip>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="platos-peach-demo-videon"
+          aria-describedby="platos-peach-demo-video-description"
+        >
+          <Box className="demo-video--modal">
+            <Box>
+              <Fab aria-label="cancel" onClick={handleClose} sx={{ justifySelf: "right", mb: "5px" }}>
+                {/* <CancelIcon /> */}
+                X
+              </Fab>
+            </Box>
+            <VideoPlayer url="https://res.cloudinary.com/drewpager/video/upload/v1693489768/platos-peach-video/how-to-use-platos-peach_wvdqui.mp4" />
+          </Box>
+        </Modal>
+      </Box>
+    </Box>
+
     // <Box sx={{ marginTop: 15 }}>
     //   <PageSkeleton />
     //   {/* <PdfUploader /> */}
