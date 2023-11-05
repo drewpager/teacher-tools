@@ -218,8 +218,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
   const lessonQuery = useMemo(() => lessonData?.allLessons.result, [lessonData])
   // let lessonQuery = lessonData ? lessonData.allLessons.result : null;
-  const quizQuery = useMemo(() => quizData?.allquizzes?.result, [quizData])
-  const articleQuery = useMemo(() => articleData?.allarticles?.result, [articleData])
+  const quizQuery = useMemo(() => quizData?.allquizzes.result, [quizData]);
+  const articleQuery = useMemo(() => articleData?.allarticles.result, [articleData])
   const bookmarkQuery = userData ? userData.user.bookmarks : null;
 
   useEffect(() => {
@@ -252,11 +252,12 @@ export const CreatePlaylist = ({ viewer }: props) => {
         lessonInput.push(lessonObj);
       })
 
-      setFilter(lessonInput)
-      setPlans(lessonInput)
+      setFilter([...lessonInput])
+      setPlans([...lessonInput])
     }
+
     if (quizQuery) {
-      const quizInput: FullLessonQuiz[] = []
+      const quizInput: any[] = []
       quizQuery.forEach(q => {
         let quizObj = {
           creator: q.creator,
@@ -267,9 +268,10 @@ export const CreatePlaylist = ({ viewer }: props) => {
         }
         quizInput.push(quizObj)
       })
-      setFilter((f) => [...f, ...quizInput])
-      setPlans((p) => [...p, ...quizInput])
+      setFilter((filter) => [...filter, ...quizInput])
+      setPlans((plan) => [...plan, ...quizInput])
     }
+
     if (articleQuery) {
       const articleInput: any[] = []
       articleQuery.forEach(a => {
@@ -286,7 +288,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       setFilter((filter) => [...filter, ...articleInput])
       setPlans((plan) => [...plan, ...articleInput])
     }
-  }, [lessonQuery, quizQuery, articleQuery, articleData, quizData, lessonData])
+  }, [lessonQuery, quizQuery, articleQuery])
 
   if (!viewer.id) {
     return (
