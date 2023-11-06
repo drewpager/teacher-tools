@@ -218,7 +218,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
   const lessonQuery = useMemo(() => lessonData?.allLessons.result, [lessonData])
   // let lessonQuery = lessonData ? lessonData.allLessons.result : null;
-  const quizQuery = useMemo(() => quizData?.allquizzes.result, [quizData]);
+  // const quizQuery = useMemo(() => quizData?.allquizzes.result, [quizData]);
+  const quizQuery = quizData?.allquizzes.result;
   const articleQuery = useMemo(() => articleData?.allarticles.result, [articleData])
   const bookmarkQuery = userData ? userData.user.bookmarks : null;
 
