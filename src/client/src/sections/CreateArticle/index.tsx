@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { Box, Button, Grid, TextField, Typography, Chip, Switch, Tooltip, CircularProgress } from '@mui/material';
+import { Box, Button, Grid, TextField, Typography, Chip, Switch, Tooltip, CircularProgress, Modal, IconButton, Fab } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import './createArticle.scss';
 import { Viewer, Article, useCreateArticleMutation } from '../../graphql/generated';
 import { Editor, EditorState } from 'react-draft-wysiwyg';
 import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { convertToRaw } from 'draft-js';
-import { Footer, PdfPlayer } from '../../lib/components';
+import { Footer, PdfPlayer, VideoPlayer } from '../../lib/components';
 import draftToHtml from 'draftjs-to-html';
 import { useNavigate } from 'react-router-dom';
 import { PdfUploader } from '../../lib/components';
+import InfoIcon from '@mui/icons-material/Info';
 
 type Props = {
   viewer: Viewer;
@@ -80,6 +81,15 @@ export const CreateArticle = ({ viewer }: Props) => {
   const [locked, setLocked] = useState<boolean>(false);
   const [pdf, setPdf] = useState<string | undefined>(undefined);
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  }
+
+  const handlePlayVideo = () => {
+    setOpen(true);
+  }
 
   const [createArticle, { data, loading, error }] = useCreateArticleMutation({
     variables: {
@@ -150,7 +160,32 @@ export const CreateArticle = ({ viewer }: Props) => {
         <Grid item xs={12} sm={12} md={12} lg={7} xl={6}>
           <Box className='createArticle-heading'>
             <form onSubmit={handleSubmit}>
-              <h1>Create Article</h1>
+              <Box sx={{ display: "flex", alignItems: "baseline" }}>
+                <h1>Create Article</h1>
+                <Tooltip title="Watch quick demo">
+                  <IconButton
+                    disableRipple
+                    onClick={handlePlayVideo}
+                  >
+                    <InfoIcon sx={{ color: "#000", marginLeft: "0.5rem" }} />
+                  </IconButton>
+                </Tooltip>
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="platos-peach-demo-videon"
+                  aria-describedby="platos-peach-demo-video-description"
+                >
+                  <Box className="demo-video--modal">
+                    <Box>
+                      <Fab aria-label="cancel" onClick={handleClose} sx={{ justifySelf: "right", mb: "5px" }}>
+                        X
+                      </Fab>
+                    </Box>
+                    <VideoPlayer url="https://res.cloudinary.com/drewpager/video/upload/v1699324151/platos-peach-video/create-article-tutorial_cylman.mov" />
+                  </Box>
+                </Modal>
+              </Box>
               <TextField
                 title='Article Title'
                 label="Article Title"

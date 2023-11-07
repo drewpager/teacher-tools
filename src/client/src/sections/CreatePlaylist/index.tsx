@@ -540,7 +540,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
         {/* <FeedbackModal /> */}
         <Box sx={{ display: "flex", alignItems: "baseline" }}>
           <h1 className='createPlaylist--h1'>Create Lesson Plan</h1>
-          {/* <Tooltip title="Watch quick demo">
+          <Tooltip title="Watch quick demo">
             <IconButton
               disableRipple
               onClick={handlePlayVideo}
@@ -560,9 +560,9 @@ export const CreatePlaylist = ({ viewer }: props) => {
                   X
                 </Fab>
               </Box>
-              <VideoPlayer url="https://res.cloudinary.com/drewpager/video/upload/v1693489768/platos-peach-video/how-to-use-platos-peach_wvdqui.mp4" />
+              <VideoPlayer url="https://res.cloudinary.com/drewpager/video/upload/v1699323489/platos-peach-video/create-lesson-plan-tutorial_qpaaog.mov" />
             </Box>
-          </Modal> */}
+          </Modal>
         </Box>
         <Snackbar
           open={autoSaved}

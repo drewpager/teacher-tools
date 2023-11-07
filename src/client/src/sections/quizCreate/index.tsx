@@ -16,7 +16,9 @@ import {
   IconButton,
   Select,
   MenuItem,
-  Switch
+  Switch,
+  Fab,
+  Modal
 } from '@mui/material'
 import { Cancel, ControlPoint, Remove } from '@mui/icons-material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -32,6 +34,8 @@ import * as yup from 'yup';
 import { Link } from 'react-router-dom';
 import { FeedbackModal } from '../Contact/FeedbackModal';
 import { styled } from '@mui/material/styles';
+import { VideoPlayer } from '../../lib/components';
+import InfoIcon from '@mui/icons-material/Info';
 
 interface props {
   viewer: Viewer
@@ -155,6 +159,15 @@ export const QuizCreate = ({ viewer }: props) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [locked, setLocked] = useState<boolean>();
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  }
+
+  const handlePlayVideo = () => {
+    setOpen(true);
+  }
 
   const quizCreatePage: boolean = pathname === "/quiz/create";
 
@@ -190,7 +203,32 @@ export const QuizCreate = ({ viewer }: props) => {
             <p>⟨ Back to dashboard</p>
           </Link>
         ) : (<></>)}
-        <h1>Create Assessment</h1>
+        <Box sx={{ display: "flex", alignItems: "baseline" }}>
+          <h1>Create Assessment</h1>
+          <Tooltip title="Watch quick demo">
+            <IconButton
+              disableRipple
+              onClick={handlePlayVideo}
+            >
+              <InfoIcon sx={{ color: "#000", marginLeft: "0.5rem" }} />
+            </IconButton>
+          </Tooltip>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="platos-peach-demo-videon"
+            aria-describedby="platos-peach-demo-video-description"
+          >
+            <Box className="demo-video--modal">
+              <Box>
+                <Fab aria-label="cancel" onClick={handleClose} sx={{ justifySelf: "right", mb: "5px" }}>
+                  X
+                </Fab>
+              </Box>
+              <VideoPlayer url="https://res.cloudinary.com/drewpager/video/upload/v1699324374/platos-peach-video/create-assessment-tutorial_jg3hhw.mov" />
+            </Box>
+          </Modal>
+        </Box>
       </Box>
       <Box className="quizCreate--form">
         <Formik
