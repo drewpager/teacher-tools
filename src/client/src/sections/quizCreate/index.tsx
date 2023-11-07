@@ -198,11 +198,11 @@ export const QuizCreate = ({ viewer }: props) => {
     <div>
       {quizCreatePage ? (<FeedbackModal />) : (<></>)}
       <Box className="breadcrumb">
-        {quizCreatePage ? (
+        {/* {quizCreatePage ? (
           <Link to={`../user/${viewer.id}`}>
             <p>⟨ Back to dashboard</p>
           </Link>
-        ) : (<></>)}
+        ) : (<></>)} */}
         <Box sx={{ display: "flex", alignItems: "baseline" }}>
           <h1>Create Assessment</h1>
           <Tooltip title="Watch quick demo">
