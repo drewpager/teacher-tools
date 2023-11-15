@@ -38,13 +38,16 @@ export const Playlist = ({ viewer }: Props) => {
   }
 
   const playlist = data ? data.playlist : null;
+  let metaDescription = playlist?.plan.map((item) => item?.title).join(' · ');
+  metaDescription = metaDescription && metaDescription.length > 160 ? metaDescription.slice(0, 157).padEnd(3, " · ") : metaDescription;
 
   if (playlist) {
     return (
       <>
         <Helmet>
           <title>{`${playlist.name} Lesson Plan | Plato's Peach`}</title>
-          <meta name="description" content={`Interactive lesson plan teaching ${playlist.name} including ${playlist.plan.length} educational items.`} />
+          <meta name="description" content={`${metaDescription}`} />
+          {!playlist.public && (<meta name="robots" content="noindex" />)}
         </Helmet>
         <PlaylistCard playlist={playlist} viewer={viewer} />
         {playlist.public ? <InlineCTA /> : <></>}

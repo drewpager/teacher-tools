@@ -83,6 +83,7 @@ export const Article = () => {
         <Helmet>
           <title>{`${article.title} Article | Plato's Peach`}</title>
           <meta name="description" content={`Article explaining ${article.title}.`} />
+          {!article.public && (<meta name="robots" content="noindex" />)}
         </Helmet>
         <Box className="article--section">
           <h2>{article.title}</h2>

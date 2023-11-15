@@ -32,6 +32,7 @@ export const Quiz = () => {
         <Helmet>
           <title>{`${quiz?.title} | Plato's Peach`}</title>
           <meta name="description" content={`The ${quiz?.title} assessment quiz includes ${quiz.questions.length} questions.`} />
+          {!quiz.public && (<meta name="robots" content="noindex" />)}
         </Helmet>
         <QuizPlayer quiz={quiz} />
         <Footer />
