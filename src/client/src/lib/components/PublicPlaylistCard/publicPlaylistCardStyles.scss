@@ -1,0 +1,11 @@
+@use '../../../library';
+
+.MuiIconButton-root {
+  &.copy-icon {
+    color: #000;
+
+    &:hover {
+      color: library.$blue;
+    }
+  }
+}

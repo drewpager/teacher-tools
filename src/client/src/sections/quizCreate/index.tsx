@@ -158,7 +158,7 @@ const checkInput = ({ field, form: { errors, touched, setFieldValue } }: FieldPr
 export const QuizCreate = ({ viewer }: props) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const [locked, setLocked] = useState<boolean>();
+  const [locked, setLocked] = useState<boolean>(false);
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
@@ -177,7 +177,7 @@ export const QuizCreate = ({ viewer }: props) => {
         title: "",
         questions: [{}],
         creator: "",
-        public: false
+        public: locked
       }
     }
   })
@@ -244,7 +244,7 @@ export const QuizCreate = ({ viewer }: props) => {
               },
             ],
             creator: `${viewer.id}`,
-            public: false
+            public: locked
           }}
           validationSchema={validationSchema}
           onSubmit={async (values) => {
@@ -409,7 +409,7 @@ export const QuizCreate = ({ viewer }: props) => {
               </FieldArray>
               <Box sx={{ display: "flex", marginTop: "1rem" }}>
                 <Tooltip title={viewer.paymentId !== null ? "Make Private/Public" : "Public Content Restricted to Paying Users"}>
-                  <LockSwitch checked={!locked} onChange={() => setLocked(!locked)} disabled={viewer.paymentId === null} value={values.public} />
+                  <LockSwitch checked={!locked} onChange={() => { setLocked(!locked); values.public = !locked }} disabled={viewer.paymentId === null} />
                 </Tooltip>
                 <Tooltip title={viewer.paymentId !== null ? "Make Private/Public" : "Public Content Restricted to Paying Users"}>
                   <Typography variant="body1" color={!locked ? "error" : "success"}>{!locked ? "Private" : "Public"}</Typography>

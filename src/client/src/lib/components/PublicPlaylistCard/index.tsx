@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Box, Card, CardContent, ListItem, Typography, Grid, Button, CircularProgress, Alert, Tooltip, Snackbar, Chip, Avatar, Skeleton } from '@mui/material';
+import { Box, Card, CardContent, ListItem, Typography, Grid, Button, CircularProgress, Alert, Tooltip, Snackbar, Chip, Avatar, Skeleton, IconButton } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { LessonPlanUnion, Viewer, useUserQuery } from '../../../graphql/generated';
 import { useMutation } from '@apollo/client';
 import { gql } from 'graphql-tag';
 import { DisplayError, DisplaySuccess } from '../../utils';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import "./publicPlaylistCardStyles.scss";
 
 type Props = {
   id?: string | null | undefined;
@@ -118,10 +119,14 @@ export const PublicPlaylistCard = ({ id, name, plan, creator, viewer }: Props) =
               </Tooltip>
               {CopyPlaylistLoading ? copyPlaylistLoadingMessage : (
                 creator === viewer?.id ? (<Chip variant='filled' label="Your Content" />) : (
-                  <Tooltip title="Copy playlist!">
-                    <Button onClick={() => handleCopy(`${id}`, `${viewer?.id}`)}>
+                  <Tooltip title="Copy lesson plan template">
+                    <IconButton
+                      disableRipple
+                      className="copy-icon"
+                      onClick={() => handleCopy(`${id}`, `${viewer?.id}`)}
+                    >
                       <ContentCopyIcon />
-                    </Button>
+                    </IconButton>
                   </Tooltip>
                 )
               )}

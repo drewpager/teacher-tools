@@ -65,7 +65,7 @@ export const Footer = ({ viewer }: Props) => {
             <Typography variant='body1' className='footer--link-text'>Lesson Catalog</Typography>
           </Link>
           <Link to="/playlists" style={{ textDecoration: "none" }}>
-            <Typography variant='body1' className='footer--link-text'>Playlist Catalog <Chip label="New!" size="small" sx={{ textDecoration: "none", backgroundColor: "#57996A" }} /></Typography>
+            <Typography variant='body1' className='footer--link-text'>Template Gallery</Typography>
           </Link>
           {viewer ? (<Link to={viewer && viewer.id ? `/user/${viewer.id}` : `/login`} style={{ textDecoration: "none" }}>
             <Typography variant='body1' className='footer--link-text'>{viewer && viewer.id ? "Profile" : "Login"}</Typography>
