@@ -17,7 +17,7 @@ export const User = ({ viewer }: Props) => {
   const [bookmarksPage, setBookmarksPage] = useState(1);
   const [articlesPage, setArticlesPage] = useState(1);
 
-  const pageLimit = 3;
+  const pageLimit = 6;
 
   const params = useParams();
 

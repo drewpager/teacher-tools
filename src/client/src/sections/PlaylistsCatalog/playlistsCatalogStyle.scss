@@ -1,0 +1,33 @@
+.MuiBox-root {
+  &.playlists--header {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+    padding-top: 0.1rem;
+    padding-left: 2rem;
+    gap: 0.6rem;
+
+    @media (max-width: 576px) {
+      display: block;
+      align-items: start;
+      margin: 0;
+      padding-top: 0;
+      padding-left: 1rem;
+      gap: 0;
+    }
+  }
+}
+
+.MuiChip-root {
+  &.playlists--chip {
+    display: flex;
+    width: fit-content;
+    margin-top: 6rem;
+    margin-left: 3rem;
+
+    @media (max-width: 576px) {
+      display: flex;
+      margin-left: 1rem;
+    }
+  }
+}

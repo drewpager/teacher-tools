@@ -13,8 +13,8 @@ interface Props {
   setQuizzesPage: (page: number) => void;
 }
 
-export const UserQuizzes = ({ userQuizzes, quizzesPage, limit, setQuizzesPage}: Props) => {
-  
+export const UserQuizzes = ({ userQuizzes, quizzesPage, limit, setQuizzesPage }: Props) => {
+
   const { result, totalCount } = userQuizzes;
 
   const handleChange = (event: ChangeEvent<unknown>, page: number) => {
@@ -35,15 +35,17 @@ export const UserQuizzes = ({ userQuizzes, quizzesPage, limit, setQuizzesPage}: 
           </Link>
         </Grid>
       </Grid>
-      <Grid container>
+      <Grid container sx={{ marginLeft: 0 }}>
         {result.map((value: any, index) => (
           <UserQuizzesCard quiz={value} key={index} />
         ))}
       </Grid>
-      <Pagination 
-        count={Math.ceil(totalCount/limit)} 
+      <Pagination
+        count={Math.ceil(totalCount / limit)}
         page={quizzesPage}
         onChange={handleChange}
+        variant="outlined"
+        color="secondary"
       />
     </Box>
   );

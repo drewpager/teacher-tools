@@ -34,7 +34,7 @@ export const UserLessons = ({ userLessons, lessonsPage, limit, setLessonsPage }:
           </Link>
         </Grid>
       </Grid>
-      <Grid container>
+      <Grid container sx={{ marginLeft: 0 }}>
         {result.map((value: any, index) => (
           <Grid item lg={4} md={6} sm={6} xs={12} key={index}>
             <ListItem key={index}>
@@ -43,11 +43,13 @@ export const UserLessons = ({ userLessons, lessonsPage, limit, setLessonsPage }:
           </Grid>
         ))}
       </Grid>
-      <Pagination 
+      <Pagination
         // Take total number of playlists divided by number of playlists per page
-        count={Math.ceil(totalCount/limit)} 
+        count={Math.ceil(totalCount / limit)}
         page={lessonsPage}
         onChange={handleChange}
+        variant="outlined"
+        color="secondary"
       />
     </Box>
   )

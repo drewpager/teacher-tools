@@ -1,21 +1,22 @@
-import React, { useState, useRef, ChangeEvent } from 'react';
-import { Box, Grid, TextField, InputAdornment } from '@mui/material';
+import React, { useState, useRef, ChangeEvent, useMemo, useEffect } from 'react';
+import { Box, Grid, TextField, InputAdornment, Pagination, Chip } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import { Playlist, Viewer, useAllPlaylistsQuery } from '../../graphql/generated';
 import { PublicPlaylistCard } from '../../lib/components/PublicPlaylistCard';
 import { Footer } from '../../lib/components';
 import { PlaylistsSkeleton } from './playlistsSkeleton';
-import './playlistsCatalog.scss';
+import './playlistsCatalogStyle.scss';
 
 type Props = {
   viewer: Viewer
 }
 
-export const Playlists = ({ viewer }: Props) => {
+export const PlaylistsCatalog = ({ viewer }: Props) => {
   const [searchInput, setSearchInput] = useState<string>('');
   const [searchError, setSearchError] = useState<boolean>(false);
   const [filteredPlaylists, setFilteredPlaylists] = useState<Playlist[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
+
   const { data, loading, error } = useAllPlaylistsQuery({
     variables: {
       limit: 1000,
@@ -49,7 +50,7 @@ export const Playlists = ({ viewer }: Props) => {
     if (searchInput !== "") {
       // setFilteredPlaylists(data?.allplaylists.result.filter((playlist) => playlist?.plan?.find((lesson) => lesson?.title?.toLowerCase().includes(searchInput.toLowerCase()))));
       setFilteredPlaylists(data?.allplaylists.result.filter((playlist) => playlist?.name?.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1) &&
-      data?.allplaylists.result.filter((playlist) => playlist?.plan?.find((lesson) => lesson?.title?.toLowerCase().includes(searchInput.toLowerCase()))))
+        data?.allplaylists.result.filter((playlist) => playlist?.plan?.find((lesson) => lesson?.title?.toLowerCase().includes(searchInput.toLowerCase()))))
       setSearchError(false);
     }
 
@@ -65,26 +66,27 @@ export const Playlists = ({ viewer }: Props) => {
 
   return (
     <Box>
+      <Chip label="Lesson Plan Template Gallery" color="secondary" className="playlists--chip" size='medium' />
       <Box className="playlists--header">
-      <h2>Playlist Catalog</h2>
-      <TextField
-        variant='outlined'
-        // id="catalog-search"
-        label="Search Catalog"
-        onChange={(e) => inputHandler(e)}
-        value={`${searchInput}`}
-        ref={inputRef}
-        className="catalog--search"
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <Close onClick={resetSearch} />
-            </InputAdornment>
-          )
-        }}
-        helperText={searchError ? "No results found" : null}
-        error={searchError}
-      />
+        <h1>Lesson Plans</h1>
+        <TextField
+          variant='outlined'
+          // id="catalog-search"
+          label="Search Catalog"
+          onChange={(e) => inputHandler(e)}
+          value={`${searchInput}`}
+          ref={inputRef}
+          className="catalog--search"
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <Close onClick={resetSearch} />
+              </InputAdornment>
+            )
+          }}
+          helperText={searchError ? "No results found" : null}
+          error={searchError}
+        />
       </Box>
       <Box>
         <Grid container>
@@ -92,13 +94,13 @@ export const Playlists = ({ viewer }: Props) => {
             (playlist.public || playlist.public === null) && 
               <PublicPlaylistCard {...playlist} viewer={viewer} />
             ))} */}
-            {filteredPlaylists.length ? filteredPlaylists.map((playlist) => (
-              (playlist.public || playlist.public === null) && 
-                <PublicPlaylistCard {...playlist} viewer={viewer} />
-              )) : data.allplaylists.result.map((playlist) => (
-            (playlist.public || playlist.public === null) && 
-              <PublicPlaylistCard {...playlist} viewer={viewer} />
-            ))}
+          {filteredPlaylists.length ? filteredPlaylists.map((playlist) => (
+            (playlist.public || playlist.public === null) &&
+            <PublicPlaylistCard {...playlist} viewer={viewer} />
+          )) : data.allplaylists.result.map((playlist) => (
+            (playlist.public || playlist.public === null) &&
+            <PublicPlaylistCard {...playlist} viewer={viewer} />
+          ))}
         </Grid>
       </Box>
       <Footer viewer={viewer} />

@@ -28,7 +28,7 @@ import {
   Login,
   AppHeader,
   Playlist,
-  Playlists,
+  PlaylistsCatalog,
   CreatePlaylist,
   CreateLesson,
   CreateQuiz,
@@ -132,7 +132,7 @@ const App = () => {
           <Route path="/playlist/:id" element={<Playlist viewer={viewer} />} />
           {/* <Route path="/plan/:plan" children={(props: any) => (<Plans viewer={viewer} {...props} />)} element={<Plans viewer={viewer} playlist={playlist} />} /> */}
           <Route path="/playlist/create" element={<CreatePlaylist viewer={viewer} />} />
-          <Route path="/playlists" element={<Playlists viewer={viewer} />} />
+          <Route path="/playlists" element={<PlaylistsCatalog viewer={viewer} />} />
           <Route path="/quiz/:id" element={<Quiz />} />
           <Route path="/quiz/create" element={<CreateQuiz viewer={viewer} />} />
           <Route path="/article/create" element={<CreateArticle viewer={viewer} />} />

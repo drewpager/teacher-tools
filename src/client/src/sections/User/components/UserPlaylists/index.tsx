@@ -35,7 +35,7 @@ export const UserPlaylists = ({ userPlaylists, playlistsPage, limit, setPlaylist
           </Link>
         </Grid>
       </Grid>
-      <Grid container>
+      <Grid container sx={{ marginLeft: 0 }}>
         {result.map((value: any, index) => (
           <UserPlaylistsCard playlist={value} key={index} />
         ))}
@@ -44,6 +44,8 @@ export const UserPlaylists = ({ userPlaylists, playlistsPage, limit, setPlaylist
         count={Math.ceil(totalCount / limit)}
         page={playlistsPage}
         onChange={handleChange}
+        variant="outlined"
+        color="secondary"
       />
     </Box>
   );

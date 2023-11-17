@@ -112,7 +112,6 @@ export const UserProfile = ({ user, viewerIsUser }: Props) => {
           <Typography variant="h5" className="user--text-details">Details</Typography>
           <Typography className="user--text-details">Name: {user.name}</Typography>
           <Typography className="user--text-details">Email: {user.contact}</Typography>
-          <Typography className="user--text-details">Bookmarks: {user.bookmarks?.length}</Typography>
           {(user.paymentId !== "undefined") ? subscriberSection : additionalDetailsSection}
           {/* {additionalDetailsSection} */}
           {stripeError && <DisplayError title="Failed to connect to stripe! Please try again" />}

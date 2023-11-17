@@ -35,7 +35,7 @@ export const UserArticles = ({ userArticles, articlesPage, limit, setArticlesPag
           </Link>
         </Grid>
       </Grid>
-      <Grid container>
+      <Grid container sx={{ marginLeft: 0 }}>
         {result.map((value: any, index) => (
           <UserArticlesCard article={value} key={index} />
         ))}
@@ -44,6 +44,8 @@ export const UserArticles = ({ userArticles, articlesPage, limit, setArticlesPag
         count={Math.ceil(totalCount / limit)}
         page={articlesPage}
         onChange={handleChange}
+        variant="outlined"
+        color="secondary"
       />
     </Box>
   );
