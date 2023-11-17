@@ -27,7 +27,7 @@ export const Playlist = ({ viewer }: Props) => {
 
   if (error) {
     return (
-      <Box sx={{ marginLeft: 5 }}>
+      <Box>
         <h2>Playlist Not Found</h2>
         <h3>Here are a few available playlists or you can try searching again.</h3>
         <Search />
@@ -57,7 +57,7 @@ export const Playlist = ({ viewer }: Props) => {
   }
 
   return (
-    <Box sx={{ marginLeft: 5 }}>
+    <Box>
       <h2>No Playlist By This ID</h2>
       <DisplayError title='No Playlist By This ID' />
       <Footer />
