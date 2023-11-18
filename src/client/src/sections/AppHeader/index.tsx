@@ -121,7 +121,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                   </Link>
                 </MenuItem>
                 <MenuItem className="dropdown--buttons" onClick={() => setAnchorElNav(null)}>
-                  <Link to={`/playlists`} style={{ textDecoration: 'none', color: "#000" }} onTransitionEnd={handleCloseNavMenu}>
+                  <Link to={`/plans`} style={{ textDecoration: 'none', color: "#000" }} onTransitionEnd={handleCloseNavMenu}>
                     <Typography textAlign="center">Lesson Plan Catalog</Typography>
                   </Link>
                 </MenuItem>
@@ -244,7 +244,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                     <Typography textAlign="center">Lesson Catalog</Typography>
                   </MenuItem>
                 </Link>
-                <Link to={`/playlists`} style={{ textDecoration: 'none', color: "#000" }}>
+                <Link to={`/plans`} style={{ textDecoration: 'none', color: "#000" }}>
                   <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons">
                     <Typography textAlign="center">Lesson Plan Catalog</Typography>
                   </MenuItem>
@@ -319,7 +319,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                     <Typography textAlign="center">Lesson Catalog</Typography>
                   </MenuItem>
                 </Link>
-                <Link to={`/playlists`} style={{ textDecoration: 'none', color: "#000" }}>
+                <Link to={`/plans`} style={{ textDecoration: 'none', color: "#000" }}>
                   <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons">
                     <Typography textAlign="center">Lesson Plan Catalog</Typography>
                   </MenuItem>
@@ -329,7 +329,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
             </Box>
             <Box className="desktop--menu-items">
               <div className="desktop--mid-menu-items">
-                <Link to={`/playlists`} style={{ textDecoration: "none", marginRight: 32 }}>
+                <Link to={`/plans`} style={{ textDecoration: "none", marginRight: 32 }}>
                   <p style={{ color: `${theme.palette.info.dark}` }}>Lesson Plan Templates</p>
                 </Link>
                 <Link to={`/pricing`} style={{ textDecoration: "none", marginRight: 32 }}>

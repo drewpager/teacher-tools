@@ -13,11 +13,11 @@ export const InlineCTA = () => {
             <Typography variant='h5' className='incallAction--subText'>Sign Up Free to browse and bookmark our catalog, create lesson plans for your curriculum, build custom assessments, and assign to students.</Typography>
             <div className='incallAction--buttonDiv'>
               <Link to="/signup" style={{ textDecoration: 'none' }}><Button variant="contained" className="incallAction--buttonFirst">Get Started For Free</Button></Link>
-              <Link to="/playlists" style={{ textDecoration: 'none' }}><Button variant="contained" className="incallAction--buttonSecond">More Lesson Plan Templates</Button></Link>
+              <Link to="/plans" style={{ textDecoration: 'none' }}><Button variant="contained" className="incallAction--buttonSecond">More Lesson Plan Templates</Button></Link>
             </div>
           </div>
         </Grid>
       </Grid>
-    </Card >
+    </Card>
   )
 }

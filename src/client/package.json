@@ -52,6 +52,7 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "react-window": "^1.8.9",
+    "sitemap": "^7.1.1",
     "typescript": "^4.5.5",
     "web-vitals": "^2.1.4",
     "webfontloader": "^1.6.28",
@@ -74,7 +75,8 @@
     "codegen:schema": "rover graph introspect http://localhost:9000/api | rover graph fetch platos-peach-graph > schema.graphql",
     "generate": "npx apollo client:codegen --localSchemaFile=schema.graphql --includes=src/**/*.ts --globalTypesFile=./src/lib/graphql/globalTypes.ts --target=typescript",
     "codegen:generate": "graphql-codegen",
-    "codegen:run": "npm run codegen:schema && npm run codegen:generate"
+    "codegen:run": "npm run codegen:schema && npm run codegen:generate",
+    "generate:sitemap": "node ./src/lib/utils/generateSitemap.ts"
   },
   "eslintConfig": {
     "extends": [

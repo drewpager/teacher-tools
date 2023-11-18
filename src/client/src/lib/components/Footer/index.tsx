@@ -64,7 +64,7 @@ export const Footer = ({ viewer }: Props) => {
           <Link to="/catalog" style={{ textDecoration: "none" }}>
             <Typography variant='body1' className='footer--link-text'>Lesson Catalog</Typography>
           </Link>
-          <Link to="/playlists" style={{ textDecoration: "none" }}>
+          <Link to="/plans" style={{ textDecoration: "none" }}>
             <Typography variant='body1' className='footer--link-text'>Template Gallery</Typography>
           </Link>
           {viewer ? (<Link to={viewer && viewer.id ? `/user/${viewer.id}` : `/login`} style={{ textDecoration: "none" }}>

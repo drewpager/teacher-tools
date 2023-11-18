@@ -128,12 +128,16 @@ export const UserPlaylistsCard = ({ playlist }: Props) => {
     setOpen(false);
   }
 
+  const formatSlug = (title: any) => {
+    return title.toLowerCase().replace(/ /g, "-");
+  }
+
   return (
     <Grid item lg={4} md={6} sm={12} xs={12} key={playlist.id}>
       <ListItem key={playlist.id}>
         <Card className="user-playlists--card">
           <CardContent>
-            <Link to={`/playlist/${playlist.id}`} style={{ textDecoration: "none" }}>
+            <Link to={`/plans/${formatSlug(playlist.name)}`} style={{ textDecoration: "none" }}>
               <Typography variant='h4' style={{ color: "#000" }}>
                 {playlist.name}
               </Typography>

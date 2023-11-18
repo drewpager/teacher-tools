@@ -35,6 +35,17 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
   if (!data) {
     return <div>No data</div>;
   }
+  // FOR SITEMAP GENERATION
+  // const playlistRoutes = data?.allplaylists.result.map((playlist: any) => {
+  //   const slug = playlist?.name?.replace(/\s+/g, "-").toLowerCase();
+  //   return {
+  //     url: `/plan/${slug}`,
+  //     changefreq: "daily",
+  //     priority: 0.9,
+  //   };
+  // });
+
+  // console.log(playlistRoutes)
 
   const resetSearch = () => {
     setSearchInput("");

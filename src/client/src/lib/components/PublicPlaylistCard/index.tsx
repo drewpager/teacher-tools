@@ -109,7 +109,7 @@ export const PublicPlaylistCard = ({ id, name, plan, creator, viewer }: Props) =
       <ListItem key={id}>
         <Card sx={{ width: "90vw" }}>
           <CardContent>
-            <Link to={`/plan/${formatSlug(name)}`} style={{ textDecoration: "none" }}>
+            <Link to={`/plans/${formatSlug(name)}`} style={{ textDecoration: "none" }}>
               <Typography variant='h4' style={{ color: "#000" }}>
                 {name}
               </Typography>
