@@ -535,6 +535,7 @@ export type Query = {
   article: Article;
   authUrl: Scalars['String'];
   lesson: Lesson;
+  plan: Playlist;
   playlist: Playlist;
   quiz: Quiz;
   user: User;
@@ -578,6 +579,11 @@ export type QueryArticleArgs = {
 
 export type QueryLessonArgs = {
   id: Scalars['ID'];
+};
+
+
+export type QueryPlanArgs = {
+  title: Scalars['String'];
 };
 
 
@@ -787,6 +793,13 @@ export type AllLessonsQueryVariables = Exact<{
 
 
 export type AllLessonsQuery = { __typename?: 'Query', allLessons: { __typename?: 'Lessons', total: number, result: Array<{ __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null, public?: boolean | null }> } };
+
+export type PlanQueryVariables = Exact<{
+  title: Scalars['String'];
+}>;
+
+
+export type PlanQuery = { __typename?: 'Query', plan: { __typename?: 'Playlist', id?: string | null, name: string, creator: string, public?: boolean | null, plan: Array<{ __typename?: 'Article', id?: string | null, title?: string | null, creator?: string | null, pdf?: string | null, public?: boolean | null, content?: { __typename?: 'Content', blocks?: Array<{ __typename?: 'Blocks', key?: string | null, text?: string | null, type?: string | null, depth?: number | null, inlineStyleRanges?: Array<{ __typename?: 'InlineStyleRanges', style?: string | null, offset?: number | null, length?: number | null } | null> | null, entityRanges?: Array<{ __typename?: 'EntityRanges', offset?: number | null, length?: number | null, key?: number | null } | null> | null } | null> | null, entityMap?: Array<{ __typename?: 'EntityMap', type?: string | null, mutability?: string | null, data?: { __typename?: 'EntityMapData', src?: string | null, width?: string | null, alignment?: string | null, height?: string | null, url?: string | null, targetOption?: string | null } | null } | null> | null } | null } | { __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null, public?: boolean | null } | { __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> } | null> } };
 
 export type PlaylistQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -1407,6 +1420,108 @@ export function useAllLessonsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type AllLessonsQueryHookResult = ReturnType<typeof useAllLessonsQuery>;
 export type AllLessonsLazyQueryHookResult = ReturnType<typeof useAllLessonsLazyQuery>;
 export type AllLessonsQueryResult = Apollo.QueryResult<AllLessonsQuery, AllLessonsQueryVariables>;
+export const PlanDocument = gql`
+    query Plan($title: String!) {
+  plan(title: $title) {
+    id
+    name
+    creator
+    public
+    plan {
+      ... on Lesson {
+        id
+        category
+        title
+        meta
+        video
+        image
+        startDate
+        endDate
+        creator
+        public
+      }
+      ... on Quiz {
+        id
+        title
+        questions {
+          question
+          answerOptions {
+            answerText
+            isCorrect
+          }
+          answerType
+        }
+        creator
+      }
+      ... on Article {
+        id
+        title
+        creator
+        content {
+          blocks {
+            key
+            text
+            type
+            depth
+            inlineStyleRanges {
+              style
+              offset
+              length
+            }
+            entityRanges {
+              offset
+              length
+              key
+            }
+          }
+          entityMap {
+            type
+            mutability
+            data {
+              src
+              width
+              alignment
+              height
+              url
+              targetOption
+            }
+          }
+        }
+        pdf
+        public
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __usePlanQuery__
+ *
+ * To run a query within a React component, call `usePlanQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePlanQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePlanQuery({
+ *   variables: {
+ *      title: // value for 'title'
+ *   },
+ * });
+ */
+export function usePlanQuery(baseOptions: Apollo.QueryHookOptions<PlanQuery, PlanQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PlanQuery, PlanQueryVariables>(PlanDocument, options);
+      }
+export function usePlanLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PlanQuery, PlanQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PlanQuery, PlanQueryVariables>(PlanDocument, options);
+        }
+export type PlanQueryHookResult = ReturnType<typeof usePlanQuery>;
+export type PlanLazyQueryHookResult = ReturnType<typeof usePlanLazyQuery>;
+export type PlanQueryResult = Apollo.QueryResult<PlanQuery, PlanQueryVariables>;
 export const PlaylistDocument = gql`
     query Playlist($id: ID!) {
   playlist(id: $id) {

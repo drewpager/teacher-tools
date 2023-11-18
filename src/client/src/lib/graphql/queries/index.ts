@@ -3,6 +3,7 @@ export * from "./Lessons";
 export * from "./User";
 export * from "./Users";
 export * from "./Playlist";
+export * from "./Plan";
 export * from "./Playlists";
 export * from "./Quiz";
 export * from "./Quizzes";

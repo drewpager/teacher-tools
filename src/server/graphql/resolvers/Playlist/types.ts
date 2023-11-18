@@ -3,6 +3,9 @@ export interface PlaylistArgs {
   id: string;
 }
 
+export interface PlanArgs {
+  title: string;
+}
 export interface PlaylistsArgs {
   limit: number;
   page: number;

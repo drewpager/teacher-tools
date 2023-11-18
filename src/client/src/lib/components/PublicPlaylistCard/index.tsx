@@ -100,12 +100,16 @@ export const PublicPlaylistCard = ({ id, name, plan, creator, viewer }: Props) =
     </Alert>
   );
 
+  function formatSlug(title: any) {
+    return title.replace(/\s+/g, '-').toLowerCase();
+  }
+
   return (
     <Grid item lg={4} md={6} sm={12} xs={12} key={id}>
       <ListItem key={id}>
         <Card sx={{ width: "90vw" }}>
           <CardContent>
-            <Link to={`/playlist/${id}`} style={{ textDecoration: "none" }}>
+            <Link to={`/plan/${formatSlug(name)}`} style={{ textDecoration: "none" }}>
               <Typography variant='h4' style={{ color: "#000" }}>
                 {name}
               </Typography>

@@ -12,6 +12,7 @@ import {
   CreatePlanArgs,
   UpdateParams,
   CopyPlaylistArgs,
+  PlanArgs,
 } from "./types";
 import { ObjectId } from "mongodb";
 
@@ -23,6 +24,20 @@ export const playlistResolvers = {
       { db }: { db: Database }
     ): Promise<Playlist> => {
       const playlist = await db.playlists.findOne({ _id: new ObjectId(id) });
+
+      if (!playlist) {
+        throw new Error("Failed to find playlist!");
+      }
+
+      return playlist;
+    },
+    plan: async (
+      _root: undefined,
+      { title }: PlanArgs,
+      { db }: { db: Database }
+    ): Promise<Playlist> => {
+      const regex = new RegExp(title, "i");
+      const playlist = await db.playlists.findOne({ name: regex });
 
       if (!playlist) {
         throw new Error("Failed to find playlist!");

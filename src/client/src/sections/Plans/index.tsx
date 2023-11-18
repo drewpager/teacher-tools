@@ -1,22 +1,27 @@
 import React from 'react';
-import { usePlaylistQuery, Viewer, Playlist } from '../../graphql/generated';
+import { usePlaylistQuery, Viewer, Playlist, usePlanQuery } from '../../graphql/generated';
 import { useParams } from 'react-router-dom';
 import { Box, LinearProgress } from '@mui/material';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
 import { PlaylistCard, Search, Footer, CTA, InlineCTA } from '../../lib/components/';
 import { Helmet } from 'react-helmet';
 import { PlaylistCardSkeleton } from '../../lib/components/PlaylistCard/playlistCardSkeleton';
+import { titleCase } from '../../lib/utils';
 
 interface Props {
   viewer?: Viewer;
-  playlist?: Playlist;
+  // playlist?: Playlist;
 }
 
-export const Plans = ({ viewer, playlist }: Props) => {
-  // const params = useParams();
-  const { data, loading, error } = usePlaylistQuery({
+export const Plans = ({ viewer }: Props) => {
+  const params = useParams();
+  const title = titleCase(`${params.plan}`.replace(/-/g, " "));
+  // console.log(`${params}`.trim().replace(/-/g, " "))
+
+
+  const { data, loading, error } = usePlanQuery({
     variables: {
-      id: `${playlist?.id}`
+      title: title
     }
   });
 
@@ -38,8 +43,8 @@ export const Plans = ({ viewer, playlist }: Props) => {
     )
   }
 
-  const playlistData = data ? data.playlist : null;
-  let metaDescription = playlist?.plan.map((item) => item?.title).join(' · ');
+  const playlistData = data ? data.plan : null;
+  let metaDescription = playlistData?.plan.map((item) => item?.title).join(' · ');
   metaDescription = metaDescription && metaDescription.length > 160 ? metaDescription.slice(0, 157).padEnd(3, " · ") : metaDescription;
 
   if (playlistData) {

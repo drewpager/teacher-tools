@@ -45,7 +45,7 @@ import {
 } from './sections';
 import { HomeInfoSkeleton } from './lib/components';
 import { DisplayError } from './lib/utils';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import "@fontsource/noto-serif/";
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -130,7 +130,7 @@ const App = () => {
           <Route path="/login" children={(props: any) => (<Login {...props} setViewer={setViewer} />)} element={<Login setViewer={setViewer} />} />
           <Route path="/signup" children={(props: any) => (<SignUp {...props} setViewer={setViewer} />)} element={<SignUp setViewer={setViewer} />} />
           <Route path="/playlist/:id" element={<Playlist viewer={viewer} />} />
-          {/* <Route path="/plan/:plan" children={(props: any) => (<Plans viewer={viewer} {...props} />)} element={<Plans viewer={viewer} playlist={playlist} />} /> */}
+          <Route path="/plan/:plan" element={<Plans viewer={viewer} />} />
           <Route path="/playlist/create" element={<CreatePlaylist viewer={viewer} />} />
           <Route path="/playlists" element={<PlaylistsCatalog viewer={viewer} />} />
           <Route path="/quiz/:id" element={<Quiz />} />
