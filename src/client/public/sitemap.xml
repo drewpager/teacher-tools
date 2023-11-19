@@ -150,17 +150,12 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plans/world-war-two-timeline</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
     <loc>https://www.platospeach.com/plans/women's-suffrage</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plans/post-civil-war-reconstruction-era-</loc>
+    <loc>https://www.platospeach.com/plans/post-civil-war-reconstruction-era</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
@@ -171,11 +166,6 @@
   </url>
   <url>
     <loc>https://www.platospeach.com/plans/new-deal</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.platospeach.com/plans/cold-war</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>

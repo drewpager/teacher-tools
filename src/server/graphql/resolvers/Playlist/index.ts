@@ -194,13 +194,16 @@ export const playlistResolvers = {
     ): Promise<Playlist | undefined> => {
       const newId = new ObjectId();
       const playlist = await db.playlists.findOne({ _id: new ObjectId(id) });
+      const user = await db.users.findOne({ _id: viewerId });
       try {
         if (playlist) {
           const insertResult = await db.playlists.insertOne({
             _id: new ObjectId(newId),
             public: false,
             creator: viewerId,
-            name: playlist.name,
+            name: user
+              ? `${playlist.name} ${user?.name} copy`
+              : `${playlist.name} copy`,
             plan: [...playlist.plan],
           });
 

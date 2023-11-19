@@ -36,16 +36,20 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
     return <div>No data</div>;
   }
   // FOR SITEMAP GENERATION
-  // const playlistRoutes = data?.allplaylists.result.map((playlist: any) => {
-  //   const slug = playlist?.name?.replace(/\s+/g, "-").toLowerCase();
-  //   return {
-  //     url: `/plan/${slug}`,
-  //     changefreq: "daily",
-  //     priority: 0.9,
-  //   };
-  // });
+  const playlistRoutes = data?.allplaylists.result.map((playlist: any) => {
+    if (playlist.public === true) {
+      const slug = playlist?.name?.replace(/\s+/g, "-").toLowerCase();
+      return {
+        url: `/plan/${slug}`,
+        changefreq: "monthly",
+        priority: 0.9,
+      };
+    } else {
+      return null;
+    }
+  });
 
-  // console.log(playlistRoutes)
+  console.log(playlistRoutes.filter((route) => route !== null))
 
   const resetSearch = () => {
     setSearchInput("");
