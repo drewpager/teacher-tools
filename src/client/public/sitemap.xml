@@ -55,112 +55,117 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plan</loc>
+    <loc>https://www.platospeach.com/plans</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plan/military-history-playlist</loc>
+    <loc>https://www.platospeach.com/plans/military-history-playlist</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plan/dictators-plus-totalitarianism</loc>
+    <loc>https://www.platospeach.com/plans/dictators-plus-totalitarianism</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plan/world-war-two-history</loc>
+    <loc>https://www.platospeach.com/plans/world-war-two-history</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plan/u.s.-founding-fathers</loc>
+    <loc>https://www.platospeach.com/plans/u.s.-founding-fathers</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plan/the-gilded-age</loc>
+    <loc>https://www.platospeach.com/plans/the-gilded-age</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plan/westward-expansion</loc>
+    <loc>https://www.platospeach.com/plans/westward-expansion</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plan/battles-of-wwii</loc>
+    <loc>https://www.platospeach.com/plans/battles-of-wwii</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plan/native-american-history</loc>
+    <loc>https://www.platospeach.com/plans/native-american-history</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plan/zoot-suit-riots</loc>
+    <loc>https://www.platospeach.com/plans/zoot-suit-riots</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plan/shays'-rebellion</loc>
+    <loc>https://www.platospeach.com/plans/shays'-rebellion</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plan/historic-diseases-and-pandemics</loc>
+    <loc>https://www.platospeach.com/plans/historic-diseases-and-pandemics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plan/marcus-garvey</loc>
+    <loc>https://www.platospeach.com/plans/marcus-garvey</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plan/cuban-missile-crisis</loc>
+    <loc>https://www.platospeach.com/plans/cuban-missile-crisis</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plan/halloween</loc>
+    <loc>https://www.platospeach.com/plans/halloween</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plan/world-war-two-timeline</loc>
+    <loc>https://www.platospeach.com/plans/world-war-two-timeline</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plan/women's-suffrage</loc>
+    <loc>https://www.platospeach.com/plans/women's-suffrage</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plan/post-civil-war-reconstruction-era</loc>
+    <loc>https://www.platospeach.com/plans/post-civil-war-reconstruction-era</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plan/new-deal</loc>
+    <loc>https://www.platospeach.com/plans/new-deal</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plan/cold-war</loc>
+    <loc>https://www.platospeach.com/plans/cold-war</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plan/boston-tea-party</loc>
+    <loc>https://www.platospeach.com/plans/boston-tea-party</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plan/american-imperialism</loc>
+    <loc>https://www.platospeach.com/plans/american-imperialism</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/plans/pearl-harbor</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>

@@ -40,7 +40,7 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
   //   if (playlist.public === true) {
   //     const slug = playlist?.name?.replace(/\s+/g, "-").toLowerCase();
   //     return {
-  //       url: `/plan/${slug}`,
+  //       url: `/plans/${slug}`,
   //       changefreq: "monthly",
   //       priority: 0.9,
   //     };
