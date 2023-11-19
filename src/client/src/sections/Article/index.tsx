@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useArticleQuery, Viewer } from '../../graphql/generated';
 import { useParams } from 'react-router-dom';
-import { Box, LinearProgress } from '@mui/material';
+import { Box, LinearProgress, Grid, Card, Typography, Button } from '@mui/material';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
 import { Search, Footer, PdfPlayer } from '../../lib/components/';
 import { Helmet } from 'react-helmet';
 import draftToHtml from 'draftjs-to-html';
 import './article.scss';
-import sample from '../../lib/assets/sample.pdf';
+import { Link } from 'react-router-dom';
 
 export const Article = () => {
   const params = useParams();
@@ -90,6 +90,20 @@ export const Article = () => {
           {newRawContent && (<div className="article--body" dangerouslySetInnerHTML={{ __html: draftToHtml(newRawContent) }} />)}
           {(article.pdf === "undefined" || article.pdf === null) ? (<></>) : (<PdfPlayer pdf={article.pdf} />)}
         </Box>
+        <Card className="incallAction--home">
+          <Grid container className="grid--container">
+            <Grid item xs={12} sm={12} md={12} lg={12}>
+              <div className="grid--text">
+                <Typography variant='h3' className='incallAction--text'>Use This Article in a Custom Plan!</Typography>
+                <Typography variant='h5' className='incallAction--subText'>Free Sign Up to browse and bookmark our catalog, create lesson plans for your curriculum, build custom assessments, and assign to students.</Typography>
+                <div className='incallAction--buttonDiv'>
+                  <Link to="/signup" style={{ textDecoration: 'none' }}><Button variant="contained" className="incallAction--buttonFirst">Get Started For Free</Button></Link>
+                  <Link to="/plans" style={{ textDecoration: 'none' }}><Button variant="contained" className="incallAction--buttonSecond">Use Lesson Plan Templates</Button></Link>
+                </div>
+              </div>
+            </Grid>
+          </Grid>
+        </Card>
         <Footer />
       </Box>
     )

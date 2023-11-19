@@ -1,23 +1,24 @@
 import React, { useState, useRef, ChangeEvent, useMemo, useEffect } from 'react';
-import { Box, Grid, TextField, InputAdornment, Pagination, Chip } from '@mui/material';
+import { Box, Grid, TextField, InputAdornment, Pagination, Chip, Typography } from '@mui/material';
 import { Close } from '@mui/icons-material';
-import { Playlist, Viewer, useAllPlaylistsQuery } from '../../graphql/generated';
+import { Article, Viewer, useAllArticlesQuery } from '../../graphql/generated';
 import { PublicPlaylistCard } from '../../lib/components/PublicPlaylistCard';
 import { Footer } from '../../lib/components';
-import { PlaylistsSkeleton } from './playlistsSkeleton';
-import './playlistsCatalogStyle.scss';
+import { Link } from 'react-router-dom';
+import { ArticlesSkeleton } from './articlesSkeleton';
+import './articlesCatalogStyle.scss';
 
 type Props = {
   viewer: Viewer
 }
 
-export const PlaylistsCatalog = ({ viewer }: Props) => {
+export const ArticlesCatalog = ({ viewer }: Props) => {
   const [searchInput, setSearchInput] = useState<string>('');
   const [searchError, setSearchError] = useState<boolean>(false);
-  const [filteredPlaylists, setFilteredPlaylists] = useState<Playlist[]>([]);
+  const [filteredArticles, setFilteredArticles] = useState<Article[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const { data, loading, error } = useAllPlaylistsQuery({
+  const { data, loading, error } = useAllArticlesQuery({
     variables: {
       limit: 1000,
       page: 1,
@@ -25,7 +26,7 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
   });
 
   if (loading) {
-    return (<PlaylistsSkeleton />);
+    return (<ArticlesSkeleton />);
   }
 
   if (error) {
@@ -36,11 +37,10 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
     return <div>No data</div>;
   }
   // FOR SITEMAP GENERATION
-  // const playlistRoutes = data?.allplaylists.result.map((playlist: any) => {
-  //   if (playlist.public === true) {
-  //     const slug = playlist?.name?.replace(/\s+/g, "-").toLowerCase();
+  // const articleRoutes = data?.allarticles.result.map((article: any) => {
+  //   if (article.public === true) {
   //     return {
-  //       url: `/plan/${slug}`,
+  //       url: `/article/${article.id}`,
   //       changefreq: "monthly",
   //       priority: 0.9,
   //     };
@@ -49,11 +49,11 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
   //   }
   // });
 
-  // console.log(playlistRoutes.filter((route) => route !== null))
+  // console.log(articleRoutes.filter((route) => route !== null))
 
   const resetSearch = () => {
     setSearchInput("");
-    setFilteredPlaylists([]);
+    setFilteredArticles([]);
     setSearchError(false);
   }
 
@@ -64,26 +64,25 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
 
     if (searchInput !== "") {
       // setFilteredPlaylists(data?.allplaylists.result.filter((playlist) => playlist?.plan?.find((lesson) => lesson?.title?.toLowerCase().includes(searchInput.toLowerCase()))));
-      setFilteredPlaylists(data?.allplaylists.result.filter((playlist) => playlist?.name?.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1) &&
-        data?.allplaylists.result.filter((playlist) => playlist?.plan?.find((lesson) => lesson?.title?.toLowerCase().includes(searchInput.toLowerCase()))))
+      setFilteredArticles(data?.allarticles.result.filter((article) => article?.title?.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1))
       setSearchError(false);
     }
 
-    if (searchInput !== "" && !filteredPlaylists.length) {
+    if (searchInput !== "" && !filteredArticles.length) {
       setSearchError(true);
     }
 
     if (e.target.value === '') {
-      setFilteredPlaylists([]);
+      setFilteredArticles([]);
       setSearchError(false);
     }
   }
 
   return (
     <Box>
-      <Chip label="Lesson Plan Template Gallery" color="secondary" className="playlists--chip" size='medium' />
-      <Box className="playlists--header">
-        <h1>Lesson Plans</h1>
+      <Chip label="Article + PDF Catalog" color="secondary" className="articles--chip" size='medium' />
+      <Box className="articles--header">
+        <h1>Articles</h1>
         <TextField
           variant='outlined'
           // id="catalog-search"
@@ -109,12 +108,24 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
             (playlist.public || playlist.public === null) && 
               <PublicPlaylistCard {...playlist} viewer={viewer} />
             ))} */}
-          {filteredPlaylists.length ? filteredPlaylists.map((playlist) => (
-            (playlist.public || playlist.public === null) &&
-            <PublicPlaylistCard {...playlist} viewer={viewer} />
-          )) : data.allplaylists.result.map((playlist) => (
-            (playlist.public || playlist.public === null) &&
-            <PublicPlaylistCard {...playlist} viewer={viewer} />
+          {filteredArticles.length ? filteredArticles.map((article) => (
+            (article.public || article.public === null) &&
+            // TODO: Create Article Display Card
+            <ul>
+              <li>{article.title}</li>
+            </ul>
+          )) : data.allarticles.result.map((article) => (
+            (article.public || article.public === null) &&
+            // TODO: Create Article Display Card
+            <Link to={`/article/${article.id}`} style={{ textDecoration: "none" }}>
+              <Chip
+                label={`${article.title}`}
+                color="secondary"
+                className="article--chip"
+                size='medium'
+                style={{ marginRight: "1rem", marginBottom: "0.5rem" }}
+              />
+            </Link>
           ))}
         </Grid>
       </Box>
