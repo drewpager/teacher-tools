@@ -55,128 +55,278 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plans</loc>
+    <loc>https://www.platospeach.com/plan</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plans/military-history-playlist</loc>
-    <changefreq>daily</changefreq>
+    <loc>https://www.platospeach.com/plan/military-history-playlist</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plans/biographies</loc>
-    <changefreq>daily</changefreq>
+    <loc>https://www.platospeach.com/plan/dictators-plus-totalitarianism</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plans/dictators-plus-totalitarianism</loc>
-    <changefreq>daily</changefreq>
+    <loc>https://www.platospeach.com/plan/world-war-two-history</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plans/world-war-two-history</loc>
-    <changefreq>daily</changefreq>
+    <loc>https://www.platospeach.com/plan/u.s.-founding-fathers</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plans/u.s.-founding-fathers</loc>
-    <changefreq>daily</changefreq>
+    <loc>https://www.platospeach.com/plan/the-gilded-age</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plans/the-gilded-age</loc>
-    <changefreq>daily</changefreq>
+    <loc>https://www.platospeach.com/plan/westward-expansion</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plans/battles-of-wwii</loc>
-    <changefreq>daily</changefreq>
+    <loc>https://www.platospeach.com/plan/battles-of-wwii</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plans/westward-expansion</loc>
-    <changefreq>daily</changefreq>
+    <loc>https://www.platospeach.com/plan/native-american-history</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plans/battles-of-wwii</loc>
-    <changefreq>daily</changefreq>
+    <loc>https://www.platospeach.com/plan/zoot-suit-riots</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plans/native-american-history</loc>
-    <changefreq>daily</changefreq>
+    <loc>https://www.platospeach.com/plan/shays'-rebellion</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plans/zoot-suit-riots</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.platospeach.com/plans/shays'-rebellion</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.platospeach.com/plans/historic-diseases-and-pandemics</loc>
-    <changefreq>daily</changefreq>
+    <loc>https://www.platospeach.com/plan/historic-diseases-and-pandemics</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.platospeach.com/plan/marcus-garvey</loc>
-    <changefreq>daily</changefreq>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plans/cuban-missile-crisis</loc>
-    <changefreq>daily</changefreq>
+    <loc>https://www.platospeach.com/plan/cuban-missile-crisis</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plans/the-gilded-age</loc>
-    <changefreq>daily</changefreq>
+    <loc>https://www.platospeach.com/plan/halloween</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plans/halloween</loc>
-    <changefreq>daily</changefreq>
+    <loc>https://www.platospeach.com/plan/world-war-two-timeline</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plans/world-war-two-timeline</loc>
-    <changefreq>daily</changefreq>
+    <loc>https://www.platospeach.com/plan/women's-suffrage</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plans/women's-suffrage</loc>
-    <changefreq>daily</changefreq>
+    <loc>https://www.platospeach.com/plan/post-civil-war-reconstruction-era</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plans/post-civil-war-reconstruction-era</loc>
-    <changefreq>daily</changefreq>
+    <loc>https://www.platospeach.com/plan/new-deal</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plans/new-deal</loc>
-    <changefreq>daily</changefreq>
+    <loc>https://www.platospeach.com/plan/cold-war</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plans/new-deal</loc>
-    <changefreq>daily</changefreq>
+    <loc>https://www.platospeach.com/plan/boston-tea-party</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plans/boston-tea-party</loc>
-    <changefreq>daily</changefreq>
+    <loc>https://www.platospeach.com/plan/american-imperialism</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.platospeach.com/plans/american-imperialism</loc>
-    <changefreq>daily</changefreq>
+    <loc>https://www.platospeach.com/article/6506066343ae84356582d1f8</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/6508640fa55e7a359d8e3753</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/65086463a55e7a359d8e3754</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/650b0a5c12a6b731d2e84aab</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/650b0aa912a6b731d2e84aac</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/650d9c712af1d0ff933e3b44</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/650da1752af1d0ff933e3b45</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/650da1e52af1d0ff933e3b46</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/650da37a2af1d0ff933e3b47</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/6511866045d1d65a489d1f60</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/6511897245d1d65a489d1f61</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/65118aa145d1d65a489d1f62</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/65118ba545d1d65a489d1f63</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/65118d0645d1d65a489d1f64</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/65201a016766970d1e8e43a8</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/65387656a8be3707f22f87f9</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/653876b1a8be3707f22f87fa</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/6543b365126e4e5671bf6244</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/6543b3ab126e4e5671bf6245</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/6543bae7126e4e5671bf6246</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/6548fcc01f6bd29831a39a45</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/6548fd221f6bd29831a39a46</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/6548fd8d1f6bd29831a39a47</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/6548fdd01f6bd29831a39a48</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/6548fe7e1f6bd29831a39a49</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/654fb43adf21cdc667959986</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/654fb6ebdf21cdc667959987</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/654fb835df21cdc667959988</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/6554ea7d92b184e4026e5467</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/6554eca392b184e4026e5468</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/6554eecc92b184e4026e5469</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/65562cc892b184e4026e546c</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.platospeach.com/article/65562de892b184e4026e546d</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 </urlset>
