@@ -180,7 +180,7 @@ export const UserPlaylistsCard = ({ playlist, paymentId }: Props) => {
                 </DialogTitle>
                 <DialogContent>
                   <DialogContentText id="alert-dialog-description">
-                    This action cannot be undone.
+                    {`If you change your mind, you can easily switch back to ${playlist.public ? "public" : "private"}.`}
                   </DialogContentText>
                 </DialogContent>
                 <DialogActions>
