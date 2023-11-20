@@ -6,6 +6,7 @@ import { PublicPlaylistCard } from '../../lib/components/PublicPlaylistCard';
 import { Footer } from '../../lib/components';
 import { PlaylistsSkeleton } from './playlistsSkeleton';
 import './playlistsCatalogStyle.scss';
+import { Helmet } from 'react-helmet';
 
 type Props = {
   viewer: Viewer
@@ -81,6 +82,10 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
 
   return (
     <Box>
+      <Helmet>
+        <title>{`Free Lesson Plan Templates | Plato's Peach`}</title>
+        <meta name="description" content={`Discover interactive lesson plans including short videos, articles, PDFs, and assessments. Use the lesson plan as is or copy to your profile and modify for your classroom.`} />
+      </Helmet>
       <Chip label="Lesson Plan Template Gallery" color="secondary" className="playlists--chip" size='medium' />
       <Box className="playlists--header">
         <h1>Lesson Plans</h1>
