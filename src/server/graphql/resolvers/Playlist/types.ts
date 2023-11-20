@@ -40,6 +40,11 @@ export interface UpdateParams {
   id: string;
 }
 
+export interface PublicArgs {
+  id: string;
+  publicStatus: boolean;
+}
+
 export interface CopyPlaylistArgs {
   id: string;
   viewerId: string;

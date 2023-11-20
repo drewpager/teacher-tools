@@ -407,6 +407,7 @@ export type Mutation = {
   logIn: Viewer;
   logOut: Viewer;
   updatePlan: Playlist;
+  updatePlanPublic: Scalars['Boolean'];
 };
 
 
@@ -481,6 +482,12 @@ export type MutationLogInArgs = {
 export type MutationUpdatePlanArgs = {
   id?: InputMaybe<Scalars['ID']>;
   input?: InputMaybe<LessonPlanInput>;
+};
+
+
+export type MutationUpdatePlanPublicArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+  public?: InputMaybe<Scalars['Boolean']>;
 };
 
 export type Package = {
@@ -758,6 +765,14 @@ export type UpdatePlanMutationVariables = Exact<{
 
 
 export type UpdatePlanMutation = { __typename?: 'Mutation', updatePlan: { __typename?: 'Playlist', id?: string | null } };
+
+export type UpdatePlanPublicMutationVariables = Exact<{
+  id?: InputMaybe<Scalars['ID']>;
+  public?: InputMaybe<Scalars['Boolean']>;
+}>;
+
+
+export type UpdatePlanPublicMutation = { __typename?: 'Mutation', updatePlanPublic: boolean };
 
 export type ArticleQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -1155,6 +1170,38 @@ export function useUpdatePlanMutation(baseOptions?: Apollo.MutationHookOptions<U
 export type UpdatePlanMutationHookResult = ReturnType<typeof useUpdatePlanMutation>;
 export type UpdatePlanMutationResult = Apollo.MutationResult<UpdatePlanMutation>;
 export type UpdatePlanMutationOptions = Apollo.BaseMutationOptions<UpdatePlanMutation, UpdatePlanMutationVariables>;
+export const UpdatePlanPublicDocument = gql`
+    mutation UpdatePlanPublic($id: ID, $public: Boolean) {
+  updatePlanPublic(id: $id, public: $public)
+}
+    `;
+export type UpdatePlanPublicMutationFn = Apollo.MutationFunction<UpdatePlanPublicMutation, UpdatePlanPublicMutationVariables>;
+
+/**
+ * __useUpdatePlanPublicMutation__
+ *
+ * To run a mutation, you first call `useUpdatePlanPublicMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdatePlanPublicMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updatePlanPublicMutation, { data, loading, error }] = useUpdatePlanPublicMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      public: // value for 'public'
+ *   },
+ * });
+ */
+export function useUpdatePlanPublicMutation(baseOptions?: Apollo.MutationHookOptions<UpdatePlanPublicMutation, UpdatePlanPublicMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdatePlanPublicMutation, UpdatePlanPublicMutationVariables>(UpdatePlanPublicDocument, options);
+      }
+export type UpdatePlanPublicMutationHookResult = ReturnType<typeof useUpdatePlanPublicMutation>;
+export type UpdatePlanPublicMutationResult = Apollo.MutationResult<UpdatePlanPublicMutation>;
+export type UpdatePlanPublicMutationOptions = Apollo.BaseMutationOptions<UpdatePlanPublicMutation, UpdatePlanPublicMutationVariables>;
 export const ArticleDocument = gql`
     query Article($id: ID!) {
   article(id: $id) {

@@ -59,8 +59,9 @@ export const User = ({ viewer }: Props) => {
       playlistsPage={playlistsPage}
       limit={pageLimit}
       setPlaylistsPage={setPlaylistsPage}
+      viewer={viewer}
     />
-  ) : (<h2>UserPlaylists Not Working</h2>), [userPlaylists, playlistsPage]);
+  ) : (<h2>UserPlaylists Not Working</h2>), [userPlaylists, playlistsPage, viewer]);
 
   const userQuizzesElement = useMemo(() => userQuizzes ? (
     <UserQuizzes

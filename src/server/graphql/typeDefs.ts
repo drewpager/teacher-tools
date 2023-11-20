@@ -194,6 +194,7 @@ export const typeDefs = gql`
     deleteQuiz(id: ID): Boolean!
     deleteArticle(id: ID): Boolean!
     deleteAllBookmarks(id: ID): String
+    updatePlanPublic(id: ID, publicStatus: Boolean): Boolean!
     bookmarkLesson(id: ID!, viewer: String!): String
     addPayment(id: ID!): Viewer
     copyPlaylist(id: ID!, viewerId: String!): Playlist

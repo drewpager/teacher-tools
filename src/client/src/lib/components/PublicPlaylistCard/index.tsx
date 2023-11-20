@@ -143,7 +143,7 @@ export const PublicPlaylistCard = ({ id, name, plan, creator, viewer }: Props) =
                 key={id}
               >
                 <Alert variant="filled" severity="error" sx={{ width: '100%' }}>
-                  Please sign up or log in to copy a playlist!
+                  Please sign up or log in to copy a lesson plan!
                 </Alert>
               </Snackbar>
             </Box>
