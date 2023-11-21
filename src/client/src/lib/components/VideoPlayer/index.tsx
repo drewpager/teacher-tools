@@ -32,7 +32,10 @@ export const VideoPlayer = ({ url }: props) => {
     if (cloudinaryRef.current) return;
     cloudinaryRef.current = window.cloudinary.videoPlayer(videoRef.current, {
       cloud_name: 'drewpager',
-      showLogo: false
+      showLogo: false,
+      // fluid: true,
+      // sourceTypes: ['mp4', 'mov'],
+      // transformation: [{ quality: "auto" }, { fetch_format: "auto" }]
     });
   }, [url, videoRef, fileString, path])
 

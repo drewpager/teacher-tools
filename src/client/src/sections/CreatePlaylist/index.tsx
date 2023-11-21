@@ -221,7 +221,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
   // const quizQuery = useMemo(() => quizData?.allquizzes.result, [quizData]);
   const quizQuery = quizData?.allquizzes.result;
   const articleQuery = useMemo(() => articleData?.allarticles.result, [articleData])
-  const bookmarkQuery = userData ? userData.user.bookmarks : null;
+  // const bookmarkQuery = userData ? userData.user.bookmarks : null;
+  const bookmarkQuery = useMemo(() => userData?.user.bookmarks, [userData]);
 
   useEffect(() => {
     if (window.localStorage.getItem("playlist")?.length) {
@@ -257,7 +258,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       setPlans([...lessonInput])
     }
 
-    if (quizQuery) {
+    else if (quizQuery) {
       const quizInput: any[] = []
       quizQuery.forEach(q => {
         let quizObj = {
@@ -273,7 +274,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       setPlans((plan) => [...plan, ...quizInput])
     }
 
-    if (articleQuery) {
+    else if (articleQuery) {
       const articleInput: any[] = []
       articleQuery.forEach(a => {
         let articleObj = {
