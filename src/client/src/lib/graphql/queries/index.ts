@@ -10,3 +10,4 @@ export * from "./Quizzes";
 export * from "./AuthUrl";
 export * from "./Article";
 export * from "./Articles";
+export * from "./Related";

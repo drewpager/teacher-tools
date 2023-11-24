@@ -10,6 +10,31 @@
       margin: 7rem 0;
     }
   }
+
+  &.featuredPlans--section {
+    margin-top: 7rem;
+    width: 100%;
+
+    @media (max-width: 900px) {
+      margin-right: 0.5rem;
+      width: 100%;
+      margin-top: 0;
+    }
+
+    @media (min-width: 900px) {
+      top: 7rem;
+      position: sticky;
+    }
+  }
+
+  &.featuredPlan--card {
+    width: fit-content;
+    margin-right: 2rem;
+  }
+}
+
+.MuiListItem-root {
+  padding-left: 0 !important;
 }
 
 .MuiPaper-root {

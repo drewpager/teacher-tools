@@ -1,4 +1,4 @@
-import { Database, Article, Viewer } from "../../../lib/types";
+import { Database, Article, Viewer, Playlist } from "../../../lib/types";
 import {
   CreateArticleArgs,
   ArticlesArgs,
@@ -38,6 +38,25 @@ export const articleResolvers = {
       data.result = await cursor.toArray();
       data.totalCount = await count.count();
       return data;
+    },
+    relatedPlans: async (
+      _root: undefined,
+      { id }: ArticleArgs,
+      { db }: { db: Database }
+    ): Promise<Playlist[]> => {
+      const related = await db.playlists
+        .find({ plan: { $elemMatch: { _id: id } } })
+        .limit(3);
+      const cursor = await related.toArray();
+      if (cursor.length === 0 || !cursor) {
+        const anyPlaylists = await db.playlists.find().limit(3);
+        if (!anyPlaylists) {
+          throw new Error("Failed to query related plans");
+        }
+        return anyPlaylists.toArray();
+        // throw new Error("Failed to query related plans");
+      }
+      return cursor;
     },
   },
   Article: {

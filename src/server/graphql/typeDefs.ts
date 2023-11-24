@@ -178,6 +178,7 @@ export const typeDefs = gql`
     allUsers(limit: Int!, page: Int!): Users!
     quiz(id: ID!): Quiz!
     allquizzes(limit: Int!, page: Int!): Quizzes!
+    relatedPlans(id: ID!): [Playlist!]!
   }
 
   type Mutation {

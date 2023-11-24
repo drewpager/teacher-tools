@@ -487,7 +487,7 @@ export type MutationUpdatePlanArgs = {
 
 export type MutationUpdatePlanPublicArgs = {
   id?: InputMaybe<Scalars['ID']>;
-  public?: InputMaybe<Scalars['Boolean']>;
+  publicStatus?: InputMaybe<Scalars['Boolean']>;
 };
 
 export type Package = {
@@ -545,6 +545,7 @@ export type Query = {
   plan: Playlist;
   playlist: Playlist;
   quiz: Quiz;
+  relatedPlans: Array<Playlist>;
   user: User;
 };
 
@@ -600,6 +601,11 @@ export type QueryPlaylistArgs = {
 
 
 export type QueryQuizArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryRelatedPlansArgs = {
   id: Scalars['ID'];
 };
 
@@ -766,14 +772,6 @@ export type UpdatePlanMutationVariables = Exact<{
 
 export type UpdatePlanMutation = { __typename?: 'Mutation', updatePlan: { __typename?: 'Playlist', id?: string | null } };
 
-export type UpdatePlanPublicMutationVariables = Exact<{
-  id?: InputMaybe<Scalars['ID']>;
-  public?: InputMaybe<Scalars['Boolean']>;
-}>;
-
-
-export type UpdatePlanPublicMutation = { __typename?: 'Mutation', updatePlanPublic: boolean };
-
 export type ArticleQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -845,6 +843,13 @@ export type AllQuizzesQueryVariables = Exact<{
 
 
 export type AllQuizzesQuery = { __typename?: 'Query', allquizzes: { __typename?: 'Quizzes', total: number, result: Array<{ __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, public?: boolean | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> }> } };
+
+export type RelatedPlansQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type RelatedPlansQuery = { __typename?: 'Query', relatedPlans: Array<{ __typename?: 'Playlist', name: string, id?: string | null, creator: string, public?: boolean | null, plan: Array<{ __typename?: 'Article', title?: string | null, public?: boolean | null, pdf?: string | null, id?: string | null, creator?: string | null } | { __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null, public?: boolean | null } | { __typename?: 'Quiz', id?: string | null, title?: string | null, creator?: string | null, questions: Array<{ __typename?: 'Questions', question?: string | null, answerType?: AnswerFormat | null, answerOptions?: Array<{ __typename?: 'AnswerOptions', answerText?: string | null, isCorrect?: boolean | null } | null> | null }> } | null> }> };
 
 export type UserQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -1170,38 +1175,6 @@ export function useUpdatePlanMutation(baseOptions?: Apollo.MutationHookOptions<U
 export type UpdatePlanMutationHookResult = ReturnType<typeof useUpdatePlanMutation>;
 export type UpdatePlanMutationResult = Apollo.MutationResult<UpdatePlanMutation>;
 export type UpdatePlanMutationOptions = Apollo.BaseMutationOptions<UpdatePlanMutation, UpdatePlanMutationVariables>;
-export const UpdatePlanPublicDocument = gql`
-    mutation UpdatePlanPublic($id: ID, $public: Boolean) {
-  updatePlanPublic(id: $id, public: $public)
-}
-    `;
-export type UpdatePlanPublicMutationFn = Apollo.MutationFunction<UpdatePlanPublicMutation, UpdatePlanPublicMutationVariables>;
-
-/**
- * __useUpdatePlanPublicMutation__
- *
- * To run a mutation, you first call `useUpdatePlanPublicMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdatePlanPublicMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updatePlanPublicMutation, { data, loading, error }] = useUpdatePlanPublicMutation({
- *   variables: {
- *      id: // value for 'id'
- *      public: // value for 'public'
- *   },
- * });
- */
-export function useUpdatePlanPublicMutation(baseOptions?: Apollo.MutationHookOptions<UpdatePlanPublicMutation, UpdatePlanPublicMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdatePlanPublicMutation, UpdatePlanPublicMutationVariables>(UpdatePlanPublicDocument, options);
-      }
-export type UpdatePlanPublicMutationHookResult = ReturnType<typeof useUpdatePlanPublicMutation>;
-export type UpdatePlanPublicMutationResult = Apollo.MutationResult<UpdatePlanPublicMutation>;
-export type UpdatePlanPublicMutationOptions = Apollo.BaseMutationOptions<UpdatePlanPublicMutation, UpdatePlanPublicMutationVariables>;
 export const ArticleDocument = gql`
     query Article($id: ID!) {
   article(id: $id) {
@@ -1873,6 +1846,78 @@ export function useAllQuizzesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type AllQuizzesQueryHookResult = ReturnType<typeof useAllQuizzesQuery>;
 export type AllQuizzesLazyQueryHookResult = ReturnType<typeof useAllQuizzesLazyQuery>;
 export type AllQuizzesQueryResult = Apollo.QueryResult<AllQuizzesQuery, AllQuizzesQueryVariables>;
+export const RelatedPlansDocument = gql`
+    query RelatedPlans($id: ID!) {
+  relatedPlans(id: $id) {
+    plan {
+      ... on Article {
+        title
+        public
+        pdf
+        id
+        creator
+      }
+      ... on Quiz {
+        id
+        title
+        questions {
+          question
+          answerOptions {
+            answerText
+            isCorrect
+          }
+          answerType
+        }
+        creator
+      }
+      ... on Lesson {
+        id
+        category
+        title
+        meta
+        video
+        image
+        startDate
+        endDate
+        creator
+        public
+      }
+    }
+    name
+    id
+    creator
+    public
+  }
+}
+    `;
+
+/**
+ * __useRelatedPlansQuery__
+ *
+ * To run a query within a React component, call `useRelatedPlansQuery` and pass it any options that fit your needs.
+ * When your component renders, `useRelatedPlansQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useRelatedPlansQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useRelatedPlansQuery(baseOptions: Apollo.QueryHookOptions<RelatedPlansQuery, RelatedPlansQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<RelatedPlansQuery, RelatedPlansQueryVariables>(RelatedPlansDocument, options);
+      }
+export function useRelatedPlansLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<RelatedPlansQuery, RelatedPlansQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<RelatedPlansQuery, RelatedPlansQueryVariables>(RelatedPlansDocument, options);
+        }
+export type RelatedPlansQueryHookResult = ReturnType<typeof useRelatedPlansQuery>;
+export type RelatedPlansLazyQueryHookResult = ReturnType<typeof useRelatedPlansLazyQuery>;
+export type RelatedPlansQueryResult = Apollo.QueryResult<RelatedPlansQuery, RelatedPlansQueryVariables>;
 export const UserDocument = gql`
     query User($id: ID!, $playlistsPage: Int!, $lessonsPage: Int!, $quizzesPage: Int!, $articlesPage: Int!, $limit: Int!) {
   user(id: $id) {

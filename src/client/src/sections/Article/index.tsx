@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useArticleQuery, Viewer } from '../../graphql/generated';
+import { useArticleQuery, Viewer, useRelatedPlansQuery } from '../../graphql/generated';
 import { useParams } from 'react-router-dom';
 import { Box, LinearProgress, Grid, Card, Typography, Button } from '@mui/material';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
@@ -8,6 +8,8 @@ import { Helmet } from 'react-helmet';
 import draftToHtml from 'draftjs-to-html';
 import './article.scss';
 import { Link } from 'react-router-dom';
+import { formatSlug } from '../../lib/utils/formatSlug';
+import { PublicPlaylistCard } from '../../lib/components/PublicPlaylistCard';
 
 export const Article = () => {
   const params = useParams();
@@ -17,7 +19,13 @@ export const Article = () => {
     }
   });
 
-  if (loading) {
+  const { data: relatedPlansData, loading: relatedPlansLoading, error: relatedPlansError } = useRelatedPlansQuery({
+    variables: {
+      id: `${params.id}`
+    }
+  })
+
+  if (loading || relatedPlansLoading) {
     return (
       <LinearProgress />
     )
@@ -28,11 +36,23 @@ export const Article = () => {
       <Box sx={{ marginLeft: 5 }}>
         <h2>Article Not Found</h2>
         <h4>Here are a few available articles or you can try searching again.</h4>
-        <Search />
+        {relatedPlansData && relatedPlansData.relatedPlans.map((plan: any) => (
+          <div key={plan.id}>
+            <Link to={`/plans/${formatSlug(plan.name)}`} style={{ textDecoration: 'none' }}>
+              <Typography variant='h6' className='article--relatedTitle'>{plan.title}</Typography>
+            </Link>
+          </div>
+        )
+        )}
+        <Link to="/plans" style={{ textDecoration: 'none' }}><Button variant="contained" className="incallAction--buttonSecond">See All Public Lesson Plan Templates</Button></Link>
         <DisplayError title='Failed to load playlist' />
         <Footer />
       </Box>
     )
+  }
+
+  if (relatedPlansError) {
+    throw new Error('Failed to load related plans');
   }
 
   const article = data ? data.article : null;
@@ -85,11 +105,30 @@ export const Article = () => {
           <meta name="description" content={`Article explaining ${article.title}.`} />
           {!article.public && (<meta name="robots" content="noindex" />)}
         </Helmet>
-        <Box className="article--section">
-          <h2>{article.title}</h2>
-          {newRawContent && (<div className="article--body" dangerouslySetInnerHTML={{ __html: draftToHtml(newRawContent) }} />)}
-          {(article.pdf === "undefined" || article.pdf === null) ? (<></>) : (<PdfPlayer pdf={article.pdf} />)}
-        </Box>
+        <Grid container>
+          <Grid item xs={12} sm={12} md={8} lg={8}>
+            <Box className="article--section">
+              <h2>{article.title}</h2>
+              {newRawContent && (<div className="article--body" dangerouslySetInnerHTML={{ __html: draftToHtml(newRawContent) }} />)}
+              {(article.pdf === "undefined" || article.pdf === null) ? (<></>) : (<PdfPlayer pdf={article.pdf} />)}
+            </Box>
+          </Grid>
+          <Grid item xs={12} sm={12} md={4} lg={4}>
+            <Box className="featuredPlans--section">
+              <h2>Featured Lesson Plans</h2>
+              {relatedPlansData?.relatedPlans.map((plan: any) => (
+                <Box className="featuredPlan--card">
+                  <PublicPlaylistCard key={plan.id} {...plan} />
+                </Box>
+                // <li key={plan.id}>
+                //   <Link to={`/plans/${formatSlug(plan.name)}`} style={{ textDecoration: 'none' }}>
+                //     <Typography variant='h6' className='article--relatedTitle'>{plan.name}</Typography>
+                //   </Link>
+                // </li>
+              ))}
+            </Box>
+          </Grid>
+        </Grid>
         <Card className="incallAction--home">
           <Grid container className="grid--container">
             <Grid item xs={12} sm={12} md={12} lg={12}>
