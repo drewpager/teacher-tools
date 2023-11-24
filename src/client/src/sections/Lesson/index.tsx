@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLessonQuery } from '../../graphql/generated';
+import { useLessonQuery, useRelatedPlansQuery } from '../../graphql/generated';
 import { useParams } from 'react-router-dom';
 import { LinearProgress, Box, Chip, Card, Grid, Button, Typography } from '@mui/material';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
@@ -7,6 +7,7 @@ import { Footer, VideoPlayer } from '../../lib/components';
 import { titleCase, formatDate } from '../../lib/utils';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
+import { PublicPlaylistCard } from '../../lib/components/PublicPlaylistCard';
 
 import './lessonPage.scss';
 
@@ -20,7 +21,13 @@ export const Lesson = () => {
     }
   });
 
-  if (loading) {
+  const { data: relatedPlansData, loading: relatedPlansLoading, error: relatedPlansError } = useRelatedPlansQuery({
+    variables: {
+      id: `${params.id}`
+    }
+  })
+
+  if (loading || relatedPlansLoading) {
     return (
       <LinearProgress />
     )
@@ -43,14 +50,29 @@ export const Lesson = () => {
           <title>{lesson?.title}</title>
           <meta name="description" content={`A short documentary of ${lesson?.title} from ${formatDate(lesson?.startDate)} to ${formatDate(lesson?.endDate)}.`} />
         </Helmet>
-        <h1>{lesson?.title}</h1>
-        {lesson?.category?.map((i, ind) => (<Chip variant='outlined' label={titleCase(`${i}`)} key={ind} color="error" className='lesson--category' />))}
-        <Box className="lesson-video--section">
-          <VideoPlayer
-            url={`${lesson?.video}`}
-          />
-        </Box>
-        {/* <img src={`${lesson?.image}`} alt={`Text overlay of ${lesson?.title}`} /> */}
+        <Grid container>
+          <Grid item xs={12} sm={12} md={12} lg={8}>
+            <Box className="article--section">
+              <h1>{lesson?.title}</h1>
+              {lesson?.category?.map((i, ind) => (<Chip variant='outlined' label={titleCase(`${i}`)} key={ind} color="error" className='lesson--category' />))}
+              <Box className="lesson-video--section">
+                <VideoPlayer
+                  url={`${lesson?.video}`}
+                />
+              </Box>
+            </Box>
+          </Grid>
+          <Grid item xs={12} sm={12} md={12} lg={4}>
+            <Box className="featuredPlans--section">
+              <h2>Featured Lesson Plans</h2>
+              {relatedPlansData?.relatedPlans.map((plan: any) => (
+                <Box className="featuredPlan--card">
+                  {plan.public && <PublicPlaylistCard key={plan.id} {...plan} />}
+                </Box>
+              ))}
+            </Box>
+          </Grid>
+        </Grid>
       </Box>
       <Card className="incallAction--home">
         <Grid container className="grid--container">

@@ -118,7 +118,7 @@ export const Article = () => {
               <h2>Featured Lesson Plans</h2>
               {relatedPlansData?.relatedPlans.map((plan: any) => (
                 <Box className="featuredPlan--card">
-                  <PublicPlaylistCard key={plan.id} {...plan} />
+                  {plan.public && <PublicPlaylistCard key={plan.id} {...plan} />}
                 </Box>
               ))}
             </Box>

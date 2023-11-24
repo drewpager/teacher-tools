@@ -119,6 +119,28 @@ export const lessonResolvers = {
 
       return data;
     },
+    relatedPlans: async (
+      _root: undefined,
+      { id }: LessonArgs,
+      { db }: { db: Database }
+    ): Promise<Playlist[]> => {
+      const related = await db.playlists
+        .find({ public: true, plan: { $elemMatch: { _id: id } } })
+        .limit(3);
+      const cursor = await related.toArray();
+      if (cursor.length === 0 || !cursor) {
+        const anyPlaylists = await db.playlists
+          .find({ public: true })
+          .sort({ _id: -1 })
+          .limit(3);
+        if (!anyPlaylists) {
+          throw new Error("Failed to query related plans");
+        }
+        return anyPlaylists.toArray();
+        // throw new Error("Failed to query related plans");
+      }
+      return cursor;
+    },
   },
   Lesson: {
     id: (lesson: Lesson) => {

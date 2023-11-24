@@ -1,5 +1,5 @@
 .lesson--page {
-  margin-top: 5rem;
+  margin-top: 1rem;
   margin-left: 2rem;
 
   @media (max-width: 900px) {
@@ -14,7 +14,7 @@
 
 .MuiBox-root {
   &.lesson-video--section {
-    width: 70%;
+    width: 100%;
     height: auto;
 
     @media (max-width: 768px) {
@@ -28,7 +28,7 @@
     }
 
     @media (min-width: 2000px) {
-      width: 60%;
+      width: 100%;
       height: auto;
     }
   }
