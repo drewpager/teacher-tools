@@ -5,6 +5,7 @@ import { LessonPlanUnion, Viewer, useUserQuery } from '../../../graphql/generate
 import { useMutation } from '@apollo/client';
 import { gql } from 'graphql-tag';
 import { DisplayError, DisplaySuccess } from '../../utils';
+import { formatSlug } from '../../utils/formatSlug';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import "./publicPlaylistCardStyles.scss";
 
@@ -99,10 +100,6 @@ export const PublicPlaylistCard = ({ id, name, plan, creator, viewer }: Props) =
       Unable to copy playlist!
     </Alert>
   );
-
-  function formatSlug(title: any) {
-    return title.replace(/\s+/g, '-').toLowerCase();
-  }
 
   return (
     <Grid item lg={4} md={6} sm={12} xs={12} key={id}>

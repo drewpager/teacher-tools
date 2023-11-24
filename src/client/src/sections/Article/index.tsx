@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { useArticleQuery, Viewer, useRelatedPlansQuery } from '../../graphql/generated';
+import React from 'react';
+import { useArticleQuery, useRelatedPlansQuery } from '../../graphql/generated';
 import { useParams } from 'react-router-dom';
 import { Box, LinearProgress, Grid, Card, Typography, Button } from '@mui/material';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
-import { Search, Footer, PdfPlayer } from '../../lib/components/';
+import { Footer, PdfPlayer } from '../../lib/components/';
 import { Helmet } from 'react-helmet';
 import draftToHtml from 'draftjs-to-html';
 import './article.scss';
@@ -120,11 +120,6 @@ export const Article = () => {
                 <Box className="featuredPlan--card">
                   <PublicPlaylistCard key={plan.id} {...plan} />
                 </Box>
-                // <li key={plan.id}>
-                //   <Link to={`/plans/${formatSlug(plan.name)}`} style={{ textDecoration: 'none' }}>
-                //     <Typography variant='h6' className='article--relatedTitle'>{plan.name}</Typography>
-                //   </Link>
-                // </li>
               ))}
             </Box>
           </Grid>
