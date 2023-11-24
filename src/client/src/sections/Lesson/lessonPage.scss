@@ -1,5 +1,10 @@
 .lesson--page {
-  margin: 5rem 2rem;
+  margin-top: 5rem;
+  margin-left: 2rem;
+
+  @media (max-width: 900px) {
+    margin-left: 0;
+  }
 }
 
 .lesson--category {
@@ -9,22 +14,40 @@
 
 .MuiBox-root {
   &.lesson-video--section {
-    width: 80%;
-    height: 80vh;
+    width: 70%;
+    height: auto;
 
     @media (max-width: 768px) {
       width: 100%;
-      height: 20vh;
+      height: auto;
     }
 
     @media (max-width: 1000px) {
       width: 100%;
-      height: 80vh;
+      height: auto;
     }
 
     @media (min-width: 2000px) {
       width: 60%;
-      height: 80vh;
+      height: auto;
+    }
+  }
+}
+
+.MuiGrid-container {
+  .containCTA {
+    max-width: 18rem;
+    height: auto;
+    justify-content: left;
+    margin-top: -4rem;
+    margin-left: -4rem;
+
+    @media (min-width: 1000px) {
+      justify-content: center;
+      align-content: center;
+      width: 18rem;
+      margin-left: -2rem;
+      margin-top: 0.875rem;
     }
   }
 }
