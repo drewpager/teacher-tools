@@ -188,7 +188,8 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
                 disableFocusRipple
                 sx={{ color: "#000" }}
               >
-                {(params.id === undefined) ? <></> : <ContentCopyIcon />}
+                {/* {(params.id === undefined) ? <></> : <ContentCopyIcon />} */}
+                <ContentCopyIcon />
               </IconButton>
             </Tooltip>
           )
