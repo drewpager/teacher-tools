@@ -109,8 +109,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const [searchError, setSearchError] = useState<boolean>(false)
   const [autoSaved, setAutoSaved] = useState<boolean>(false)
   const [variant, setVariant] = useState<boolean>(true)
-  const [plans, setPlans] = useState<Array<Plan>>([])
-  const [filter, setFilter] = useState<Array<Plan>>([])
+  const [plans, setPlans] = useState<Plan[]>([])
+  const [filter, setFilter] = useState<Plan[]>([])
   const [yourContent, setYourContent] = useState<boolean>(false);
   const inputRef = useFocus();
   const searchRef = useFocus();
@@ -169,6 +169,87 @@ export const CreatePlaylist = ({ viewer }: props) => {
     }
   })
 
+  let lessonQuery = useMemo(() => lessonData?.allLessons.result, [lessonData])
+  // let lessonQuery = lessonData ? lessonData.allLessons.result : null;
+  let quizQuery = useMemo(() => quizData?.allquizzes.result, [quizData]);
+  // const quizQuery = quizData?.allquizzes.result;
+  let articleQuery = useMemo(() => articleData?.allarticles.result, [articleData])
+  // const bookmarkQuery = userData ? userData.user.bookmarks : null;
+  let bookmarkQuery = useMemo(() => userData ? userData.user.bookmarks : null, [userData]);
+
+  // useEffect(() => {
+  //   const playlistStorage = window.localStorage.getItem("playlist");
+  //   if (playlistStorage) {
+  //     setPlaylist(JSON.parse(playlistStorage));
+  //   } else {
+  //     setPlaylist(initialData);
+  //   }
+  // }, [])
+
+  useEffect(() => {
+    const playlistStorage = window.localStorage.getItem("playlist");
+    if (playlistStorage) {
+      setPlaylist(JSON.parse(playlistStorage));
+    }
+
+    setPlaylist(initialData);
+
+    if (lessonQuery) {
+      const lessonInput: FullLessonInput[] = []
+      lessonQuery.forEach(i => {
+        let lessonObj = {
+          title: i.title,
+          category: i.category,
+          creator: i.creator,
+          endDate: i.endDate,
+          // image: i.image,
+          meta: i.meta,
+          startDate: i.startDate,
+          video: i.video,
+          _id: i.id,
+          public: i.public,
+        }
+        lessonInput.push(lessonObj);
+      })
+
+      setFilter(lessonInput)
+      setPlans(lessonInput)
+    }
+
+    if (quizQuery) {
+      const quizInput: Plan[] = []
+      quizQuery.forEach(q => {
+        let quizObj = {
+          creator: q.creator,
+          _id: q.id,
+          title: q.title,
+          questions: q.questions,
+          public: q.public
+        }
+        quizInput.push(quizObj)
+      })
+      setFilter((fil) => [...fil, ...quizInput])
+      setPlans((p) => [...p, ...quizInput])
+    }
+
+    if (articleQuery) {
+      const articleInput: Plan[] = []
+      articleQuery.forEach(a => {
+        let articleObj = {
+          creator: a.creator,
+          _id: a.id,
+          title: a.title,
+          content: a.content,
+          public: a.public,
+          pdf: a.pdf
+        }
+        articleInput.push(articleObj)
+      })
+      setFilter((filt) => [...filt, ...articleInput])
+      setPlans((plan) => [...plan, ...articleInput])
+    }
+  }, [lessonQuery, quizQuery, articleQuery])
+
   const BookmarkSwitch = styled(Switch)(({ theme }) => ({
     width: 62,
     height: 34,
@@ -216,82 +297,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
     },
   }));
 
-  const lessonQuery = useMemo(() => lessonData?.allLessons.result, [lessonData])
-  // let lessonQuery = lessonData ? lessonData.allLessons.result : null;
-  // const quizQuery = useMemo(() => quizData?.allquizzes.result, [quizData]);
-  const quizQuery = quizData?.allquizzes.result;
-  const articleQuery = useMemo(() => articleData?.allarticles.result, [articleData])
-  // const bookmarkQuery = userData ? userData.user.bookmarks : null;
-  const bookmarkQuery = useMemo(() => userData?.user.bookmarks, [userData]);
-
-  useEffect(() => {
-    if (window.localStorage.getItem("playlist")?.length) {
-      setPlaylist(JSON.parse(`${window?.localStorage?.getItem("playlist")}`))
-    } else {
-      setPlaylist(initialData);
-    }
-  }, [])
-
-  useEffect(() => {
-    if (window.localStorage.getItem("playlist")?.length) {
-      setPlaylist(JSON.parse(`${window?.localStorage?.getItem("playlist")}`))
-    }
-
-    if (lessonQuery) {
-      const lessonInput: FullLessonInput[] = []
-      lessonQuery.forEach(i => {
-        let lessonObj = {
-          title: i.title,
-          category: i.category,
-          creator: i.creator,
-          endDate: i.endDate,
-          // image: i.image,
-          meta: i.meta,
-          startDate: i.startDate,
-          video: i.video,
-          _id: i.id
-        }
-        lessonInput.push(lessonObj);
-      })
-
-      setFilter([...lessonInput])
-      setPlans([...lessonInput])
-    }
-
-    else if (quizQuery) {
-      const quizInput: any[] = []
-      quizQuery.forEach(q => {
-        let quizObj = {
-          creator: q.creator,
-          _id: q.id,
-          title: q.title,
-          questions: q.questions,
-          public: q.public
-        }
-        quizInput.push(quizObj)
-      })
-      setFilter((filter) => [...filter, ...quizInput])
-      setPlans((plan) => [...plan, ...quizInput])
-    }
-
-    else if (articleQuery) {
-      const articleInput: any[] = []
-      articleQuery.forEach(a => {
-        let articleObj = {
-          creator: a.creator,
-          _id: a.id,
-          title: a.title,
-          content: a.content,
-          public: a.public,
-          pdf: a.pdf
-        }
-        articleInput.push(articleObj)
-      })
-      setFilter((filter) => [...filter, ...articleInput])
-      setPlans((plan) => [...plan, ...articleInput])
-    }
-  }, [lessonQuery, quizQuery, articleQuery])
-
   if (!viewer.id) {
     return (
       <>
@@ -325,7 +330,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
   }
 
   // Isolate the main and any secondary categories
-  const categor = lessonData?.allLessons.result;
+  const categor = lessonQuery;
   const mainCategoryArray: any[] = [];
   const secondaryCategory: any = [{}];
   const allCategories: any[] = [];
