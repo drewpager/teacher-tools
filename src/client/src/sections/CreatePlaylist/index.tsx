@@ -177,15 +177,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
   // const bookmarkQuery = userData ? userData.user.bookmarks : null;
   let bookmarkQuery = useMemo(() => userData ? userData.user.bookmarks : null, [userData]);
 
-  // useEffect(() => {
-  //   const playlistStorage = window.localStorage.getItem("playlist");
-  //   if (playlistStorage) {
-  //     setPlaylist(JSON.parse(playlistStorage));
-  //   } else {
-  //     setPlaylist(initialData);
-  //   }
-  // }, [])
-
   useEffect(() => {
     const playlistStorage = window.localStorage.getItem("playlist");
     if (playlistStorage) {
@@ -193,62 +184,68 @@ export const CreatePlaylist = ({ viewer }: props) => {
     }
 
     setPlaylist(initialData);
+    // Reset states to initial value or empty arrays
+    setFilter([]);
+    setPlans([]);
+
+    const updateStates = (newData: any, setStateFunction: any) => {
+      setStateFunction((currentData: any) => {
+        // Check if the new data is different from current data to prevent duplication
+        const newDataIds = new Set(newData.map((item: any) => item._id));
+        const filteredCurrentData = currentData.filter((item: any) => !newDataIds.has(item._id));
+
+        return [...filteredCurrentData, ...newData];
+      });
+    };
 
     if (lessonQuery) {
-      const lessonInput: FullLessonInput[] = []
-      lessonQuery.forEach(i => {
-        let lessonObj = {
-          title: i.title,
-          category: i.category,
-          creator: i.creator,
-          endDate: i.endDate,
-          // image: i.image,
-          meta: i.meta,
-          startDate: i.startDate,
-          video: i.video,
-          _id: i.id,
-          public: i.public,
-        }
-        lessonInput.push(lessonObj);
-      })
+      // Map lessonQuery to lessonInput
+      const lessonInput = lessonQuery.map(i => ({
+        title: i.title,
+        category: i.category,
+        creator: i.creator,
+        endDate: i.endDate,
+        meta: i.meta,
+        startDate: i.startDate,
+        video: i.video,
+        _id: i.id,
+        public: i.public,
+      }));
 
-      setFilter(lessonInput)
-      setPlans(lessonInput)
+      updateStates(lessonInput, setFilter);
+      updateStates(lessonInput, setPlans);
     }
 
     if (quizQuery) {
-      const quizInput: Plan[] = []
-      quizQuery.forEach(q => {
-        let quizObj = {
-          creator: q.creator,
-          _id: q.id,
-          title: q.title,
-          questions: q.questions,
-          public: q.public
-        }
-        quizInput.push(quizObj)
-      })
-      setFilter((fil) => [...fil, ...quizInput])
-      setPlans((p) => [...p, ...quizInput])
+      // Map quizQuery to quizInput
+      const quizInput = quizQuery.map(q => ({
+        creator: q.creator,
+        _id: q.id,
+        title: q.title,
+        questions: q.questions,
+        public: q.public
+      }));
+
+      updateStates(quizInput, setFilter);
+      updateStates(quizInput, setPlans);
     }
 
     if (articleQuery) {
-      const articleInput: Plan[] = []
-      articleQuery.forEach(a => {
-        let articleObj = {
-          creator: a.creator,
-          _id: a.id,
-          title: a.title,
-          content: a.content,
-          public: a.public,
-          pdf: a.pdf
-        }
-        articleInput.push(articleObj)
-      })
-      setFilter((filt) => [...filt, ...articleInput])
-      setPlans((plan) => [...plan, ...articleInput])
+      // Map articleQuery to articleInput
+      const articleInput = articleQuery.map(a => ({
+        creator: a.creator,
+        _id: a.id,
+        title: a.title,
+        content: a.content,
+        public: a.public,
+        pdf: a.pdf
+      }));
+
+      updateStates(articleInput, setFilter);
+      updateStates(articleInput, setPlans);
     }
-  }, [lessonQuery, quizQuery, articleQuery])
+  }, [lessonQuery, quizQuery, articleQuery]);
+
 
   const BookmarkSwitch = styled(Switch)(({ theme }) => ({
     width: 62,
@@ -371,7 +368,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
   const onDragEndHandler = (result: any) => {
     const { destination, source } = result;
-    console.log(playlist.plan);
 
     // if there is no droppable destination, simply return.
     if (!destination) {

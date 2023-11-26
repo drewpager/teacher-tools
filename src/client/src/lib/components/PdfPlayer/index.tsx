@@ -20,7 +20,7 @@ type Props = {
 }
 
 export const PdfPlayer = ({ pdf }: Props) => {
-  const [numPages, setNumPages] = useState<number>();
+  const [numPages, setNumPages] = useState<number>(0);
   const [pageNumber, setPageNumber] = useState<number>(1);
 
   function onDocumentLoadSuccess({ numPages }: { numPages: number }): void {
@@ -60,31 +60,35 @@ export const PdfPlayer = ({ pdf }: Props) => {
         />
       </Document>
       <Box className="pdf-button--section">
-        <IconButton
-          disableRipple
-          onClick={previousPage}
-          disabled={pageNumber <= 1}
-        >
-          <Button
-            disabled={pageNumber <= 1}
-            disableRipple
-          >
-            <UndoIcon /> Previous
-          </Button>
-        </IconButton>
-        <Chip variant="outlined" className="pdfPage-chip" label={`Page ${pageNumber || (numPages ? 1 : '--')} of ${numPages || '--'}`} />
-        <IconButton
-          disableRipple
-          onClick={nextPage}
-          disabled={pageNumber === numPages}
-        >
-          <Button
-            disabled={pageNumber === numPages}
-            disableRipple
-          >
-            Next <RedoIcon />
-          </Button>
-        </IconButton>
+        {(numPages > 1) ? (
+          <>
+            <IconButton
+              disableRipple
+              onClick={previousPage}
+              disabled={pageNumber <= 1}
+            >
+              <Button
+                disabled={pageNumber <= 1}
+                disableRipple
+              >
+                <UndoIcon /> Previous
+              </Button>
+            </IconButton>
+            <Chip variant="outlined" className="pdfPage-chip" label={`Page ${pageNumber || (numPages ? 1 : '--')} of ${numPages || '--'}`} />
+            <IconButton
+              disableRipple
+              onClick={nextPage}
+              disabled={pageNumber === numPages}
+            >
+              <Button
+                disabled={pageNumber === numPages}
+                disableRipple
+              >
+                Next <RedoIcon />
+              </Button>
+            </IconButton>
+          </>
+        ) : (<></>)}
         {PDFError}
       </Box>
     </Box>
