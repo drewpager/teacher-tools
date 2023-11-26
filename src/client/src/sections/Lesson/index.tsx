@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLessonQuery, useRelatedPlansQuery } from '../../graphql/generated';
+import { Viewer, useLessonQuery, useRelatedPlansQuery } from '../../graphql/generated';
 import { useParams } from 'react-router-dom';
 import { LinearProgress, Box, Chip, Card, Grid, Button, Typography } from '@mui/material';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
@@ -10,8 +10,11 @@ import { Link } from 'react-router-dom';
 import { PublicPlaylistCard } from '../../lib/components/PublicPlaylistCard';
 
 import './lessonPage.scss';
+interface Props {
+  viewer: Viewer
+}
 
-export const Lesson = () => {
+export const Lesson = ({ viewer }: Props) => {
   const params = useParams()
   const screenWidth = window.screen.width;
   const screenHeight = window.screen.height;
@@ -43,6 +46,10 @@ export const Lesson = () => {
 
   const lesson = data ? data.lesson : null;
 
+  const formatSlugSpaces = (slug: string) => {
+    return slug.trim().replaceAll(" ", '%20');
+  }
+
   return (
     <>
       <Box className="lesson--page">
@@ -54,7 +61,16 @@ export const Lesson = () => {
           <Grid item xs={12} sm={12} md={12} lg={8}>
             <Box className="article--section">
               <h1>{lesson?.title}</h1>
-              {lesson?.category?.map((i, ind) => (<Chip variant='outlined' label={titleCase(`${i}`)} key={ind} color="error" className='lesson--category' />))}
+              {lesson?.startDate === lesson?.endDate ? (
+                <Chip variant="filled" label={`${formatDate(lesson?.startDate)}`} color="primary" className='lesson--category' />
+              ) : (
+                <Chip variant="filled" label={`${formatDate(lesson?.startDate)} - ${formatDate(lesson?.endDate)}`} color="primary" className='lesson--category' />
+              )}
+              {lesson?.category?.map((i, ind) => (
+                <Link to={`/catalog#${formatSlugSpaces(`${i}`)}`}>
+                  <Chip variant='outlined' label={titleCase(`${i}`)} key={ind} color="error" className='lesson--category' />
+                </Link>
+              ))}
               <Box className="lesson-video--section">
                 <VideoPlayer
                   url={`${lesson?.video}`}
@@ -67,7 +83,7 @@ export const Lesson = () => {
               <h2>Featured Lesson Plans</h2>
               {relatedPlansData?.relatedPlans.map((plan: any) => (
                 <Box className="featuredPlan--card">
-                  {plan.public && <PublicPlaylistCard key={plan.id} {...plan} />}
+                  {plan.public && <PublicPlaylistCard key={plan.id} {...plan} viewer={viewer} />}
                 </Box>
               ))}
             </Box>

@@ -120,7 +120,7 @@ const App = () => {
           <Route path="/test" element={<TestElement viewer={viewer} />} />
           {/* <Route path="/stripe" children={(props: any) => (<Stripe {...props} setViewer={setViewer} />)} element={<Stripe viewer={viewer} setViewer={setViewer} />} /> */}
           <Route path="/catalog" element={<Catalog viewer={viewer} />} />
-          <Route path="/lesson/:id" element={<Lesson />} />
+          <Route path="/lesson/:id" element={<Lesson viewer={viewer} />} />
           <Route path="/lessons/:filter?" element={<Lessons title="Plato's Peach" />} />
           <Route path="/user/:id" children={(props: any) => (<User {...props} viewer={viewer} />)} element={<User viewer={viewer} />} />
           <Route path="/terms" element={<Terms />} />
