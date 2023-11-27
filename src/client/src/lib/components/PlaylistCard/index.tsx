@@ -30,7 +30,7 @@ import SkipNextIcon from '@mui/icons-material/SkipNext';
 import QuizIcon from '@mui/icons-material/Quiz';
 import ArticleIcon from '@mui/icons-material/Article';
 import { Playlist, LessonPlanUnion, Viewer, useUserQuery } from '../../../graphql/generated';
-import { QuizPlayer, ArticlePlayer } from '../index';
+import { QuizPlayer, ArticlePlayer, GoogleClassroomShareButton } from '../index';
 import { VideosPlayer } from '../VideosPlayer';
 import './playlistcard.scss';
 import { formatDate } from '../../utils';
@@ -40,6 +40,7 @@ import { DisplaySuccess } from '../../utils';
 import { useMutation } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import { PlaylistCardSkeleton } from './playlistCardSkeleton';
+import { formatSlug } from '../../utils/formatSlug';
 
 interface Props {
   playlist: Playlist
@@ -180,7 +181,7 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
           <Avatar alt="User Image" src={userImage} sx={{ mr: 2 }} className="avatar--creator" />
         </Tooltip>
         {CopyPlaylistLoading ? copyPlaylistLoadingMessage : (
-          (playlist.creator === viewer?.id) ? (<Chip variant='filled' label="Your Content" />) : (
+          (playlist.creator === viewer?.id) ? (<Chip variant='filled' label="Your Content" className="yourContent-chip" />) : (
             <Tooltip title="Copy playlist!">
               <IconButton
                 onClick={() => handleCopy(`${playlist.id}`, `${viewer?.id}`)}
@@ -195,6 +196,9 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
           )
         )}
         {CopyPlaylistError ? copyPlaylistErrorMessage : null}
+        <Tooltip title="Assign via Google Classroom">
+          <GoogleClassroomShareButton url={`https://www.platospeach.com/plans/${formatSlug(playlist.name)}`} />
+        </Tooltip>
       </Box>
       <Grid container className='playlistcard--grid'>
         <Timeline position="left" className='playist--grid__timeline'>

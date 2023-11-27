@@ -156,3 +156,9 @@
         cursor: pointer;
     }
 }
+
+.MuiChip-root {
+    &.yourContent-chip {
+        margin-right: 0.5rem;
+    }
+}

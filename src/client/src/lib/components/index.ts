@@ -1,6 +1,7 @@
 export * from "./PageSkeleton";
 export * from "./SkeletonComponent";
 export * from "./LessonCard";
+export * from "./GoogleClassroomButton";
 export * from "./HomeInfo";
 export * from "./HomeInfoSkeleton";
 export * from "./HomeDemo";
