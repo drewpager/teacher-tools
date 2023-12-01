@@ -152,7 +152,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
     variables: {
       limit: limit,
       page: page
-    }
+    }, pollInterval: 5000
   })
 
   const { data: articleData, loading: articleLoading, error: articleError } = useAllArticlesQuery({
