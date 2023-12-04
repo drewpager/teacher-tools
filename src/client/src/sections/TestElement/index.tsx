@@ -18,7 +18,8 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useNavigate } from 'react-router-dom';
 import { UseModal } from '../Modal';
 import { UsePreviewModal, VideoPlayer } from '../../lib/components';
-import '../CreatePlaylist/createPlaylist.scss';
+// import '../CreatePlaylist/createPlaylist.scss';
+import './testElement.scss';
 import { Link } from 'react-router-dom';
 import { CreatePlaylistCard, Footer } from '../../lib/components';
 import theme from '../../theme';
@@ -27,6 +28,7 @@ import { CreatePlaylistSkeleton } from '../CreatePlaylist/createPlaylistSkeleton
 import { Helmet } from 'react-helmet';
 import InfoIcon from '@mui/icons-material/Info';
 import { FixedSizeList } from 'react-window';
+import { VariableSizeList as List } from 'react-window';
 
 type props = {
   viewer: Viewer;
@@ -323,11 +325,19 @@ export const TestElement = ({ viewer }: props) => {
     return new Date(a.startDate).getTime() - new Date(b.startDate).getTime();
   }
 
+  const rowHeights = plans.map(() => 170)
+  
+  const getItemSize = (index: number) => rowHeights[index];
+
   const RenderRow = ({ index, style }: RenderProps) => (
     <Draggable draggableId={`${plans[index]._id}`} index={index} key={plans[index]._id}>
-      {provided => (
+      {(provided, snapshot) => (
         <Grid item xs={12} md={12} lg={12} className="playlist--dropbox">
-          <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} style={style}>
+          <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} style={{
+            ...style,
+            boxShadow: snapshot.isDragging && '0 0 .4rem #666'
+          }} 
+          >
             {(plans[index].startDate) ? (
               <CreatePlaylistCard {...plans[index]} />
             ) : (plans[index].questions && !plans[index].content) ? (
@@ -365,9 +375,12 @@ export const TestElement = ({ viewer }: props) => {
 
   const RenderPlaylistRow = ({ index, style }: RenderProps) => (
     <Draggable draggableId={`${playlist.plan[index]._id}`} index={index} key={playlist.plan[index]._id}>
-      {provided => (
+      {(provided, snapshot) => (
           <Grid item xs={12} md={12} lg={12} className="playlist--dropbox">
-            <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+            <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} style={{
+              ...style,
+              border: snapshot.isDragging && '2px solid red'
+            }}>
               {(playlist.plan[index].startDate) ? (
                 <CreatePlaylistCard {...playlist.plan[index]} />
               ) : (playlist.plan[index].questions && !playlist.plan[index].content) ? (
@@ -670,7 +683,7 @@ export const TestElement = ({ viewer }: props) => {
           </Box>
           <DragDropContext onDragEnd={onDragEndHandler}>
             <Grid container>
-              <Droppable droppableId='playlist'>
+              <Droppable droppableId='playlist' mode="virtual">
                 {(provided, snapshot) => (
                   <Grid item xs={12} sm={12} md={7} lg={7}>
                     <Card variant="outlined" className="createPlaylist-drop--card" {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
@@ -685,217 +698,21 @@ export const TestElement = ({ viewer }: props) => {
                         onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
                       />
                       {playlist.plan.length === 0 && <CardMedia component="img" image={HowItWorks} sx={{ width: "95%", opacity: "50%" }} />}
-                      {/* {playlist.plan.map((i, indices) => (
-                        <Draggable draggableId={`${i._id}`} index={indices} key={i._id}>
-                          {(provided, snapshot) => (
-                            <Grid item xs={12} md={12} lg={12} className="playlist--dropbox">
-                              <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                                {(i.startDate) ? (
-                                  <CreatePlaylistCard {...i} />
-                                ) : (i.questions && !i.content) ? (
-                                  <Card className="lesson--card">
-                                    {i.title}
-                                    <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
-                                    <UsePreviewModal color={"#fff"} item={{
-                                      __typename: "Quiz",
-                                      creator: i.creator,
-                                      id: i._id,
-                                      public: i.public,
-                                      title: i.title,
-                                      questions: i?.questions?.map((q) => ({ question: q?.question, answerOptions: q?.answerOptions, answerType: q?.answerType }))
-                                    }} />
-                                  </Card>
-                                ) : (i.content && (!i.questions || !i.startDate)) && (
-                                  <Card className="lesson--card">
-                                    {i.title}
-                                    <Chip label="Article" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
-                                    <UsePreviewModal color={"#fff"} item={{
-                                      __typename: "Article",
-                                      content: i.content,
-                                      creator: i.creator,
-                                      id: i._id,
-                                      pdf: i.pdf,
-                                      public: i.public,
-                                      title: i.title
-                                    }} />
-                                  </Card>)}
-                              </div>
-                            </Grid>
-                          )}
-                        </Draggable>
-                      ))} */}
-                      <FixedSizeList
+                    
+                      <List
                         height={800} // Adjust based on your requirement
                         width="100%"
                         itemCount={playlist.plan.length}
-                        itemSize={170} // Adjust based on your requirement
+                        itemSize={getItemSize} // Adjust based on your requirement
                       >
                         {RenderPlaylistRow}
-                      </FixedSizeList>
+                      </List>
                       {provided.placeholder}
                     </Card>
                   </Grid>
                 )}
               </Droppable>
-              {/* <Droppable droppableId='lessons'>
-                {(provided, snapshot) => (
-                  <Grid item xs={12} sm={12} md={5} lg={5}>
-                    <Tooltip title="Filter for content you've created or bookmarked" placement="top">
-                      <FormControlLabel
-                        control={<BookmarkSwitch
-                          sx={{ m: 1 }}
-                          checked={!yourContent}
-                          onChange={handleSwitch}
-                        />}
-                        label={yourContent ? "Viewing Your Content Only" : "Viewing All Public Content"}
-                      />
-                    </Tooltip>
-                    <br />
-                    <Chip
-                      key={1000}
-                      label={"All"}
-                      variant={"outlined"}
-                      onClick={() => handleCategoryClick("All", 0)}
-                      sx={{ m: "1px" }}
-                    />
-                    <Chip
-                      key={1001}
-                      label={"Quizzes"}
-                      variant={"outlined"}
-                      onClick={() => handleCategoryClick("Quizzes", 1)}
-                      sx={{ m: "1px" }}
-                    />
-                    <Chip
-                      key={1002}
-                      label={"Articles"}
-                      variant={"outlined"}
-                      onClick={() => handleCategoryClick("Articles", 2)}
-                      sx={{ m: "1px" }}
-                    />
-                    {mainCategories.map((i: any, index) => (
-                      <>
-                        <Chip
-                          key={index}
-                          label={titleCase(i)}
-                          variant={variant ? "filled" : "outlined"}
-                          onClick={() => handleCategoryClick(i.toString(), index)}
-                          sx={{ m: "1px" }}
-                        />
-                      </>
-                    ))}
-                    <Card variant="outlined" className="createPlaylist--card" {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
-                      <TextField
-                        variant='outlined'
-                        id="lesson-search"
-                        label="Search Lessons"
-                        value={searchInput}
-                        onChange={inputHandler}
-                        ref={searchRef}
-                        className="createPlaylist--search"
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <Close onClick={resetSearch} />
-                            </InputAdornment>
-                          )
-                        }}
-                        helperText={searchError ? "No results found" : null}
-                        error={searchError}
-                        onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
-                      />
-                      <Grid container>
-                        {plans.map((i, index) => (
-                          yourContent && (bookmarkQuery?.find((val) => (val?.id === `${i._id}`)) || (i.creator === viewer.id)) ? (
-                            <Draggable draggableId={`${i._id}`} index={index} key={i._id}>
-                              {(provided) => (
-                                <Grid item xs={12} md={12} lg={12}>
-                                  {!i && <Link to="/catalog"><Typography variant="h5">You haven't added or bookmarked any content here yet, click here to add your first lesson.</Typography></Link>}
-                                  <Box {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                                    {i.startDate ? (
-                                      <CreatePlaylistCard {...i} />
-                                    ) : (i.questions && !i.content) ? (
-                                      <Card className="lesson--card">
-                                        {JSON.parse(JSON.stringify(i)).title}
-                                        <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
-                                        <UsePreviewModal color={"#fff"} item={{
-                                          __typename: "Quiz",
-                                          creator: i.creator,
-                                          id: i._id,
-                                          public: i.public,
-                                          title: i.title,
-                                          questions: i?.questions?.map((q) => ({ question: q?.question, answerOptions: q?.answerOptions, answerType: q?.answerType }))
-                                        }} />
-                                      </Card>
-                                    ) : i.content && (
-                                      <Card className="lesson--card">
-                                        {JSON.parse(JSON.stringify(i)).title}
-                                        <Chip label="Article" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
-                                        <UsePreviewModal color={"#fff"} item={{
-                                          __typename: "Article",
-                                          content: i.content,
-                                          creator: i.creator,
-                                          id: i._id,
-                                          pdf: i.pdf,
-                                          public: i.public,
-                                          title: i.title
-                                        }} />
-                                      </Card>
-                                    )}
-                                  </Box>
-                                </Grid>
-                              )}
-                            </Draggable>
-                          ) : (!yourContent) && (
-                            <Draggable draggableId={`${i._id}`} index={index} key={i._id}>
-                              {(provided) => (
-                                <Grid item xs={12} md={12} lg={12}>
-                                  <Box {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                                    {i.startDate ? (
-                                      <CreatePlaylistCard {...i} />
-                                    ) : (i.questions && !i.content) ? (
-                                      <Card className="lesson--card">
-                                        {JSON.parse(JSON.stringify(i)).title}
-                                        <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
-                                        <UsePreviewModal color={"#fff"} item={{
-                                          __typename: "Quiz",
-                                          creator: i.creator,
-                                          id: i._id,
-                                          public: i.public,
-                                          title: i.title,
-                                          questions: i?.questions?.map((q) => ({ question: q?.question, answerOptions: q?.answerOptions, answerType: q?.answerType }))
-                                        }} />
-                                      </Card>
-                                    ) : (!i.questions && !i.startDate && i.public) && (
-                                      <Card className="lesson--card">
-                                        {JSON.parse(JSON.stringify(i)).title}
-                                        <Chip label="Article" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
-                                        <UsePreviewModal color={"#fff"} item={{
-                                          __typename: "Article",
-                                          content: i.content,
-                                          creator: i.creator,
-                                          id: i._id,
-                                          pdf: i.pdf,
-                                          public: i.public,
-                                          title: i.title
-                                        }} />
-                                      </Card>
-                                    )}
-                                  </Box>
-                                </Grid>
-                              )}
-                            </Draggable>
-                          )
-                        ))}
-                        {provided.placeholder}
-                      </Grid>
-                    </Card>
-                    <Grid container>
-                      <UseModal viewer={viewer} />
-                    </Grid>
-                  </Grid>
-                )}
-              </Droppable> */}
-              <Droppable droppableId='lessons'>
+              <Droppable droppableId='lessons' mode="virtual">
                 {(provided) => (
                   <Grid item xs={12} sm={12} md={5} lg={5}>
                     <Tooltip title="Filter for content you've created or bookmarked" placement="top">
@@ -961,17 +778,15 @@ export const TestElement = ({ viewer }: props) => {
                         error={searchError}
                         onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
                       />
-                  {/* <div {...provided.droppableProps} ref={provided.innerRef}> */}
-                    <FixedSizeList
+                    <List
                       height={800} // Adjust based on your requirement
                       width="100%"
                       itemCount={plans.length}
-                      itemSize={170} // Adjust based on your requirement
+                      itemSize={getItemSize} // Adjust based on your requirement
                     >
                       {RenderRow}
-                    </FixedSizeList>
+                    </List>
                     {provided.placeholder}
-                  {/* </div> */}
                   </Card>
                   </Grid>
                 )}

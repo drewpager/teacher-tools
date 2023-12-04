@@ -1,97 +1,100 @@
-@import url("https://fonts.googleapis.com/css?family=Vibur&display=swap");
+@use '../../library';
 
-:root {
-  --grid: 8px;
-  --pink: #fd3afd;
-  --pinkDark: #690169;
-  --greyLight: #515b7d;
-  --black: #1d212e;
-  --borderWidth: 4px;
-  --borderRadius: 8px;
+.MuiBox-root {
+  &.createPlaylist--box {
+    margin: 5rem 0;
+    overflow-y: hidden;
+    overflow-x: hidden;
+
+    // padding-right: 2rem;
+    .createPlaylist--h1,
+    .createPlaylist--button {
+      margin-left: 1rem;
+
+      @media (max-width: 768px) {
+        margin: 0;
+        margin-bottom: 0.5rem;
+        width: 100%;
+      }
+    }
+  }
+
+  &.button--slider-playlist {
+    margin-bottom: 0.5rem;
+    margin-top: -3rem;
+    margin-left: 1rem;
+    display: flex;
+    align-items: last baseline;
+  }
 }
 
-body {
-  background: var(--black);
-  font-family: "Vibur", cursive;
-  // user-select: none;
-  margin-top: 15px;
+.MuiPaper-root {
+  &.createPlaylist--card {
+    min-height: 30%;
+    max-height: 37.1rem;
+    width: 100%;
+    padding: 2rem;
+    margin-top: 1rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    @media (max-width: 768px) {
+      height: 50%;
+      width: 100%;
+      margin: 0.25rem;
+    }
+  }
+
+  &.createQuiz--card {
+    min-height: 6rem;
+    max-height: 6rem;
+    min-width: 40%;
+    margin-top: 1rem;
+    background-color: library.$darkGreen;
+    color: library.$coral;
+    align-items: center;
+    text-align: center;
+  }
+
+  &.lesson--card {
+    background-color: library.$coral;
+    padding: 1rem;
+    margin: 0.25rem -0.25rem;
+    width: 95%;
+    color: library.$white;
+    border: 2px solid red;
+
+    @media (max-width: 768px) {
+      width: 95%;
+      margin: 0.25rem -0.25rem;
+    }
+  }
+
+  &.createPlaylist-drop--card {
+    height: 750px;
+    margin: 1rem;
+    margin-left: -1rem;
+    padding: 2rem;
+    overflow-y: scroll;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      max-height: 50vh;
+      margin: 0;
+      overflow-y: scroll;
+    }
+  }
 }
 
-*,
-*::after,
-*::before {
-  box-sizing: border-box;
-}
-.app {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 50px;
-}
+// TODO With Chris: Stop cards from showing above search bar on scroll.
 
-.columns {
-  display: flex;
-}
-
-.column {
-  margin: calc(var(--grid) / 2);
-  border: var(--borderWidth) solid #0ff0fc;
-  border-radius: var(--borderRadius);
-  background-color: #2a2f41;
-}
-
-.column-title {
-  font-size: 40px;
-  color: var(--pink);
-  text-shadow: 0px 0px 2px var(--pinkDark),
-    0px 0px 15px rgba(255, 110, 255, 0.5);
-  text-align: center;
-  margin: 0;
-}
-
-.column-title:hover {
-  text-shadow: 0px 0px 2px var(--pinkDark),
-    0px 0px 15px rgba(255, 110, 255, 0.8);
-}
-
-.task-list {
-  /* this has no visible impact, but is in line with the absolute position spacing.
-  doing this ensures that dropping into an empty list will be in the correct visual position */
-  padding-left: var(--grid);
-  padding-right: var(--grid);
-  scrollbar-color: dark;
-}
-
-.task-list::-webkit-scrollbar {
-  width: 1em;
-}
-
-.task-list::-webkit-scrollbar-track {
-  background-color: var(--greyLight);
-  border-radius: var(--borderRadius);
-}
-
-.task-list::-webkit-scrollbar-thumb {
-  background-color: var(--pink);
-}
-
-.item {
-  background: #333851;
-  border: var(--borderWidth) solid mediumpurple;
-  box-sizing: border-box;
-  border-radius: var(--borderRadius);
-  color: #cdd5ee;
-  font-size: 30px;
-  // user-select: none;
-
-  /* center align text */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.item.is-dragging {
-  background: #515b7d;
-  border-color: #08ff08;
-  box-shadow: 0px 0px 2px rgb(8, 58, 30), 0px 0px 10px MediumSeaGreen;
+.MuiFormControl-root {
+  &.createPlaylist--search {
+    background-color: library.$white;
+    width: 100%;
+    top: 0;
+    position: sticky;
+    z-index: 1;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  }
 }

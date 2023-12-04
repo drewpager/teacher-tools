@@ -6,7 +6,7 @@ import { Lesson } from '../../../graphql/generated';
 
 export const CreatePlaylistCard = (props: Lesson) => {
   return (
-    <Card sx={{ display: 'flex', flexDirection: 'column', backgroundColor: '#535ac8', borderRadius: 5, height: "auto", width: "95%", margin: "0.25rem -0.5rem" }}>
+    <Card sx={{ display: 'flex', flexDirection: 'column', backgroundColor: '#535ac8', borderRadius: 5, height: "auto", width: "95%", margin: "0.25rem 0.5rem" }}>
       <CardContent sx={{ flex: '1 0 auto' }}>
         <Typography component="div" variant="h3" style={{ color: "#FAF9F6" }}>
           {props.title}
