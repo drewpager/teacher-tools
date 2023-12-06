@@ -59,14 +59,13 @@
   &.lesson--card {
     background-color: library.$coral;
     padding: 1rem;
-    margin: 0.25rem -0.25rem;
+    // margin: 0.25rem 0.25rem;
     width: 95%;
     color: library.$white;
-    border: 2px solid red;
 
     @media (max-width: 768px) {
       width: 95%;
-      margin: 0.25rem -0.25rem;
+      // margin: 0.25rem 0.25rem;
     }
   }
 

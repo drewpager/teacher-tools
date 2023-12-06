@@ -27,7 +27,6 @@ import HowItWorks from '../../lib/assets/how-it-works-3.png';
 import { CreatePlaylistSkeleton } from '../CreatePlaylist/createPlaylistSkeleton';
 import { Helmet } from 'react-helmet';
 import InfoIcon from '@mui/icons-material/Info';
-import { FixedSizeList } from 'react-window';
 import { VariableSizeList as List } from 'react-window';
 
 type props = {
@@ -37,6 +36,18 @@ type props = {
 interface RenderProps {
   index: number;
   style: any;
+}
+
+interface BookmarkProps {
+  bookmarkQuery: any;
+  plans: Plan[];
+  viewer: Viewer;
+}
+
+interface StyleProps {
+  draggableStyle: any;
+  virtualStyle: any;
+  isDragging: boolean;
 }
 
 type InputLessonPlan = {
@@ -122,6 +133,9 @@ export const TestElement = ({ viewer }: props) => {
   const [yourContent, setYourContent] = useState<boolean>(false);
   const inputRef = useTestFocus();
   const searchRef = useTestFocus();
+  const listRef = useRef<List>(null);
+  const playlistRef = useRef<List>(null);
+  const bookmarkRef = useRef<List>(null);
   const [playlist, setPlaylist] = useState<InputLessonPlan>(initialData)
   const [locked, setLocked] = useState<boolean>(false);
   const [ascending, setAscending] = useState<boolean>(true);
@@ -325,18 +339,88 @@ export const TestElement = ({ viewer }: props) => {
     return new Date(a.startDate).getTime() - new Date(b.startDate).getTime();
   }
 
-  const rowHeights = plans.map(() => 170)
-  
+  const rowHeights = plans.map(p =>
+    p.startDate && p.title && p.title.length > 50 ? 190
+      : p.content?.blocks?.length && p.title && p.title.length > 50 ? 115
+        : p.questions && p.title && p.title.length > 50 ? 105
+          : p.startDate ? 174
+            : p.content?.blocks?.length ? 85
+              : p.pdf ? 85
+                : p.questions ? 75
+                  : 150)
+
+  const playHeights = playlist.plan.map(p =>
+    p.startDate && p.title && p.title.length > 50 ? 190
+      : p.content?.blocks?.length && p.title && p.title.length > 50 ? 95
+        : p.startDate ? 174
+          : p.content?.blocks?.length ? 85
+            : p.pdf ? 85
+              : p.questions ? 75
+                : 150)
+
   const getItemSize = (index: number) => rowHeights[index];
+  const getPlaylistItemSize = (index: number) => playHeights[index];
+
+  const updateListSize = () => {
+    // resets the itemSize rendering for quizzes and articles
+    if (listRef.current) {
+      listRef.current.resetAfterIndex(0);
+    }
+  };
+
+  const updatePlaylistSize = () => {
+    if (playlistRef.current) {
+      playlistRef.current.resetAfterIndex(0);
+    }
+  }
+
+  const updateBookmarkSize = () => {
+    if (bookmarkRef.current) {
+      bookmarkRef.current.resetAfterIndex(0);
+    }
+  }
+
+  const getStyle = ({ draggableStyle, virtualStyle, isDragging }: StyleProps) => {
+    // replaces the need for a placeholder
+    const combined = {
+      ...virtualStyle,
+      ...draggableStyle
+    };
+
+    const grid = 8;
+
+    const result = {
+      ...combined,
+      height: isDragging ? combined.height : combined.height - grid,
+      left: isDragging ? combined.left : combined.left + grid,
+      width: isDragging
+        ? draggableStyle.width
+        : `calc(${combined.width} - ${grid * 2}px)`,
+      marginBottom: grid
+    };
+
+    return result;
+  }
+
+  let bookmarkPlans: any[] = [];
+  const bookmarkedPlans = ({ bookmarkQuery, plans, viewer }: BookmarkProps) => {
+    bookmarkPlans.push(...bookmarkQuery);
+    plans.map((i) => {
+      // bookmarkQuery?.find((val: any) => (val?.id === `${i._id}`)) || (i.creator === viewer.id)
+      (i.creator === viewer.id) && bookmarkPlans.push(i)
+    })
+    return bookmarkPlans;
+  }
 
   const RenderRow = ({ index, style }: RenderProps) => (
     <Draggable draggableId={`${plans[index]._id}`} index={index} key={plans[index]._id}>
       {(provided, snapshot) => (
         <Grid item xs={12} md={12} lg={12} className="playlist--dropbox">
-          <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} style={{
-            ...style,
-            boxShadow: snapshot.isDragging && '0 0 .4rem #666'
-          }} 
+          <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} style={getStyle({
+            draggableStyle: provided.draggableProps.style,
+            virtualStyle: style,
+            isDragging: snapshot.isDragging
+          })}
           >
             {(plans[index].startDate) ? (
               <CreatePlaylistCard {...plans[index]} />
@@ -373,21 +457,67 @@ export const TestElement = ({ viewer }: props) => {
     </Draggable>
   );
 
+  const RenderBookmarkRow = ({ index, style }: RenderProps) => (
+    <Draggable draggableId={`${bookmarkPlans[index]._id}`} index={index} key={bookmarkPlans[index]._id}>
+      {(provided, snapshot) => (
+        <Grid item xs={12} md={12} lg={12} className="playlist--dropbox">
+          <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} style={getStyle({
+            draggableStyle: provided.draggableProps.style,
+            virtualStyle: style,
+            isDragging: snapshot.isDragging
+          })}
+          >
+            {(bookmarkPlans[index].startDate) ? (
+              <CreatePlaylistCard {...bookmarkPlans[index]} />
+            ) : (bookmarkPlans[index].questions && !bookmarkPlans[index].content) ? (
+              <Card className="lesson--card">
+                {`${bookmarkPlans[index].title}`}
+                <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                {/* <UsePreviewModal color={"#fff"} item={{
+                  __typename: "Quiz",
+                  creator: plans[index].creator,
+                  id: plans[index]._id,
+                  public: plans[index].public,
+                  title: plans[index].title,
+                  questions: (!typeof([plans[index].questions]) === undefined || null) ? plans[index]?.questions?.map((q) => ({ question: q?.question, answerOptions: q?.answerOptions, answerType: q?.answerType })) : [{ question: "", answerOptions: [{ answer: "", correct: false }], answerType: "TRUEFALSE" }],
+                }} /> */}
+              </Card>
+            ) : (bookmarkPlans[index].content && (!bookmarkPlans[index].questions || !bookmarkPlans[index].startDate)) && (
+              <Card className="lesson--card">
+                {bookmarkPlans[index].title}
+                <Chip label="Article" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                <UsePreviewModal color={"#fff"} item={{
+                  __typename: "Article",
+                  content: bookmarkPlans[index].content,
+                  creator: bookmarkPlans[index].creator,
+                  id: bookmarkPlans[index]._id,
+                  pdf: bookmarkPlans[index].pdf,
+                  public: bookmarkPlans[index].public,
+                  title: bookmarkPlans[index].title
+                }} />
+              </Card>)}
+          </div>
+        </Grid>
+      )}
+    </Draggable>
+  );
+
   const RenderPlaylistRow = ({ index, style }: RenderProps) => (
     <Draggable draggableId={`${playlist.plan[index]._id}`} index={index} key={playlist.plan[index]._id}>
       {(provided, snapshot) => (
-          <Grid item xs={12} md={12} lg={12} className="playlist--dropbox">
-            <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} style={{
-              ...style,
-              border: snapshot.isDragging && '2px solid red'
-            }}>
-              {(playlist.plan[index].startDate) ? (
-                <CreatePlaylistCard {...playlist.plan[index]} />
-              ) : (playlist.plan[index].questions && !playlist.plan[index].content) ? (
-                <Card className="lesson--card">
-                  {playlist.plan[index].title}
-                  <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
-                  {/* <UsePreviewModal color={"#fff"} item={{
+        <Grid item xs={12} md={12} lg={12} className="playlist--dropbox">
+          <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} style={getStyle({
+            draggableStyle: provided.draggableProps.style,
+            virtualStyle: style,
+            isDragging: snapshot.isDragging
+          })}>
+            {(playlist.plan[index].startDate) ? (
+              <CreatePlaylistCard {...playlist.plan[index]} />
+            ) : (playlist.plan[index].questions && !playlist.plan[index].content) ? (
+              <Card className="lesson--card">
+                {playlist.plan[index].title}
+                <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                {/* <UsePreviewModal color={"#fff"} item={{
                     __typename: "Quiz",
                     creator: playlist.plan[index].creator,
                     id: playlist.plan[index]._id,
@@ -395,25 +525,25 @@ export const TestElement = ({ viewer }: props) => {
                     title: playlist.plan[index].title,
                     questions: playlist.plan[index]?.questions?.map((q) => ({ question: q?.question, answerOptions: q?.answerOptions, answerType: q?.answerType }))
                   }} /> */}
-                </Card>
-              ) : (playlist.plan[index].content && (!playlist.plan[index].questions || !playlist.plan[index].startDate)) && (
-                <Card className="lesson--card">
-                  {playlist.plan[index].title}
-                  <Chip label="Article" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
-                  <UsePreviewModal color={"#fff"} item={{
-                    __typename: "Article",
-                    content: playlist.plan[index].content,
-                    creator: playlist.plan[index].creator,
-                    id: playlist.plan[index]._id,
-                    pdf: playlist.plan[index].pdf,
-                    public: playlist.plan[index].public,
-                    title: playlist.plan[index].title
-                  }} />
-                </Card>)}
-            </div>
-          </Grid>
-        )}
-      </Draggable>
+              </Card>
+            ) : (playlist.plan[index].content && (!playlist.plan[index].questions || !playlist.plan[index].startDate)) && (
+              <Card className="lesson--card">
+                {playlist.plan[index].title}
+                <Chip label="Article" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                <UsePreviewModal color={"#fff"} item={{
+                  __typename: "Article",
+                  content: playlist.plan[index].content,
+                  creator: playlist.plan[index].creator,
+                  id: playlist.plan[index]._id,
+                  pdf: playlist.plan[index].pdf,
+                  public: playlist.plan[index].public,
+                  title: playlist.plan[index].title
+                }} />
+              </Card>)}
+          </div>
+        </Grid>
+      )}
+    </Draggable>
   );
 
   const handleChron = (plans: Plan[]) => {
@@ -508,6 +638,8 @@ export const TestElement = ({ viewer }: props) => {
       setPlaylist(playlist)
       window.localStorage.setItem('playlist', JSON.stringify(playlist));
       setAutoSaved(true);
+      // TODO: Test this fires
+      updatePlaylistSize();
     }
 
     if (destination.droppableId === "lessons") {
@@ -561,6 +693,7 @@ export const TestElement = ({ viewer }: props) => {
 
   const handleSwitch = () => {
     setYourContent(!yourContent)
+    updateBookmarkSize();
     handleCategoryClick("All", 0)
   }
 
@@ -596,6 +729,7 @@ export const TestElement = ({ viewer }: props) => {
 
   const handleCategoryClick = (i: string, index: number) => {
     setPlans([])
+    updateListSize();
     if (i === "All") {
       setPlans([...filter])
       return { ...filter }
@@ -683,7 +817,44 @@ export const TestElement = ({ viewer }: props) => {
           </Box>
           <DragDropContext onDragEnd={onDragEndHandler}>
             <Grid container>
-              <Droppable droppableId='playlist' mode="virtual">
+              <Droppable droppableId='playlist' mode="virtual" renderClone={(provided, snapshot, rubric) => (
+                <div
+                  {...provided.draggableProps}
+                  {...provided.dragHandleProps}
+                  ref={provided.innerRef}
+                >
+                  {(playlist.plan[rubric.source.index].startDate) ? (
+                    <CreatePlaylistCard {...playlist.plan[rubric.source.index]} />
+                  ) : (playlist.plan[rubric.source.index].questions && !playlist.plan[rubric.source.index].content) ? (
+                    <Card className="lesson--card">
+                      {`${playlist.plan[rubric.source.index].title}`}
+                      <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                      {/* <UsePreviewModal color={"#fff"} item={{
+                        __typename: "Quiz",
+                        creator: plans[index].creator,
+                        id: plans[index]._id,
+                        public: plans[index].public,
+                        title: plans[index].title,
+                        questions: (!typeof([plans[index].questions]) === undefined || null) ? plans[index]?.questions?.map((q) => ({ question: q?.question, answerOptions: q?.answerOptions, answerType: q?.answerType })) : [{ question: "", answerOptions: [{ answer: "", correct: false }], answerType: "TRUEFALSE" }],
+                      }} /> */}
+                    </Card>
+                  ) : (playlist.plan[rubric.source.index].content && (!playlist.plan[rubric.source.index].questions || !playlist.plan[rubric.source.index].startDate)) && (
+                    <Card className="lesson--card">
+                      {playlist.plan[rubric.source.index].title}
+                      <Chip label="Article" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                      <UsePreviewModal color={"#fff"} item={{
+                        __typename: "Article",
+                        content: playlist.plan[rubric.source.index].content,
+                        creator: playlist.plan[rubric.source.index].creator,
+                        id: playlist.plan[rubric.source.index]._id,
+                        pdf: playlist.plan[rubric.source.index].pdf,
+                        public: playlist.plan[rubric.source.index].public,
+                        title: playlist.plan[rubric.source.index].title
+                      }} />
+                    </Card>)}
+                </div>
+              )}>
+                {/* Item id: {playlist.plan[rubric.source.index]._id} */}
                 {(provided, snapshot) => (
                   <Grid item xs={12} sm={12} md={7} lg={7}>
                     <Card variant="outlined" className="createPlaylist-drop--card" {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
@@ -698,21 +869,59 @@ export const TestElement = ({ viewer }: props) => {
                         onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
                       />
                       {playlist.plan.length === 0 && <CardMedia component="img" image={HowItWorks} sx={{ width: "95%", opacity: "50%" }} />}
-                    
+
                       <List
-                        height={800} // Adjust based on your requirement
+                        ref={playlistRef}
+                        height={800}
                         width="100%"
                         itemCount={playlist.plan.length}
-                        itemSize={getItemSize} // Adjust based on your requirement
+                        itemSize={getPlaylistItemSize}
                       >
                         {RenderPlaylistRow}
                       </List>
-                      {provided.placeholder}
+                      {/* {provided.placeholder} */}
                     </Card>
                   </Grid>
                 )}
               </Droppable>
-              <Droppable droppableId='lessons' mode="virtual">
+              <Droppable droppableId='lessons' mode="virtual" renderClone={(provided, snapshot, rubric) => (
+                <div
+                  {...provided.draggableProps}
+                  {...provided.dragHandleProps}
+                  ref={provided.innerRef}
+                >
+                  {/* Item id: {plans[rubric.source.index]._id} */}
+                  {(plans[rubric.source.index].startDate) ? (
+                    <CreatePlaylistCard {...plans[rubric.source.index]} />
+                  ) : (plans[rubric.source.index].questions && !plans[rubric.source.index].content) ? (
+                    <Card className="lesson--card">
+                      {`${plans[rubric.source.index].title}`}
+                      <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                      {/* <UsePreviewModal color={"#fff"} item={{
+                        __typename: "Quiz",
+                        creator: plans[index].creator,
+                        id: plans[index]._id,
+                        public: plans[index].public,
+                        title: plans[index].title,
+                        questions: (!typeof([plans[index].questions]) === undefined || null) ? plans[index]?.questions?.map((q) => ({ question: q?.question, answerOptions: q?.answerOptions, answerType: q?.answerType })) : [{ question: "", answerOptions: [{ answer: "", correct: false }], answerType: "TRUEFALSE" }],
+                      }} /> */}
+                    </Card>
+                  ) : (plans[rubric.source.index].content && (!plans[rubric.source.index].questions || !plans[rubric.source.index].startDate)) && (
+                    <Card className="lesson--card">
+                      {plans[rubric.source.index].title}
+                      <Chip label="Article" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                      <UsePreviewModal color={"#fff"} item={{
+                        __typename: "Article",
+                        content: plans[rubric.source.index].content,
+                        creator: plans[rubric.source.index].creator,
+                        id: plans[rubric.source.index]._id,
+                        pdf: plans[rubric.source.index].pdf,
+                        public: plans[rubric.source.index].public,
+                        title: plans[rubric.source.index].title
+                      }} />
+                    </Card>)}
+                </div>
+              )}>
                 {(provided) => (
                   <Grid item xs={12} sm={12} md={5} lg={5}>
                     <Tooltip title="Filter for content you've created or bookmarked" placement="top">
@@ -778,16 +987,29 @@ export const TestElement = ({ viewer }: props) => {
                         error={searchError}
                         onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
                       />
-                    <List
-                      height={800} // Adjust based on your requirement
-                      width="100%"
-                      itemCount={plans.length}
-                      itemSize={getItemSize} // Adjust based on your requirement
-                    >
-                      {RenderRow}
-                    </List>
-                    {provided.placeholder}
-                  </Card>
+                      {yourContent && bookmarkedPlans({ bookmarkQuery: bookmarkQuery, plans: plans, viewer: viewer }) ? (
+                        <List
+                          ref={bookmarkRef}
+                          height={800}
+                          width="100%"
+                          itemCount={bookmarkPlans.length}
+                          itemSize={getItemSize}
+                        >
+                          {RenderBookmarkRow}
+                        </List>
+                      ) : (
+                        <List
+                          ref={listRef}
+                          height={800}
+                          width="100%"
+                          itemCount={plans.length}
+                          itemSize={getItemSize}
+                        >
+                          {RenderRow}
+                        </List>
+                      )}
+
+                    </Card>
                   </Grid>
                 )}
               </Droppable>
