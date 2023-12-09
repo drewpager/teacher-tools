@@ -140,7 +140,20 @@ export const Catalog = ({ viewer }: Props) => {
       </Box>
     )
   }
+  // FOR SITEMAP GENERATION
+  // const lessonsRoutes = datum?.allLessons.result.map((lesson: any) => {
+  //   if (lesson.public === true) {
+  //     return {
+  //       url: `/lesson/${lesson.id}`,
+  //       changefreq: "yearly",
+  //       priority: 0.8,
+  //     };
+  //   } else {
+  //     return null;
+  //   }
+  // });
 
+  // console.log(lessonsRoutes?.filter((route) => route !== null))
 
   // Filtering functions
   function onlyUnique(value: any, index: number, self: any) {

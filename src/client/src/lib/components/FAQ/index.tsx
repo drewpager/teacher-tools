@@ -18,7 +18,7 @@ export const FAQ = ({ questionAnswers }: Props) => {
   return (
     <div>
       {questionAnswers.map((item, index) => (
-        <Accordion sx={{ margin: "0.5em 0", backgroundColor: "#FAF9F6" }}>
+        <Accordion sx={{ margin: "0.5em 0", backgroundColor: "#FAF9F6", border: '2px solid #000' }}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls={`panel${index}a-content`}

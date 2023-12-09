@@ -54,7 +54,7 @@ export const Lesson = ({ viewer }: Props) => {
     <>
       <Box className="lesson--page">
         <Helmet>
-          <title>{lesson?.title}</title>
+          <title>{lesson?.title} | Plato's Peach</title>
           <meta name="description" content={lesson?.meta?.length ? `${lesson?.meta}` : `A short documentary of ${lesson?.title} from ${formatDate(lesson?.startDate)} to ${formatDate(lesson?.endDate)}.`} />
         </Helmet>
         <Grid container>
