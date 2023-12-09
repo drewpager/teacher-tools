@@ -55,7 +55,7 @@ export const Lesson = ({ viewer }: Props) => {
       <Box className="lesson--page">
         <Helmet>
           <title>{lesson?.title}</title>
-          <meta name="description" content={`A short documentary of ${lesson?.title} from ${formatDate(lesson?.startDate)} to ${formatDate(lesson?.endDate)}.`} />
+          <meta name="description" content={lesson?.meta?.length ? `${lesson?.meta}` : `A short documentary of ${lesson?.title} from ${formatDate(lesson?.startDate)} to ${formatDate(lesson?.endDate)}.`} />
         </Helmet>
         <Grid container>
           <Grid item xs={12} sm={12} md={12} lg={8}>
