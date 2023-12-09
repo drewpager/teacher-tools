@@ -1,7 +1,6 @@
-import { Grid, Box, Card, TextField, Button, IconButton, Fab, Switch, FormControlLabel, Chip, Typography, CardMedia, InputAdornment, Tooltip, Alert, Snackbar, Checkbox, Modal } from '@mui/material';
+import { Grid, Box, Card, TextField, Button, IconButton, Fab, FormControlLabel, Chip, Typography, CardMedia, InputAdornment, Tooltip, Alert, Snackbar, Checkbox, Modal } from '@mui/material';
 import { Close } from '@mui/icons-material';
-import { styled } from '@mui/material/styles';
-import React, { useState, ChangeEvent, useRef, useEffect, useMemo, SyntheticEvent, useCallback } from 'react';
+import React, { useState, ChangeEvent, useRef, useEffect, useMemo, SyntheticEvent } from 'react';
 import {
   FullLessonInput,
   useLessonPlanMutation,
@@ -16,11 +15,10 @@ import {
 import { DisplayError, titleCase } from '../../lib/utils';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useNavigate } from 'react-router-dom';
-import { UseModal } from '../Modal';
+// import { UseModal } from '../Modal';
 import { UsePreviewModal, VideoPlayer } from '../../lib/components';
 // import '../CreatePlaylist/createPlaylist.scss';
 import './testElement.scss';
-import { Link } from 'react-router-dom';
 import { CreatePlaylistCard, Footer } from '../../lib/components';
 import theme from '../../theme';
 import HowItWorks from '../../lib/assets/how-it-works-3.png';
@@ -142,11 +140,8 @@ export const TestElement = ({ viewer }: props) => {
   })
 
   let lessonQuery = useMemo(() => lessonData?.allLessons.result, [lessonData])
-  // let lessonQuery = lessonData ? lessonData.allLessons.result : null;
   let quizQuery = useMemo(() => quizData?.allquizzes.result, [quizData]);
-  // const quizQuery = quizData?.allquizzes.result;
   let articleQuery = useMemo(() => articleData?.allarticles.result, [articleData])
-  // const bookmarkQuery = userData ? userData.user.bookmarks : null;
   let bookmarkQuery: any = useMemo(() => userData ? userData.user.bookmarks : [], [userData]);
 
   useEffect(() => {
@@ -172,7 +167,6 @@ export const TestElement = ({ viewer }: props) => {
     };
 
     if (lessonQuery) {
-      // Map lessonQuery to lessonInput
       const lessonInput = lessonQuery.map(i => ({
         title: i.title,
         category: i.category,
@@ -190,7 +184,6 @@ export const TestElement = ({ viewer }: props) => {
     }
 
     if (quizQuery) {
-      // Map quizQuery to quizInput
       const quizInput = quizQuery.map(q => ({
         creator: q.creator,
         _id: q.id,
@@ -204,7 +197,6 @@ export const TestElement = ({ viewer }: props) => {
     }
 
     if (articleQuery) {
-      // Map articleQuery to articleInput
       const articleInput = articleQuery.map(a => ({
         creator: a.creator,
         _id: a.id,
@@ -219,7 +211,6 @@ export const TestElement = ({ viewer }: props) => {
     }
 
     if (bookmarkQuery) {
-      // Map articleQuery to articleInput
       const bookmarkInput = bookmarkQuery.map((b: any) => ({
         title: b.title,
         category: b.category,
@@ -251,10 +242,6 @@ export const TestElement = ({ viewer }: props) => {
     return self.indexOf(value) === index;
   }
 
-  // function onlyDefined(value: { main: string, secondary: undefined | string }, index: number, self: any) {
-  //   return value.secondary !== undefined
-  // }
-
   function ascend(a: any, b: any) {
     return new Date(a.startDate).getTime() - new Date(b.startDate).getTime();
   }
@@ -283,25 +270,21 @@ export const TestElement = ({ viewer }: props) => {
   const getBookmarkItemSize = (index: number) => rowHeights[index];
 
   const updateListSize = () => {
-    // resets the itemSize rendering for quizzes and articles
     if (listRef.current) {
       listRef.current.resetAfterIndex(0);
     }
-    console.log("Update List Triggered")
   };
 
   const updatePlaylistSize = () => {
     if (playlistRef.current) {
       playlistRef.current.resetAfterIndex(0);
     }
-    console.log("Update Playlist Triggered")
   }
 
   const updateBookmarkSize = () => {
     if (bookmarkRef.current) {
       bookmarkRef.current.resetAfterIndex(0);
     }
-    console.log("Update Bookmark Triggered")
   }
 
   const getStyle = ({ draggableStyle, virtualStyle, isDragging }: StyleProps) => {
@@ -348,7 +331,7 @@ export const TestElement = ({ viewer }: props) => {
                   id: plans[index]._id,
                   public: plans[index].public,
                   title: plans[index].title,
-                  questions: (!typeof([plans[index].questions]) === undefined || null) ? plans[index]?.questions?.map((q) => ({ question: q?.question, answerOptions: q?.answerOptions, answerType: q?.answerType })) : [{ question: "", answerOptions: [{ answer: "", correct: false }], answerType: "TRUEFALSE" }],
+                  questions: plans[index]?.questions?.map((q) => ([{ question: q?.question, answerOptions: q?.answerOptions, answerType: q?.answerType }]))
                 }} /> */}
               </Card>
             ) : (plans[index].content && (!plans[index].questions || !plans[index].startDate)) && (
@@ -483,7 +466,7 @@ export const TestElement = ({ viewer }: props) => {
 
   const titleHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     e.preventDefault();
-    // let name = e.target.value;
+
     setPlaylist({
       plan: [...playlist.plan],
       name: e.target.value,
@@ -501,7 +484,6 @@ export const TestElement = ({ viewer }: props) => {
     return <DisplayError title="Failed to query lesson plan items" />
   }
 
-
   const onDragEndHandler = (result: any) => {
     const { destination, source } = result;
 
@@ -510,6 +492,9 @@ export const TestElement = ({ viewer }: props) => {
       return;
     }
 
+    if (playlist.plan.length > 0) {
+      setPlans(plans.filter(val => !playlist.plan.includes(val)))
+    }
     // Otherwise, cut the item from lessons array and push to new playlist
     let items = plans
 
@@ -519,8 +504,9 @@ export const TestElement = ({ viewer }: props) => {
       const displacedPlaylistItem = playlist.plan.slice(destination.index, (destination.index + 1));
       playlist.plan[destination.index] = reorderedPlaylistItem;
       playlist.plan.splice((destination.index + 1), 0, ...displacedPlaylistItem);
+      updatePlaylistSize();
       setAutoSaved(true);
-      // return playlist;
+
       return { ...playlist }
     }
 
@@ -530,7 +516,7 @@ export const TestElement = ({ viewer }: props) => {
       const displacedLesson = items.slice(destination.index, (destination.index + 1));
       items[destination.index] = reorderedLesson;
       items.splice((destination.index + 1), 0, ...displacedLesson)
-
+      updateListSize();
       return { ...items }
     }
 
@@ -541,6 +527,7 @@ export const TestElement = ({ viewer }: props) => {
       playlist.plan[destination.index] = reorderedItem;
       playlist.plan.push(...displacedItem)
 
+      updatePlaylistSize();
       setPlaylist(playlist)
       window.localStorage.setItem('playlist', JSON.stringify(playlist));
       setAutoSaved(true);
@@ -555,6 +542,7 @@ export const TestElement = ({ viewer }: props) => {
       setPlans(items)
       setFilter(items)
       setPlaylist(playlist)
+      updateListSize();
       window.localStorage.setItem('playlist', JSON.stringify(playlist));
       setAutoSaved(true);
     }
@@ -577,8 +565,6 @@ export const TestElement = ({ viewer }: props) => {
       // if value is already from plan, remove from lessons
       setSearchError(false)
       setPlans(filter.filter(val => !playlist.plan.includes(val)))
-      // setSearchError(true)
-      // setFilter(lessons)
     }
   }
 
@@ -592,7 +578,8 @@ export const TestElement = ({ viewer }: props) => {
     }
     handleCategoryClick("All", 0)
     setAscending(true);
-    handleSwitch();
+    updateListSize();
+    updateBookmarkSize();
   }
 
   const handleSwitch = () => {
@@ -602,7 +589,6 @@ export const TestElement = ({ viewer }: props) => {
 
     if (!yourContent) {
       setPlans(filter.filter((i) => i.creator === viewer.id))
-      console.log(bookmarks)
       if (bookmarks) {
         setPlans((p) => [...bookmarks, ...p])
       }
@@ -652,21 +638,22 @@ export const TestElement = ({ viewer }: props) => {
   const handleCategoryClick = (i: string, index: number) => {
     setPlans([])
     if (i === "All") {
-      setPlans([...filter])
+      setPlans(filter.filter(i => !playlist.plan.includes(i)))
+      updateListSize();
       return { ...filter }
-      // DisplayError({ title: "All" })
     }
 
     if (i === "Quizzes") {
       setPlans([...filter.filter((e) => e.questions && e.questions?.length > 0)])
+      updateListSize();
       return { ...filter }
     }
 
     if (i === "Articles") {
       setPlans([...filter.filter((c) => c.pdf || (c.content && c.content.blocks))])
+      updateListSize();
       return { ...filter }
     }
-    // setFilled(!filled)
     setPlans([...filter.filter((e) => e.category?.includes(i))])
   }
 
