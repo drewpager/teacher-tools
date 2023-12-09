@@ -40,12 +40,6 @@ interface RenderProps {
   style: any;
 }
 
-interface BookmarkProps {
-  bookmarkQuery: any;
-  plans: Plan[];
-  viewer: Viewer;
-}
-
 interface StyleProps {
   draggableStyle: any;
   virtualStyle: any;
@@ -85,6 +79,7 @@ export const TestElement = ({ viewer }: props) => {
   const [variant, setVariant] = useState<boolean>(true)
   const [plans, setPlans] = useState<Plan[]>([])
   const [filter, setFilter] = useState<Plan[]>([])
+  const [bookmarks, setBookmarks] = useState<Plan[]>([])
   const [yourContent, setYourContent] = useState<boolean>(false);
   const inputRef = useTestFocus();
   const searchRef = useTestFocus();
@@ -152,17 +147,7 @@ export const TestElement = ({ viewer }: props) => {
   // const quizQuery = quizData?.allquizzes.result;
   let articleQuery = useMemo(() => articleData?.allarticles.result, [articleData])
   // const bookmarkQuery = userData ? userData.user.bookmarks : null;
-  let bookmarkQuery = useMemo(() => userData ? userData.user.bookmarks : null, [userData]);
-
-  let bookmarkPlans: Plan[] = [];
-  const bookmarkedPlans = ({ bookmarkQuery, plans, viewer }: BookmarkProps) => {
-    bookmarkPlans.push(...bookmarkQuery);
-    plans.map((i) => {
-      (i.creator === viewer.id) && bookmarkPlans.push(i)
-    })
-    console.log(bookmarkPlans)
-    return bookmarkPlans;
-  }
+  let bookmarkQuery: any = useMemo(() => userData ? userData.user.bookmarks : [], [userData]);
 
   useEffect(() => {
     updateListSize();
@@ -232,7 +217,24 @@ export const TestElement = ({ viewer }: props) => {
       updateStates(articleInput, setFilter);
       updateStates(articleInput, setPlans);
     }
-  }, [lessonQuery, quizQuery, articleQuery]);
+
+    if (bookmarkQuery) {
+      // Map articleQuery to articleInput
+      const bookmarkInput = bookmarkQuery.map((b: any) => ({
+        title: b.title,
+        category: b.category,
+        creator: b.creator,
+        endDate: b.endDate,
+        meta: b.meta,
+        startDate: b.startDate,
+        video: b.video,
+        _id: b.id,
+        public: b.public,
+      }));
+
+      setBookmarks(bookmarkInput);
+    }
+  }, [lessonQuery, quizQuery, articleQuery, bookmarkQuery]);
 
   if (!viewer.id) {
     return (
@@ -276,36 +278,30 @@ export const TestElement = ({ viewer }: props) => {
               : p.questions ? 75
                 : 150)
 
-  const bookHeights = bookmarkPlans.map(p =>
-    p.startDate && p.title && p.title.length > 50 ? 190
-      : p.content?.blocks?.length && p.title && p.title.length > 50 ? 95
-        : p.startDate ? 174
-          : p.content?.blocks?.length ? 85
-            : p.pdf ? 85
-              : p.questions ? 75
-                : 150)
-
   const getItemSize = (index: number) => rowHeights[index];
   const getPlaylistItemSize = (index: number) => playHeights[index];
-  const getBookmarkItemSize = (index: number) => bookHeights[index];
+  const getBookmarkItemSize = (index: number) => rowHeights[index];
 
   const updateListSize = () => {
     // resets the itemSize rendering for quizzes and articles
     if (listRef.current) {
       listRef.current.resetAfterIndex(0);
     }
+    console.log("Update List Triggered")
   };
 
   const updatePlaylistSize = () => {
     if (playlistRef.current) {
       playlistRef.current.resetAfterIndex(0);
     }
+    console.log("Update Playlist Triggered")
   }
 
   const updateBookmarkSize = () => {
     if (bookmarkRef.current) {
       bookmarkRef.current.resetAfterIndex(0);
     }
+    console.log("Update Bookmark Triggered")
   }
 
   const getStyle = ({ draggableStyle, virtualStyle, isDragging }: StyleProps) => {
@@ -331,7 +327,7 @@ export const TestElement = ({ viewer }: props) => {
   }
 
   const RenderRow = ({ index, style }: RenderProps) => (
-    <Draggable draggableId={`${plans[index]._id}`} index={index} key={plans[index]._id}>
+    <Draggable draggableId={plans[index] && `${plans[index]._id}`} index={index} key={plans[index]._id}>
       {(provided, snapshot) => (
         <Grid item xs={12} md={12} lg={12} className="playlist--dropbox">
           <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} style={getStyle({
@@ -376,20 +372,20 @@ export const TestElement = ({ viewer }: props) => {
   );
 
   const RenderBookmarkRow = ({ index, style }: RenderProps) => (
-    <Draggable draggableId={`${bookmarkPlans[index]._id}`} index={index} key={bookmarkPlans[index]._id}>
+    <Draggable draggableId={`${plans[index]._id}${index}`} index={index} key={plans[index]._id}>
       {(provided, snapshot) => (
         <Grid item xs={12} md={12} lg={12} className="playlist--dropbox">
-          <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} style={getStyle({
+          <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} style={getStyle({
             draggableStyle: provided.draggableProps.style,
             virtualStyle: style,
             isDragging: snapshot.isDragging
           })}
           >
-            {(bookmarkPlans[index].startDate) ? (
-              <CreatePlaylistCard {...bookmarkPlans[index]} />
-            ) : (bookmarkPlans[index].questions && !bookmarkPlans[index].content) ? (
+            {(plans[index].startDate) ? (
+              <CreatePlaylistCard {...plans[index]} />
+            ) : (plans[index].questions && !plans[index].content) ? (
               <Card className="lesson--card">
-                {`${bookmarkPlans[index].title}`}
+                {`${plans[index].title}`}
                 <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
                 {/* <UsePreviewModal color={"#fff"} item={{
                   __typename: "Quiz",
@@ -400,18 +396,18 @@ export const TestElement = ({ viewer }: props) => {
                   questions: (!typeof([plans[index].questions]) === undefined || null) ? plans[index]?.questions?.map((q) => ({ question: q?.question, answerOptions: q?.answerOptions, answerType: q?.answerType })) : [{ question: "", answerOptions: [{ answer: "", correct: false }], answerType: "TRUEFALSE" }],
                 }} /> */}
               </Card>
-            ) : (bookmarkPlans[index].content && (!bookmarkPlans[index].questions || !bookmarkPlans[index].startDate)) && (
+            ) : (plans[index].content && (!plans[index].questions || !plans[index].startDate)) && (
               <Card className="lesson--card">
-                {bookmarkPlans[index].title}
+                {plans[index].title}
                 <Chip label="Article" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
                 <UsePreviewModal color={"#fff"} item={{
                   __typename: "Article",
-                  content: bookmarkPlans[index].content,
-                  creator: bookmarkPlans[index].creator,
-                  id: bookmarkPlans[index]._id,
-                  pdf: bookmarkPlans[index].pdf,
-                  public: bookmarkPlans[index].public,
-                  title: bookmarkPlans[index].title
+                  content: plans[index].content,
+                  creator: plans[index].creator,
+                  id: plans[index]._id,
+                  pdf: plans[index].pdf,
+                  public: plans[index].public,
+                  title: plans[index].title
                 }} />
               </Card>)}
           </div>
@@ -484,13 +480,7 @@ export const TestElement = ({ viewer }: props) => {
   categor?.map((i) => secondaryCategory.push(i?.category ? { main: i.category[0], secondary: i.category[2]?.trim() } : undefined))
   categor?.map((i) => secondaryCategory.push(i?.category ? { main: i.category[0], secondary: i.category[3]?.trim() } : undefined))
   const mainCategories = mainCategoryArray.filter(onlyUnique)
-  // let secCategories = secondaryCategory.filter(onlyDefined)
-  // const secondaryCategories = new Map(secCategories.map((item: any) =>
-  //   [item["secondary"], item])).values();
 
-  // const combinedCategories = Array.from(secondaryCategories)
-  // const selectedSecondary = allCategories.filter((b) => b.includes(selected[0]));
-  // setCater(mainCategories.map((i) => false))
   const titleHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     e.preventDefault();
     // let name = e.target.value;
@@ -501,7 +491,6 @@ export const TestElement = ({ viewer }: props) => {
       public: locked
     })
     window.localStorage.setItem('playlist', JSON.stringify(playlist));
-    // e.target.onmouseleave = () => { setAutoSaved(true) }
   }
 
   if (lessonLoading || quizLoading || articleLoading) {
@@ -531,7 +520,6 @@ export const TestElement = ({ viewer }: props) => {
       playlist.plan[destination.index] = reorderedPlaylistItem;
       playlist.plan.splice((destination.index + 1), 0, ...displacedPlaylistItem);
       setAutoSaved(true);
-      updatePlaylistSize();
       // return playlist;
       return { ...playlist }
     }
@@ -542,8 +530,7 @@ export const TestElement = ({ viewer }: props) => {
       const displacedLesson = items.slice(destination.index, (destination.index + 1));
       items[destination.index] = reorderedLesson;
       items.splice((destination.index + 1), 0, ...displacedLesson)
-      // items.push(...displacedLesson);
-      // return items;
+
       return { ...items }
     }
 
@@ -557,8 +544,6 @@ export const TestElement = ({ viewer }: props) => {
       setPlaylist(playlist)
       window.localStorage.setItem('playlist', JSON.stringify(playlist));
       setAutoSaved(true);
-      // TODO: Test this fires
-      updatePlaylistSize();
     }
 
     if (destination.droppableId === "lessons") {
@@ -607,12 +592,30 @@ export const TestElement = ({ viewer }: props) => {
     }
     handleCategoryClick("All", 0)
     setAscending(true);
-    handleLock()
+    handleSwitch();
   }
 
   const handleSwitch = () => {
     setYourContent(!yourContent)
-    updateBookmarkSize();
+    setPlans([])
+    updateListSize();
+
+    if (!yourContent) {
+      setPlans(filter.filter((i) => i.creator === viewer.id))
+      console.log(bookmarks)
+      if (bookmarks) {
+        setPlans((p) => [...bookmarks, ...p])
+      }
+      updatePlaylistSize();
+      return { ...plans }
+    }
+
+    if (yourContent) {
+      updateListSize();
+      updatePlaylistSize();
+      updateBookmarkSize();
+    }
+
     handleCategoryClick("All", 0)
   }
 
@@ -648,7 +651,6 @@ export const TestElement = ({ viewer }: props) => {
 
   const handleCategoryClick = (i: string, index: number) => {
     setPlans([])
-    updateListSize();
     if (i === "All") {
       setPlans([...filter])
       return { ...filter }
@@ -808,14 +810,13 @@ export const TestElement = ({ viewer }: props) => {
                   {...provided.dragHandleProps}
                   ref={provided.innerRef}
                 >
-                  {yourContent ? (
-                    (bookmarkPlans[rubric.source.index].startDate) ? (
-                      <CreatePlaylistCard {...bookmarkPlans[rubric.source.index]} />
-                    ) : (bookmarkPlans[rubric.source.index].questions && !bookmarkPlans[rubric.source.index].content) ? (
-                      <Card className="lesson--card">
-                        {`${bookmarkPlans[rubric.source.index].title}`}
-                        <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
-                        {/* <UsePreviewModal color={"#fff"} item={{
+                  {(plans[rubric.source.index].startDate) ? (
+                    <CreatePlaylistCard {...plans[rubric.source.index]} />
+                  ) : (plans[rubric.source.index].questions && !plans[rubric.source.index].content) ? (
+                    <Card className="lesson--card">
+                      {`${plans[rubric.source.index].title}`}
+                      <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                      {/* <UsePreviewModal color={"#fff"} item={{
                           __typename: "Quiz",
                           creator: plans[rubric.source.index].creator,
                           id: plans[rubric.source.index]._id,
@@ -823,52 +824,21 @@ export const TestElement = ({ viewer }: props) => {
                           title: plans[rubric.source.index].title,
                           // questions: plans[rubric.source.index].questions?.map((q) => ({ question: q?.question, answerOptions: [q?.answerOptions], answerType: q?.answerType }))
                         }} /> */}
-                      </Card>
-                    ) : (bookmarkPlans[rubric.source.index].content && (!bookmarkPlans[rubric.source.index].questions || !bookmarkPlans[rubric.source.index].startDate)) && (
-                      <Card className="lesson--card">
-                        {bookmarkPlans[rubric.source.index].title}
-                        <Chip label="Article" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
-                        <UsePreviewModal color={"#fff"} item={{
-                          __typename: "Article",
-                          content: bookmarkPlans[rubric.source.index].content,
-                          creator: bookmarkPlans[rubric.source.index].creator,
-                          id: bookmarkPlans[rubric.source.index]._id,
-                          pdf: bookmarkPlans[rubric.source.index].pdf,
-                          public: bookmarkPlans[rubric.source.index].public,
-                          title: bookmarkPlans[rubric.source.index].title
-                        }} />
-                      </Card>)
-                  ) : (
-                    (plans[rubric.source.index].startDate) ? (
-                      <CreatePlaylistCard {...plans[rubric.source.index]} />
-                    ) : (plans[rubric.source.index].questions && !plans[rubric.source.index].content) ? (
-                      <Card className="lesson--card">
-                        {`${plans[rubric.source.index].title}`}
-                        <Chip label="Assessment" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
-                        {/* <UsePreviewModal color={"#fff"} item={{
-                          __typename: "Quiz",
-                          creator: plans[rubric.source.index].creator,
-                          id: plans[rubric.source.index]._id,
-                          public: plans[rubric.source.index].public,
-                          title: plans[rubric.source.index].title,
-                          // questions: plans[rubric.source.index].questions?.map((q) => ({ question: q?.question, answerOptions: [q?.answerOptions], answerType: q?.answerType }))
-                        }} /> */}
-                      </Card>
-                    ) : (plans[rubric.source.index].content && (!plans[rubric.source.index].questions || !plans[rubric.source.index].startDate)) && (
-                      <Card className="lesson--card">
-                        {plans[rubric.source.index].title}
-                        <Chip label="Article" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
-                        <UsePreviewModal color={"#fff"} item={{
-                          __typename: "Article",
-                          content: plans[rubric.source.index].content,
-                          creator: plans[rubric.source.index].creator,
-                          id: plans[rubric.source.index]._id,
-                          pdf: plans[rubric.source.index].pdf,
-                          public: plans[rubric.source.index].public,
-                          title: plans[rubric.source.index].title
-                        }} />
-                      </Card>)
-                  )}
+                    </Card>
+                  ) : (plans[rubric.source.index].content && (!plans[rubric.source.index].questions || !plans[rubric.source.index].startDate)) && (
+                    <Card className="lesson--card">
+                      {plans[rubric.source.index].title}
+                      <Chip label="Article" color="error" sx={{ ml: 1, color: theme.palette.info.light }} />
+                      <UsePreviewModal color={"#fff"} item={{
+                        __typename: "Article",
+                        content: plans[rubric.source.index].content,
+                        creator: plans[rubric.source.index].creator,
+                        id: plans[rubric.source.index]._id,
+                        pdf: plans[rubric.source.index].pdf,
+                        public: plans[rubric.source.index].public,
+                        title: plans[rubric.source.index].title
+                      }} />
+                    </Card>)}
                 </div>
               )}>
                 {(provided) => (
@@ -936,27 +906,15 @@ export const TestElement = ({ viewer }: props) => {
                         error={searchError}
                         onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
                       />
-                      {yourContent && bookmarkedPlans({ bookmarkQuery: bookmarkQuery, plans: plans, viewer: viewer }) ? (
-                        <List
-                          ref={bookmarkRef}
-                          height={800}
-                          width="100%"
-                          itemCount={bookmarkPlans.length}
-                          itemSize={getBookmarkItemSize}
-                        >
-                          {RenderBookmarkRow}
-                        </List>
-                      ) : (
-                        <List
-                          ref={listRef}
-                          height={800}
-                          width="100%"
-                          itemCount={plans.length}
-                          itemSize={getItemSize}
-                        >
-                          {RenderRow}
-                        </List>
-                      )}
+                      <List
+                        ref={yourContent ? bookmarkRef : listRef}
+                        height={800}
+                        width="100%"
+                        itemCount={plans.length}
+                        itemSize={yourContent ? getBookmarkItemSize : getItemSize}
+                      >
+                        {yourContent ? RenderBookmarkRow : RenderRow}
+                      </List>
                     </Card>
                   </Grid>
                 )}
