@@ -18,13 +18,13 @@ export const FAQ = ({ questionAnswers }: Props) => {
   return (
     <div>
       {questionAnswers.map((item, index) => (
-        <Accordion sx={{ margin: "0.5em 0" }}>
+        <Accordion sx={{ margin: "0.5em 0", backgroundColor: "#FAF9F6" }}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls={`panel${index}a-content`}
             id={`panel${index}a-header`}
           >
-            <Typography>{item.question}</Typography>
+            <Typography variant="h4" style={{ fontWeight: 600 }}>{item.question}</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>

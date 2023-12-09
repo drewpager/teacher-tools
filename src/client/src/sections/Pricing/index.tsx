@@ -18,20 +18,28 @@ export const Pricing = () => {
 
   const pricingFAQ = [
     {
-      question: "What is the difference between the Socrates and Plato plans?",
-      answer: "The Socrates plan is best for home schoolers and the Plato plan is best for teachers. The Socrates plan allows you to create up to 5 student accounts and the Plato plan allows you to create up to 30 student accounts. The Socrates plan is billed monthly and the Plato plan is billed annually."
-    },
-    {
-      question: "What are custom assessments?",
-      answer: "Plato's Peach custom assessments allow teachers to create their own multiple choice or True/False questions. Teachers can create custom assessments to understand retention within lesson plans."
-    },
-    {
-      question: "What does 'teacher-to-teacher' sharing entail?",
-      answer: "Teachers have the option to make the assessments, lesson plans and other content they create available to other teachers. Teachers can also search for and use content created by other teachers."
-    },
-    {
       question: "Is Plato's Peach only for history teachers?",
-      answer: "Currently, our content catalog and suite of tools is built primarily for history teachers. If you teach another subject and have interest in our product, please reach out to drew@greadings.com to discuss how we can help."
+      answer: "Currently, our content catalog features documentaries built primarily for teaching History and Social Studies, but STEM and English related content is currently in production. The platform itself does allow teachers to create the content they want to teach in their lesson plans. If you teach another subject or have questions related to our product, please reach out to drew@teachertoolsusa.com to discuss how we can help."
+    },
+    {
+      question: "If I pay for a full year and don't use the platform, can I have a refund?",
+      answer: "Yes, we can refund you for the unused portion of your subscription. Please reach out via our contact form or directly to drew@teachertoolsusa.com to request a refund."
+    },
+    {
+      question: "Do you offer discounts to teachers of Title I schools?",
+      answer: "Yes, we will offer a 37% discount to teachers of Title I schools. Please reach out via our contact form or directly to drew@teachertoolsusa.com to request a discount."
+    },
+    {
+      question: "Do you offer any other discounts?",
+      answer: "If you are interested in the product but feel the price is too high, please reach out via our contact form or directly to tom@teachertoolsusa.com to discuss."
+    },
+    {
+      question: `What does "Teacher-To-Teacher" sharing entail?`,
+      answer: "Teachers have the option to make the assessments, lesson plans and other content they create available publicly for other teachers to use. Teachers can also search for and use content created by other teachers."
+    },
+    {
+      question: "Does Plato's Peach integrate with Google Classroom?",
+      answer: "Yes! Currently, teachers can assign a Plato's Peach interactive lesson plan to their Google Classroom. We are working on additional integrations with Google Classroom and other LMS platforms."
     }
   ]
 
@@ -160,7 +168,7 @@ export const Pricing = () => {
           <h3>Socrates Plan</h3>
           <ul>
             <li className="success">Unlimited Custom Assessments</li>
-            <li className="success">Teacher To Teacher Sharing</li>
+            <li className="success">Teacher-To-Teacher Sharing</li>
             <li className="warning">Limited To 30 Lesson Plans</li>
             <li className="warning">Limited To 10 Classes</li>
           </ul>
@@ -169,7 +177,7 @@ export const Pricing = () => {
           <h3>Plato's Plan</ h3>
           <ul>
             <li className="success">Unlimited Custom Assessments</li>
-            <li className="success">Teacher To Teacher Sharing</li>
+            <li className="success">Teacher-To-Teacher Sharing</li>
             <li className="success">Unlimited Lesson Plans</li>
             <li className="success">Unlimited Classes</li>
             <li className="warning">Limited To 300 students</li>
@@ -187,7 +195,7 @@ export const Pricing = () => {
           </ul>
         </Box>
         <Box className="pricing-faq--box">
-          <h2>Frequently Asked Questions</h2>
+          <a id="frequent-questions" href='/pricing' style={{ textDecoration: "none", color: "#000" }}><h2>Frequently Asked Questions</h2></a>
           <FAQ questionAnswers={pricingFAQ} />
           <Divider sx={{ marginBottom: "1em" }} />
           <Typography variant="h5" fontSize={28} className='pullQuote'>"In order to seek one’s own direction, we must simplify the mechanics of ordinary, everyday life." -Plato</Typography>
