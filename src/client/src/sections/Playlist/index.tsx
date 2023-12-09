@@ -6,6 +6,7 @@ import { DisplayError } from '../../lib/utils/alerts/displayError';
 import { PlaylistCard, Search, Footer, CTA, InlineCTA } from '../../lib/components/';
 import { Helmet } from 'react-helmet';
 import { PlaylistCardSkeleton } from '../../lib/components/PlaylistCard/playlistCardSkeleton';
+import { formatSlug } from '../../lib/utils/formatSlug';
 
 interface Props {
   viewer?: Viewer;
@@ -47,6 +48,7 @@ export const Playlist = ({ viewer }: Props) => {
         <Helmet>
           <title>{`${playlist.name} Lesson Plan | Plato's Peach`}</title>
           <meta name="description" content={`${metaDescription}`} />
+          <link rel="canonical" href={`https://www.platospeach.com/plans/${formatSlug(playlist.name)}`} />
           {!playlist.public && (<meta name="robots" content="noindex" />)}
         </Helmet>
         <PlaylistCard playlist={playlist} viewer={viewer} />
