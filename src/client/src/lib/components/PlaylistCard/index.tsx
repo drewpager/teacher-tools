@@ -41,6 +41,7 @@ import { useMutation } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import { PlaylistCardSkeleton } from './playlistCardSkeleton';
 import { formatSlug } from '../../utils/formatSlug';
+import PaidIcon from '@mui/icons-material/Paid';
 
 interface Props {
   playlist: Playlist
@@ -124,7 +125,7 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
     })
     if (res) {
       navigation(`/user/${viewerId}`)
-      return (<DisplaySuccess title="Copy Successful!" />);
+      // return (<DisplaySuccess title="Copy Successful!" />);
     }
   }
 
@@ -134,7 +135,7 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
       position: 'absolute',
       top: '50%',
       left: '50%',
-      zIndex: 1,
+      zIndex: 10,
     }} />
   );
 
@@ -182,24 +183,25 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
         </Tooltip>
         {CopyPlaylistLoading ? copyPlaylistLoadingMessage : (
           (playlist.creator === viewer?.id) ? (<Chip variant='filled' label="Your Content" className="yourContent-chip" />) : (
-            <Tooltip title="Copy playlist!">
-              <IconButton
-                onClick={() => handleCopy(`${playlist.id}`, `${viewer?.id}`)}
-                disableRipple
-                disableFocusRipple
-                sx={{ color: "#000" }}
-              >
-                {/* {(params.id === undefined) ? <></> : <ContentCopyIcon />} */}
-                <ContentCopyIcon />
-              </IconButton>
-            </Tooltip>
+            <IconButton
+              onClick={() => handleCopy(`${playlist.id}`, `${viewer?.id}`)}
+              disabled={viewer?.paymentId === null && playlist?.premium === true}
+              disableRipple
+              disableFocusRipple
+              sx={{ color: "#000" }}
+            >
+              {/* {(params.id === undefined) ? <></> : <ContentCopyIcon />} */}
+              <ContentCopyIcon />
+            </IconButton>
           )
         )}
         {CopyPlaylistError ? copyPlaylistErrorMessage : null}
+        {playlist.premium ? <Chip icon={<PaidIcon color="success" />} label="Premium" sx={{ backgroundColor: "#e9efe7", mr: 0.5 }} /> : null}
         <Tooltip title="Assign via Google Classroom">
           <GoogleClassroomShareButton url={`https://www.platospeach.com/plans/${formatSlug(playlist.name)}`} />
         </Tooltip>
       </Box>
+      {(!viewer?.paymentId || viewer.paymentId === null) && playlist.premium && (<Box className="premium-content hide-premium" />)}
       <Grid container className='playlistcard--grid'>
         <Timeline position="left" className='playist--grid__timeline'>
           {playlist?.plan?.map((item, id) => (

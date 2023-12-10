@@ -41,6 +41,7 @@ export const RELATED_PLANS = gql`
       id
       creator
       public
+      premium
     }
   }
 `;

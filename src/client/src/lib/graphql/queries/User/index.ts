@@ -40,6 +40,7 @@ export const USER = gql`
           name
           creator
           public
+          premium
           plan {
             __typename
             ... on Article {

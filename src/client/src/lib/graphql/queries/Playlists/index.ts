@@ -9,6 +9,7 @@ export const ALL_PLAYLISTS = gql`
         name
         creator
         public
+        premium
         plan {
           ... on Lesson {
             id

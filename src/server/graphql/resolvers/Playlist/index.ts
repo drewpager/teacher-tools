@@ -207,7 +207,7 @@ export const playlistResolvers = {
               ? `${playlist.name} ${user?.name} copy`
               : `${playlist.name} copy`,
             plan: [...playlist.plan],
-            premium: playlist.premium,
+            premium: false,
           });
 
           const insertedResult = insertResult

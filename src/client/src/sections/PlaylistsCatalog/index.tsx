@@ -116,10 +116,10 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
             ))} */}
           {filteredPlaylists.length ? filteredPlaylists.map((playlist) => (
             (playlist.public || playlist.public === null) &&
-            <PublicPlaylistCard {...playlist} viewer={viewer} />
+            <PublicPlaylistCard {...playlist} premium={playlist.premium ? playlist.premium : false} viewer={viewer} />
           )) : data.allplaylists.result.map((playlist) => (
             (playlist.public || playlist.public === null) &&
-            <PublicPlaylistCard {...playlist} viewer={viewer} />
+            <PublicPlaylistCard {...playlist} premium={playlist.premium ? playlist.premium : false} viewer={viewer} />
           ))}
         </Grid>
       </Box>

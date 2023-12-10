@@ -46,6 +46,8 @@
 .MuiPaper-root {
   &.incallAction--home {
     background-color: #e9efe7;
+    position: relative;
+    z-index: 2;
     min-width: 100%;
     display: flex;
     // align-self: center;

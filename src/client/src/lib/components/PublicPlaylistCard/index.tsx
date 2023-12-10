@@ -15,6 +15,7 @@ type Props = {
   name: string;
   plan: any[];
   creator: string;
+  premium: boolean;
   viewer: Viewer
 }
 
@@ -38,7 +39,7 @@ interface CopyPlaylistVariables {
 }
 
 
-export const PublicPlaylistCard = ({ id, name, plan, creator, viewer }: Props) => {
+export const PublicPlaylistCard = ({ id, name, plan, creator, premium, viewer }: Props) => {
   const navigation = useNavigate();
   const [copyPlaylist, { loading: CopyPlaylistLoading, error: CopyPlaylistError }] = useMutation<CopyPlaylistData, CopyPlaylistVariables>(COPY_PLAYLIST);
   const [open, setOpen] = useState<boolean>(false);
@@ -114,7 +115,6 @@ export const PublicPlaylistCard = ({ id, name, plan, creator, viewer }: Props) =
               <Typography variant='h6' style={{ color: "#000" }}>
                 {plan.length} {plan.length === 1 ? " Item" : " Items"}
               </Typography>
-              {/* {premium ? <Chip icon={<PaidIcon />} label="Premium" /> : null} */}
             </Link>
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <Tooltip title={userName}>
@@ -127,6 +127,7 @@ export const PublicPlaylistCard = ({ id, name, plan, creator, viewer }: Props) =
                       disableRipple
                       className="copy-icon"
                       onClick={() => handleCopy(`${id}`, `${viewer?.id}`)}
+                      disabled={viewer.paymentId === null && premium}
                     >
                       <ContentCopyIcon />
                     </IconButton>
@@ -134,6 +135,7 @@ export const PublicPlaylistCard = ({ id, name, plan, creator, viewer }: Props) =
                 )
               )}
               {CopyPlaylistError ? copyPlaylistErrorMessage : null}
+              {premium ? <Chip icon={<PaidIcon color="success" />} label="Premium" sx={{ backgroundColor: "#e9efe7" }} /> : null}
               <Snackbar
                 anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                 autoHideDuration={6000}
