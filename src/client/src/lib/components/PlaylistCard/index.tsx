@@ -135,7 +135,7 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
       position: 'absolute',
       top: '50%',
       left: '50%',
-      zIndex: 10,
+      // zIndex: 10,
     }} />
   );
 
@@ -183,16 +183,18 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
         </Tooltip>
         {CopyPlaylistLoading ? copyPlaylistLoadingMessage : (
           (playlist.creator === viewer?.id) ? (<Chip variant='filled' label="Your Content" className="yourContent-chip" />) : (
-            <IconButton
-              onClick={() => handleCopy(`${playlist.id}`, `${viewer?.id}`)}
-              disabled={viewer?.paymentId === null && playlist?.premium === true}
-              disableRipple
-              disableFocusRipple
-              sx={{ color: "#000" }}
-            >
-              {/* {(params.id === undefined) ? <></> : <ContentCopyIcon />} */}
-              <ContentCopyIcon />
-            </IconButton>
+            <Tooltip title={viewer?.paymentId === null && playlist?.premium === true ? "Become a subscriber to copy!" : "Copy Lesson Plan!"}>
+              <IconButton
+                onClick={() => handleCopy(`${playlist.id}`, `${viewer?.id}`)}
+                disabled={viewer?.paymentId === null && playlist?.premium === true}
+                disableRipple
+                disableFocusRipple
+                sx={{ color: "#000" }}
+              >
+                {/* {(params.id === undefined) ? <></> : <ContentCopyIcon />} */}
+                <ContentCopyIcon />
+              </IconButton>
+            </Tooltip>
           )
         )}
         {CopyPlaylistError ? copyPlaylistErrorMessage : null}

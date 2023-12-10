@@ -122,7 +122,7 @@ export const PublicPlaylistCard = ({ id, name, plan, creator, premium, viewer }:
               </Tooltip>
               {CopyPlaylistLoading ? copyPlaylistLoadingMessage : (
                 creator === viewer?.id ? (<Chip variant='filled' label="Your Content" />) : (
-                  <Tooltip title="Copy lesson plan template">
+                  <Tooltip title={viewer?.paymentId === null && premium === true ? "Become a subscriber to copy!" : "Copy Lesson Plan!"}>
                     <IconButton
                       disableRipple
                       className="copy-icon"

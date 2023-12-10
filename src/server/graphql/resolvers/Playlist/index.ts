@@ -202,12 +202,12 @@ export const playlistResolvers = {
           const insertResult = await db.playlists.insertOne({
             _id: new ObjectId(newId),
             public: false,
+            premium: false,
             creator: viewerId,
             name: user
               ? `${playlist.name} ${user?.name} copy`
               : `${playlist.name} copy`,
             plan: [...playlist.plan],
-            premium: false,
           });
 
           const insertedResult = insertResult
