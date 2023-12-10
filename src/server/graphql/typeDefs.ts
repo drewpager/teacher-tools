@@ -89,6 +89,7 @@ export const typeDefs = gql`
     creator: String!
     authorized: Boolean
     public: Boolean
+    premium: Boolean
   }
 
   type Playlists {
@@ -344,6 +345,7 @@ export const typeDefs = gql`
     creator: String!
     plan: [Plan]!
     public: Boolean
+    premium: Boolean
   }
 
   union LessonPlanUnion = Quiz | Lesson | Article

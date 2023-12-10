@@ -7,6 +7,7 @@ import { gql } from 'graphql-tag';
 import { DisplayError, DisplaySuccess } from '../../utils';
 import { formatSlug } from '../../utils/formatSlug';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import PaidIcon from '@mui/icons-material/Paid';
 import "./publicPlaylistCardStyles.scss";
 
 type Props = {
@@ -113,6 +114,7 @@ export const PublicPlaylistCard = ({ id, name, plan, creator, viewer }: Props) =
               <Typography variant='h6' style={{ color: "#000" }}>
                 {plan.length} {plan.length === 1 ? " Item" : " Items"}
               </Typography>
+              {/* {premium ? <Chip icon={<PaidIcon />} label="Premium" /> : null} */}
             </Link>
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <Tooltip title={userName}>

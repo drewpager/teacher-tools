@@ -7,6 +7,7 @@ export const PLAYLIST = gql`
       name
       creator
       public
+      premium
       plan {
         ... on Lesson {
           id

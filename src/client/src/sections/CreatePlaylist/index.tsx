@@ -47,14 +47,16 @@ type InputLessonPlan = {
   name: string,
   creator: string,
   plan: Plan[],
-  public: boolean
+  public: boolean,
+  premium: boolean
 }
 
 const initialData: InputLessonPlan = {
   name: "",
   creator: "",
   plan: [],
-  public: false
+  public: false,
+  premium: false
 }
 
 
@@ -85,6 +87,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const bookmarkRef = useRef<List>(null);
   const [playlist, setPlaylist] = useState<InputLessonPlan>(initialData)
   const [locked, setLocked] = useState<boolean>(false);
+  const [premium, setPremium] = useState<boolean>(false);
   const [ascending, setAscending] = useState<boolean>(true);
   const [open, setOpen] = useState(false);
 
@@ -470,7 +473,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
       plan: [...playlist.plan],
       name: e.target.value,
       creator: viewer && viewer.id ? viewer.id : "0",
-      public: locked
+      public: locked,
+      premium: premium
     })
     window.localStorage.setItem('playlist', JSON.stringify(playlist));
   }
@@ -924,6 +928,18 @@ export const CreatePlaylist = ({ viewer }: props) => {
                   />}
                 label="Sort by Date"
                 sx={{ ml: 1 }}
+              />
+            </Tooltip>
+            <Tooltip title="Check to make premium (for paying users only)">
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    onChange={() => setPremium(!premium)}
+                    disableRipple
+                    disabled={viewer.paymentId === null}
+                  />}
+                label="Premium Content"
+                sx={{ ml: 0.5 }}
               />
             </Tooltip>
           </Box>

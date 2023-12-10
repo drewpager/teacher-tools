@@ -164,6 +164,7 @@ export const playlistResolvers = {
           creator: upsertedResult.creator,
           public: upsertedResult.public,
           authorized: true,
+          premium: upsertedResult.premium,
         };
       } catch (e) {
         throw new Error(`Failed to update playlist ${e}`);
@@ -206,6 +207,7 @@ export const playlistResolvers = {
               ? `${playlist.name} ${user?.name} copy`
               : `${playlist.name} copy`,
             plan: [...playlist.plan],
+            premium: playlist.premium,
           });
 
           const insertedResult = insertResult
