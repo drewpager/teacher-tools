@@ -9,22 +9,29 @@
         padding-left: 2rem;
         margin-top: 2rem;
 
-        @media (max-width: 600px) {
-            flex: 1 1 30%;
+        @media (max-width: 768px) {
+            // flex: 1 1 30%;
             align-items: center;
             flex-wrap: wrap;
-            margin-left: 0;
-            padding-left: 0;
-            padding-top: 1rem;
-            margin-top: 4rem;
+            margin-left: -1rem;
+            padding-left: 0rem;
+            padding-top: 5rem;
+            margin-top: 0rem;
         }
     }
 
     &.premium-content {
         position: relative;
-        max-height: 100%;
-        // overflow: hidden;
+        max-height: 120%;
         overflow: hidden;
+
+        @media (max-width: 768px) {
+            height: 120%;
+        }
+
+        @media (max-width: 1300px) {
+            height: 100%;
+        }
     }
 
     &.hide-premium {

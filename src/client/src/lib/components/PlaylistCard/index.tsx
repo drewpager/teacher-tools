@@ -42,6 +42,7 @@ import { useParams } from 'react-router-dom';
 import { PlaylistCardSkeleton } from './playlistCardSkeleton';
 import { formatSlug } from '../../utils/formatSlug';
 import PaidIcon from '@mui/icons-material/Paid';
+import { Link } from 'react-router-dom';
 
 interface Props {
   playlist: Playlist
@@ -124,6 +125,7 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
       }
     })
     if (res) {
+      console.log("Copy Successful!")
       navigation(`/user/${viewerId}`)
       // return (<DisplaySuccess title="Copy Successful!" />);
     }
@@ -181,24 +183,21 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
         <Tooltip title={`Created by ${userName}`}>
           <Avatar alt="User Image" src={userImage} sx={{ mr: 2 }} className="avatar--creator" />
         </Tooltip>
-        {CopyPlaylistLoading ? copyPlaylistLoadingMessage : (
-          (playlist.creator === viewer?.id) ? (<Chip variant='filled' label="Your Content" className="yourContent-chip" />) : (
-            <Tooltip title={viewer?.paymentId === null && playlist?.premium === true ? "Become a subscriber to copy!" : "Copy Lesson Plan!"}>
-              <IconButton
-                onClick={() => handleCopy(`${playlist.id}`, `${viewer?.id}`)}
-                disabled={viewer?.paymentId === null && playlist?.premium === true}
-                disableRipple
-                disableFocusRipple
-                sx={{ color: "#000" }}
-              >
-                {/* {(params.id === undefined) ? <></> : <ContentCopyIcon />} */}
-                <ContentCopyIcon />
-              </IconButton>
-            </Tooltip>
-          )
+        {CopyPlaylistLoading ? copyPlaylistLoadingMessage : null}
+        {(playlist.creator === viewer?.id) ? (<Chip variant='filled' label="Your Content" className="yourContent-chip" />) : (
+          <IconButton
+            onClick={() => handleCopy(`${playlist.id}`, `${viewer?.id}`)}
+            disabled={viewer?.paymentId === null && playlist?.premium === true}
+            disableRipple
+            disableFocusRipple
+            sx={{ color: "#000" }}
+          >
+            {/* {(params.id === undefined) ? <></> : <ContentCopyIcon />} */}
+            <ContentCopyIcon />
+          </IconButton>
         )}
         {CopyPlaylistError ? copyPlaylistErrorMessage : null}
-        {playlist.premium ? <Chip icon={<PaidIcon color="success" />} label="Premium" sx={{ backgroundColor: "#e9efe7", mr: 0.5 }} /> : null}
+        {playlist.premium ? <Link to={!viewer?.id ? "/signup" : "/plans"}><Chip icon={<PaidIcon color="success" />} label="Premium" sx={{ backgroundColor: "#e9efe7", mr: 0.5 }} /></Link> : null}
         <Tooltip title="Assign via Google Classroom">
           <GoogleClassroomShareButton url={`https://www.platospeach.com/plans/${formatSlug(playlist.name)}`} />
         </Tooltip>

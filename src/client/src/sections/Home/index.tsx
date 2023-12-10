@@ -21,7 +21,7 @@ type Props = {
 export const Home = ({ viewer }: Props) => {
   const { data, loading, error } = usePlaylistQuery({
     variables: {
-      id: "64bd4da2f5dcf743baacdc36"
+      id: "6554ef5092b184e4026e546a" // Boston Tea Party
     }
   })
 
