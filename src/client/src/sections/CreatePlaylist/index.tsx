@@ -681,8 +681,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
     setAutoSaved(false);
   };
 
-  console.log(playlist.plan)
-
   return (
     <div>
       <Helmet>
