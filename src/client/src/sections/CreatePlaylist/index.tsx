@@ -613,6 +613,11 @@ export const CreatePlaylist = ({ viewer }: props) => {
     setPlaylist({ ...playlist, public: !locked });
   }
 
+  const handlePremium = () => {
+    setPremium(!premium);
+    setPlaylist({ ...playlist, premium: !premium });
+  }
+
   const resetSearch = () => {
     setSearchInput("");
     setPlans(filter.filter(val => !playlist.plan.includes(val)))
@@ -675,6 +680,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
     setAutoSaved(false);
   };
+
+  console.log(playlist.plan)
 
   return (
     <div>
@@ -934,7 +941,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
               <FormControlLabel
                 control={
                   <Checkbox
-                    onChange={() => setPremium(!premium)}
+                    onChange={() => handlePremium()}
                     disableRipple
                     disabled={viewer.paymentId === null}
                   />}

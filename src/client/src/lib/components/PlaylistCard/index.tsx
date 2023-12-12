@@ -257,6 +257,7 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
             }
 
             if (iter?.__typename === "Article") {
+              // console.log(iter.content?.entityMap)
               return (
                 <ArticlePlayer article={iter} key={index} />
               )

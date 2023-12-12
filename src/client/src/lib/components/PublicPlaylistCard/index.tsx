@@ -121,13 +121,13 @@ export const PublicPlaylistCard = ({ id, name, plan, creator, premium, viewer }:
                 <Avatar alt="creator headshot" src={image} sx={{ marginRight: "0.5rem" }} />
               </Tooltip>
               {CopyPlaylistLoading ? copyPlaylistLoadingMessage : (
-                creator === viewer?.id ? (<Chip variant='filled' label="Your Content" />) : (
-                  <Tooltip title={viewer?.paymentId === null && premium === true ? "Become a subscriber to copy!" : "Copy Lesson Plan!"}>
+                creator === viewer?.id ? (<Chip variant='filled' label="Your Content" />) : premium ? (<></>) : (
+                  <Tooltip title={viewer?.paymentId === null && premium ? "Become a subscriber to copy!" : "Copy Lesson Plan!"}>
                     <IconButton
                       disableRipple
                       className="copy-icon"
                       onClick={() => handleCopy(`${id}`, `${viewer?.id}`)}
-                      disabled={viewer.paymentId === null && premium}
+                      disabled={viewer?.paymentId === null && premium}
                     >
                       <ContentCopyIcon />
                     </IconButton>

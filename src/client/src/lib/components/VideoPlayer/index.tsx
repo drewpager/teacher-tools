@@ -52,7 +52,6 @@ export const VideoPlayer = ({ url }: props) => {
         // max-width={"100%"}
         max-height={"auto"}
         className="cld-video-player cld-fluid"
-        autoPlay
       />
     </Box>
   )
