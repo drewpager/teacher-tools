@@ -146,7 +146,29 @@ export const CreatePlaylist = ({ viewer }: props) => {
   let articleQuery = useMemo(() => articleData?.allarticles.result, [articleData])
   let bookmarkQuery: any = useMemo(() => userData ? userData.user.bookmarks : [], [userData]);
 
+  const updateListSize = () => {
+    if (listRef.current) {
+      listRef.current.resetAfterIndex(0);
+    }
+  };
+
+  const updatePlaylistSize = () => {
+    if (playlistRef.current) {
+      playlistRef.current.resetAfterIndex(0);
+    }
+  }
+
+  const updateBookmarkSize = () => {
+    if (bookmarkRef.current) {
+      bookmarkRef.current.resetAfterIndex(0);
+    }
+  }
+
   useEffect(() => {
+    if (!viewer.id) {
+      navigate('/signup', { replace: true })
+    }
+
     const playlistStorage = window.localStorage.getItem("playlist");
     if (playlistStorage) {
       setPlaylist(JSON.parse(playlistStorage));
@@ -226,16 +248,10 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
       setBookmarks(bookmarkInput);
     }
-  }, [lessonQuery, quizQuery, articleQuery, bookmarkQuery]);
 
-  if (!viewer.id) {
-    return (
-      <>
-        {navigate('/login', { replace: true })}
-        <Footer />
-      </>
-    )
-  }
+    updateListSize()
+    updateBookmarkSize()
+  }, [lessonQuery, quizQuery, articleQuery, bookmarkQuery]);
 
   // Filtering functions
   function onlyUnique(value: any, index: number, self: any) {
@@ -268,24 +284,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const getItemSize = (index: number) => rowHeights[index];
   const getPlaylistItemSize = (index: number) => playHeights[index];
   const getBookmarkItemSize = (index: number) => rowHeights[index];
-
-  const updateListSize = () => {
-    if (listRef.current) {
-      listRef.current.resetAfterIndex(0);
-    }
-  };
-
-  const updatePlaylistSize = () => {
-    if (playlistRef.current) {
-      playlistRef.current.resetAfterIndex(0);
-    }
-  }
-
-  const updateBookmarkSize = () => {
-    if (bookmarkRef.current) {
-      bookmarkRef.current.resetAfterIndex(0);
-    }
-  }
 
   const getStyle = ({ draggableStyle, virtualStyle, isDragging }: StyleProps) => {
     // replaces the need for a placeholder
@@ -594,6 +592,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
         setPlans((p) => [...bookmarks, ...p])
       }
       updatePlaylistSize();
+      updateBookmarkSize();
       return { ...plans }
     }
 
@@ -646,18 +645,21 @@ export const CreatePlaylist = ({ viewer }: props) => {
     if (i === "All") {
       setPlans(filter.filter(i => !playlist.plan.includes(i)))
       updateListSize();
+      updateBookmarkSize();
       return { ...filter }
     }
 
     if (i === "Quizzes") {
       setPlans([...filter.filter((e) => e.questions && e.questions?.length > 0)])
       updateListSize();
+      updateBookmarkSize();
       return { ...filter }
     }
 
     if (i === "Articles") {
       setPlans([...filter.filter((c) => c.pdf || (c.content && c.content.blocks))])
       updateListSize();
+      updateBookmarkSize();
       return { ...filter }
     }
     setPlans([...filter.filter((e) => e.category?.includes(i))])

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Button, Grid, TextField, Typography, Chip, Switch, Tooltip, CircularProgress, Modal, IconButton, Fab } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import './createArticle.scss';
@@ -81,6 +81,12 @@ export const CreateArticle = ({ viewer }: Props) => {
   const [pdf, setPdf] = useState<string | undefined>(undefined);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!viewer.id) {
+      navigate('/signup', { replace: true })
+    }
+  }, [viewer, navigate])
 
   const handleClose = () => {
     setOpen(false);

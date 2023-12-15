@@ -124,11 +124,19 @@ export const SignUp = ({ setViewer }: Props) => {
   const signUpFAQ = [
     {
       question: "What is Plato's Peach?",
-      answer: "Plato's Peach is a platform that allows history teachers to build and share lesson plans with students and other teachers."
+      answer: "Plato's Peach is a platform that allows teachers to build, copy, customize and share interactive lesson plans with their students and other teachers."
+    },
+    {
+      question: "What Features Does Plato's Peach Have?",
+      answer: "1,000+ short educational films, lesson plan templates, easy drag and drop lesson plan builder, customizable assessments, supporting articles, and more!"
+    },
+    {
+      question: "What LMS Integrations Does Plato's Peach Support?",
+      answer: "Currently, Plato's Peach supports Google Classroom. We're working on adding more LMS integrations soon!"
     },
     {
       question: "Is Plato's Peach Free?",
-      answer: "Plato's Peach has a free version with limited features. If you'd like to upgrade to the premium version, you can do so for as little as $5/month."
+      answer: "Plato's Peach has a free version with limited features. If you'd like to upgrade to the premium version, you can do so for a monthly or annual charge."
     }
   ]
 

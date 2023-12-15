@@ -5,20 +5,23 @@
     border: 1px solid black;
     text-align: center;
     min-width: 33%;
-    max-width: 60%; 
+    max-width: 60%;
     height: auto;
-    margin: 6em auto;
+    margin: 6rem auto 1rem auto;
 
     @media (max-width: 768px) {
       min-width: 100%;
       max-width: 100%;
+      margin: 6rem 1rem 1rem 0.25rem;
     }
   }
-  &.login--box { 
+
+  &.login--box {
     display: flex;
     flex-direction: column;
     color: white;
   }
+
   &.login--text {
     color: library.$darkGreen;
   }
@@ -26,13 +29,14 @@
 
 .signUp--faq {
   min-width: 33%;
-  max-width: 60%; 
+  max-width: 60%;
   height: auto;
-  margin: 6rem auto;
-  
+  margin: 4rem auto;
+
   @media (max-width: 768px) {
     min-width: 100%;
     max-width: 100%;
+    margin: 2rem auto auto 0.25rem;
   }
 }
 
