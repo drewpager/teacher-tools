@@ -180,7 +180,16 @@ export const QuizCreate = ({ viewer }: props) => {
         public: locked
       }
     }
-  })
+  });
+
+  // if (!viewer.id) {
+  //   return (
+  //     <>
+  //       {navigate('/login', { replace: true })}
+  //       <Footer />
+  //     </>
+  //   )
+  // }
 
   if (loading) {
     <Box sx={{ marginTop: 15 }}>
@@ -420,7 +429,12 @@ export const QuizCreate = ({ viewer }: props) => {
                   variant="outlined"
                   type="submit"
                   className="quiz--button-submit"
+                  disabled={!viewer.id}
                 >Save Assessment</Button>
+                {!viewer.id && (
+                  <Link to="/login" style={{ textDecoration: "none", color: "#BC4710" }}>
+                    <Typography variant="body2">Login required to save</Typography>
+                  </Link>)}
                 {quizCreatePage ? (
                   <Link to={`../user/${viewer.id}`} style={{ textDecoration: "none" }}>
                     <Typography variant="h4" className="quiz--button-cancel">Cancel</Typography>

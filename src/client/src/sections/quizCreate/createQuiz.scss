@@ -72,6 +72,12 @@
       background-color: library.$black;
       border: 1px solid library.$black;
     }
+
+    &:disabled {
+      background-color: #c7c7c7;
+      color: library.$white;
+      border: 1px solid #c7c7c7;
+    }
   }
 
   .quiz--button-area {

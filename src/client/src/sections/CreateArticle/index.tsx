@@ -6,10 +6,9 @@ import { Viewer, Article, useCreateArticleMutation } from '../../graphql/generat
 import { Editor, EditorState } from 'react-draft-wysiwyg';
 import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { convertToRaw } from 'draft-js';
-import { Footer, PdfPlayer, VideoPlayer } from '../../lib/components';
+import { Footer, PdfPlayer, VideoPlayer, PdfUploader } from '../../lib/components';
 import draftToHtml from 'draftjs-to-html';
-import { useNavigate } from 'react-router-dom';
-import { PdfUploader } from '../../lib/components';
+import { useNavigate, Link } from 'react-router-dom';
 import InfoIcon from '@mui/icons-material/Info';
 
 type Props = {
@@ -185,6 +184,10 @@ export const CreateArticle = ({ viewer }: Props) => {
                     <VideoPlayer url="https://res.cloudinary.com/drewpager/video/upload/v1699324151/platos-peach-video/create-article-tutorial_cylman.mov" />
                   </Box>
                 </Modal>
+                {!viewer.id && (
+                  <Link to="/login" style={{ textDecoration: "underline", color: "#BC4710", textAlign: "center", verticalAlign: "center" }}>
+                    <Typography variant="body2">Login required</Typography>
+                  </Link>)}
               </Box>
               <TextField
                 title='Article Title'
@@ -192,6 +195,7 @@ export const CreateArticle = ({ viewer }: Props) => {
                 sx={{ width: '100%' }}
                 onChange={(e) => setTitle(e.target.value)}
                 required
+                disabled={!viewer.id}
               />
               <PdfUploader onData={handleChildData} />
               <Editor

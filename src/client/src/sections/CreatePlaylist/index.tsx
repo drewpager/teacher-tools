@@ -147,7 +147,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
   let bookmarkQuery: any = useMemo(() => userData ? userData.user.bookmarks : [], [userData]);
 
   useEffect(() => {
-    updateListSize();
     const playlistStorage = window.localStorage.getItem("playlist");
     if (playlistStorage) {
       setPlaylist(JSON.parse(playlistStorage));
@@ -233,7 +232,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
     return (
       <>
         {navigate('/login', { replace: true })}
-        <DisplayError title="Must be logged in to create a playlist!" />
         <Footer />
       </>
     )

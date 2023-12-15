@@ -57,12 +57,8 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
 
   const handleLogOut = () => {
     logOut();
+    setAnchorElUser(null);
   }
-
-  const handleUserAction = () => {
-    console.log("Add button clicked!")
-  }
-
 
   return (
     <AppBar className='NavBar-container'>
