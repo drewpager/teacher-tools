@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, IconButton, Typography, Chip, CircularProgress, Alert, Snackbar, Tooltip } from '@mui/material';
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import { Link } from 'react-router-dom';
@@ -28,8 +28,12 @@ type BookmarkLessonVariables = {
 export const CatalogList = ({ name, category, viewer, bookmarks }: props) => {
   const [open, setOpen] = useState<boolean>(false);
   const [bookmarkError, setBookmarkError] = useState<boolean>(false);
-  const [bookmarked, setBookmarked] = useState<any[]>(bookmarks ? bookmarks : []);
+  const [bookmarked, setBookmarked] = useState<any[]>([]);
   const [bookmarkStatus, setBookmarkStatus] = useState<string>('');
+
+  useEffect(() => {
+    setBookmarked(bookmarks ? bookmarks : [])
+  }, [bookmarked, bookmarks])
 
   const handleClose = () => {
     setOpen(false)
@@ -56,16 +60,7 @@ export const CatalogList = ({ name, category, viewer, bookmarks }: props) => {
         }
       })
       setBookmarkStatus(`${res.data?.bookmarkLesson}`)
-
-      // if (res && `${res.data?.bookmarkLesson}` === "bookmarked") {
-      //   setBookmarked([...bookmarked, id])
-      // }
-
-      // if (res && `${res.data?.bookmarkLesson}` === "unbookmarked") {
-      //   const indy = bookmarked.indexOf(id);
-      //   setBookmarked(bookmarked.splice(indy, 1))
-      // }
-
+      setBookmarked([...bookmarked, `${id}`])
       res && setOpen(true)
     }
   }

@@ -42,7 +42,7 @@ export const Catalog = ({ viewer }: Props) => {
   const [ascending, setAscending] = useState<boolean>(true);
   const [alphabetical, setAlphabetical] = useState<boolean>(false);
   const [searchInput, setSearchInput] = useState<string>("");
-  const [filteredLesson, setFilteredLesson] = useState<any>();
+  const [filteredLesson, setFilteredLesson] = useState<any[]>([]);
   const [searchError, setSearchError] = useState<boolean>(false);
   const [searchInfo, setSearchInfo] = useState<boolean>(true);
   const [view, setView] = useState<'grid' | 'list'>('list')
@@ -57,7 +57,7 @@ export const Catalog = ({ viewer }: Props) => {
       quizzesPage: 1,
       articlesPage: 1,
       limit: 1
-    }
+    }, pollInterval: 1000
   });
 
   if (userLoading) {
@@ -94,7 +94,7 @@ export const Catalog = ({ viewer }: Props) => {
     setSearchInput(e.target.value)
 
     if (searchInput !== "") {
-      setFilteredLesson(newDatum?.filter((lesson) => lesson?.title?.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1));
+      setFilteredLesson(newDatum ? [...newDatum?.filter((lesson) => lesson?.title?.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1)] : []);
       setSearchError(false);
     }
 
@@ -267,7 +267,7 @@ export const Catalog = ({ viewer }: Props) => {
                 // id="catalog-search"
                 label="Search Catalog"
                 onChange={(e) => inputHandler(e)}
-                value={`${searchInput}`}
+                value={searchInput}
                 ref={inputRef}
                 className="catalog--search"
                 InputProps={{

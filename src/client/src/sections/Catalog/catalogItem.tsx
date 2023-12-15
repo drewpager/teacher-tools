@@ -33,7 +33,7 @@ export const CatalogItem = ({ name, category, viewer, bookmarks }: props) => {
   const [open, setOpen] = useState<boolean>(false);
   const [bookmarkError, setBookmarkError] = useState<boolean>(false);
   const [bookmarkStatus, setBookmarkStatus] = useState<string>('');
-  const [bookmarked, setBookmarked] = useState<any[]>(bookmarks ? bookmarks : []);
+  const [bookmarked, setBookmarked] = useState<any[]>([]);
   const [loaded, setLoaded] = useState<boolean>(false);
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [sliderRef, instanceRef] = useKeenSlider(
@@ -67,6 +67,10 @@ export const CatalogItem = ({ name, category, viewer, bookmarks }: props) => {
     },
   )
 
+  useEffect(() => {
+    setBookmarked(bookmarks ? bookmarks : []);
+  }, [bookmarks, bookmarked])
+
   const handleClose = () => {
     setOpen(false)
     setBookmarkError(false)
@@ -92,16 +96,7 @@ export const CatalogItem = ({ name, category, viewer, bookmarks }: props) => {
         }
       })
       setBookmarkStatus(`${res.data?.bookmarkLesson}`)
-
-      // if (res && `${res.data?.bookmarkLesson}` === "bookmarked") {
-      //   setBookmarked([...bookmarked, id])
-      // }
-
-      // if (res && `${res.data?.bookmarkLesson}` === "unbookmarked") {
-      //   const indy = bookmarked.indexOf(id);
-      //   setBookmarked(bookmarked.splice(indy, 1))
-      // }
-
+      setBookmarked([...bookmarked, id])
       res && setOpen(true)
     }
   }
@@ -176,8 +171,9 @@ export const CatalogItem = ({ name, category, viewer, bookmarks }: props) => {
                       sx={{ color: "#FAF9F6" }}
                       disableRipple
                       disableFocusRipple
+                      onClick={() => onBookmark(`${l.id}`, viewer)}
                     >
-                      <BookmarkAddIcon color={bookmarked[0]?.includes(`${l.id}`) ? "success" : "inherit"} onClick={() => onBookmark(`${l.id}`, viewer)} />
+                      <BookmarkAddIcon color={bookmarked[0]?.includes(`${l.id}`) ? "success" : "inherit"} />
                     </IconButton>
                   </Box>
                 </Box>

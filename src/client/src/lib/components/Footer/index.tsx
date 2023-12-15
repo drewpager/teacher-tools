@@ -67,6 +67,10 @@ export const Footer = ({ viewer }: Props) => {
           <Link to="/plans" style={{ textDecoration: "none" }}>
             <Typography variant='body1' className='footer--link-text'>Template Gallery</Typography>
           </Link>
+          {viewer && viewer.id ? (<></>) : (
+            <Link to="/signup" style={{ textDecoration: "none" }}>
+              <Typography variant='body1' className='footer--link-text'>Free Signup</Typography>
+            </Link>)}
           {viewer ? (<Link to={viewer && viewer.id ? `/user/${viewer.id}` : `/login`} style={{ textDecoration: "none" }}>
             <Typography variant='body1' className='footer--link-text'>{viewer && viewer.id ? "Profile" : "Login"}</Typography>
           </Link>) : (<></>)}
@@ -75,6 +79,9 @@ export const Footer = ({ viewer }: Props) => {
           <Typography variant="h5" className='footer--text'>
             Popular Categories
           </Typography>
+          <Link to="/catalog#westward%20expansion" style={{ textDecoration: "none" }}>
+            <Typography variant='body1' className='footer--link-text'>Westward Expansion</Typography>
+          </Link>
           <Link to="/catalog#world%20war%20two" style={{ textDecoration: "none" }}>
             <Typography variant='body1' className='footer--link-text'>World War II</Typography>
           </Link>

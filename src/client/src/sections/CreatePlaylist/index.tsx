@@ -577,6 +577,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
     }
     handleCategoryClick("All", 0)
     setAscending(true);
+    setYourContent(false);
     updateListSize();
     updateBookmarkSize();
   }
@@ -620,6 +621,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
     setPlans(filter.filter(val => !playlist.plan.includes(val)))
     setSearchError(false);
     document.getElementById("lesson-search")?.focus();
+    updateListSize();
+    updateBookmarkSize();
   }
 
   const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {

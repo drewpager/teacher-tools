@@ -150,7 +150,7 @@ export const SignUp = ({ setViewer }: Props) => {
       <Box className="login--box">
         <Card className="login--card">
           <CardContent>
-            <Typography variant="h4" color="text.secondary">Sign Up For Plato's Peach</Typography>
+            <Typography variant="h4" color="text.secondary">Free Sign Up For Plato's Peach</Typography>
             <Divider sx={{ margin: 2 }} />
             <CardActions>
               <Button className="google--button" onClick={handleAuthorize} size="medium"><GoogleIcon fontSize='medium' /> Sign Up With Google!</Button>
