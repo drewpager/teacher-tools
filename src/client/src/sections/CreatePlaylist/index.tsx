@@ -251,7 +251,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
     updateListSize()
     updateBookmarkSize()
-  }, [lessonQuery, quizQuery, articleQuery, bookmarkQuery]);
+  }, [lessonQuery, quizQuery, articleQuery, bookmarkQuery, navigate, viewer]);
 
   // Filtering functions
   function onlyUnique(value: any, index: number, self: any) {
@@ -958,7 +958,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
             disableRipple
             disableTouchRipple
           >Create</Button>
-        </form >
+        </form>
       </Box>
       <Footer viewer={viewer} />
     </div>
