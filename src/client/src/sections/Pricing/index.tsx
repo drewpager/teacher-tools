@@ -104,7 +104,7 @@ export const Pricing = () => {
       <FormGroup sx={{ alignItems: 'center', marginRight: 2 }}>
         <FormControlLabel control={<PricingSwitch sx={{ m: 1 }} checked={monthlyCadence} onChange={() => setMonthlyCadence(!monthlyCadence)} />} label="" />
       </FormGroup>
-      <Alert severity="success">All Plans Include a 7-Day Free Trial!</Alert>
+      {/* <Alert severity="success" sx={{ backgroundColor: "#57996A" }}>All Paid Plans Include a 7-Day Free Trial!</Alert> */}
       <Box className='pricing--card-box'>
         <Box className="pricing--box">
           <h3>Free Plan</h3>
@@ -159,6 +159,8 @@ export const Pricing = () => {
           <h3>Free Plan</h3>
           <ul>
             <li className="success">Unlimited Bookmarks</li>
+            <li className="success">Google Classroom Integration</li>
+            <li className="warning">Premium Lesson Plans Locked</li>
             <li className="warning">Limited to 6 Lesson Plans</li>
             <li className="warning">Limited To 6 Assessments</li>
             <li className="warning">Limited To 6 Custom Lessons</li>
@@ -167,8 +169,10 @@ export const Pricing = () => {
         <Box className="pricing-details--box">
           <h3>Socrates Plan</h3>
           <ul>
+            <li className="success">7-Day Free Trial</li>
             <li className="success">Unlimited Custom Assessments</li>
             <li className="success">Teacher-To-Teacher Sharing</li>
+            <li className="success">Access Premium Lesson Plans</li>
             <li className="warning">Limited To 30 Lesson Plans</li>
             <li className="warning">Limited To 10 Classes</li>
           </ul>
@@ -176,6 +180,7 @@ export const Pricing = () => {
         <Box className="pricing-details--box">
           <h3>Plato's Plan</ h3>
           <ul>
+            <li className="success">7-Day Free Trial</li>
             <li className="success">Unlimited Custom Assessments</li>
             <li className="success">Teacher-To-Teacher Sharing</li>
             <li className="success">Unlimited Lesson Plans</li>

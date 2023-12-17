@@ -157,7 +157,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                 </MenuItem>
                 <MenuItem onClick={() => setAnchorElAction(null)} className="dropdown--buttons">
                   <Link to={`/quiz/create`} style={{ textDecoration: 'none', color: "#000" }}>
-                    <Typography textAlign="center">Create Asessment</Typography>
+                    <Typography textAlign="center">Create Assessment</Typography>
                   </Link>
                 </MenuItem>
                 <MenuItem onClick={() => setAnchorElAction(null)} className="dropdown--buttons">
@@ -256,7 +256,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                 </MenuItem>
                 <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons">
                   <Link to={`/quiz/create`} style={{ textDecoration: 'none', color: "#000" }}>
-                    <Typography textAlign="center">Create Asessment</Typography>
+                    <Typography textAlign="center">Create Assessment</Typography>
                   </Link>
                 </MenuItem>
                 <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons">
