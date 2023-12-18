@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Grid,
   Typography,
@@ -42,6 +42,7 @@ import { useParams } from 'react-router-dom';
 import { PlaylistCardSkeleton } from './playlistCardSkeleton';
 import { formatSlug } from '../../utils/formatSlug';
 import PaidIcon from '@mui/icons-material/Paid';
+import HistoryToggleOffIcon from '@mui/icons-material/HistoryToggleOff';
 import { Link } from 'react-router-dom';
 
 interface Props {
@@ -77,6 +78,7 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
   const [active, setActive] = useState<string>(playlist && playlist.plan ? `${playlist?.plan[0]?.id}` : `1`)
   const [copyPlaylist, { loading: CopyPlaylistLoading, error: CopyPlaylistError }] = useMutation<CopyPlaylistData, CopyPlaylistVariables>(COPY_PLAYLIST);
   const params = useParams();
+  const [estimatedTime, setEstimatedTime] = useState<number>(0);
 
   const { data, loading, error } = useUserQuery({
     variables: {
@@ -88,6 +90,38 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
       limit: 1
     }
   });
+
+  // Calculate Estimated Completion Time for Lesson Plan
+  useEffect(() => {
+    let time: number = 0;
+    playlist.plan.map((p) => {
+      if (p?.__typename === "Quiz") {
+        // Assumes 45 seconds to read and complete each question
+        time = time + Math.round((p.questions.length * 45) / 60);
+      }
+
+      if (p?.__typename === "Lesson") {
+        // Assumes 4 minutes to watch each lesson, on average
+        time = time + 4;
+      }
+
+      if (p?.__typename === "Article") {
+        let length: any = 0;
+        if (p.content) {
+          p.content?.blocks?.map((item) => length += item?.text?.length)
+        }
+
+        if (p.pdf) {
+          // Assumes 5 minutes to review each PDF, on average
+          length += 5000;
+        }
+
+        // Assumes read time of 17 Characters per second
+        time = time + Math.round((length / 17) / 60);
+      }
+      setEstimatedTime(time);
+    })
+  }, [playlist.plan])
 
   if (loading) return (<PlaylistCardSkeleton />);
 
@@ -210,6 +244,10 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
         <Tooltip title="Assign via Google Classroom">
           <GoogleClassroomShareButton url={`https://www.platospeach.com/plans/${formatSlug(playlist.name)}`} />
         </Tooltip>
+        <Tooltip title="Estimtated Completion Time">
+          <HistoryToggleOffIcon />
+        </Tooltip>
+        <Typography className='playlist--duration' variant="body1">{estimatedTime}-{estimatedTime * 1.5} Minutes</Typography>
       </Box>
       {(!viewer?.paymentId || viewer.paymentId === null) && playlist.premium && (<Box className="premium-content hide-premium" />)}
       <Grid container className='playlistcard--grid'>
@@ -260,13 +298,13 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
             }
 
             if (iter?.__typename === "Lesson") {
+
               return (
                 <VideosPlayer url={`${iter.video}`} key={index} />
               )
             }
 
             if (iter?.__typename === "Article") {
-              // console.log(iter.content?.entityMap)
               return (
                 <ArticlePlayer article={iter} key={index} />
               )
