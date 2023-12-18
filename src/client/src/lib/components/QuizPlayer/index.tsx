@@ -45,6 +45,14 @@ export const QuizPlayer = ({ quiz }: Props) => {
     setScore(0);
     setQuizOptionId(undefined)
   }
+
+  const showResult = () => {
+    const res = document.querySelector('div.quiz--container');
+
+    if (res) {
+      res.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
   //TODO: Evaluate final submission state before calculating score.
   return (
     <Box className='quiz--container'>
@@ -52,7 +60,7 @@ export const QuizPlayer = ({ quiz }: Props) => {
       <Divider sx={{ margin: "0.5em" }} />
       {showFinalResult ? (
         <div>
-          <Typography style={{ fontSize: 100 }} variant="h2">{score > 0 ? `${Math.round((score / totalCorrect) * 100)}%` : "0%"}</Typography>
+          <Typography className="quiz-result" style={{ fontSize: 100 }} variant="h2">{score > 0 ? `${Math.round((score / totalCorrect) * 100)}%` : "0%"}</Typography>
           <Button type="submit" variant="outlined" onClick={() => resetQuiz()}>Retake!</Button>
         </div>
       ) : (
@@ -81,7 +89,7 @@ export const QuizPlayer = ({ quiz }: Props) => {
               <Divider sx={{ margin: "0.5em" }} />
             </form>
           ))}
-          <Button type="submit" variant="outlined" onClick={() => { setFinalResult(true); window.moveTo(0, 0) }}>Show Results!</Button>
+          <Button type="submit" variant="outlined" onClick={() => { setFinalResult(true); showResult() }}>Show Results!</Button>
         </div>
       )}
     </Box>

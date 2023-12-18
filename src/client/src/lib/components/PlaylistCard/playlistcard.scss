@@ -67,7 +67,13 @@
 
 .MuiButtonBase-root {
     &.playlistcard--next_button {
-        margin: 0.5rem 0;
+        margin: 0;
+        background-color: library.$blue;
+        color: white;
+
+        &:hover {
+            background-color: black;
+        }
     }
 
     &.playlistCard--button {

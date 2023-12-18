@@ -146,6 +146,7 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
       Unable to copy playlist!
     </Alert>
   );
+
   const handleNextButton = (active: string) => {
     // Create a map of ids to index and iterate through
     let ids: string[] = [];
@@ -158,10 +159,18 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
     }
     setActive(ids[index + 1]);
 
-    // Scroll to top of page when next button clicked if on playlist page
-    if (params.id !== undefined) {
-      window.scrollTo(0, 0);
+    if (index === ids.lastIndexOf(ids[ids.length - 1])) {
+      setActive(ids[0]);
     }
+
+    // Scroll to top of next item when next button clicked
+
+    const h2Title = document.querySelector('h2.playlist--title');
+
+    if (h2Title) {
+      h2Title.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    // window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   return (
@@ -266,8 +275,8 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
               <h2>Failed to load resource</h2>
             )
           })}
-          <Box sx={{ margin: 2 }}>
-            <Button className="playlistcard--next_button" onClick={() => handleNextButton(active)} variant="outlined">Next <SkipNextIcon /></Button>
+          <Box>
+            <Button className="playlistcard--next_button" onClick={() => handleNextButton(active)} variant="contained">Next <SkipNextIcon /></Button>
           </Box>
         </Grid>
       </Grid>
