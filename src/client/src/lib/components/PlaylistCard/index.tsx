@@ -244,10 +244,12 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
         <Tooltip title="Assign via Google Classroom">
           <GoogleClassroomShareButton url={`https://www.platospeach.com/plans/${formatSlug(playlist.name)}`} />
         </Tooltip>
-        <Tooltip title="Estimtated Completion Time">
-          <HistoryToggleOffIcon />
-        </Tooltip>
-        <Typography className='playlist--duration' variant="body1">{estimatedTime}-{Math.round(estimatedTime * 1.5)} Minutes</Typography>
+        <Box className="playlist--time">
+          <Tooltip title="Estimtated Completion Time">
+            <HistoryToggleOffIcon />
+          </Tooltip>
+          <Typography className='playlist--duration' variant="body1">{estimatedTime}-{Math.round(estimatedTime * 1.25)} Minutes</Typography>
+        </Box>
       </Box>
       {(!viewer?.paymentId || viewer.paymentId === null) && playlist.premium && (<Box className="premium-content hide-premium" />)}
       <Grid container className='playlistcard--grid'>
