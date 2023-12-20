@@ -2,13 +2,15 @@ import { Box, Typography, Chip, FormGroup, FormControlLabel, Alert, Divider, Con
 import Switch, { SwitchProps } from '@mui/material/Switch';
 import { styled } from '@mui/material/styles';
 import React, { useState, forwardRef, useEffect } from 'react';
-import { FAQ, Footer } from '../../lib/components/';
+import { FAQ, Footer, Testimonial } from '../../lib/components/';
 import { Stripe, loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 import CheckIcon from '@mui/icons-material/Check';
 import './pricing.scss'
 import theme from '../../theme';
 import { Helmet } from 'react-helmet';
+import '../../lib/assets/christina-headshot.png';
+import Christina from '../../lib/assets/christina-headshot.png';
 
 export const Pricing = () => {
   const [stripePromise, setStripePromise] = useState<Stripe | null>(null);
@@ -208,6 +210,13 @@ export const Pricing = () => {
         <Box className="pricing-faq--box">
           <a id="frequent-questions" href='/pricing' style={{ textDecoration: "none", color: "#000" }}><h2>Frequently Asked Questions</h2></a>
           <FAQ questionAnswers={pricingFAQ} />
+          <Testimonial
+            text="I've been using Plato's Peach for a few months now and love it! It's so easy to use and my students love the short documentary-style videos. I highly recommend it!"
+            author="Christina Ellington"
+            position="9th Grade Teacher"
+            imageSrc={Christina}
+            bgColor="#57996A"
+          />
           <Divider sx={{ marginBottom: "1em" }} />
           <Typography variant="h5" fontSize={28} className='pullQuote'>"In order to seek one’s own direction, we must simplify the mechanics of ordinary, everyday life." -Plato</Typography>
           <Divider sx={{ marginTop: "1em" }} />

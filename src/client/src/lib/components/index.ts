@@ -29,3 +29,4 @@ export * from "./InlineCTA";
 export * from "./FAQ";
 export * from "./Footer";
 export * from "./SignUpForm";
+export * from "./Testimonial";
