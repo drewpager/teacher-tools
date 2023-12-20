@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Card, CardContent, ListItem, Typography, Grid, Button, CircularProgress, Alert, Tooltip, Snackbar, Chip, Avatar, Skeleton, IconButton } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { LessonPlanUnion, Viewer, useUserQuery } from '../../../graphql/generated';
@@ -9,6 +9,7 @@ import { formatSlug } from '../../utils/formatSlug';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import PaidIcon from '@mui/icons-material/Paid';
 import "./publicPlaylistCardStyles.scss";
+import HistoryToggleOffIcon from '@mui/icons-material/HistoryToggleOff';
 
 type Props = {
   id?: string | null | undefined;
@@ -43,6 +44,39 @@ export const PublicPlaylistCard = ({ id, name, plan, creator, premium, viewer }:
   const navigation = useNavigate();
   const [copyPlaylist, { loading: CopyPlaylistLoading, error: CopyPlaylistError }] = useMutation<CopyPlaylistData, CopyPlaylistVariables>(COPY_PLAYLIST);
   const [open, setOpen] = useState<boolean>(false);
+  const [estimatedTime, setEstimatedTime] = useState<number>(0);
+
+  // Calculate Estimated Completion Time for Lesson Plan
+  useEffect(() => {
+    let time: number = 0;
+    plan.map((p) => {
+      if (p?.__typename === "Quiz") {
+        // Assumes 45 seconds to read and complete each question
+        time = time + Math.round((p.questions.length * 45) / 60);
+      }
+
+      if (p?.__typename === "Lesson") {
+        // Assumes 4 minutes to watch each lesson, on average
+        time = time + 4;
+      }
+
+      if (p?.__typename === "Article") {
+        let length: any = 0;
+        if (p.content) {
+          p.content?.blocks?.map((item: any) => length += item?.text?.length)
+        }
+
+        if (p.pdf) {
+          // Assumes 5 minutes to review each PDF, on average
+          length += 5000;
+        }
+
+        // Assumes read time of 17 Characters per second
+        time = time + Math.round((length / 17) / 60);
+      }
+      setEstimatedTime(time);
+    })
+  }, [plan])
 
   const { data: userData, loading: userLoading, error: userError } = useUserQuery({
     variables: {
@@ -109,13 +143,16 @@ export const PublicPlaylistCard = ({ id, name, plan, creator, premium, viewer }:
         <Card sx={{ width: "90vw" }}>
           <CardContent>
             <Link to={`/plans/${formatSlug(name)}`} style={{ textDecoration: "none" }}>
-              <Typography variant='h4' style={{ color: "#000" }}>
+              <Typography variant='h4' style={{ color: "#000", marginBottom: "0.5rem" }} className="public-playlist--title">
                 {name}
               </Typography>
-              <Typography variant='h6' style={{ color: "#000" }}>
-                {plan.length} {plan.length === 1 ? " Item" : " Items"}
-              </Typography>
             </Link>
+            <Box className="playlist-card--time">
+              <Tooltip title="Estimated Completion Time">
+                <HistoryToggleOffIcon />
+              </Tooltip>
+              <Typography className='playlist--duration' variant="body1">{estimatedTime}-{Math.round(estimatedTime * 1.25)} Minutes</Typography>
+            </Box>
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <Tooltip title={userName}>
                 <Avatar alt="creator headshot" src={image} sx={{ marginRight: "0.5rem" }} />
@@ -135,7 +172,9 @@ export const PublicPlaylistCard = ({ id, name, plan, creator, premium, viewer }:
                 )
               )}
               {CopyPlaylistError ? copyPlaylistErrorMessage : null}
-              {premium ? <Chip icon={<PaidIcon color="success" />} label="Premium" sx={{ backgroundColor: "#e9efe7" }} /> : null}
+              {premium ?
+                <Chip icon={<PaidIcon color="success" />} label="Premium" sx={{ backgroundColor: "#e9efe7", marginLeft: "0.25rem" }} /> :
+                <Chip icon={<PaidIcon color="warning" />} label="Free" sx={{ backgroundColor: "#ebebeb", marginLeft: "0.25rem" }} />}
               <Snackbar
                 anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                 autoHideDuration={6000}

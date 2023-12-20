@@ -9,3 +9,22 @@
     }
   }
 }
+
+.MuiTypography-root {
+  &.public-playlist--title {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.MuiBox-root {
+  &.playlist-card--time {
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+    margin-left: 0rem;
+    margin-bottom: 0.5rem;
+    justify-self: normal;
+  }
+}
