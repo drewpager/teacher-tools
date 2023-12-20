@@ -245,7 +245,7 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
           <GoogleClassroomShareButton url={`https://www.platospeach.com/plans/${formatSlug(playlist.name)}`} />
         </Tooltip>
         <Box className="playlist--time">
-          <Tooltip title="Estimtated Completion Time">
+          <Tooltip title="Estimated Completion Time">
             <HistoryToggleOffIcon />
           </Tooltip>
           <Typography className='playlist--duration' variant="body1">{estimatedTime}-{Math.round(estimatedTime * 1.25)} Minutes</Typography>
