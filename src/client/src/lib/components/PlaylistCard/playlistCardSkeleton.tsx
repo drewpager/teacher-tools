@@ -14,7 +14,7 @@ export const PlaylistCardSkeleton = () => {
       <Grid container className='playlistcard--grid'>
         <Timeline position="left" className='playist--grid__timeline'>
           {Array.from(Array(5).keys()).map((item, id) => (
-            <TimelineItem>
+            <TimelineItem key={id}>
               <ListItem disableGutters>
                 <Skeleton variant="text" height={60} width={150} sx={{ ml: 1 }} />
               </ListItem>
