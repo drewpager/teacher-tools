@@ -111,12 +111,12 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                 onClose={handleCloseNavMenu}
                 className="header--menu"
               >
-                <MenuItem className="dropdown--buttons" onClick={() => setAnchorElNav(null)}>
+                <MenuItem className="dropdown--buttons" onClick={() => setAnchorElNav(null)} disableRipple disableTouchRipple>
                   <Link to={`/catalog`} style={{ textDecoration: 'none', color: "#000" }}>
                     <Typography textAlign="center">Lesson Catalog</Typography>
                   </Link>
                 </MenuItem>
-                <MenuItem className="dropdown--buttons" onClick={() => setAnchorElNav(null)}>
+                <MenuItem className="dropdown--buttons" onClick={() => setAnchorElNav(null)} disableRipple disableTouchRipple>
                   <Link to={`/plans`} style={{ textDecoration: 'none', color: "#000" }} onTransitionEnd={handleCloseNavMenu}>
                     <Typography textAlign="center">Lesson Plan Catalog</Typography>
                   </Link>
@@ -150,22 +150,22 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                 onClose={handleCloseActionMenu}
                 className="header--menu"
               >
-                <MenuItem onClick={() => setAnchorElAction(null)} className="dropdown--buttons">
+                <MenuItem onClick={() => setAnchorElAction(null)} className="dropdown--buttons" disableRipple disableTouchRipple>
                   <Link to={`/lesson/create`} style={{ textDecoration: 'none', color: "#000" }}>
                     <Typography textAlign="center">Create Lesson</Typography>
                   </Link>
                 </MenuItem>
-                <MenuItem onClick={() => setAnchorElAction(null)} className="dropdown--buttons">
+                <MenuItem onClick={() => setAnchorElAction(null)} className="dropdown--buttons" disableRipple disableTouchRipple>
                   <Link to={`/quiz/create`} style={{ textDecoration: 'none', color: "#000" }}>
                     <Typography textAlign="center">Create Assessment</Typography>
                   </Link>
                 </MenuItem>
-                <MenuItem onClick={() => setAnchorElAction(null)} className="dropdown--buttons">
+                <MenuItem onClick={() => setAnchorElAction(null)} className="dropdown--buttons" disableRipple disableTouchRipple>
                   <Link to={`/article/create`} style={{ textDecoration: 'none', color: "#000" }}>
                     <Typography textAlign="center">Create Article</Typography>
                   </Link>
                 </MenuItem>
-                <MenuItem onClick={() => setAnchorElAction(null)} className="dropdown--buttons">
+                <MenuItem onClick={() => setAnchorElAction(null)} className="dropdown--buttons" disableRipple disableTouchRipple>
                   <Link to={`/playlist/create`} style={{ textDecoration: 'none', color: "#000" }}>
                     <Typography textAlign="center">Create Lesson Plan</Typography>
                   </Link>
@@ -199,11 +199,11 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                 className="header--menu"
               >
                 <Link to={`/user/${viewer.id}`} style={{ textDecoration: 'none', color: "#000" }}>
-                  <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons">
+                  <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons" disableRipple disableTouchRipple>
                     <Typography textAlign="center">Profile</Typography>
                   </MenuItem>
                 </Link>
-                <MenuItem onClick={handleLogOut} className="dropdown--buttons">
+                <MenuItem onClick={handleLogOut} className="dropdown--buttons" disableRipple disableTouchRipple>
                   <Typography textAlign="center">Logout</Typography>
                 </MenuItem>
               </Menu>
@@ -231,41 +231,41 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                 className="mobile--menu"
               >
                 <Link to={`/user/${viewer.id}`} style={{ textDecoration: 'none', color: "#000" }}>
-                  <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons">
+                  <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons" disableRipple disableTouchRipple>
                     <Typography textAlign="center">Profile</Typography>
                   </MenuItem>
                 </Link>
                 <Link to={`/catalog`} style={{ textDecoration: 'none', color: "#000" }}>
-                  <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons">
+                  <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons" disableRipple disableTouchRipple>
                     <Typography textAlign="center">Lesson Catalog</Typography>
                   </MenuItem>
                 </Link>
                 <Link to={`/plans`} style={{ textDecoration: 'none', color: "#000" }}>
-                  <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons">
+                  <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons" disableRipple disableTouchRipple>
                     <Typography textAlign="center">Lesson Plan Catalog</Typography>
                   </MenuItem>
                 </Link>
-                <MenuItem onClick={handleLogOut} className="dropdown--buttons">
+                <MenuItem onClick={handleLogOut} className="dropdown--buttons" disableRipple disableTouchRipple>
                   <Typography textAlign="center">Logout</Typography>
                 </MenuItem>
                 <Divider />
-                <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons">
+                <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons" disableRipple disableTouchRipple>
                   <Link to={`/lesson/create`} style={{ textDecoration: 'none', color: "#000" }}>
                     <Typography textAlign="center">Create Lesson</Typography>
                   </Link>
                 </MenuItem>
-                <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons">
+                <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons" disableRipple disableTouchRipple>
                   <Link to={`/quiz/create`} style={{ textDecoration: 'none', color: "#000" }}>
                     <Typography textAlign="center">Create Assessment</Typography>
                   </Link>
                 </MenuItem>
-                <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons">
+                <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons" disableRipple disableTouchRipple>
                   <Link to={`/article/create`} style={{ textDecoration: 'none', color: "#000" }}>
                     <Typography textAlign="center">Create Article</Typography>
                   </Link>
                 </MenuItem>
 
-                <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons">
+                <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons" disableRipple disableTouchRipple>
                   <Link to={`/playlist/create`} style={{ textDecoration: 'none', color: "#000" }}>
                     <Typography textAlign="center">Create Lesson Plan</Typography>
                   </Link>
@@ -301,22 +301,22 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                 className="mobile--menu"
               >
                 <Link to={`/signup`} style={{ textDecoration: 'none', color: "#000" }}>
-                  <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons">
+                  <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons" disableRipple disableTouchRipple>
                     <Typography textAlign="center">Sign Up</Typography>
                   </MenuItem>
                 </Link>
                 <Link to={`/login`} style={{ textDecoration: 'none', color: "#000" }}>
-                  <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons">
+                  <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons" disableRipple disableTouchRipple>
                     <Typography textAlign="center">Login</Typography>
                   </MenuItem>
                 </Link>
                 <Link to={`/catalog`} style={{ textDecoration: 'none', color: "#000" }}>
-                  <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons">
+                  <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons" disableRipple disableTouchRipple>
                     <Typography textAlign="center">Lesson Catalog</Typography>
                   </MenuItem>
                 </Link>
                 <Link to={`/plans`} style={{ textDecoration: 'none', color: "#000" }}>
-                  <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons">
+                  <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons" disableRipple disableTouchRipple>
                     <Typography textAlign="center">Lesson Plan Catalog</Typography>
                   </MenuItem>
                 </Link>

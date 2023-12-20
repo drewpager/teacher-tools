@@ -2,7 +2,7 @@
 
 .MuiPaper-root {
   &.NavBar-container {
-    background-color: #fff; 
+    background-color: #fff;
     overflow: hidden;
     border-bottom: 1px solid #182742;
     display: flex;
@@ -33,7 +33,7 @@
 }
 
 .navbar--icon {
-  width: 70px; 
+  width: 70px;
   height: 70px;
   margin-top: 0.875rem;
   margin-right: -0.875rem;
@@ -78,6 +78,7 @@
 }
 
 .MuiTypography-root {
+
   /* LOGO TEXT */
   &.nav--title {
     font-family: "Source Serif Pro";
@@ -115,6 +116,7 @@
     height: 3rem;
     text-transform: capitalize;
     padding: 1.25em;
+
     &:hover {
       color: #ffffff;
       background-color: #557669;
@@ -130,7 +132,7 @@
     font-weight: 600;
     border-radius: 100px;
     border: 1px solid #000;
-    
+
     &:hover {
       background-color: #57996A;
       color: #ffffff;
@@ -140,8 +142,13 @@
 
 .MuiButtonBase-root {
   &.dropdown--buttons {
-    border: 10px solid transparent;
+    // border: 10px solid transparent;
+    padding: 1rem 1.5rem;
     transform: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
@@ -158,6 +165,7 @@
 }
 
 @media (max-width: 768px) {
+
   /* Navbar Icon Styles */
   .navburger--icon {
     display: flex;
@@ -187,6 +195,7 @@
       text-transform: capitalize;
       padding: 1rem;
       margin-right: 0.5rem;
+
       &:hover {
         color: #ffffff;
         background-color: #557669;
@@ -197,7 +206,7 @@
   .logged-out--nav {
     display: none;
   }
-  
+
   /* Navbar Icon Hover Styles */
   // .navbar--icon:hover {
   //   color: #999999;
@@ -210,7 +219,7 @@
   .header--menu {
     display: none;
   }
-  
+
   .mobile--menu {
     display: flex;
   }
