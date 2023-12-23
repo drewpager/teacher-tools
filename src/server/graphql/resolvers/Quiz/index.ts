@@ -100,9 +100,9 @@ export const quizResolvers = {
     },
     generateQuiz: async (
       _root: undefined,
-      { numMCQuestions, numTFQuestions, subject }: GenerateQuizArgs,
-      { db }: { db: Database }
-    ): Promise<string | any> => {
+      { numMCQuestions, numTFQuestions, subject }: GenerateQuizArgs
+    ): // { db }: { db: Database }
+    Promise<JSON | any> => {
       try {
         const quiz = await OpenAIQuiz({
           numMCQuestions,

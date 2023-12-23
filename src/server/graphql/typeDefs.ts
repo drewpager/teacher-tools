@@ -192,7 +192,7 @@ export const typeDefs = gql`
       numMCQuestions: Int!
       numTFQuestions: Int!
       subject: String!
-    ): String
+    ): JSON
     createArticle(input: CreateArticleInput): Article!
     lessonPlan(input: LessonPlanInput, viewerId: ID): Playlist!
     updatePlan(input: LessonPlanInput, id: ID): Playlist!

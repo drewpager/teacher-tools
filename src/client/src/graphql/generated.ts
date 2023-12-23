@@ -404,7 +404,7 @@ export type Mutation = {
   deletePlaylist: Scalars['Boolean'];
   deleteQuiz: Scalars['Boolean'];
   disconnectStripe: Viewer;
-  generateQuiz?: Maybe<Scalars['String']>;
+  generateQuiz?: Maybe<Scalars['JSON']>;
   lessonPlan: Playlist;
   logIn: Viewer;
   logOut: Viewer;
@@ -769,7 +769,7 @@ export type GenerateQuizMutationVariables = Exact<{
 }>;
 
 
-export type GenerateQuizMutation = { __typename?: 'Mutation', generateQuiz?: string | null };
+export type GenerateQuizMutation = { __typename?: 'Mutation', generateQuiz?: any | null };
 
 export type LogInMutationVariables = Exact<{
   input?: InputMaybe<LogInInput>;
