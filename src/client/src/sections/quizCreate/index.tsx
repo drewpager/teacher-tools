@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FieldArray, Formik, getIn, FieldProps, Field } from 'formik';
-import { useCreateQuizMutation, Viewer, AnswerFormat } from '../../graphql/generated';
+import { useCreateQuizMutation, Viewer, AnswerFormat, useGenerateQuizMutation } from '../../graphql/generated';
 import {
   Box,
   TextField,
@@ -18,7 +18,8 @@ import {
   MenuItem,
   Switch,
   Fab,
-  Modal
+  Modal,
+  Slider
 } from '@mui/material'
 import { Cancel, ControlPoint, Remove } from '@mui/icons-material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -160,6 +161,19 @@ export const QuizCreate = ({ viewer }: props) => {
   const { pathname } = useLocation();
   const [locked, setLocked] = useState<boolean>(false);
   const [open, setOpen] = useState(false);
+  const [generateQuizOpen, setGenerateQuizOpen] = useState(false);
+  const [mcNums, setMcNums] = useState<number>(0);
+  const [tfNums, setTfNums] = useState<number>(0);
+  const [subject, setSubject] = useState<string>("");
+
+
+  const [generateQuiz, { loading: generateQuizLoading, error: generateQuizError }] = useGenerateQuizMutation({
+    variables: {
+      numMcQuestions: 0,
+      numTfQuestions: 0,
+      subject: ""
+    }
+  })
 
   const handleClose = () => {
     setOpen(false);
@@ -167,6 +181,50 @@ export const QuizCreate = ({ viewer }: props) => {
 
   const handlePlayVideo = () => {
     setOpen(true);
+  }
+
+  const handleGenerateQuiz = async () => {
+    setGenerateQuizOpen(true);
+  }
+
+  const handleGenerateClose = () => {
+    setGenerateQuizOpen(false);
+  }
+
+  const handleMcSlideChange = (event: Event, newValue: number | number[]) => {
+    setMcNums(newValue as number);
+  };
+
+  const handleTfSlideChange = (event: Event, newValue: number | number[]) => {
+    setTfNums(newValue as number);
+  };
+
+  const handleQuizGenerate = async () => {
+    try {
+      const res = await generateQuiz({
+        variables: {
+          numMcQuestions: mcNums,
+          numTfQuestions: tfNums,
+          subject: subject
+        }
+      })
+
+      if (generateQuizError) {
+        console.log("Error from within: ", generateQuizError);
+      }
+
+      if (generateQuizLoading) {
+        console.log("Loading...");
+      }
+
+      console.log(res);
+    } catch (e) {
+      console.log("Didn't even try: ", e);
+    }
+    setGenerateQuizOpen(false);
+    setSubject("");
+    setMcNums(0);
+    setTfNums(0);
   }
 
   const quizCreatePage: boolean = pathname === "/quiz/create";
@@ -448,6 +506,63 @@ export const QuizCreate = ({ viewer }: props) => {
               <pre>
                 {JSON.stringify(errors, null, 2)}
               </pre> */}
+              <Modal
+                open={generateQuizOpen}
+                onClose={handleGenerateClose}
+                aria-labelledby="platos-peach-demo-videon"
+                aria-describedby="platos-peach-demo-video-description"
+              >
+                <Box className="demo-video--modal">
+                  <Box>
+                    <Fab aria-label="cancel" onClick={handleGenerateClose} sx={{ justifySelf: "right", mb: "5px" }}>
+                      X
+                    </Fab>
+                  </Box>
+                  <Box className="generate-quiz--modal">
+                    <Typography variant="h3" sx={{ m: "1rem" }}>AI Quiz Generator</Typography>
+                    <Typography variant="h4" sx={{ m: "1rem" }}>How many multiple choice questions?</Typography>
+                    <Slider
+                      aria-label="Multichoice Questions"
+                      value={mcNums}
+                      onChange={handleMcSlideChange}
+                      valueLabelDisplay="on"
+                      step={1}
+                      marks
+                      min={0}
+                      max={10}
+                      sx={{ m: "1rem", width: "90%", color: "#3A70CD" }}
+                    />
+                    <Typography variant="h4" sx={{ m: "1rem" }}>How many true/false questions?</Typography>
+                    <Slider
+                      aria-label="Multichoice Questions"
+                      value={tfNums}
+                      onChange={handleTfSlideChange}
+                      valueLabelDisplay="on"
+                      step={1}
+                      marks
+                      min={0}
+                      max={10}
+                      sx={{ m: "1rem", width: "90%", color: "#3A70CD" }}
+                    />
+                    <Typography variant="h4" sx={{ m: "1rem" }}>What subject?</Typography>
+                    <TextField
+                      label="Subject"
+                      variant="outlined"
+                      sx={{ m: "1rem", width: "90%" }}
+                      placeholder='The Cuban Missile Crisis'
+                      onChange={(e) => setSubject(e.target.value)}
+                    />
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      sx={{ ml: "1rem" }}
+                      disabled={(subject === "") || (mcNums === 0 && tfNums === 0)}
+                      onClick={() => handleQuizGenerate()}
+                    >Generate Quiz {generateQuizLoading && <CircularProgress />}</Button>
+                  </Box>
+                </Box>
+              </Modal>
+              <Button onClick={() => handleGenerateQuiz()}>Use AI</Button>
             </form>
           )}
         </Formik>

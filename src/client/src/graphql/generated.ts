@@ -404,6 +404,7 @@ export type Mutation = {
   deletePlaylist: Scalars['Boolean'];
   deleteQuiz: Scalars['Boolean'];
   disconnectStripe: Viewer;
+  generateQuiz?: Maybe<Scalars['String']>;
   lessonPlan: Playlist;
   logIn: Viewer;
   logOut: Viewer;
@@ -466,6 +467,13 @@ export type MutationDeletePlaylistArgs = {
 
 export type MutationDeleteQuizArgs = {
   id?: InputMaybe<Scalars['ID']>;
+};
+
+
+export type MutationGenerateQuizArgs = {
+  numMCQuestions: Scalars['Int'];
+  numTFQuestions: Scalars['Int'];
+  subject: Scalars['String'];
 };
 
 
@@ -753,6 +761,15 @@ export type DeleteAllBookmarksMutationVariables = Exact<{
 
 
 export type DeleteAllBookmarksMutation = { __typename?: 'Mutation', deleteAllBookmarks?: string | null };
+
+export type GenerateQuizMutationVariables = Exact<{
+  numMcQuestions: Scalars['Int'];
+  numTfQuestions: Scalars['Int'];
+  subject: Scalars['String'];
+}>;
+
+
+export type GenerateQuizMutation = { __typename?: 'Mutation', generateQuiz?: string | null };
 
 export type LogInMutationVariables = Exact<{
   input?: InputMaybe<LogInInput>;
@@ -1071,6 +1088,43 @@ export function useDeleteAllBookmarksMutation(baseOptions?: Apollo.MutationHookO
 export type DeleteAllBookmarksMutationHookResult = ReturnType<typeof useDeleteAllBookmarksMutation>;
 export type DeleteAllBookmarksMutationResult = Apollo.MutationResult<DeleteAllBookmarksMutation>;
 export type DeleteAllBookmarksMutationOptions = Apollo.BaseMutationOptions<DeleteAllBookmarksMutation, DeleteAllBookmarksMutationVariables>;
+export const GenerateQuizDocument = gql`
+    mutation GenerateQuiz($numMcQuestions: Int!, $numTfQuestions: Int!, $subject: String!) {
+  generateQuiz(
+    numMCQuestions: $numMcQuestions
+    numTFQuestions: $numTfQuestions
+    subject: $subject
+  )
+}
+    `;
+export type GenerateQuizMutationFn = Apollo.MutationFunction<GenerateQuizMutation, GenerateQuizMutationVariables>;
+
+/**
+ * __useGenerateQuizMutation__
+ *
+ * To run a mutation, you first call `useGenerateQuizMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useGenerateQuizMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [generateQuizMutation, { data, loading, error }] = useGenerateQuizMutation({
+ *   variables: {
+ *      numMcQuestions: // value for 'numMcQuestions'
+ *      numTfQuestions: // value for 'numTfQuestions'
+ *      subject: // value for 'subject'
+ *   },
+ * });
+ */
+export function useGenerateQuizMutation(baseOptions?: Apollo.MutationHookOptions<GenerateQuizMutation, GenerateQuizMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<GenerateQuizMutation, GenerateQuizMutationVariables>(GenerateQuizDocument, options);
+      }
+export type GenerateQuizMutationHookResult = ReturnType<typeof useGenerateQuizMutation>;
+export type GenerateQuizMutationResult = Apollo.MutationResult<GenerateQuizMutation>;
+export type GenerateQuizMutationOptions = Apollo.BaseMutationOptions<GenerateQuizMutation, GenerateQuizMutationVariables>;
 export const LogInDocument = gql`
     mutation LogIn($input: LogInInput) {
   logIn(input: $input) {

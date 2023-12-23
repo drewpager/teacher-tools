@@ -188,6 +188,11 @@ export const typeDefs = gql`
     disconnectStripe: Viewer!
     createLesson(input: CreateLessonInput): Lesson!
     createQuiz(input: CreateQuizInput): Quiz!
+    generateQuiz(
+      numMCQuestions: Int!
+      numTFQuestions: Int!
+      subject: String!
+    ): String
     createArticle(input: CreateArticleInput): Article!
     lessonPlan(input: LessonPlanInput, viewerId: ID): Playlist!
     updatePlan(input: LessonPlanInput, id: ID): Playlist!

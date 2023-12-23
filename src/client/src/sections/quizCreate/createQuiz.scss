@@ -16,6 +16,14 @@
     }
   }
 
+  &.generate-quiz--modal {
+    width: 90%;
+    height: fit-content;
+    background-color: #f3efe8;
+    border-radius: 10px;
+    padding: 1rem;
+  }
+
   .button--cancel {
     grid-auto-flow: column;
     grid-column: 2 / -1;

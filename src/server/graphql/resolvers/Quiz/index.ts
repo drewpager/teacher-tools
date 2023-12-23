@@ -1,6 +1,13 @@
 import { Database, Quiz, Viewer } from "../../../lib/types";
-import { QuizArgs, QuizzesArgs, QuizzesData, CreateQuizArgs } from "./types";
+import {
+  QuizArgs,
+  QuizzesArgs,
+  QuizzesData,
+  CreateQuizArgs,
+  GenerateQuizArgs,
+} from "./types";
 import { ObjectId } from "mongodb";
+import { OpenAIQuiz } from "../../../lib/api";
 
 export const quizResolvers = {
   Query: {
@@ -89,6 +96,23 @@ export const quizResolvers = {
         return deletedQuiz.acknowledged;
       } catch (error) {
         throw new Error(`Failed to start deleting quiz: ${error}`);
+      }
+    },
+    generateQuiz: async (
+      _root: undefined,
+      { numMCQuestions, numTFQuestions, subject }: GenerateQuizArgs,
+      { db }: { db: Database }
+    ): Promise<string | any> => {
+      try {
+        const quiz = await OpenAIQuiz({
+          numMCQuestions,
+          numTFQuestions,
+          subject,
+        });
+        const message = quiz;
+        return message;
+      } catch (err) {
+        throw new Error(`Failed to generate quiz: ${err}`);
       }
     },
   },

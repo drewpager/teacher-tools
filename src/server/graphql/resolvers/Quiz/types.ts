@@ -25,3 +25,9 @@ export interface CreateQuizInput {
 export interface CreateQuizArgs {
   input: CreateQuizInput;
 }
+
+export interface GenerateQuizArgs {
+  numMCQuestions: number;
+  numTFQuestions: number;
+  subject: string;
+}
