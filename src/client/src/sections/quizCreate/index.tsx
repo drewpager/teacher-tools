@@ -47,10 +47,10 @@ interface QuestionsProps {
     {
       question: string,
       answerType: AnswerFormat,
-      answerOptions: [{
+      answerOptions: {
         answerText: string,
         isCorrect: boolean
-      }],
+      }[],
     },
   ]
 }
@@ -58,10 +58,10 @@ interface QuestionsProps {
 interface QuestionProps {
   question: string,
   answerType: AnswerFormat,
-  answerOptions: [{
+  answerOptions: {
     answerText: string,
     isCorrect: boolean
-  }],
+  }[],
 }
 
 const validationSchema = yup.object({
@@ -186,9 +186,9 @@ export const QuizCreate = ({ viewer }: props) => {
   const [generateQuizOpen, setGenerateQuizOpen] = useState(false);
   const [mcNums, setMcNums] = useState<number>(2);
   const [tfNums, setTfNums] = useState<number>(0);
-  const [subject, setSubject] = useState<string>("The 14th Amendment");
+  const [subject, setSubject] = useState<string>("");
   const [generatedQuestions, setGeneratedQuestions] = useState<QuestionsProps>();
-  const [aiValues, setAiValues] = useState<any>();
+  const [aiValues, setAiValues] = useState<QuestionProps>();
 
 
   const [generateQuiz, { loading: generateQuizLoading, error: generateQuizError }] = useGenerateQuizMutation({
@@ -241,26 +241,16 @@ export const QuizCreate = ({ viewer }: props) => {
         console.log("Loading...");
       }
 
-      res.data && setGeneratedQuestions(res.data?.generateQuiz);
+      res.data?.generateQuiz && setGeneratedQuestions(res.data?.generateQuiz)
 
-      if (generatedQuestions) {
-        let val = JSON.parse(`${generatedQuestions}`);
-        setAiValues(val);
-      }
-
-      // generatedQuestions?.questions?.map((question: any) => {
-      //   setAiValues({
-      //     question: question.question,
-      //     answerType: question.answerType,
-      //     answerOptions: [...question.answerOptions]
-      //   })
-      // })
-      console.log(aiValues);
+      const val = JSON.parse(`${generatedQuestions}`);
+      const valObj = val.questions;
+      setAiValues(valObj);
     } catch (e) {
       console.log("Didn't even try: ", e);
     }
     setGenerateQuizOpen(false);
-    setSubject("The 14th Amendment");
+    setSubject("");
     setMcNums(2);
     setTfNums(0);
   }
@@ -367,11 +357,13 @@ export const QuizCreate = ({ viewer }: props) => {
         >
           {({ values, errors, touched, handleSubmit, handleChange }) => (
             <form onSubmit={handleSubmit}>
-              {aiValues && values.questions.push(aiValues)}
-              {/* <div className="assessment--heading">
-                <h1>Create Assessment</h1>
-                <PeachIcon className="peach--icon" />
-              </div> */}
+              {values.title = `${subject}`}
+              {console.log(values)}
+              {!!aiValues && values.questions.push({
+                question: `${aiValues.question}`,
+                answerType: `${aiValues.answerType.toUpperCase()}` as AnswerFormat,
+                answerOptions: aiValues.answerOptions,
+              })}
               <TextField
                 fullWidth
                 type="text"
@@ -401,6 +393,7 @@ export const QuizCreate = ({ viewer }: props) => {
                                 fullWidth
                                 sx={{ paddingTop: "1rem", gridColumn: 4 }}
                                 name={`questions[${index}].question`}
+                                value={`${values.questions[index].question}`}
                                 onChange={handleChange}
                                 InputProps={{
                                   endAdornment: (
@@ -428,6 +421,7 @@ export const QuizCreate = ({ viewer }: props) => {
                               <FieldArray name={`questions[${index}].answerOptions`}>
                                 {({ insert, remove, push }) => (
                                   <div>
+                                    {!!aiValues && values.questions[index].answerOptions === aiValues.answerOptions}
                                     {values.questions[index].answerOptions.length > 0 &&
                                       values.questions[index].answerOptions.map((option: any, indy: number) => {
                                         return (
@@ -597,7 +591,7 @@ export const QuizCreate = ({ viewer }: props) => {
                       sx={{ ml: "1rem" }}
                       disabled={(subject === "") || (mcNums === 0 && tfNums === 0)}
                       onClick={() => handleQuizGenerate()}
-                    >Generate Quiz {generateQuizLoading && <CircularProgress />}</Button>
+                    >Generate Quiz {generateQuizLoading && <CircularProgress size={20} sx={{ color: "#FFF" }} />}</Button>
                   </Box>
                 </Box>
               </Modal>
