@@ -19,7 +19,8 @@ import {
   Switch,
   Fab,
   Modal,
-  Slider
+  Slider,
+  Alert
 } from '@mui/material'
 import { Cancel, ControlPoint, Remove } from '@mui/icons-material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -184,11 +185,11 @@ export const QuizCreate = ({ viewer }: props) => {
   const [locked, setLocked] = useState<boolean>(false);
   const [open, setOpen] = useState(false);
   const [generateQuizOpen, setGenerateQuizOpen] = useState(false);
-  const [mcNums, setMcNums] = useState<number>(2);
+  const [mcNums, setMcNums] = useState<number>(0);
   const [tfNums, setTfNums] = useState<number>(0);
   const [subject, setSubject] = useState<string>("");
   const [generatedQuestions, setGeneratedQuestions] = useState<QuestionsProps>();
-  const [aiValues, setAiValues] = useState<QuestionProps>();
+  const [aiValues, setAiValues] = useState<QuestionProps[]>();
 
 
   const [generateQuiz, { loading: generateQuizLoading, error: generateQuizError }] = useGenerateQuizMutation({
@@ -245,13 +246,15 @@ export const QuizCreate = ({ viewer }: props) => {
 
       const val = JSON.parse(`${generatedQuestions}`);
       const valObj = val.questions;
+      console.log("Val: ", valObj)
       setAiValues(valObj);
+
     } catch (e) {
-      console.log("Didn't even try: ", e);
+      return (<Alert title="AI Quiz Generation Failed, Please Try Again" color='warning' />)
     }
     setGenerateQuizOpen(false);
     setSubject("");
-    setMcNums(2);
+    setMcNums(0);
     setTfNums(0);
   }
 
@@ -357,13 +360,6 @@ export const QuizCreate = ({ viewer }: props) => {
         >
           {({ values, errors, touched, handleSubmit, handleChange }) => (
             <form onSubmit={handleSubmit}>
-              {values.title = `${subject}`}
-              {console.log(values)}
-              {!!aiValues && values.questions.push({
-                question: `${aiValues.question}`,
-                answerType: `${aiValues.answerType.toUpperCase()}` as AnswerFormat,
-                answerOptions: aiValues.answerOptions,
-              })}
               <TextField
                 fullWidth
                 type="text"
@@ -378,8 +374,10 @@ export const QuizCreate = ({ viewer }: props) => {
                 sx={{
                   gridColumn: 3
                 }}
-                onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+              // onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
               />
+              {aiValues !== undefined && values.questions.splice(0, 1, ...aiValues)}
+              {console.log(values)}
               <FieldArray name="questions">
                 {({ insert, remove, push }) => (
                   <div>
@@ -421,7 +419,7 @@ export const QuizCreate = ({ viewer }: props) => {
                               <FieldArray name={`questions[${index}].answerOptions`}>
                                 {({ insert, remove, push }) => (
                                   <div>
-                                    {!!aiValues && values.questions[index].answerOptions === aiValues.answerOptions}
+                                    {/* {!!aiValues && values.questions[index].answerOptions === aiValues[0].answerOptions} */}
                                     {values.questions[index].answerOptions.length > 0 &&
                                       values.questions[index].answerOptions.map((option: any, indy: number) => {
                                         return (
@@ -436,6 +434,7 @@ export const QuizCreate = ({ viewer }: props) => {
                                                 fullWidth
                                                 sx={{ marginTop: 2 }}
                                                 name={`questions[${index}].answerOptions[${indy}].answerText`}
+                                                value={`${values.questions[index].answerOptions[indy].answerText}`}
                                                 onChange={handleChange}
                                                 onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
                                               />
