@@ -43,7 +43,7 @@ export const ProductDetails = () => {
                       X
                     </Fab>
                   </Box>
-                  <VideoPlayer url="https://res.cloudinary.com/drewpager/video/upload/v1693489768/platos-peach-video/how-to-use-platos-peach_wvdqui.mp4" />
+                  <VideoPlayer url="https://res.cloudinary.com/drewpager/video/upload/v1703890789/platos-peach-video/platos-peach-overview-december-2023_wovljf.mov" />
                 </Box>
               </Modal>
             </Box>
@@ -54,7 +54,7 @@ export const ProductDetails = () => {
               <Typography variant="h4" className="productDetails-title--font" sx={{ position: "absolute", top: "-30%", left: "7%", fontSize: 70 }}>1.</Typography>
             </Box>
             <Typography variant="h2" className="productDetails-subtitle--font">
-              Learn How it Works in 4 Minutes — Watch The Video Now!
+              Learn How it Works in 5 Minutes — Watch The Quick Overview Now!
             </Typography>
             <Typography variant="body2" className="productDetails-description--font">
               Our catalog of short history documentaries are the perfect puzzle pieces for you to construct lesson plans with the content you choose.

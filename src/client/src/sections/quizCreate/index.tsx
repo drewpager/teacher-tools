@@ -344,7 +344,7 @@ export const QuizCreate = ({ viewer }: props) => {
                   X
                 </Fab>
               </Box>
-              <VideoPlayer url="https://res.cloudinary.com/drewpager/video/upload/v1699324374/platos-peach-video/create-assessment-tutorial_jg3hhw.mov" />
+              <VideoPlayer url="https://res.cloudinary.com/drewpager/video/upload/v1703890959/platos-peach-video/create-assessment-overview_k3v7j4.mov" />
             </Box>
           </Modal>
           {!viewer.id || viewer.paymentId === null ? (
