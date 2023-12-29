@@ -169,6 +169,7 @@ export const Pricing = () => {
             <li className="success">Unlimited Bookmarks</li>
             <li className="success">Google Classroom Integration</li>
             <li className="warning">Premium Lesson Plans Locked</li>
+            <li className="warning">AI Quiz Generator Unavailable</li>
             <li className="warning">Limited to 6 Lesson Plans</li>
             <li className="warning">Limited To 6 Assessments</li>
             <li className="warning">Limited To 6 Custom Lessons</li>
@@ -181,6 +182,7 @@ export const Pricing = () => {
             <li className="success">Unlimited Custom Assessments</li>
             <li className="success">Teacher-To-Teacher Sharing</li>
             <li className="success">Access Premium Lesson Plans</li>
+            <li className="warning">AI Quiz Generator Unavailable</li>
             <li className="warning">Limited To 30 Lesson Plans</li>
             <li className="warning">Limited To 10 Classes</li>
           </ul>
@@ -193,6 +195,7 @@ export const Pricing = () => {
             <li className="success">Teacher-To-Teacher Sharing</li>
             <li className="success">Unlimited Lesson Plans</li>
             <li className="success">Unlimited Classes</li>
+            <li className="success">AI Quiz Generator</li>
             <li className="warning">Limited To 300 students</li>
           </ul>
         </Box>
@@ -200,6 +203,7 @@ export const Pricing = () => {
           <h3>Aristotle Plan</h3>
           <ul>
             <li className="success">Unlimited Custom Assessments</li>
+            <li className="success">AI Quiz Generator</li>
             <li className="success">Inter-District Sharing</li>
             <li className="success">Unlimited Lesson Plans</li>
             <li className="success">Unlimited Classes</li>

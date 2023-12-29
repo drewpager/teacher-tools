@@ -6,6 +6,7 @@
     // padding-left: 2rem;
     // padding-right: 2rem;
     align-items: center;
+
     @include sm {
       padding: 0 2rem;
     }
@@ -33,6 +34,7 @@
 }
 
 .MuiTypography-root {
+
   /* HOW PLATOS WORKS */
   &.productDetails-heading--font {
     text-align: center;
@@ -44,6 +46,7 @@
     font-family: "Source Sans Pro", sans-serif;
     color: black;
   }
+
   /* NUMBERS */
   &.productDetails-title--font {
     text-align: center;
@@ -103,7 +106,7 @@
     color: black;
     line-break: normal;
 
-    & > a {
+    &>a {
       color: black;
       text-decoration: underline;
       font-weight: 600;
@@ -199,17 +202,20 @@
 
 .MuiButton-root {
   &.pricing--button {
+    display: flex;
+    justify-items: center;
     background-color: inherit;
     color: #000;
     font-weight: 600;
     border-radius: 100px;
     height: 4rem;
-    width: 100%;
+    width: fit-content;
     text-transform: capitalize;
-    text-align: center;
+    text-align: baseline;
     text-decoration: none;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     border: 1px solid black;
+
     &:hover {
       color: #faf9f6;
       background-color: #000;
@@ -248,10 +254,8 @@
   grid-row: 1 / -1;
   width: 70px;
   height: 70px;
-  background: radial-gradient(
-    rgba(0, 115, 255, 1) 100%,
-    rgba(58, 112, 205, 1) 60%
-  );
+  background: radial-gradient(rgba(0, 115, 255, 1) 100%,
+      rgba(58, 112, 205, 1) 60%);
   border-radius: 50%;
   display: block;
   margin: 100px auto;

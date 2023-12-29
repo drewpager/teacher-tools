@@ -92,7 +92,9 @@ export const userResolvers = {
           totalCount: 0,
         };
 
-        let cursor = await db.playlists.find({ creator: { $in: [user._id] } });
+        let cursor = await db.playlists
+          .find({ creator: { $in: [user._id] } })
+          .sort({ _id: -1 });
         const countTotal = await db.playlists.find({
           creator: { $in: [user._id] },
         });
@@ -121,9 +123,11 @@ export const userResolvers = {
           totalCount: 0,
         };
 
-        let cursor = await db.lessons.find({
-          creator: { $in: [user._id] },
-        });
+        let cursor = await db.lessons
+          .find({
+            creator: { $in: [user._id] },
+          })
+          .sort({ _id: -1 });
         const totalCount = await db.lessons.find({
           creator: { $in: [user._id] },
         });
@@ -155,9 +159,11 @@ export const userResolvers = {
           result: [],
           totalCount: 0,
         };
-        let cursor = await db.quizzes.find({
-          creator: { $in: [user._id] },
-        });
+        let cursor = await db.quizzes
+          .find({
+            creator: { $in: [user._id] },
+          })
+          .sort({ _id: -1 });
 
         const totalCount = await db.quizzes.find({
           creator: { $in: [user._id] },
@@ -186,9 +192,11 @@ export const userResolvers = {
           result: [],
           totalCount: 0,
         };
-        let cursor = await db.articles.find({
-          creator: { $in: [user._id] },
-        });
+        let cursor = await db.articles
+          .find({
+            creator: { $in: [user._id] },
+          })
+          .sort({ _id: -1 });
 
         const totalCount = await db.articles.find({
           creator: { $in: [user._id] },

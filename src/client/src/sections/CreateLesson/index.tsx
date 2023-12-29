@@ -362,7 +362,7 @@ export const CreateLesson = ({ viewer }: Props) => {
       <Box className='createLesson--page'>
         <FeedbackModal />
         <Box className='createLesson--form'>
-          <h2>Create a New Lesson</h2>
+          <h2>Create a New Video Lesson</h2>
           <Formik
             initialValues={{
               title: "",

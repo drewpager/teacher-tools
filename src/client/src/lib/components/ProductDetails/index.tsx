@@ -1,4 +1,4 @@
-import { Box, Grid, Typography, Button, Modal, Fab } from '@mui/material';
+import { Box, Grid, Typography, Button, Modal, Fab, IconButton } from '@mui/material';
 import { CardGrid } from '../CardGrid';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -7,6 +7,7 @@ import sistine from '../../assets/how-it-works-1.png'
 import works2 from '../../assets/how-it-works-2.png'
 import works3 from '../../assets/how-it-works-3.png'
 import works4 from '../../assets/how-it-works-4.png'
+import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import './productDetails.scss';
 import { VideoPlayer } from '../VideoPlayer';
 
@@ -76,12 +77,12 @@ export const ProductDetails = () => {
               <Typography variant="h4" className="productDetails-title--font" sx={{ position: "absolute", top: "-30%", left: "7%", fontSize: 70 }}>2.</Typography>
             </Box>
             <Typography variant="h2" className="productDetails-subtitle--font">
-              Create Custom Assessment Questions
+              Generate Custom Assessment Questions Using AI
             </Typography>
             <Typography variant="body2" className="productDetails-description--font">
               Using our quiz creation tool you can customize assessments to fit the content within your lesson plans.
             </Typography>
-            <Button href='/quiz/create' className="pricing--button">Create Quiz</Button>
+            <Button href='/quiz/create' className="pricing--button"><AutoFixHighIcon /> Create Quiz</Button>
           </Box>
         </Grid>
 

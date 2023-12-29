@@ -21,7 +21,7 @@ export const HomeInfo = () => {
       <Grid item xs={12} sm={12} md={7} lg={6}>
         <Box className='box--title'>
           <Typography variant="h1" className='title--text'>
-            Easy Interactive Lesson Plans and Templates For Teachers
+            Easy Interactive Lesson Plans, Templates and Tools For Teachers
           </Typography>
           <Typography variant='h4' className='subtitle--text'>
             We’re an educational film company with a mission to provide short, world-class documentary films, lesson plans and assessment questions for students, teachers and life-long learners.
