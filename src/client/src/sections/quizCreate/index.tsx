@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { FieldArray, Formik, getIn, FieldProps, Field } from 'formik';
 import { useCreateQuizMutation, Viewer, AnswerFormat, useGenerateQuizMutation, QuestionInput, Questions } from '../../graphql/generated';
 import {
@@ -191,8 +191,9 @@ export const QuizCreate = ({ viewer }: props) => {
   const [nums, setNums] = useState<number>(0);
   const [subject, setSubject] = useState<string>("");
   const [generatedQuestions, setGeneratedQuestions] = useState<QuestionsProps>();
-  const [aiValues, setAiValues] = useState<QuestionProps[]>();
+  const [aiValues, setAiValues] = useState<QuestionProps[]>([]);
   const [aiDisclaimer, setAiDisclaimer] = useState<boolean>(false);
+  const [ready, setReady] = useState<boolean>(false);
 
   const [generateQuiz, { loading: generateQuizLoading, error: generateQuizError }] = useGenerateQuizMutation({
     variables: {
@@ -232,6 +233,7 @@ export const QuizCreate = ({ viewer }: props) => {
     setMcNums(0);
     setTfNums(0);
     setNums(0);
+    setReady(false);
   }
 
   const handleQuizGenerate = async () => {
@@ -255,17 +257,15 @@ export const QuizCreate = ({ viewer }: props) => {
       }
 
       res && setGeneratedQuestions(res?.data?.generateQuiz)
-      const val = JSON.parse(`${generatedQuestions}`);
-      const valObj = val.questions;
-      setAiValues(valObj);
-      return aiValues;
+      setAiValues([...JSON.parse(`${generatedQuestions}`).questions]);
+      setReady(true)
     } catch (e) {
       return (<Alert title="AI Quiz Generation Failed, Please Try Again" color='warning' />)
     }
   }
 
   const handleQuizGenerateUpdate = (values: any) => {
-    if (aiValues !== undefined) {
+    if (aiValues.length > 0) {
       values.questions.splice(0, 1);
       for (let i = 0; i < nums; i++) {
         values.questions.push({
@@ -419,7 +419,8 @@ export const QuizCreate = ({ viewer }: props) => {
                 }}
               // onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
               />
-              {generateQuizOpen && handleQuizGenerateUpdate(values)}
+              {/* {generateQuizOpen && aiValues.length > 0 && handleQuizGenerateUpdate(values)} */}
+              {ready && handleQuizGenerateUpdate(values)}
               <FieldArray name="questions">
                 {({ insert, remove, push }) => (
                   <div>
@@ -630,15 +631,6 @@ export const QuizCreate = ({ viewer }: props) => {
                   </Box>
                 </Box>
               </Modal>
-              {/* <Tooltip title="Generate Quiz with AI">
-                <IconButton
-                  onClick={() => handleGenerateQuiz()}
-                  disableRipple
-                  disableFocusRipple
-                >
-                  <AutoFixHighIcon color="secondary" />
-                </IconButton>
-              </Tooltip> */}
             </form>
           )}
         </Formik>
