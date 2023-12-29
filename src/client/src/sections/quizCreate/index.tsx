@@ -27,6 +27,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { DisplayError } from '../../lib/utils';
 import { ReactComponent as PeachIcon } from '../../lib/assets/peach-logo.svg';
@@ -187,10 +188,11 @@ export const QuizCreate = ({ viewer }: props) => {
   const [generateQuizOpen, setGenerateQuizOpen] = useState(false);
   const [mcNums, setMcNums] = useState<number>(0);
   const [tfNums, setTfNums] = useState<number>(0);
+  const [nums, setNums] = useState<number>(0);
   const [subject, setSubject] = useState<string>("");
   const [generatedQuestions, setGeneratedQuestions] = useState<QuestionsProps>();
   const [aiValues, setAiValues] = useState<QuestionProps[]>();
-
+  const [aiDisclaimer, setAiDisclaimer] = useState<boolean>(false);
 
   const [generateQuiz, { loading: generateQuizLoading, error: generateQuizError }] = useGenerateQuizMutation({
     variables: {
@@ -224,6 +226,14 @@ export const QuizCreate = ({ viewer }: props) => {
     setTfNums(newValue as number);
   };
 
+  const handleResetQuiz = () => {
+    setGenerateQuizOpen(false);
+    setSubject("");
+    setMcNums(0);
+    setTfNums(0);
+    setNums(0);
+  }
+
   const handleQuizGenerate = async () => {
     try {
       const res = await generateQuiz({
@@ -234,6 +244,8 @@ export const QuizCreate = ({ viewer }: props) => {
         }
       })
 
+      setNums(mcNums + tfNums);
+
       if (generateQuizError) {
         console.log("Error from within: ", generateQuizError);
       }
@@ -242,20 +254,29 @@ export const QuizCreate = ({ viewer }: props) => {
         console.log("Loading...");
       }
 
-      res.data?.generateQuiz && setGeneratedQuestions(res.data?.generateQuiz)
-
+      res && setGeneratedQuestions(res?.data?.generateQuiz)
       const val = JSON.parse(`${generatedQuestions}`);
       const valObj = val.questions;
-      console.log("Val: ", valObj)
       setAiValues(valObj);
-
+      return aiValues;
     } catch (e) {
       return (<Alert title="AI Quiz Generation Failed, Please Try Again" color='warning' />)
     }
-    setGenerateQuizOpen(false);
-    setSubject("");
-    setMcNums(0);
-    setTfNums(0);
+  }
+
+  const handleQuizGenerateUpdate = (values: any) => {
+    if (aiValues !== undefined) {
+      values.questions.splice(0, 1);
+      for (let i = 0; i < nums; i++) {
+        values.questions.push({
+          question: aiValues[i].question,
+          answerType: aiValues[i].answerType,
+          answerOptions: [...aiValues[i].answerOptions]
+        });
+      }
+      setAiDisclaimer(true);
+      handleResetQuiz();
+    }
   }
 
   const quizCreatePage: boolean = pathname === "/quiz/create";
@@ -326,6 +347,27 @@ export const QuizCreate = ({ viewer }: props) => {
               <VideoPlayer url="https://res.cloudinary.com/drewpager/video/upload/v1699324374/platos-peach-video/create-assessment-tutorial_jg3hhw.mov" />
             </Box>
           </Modal>
+          {!viewer.id || viewer.paymentId === null ? (
+            <Tooltip title="Must be a paying user to use AI Quiz Generator">
+              <IconButton
+                onClick={() => !viewer.id ? navigate('/signup', { replace: true }) : viewer.paymentId === null ? navigate('/pricing', { replace: true }) : null}
+                disableRipple
+                disableFocusRipple
+              >
+                <AutoFixHighIcon color="warning" />
+              </IconButton>
+            </Tooltip>
+          ) : (
+            <Tooltip title="Generate Quiz with AI">
+              <IconButton
+                onClick={() => handleGenerateQuiz()}
+                disableRipple
+                disableFocusRipple
+              >
+                <AutoFixHighIcon color="secondary" />
+              </IconButton>
+            </Tooltip>
+          )}
         </Box>
       </Box>
       <Box className="quizCreate--form">
@@ -360,6 +402,7 @@ export const QuizCreate = ({ viewer }: props) => {
         >
           {({ values, errors, touched, handleSubmit, handleChange }) => (
             <form onSubmit={handleSubmit}>
+              {aiDisclaimer && (<Typography variant="h5" sx={{ color: "#BC4710" }}>Please confirm AI generated quiz is correct before saving. Large language models are known to hallucinate.</Typography>)}
               <TextField
                 fullWidth
                 type="text"
@@ -376,8 +419,7 @@ export const QuizCreate = ({ viewer }: props) => {
                 }}
               // onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
               />
-              {aiValues !== undefined && values.questions.splice(0, 1, ...aiValues)}
-              {console.log(values)}
+              {generateQuizOpen && handleQuizGenerateUpdate(values)}
               <FieldArray name="questions">
                 {({ insert, remove, push }) => (
                   <div>
@@ -406,6 +448,7 @@ export const QuizCreate = ({ viewer }: props) => {
                               variant='outlined'
                               onChange={handleChange}
                               fullWidth
+                              value={`${values.questions[index].answerType}`}
                               defaultValue={`MULTIPLECHOICE`}
                               inputProps={{
                                 name: `questions[${index}].answerType`,
@@ -531,13 +574,6 @@ export const QuizCreate = ({ viewer }: props) => {
                   </Link>
                 ) : (<Typography variant="h5">Click away to close</Typography>)}
               </div>
-              {/* UNCOMMENT TO DISPLAY MUTATION CONSTRUCTION
-              <pre>
-                {JSON.stringify(values, null, 2)}
-              </pre>
-              <pre>
-                {JSON.stringify(errors, null, 2)}
-              </pre> */}
               <Modal
                 open={generateQuizOpen}
                 onClose={handleGenerateClose}
@@ -589,12 +625,20 @@ export const QuizCreate = ({ viewer }: props) => {
                       color="secondary"
                       sx={{ ml: "1rem" }}
                       disabled={(subject === "") || (mcNums === 0 && tfNums === 0)}
-                      onClick={() => handleQuizGenerate()}
-                    >Generate Quiz {generateQuizLoading && <CircularProgress size={20} sx={{ color: "#FFF" }} />}</Button>
+                      onClick={handleQuizGenerate}
+                    >Generate Quiz {generateQuizLoading && <CircularProgress size={20} sx={{ ml: 1, color: "#FFF" }} />}</Button>
                   </Box>
                 </Box>
               </Modal>
-              <Button onClick={() => handleGenerateQuiz()}>Use AI</Button>
+              {/* <Tooltip title="Generate Quiz with AI">
+                <IconButton
+                  onClick={() => handleGenerateQuiz()}
+                  disableRipple
+                  disableFocusRipple
+                >
+                  <AutoFixHighIcon color="secondary" />
+                </IconButton>
+              </Tooltip> */}
             </form>
           )}
         </Formik>
