@@ -101,10 +101,10 @@ export const User = ({ viewer }: Props) => {
   return (
     <>
       {UserProfileElement}
-      {userLessonsElement}
       {userPlaylistsElement}
       {userQuizzesElement}
       {userArticlesElement}
+      {userLessonsElement}
       {userBookmarksElement}
       <Footer viewer={viewer} />
     </>
