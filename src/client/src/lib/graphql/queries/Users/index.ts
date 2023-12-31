@@ -6,6 +6,7 @@ export const ALL_USERS = gql`
       totalCount
       result {
         contact
+        paymentId
       }
     }
   }

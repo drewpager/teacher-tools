@@ -73,6 +73,27 @@
     }
 }
 
+.MuiCard-root {
+    &.premium-content--card {
+        position: relative;
+        width: 70%;
+        border: 2px solid black;
+        background-color: #FAF9F6;
+        padding: 1rem;
+        margin-top: 5rem;
+        margin-left: 10%;
+
+        @media (max-width: 900px) {
+            width: 95%;
+            margin-left: 1rem;
+        }
+    }
+
+    &.display-none {
+        display: none;
+    }
+}
+
 .MuiAvatar-root {
     &.avatar--creator {
         border: 1px solid black;
@@ -111,6 +132,34 @@
             .MuiListItemText-primary {
                 color: white;
             }
+        }
+    }
+
+    &.premium-subscribe--prompt {
+        border-color: #57996A;
+        color: #57996A;
+        border-radius: 100px;
+        margin-bottom: 1rem;
+        margin-top: 1rem;
+
+        &:hover {
+            background-color: #57996A;
+            border-color: #57996A;
+            color: white;
+        }
+    }
+
+    &.premium-signup--prompt {
+        background-color: #000;
+        color: #FFF;
+        border-radius: 100px;
+        margin-bottom: 1rem;
+        margin-top: 1rem;
+        margin-right: 0.5rem;
+
+        &:hover {
+            background-color: #57996A;
+            color: white;
         }
     }
 

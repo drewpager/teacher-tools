@@ -15,6 +15,9 @@ import {
   Avatar,
   Icon,
   IconButton,
+  Card,
+  TextField,
+  Divider
 } from '@mui/material';
 import Timeline from '@mui/lab/Timeline';
 import {
@@ -29,7 +32,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import QuizIcon from '@mui/icons-material/Quiz';
 import ArticleIcon from '@mui/icons-material/Article';
-import { Playlist, LessonPlanUnion, Viewer, useUserQuery } from '../../../graphql/generated';
+import { Playlist, LessonPlanUnion, Viewer, useUserQuery, useAllUsersQuery, User } from '../../../graphql/generated';
 import { QuizPlayer, ArticlePlayer, GoogleClassroomShareButton } from '../index';
 import { VideosPlayer } from '../VideosPlayer';
 import './playlistcard.scss';
@@ -79,6 +82,16 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
   const [copyPlaylist, { loading: CopyPlaylistLoading, error: CopyPlaylistError }] = useMutation<CopyPlaylistData, CopyPlaylistVariables>(COPY_PLAYLIST);
   const params = useParams();
   const [estimatedTime, setEstimatedTime] = useState<number>(0);
+  const [student, setStudent] = useState<boolean>(false);
+  const [teacherEmail, setTeacherEmail] = useState<string>("");
+
+  const { data: allUsersData, loading: allUsersLoading, error: allUsersError } = useAllUsersQuery({
+    variables: {
+      limit: 1000,
+      page: 1
+    }
+  })
+
 
   const { data, loading, error } = useUserQuery({
     variables: {
@@ -130,6 +143,14 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
   let userImage = data?.user.avatar;
   let userName = data?.user.name;
 
+  if (allUsersLoading) return (<></>);
+  if (allUsersError) return (<Alert severity="error">{allUsersError.message}</Alert>);
+
+  allUsersData?.allUsers.result.map((user) => {
+    if (user?.contact === teacherEmail) {
+      setStudent(true)
+    }
+  })
 
   const handleChange = ({ ...item }: LessonPlanUnion) => {
     if (document.contains(document.getElementById("video-player"))) {
@@ -207,6 +228,23 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
     // window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
+  const handleClassroomCode = (e: any) => {
+    if (e.length >= 7) {
+      document.querySelector('.hide-premium')?.classList.remove('hide-premium');
+      document.querySelector('.premium-content--card')?.classList.add('display-none');
+    }
+  }
+
+  const handleTeacherEmail = (e: any) => {
+    setTeacherEmail(e);
+    allUsersData?.allUsers?.result.map((user) => {
+      if (user?.contact === teacherEmail) {
+        document.querySelector('.hide-premium')?.classList.remove('hide-premium');
+        document.querySelector('.premium-content--card')?.classList.add('display-none');
+      }
+    })
+  }
+
   return (
     <>
       {open && (
@@ -251,7 +289,19 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
           <Typography className='playlist--duration' variant="body1">{estimatedTime}-{Math.round(estimatedTime * 1.25)} Minutes</Typography>
         </Box>
       </Box>
-      {(!viewer?.paymentId || viewer.paymentId === null) && playlist.premium && (<Box className="premium-content hide-premium" />)}
+      {(!viewer?.paymentId || viewer.paymentId === null) && playlist.premium && (<Box className="premium-content hide-premium">
+        <Card className="premium-content--card">
+          <Typography variant="h3">Premium Content</Typography>
+          <Typography variant="body1">This content is only available to premium subscribers.</Typography>
+          <Button variant="contained" href={'/signup'} className="premium-signup--prompt">Signup</Button>
+          <Button variant="outlined" href={'/pricing'} className="premium-subscribe--prompt">Subscribe</Button>
+          <Divider />
+          <Typography variant="h3" sx={{ mt: 1, mb: 1 }}>Students</Typography>
+          <Typography variant="body1">Please enter your class code <b>or</b> teacher's email address to unlock content:</Typography>
+          <TextField placeholder="Classroom Code" onChange={(e) => handleClassroomCode(e.target.value)} />
+          <TextField placeholder="Teacher's Email" onChange={(e) => handleTeacherEmail(e.target.value)} sx={{ marginLeft: 2 }} />
+        </Card>
+      </Box>)}
       <Grid container className='playlistcard--grid'>
         <Timeline position="left" className='playist--grid__timeline'>
           {playlist?.plan?.map((item, id) => (
