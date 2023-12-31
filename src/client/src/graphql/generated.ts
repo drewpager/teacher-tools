@@ -888,7 +888,7 @@ export type AllUsersQueryVariables = Exact<{
 }>;
 
 
-export type AllUsersQuery = { __typename?: 'Query', allUsers: { __typename?: 'Users', totalCount: number, result: Array<{ __typename?: 'User', contact: string }> } };
+export type AllUsersQuery = { __typename?: 'Query', allUsers: { __typename?: 'Users', totalCount: number, result: Array<{ __typename?: 'User', contact: string, paymentId?: string | null }> } };
 
 
 export const AddPaymentDocument = gql`
@@ -2197,6 +2197,7 @@ export const AllUsersDocument = gql`
     totalCount
     result {
       contact
+      paymentId
     }
   }
 }

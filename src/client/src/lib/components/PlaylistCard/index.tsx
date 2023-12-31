@@ -82,7 +82,6 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
   const [copyPlaylist, { loading: CopyPlaylistLoading, error: CopyPlaylistError }] = useMutation<CopyPlaylistData, CopyPlaylistVariables>(COPY_PLAYLIST);
   const params = useParams();
   const [estimatedTime, setEstimatedTime] = useState<number>(0);
-  const [student, setStudent] = useState<boolean>(false);
   const [teacherEmail, setTeacherEmail] = useState<string>("");
 
   const { data: allUsersData, loading: allUsersLoading, error: allUsersError } = useAllUsersQuery({
@@ -136,6 +135,20 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
     })
   }, [playlist.plan])
 
+  useEffect(() => {
+    allUsersData?.allUsers?.result.map((user) => {
+      if (user?.contact === teacherEmail && user?.paymentId && user?.paymentId?.length > 1) {
+        document.querySelector('.hide-premium')?.classList.remove('hide-premium');
+        document.querySelector('.premium-content--card')?.classList.add('display-none');
+      }
+
+      if (user?.contact === teacherEmail && (user.paymentId === null || undefined)) {
+        setUserError("Teacher not subscribed to premium!");
+        setOpen(true);
+      }
+    })
+  }, [teacherEmail, allUsersData])
+
   if (loading) return (<PlaylistCardSkeleton />);
 
   if (error) return (<Alert severity="error">{error.message}</Alert>)
@@ -145,12 +158,6 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
 
   if (allUsersLoading) return (<></>);
   if (allUsersError) return (<Alert severity="error">{allUsersError.message}</Alert>);
-
-  allUsersData?.allUsers.result.map((user) => {
-    if (user?.contact === teacherEmail) {
-      setStudent(true)
-    }
-  })
 
   const handleChange = ({ ...item }: LessonPlanUnion) => {
     if (document.contains(document.getElementById("video-player"))) {
@@ -228,21 +235,8 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
     // window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  const handleClassroomCode = (e: any) => {
-    if (e.length >= 7) {
-      document.querySelector('.hide-premium')?.classList.remove('hide-premium');
-      document.querySelector('.premium-content--card')?.classList.add('display-none');
-    }
-  }
-
   const handleTeacherEmail = (e: any) => {
     setTeacherEmail(e);
-    allUsersData?.allUsers?.result.map((user) => {
-      if (user?.contact === teacherEmail) {
-        document.querySelector('.hide-premium')?.classList.remove('hide-premium');
-        document.querySelector('.premium-content--card')?.classList.add('display-none');
-      }
-    })
   }
 
   return (
@@ -297,9 +291,8 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
           <Button variant="outlined" href={'/pricing'} className="premium-subscribe--prompt">Subscribe</Button>
           <Divider />
           <Typography variant="h3" sx={{ mt: 1, mb: 1 }}>Students</Typography>
-          <Typography variant="body1">Please enter your class code <b>or</b> teacher's email address to unlock content:</Typography>
-          <TextField placeholder="Classroom Code" onChange={(e) => handleClassroomCode(e.target.value)} />
-          <TextField placeholder="Teacher's Email" onChange={(e) => handleTeacherEmail(e.target.value)} sx={{ marginLeft: 2 }} />
+          <Typography variant="body1">Please enter your teacher's email address to unlock content:</Typography>
+          <TextField placeholder="Teacher's Email" onChange={(e) => handleTeacherEmail(e.target.value)} />
         </Card>
       </Box>)}
       <Grid container className='playlistcard--grid'>
