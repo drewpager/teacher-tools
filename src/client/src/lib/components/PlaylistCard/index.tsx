@@ -146,6 +146,11 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
         setUserError("Teacher not subscribed to premium!");
         setOpen(true);
       }
+
+      if (teacherEmail.includes("@") && user?.contact !== teacherEmail) {
+        setUserError("Teacher's Email Not Recognized!");
+        setOpen(true);
+      }
     })
   }, [teacherEmail, allUsersData])
 
