@@ -75,7 +75,9 @@ interface CopyPlaylistVariables {
 // NOTE: Pass lessons object instead of single lesson for Accordion to work correctly
 export const PlaylistCard = ({ playlist, viewer }: Props) => {
   const [open, setOpen] = useState<boolean>(false);
+  const [successOpen, setSuccessOpen] = useState<boolean>(false);
   const [userError, setUserError] = useState<string>("");
+  const [userSuccess, setUserSuccess] = useState<string>("");
   const navigation = useNavigate();
   // const [itemName, setItemName] = useState<LessonPlanUnion>(playlist && playlist.plan ? { ...playlist.plan[0] } : {})
   const [active, setActive] = useState<string>(playlist && playlist.plan ? `${playlist?.plan[0]?.id}` : `1`)
@@ -136,22 +138,27 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
   }, [playlist.plan])
 
   useEffect(() => {
+    let userEmails: string[] = [];
     allUsersData?.allUsers?.result.map((user) => {
-      if (user?.contact === teacherEmail && user?.paymentId && user?.paymentId?.length > 1) {
-        document.querySelector('.hide-premium')?.classList.remove('hide-premium');
-        document.querySelector('.premium-content--card')?.classList.add('display-none');
-      }
-
+      userEmails.push(user.contact);
       if (user?.contact === teacherEmail && (user.paymentId === null || undefined)) {
         setUserError("Teacher not subscribed to premium!");
         setOpen(true);
       }
 
-      if (teacherEmail.includes("@") && user?.contact !== teacherEmail) {
-        setUserError("Teacher's Email Not Recognized!");
-        setOpen(true);
+      if (user?.contact === teacherEmail && user?.paymentId && user?.paymentId?.length > 1) {
+        document.querySelector('.hide-premium')?.classList.remove('hide-premium');
+        document.querySelector('.premium-content--card')?.classList.add('display-none');
+        setOpen(false);
+        setUserSuccess("Email Accepted!");
+        setSuccessOpen(true);
       }
     })
+
+    if (teacherEmail.length && userEmails.indexOf(teacherEmail) === -1) {
+      setUserError("Teacher's Email Not Recognized!");
+      setOpen(true);
+    }
   }, [teacherEmail, allUsersData])
 
   if (loading) return (<PlaylistCardSkeleton />);
@@ -176,6 +183,10 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
 
   function handleClose() {
     setOpen(false);
+  }
+
+  function handleSuccessClose() {
+    setSuccessOpen(false);
   }
 
   const handleCopy = async (id: string, viewerId: string) => {
@@ -240,8 +251,15 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
     // window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
+  const validateEmail = (email: string) => {
+    let re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  }
+
   const handleTeacherEmail = (e: any) => {
-    setTeacherEmail(e);
+    if (validateEmail(e) === true) {
+      setTeacherEmail(e);
+    }
   }
 
   return (
@@ -254,6 +272,16 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
           anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         >
           <Alert variant="filled" severity="error" onClose={handleClose}>{userError}</Alert>
+        </Snackbar>
+      )}
+      {successOpen && (
+        <Snackbar
+          open={successOpen}
+          autoHideDuration={5000}
+          onClose={handleSuccessClose}
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        >
+          <Alert variant="filled" severity="success" onClose={handleSuccessClose}>{userSuccess}</Alert>
         </Snackbar>
       )}
       <Box className="title-button--section">
@@ -297,7 +325,7 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
           <Divider />
           <Typography variant="h3" sx={{ mt: 1, mb: 1 }}>Students</Typography>
           <Typography variant="body1">Please enter your teacher's email address to unlock content:</Typography>
-          <TextField placeholder="Teacher's Email" onChange={(e) => handleTeacherEmail(e.target.value)} />
+          <TextField placeholder="Teacher's Email" sx={{ width: "75%" }} onChange={(e) => handleTeacherEmail(e.target.value)} />
         </Card>
       </Box>)}
       <Grid container className='playlistcard--grid'>

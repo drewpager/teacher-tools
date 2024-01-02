@@ -567,7 +567,7 @@ export const QuizCreate = ({ viewer }: props) => {
                 >Save Assessment</Button>
                 {!viewer.id && (
                   <Link to="/login" style={{ textDecoration: "none", color: "#BC4710" }}>
-                    <Typography variant="body2">Login required to save</Typography>
+                    <Typography variant="body2">Login required</Typography>
                   </Link>)}
                 {quizCreatePage ? (
                   <Link to={`../user/${viewer.id}`} style={{ textDecoration: "none" }}>
