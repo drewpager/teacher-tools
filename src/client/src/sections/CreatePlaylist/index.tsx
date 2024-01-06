@@ -775,7 +775,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
               )}>
                 {/* Item id: {playlist.plan[rubric.source.index]._id} */}
                 {(provided, snapshot) => (
-                  <Grid item xs={12} sm={12} md={7} lg={7}>
+                  <Grid item xs={12} sm={12} md={6} lg={6}>
                     <Card variant="outlined" className="createPlaylist-drop--card" {...provided.droppableProps} ref={provided.innerRef} key={provided.droppableProps['data-rbd-droppable-id']}>
                       <TextField
                         label="Lesson Plan Title"
@@ -840,7 +840,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
                 </div>
               )}>
                 {(provided) => (
-                  <Grid item xs={12} sm={12} md={5} lg={5}>
+                  <Grid item xs={12} sm={12} md={6} lg={6}>
                     <Tooltip title="Filter for content you've created or bookmarked" placement="top">
                       <FormControlLabel
                         control={<BookmarkSwitch
