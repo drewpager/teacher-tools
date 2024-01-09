@@ -1,8 +1,8 @@
-import { Box, Typography, Chip, FormGroup, FormControlLabel, Alert, Divider, Container, Tabs, Fade, Tab, Button, Paper } from '@mui/material';
+import { Box, Typography, Chip, FormGroup, FormControlLabel, Divider, Button, Modal } from '@mui/material';
 import Switch, { SwitchProps } from '@mui/material/Switch';
 import { styled } from '@mui/material/styles';
 import React, { useState, forwardRef, useEffect } from 'react';
-import { FAQ, Footer, Testimonial } from '../../lib/components/';
+import { FAQ, Footer, Testimonial, SignupModal } from '../../lib/components/';
 import { Stripe, loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 import CheckIcon from '@mui/icons-material/Check';
@@ -11,12 +11,19 @@ import theme from '../../theme';
 import { Helmet } from 'react-helmet';
 import '../../lib/assets/christina-headshot.png';
 import Christina from '../../lib/assets/christina-headshot.png';
+import { Viewer } from '../../graphql/generated';
 
-export const Pricing = () => {
+interface props {
+  viewer: Viewer;
+  setViewer: (viewer: Viewer) => void;
+}
+
+export const Pricing = ({ viewer, setViewer }: props) => {
   const [stripePromise, setStripePromise] = useState<Stripe | null>(null);
   const [clientSecret, setClientSecret] = useState<string | undefined>("")
   // const [monthlyCadence, setMonthlyCadence] = useState<"monthly" | "yearly">("monthly");
   const [monthlyCadence, setMonthlyCadence] = useState<boolean>(false);
+  const [promptOpen, setPromptOpen] = useState<boolean>(false);
 
   const pricingFAQ = [
     {
@@ -97,6 +104,10 @@ export const Pricing = () => {
     },
   }));
 
+  const handlePromptClose = () => {
+    setPromptOpen(false);
+  }
+
   return (
     <Box sx={{ marginTop: 12 }}>
       <Helmet>
@@ -107,48 +118,83 @@ export const Pricing = () => {
         <FormControlLabel control={<PricingSwitch sx={{ m: 1 }} checked={monthlyCadence} onChange={() => setMonthlyCadence(!monthlyCadence)} />} label="" />
       </FormGroup>
       {/* <Alert severity="success" sx={{ backgroundColor: "#57996A" }}>All Paid Plans Include a 7-Day Free Trial!</Alert> */}
+      <Modal
+        open={promptOpen}
+        onClose={handlePromptClose}
+      >
+        <Box className="signupmodal--box">
+          <SignupModal setViewer={setViewer} />
+        </Box>
+      </Modal>
       <Box className='pricing--card-box'>
         <Box className="pricing--box">
           <h3>Free Plan</h3>
           <Chip label="Best for Trial" color="primary" />
           <Typography variant="h5" color={theme.palette.info.dark} sx={{ fontWeight: 600, marginTop: 2 }}>$0 with Limitations</Typography>
-          <Button
-            variant='contained'
-            href={"/signup"}
-            className='pricing--button'
-          >Try Free</Button>
+          {viewer.id === null ? (
+            <Button
+              variant='contained'
+              // href={"/signup"}
+              onClick={() => setPromptOpen(true)}
+              className='pricing--button'
+            >Try Free</Button>
+          ) : (
+            <Button
+              variant='contained'
+              className='pricing--button'
+              href={"/"}
+              disabled>
+              Current Plan
+            </Button>
+          )}
         </Box>
         <Box className="pricing--box">
           <h3>Socrates Plan</h3>
           <Chip label="Best for Home School" color="primary" />
           <Typography variant="h5" color={theme.palette.info.dark} sx={{ fontWeight: 600, marginTop: 2 }}>{monthlyCadence ? "$70 billed annually ($5.83/mo)" : "$6.99 billed Monthly"}</Typography>
-          <Button
-            variant='contained'
-            target="_blank"
-            // href={monthlyCadence ? "/yearly" : "/monthly"}
-            // $14.95/mo + $152/yr
-            // href={monthlyCadence ? "https://buy.stripe.com/bIY013f3v5pq4Vi7sB" : "https://buy.stripe.com/00gcNP6wZbNO4Vi6ow"}
-            // $6.99/mo + $70/yr
-            href={monthlyCadence ? "https://buy.stripe.com/6oEcNPcVnbNOevSdQR" : "https://buy.stripe.com/14k1571cFbNObjGdQQ"}
-            className='pricing--button'
-          >Choose Plan</Button>
+          {viewer.id === null ? (
+            <Button
+              variant='contained'
+              onClick={() => setPromptOpen(true)}
+              className='pricing--button'
+            >Choose Plan</Button>
+          ) : (
+            <Button
+              variant='contained'
+              target="_blank"
+              // href={monthlyCadence ? "/yearly" : "/monthly"}
+              // $14.95/mo + $152/yr
+              // href={monthlyCadence ? "https://buy.stripe.com/bIY013f3v5pq4Vi7sB" : "https://buy.stripe.com/00gcNP6wZbNO4Vi6ow"}
+              // $6.99/mo + $70/yr
+              href={monthlyCadence ? "https://buy.stripe.com/6oEcNPcVnbNOevSdQR" : "https://buy.stripe.com/14k1571cFbNObjGdQQ"}
+              className='pricing--button'
+            >Choose Plan</Button>
+          )}
         </Box>
         <Box className="pricing--box">
           <h3>Plato's Plan</ h3>
           <Chip label="Best For Teachers" color="primary" />
           <Typography variant="h5" color={theme.palette.info.dark} sx={{ fontWeight: 600, marginTop: 2 }}>{monthlyCadence ? "$99 billed annually ($8.25/mo)" : "$9.99 billed Monthly"}</Typography>
-          <Button
-            variant='contained'
-            target="_blank"
-            // Test + Production Stripe Links
-            // href={monthlyCadence ? "https://buy.stripe.com/test_bIYaGpghueZDaDSbIN" : "https://buy.stripe.com/test_4gw4i1d5i04JeU814a"}
-            // href={monthlyCadence ? "/yearly" : "/monthly"}
-            // $19.95/mo + $200/yr
-            // href={monthlyCadence ? "https://buy.stripe.com/aEU6pr8F77xy5ZmfZ4" : "https://buy.stripe.com/3cs1574oRf0087u9AH"}
-            // $9.99/mo + $99/yr
-            href={monthlyCadence ? "https://buy.stripe.com/bIY5ln5sV3hi2Na28k" : "https://buy.stripe.com/aEU1572gJ2de1J6eV5"}
-            className='pricing--button'
-          >Choose Plan</Button>
+          {viewer.id === null ? (
+            <Button
+              variant='contained'
+              onClick={() => setPromptOpen(true)}
+              className='pricing--button'
+            >Choose Plan</Button>
+          ) : (
+            <Button
+              variant='contained'
+              target="_blank"
+              // Test + Production Stripe Links
+              // href={monthlyCadence ? "https://buy.stripe.com/test_bIYaGpghueZDaDSbIN" : "https://buy.stripe.com/test_4gw4i1d5i04JeU814a"}
+              // href={monthlyCadence ? "/yearly" : "/monthly"}
+              // $19.95/mo + $200/yr
+              // href={monthlyCadence ? "https://buy.stripe.com/aEU6pr8F77xy5ZmfZ4" : "https://buy.stripe.com/3cs1574oRf0087u9AH"}
+              // $9.99/mo + $99/yr
+              href={monthlyCadence ? "https://buy.stripe.com/bIY5ln5sV3hi2Na28k" : "https://buy.stripe.com/aEU1572gJ2de1J6eV5"}
+              className='pricing--button'
+            >Choose Plan</Button>
+          )}
         </Box>
         <Box className="pricing--box">
           <h3>Aristotle Plan</h3>

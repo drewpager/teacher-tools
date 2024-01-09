@@ -125,7 +125,7 @@ const App = () => {
           <Route path="/user/:id" children={(props: any) => (<User {...props} viewer={viewer} />)} element={<User viewer={viewer} />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
-          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/pricing" element={<Pricing viewer={viewer} setViewer={setViewer} />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/billing" element={<Billing viewer={viewer} />} />
           <Route path="/login" children={(props: any) => (<Login {...props} setViewer={setViewer} />)} element={<Login setViewer={setViewer} />} />
