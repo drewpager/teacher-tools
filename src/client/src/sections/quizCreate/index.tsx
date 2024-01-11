@@ -353,8 +353,9 @@ export const QuizCreate = ({ viewer }: props) => {
                 onClick={() => !viewer.id ? navigate('/signup', { replace: true }) : viewer.paymentId === null ? navigate('/pricing', { replace: true }) : null}
                 disableRipple
                 disableFocusRipple
+                className="quiz--ai-button"
               >
-                <AutoFixHighIcon color="warning" />
+                <AutoFixHighIcon color="warning" /> <Typography variant="body1" className='quiz--ai-text'> AI Quiz Generator</Typography>
               </IconButton>
             </Tooltip>
           ) : (
@@ -363,8 +364,9 @@ export const QuizCreate = ({ viewer }: props) => {
                 onClick={() => handleGenerateQuiz()}
                 disableRipple
                 disableFocusRipple
+                className="quiz--ai-button"
               >
-                <AutoFixHighIcon color="secondary" />
+                <AutoFixHighIcon /> <Typography variant="body1" className='quiz--ai-text'> AI Quiz Generator</Typography>
               </IconButton>
             </Tooltip>
           )}

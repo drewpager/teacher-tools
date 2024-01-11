@@ -209,6 +209,15 @@
       color: library.$black;
     }
   }
+
+  &.quiz--ai-text {
+    color: library.$black;
+    margin-left: 0.25rem;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
 }
 
 .quiz__multiAnswerArea {
@@ -228,6 +237,17 @@
       >.quiz--modicons {
         fill: library.$black;
       }
+    }
+  }
+
+  &.quiz--ai-button {
+    color: library.$blue;
+    border: 1px solid library.$black;
+    border-radius: 50px;
+
+    @media (max-width: 768px) {
+      color: library.$blue;
+      border: none;
     }
   }
 }
