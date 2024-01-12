@@ -347,10 +347,10 @@ export const QuizCreate = ({ viewer }: props) => {
               <VideoPlayer url="https://res.cloudinary.com/drewpager/video/upload/v1703890959/platos-peach-video/create-assessment-overview_k3v7j4.mov" />
             </Box>
           </Modal>
-          {!viewer.id || viewer.paymentId === null ? (
+          {!viewer.id ? (
             <Tooltip title="Must be a paying user to use AI Quiz Generator">
               <IconButton
-                onClick={() => !viewer.id ? navigate('/signup', { replace: true }) : viewer.paymentId === null ? navigate('/pricing', { replace: true }) : null}
+                onClick={() => !viewer.id ? navigate('/signup', { replace: true }) : null}
                 disableRipple
                 disableFocusRipple
                 className="quiz--ai-button"
@@ -565,7 +565,7 @@ export const QuizCreate = ({ viewer }: props) => {
                   variant="outlined"
                   type="submit"
                   className="quiz--button-submit"
-                  disabled={!viewer.id}
+                  disabled={values.title.length === 0 || values.questions[0].question.length === 0}
                 >Save Assessment</Button>
                 {!viewer.id && (
                   <Link to="/login" style={{ textDecoration: "none", color: "#BC4710" }}>
@@ -590,12 +590,15 @@ export const QuizCreate = ({ viewer }: props) => {
                     </Fab>
                   </Box>
                   <Box className="generate-quiz--modal">
+                    {viewer.paymentId === null && setTfNums(2)}
+                    {viewer.paymentId === null && setMcNums(2)}
+                    {viewer.paymentId === null && (<Typography variant="body2" color="error" sx={{ m: "1rem" }}>Free Plan Limited to 4 AI Generated Quiz Questions</Typography>)}
                     <Typography variant="h3" sx={{ m: "1rem" }}>AI Quiz Generator</Typography>
                     <Typography variant="h4" sx={{ m: "1rem" }}>How many multiple choice questions?</Typography>
                     <Slider
                       aria-label="Multichoice Questions"
                       value={mcNums}
-                      onChange={handleMcSlideChange}
+                      onChange={viewer.paymentId !== null ? handleMcSlideChange : () => { }}
                       valueLabelDisplay="on"
                       step={1}
                       marks
@@ -607,7 +610,7 @@ export const QuizCreate = ({ viewer }: props) => {
                     <Slider
                       aria-label="Multichoice Questions"
                       value={tfNums}
-                      onChange={handleTfSlideChange}
+                      onChange={viewer.paymentId !== null ? handleTfSlideChange : () => { }}
                       valueLabelDisplay="on"
                       step={1}
                       marks
