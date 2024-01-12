@@ -28,6 +28,15 @@ export const Dashboard = ({ viewer }: props) => {
         <Box>
           <h1>{viewer.id} Authorized</h1>
           <h2>Total Users: {data?.allUsers.totalCount}</h2>
+          <ol>
+            {data?.allUsers.result.map((user, index) => {
+              return (
+                <li key={index}>
+                  {user.contact}
+                </li>
+              )
+            })}
+          </ol>
         </Box>
       ) : (<h1>Unauthorized: This Page is Locked</h1>)}
     </Box>
