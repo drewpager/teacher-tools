@@ -11,6 +11,7 @@ import {
   FullLessonQuiz,
   Plan,
   useUserQuery,
+  useAllPlaylistsQuery,
 } from '../../graphql/generated';
 import { DisplayError, titleCase } from '../../lib/utils';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
@@ -74,6 +75,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
   let navigate = useNavigate();
   const [searchInput, setSearchInput] = useState<string>("")
   const [searchError, setSearchError] = useState<boolean>(false)
+  const [titleError, setTitleError] = useState<boolean>(false)
   const [autoSaved, setAutoSaved] = useState<boolean>(false)
   const [variant, setVariant] = useState<boolean>(true)
   const [plans, setPlans] = useState<Plan[]>([])
@@ -134,6 +136,13 @@ export const CreatePlaylist = ({ viewer }: props) => {
     }
   })
 
+  const { data: lessonPlanData, loading: lessonPlanLoading, error: lessonPlanError } = useAllPlaylistsQuery({
+    variables: {
+      limit: limit,
+      page: page
+    },
+  })
+
   const [lessonPlan, { loading, error }] = useLessonPlanMutation({
     variables: {
       input: playlist,
@@ -145,6 +154,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
   let quizQuery = useMemo(() => quizData?.allquizzes.result, [quizData]);
   let articleQuery = useMemo(() => articleData?.allarticles.result, [articleData])
   let bookmarkQuery: any = useMemo(() => userData ? userData.user.bookmarks : [], [userData]);
+  let lessonPlanQuery = useMemo(() => lessonPlanData?.allplaylists.result, [lessonPlanData])
 
   const updateListSize = () => {
     if (listRef.current) {
@@ -461,18 +471,31 @@ export const CreatePlaylist = ({ viewer }: props) => {
   categor?.map((i) => secondaryCategory.push(i?.category ? { main: i.category[0], secondary: i.category[2]?.trim() } : undefined))
   categor?.map((i) => secondaryCategory.push(i?.category ? { main: i.category[0], secondary: i.category[3]?.trim() } : undefined))
   const mainCategories = mainCategoryArray.filter(onlyUnique)
+  let existingPlanNames: string[] = [];
 
   const titleHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     e.preventDefault();
 
-    setPlaylist({
-      plan: [...playlist.plan],
-      name: e.target.value,
-      creator: viewer && viewer.id ? viewer.id : "0",
-      public: locked,
-      premium: premium
-    })
-    window.localStorage.setItem('playlist', JSON.stringify(playlist));
+    // Check if Lesson Plan Name Already Exists and throw error if yes to avoid URL duplication
+    lessonPlanQuery?.map((i) => {
+      existingPlanNames.push(i.name.toLowerCase());
+    });
+
+    if (existingPlanNames.includes(e.target.value.toLowerCase())) {
+      setTitleError(true);
+      setPlaylist({ ...playlist, name: `${e.target.value}` })
+    } else {
+      setPlaylist({
+        plan: [...playlist.plan],
+        name: e.target.value,
+        creator: viewer && viewer.id ? viewer.id : "0",
+        public: locked,
+        premium: premium
+      })
+      setTitleError(false);
+
+      window.localStorage.setItem('playlist', JSON.stringify(playlist));
+    }
   }
 
   if (lessonLoading || quizLoading || articleLoading) {
@@ -785,7 +808,9 @@ export const CreatePlaylist = ({ viewer }: props) => {
                         fullWidth
                         onChange={(e) => titleHandler(e)}
                         value={playlist.name}
-                        onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+                        error={titleError}
+                        helperText={titleError ? "Title already exists, please choose unique title." : null}
+                      // onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
                       />
                       {playlist.plan.length === 0 && <CardMedia component="img" image={HowItWorks} sx={{ width: "95%", opacity: "50%" }} />}
 
@@ -957,6 +982,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
             type='submit'
             disableRipple
             disableTouchRipple
+            disabled={titleError || playlist.plan.length === 0}
           >Create</Button>
         </form>
       </Box>
