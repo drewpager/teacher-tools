@@ -325,7 +325,7 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
           <Divider />
           <Typography variant="h3" sx={{ mt: 1, mb: 1 }}>Students</Typography>
           <Typography variant="body1">Please enter your teacher's email address to unlock content:</Typography>
-          <TextField placeholder="Teacher's Email" sx={{ width: "75%" }} onChange={(e) => handleTeacherEmail(e.target.value)} />
+          <TextField placeholder="Teacher's Email" sx={{ width: "75%" }} onChange={(e) => handleTeacherEmail(e.target.value.toLowerCase())} />
         </Card>
       </Box>)}
       <Grid container className='playlistcard--grid'>
