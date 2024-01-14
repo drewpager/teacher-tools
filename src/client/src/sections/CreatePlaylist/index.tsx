@@ -24,7 +24,7 @@ import theme from '../../theme';
 import HowItWorks from '../../lib/assets/how-it-works-3.png';
 import { CreatePlaylistSkeleton } from '../CreatePlaylist/createPlaylistSkeleton';
 import { Helmet } from 'react-helmet';
-import InfoIcon from '@mui/icons-material/Info';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import { VariableSizeList as List } from 'react-window';
 import { BookmarkSwitch } from './bookmarkSwitch';
 import { LockSwitch } from './lockSwitch';
@@ -722,7 +722,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
               disableRipple
               onClick={handlePlayVideo}
             >
-              <InfoIcon sx={{ color: "#000", marginLeft: "0.5rem" }} />
+              <PlayCircleOutlineIcon sx={{ color: "#000", marginLeft: "0.5rem" }} /> <Typography variant="body2" color="#000"> How To Use</Typography>
             </IconButton>
           </Tooltip>
           <Modal

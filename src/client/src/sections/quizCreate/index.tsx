@@ -38,7 +38,7 @@ import { Link } from 'react-router-dom';
 import { FeedbackModal } from '../Contact/FeedbackModal';
 import { styled } from '@mui/material/styles';
 import { VideoPlayer } from '../../lib/components';
-import InfoIcon from '@mui/icons-material/Info';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 
 interface props {
   viewer: Viewer
@@ -329,7 +329,7 @@ export const QuizCreate = ({ viewer }: props) => {
               disableRipple
               onClick={handlePlayVideo}
             >
-              <InfoIcon sx={{ color: "#000", marginLeft: "0.5rem" }} />
+              <PlayCircleOutlineIcon sx={{ color: "#000", marginLeft: "0.5rem" }} />
             </IconButton>
           </Tooltip>
           <Modal

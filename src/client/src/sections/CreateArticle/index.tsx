@@ -9,7 +9,7 @@ import { convertToRaw } from 'draft-js';
 import { Footer, PdfPlayer, VideoPlayer, PdfUploader } from '../../lib/components';
 import draftToHtml from 'draftjs-to-html';
 import { useNavigate, Link } from 'react-router-dom';
-import InfoIcon from '@mui/icons-material/Info';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 
 type Props = {
   viewer: Viewer;
@@ -172,7 +172,7 @@ export const CreateArticle = ({ viewer }: Props) => {
                     disableRipple
                     onClick={handlePlayVideo}
                   >
-                    <InfoIcon sx={{ color: "#000", marginLeft: "0.5rem" }} />
+                    <PlayCircleOutlineIcon sx={{ color: "#000", marginLeft: "0.5rem" }} /> <Typography variant="body2" color="#000"> How To Use</Typography>
                   </IconButton>
                 </Tooltip>
                 <Modal
