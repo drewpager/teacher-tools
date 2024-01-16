@@ -53,28 +53,43 @@ const seed = async () => {
     const lessons: Lesson[] = [
       // {
       //   _id: new ObjectId(),
-      //   title: "The Great Fire of New York",
+      //   title: "Quantum Chromodynamics",
       //   video:
-      //     "https://res.cloudinary.com/drewpager/video/upload/v1690996386/platos-peach-video/The_Great_Fire_of_New_York_City_hntv8i.mp4",
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1703105352/platos-peach-video/Quantum_Chromodynamics_ekwiuw.mov",
       //   image:
       //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-      //   startDate: "1776-09-21",
-      //   endDate: "1776-09-22",
-      //   category: ["american history", " revolution & independence"],
-      //   meta: "The Great Fire of New York City was a devastating fire that occurred in 1835, destroying a large portion of the city and leading to significant changes in fire safety regulations and infrastructure.",
+      //   startDate: "Present",
+      //   endDate: "Present",
+      //   category: ["science", " physics"],
+      //   meta: "Quantum Chromodynamics (QCD) is a theory that describes the strong nuclear force, which binds quarks together to form protons, neutrons, and other particles. It is a fundamental theory of particle physics and is part of the Standard Model. QCD involves the study of the interactions between quarks and gluons, which are the carriers of the strong force.",
       //   creator: "116143759549242008910",
+      //   public: true,
       // },
       // {
       //   _id: new ObjectId(),
-      //   title: "The Louisiana Purchase",
+      //   title: "Quantum Electrodynamics",
       //   video:
-      //     "https://res.cloudinary.com/drewpager/video/upload/v1669703826/platos-peach-video/The_Louisiana_Purchase_w2vdrp.mp4",
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1703106277/platos-peach-video/Quantum_Electrodynamics_ooryof.mov",
       //   image:
       //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-      //   startDate: "1801",
-      //   endDate: "1803",
-      //   category: ["american history", " westward expansion"],
-      //   meta: "French territory in early 19th Century America was ideal for US expansion when the Louisiana Purchase was negotiated for $15 million or $0.03 per acre as Napoleon forced France into financial distress during the Napoleonic Wars. ",
+      //   startDate: "Present",
+      //   endDate: "Present",
+      //   category: ["science", " physics"],
+      //   meta: "Quantum Electrodynamics is a branch of physics that combines quantum mechanics with classical electromagnetism. It describes the interactions between electrically charged particles and electromagnetic fields. It is a highly successful theory that has been used to explain and predict a wide range of phenomena, including the behavior of subatomic particles and the properties of light.",
+      //   creator: "116143759549242008910",
+      //   public: true,
+      // },
+      // {
+      //   _id: new ObjectId(),
+      //   title: "Quarks and Gluons",
+      //   video:
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1703107396/platos-peach-video/Quarks_and_Gluons_qzwtfv.mov",
+      //   image:
+      //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
+      //   startDate: "Present",
+      //   endDate: "Present",
+      //   category: ["science", " physics"],
+      //   meta: "Quarks and gluons are elementary particles that make up protons and neutrons. Quarks have fractional electric charges and are held together by gluons, which are the carriers of the strong force. They play a crucial role in the structure and interactions of matter, as described by the theory of quantum chromodynamics.",
       //   creator: "116143759549242008910",
       //   public: true,
       // },
