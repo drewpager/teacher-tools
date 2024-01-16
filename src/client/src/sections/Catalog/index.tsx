@@ -238,7 +238,7 @@ export const Catalog = ({ viewer }: Props) => {
             >
               {mainCategories?.map((cat, ind) => (
                 <TreeItem nodeId={`${cat}`} label={
-                  <Typography variant='h3'>
+                  <Typography variant='h3' key={`${ind}`}>
                     {titleCase(cat)}
                   </Typography>
                 }>
@@ -292,7 +292,7 @@ export const Catalog = ({ viewer }: Props) => {
             {filteredLesson && (
               <div className="catalog--item">
                 <>
-                  <CatalogItem viewer={`${viewer.id}`} name="Search Results" category={filteredLesson} key={filteredLesson.length} bookmarks={userBookmarks} />
+                  <CatalogItem viewer={`${viewer.id}`} name="Search Results" category={filteredLesson} key={`${filteredLesson.length}`} bookmarks={userBookmarks} />
                   {searchInfo && <Alert variant="outlined" severity="info" style={{ marginTop: "0.875rem" }}>Still not finding a topic you want? You can add it <Link to="/lesson/create" style={{ color: "#000" }}>here</Link>.</Alert>}
                 </>
               </div>
@@ -301,12 +301,14 @@ export const Catalog = ({ viewer }: Props) => {
               <div className="catalog--item" id={`${selected[0]}`}>
                 {view === 'grid' ? (
                   <>
-                    <CatalogItem viewer={`${viewer.id}`} name={`${selected[0]}`} category={newDatum.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0])).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={`${selected[0]}`} bookmarks={userBookmarks} />
+                    {selected[0] && <CatalogItem viewer={`${viewer.id}`} name={`${selected[0]}`} category={newDatum.filter((b) => b.category?.includes(`${selected[0]}`)).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={`${selected[0]}`} bookmarks={userBookmarks} />}
+                    {selectedSecondary[0][1] && <CatalogItem viewer={`${viewer.id}`} name={`${selectedSecondary[0][1]}`} category={newDatum.filter((b) => b.category?.includes(` ${selectedSecondary[0][1]}`)).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={`${selectedSecondary[0][1]}`} bookmarks={userBookmarks} />}
                     <Alert variant="outlined" severity="info" style={{ marginTop: "0.875rem" }}>Not seeing what you're looking for? It might be in another category or try using the search bar above!</Alert>
                   </>
                 ) : (
                   <>
-                    <CatalogList viewer={`${viewer.id}`} name={`${selected[0]}`} category={newDatum.filter((b) => b.category?.includes(selectedSecondary[0][1] ? ` ${selectedSecondary[0][1]}` : selected[0])).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={`${selected[0]}`} bookmarks={userBookmarks} />
+                    {selected[0] && <CatalogList viewer={`${viewer.id}`} name={`${selected[0]}`} category={newDatum.filter((b) => b.category?.includes(`${selected[0]}`)).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={`${selected[0]}`} bookmarks={userBookmarks} />}
+                    {selectedSecondary[0][1] && <CatalogList viewer={`${viewer.id}`} name={`${selectedSecondary[0][1]}`} category={newDatum.filter((b) => b.category?.includes(` ${selectedSecondary[0][1]}`)).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={`${selectedSecondary[0][1]}`} bookmarks={userBookmarks} />}
                     <Alert variant="outlined" severity="info">Not seeing what you're looking for? It might be in another category or try using the search bar above!</Alert>
                   </>
                 )}
@@ -315,11 +317,10 @@ export const Catalog = ({ viewer }: Props) => {
             {newDatum && categories.map((cater) => (cater.name !== selected[0]) && (
               <div className="catalog--item" id={`${cater.name}`}>
                 {view === 'grid' && newDatum ? (
-                  <CatalogItem viewer={`${viewer.id}`} name={cater.name} category={newDatum.filter((b) => b.category?.includes(cater.name)).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={cater.name} bookmarks={userBookmarks} />
+                  <CatalogItem viewer={`${viewer.id}`} name={cater.name} category={newDatum.filter((b) => b.category?.includes(cater.name)).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={`${cater.name}`} bookmarks={userBookmarks} />
                 ) : newDatum && (
-                  <CatalogList viewer={`${viewer.id}`} name={cater.name} category={newDatum.filter((b) => b.category?.includes(cater.name)).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={cater.name} bookmarks={userBookmarks} />
+                  <CatalogList viewer={`${viewer.id}`} name={cater.name} category={newDatum.filter((b) => b.category?.includes(cater.name)).sort(ascending ? ascend : descend).sort(alphabetical ? alpha : undefined)} key={`${cater.name}`} bookmarks={userBookmarks} />
                 )}
-
               </div>
             ))}
           </Box >
