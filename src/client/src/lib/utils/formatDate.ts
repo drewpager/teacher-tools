@@ -7,6 +7,10 @@ export const formatDate = (date: string) => {
     return "Present";
   }
 
+  if (date === "Infinity") {
+    return "Infinity";
+  }
+
   if (date.length <= 4 && date.startsWith("-", 0)) {
     return `${date.split("-")[1]} BC`;
   }
