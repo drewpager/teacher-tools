@@ -4,8 +4,9 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { Formik, Field, Form, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
-import { useLogInMutation } from '../../../graphql/generated';
+import { useLogInMutation, useAllUsersQuery } from '../../../graphql/generated';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import './signUpForm.scss';
 
@@ -33,6 +34,16 @@ export const SignUpForm = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
   const navigation = useNavigate();
+
+  const { data: allUsersData, loading: allUsersLoading, error: allUsersError } = useAllUsersQuery({
+    variables: {
+      limit: 1000,
+      page: 1
+    }
+  });
+
+  let users: string[] = [];
+  allUsersData?.allUsers.result.map(user => users.push(user.contact))
 
   const [logInMutation, { data, loading, error }] = useLogInMutation({
     variables: {
@@ -77,12 +88,14 @@ export const SignUpForm = () => {
           })
         }}
       >
-        {({ errors, touched }) => (
+        {({ errors, touched, values }) => (
           <Form>
             {/* <label htmlFor="email">Email</label> */}
             <Field id="email" name="email" label="Email" component={MuiInput} />
             {errors.email && touched.email ? (
               <Typography variant='h6' sx={{ color: "red" }}>{errors.email}</Typography>
+            ) : users.includes(values.email) ? (
+              <Typography variant='h6' sx={{ color: "red" }}>Email already active, try <Link to="/login" style={{ textDecoration: "underline", color: "red" }}>logging in</Link> instead.</Typography>
             ) : null}
             <Field
               component={MuiInput}
