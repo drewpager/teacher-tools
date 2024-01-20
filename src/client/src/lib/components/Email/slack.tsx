@@ -2,6 +2,7 @@ import {
   Body,
   Container,
   Column,
+  Button,
   Head,
   Heading,
   Html,
@@ -14,43 +15,58 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 
-interface SlackConfirmEmailProps {
-  validationCode?: string;
+interface ConfirmEmailProps {
+  id?: string;
 }
 
-const baseUrl = process.env.PUBLIC_URL
-  ? `https://${process.env.PUBLIC_URL}`
-  : "";
+const baseUrl = `https://www.platospeach.com/`;
 
-export const SlackConfirmEmail = ({
-  validationCode,
-}: SlackConfirmEmailProps) => (
+export const Email = ({
+  id
+}: ConfirmEmailProps) => (
   <Html>
     <Head />
     <Preview>Confirm your email address</Preview>
     <Body style={main}>
       <Container style={container}>
-        <Section style={logoContainer}>
-          <Img
-            // src={`${baseUrl}/static/fruit.png`}
-            src={`../../assets/fruit.png`}
-            width="120"
-            height="36"
-            alt="Slack"
-          />
-        </Section>
         <Heading style={h1}>Welcome to Plato's Peach</Heading>
-        <Text style={heroText}>
-          Your confirmation code is below - enter it in your open browser window
-          and we'll help you get signed in.
-        </Text>
 
-        <Section style={codeBox}>
-          <Text style={confirmationCodeText}>{validationCode}</Text>
+        <Section>
+          <Row>
+            <Text style={heroText}>
+              Congratulations! You're joining over 12,000 Educators who use Plato's Peach content to create and share lesson plans.
+            </Text>
+
+            <Text style={heroText}>Here's how to get started:</Text>
+          </Row>
+        </Section>
+
+        <ul>
+          <li style={{ fontSize: 20, marginBottom: 15 }} key={2}>
+            <strong>Bookmark content from catalog.</strong> Find the subjects and content you want to include in your lesson plans.{" "}
+            <Link href="https://www.platospeach.com/catalog/" style={{ color: "#3a70cd" }}>See the video lesson catalog</Link>.
+          </li>
+          <li style={{ fontSize: 20, marginBottom: 15 }} key={1}>
+            <strong>Create your first lesson plan.</strong>{" "}
+            <Link href="https://www.platospeach.com/playlist/create" style={{ color: "#3a70cd" }}>Build a custom plan</Link>, or choose from a template in the gallery.
+          </li>
+          <li style={{ fontSize: 20, marginBottom: 15 }} key={3}>
+            <strong>Share with Google Classroom.</strong> Check out some example lesson plans: <Link style={{ color: "#3a70cd" }} href={`${baseUrl}plans/civil-rights-movement`}>Civil Rights Movement</Link>, <Link style={{ color: "#3a70cd" }} href={`${baseUrl}plans/patrick-henry`}>Patrick Henry</Link>, <Link style={{ color: "#3a70cd" }} href={`${baseUrl}plans/new-deal`}>The New Deal</Link>.
+          </li>
+          <li style={{ fontSize: 20, marginBottom: 25 }} key={4}>
+            <strong>Use the AI Quiz Generator.</strong> Reduce the amount of time needed to create lesson plans with our
+            <Link style={{ color: "#3a70cd" }} href={`${baseUrl}quiz/create/`}> quiz generator tool here</Link>!
+          </li>
+        </ul>
+
+        <Section>
+          <Button style={welcomeButton} href={`${baseUrl}user/${id}`}>
+            Go to your dashboard
+          </Button>
         </Section>
 
         <Text style={text}>
-          If you didn't sign up for Plato's Peach, please contact us <Link style={{ color: "#57996a" }} href={`${baseUrl}/contact`}>here</Link>
+          If you didn't sign up for Plato's Peach, please contact us <Link style={{ color: "#3a70cd" }} href={`${baseUrl}contact`}>here</Link>
         </Text>
 
         <Section>
@@ -80,17 +96,6 @@ export const SlackConfirmEmail = ({
           >
             Contact
           </Link>
-          &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-          <Link
-            style={footerLink}
-            href="https://slack.com/community"
-            target="_blank"
-            rel="noopener noreferrer"
-            data-auth="NotApplicable"
-            data-linkindex="6"
-          >
-            Community
-          </Link>
           <Text style={footerText}>
             ©2024 Page One Productions, LLC. <br />
             1757 Playa Vista, San Marcos, CA 92078, USA <br />
@@ -103,11 +108,7 @@ export const SlackConfirmEmail = ({
   </Html>
 );
 
-SlackConfirmEmail.PreviewProps = {
-  validationCode: "DJZ-TLX",
-} as SlackConfirmEmailProps;
-
-export default SlackConfirmEmail;
+// export default Email;
 
 const footerText = {
   fontSize: "12px",
@@ -122,18 +123,6 @@ const footerLink = {
   textDecoration: "underline",
 };
 
-const footerLogos = {
-  marginBottom: "32px",
-  paddingLeft: "8px",
-  paddingRight: "8px",
-  width: "100%",
-};
-
-const socialMediaIcon = {
-  display: "inline",
-  marginLeft: "32px",
-};
-
 const main = {
   backgroundColor: "#ffffff",
   margin: "0 auto",
@@ -146,9 +135,12 @@ const container = {
   padding: "0px 20px",
 };
 
-const logoContainer = {
-  marginTop: "32px",
-};
+const welcomeButton = {
+  backgroundColor: "#3a70cd",
+  borderRadius: "4px",
+  color: "#ffffff",
+  padding: "15px 30px",
+}
 
 const h1 = {
   color: "#1d1c1d",
@@ -163,19 +155,6 @@ const heroText = {
   fontSize: "20px",
   lineHeight: "28px",
   marginBottom: "30px",
-};
-
-const codeBox = {
-  background: "rgb(245, 244, 245)",
-  borderRadius: "4px",
-  marginBottom: "30px",
-  padding: "40px 10px",
-};
-
-const confirmationCodeText = {
-  fontSize: "30px",
-  textAlign: "center" as const,
-  verticalAlign: "middle",
 };
 
 const text = {
