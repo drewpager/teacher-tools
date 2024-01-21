@@ -226,6 +226,7 @@ export const viewerResolvers = {
             _id: emailLogin?._id,
             token: emailInput?.input?.password,
             avatar: emailLogin?.avatar,
+            contact: input?.email,
             paymentId: emailLogin?.paymentId,
             didRequest: true,
           };
@@ -246,6 +247,7 @@ export const viewerResolvers = {
           _id: viewer._id,
           token: viewer.token,
           avatar: viewer.avatar,
+          contact: viewer.contact,
           paymentId: viewer.paymentId,
           didRequest: true,
         };
@@ -378,6 +380,9 @@ export const viewerResolvers = {
     },
     paymentId: (viewer: Viewer): string | undefined => {
       return viewer.paymentId ? viewer.paymentId : undefined;
+    },
+    contact: (viewer: Viewer): string | undefined => {
+      return viewer.contact ? viewer.contact : undefined;
     },
     playlists: async (
       viewer: Viewer,

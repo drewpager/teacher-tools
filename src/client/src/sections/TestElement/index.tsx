@@ -8,15 +8,10 @@ type props = {
 
 export const TestElement = ({ viewer }: props) => {
   return (
-    <div>
+    <div style={{ marginTop: 70 }}>
       <h1>Test Element</h1>
-      <Testimonial
-        text="I've been using Plato's Peach for a few months now and I love it! It's so easy to use and my students love the short documentary-style videos. I highly recommend it!"
-        author="Katie Santos"
-        position="9th Grade History Teacher"
-        imageSrc="https://katiepagetherapy.com/static/media/katie-page.6e2a2f5e.jpeg"
-        bgColor="#57996A"
-      />
+      <h2>{`${viewer.id}`}</h2>
+      <h2>{`${viewer.contact}`}</h2>
     </div>
   )
 }

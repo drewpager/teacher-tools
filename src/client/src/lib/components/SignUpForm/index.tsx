@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 import { useLogInMutation, useAllUsersQuery } from '../../../graphql/generated';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { sendWelcome } from '../../utils/sendWelcome';
 
 import './signUpForm.scss';
 
@@ -63,6 +64,7 @@ export const SignUpForm = () => {
   }
 
   if (data) {
+    sendWelcome({ id: `${data.logIn.id}`, email: `${data.logIn.contact}` })
     navigation(`/user/${data.logIn.id}`)
     window.location.reload();
     // navigation(`/catalog/`)

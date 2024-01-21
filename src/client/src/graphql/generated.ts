@@ -710,6 +710,7 @@ export type Viewer = {
   articles?: Maybe<Array<Maybe<Article>>>;
   avatar?: Maybe<Scalars['String']>;
   bookmarks?: Maybe<Array<Maybe<Lesson>>>;
+  contact?: Maybe<Scalars['String']>;
   didRequest: Scalars['Boolean'];
   id?: Maybe<Scalars['ID']>;
   lessons?: Maybe<Array<Maybe<Lesson>>>;
@@ -776,12 +777,12 @@ export type LogInMutationVariables = Exact<{
 }>;
 
 
-export type LogInMutation = { __typename?: 'Mutation', logIn: { __typename?: 'Viewer', id?: string | null, token?: string | null, avatar?: string | null, paymentId?: string | null, didRequest: boolean } };
+export type LogInMutation = { __typename?: 'Mutation', logIn: { __typename?: 'Viewer', id?: string | null, token?: string | null, avatar?: string | null, contact?: string | null, paymentId?: string | null, didRequest: boolean } };
 
 export type LogOutMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type LogOutMutation = { __typename?: 'Mutation', logOut: { __typename?: 'Viewer', id?: string | null, token?: string | null, avatar?: string | null, didRequest: boolean } };
+export type LogOutMutation = { __typename?: 'Mutation', logOut: { __typename?: 'Viewer', id?: string | null, token?: string | null, avatar?: string | null, contact?: string | null, didRequest: boolean } };
 
 export type UpdatePlanMutationVariables = Exact<{
   input?: InputMaybe<LessonPlanInput>;
@@ -1131,6 +1132,7 @@ export const LogInDocument = gql`
     id
     token
     avatar
+    contact
     paymentId
     didRequest
   }
@@ -1168,6 +1170,7 @@ export const LogOutDocument = gql`
     id
     token
     avatar
+    contact
     didRequest
   }
 }

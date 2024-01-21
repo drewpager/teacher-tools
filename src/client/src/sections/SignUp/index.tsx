@@ -10,6 +10,7 @@ import { DisplayError, DisplaySuccess } from '../../lib/utils';
 import './signup.scss';
 import { FAQ, Footer, SignUpForm } from '../../lib/components';
 import { Helmet } from 'react-helmet';
+import { sendWelcome } from '../../lib/utils/sendWelcome';
 
 interface Props {
   setViewer: (viewer: Viewer) => void;
@@ -25,8 +26,9 @@ export const SignUp = ({ setViewer }: Props) => {
     error: LogInError
   }] = useLogInMutation({
     onCompleted: data => {
-      if (data && data.logIn && data.logIn.token) {
+      if (data && data.logIn && data.logIn.token && data.logIn.contact) {
         setViewer(data.logIn);
+        console.log("This is the data email: ", data.logIn.contact)
         sessionStorage.setItem("token", data.logIn.token);
         return (<DisplaySuccess title="You've successfully signed up!" />)
       }
@@ -65,6 +67,7 @@ export const SignUp = ({ setViewer }: Props) => {
 
   if (Mutation && Mutation.logIn) {
     const { id: viewerId } = Mutation.logIn;
+    sendWelcome({ id: `${Mutation.logIn.id}`, email: `${Mutation.logIn.contact}` })
     return (
       <>
         <Navigate to={`/user/${viewerId}`} />

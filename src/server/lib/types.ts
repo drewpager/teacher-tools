@@ -106,6 +106,7 @@ export interface Viewer {
   _id?: string;
   token?: string;
   avatar?: string;
+  contact?: string;
   paymentId?: string | null;
   didRequest: boolean;
   playlists?: Playlist[];

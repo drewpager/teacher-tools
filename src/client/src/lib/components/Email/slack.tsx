@@ -26,7 +26,7 @@ export const Email = ({
 }: ConfirmEmailProps) => (
   <Html>
     <Head />
-    <Preview>Confirm your email address</Preview>
+    <Preview>You just made a smart move.</Preview>
     <Body style={main}>
       <Container style={container}>
         <Heading style={h1}>Welcome to Plato's Peach</Heading>

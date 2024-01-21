@@ -13,6 +13,7 @@ export const typeDefs = gql`
     id: ID
     token: String
     avatar: String
+    contact: String
     paymentId: String
     didRequest: Boolean!
     playlists: [Playlist]

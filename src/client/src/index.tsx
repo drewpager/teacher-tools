@@ -69,6 +69,7 @@ const initialViewer: Viewer = {
   token: null,
   avatar: null,
   paymentId: null,
+  contact: null,
   didRequest: false
 }
 
