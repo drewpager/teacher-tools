@@ -91,7 +91,7 @@ export const Catalog = ({ viewer }: Props) => {
   // Catalog Search Bar Feature
   const inputHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     e.preventDefault();
-    setSearchInput(e.target.value)
+    setSearchInput(`${e.target.value}`)
 
     if (searchInput !== "") {
       setFilteredLesson(newDatum ? [...newDatum?.filter((lesson) => lesson?.title?.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1)] : []);
@@ -123,6 +123,7 @@ export const Catalog = ({ viewer }: Props) => {
   });
 
   const datum = useMemo(() => { return data }, [data])
+  let newDatum = datum?.allLessons.result.filter((d) => d.public)
 
   if (loading && view === 'grid') {
     return <CatalogSkeletonGrid />
@@ -213,7 +214,6 @@ export const Catalog = ({ viewer }: Props) => {
   const combinedCategories = Array.from(secondaryCategories);
   const selectedSecondary = allCategories.filter((b) => b.includes(selected[0]));
 
-  let newDatum = datum?.allLessons.result.filter((d) => d.public)
   // return <CatalogSkeleton />
   return (
     <Box maxWidth="100vw" overflow-x="hidden">
@@ -267,7 +267,7 @@ export const Catalog = ({ viewer }: Props) => {
                 // id="catalog-search"
                 label="Search Catalog"
                 onChange={(e) => inputHandler(e)}
-                value={searchInput}
+                value={`${searchInput}`}
                 ref={inputRef}
                 className="catalog--search"
                 InputProps={{
