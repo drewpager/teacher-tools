@@ -97,7 +97,7 @@ export const Email = ({
             Contact
           </Link>
           <Text style={footerText}>
-            ©2024 Page One Productions, LLC. <br />
+            ©2024 Page Two Productions, LLC. <br />
             1757 Playa Vista, San Marcos, CA 92078, USA <br />
             <br />
             All rights reserved.
@@ -108,7 +108,7 @@ export const Email = ({
   </Html>
 );
 
-// export default Email;
+export default Email;
 
 const footerText = {
   fontSize: "12px",
@@ -140,6 +140,7 @@ const welcomeButton = {
   borderRadius: "4px",
   color: "#ffffff",
   padding: "15px 30px",
+  fontSize: 20,
 }
 
 const h1 = {
