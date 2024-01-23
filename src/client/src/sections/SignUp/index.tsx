@@ -67,7 +67,7 @@ export const SignUp = ({ setViewer }: Props) => {
 
   if (Mutation && Mutation.logIn) {
     const { id: viewerId } = Mutation.logIn;
-    sendWelcome({ id: `${Mutation.logIn.id}`, email: `${Mutation.logIn.contact}` })
+    sendWelcome({ id: `${viewerId}`, email: `${Mutation.logIn.contact}` })
     return (
       <>
         <Navigate to={`/user/${viewerId}`} />
