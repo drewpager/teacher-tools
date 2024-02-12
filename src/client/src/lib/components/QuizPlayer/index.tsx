@@ -20,7 +20,11 @@ export const QuizPlayer = ({ quiz }: Props) => {
 
   const title = quiz.title;
   let totalCorrect = 0;
-  quiz.questions.map((quest) => quest?.answerOptions?.map((q) => q?.isCorrect ? totalCorrect += 1 : totalCorrect))
+  let questionCount = quiz.questions.length;
+  quiz.questions.map((quest) => quest?.answerOptions?.map((q) => q?.isCorrect ? totalCorrect = totalCorrect + 1 : totalCorrect))
+  if (totalCorrect < questionCount) {
+    totalCorrect = questionCount;
+  }
   interface Values {
     answers: string[] | undefined[];
   }
@@ -73,6 +77,7 @@ export const QuizPlayer = ({ quiz }: Props) => {
     setFinalResult(false);
     setScore(0);
     setQuizOptionId(undefined)
+    setAnswers([]);
   }
 
   const showResult = () => {
@@ -105,7 +110,10 @@ export const QuizPlayer = ({ quiz }: Props) => {
                 <h2>{a.question}</h2>
                 <p>{a.answerOptions?.map((ans, indy) => (
                   <div className='quiz--div'>
-                    <label className='quiz--label'>
+                    <label
+                      className='quiz--label'
+                      style={userAnswers[indy] === ans?.answerText ? { color: ans?.isCorrect ? "#57996A" : "#BC4710" } : { color: ans?.isCorrect ? "#57996A" : "#BC4710" }}
+                    >
                       <input
                         type={a.answerType === "TRUEFALSE" ? "radio" : "checkbox"}
                         name="answer"
@@ -121,10 +129,11 @@ export const QuizPlayer = ({ quiz }: Props) => {
                         type="radio"
                         name="answer"
                         value="false"
-                        checked={userAnswers[indy] === "false"}
-                        style={userAnswers[indy] === "" && !ans?.isCorrect ? { backgroundColor: "#57996A" } : { backgroundColor: "#BC4710" }}
+                        checked={answers[index].answerText === "false"}
                         key={index}
-                      /><label>False</label></>)}
+                      /><label
+                        style={userAnswers[indy] === ans?.answerText ? { color: !ans?.isCorrect ? "#57996A" : "#BC4710" } : { color: !ans?.isCorrect ? "#57996A" : "#BC4710" }}
+                      >False</label></>)}
                   </div>
                 ))}</p>
               </div>
