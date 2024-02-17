@@ -1,5 +1,5 @@
 import React, { FormEvent, ReactHTMLElement, useState } from 'react';
-import { Box, Button, FormControl, Radio, RadioGroup, Chip, Divider, Typography } from '@mui/material';
+import { Box, Button, FormControl, Radio, RadioGroup, Tooltip, Chip, Divider, Typography } from '@mui/material';
 import QuizIcon from '@mui/icons-material/Quiz';
 import { Quiz, AnswerOptions } from '../../../graphql/generated';
 import { Formik, Field, Form } from "formik";
@@ -29,13 +29,6 @@ export const QuizPlayer = ({ quiz }: Props) => {
     answers: string[] | undefined[];
   }
 
-  // let initialAnswers = {
-  //   ...quiz.questions.map((i) =>
-  //     i.answerOptions && i.answerOptions[0]
-  //       ? i.answerOptions[0].answerText
-  //       : "")
-  // }
-
   const handleClick = (a: AnswerOptions | null, id: number) => {
     if (a && answers.includes(a)) {
       setAnswers(answers.filter((ans) => ans !== a));
@@ -50,13 +43,6 @@ export const QuizPlayer = ({ quiz }: Props) => {
     let updatedAnswers = [...userAnswers];
     updatedAnswers[id] = a?.answerText === "" ? true : a?.answerText;
     setUserAnswers(updatedAnswers);
-
-    // if (a?.isCorrect) {
-    //   setScore(score + 1)
-    // }
-    // if (!a?.isCorrect) {
-    //   setScore(score - 1)
-    // }
   }
 
   const handleQuizSubmit = () => {
@@ -87,7 +73,6 @@ export const QuizPlayer = ({ quiz }: Props) => {
       res.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
-  //TODO: Evaluate final submission state before calculating score.
   return (
     <Box className='quiz--container'>
       <h1><QuizIcon color="secondary" /> {title}</h1>
@@ -97,12 +82,6 @@ export const QuizPlayer = ({ quiz }: Props) => {
       }
       <Divider sx={{ margin: "0.5em" }} />
       {
-        // showFinalResult ? (
-        //   <div>
-        //     <Typography className="quiz-result" style={{ fontSize: 100 }} variant="h2">{score > 0 ? `${Math.round((score / totalCorrect) * 100)}%` : "0%"}</Typography>
-        //     <Button type="submit" variant="outlined" onClick={() => resetQuiz()}>Retake!</Button>
-        //   </div>
-        // ) 
         showFinalResult ? (
           quiz.questions.map((a, index) => (
             <>
@@ -123,7 +102,7 @@ export const QuizPlayer = ({ quiz }: Props) => {
                         disabled
                         key={index}
                       />
-                      {ans?.answerText === "" ? "True" : ans?.answerText}</label>
+                      {ans?.answerText === "" && answers[index].answerText === ans?.answerText ? "True (your response)" : ans?.answerText === "" ? "True" : ans?.answerText}</label>
                     {a.answerType === "TRUEFALSE" && (<>
                       <input
                         type="radio"
@@ -133,7 +112,9 @@ export const QuizPlayer = ({ quiz }: Props) => {
                         key={index}
                       /><label
                         style={userAnswers[indy] === ans?.answerText ? { color: !ans?.isCorrect ? "#57996A" : "#BC4710" } : { color: !ans?.isCorrect ? "#57996A" : "#BC4710" }}
-                      >False</label></>)}
+                      >
+                        {answers[index].answerText === "false" ? "False (your response)" : "False"}
+                      </label></>)}
                   </div>
                 ))}</p>
               </div>
@@ -173,9 +154,14 @@ export const QuizPlayer = ({ quiz }: Props) => {
                   <Divider sx={{ margin: "0.5em" }} />
                 </form>
               ))}
-              {/* <Button type="submit" variant="outlined" onClick={() => { setFinalResult(true); showResult() }}>Show Results!</Button> */}
-              <Button type="submit" variant="outlined" onClick={handleQuizSubmit}>Submit!</Button>
-              {showFinalResult && (<Button type="submit" variant="outlined" onClick={() => resetQuiz()}>Retake!</Button>)}
+              <Button
+                type="submit"
+                variant="outlined"
+                onClick={handleQuizSubmit}
+                disabled={answers.length < quiz.questions.length}
+                style={{ textTransform: "capitalize" }}
+              >Submit!</Button>
+              {showFinalResult && (<Button type="submit" variant="outlined" style={{ textTransform: "capitalize" }} onClick={() => resetQuiz()}>Retake!</Button>)}
             </div>
           )}
     </Box>
