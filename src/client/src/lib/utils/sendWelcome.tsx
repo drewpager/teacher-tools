@@ -1,6 +1,5 @@
 import { render } from "@react-email/render";
 import { Email } from "../components/Email/slack";
-import { useUserQuery } from "../../graphql/generated";
 
 interface props {
   id: string;
@@ -8,25 +7,6 @@ interface props {
 }
 
 export const sendWelcome = ({ id, email }: props) => {
-  // const { data, loading, error } = useUserQuery({
-  //   variables: {
-  //     id: `${id}`,
-  //     lessonsPage: 1,
-  //     playlistsPage: 1,
-  //     quizzesPage: 1,
-  //     articlesPage: 1,
-  //     limit: 1
-  //   }
-  // });
-
-  // if (loading) {
-  //   console.log("loading user email");
-  // }
-
-  // if (error) {
-  //   console.log("Loading User Error: ", error);
-  // }
-
   const emailHtml = render(Email({ id: `${id}` }));
 
   const mail = {

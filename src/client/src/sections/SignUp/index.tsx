@@ -26,11 +26,10 @@ export const SignUp = ({ setViewer }: Props) => {
     error: LogInError
   }] = useLogInMutation({
     onCompleted: data => {
-      if (data && data.logIn && data.logIn.token && data.logIn.contact) {
+      if (data && data.logIn && data.logIn.token) {
         setViewer(data.logIn);
-        console.log("This is the data email: ", data.logIn.contact)
         sessionStorage.setItem("token", data.logIn.token);
-        return (<DisplaySuccess title="You've successfully signed up!" />)
+        return (<DisplaySuccess title="You've successfully logged in!" />)
       }
     },
     onError: error => {
@@ -53,7 +52,7 @@ export const SignUp = ({ setViewer }: Props) => {
     }
   }, []);
 
-  const handleAuthorize = async () => {
+  const handleSignUp = async () => {
     try {
       const { data } = await client.query<AuthUrlData>({
         query: AUTH_URL
@@ -94,7 +93,7 @@ export const SignUp = ({ setViewer }: Props) => {
         <CardContent>
           <Typography variant="h4" className='login--text'>Sign Up For Plato's Peach</Typography>
           <CardActions>
-            <Button className="login--button" onClick={handleAuthorize} size="small">Free Account With Google!</Button>
+            <Button className="login--button" onClick={handleSignUp} size="small">Free Account With Google!</Button>
           </CardActions>
           <Typography sx={{ fontStyle: 'italic' }}>Note: By signing up, you'll be redirected to the Google consent form to sign in
             with your Google account.</Typography>
@@ -156,7 +155,7 @@ export const SignUp = ({ setViewer }: Props) => {
             <Typography variant="h4" color="text.secondary">Free Sign Up For Plato's Peach</Typography>
             <Divider sx={{ margin: 2 }} />
             <CardActions>
-              <Button className="google--button" onClick={handleAuthorize} size="medium"><GoogleIcon fontSize='medium' /> Sign Up With Google!</Button>
+              <Button className="google--button" onClick={handleSignUp} size="medium"><GoogleIcon fontSize='medium' /> Sign Up With Google!</Button>
             </CardActions>
             <Typography sx={{ fontStyle: 'italic' }}>Note: By signing up, you'll be redirected to the Google consent form to sign in
               with your Google account.</Typography>
