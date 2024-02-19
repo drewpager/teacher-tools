@@ -101,7 +101,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
     setOpen(true);
   }
 
-  const limit: number = 1000;
+  const limit: number = 1500;
   const page: number = 1;
 
   const { data: userData, loading: userLoading, error: userError } = useUserQuery({

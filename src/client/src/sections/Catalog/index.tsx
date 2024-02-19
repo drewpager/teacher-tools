@@ -117,7 +117,7 @@ export const Catalog = ({ viewer }: Props) => {
 
   const { data, loading, error } = useAllLessonsQuery({
     variables: {
-      limit: 1000,
+      limit: 1500,
       page: 1
     }
   });

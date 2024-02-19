@@ -62,6 +62,9 @@ export const categories = [
   {
     name: "uncategorized",
   },
+  // {
+  //   name: "economic history",
+  // },
 ];
 
 // export const categories = ["History", "Biography", "American History", "World History", "Military History", "Medicine"]

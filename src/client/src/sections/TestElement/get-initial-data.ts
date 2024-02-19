@@ -21,7 +21,7 @@ const GetLessons = () => {
   let uniqueId = 1001;
   const { data, loading, error } = useAllLessonsQuery({
     variables: {
-      limit: 1000,
+      limit: 1500,
       page: 1,
     },
   });
