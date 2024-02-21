@@ -91,6 +91,7 @@ export const typeDefs = gql`
     authorized: Boolean
     public: Boolean
     premium: Boolean
+    level: [Int]
   }
 
   type Playlists {
@@ -352,6 +353,7 @@ export const typeDefs = gql`
     plan: [Plan]!
     public: Boolean
     premium: Boolean
+    level: [Int]
   }
 
   union LessonPlanUnion = Quiz | Lesson | Article

@@ -77,6 +77,9 @@ export const playlistResolvers = {
     name: (playlist: Playlist) => {
       return playlist.name;
     },
+    level: (playlist: Playlist) => {
+      return playlist.level;
+    },
   },
   LessonPlanUnion: {
     __resolveType(obj: any, context: any, info: any) {
@@ -165,6 +168,7 @@ export const playlistResolvers = {
           public: upsertedResult.public,
           authorized: true,
           premium: upsertedResult.premium,
+          level: upsertedResult.level,
         };
       } catch (e) {
         throw new Error(`Failed to update playlist ${e}`);
@@ -208,6 +212,7 @@ export const playlistResolvers = {
               ? `${playlist.name} ${user?.name} copy`
               : `${playlist.name} copy`,
             plan: [...playlist.plan],
+            level: [...playlist.level],
           });
 
           const insertedResult = insertResult

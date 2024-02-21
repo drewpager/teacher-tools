@@ -46,6 +46,7 @@ import { PlaylistCardSkeleton } from './playlistCardSkeleton';
 import { formatSlug } from '../../utils/formatSlug';
 import PaidIcon from '@mui/icons-material/Paid';
 import HistoryToggleOffIcon from '@mui/icons-material/HistoryToggleOff';
+import GradingIcon from '@mui/icons-material/Grading';
 import { Link } from 'react-router-dom';
 
 interface Props {
@@ -309,6 +310,13 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
         <Tooltip title="Assign via Google Classroom">
           <GoogleClassroomShareButton url={`https://www.platospeach.com/plans/${formatSlug(playlist.name)}`} />
         </Tooltip>
+
+        <Box className="playlist--time">
+          <Tooltip title="Suggested Grade Level">
+            <GradingIcon />
+          </Tooltip>
+          <Typography className='playlist--duration' variant="body1">{`Grades ${playlist.level}`}</Typography>
+        </Box>
         <Box className="playlist--time">
           <Tooltip title="Estimated Completion Time">
             <HistoryToggleOffIcon />

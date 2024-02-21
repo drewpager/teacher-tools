@@ -22,6 +22,7 @@ export interface LessonPlanInput {
   plan: LessonPlan[];
   public: boolean;
   premium: boolean;
+  level: number[];
 }
 
 export interface CreatePlanArgs {
@@ -35,6 +36,7 @@ export interface UpdatePlanArgs {
   name: string;
   public: boolean;
   premium: boolean;
+  level: number[];
 }
 
 export interface UpdateParams {

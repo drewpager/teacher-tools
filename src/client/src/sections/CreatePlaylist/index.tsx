@@ -28,6 +28,7 @@ import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import { VariableSizeList as List } from 'react-window';
 import { BookmarkSwitch } from './bookmarkSwitch';
 import { LockSwitch } from './lockSwitch';
+import { GradeLevel } from './gradeLevel';
 
 type props = {
   viewer: Viewer;
@@ -50,6 +51,7 @@ type InputLessonPlan = {
   plan: Plan[],
   public: boolean,
   premium: boolean
+  level: number[]
 }
 
 const initialData: InputLessonPlan = {
@@ -57,7 +59,8 @@ const initialData: InputLessonPlan = {
   creator: "",
   plan: [],
   public: false,
-  premium: false
+  premium: false,
+  level: []
 }
 
 
@@ -90,6 +93,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const [playlist, setPlaylist] = useState<InputLessonPlan>(initialData)
   const [locked, setLocked] = useState<boolean>(false);
   const [premium, setPremium] = useState<boolean>(false);
+  const [level, setLevel] = useState<number[]>([6, 8]);
   const [ascending, setAscending] = useState<boolean>(true);
   const [open, setOpen] = useState(false);
 
@@ -490,7 +494,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
         name: e.target.value,
         creator: viewer && viewer.id ? viewer.id : "0",
         public: locked,
-        premium: premium
+        premium: premium,
+        level: level
       })
       setTitleError(false);
 
@@ -637,6 +642,11 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const handlePremium = () => {
     setPremium(!premium);
     setPlaylist({ ...playlist, premium: !premium });
+  }
+
+  const handleGradeLevel = () => {
+    setLevel(level);
+    setPlaylist({ ...playlist, level: level });
   }
 
   const resetSearch = () => {
@@ -975,6 +985,10 @@ export const CreatePlaylist = ({ viewer }: props) => {
                 sx={{ ml: 0.5 }}
               />
             </Tooltip>
+          </Box>
+          <Box className="button--slider-playlist">
+            <GradeLevel level={level} setLevel={setLevel} onChange={handleGradeLevel} />
+            {console.log(playlist)}
           </Box>
           <Button
             className="createPlaylist--button"

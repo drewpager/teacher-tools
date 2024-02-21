@@ -41,6 +41,7 @@ export const USER = gql`
           creator
           public
           premium
+          level
           plan {
             __typename
             ... on Article {
