@@ -310,13 +310,14 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
         <Tooltip title="Assign via Google Classroom">
           <GoogleClassroomShareButton url={`https://www.platospeach.com/plans/${formatSlug(playlist.name)}`} />
         </Tooltip>
-
-        <Box className="playlist--time">
-          <Tooltip title="Suggested Grade Level">
-            <GradingIcon />
-          </Tooltip>
-          <Typography className='playlist--duration' variant="body1">{`Grades ${playlist.level}`}</Typography>
-        </Box>
+        {playlist.level && (
+          <Box className="playlist--grade">
+            <Tooltip title="Suggested Grade Level">
+              <GradingIcon />
+            </Tooltip>
+            <Typography className='playlist--duration' variant="body1">{`Grades ${playlist.level && playlist.level[0]}-${playlist.level && playlist.level[1]}`}</Typography>
+          </Box>
+        )}
         <Box className="playlist--time">
           <Tooltip title="Estimated Completion Time">
             <HistoryToggleOffIcon />

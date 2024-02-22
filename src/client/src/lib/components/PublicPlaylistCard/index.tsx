@@ -10,6 +10,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import PaidIcon from '@mui/icons-material/Paid';
 import "./publicPlaylistCardStyles.scss";
 import HistoryToggleOffIcon from '@mui/icons-material/HistoryToggleOff';
+import GradingIcon from '@mui/icons-material/Grading';
 
 type Props = {
   id?: string | null | undefined;
@@ -153,6 +154,12 @@ export const PublicPlaylistCard = ({ id, name, plan, creator, premium, viewer }:
               </Tooltip>
               <Typography className='playlist--duration' variant="body1">{estimatedTime}-{Math.round(estimatedTime * 1.25)} Minutes</Typography>
             </Box>
+            {/* <Box className="playlist-card--time">
+              <Tooltip title="Suggested Grade Level">
+                <GradingIcon />
+              </Tooltip>
+              <Typography className='playlist--duration' variant="body1">Grades {level}</Typography>
+            </Box> */}
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <Tooltip title={userName}>
                 <Avatar alt="creator headshot" src={image} sx={{ marginRight: "0.5rem" }} />

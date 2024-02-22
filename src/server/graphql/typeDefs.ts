@@ -91,7 +91,7 @@ export const typeDefs = gql`
     authorized: Boolean
     public: Boolean
     premium: Boolean
-    level: [Int]
+    level: [Int!]
   }
 
   type Playlists {

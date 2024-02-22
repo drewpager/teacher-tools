@@ -38,6 +38,20 @@
         }
     }
 
+    &.playlist--grade {
+        display: flex;
+        vertical-align: middle;
+        align-items: center;
+        margin-left: 0.5rem;
+        justify-self: normal;
+
+        @media (min-width: 1300px) {
+            margin-left: 10rem;
+            justify-self: center;
+            margin-right: 0rem;
+        }
+    }
+
     &.premium-content {
         position: relative;
         max-height: 120%;

@@ -57,8 +57,8 @@ export interface Playlist {
   creator: string;
   public: boolean;
   premium: boolean;
-  authorized?: boolean; // https://www.newline.co/courses/tinyhouse-react-masterclass-part-2/building-the-listing-resolvers
   level: number[];
+  authorized?: boolean; // https://www.newline.co/courses/tinyhouse-react-masterclass-part-2/building-the-listing-resolvers
 }
 
 export interface Package {
