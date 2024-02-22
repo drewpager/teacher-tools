@@ -18,6 +18,7 @@ type Props = {
   plan: any[];
   creator: string;
   premium: boolean;
+  level?: number[] | undefined | null;
   viewer: Viewer
 }
 
@@ -41,7 +42,7 @@ interface CopyPlaylistVariables {
 }
 
 
-export const PublicPlaylistCard = ({ id, name, plan, creator, premium, viewer }: Props) => {
+export const PublicPlaylistCard = ({ id, name, plan, creator, premium, level, viewer }: Props) => {
   const navigation = useNavigate();
   const [copyPlaylist, { loading: CopyPlaylistLoading, error: CopyPlaylistError }] = useMutation<CopyPlaylistData, CopyPlaylistVariables>(COPY_PLAYLIST);
   const [open, setOpen] = useState<boolean>(false);
@@ -153,13 +154,15 @@ export const PublicPlaylistCard = ({ id, name, plan, creator, premium, viewer }:
                 <HistoryToggleOffIcon />
               </Tooltip>
               <Typography className='playlist--duration' variant="body1">{estimatedTime}-{Math.round(estimatedTime * 1.25)} Minutes</Typography>
+              {level && (
+                <Box className="playlist-card--level">
+                  <Tooltip title="Suggested Grade Level">
+                    <GradingIcon />
+                  </Tooltip>
+                  <Typography className='playlist--duration' variant="body1">Grades {level[0]}-{level[1]}</Typography>
+                </Box>
+              )}
             </Box>
-            {/* <Box className="playlist-card--time">
-              <Tooltip title="Suggested Grade Level">
-                <GradingIcon />
-              </Tooltip>
-              <Typography className='playlist--duration' variant="body1">Grades {level}</Typography>
-            </Box> */}
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <Tooltip title={userName}>
                 <Avatar alt="creator headshot" src={image} sx={{ marginRight: "0.5rem" }} />
