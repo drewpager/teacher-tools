@@ -60,7 +60,7 @@ const initialData: InputLessonPlan = {
   plan: [],
   public: false,
   premium: false,
-  level: []
+  level: [6, 8]
 }
 
 
@@ -644,9 +644,9 @@ export const CreatePlaylist = ({ viewer }: props) => {
     setPlaylist({ ...playlist, premium: !premium });
   }
 
-  const handleGradeLevel = () => {
-    setLevel(level);
-    setPlaylist({ ...playlist, level: level });
+  const handleGradeLevel = (newLevel: number[]) => {
+    setLevel(newLevel);
+    setPlaylist({ ...playlist, level: newLevel });
   }
 
   const resetSearch = () => {
@@ -987,8 +987,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
             </Tooltip>
           </Box>
           <Box className="button--slider-playlist">
-            <GradeLevel level={level} setLevel={setLevel} onChange={handleGradeLevel} />
-            {console.log(playlist)}
+            <GradeLevel level={level} setLevel={setLevel} onChange={(event: any, newLevel: number[]) => handleGradeLevel(newLevel)} />
           </Box>
           <Button
             className="createPlaylist--button"

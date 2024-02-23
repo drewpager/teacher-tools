@@ -5,7 +5,7 @@ import './createPlaylist.scss';
 interface props {
   level: number[];
   setLevel: (level: number[]) => void;
-  onChange: (event: Event) => void;
+  onChange: (event: Event, newLevel: number[]) => void;
 }
 
 const minDistance = 1;
@@ -52,8 +52,9 @@ export const GradeLevel = ({ level, setLevel, onChange }: props) => {
       }
     } else {
       setValue2(newValue as number[]);
+      setLevel(newValue as number[]);
     }
-    onChange(event);
+    onChange(event, newValue as number[]);
     setLevel(newValue as number[]);
   };
 
@@ -70,6 +71,7 @@ export const GradeLevel = ({ level, setLevel, onChange }: props) => {
         marks={marks}
         onChange={handleChange2}
         valueLabelDisplay="on"
+        color={"secondary"}
         disableSwap
       />
     </Box>
