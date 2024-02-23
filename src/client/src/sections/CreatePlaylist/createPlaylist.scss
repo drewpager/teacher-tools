@@ -25,6 +25,10 @@
     margin-left: 1rem;
     display: flex;
     align-items: last baseline;
+
+    @media (max-width: 915px) {
+      flex-wrap: wrap;
+    }
   }
 }
 

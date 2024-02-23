@@ -985,9 +985,9 @@ export const CreatePlaylist = ({ viewer }: props) => {
                 sx={{ ml: 0.5 }}
               />
             </Tooltip>
-          </Box>
-          <Box className="button--slider-playlist">
-            <GradeLevel level={level} setLevel={setLevel} onChange={(event: any, newLevel: number[]) => handleGradeLevel(newLevel)} />
+            <Box className="button--slider-playlist">
+              <GradeLevel level={level} setLevel={setLevel} onChange={(event: any, newLevel: number[]) => handleGradeLevel(newLevel)} />
+            </Box>
           </Box>
           <Button
             className="createPlaylist--button"
