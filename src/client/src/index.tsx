@@ -39,6 +39,7 @@ import {
   Quiz,
   TestElement,
   Billing,
+  Donate,
   SignUp,
   Article,
   Plans,
@@ -127,6 +128,7 @@ const App = () => {
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/pricing" element={<Pricing viewer={viewer} setViewer={setViewer} />} />
+          <Route path="/donate" element={<Donate viewer={viewer} setViewer={setViewer} />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/billing" element={<Billing viewer={viewer} />} />
           <Route path="/login" children={(props: any) => (<Login {...props} setViewer={setViewer} />)} element={<Login setViewer={setViewer} />} />

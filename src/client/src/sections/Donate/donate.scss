@@ -1,0 +1,159 @@
+@use "../../library";
+@import "../../mixins";
+
+.donate-box--title {
+  width: 100%;
+  margin-left: 2rem;
+
+  @media (min-width: 1500px) {
+    margin-left: 12rem;
+  }
+
+  @media (max-width: 1499px) {
+    margin-left: 4rem;
+  }
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    padding-left: 0;
+  }
+}
+
+.grid--container {
+  position: relative;
+}
+
+.MuiButton-root {
+  &.donationFrequency--button {
+    font-weight: 600;
+    text-transform: capitalize;
+    border-radius: 0;
+    padding: 1rem;
+    border: 1px solid black;
+
+    &:hover {
+      color: #faf9f6;
+      background-color: library.$blue;
+      border: 1px solid black;
+    }
+
+    &:nth-child(2) {
+      border-left: 0;
+      border-right: 0;
+    }
+  }
+
+  &.donate-now--button {
+    border-radius: 0;
+    text-transform: capitalize;
+    margin-top: 1rem;
+  }
+}
+
+.MuiBox-root {
+  &.box--donate {
+    width: 70%;
+    border: 2px solid black;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-top: 2rem;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+}
+
+.MuiTypography-root {
+  &.donate-title--text {
+    width: 70%;
+    margin-top: 2rem;
+    margin-right: 1.5rem;
+    margin-left: 1.5rem;
+    padding: 1rem 0;
+    font-size: clamp(2.75rem, 3rem, 3.25rem);
+    color: library.$peachy;
+    align-self: baseline;
+    line-height: 115%;
+    font-family: "Source Serif Pro";
+    font-style: normal;
+    font-weight: bold;
+
+    @media (max-width: 768px) {
+      width: 90%;
+    }
+  }
+
+  &.subtitle--text {
+    width: 70%;
+    padding: 0 1.5rem;
+    margin: 1rem 0;
+    // font-size: clamp(0.75rem, 1.25rem, 1.5rem);
+    color: library.$peachy;
+    align-self: baseline;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      line-height: 1.875rem;
+      font-size: 1.25rem;
+    }
+  }
+}
+
+.grid--buttons {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 1.5rem;
+  gap: 1rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+
+.MuiLink-root {
+  &.startTeaching--button {
+    background: #57996a;
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: 100px;
+    height: 4rem;
+    width: 100%;
+    text-transform: capitalize;
+    text-align: center;
+    text-decoration: none;
+    padding: 1rem;
+
+    &:hover {
+      color: #ffffff;
+      background-color: #557669;
+    }
+
+    @media (min-width: 768px) {
+      width: 12rem;
+    }
+  }
+
+  &.pricing--button {
+    background: #faf9f6;
+    color: #000;
+    font-weight: 600;
+    border-radius: 100px;
+    height: 4rem;
+    width: 100%;
+    text-transform: capitalize;
+    text-align: center;
+    text-decoration: none;
+    padding: 1rem;
+    border: 1px solid black;
+
+    &:hover {
+      color: #faf9f6;
+      background-color: #000;
+    }
+
+    @media (min-width: 768px) {
+      width: 12rem;
+    }
+  }
+}

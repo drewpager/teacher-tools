@@ -20,6 +20,7 @@ export * from "./Contact";
 export * from "./CreateLesson";
 export * from "./CreateQuiz";
 export * from "./CreateArticle";
+export * from "./Donate";
 export * from "./EditPlaylist";
 export * from "./Quiz";
 export * from "./QuizCreate";
