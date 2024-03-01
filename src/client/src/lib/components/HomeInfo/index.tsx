@@ -30,8 +30,8 @@ export const HomeInfo = () => {
             <Link variant="subtitle1" href="/catalog" className='startTeaching--button'>
               View Catalog
             </Link>
-            <Link variant="subtitle1" href="/pricing/" className='pricing--button'>
-              View Pricing
+            <Link variant="subtitle1" href="/donate/" className='pricing--button'>
+              Donate
             </Link>
           </div>
         </Box>

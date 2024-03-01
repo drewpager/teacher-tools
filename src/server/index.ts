@@ -62,34 +62,6 @@ const mount = async (app: Application) => {
     });
   });
 
-  app.post("/donate", async (req, res) => {
-    async function createPaymentLink(amount: number) {
-      const paymentLink = await stripe.paymentLinks.create({
-        line_items: [
-          {
-            price_data: {
-              currency: "usd",
-              product_data: {
-                name: "Custom Payment",
-              },
-              unit_amount: amount * 100, // Convert to cents
-            },
-            quantity: 1,
-          },
-        ],
-        payment_intent_data: {
-          metadata: {
-            // Add any custom metadata here
-          },
-        },
-        allow_promotion_codes: true,
-        billing_address_collection: "auto",
-      });
-
-      return paymentLink.url;
-    }
-  });
-
   // const customer = await stripe.customers.search({
   //   query: `email:'drew@greadings.com'`,
   // });

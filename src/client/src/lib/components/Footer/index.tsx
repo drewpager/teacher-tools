@@ -102,12 +102,12 @@ export const Footer = ({ viewer }: Props) => {
           <Link to="/contact" style={{ textDecoration: "none" }}>
             <Typography variant='body1' className='footer--link-text'>Contact Us</Typography>
           </Link>
-          <Link to="/pricing" style={{ textDecoration: "none" }}>
-            <Typography variant='body1' className='footer--link-text'>Pricing</Typography>
+          <Link to="/donate" style={{ textDecoration: "none" }}>
+            <Typography variant='body1' className='footer--link-text'>Donate</Typography>
           </Link>
-          <Link to="/pricing#frequent-questions" style={{ textDecoration: "none" }}>
+          {/* <Link to="/pricing#frequent-questions" style={{ textDecoration: "none" }}>
             <Typography variant='body1' className='footer--link-text'>FAQ</Typography>
-          </Link>
+          </Link> */}
         </Grid>
         <Grid item xs={12} md={12} lg={12}>
           <Box className="subfooter--center">

@@ -85,6 +85,63 @@ export const Donate = ({ viewer, setViewer }: props) => {
     setAmount(event.target.value);
   }
 
+  const handleDonateNow = (amount: number, selected: string) => {
+    if (amount === 10 && selected === "o") {
+      window.open("https://donate.stripe.com/5kA9BD2gJ19abjG3cp", "_blank")
+    }
+    if (amount === 10 && selected === "m") {
+      window.open("https://buy.stripe.com/5kAeVX8F7dVWcnK6oH", "_blank")
+    }
+    if (amount === 10 && selected === "a") {
+      window.open("https://buy.stripe.com/dR66pr08BdVW0F29B4", "_blank")
+    }
+    if (amount === 20 && selected === "o") {
+      window.open("https://donate.stripe.com/aEU8xzcVncRScnKaES", "_blank")
+    }
+    if (amount === 20 && selected === "m") {
+      window.open("https://buy.stripe.com/28odRTg7z4lm3Re3cw", "_blank")
+    }
+    if (amount === 20 && selected === "a") {
+      window.open("https://buy.stripe.com/28oeVX5sV9FGdrO00t", "_blank")
+    }
+    if (amount === 30 && selected === "o") {
+      window.open("https://donate.stripe.com/00g7tv3kN3higE0eV9", "_blank")
+    }
+    if (amount === 30 && selected === "m") {
+      window.open("https://buy.stripe.com/aEU4hjbRj2deevSfZj", "_blank")
+    }
+    if (amount === 30 && selected === "a") {
+      window.open("https://buy.stripe.com/5kA8xzf3vcRS87u7sU", "_blank")
+    }
+    if (amount === 100 && selected === "o") {
+      window.open("https://donate.stripe.com/6oE4hj9Jb9FG5Zm3cs", "_blank")
+    }
+    if (amount === 100 && selected === "m") {
+      window.open("https://buy.stripe.com/14k29bbRj0564Vi28u", "_blank")
+    }
+    if (amount === 100 && selected === "a") {
+      window.open("https://buy.stripe.com/28o4hjdZr6tudrO8wX", "_blank")
+    }
+    if (amount === 200 && selected === "o") {
+      window.open("https://donate.stripe.com/28oeVX5sV4lm73q9AR", "_blank")
+    }
+    if (amount === 200 && selected === "m") {
+      window.open("https://buy.stripe.com/cN201308BdVWfzWfZl", "_blank")
+    }
+    if (amount === 200 && selected === "a") {
+      window.open("https://buy.stripe.com/9AQ9BD1cF05687udRg", "_blank")
+    }
+    if (amount === 500 && selected === "o") {
+      window.open("https://donate.stripe.com/bIY1571cF5pqevSfZg", "_blank")
+    }
+    if (amount === 500 && selected === "m") {
+      window.open("https://buy.stripe.com/aEU5ln4oRaJK5Zm5kI", "_blank")
+    }
+    if (amount === 500 && selected === "a") {
+      window.open("https://buy.stripe.com/7sIg01g7z4lmcnK9AZ", "_blank")
+    }
+  }
+
   return (
     <Box sx={{ marginTop: 12 }}>
       <Helmet>
@@ -176,7 +233,7 @@ export const Donate = ({ viewer, setViewer }: props) => {
                 >$500</Button>
               </Grid>
             </Grid>
-            <Typography variant="h4" color={theme.palette.info.dark} sx={{ fontWeight: 600, marginTop: 2 }}>Name a Fair Price:</Typography>
+            {/* <Typography variant="h4" color={theme.palette.info.dark} sx={{ fontWeight: 600, marginTop: 2 }}>Name a Fair Price:</Typography>
             <TextField
               type='number'
               fullWidth
@@ -185,7 +242,7 @@ export const Donate = ({ viewer, setViewer }: props) => {
               InputProps={{
                 startAdornment: <InputAdornment position="start">$</InputAdornment>,
               }}
-            />
+            /> */}
             <Typography variant="h2" color={theme.palette.info.dark} sx={{ fontWeight: 600, marginTop: 2 }}>
               ${amount}/{selected === "o" ? "Once" : selected === "m" ? "Month" : "Year"}
             </Typography>
@@ -193,8 +250,20 @@ export const Donate = ({ viewer, setViewer }: props) => {
             <Button
               variant="contained"
               className="donate-now--button"
+              disabled={amount <= 0}
+              onClick={() => handleDonateNow(amount, selected)}
+              disableRipple
             >
               Donate Now
+            </Button>
+            <Button
+              variant="contained"
+              sx={{ backgroundColor: "#57996A", color: "#fff", marginTop: 2, textTransform: "capitalize", borderRadius: 0 }}
+              href='https://donate.stripe.com/9AQ7tv3kN6tudrOaF9'
+              target="_blank"
+              disableRipple
+            >
+              Name Fair Price
             </Button>
           </Box>
         </Grid>
