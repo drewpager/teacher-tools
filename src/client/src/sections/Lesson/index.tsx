@@ -1,13 +1,14 @@
 import React from 'react';
 import { Viewer, useLessonQuery, useRelatedPlansQuery } from '../../graphql/generated';
 import { useParams } from 'react-router-dom';
-import { LinearProgress, Box, Chip, Card, Grid, Button, Typography } from '@mui/material';
+import { LinearProgress, Box, Chip, Card, Grid, Button, Typography, Tooltip } from '@mui/material';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
 import { Footer, VideoPlayer } from '../../lib/components';
 import { titleCase, formatDate } from '../../lib/utils';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { PublicPlaylistCard } from '../../lib/components/PublicPlaylistCard';
+import { GoogleClassroomShareButton } from '../../lib/components';
 
 import './lessonPage.scss';
 interface Props {
@@ -71,6 +72,9 @@ export const Lesson = ({ viewer }: Props) => {
                   <Chip variant='outlined' label={titleCase(`${i}`)} key={ind} color="error" className='lesson--category' />
                 </Link>
               ))}
+              <Tooltip title="Assign via Google Classroom">
+                <GoogleClassroomShareButton url={`https://www.platospeach.com/lesson/${lesson?.id}`} />
+              </Tooltip>
               <Box className="lesson-video--section">
                 <VideoPlayer
                   url={`${lesson?.video}`}
