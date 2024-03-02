@@ -148,6 +148,14 @@ export const Donate = ({ viewer, setViewer }: props) => {
         <title>{`Donate to Plato's Peach Non-Profit`}</title>
         <meta name="description" content={`Donate one-time, monthly or annually to support our catalog expansion of short documentaries, custom assessments and interactive lesson plans.`} />
       </Helmet>
+      <Modal
+        open={promptOpen}
+        onClose={handlePromptClose}
+      >
+        <Box className="signupmodal--box">
+          <SignupModal setViewer={setViewer} />
+        </Box>
+      </Modal>
       <Grid container className='grid--container'>
         <Grid item xs={12} sm={12} md={6} lg={6}>
           <Box className='donate-box--title'>
@@ -246,16 +254,24 @@ export const Donate = ({ viewer, setViewer }: props) => {
             <Typography variant="h2" color={theme.palette.info.dark} sx={{ fontWeight: 600, marginTop: 2 }}>
               ${amount}/{selected === "o" ? "Once" : selected === "m" ? "Month" : "Year"}
             </Typography>
-            {selected !== "o" && <Typography variant="body2" color={theme.palette.info.dark} sx={{ fontWeight: 600, marginTop: 2 }}>You can stop recurring payments at any time.</Typography>}
-            <Button
-              variant="contained"
-              className="donate-now--button"
-              disabled={amount <= 0}
-              onClick={() => handleDonateNow(amount, selected)}
-              disableRipple
-            >
-              Donate Now
-            </Button>
+            {selected !== "o" && <Typography variant="body2" color={theme.palette.info.dark} sx={{ fontWeight: 600, marginTop: 2 }}>You can stop recurring payments at any time. Free Signup/Account Required.</Typography>}
+            {viewer.id === null && selected !== "o" ? (
+              <Button
+                variant='contained'
+                onClick={() => setPromptOpen(true)}
+                className='donate-now--button'
+              >Donate Now</Button>
+            ) : (
+              <Button
+                variant="contained"
+                className="donate-now--button"
+                disabled={amount <= 0}
+                onClick={() => handleDonateNow(amount, selected)}
+                disableRipple
+              >
+                Donate Now
+              </Button>
+            )}
             <Button
               variant="contained"
               sx={{ backgroundColor: "#57996A", color: "#fff", marginTop: 2, textTransform: "capitalize", borderRadius: 0 }}
@@ -263,7 +279,7 @@ export const Donate = ({ viewer, setViewer }: props) => {
               target="_blank"
               disableRipple
             >
-              Name Fair Price
+              Custom Amount
             </Button>
           </Box>
         </Grid>

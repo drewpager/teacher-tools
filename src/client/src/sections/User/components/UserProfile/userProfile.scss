@@ -5,7 +5,9 @@
     margin: 4px 0;
     background: library.$lightGreen;
     text-decoration: none;
+    text-transform: capitalize;
     color: white;
+
     &:hover {
       background: library.$darkGreen;
     }
@@ -28,11 +30,13 @@
 .MuiTypography-root {
   &.user--text-details {
     color: library.$darkGreen;
+
     :a {
       text-decoration: none;
+
       &:hover {
         color: library.$coral
-      }  
+      }
     }
   }
 }
@@ -42,7 +46,7 @@
     max-width: 90vw;
     box-shadow: 1rem;
     padding: 2rem;
-    
+
     @media (min-width: 768px) {
       width: 350px;
     }

@@ -203,6 +203,11 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                     <Typography textAlign="center">Profile</Typography>
                   </MenuItem>
                 </Link>
+                <Link to={`/donate/`} style={{ textDecoration: 'none', color: "#000" }}>
+                  <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons" disableRipple disableTouchRipple>
+                    <Typography textAlign="center">Donate</Typography>
+                  </MenuItem>
+                </Link>
                 <MenuItem onClick={handleLogOut} className="dropdown--buttons" disableRipple disableTouchRipple>
                   <Typography textAlign="center">Logout</Typography>
                 </MenuItem>
@@ -328,8 +333,8 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                 <Link to={`/plans`} style={{ textDecoration: "none", marginRight: 32 }}>
                   <p style={{ color: `${theme.palette.info.dark}` }}>Lesson Plan Templates</p>
                 </Link>
-                <Link to={`/pricing`} style={{ textDecoration: "none", marginRight: 32 }}>
-                  <p style={{ color: `${theme.palette.info.dark}` }}>Pricing</p>
+                <Link to={`/donate`} style={{ textDecoration: "none", marginRight: 32 }}>
+                  <p style={{ color: `${theme.palette.info.dark}` }}>Donate</p>
                 </Link>
                 <Link to={`/contact`} style={{ textDecoration: "none", marginRight: 110 }}>
                   <p style={{ color: `${theme.palette.info.dark}` }}>Contact Us</p>

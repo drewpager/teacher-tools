@@ -114,7 +114,7 @@ export const Footer = ({ viewer }: Props) => {
             <Typography className='footer--text-center'>
               All Rights Reserved
               <Copyright fontSize='small' />
-              Plato's Peach
+              Plato's Peach Foundation
             </Typography>
           </Box>
         </Grid>
