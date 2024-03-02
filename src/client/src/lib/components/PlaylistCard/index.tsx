@@ -142,12 +142,8 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
     let userEmails: string[] = [];
     allUsersData?.allUsers?.result.map((user) => {
       userEmails.push(user.contact);
-      if (user?.contact === teacherEmail && (user.paymentId === null || undefined)) {
-        setUserError("Teacher not subscribed to premium!");
-        setOpen(true);
-      }
 
-      if (user?.contact === teacherEmail && user?.paymentId && user?.paymentId?.length > 1) {
+      if (user?.contact === teacherEmail) {
         document.querySelector('.hide-premium')?.classList.remove('hide-premium');
         document.querySelector('.premium-content--card')?.classList.add('display-none');
         setOpen(false);
@@ -296,7 +292,7 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
         {(playlist.creator === viewer?.id) ? (<Chip variant='filled' label="Your Content" className="yourContent-chip" />) : (
           <IconButton
             onClick={() => handleCopy(`${playlist.id}`, `${viewer?.id}`)}
-            disabled={viewer?.paymentId === null && playlist?.premium === true}
+            disabled={viewer?.id === null && playlist?.premium === true}
             disableRipple
             disableFocusRipple
             sx={{ color: "#000" }}
@@ -306,7 +302,6 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
           </IconButton>
         )}
         {CopyPlaylistError ? copyPlaylistErrorMessage : null}
-        {playlist.premium ? <Link to={!viewer?.id ? "/signup" : "/plans"}><Chip icon={<PaidIcon color="success" />} label="Premium" sx={{ backgroundColor: "#e9efe7", mr: 0.5 }} /></Link> : null}
         <Tooltip title="Assign via Google Classroom">
           <GoogleClassroomShareButton url={`https://www.platospeach.com/plans/${formatSlug(playlist.name)}`} />
         </Tooltip>
@@ -325,12 +320,12 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
           <Typography className='playlist--duration' variant="body1">{estimatedTime}-{Math.round(estimatedTime * 1.25)} Minutes</Typography>
         </Box>
       </Box>
-      {(!viewer?.paymentId || viewer.paymentId === null) && playlist.premium && (<Box className="premium-content hide-premium">
+      {(!viewer?.id) && playlist.premium && (<Box className="premium-content hide-premium">
         <Card className="premium-content--card">
-          <Typography variant="h3">Premium Content</Typography>
-          <Typography variant="body1">This content is only available to premium subscribers.</Typography>
+          <Typography variant="h3">Sign Up For A Free Account to View</Typography>
+          <Typography variant="body1">This content is only available to members.</Typography>
           <Button variant="contained" href={'/signup'} className="premium-signup--prompt">Signup</Button>
-          <Button variant="outlined" href={'/pricing'} className="premium-subscribe--prompt">Subscribe</Button>
+          <Button variant="outlined" href={'/donate'} className="premium-subscribe--prompt">Donate</Button>
           <Divider />
           <Typography variant="h3" sx={{ mt: 1, mb: 1 }}>Students</Typography>
           <Typography variant="body1">Please enter your teacher's email address to unlock content:</Typography>

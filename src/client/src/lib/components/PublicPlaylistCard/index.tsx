@@ -168,13 +168,13 @@ export const PublicPlaylistCard = ({ id, name, plan, creator, premium, level, vi
                 <Avatar alt="creator headshot" src={image} sx={{ marginRight: "0.5rem" }} />
               </Tooltip>
               {CopyPlaylistLoading ? copyPlaylistLoadingMessage : (
-                creator === viewer?.id ? (<Chip variant='filled' label="Your Content" />) : premium ? (<></>) : (
-                  <Tooltip title={viewer?.paymentId === null && premium ? "Become a subscriber to copy!" : "Copy Lesson Plan!"}>
+                creator === viewer?.id ? (<Chip variant='filled' label="Your Content" />) : (
+                  <Tooltip title={viewer?.id === null && premium ? "Create account to copy!" : "Copy Lesson Plan!"}>
                     <IconButton
                       disableRipple
                       className="copy-icon"
                       onClick={() => handleCopy(`${id}`, `${viewer?.id}`)}
-                      disabled={viewer?.paymentId === null && premium}
+                      disabled={viewer?.id === null && premium}
                     >
                       <ContentCopyIcon />
                     </IconButton>
@@ -182,9 +182,9 @@ export const PublicPlaylistCard = ({ id, name, plan, creator, premium, level, vi
                 )
               )}
               {CopyPlaylistError ? copyPlaylistErrorMessage : null}
-              {premium ?
-                <Chip icon={<PaidIcon color="success" />} label="Premium" sx={{ backgroundColor: "#e9efe7", marginLeft: "0.25rem" }} /> :
-                <Chip icon={<PaidIcon color="warning" />} label="Free" sx={{ backgroundColor: "#ebebeb", marginLeft: "0.25rem" }} />}
+              {premium && !viewer.id ?
+                <Link to="/signup"><Chip label="Sign Up Required" sx={{ backgroundColor: "#e9efe7", marginLeft: "0.25rem" }} /></Link> :
+                <></>}
               <Snackbar
                 anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                 autoHideDuration={6000}
