@@ -212,7 +212,7 @@ export const playlistResolvers = {
               ? `${playlist.name} ${user?.name} copy`
               : `${playlist.name} copy`,
             plan: [...playlist.plan],
-            level: [...playlist.level],
+            level: playlist.level,
           });
 
           const insertedResult = insertResult
