@@ -113,6 +113,7 @@ export const Pricing = ({ viewer, setViewer }: props) => {
       <Helmet>
         <title>{`Pricing for Teachers, Homeschool, and School Districts | Plato's Peach`}</title>
         <meta name="description" content={`Pay annually or monthly to leverage our catalog of short documentaries and custom assessments to create interactive lesson plans.`} />
+        <meta name="robots" content="noindex" />
       </Helmet>
       <FormGroup sx={{ alignItems: 'center', marginRight: 2 }}>
         <FormControlLabel control={<PricingSwitch sx={{ m: 1 }} checked={monthlyCadence} onChange={() => setMonthlyCadence(!monthlyCadence)} />} label="" />
