@@ -126,11 +126,11 @@ export const SignUp = ({ setViewer }: Props) => {
   const signUpFAQ = [
     {
       question: "What is Plato's Peach?",
-      answer: "Plato's Peach is a platform that allows teachers to build, copy, customize and share interactive lesson plans with their students and other teachers."
+      answer: "Plato's Peach is a platform that provides over 1,000 short documentary-style microlearning videos and allows teachers to build, copy, customize and share interactive lesson plans with their students and other teachers."
     },
     {
       question: "What Features Does Plato's Peach Have?",
-      answer: "1,000+ short educational films, lesson plan templates, easy drag and drop lesson plan builder, customizable assessments, supporting articles, and more!"
+      answer: "1,000+ short educational films, lesson plan templates, easy drag and drop lesson plan builder, AI assessment generator, supporting articles, and more!"
     },
     {
       question: "What LMS Integrations Does Plato's Peach Support?",
@@ -138,7 +138,7 @@ export const SignUp = ({ setViewer }: Props) => {
     },
     {
       question: "Is Plato's Peach Free?",
-      answer: "Plato's Peach has a free version with limited features. If you'd like to upgrade to the premium version, you can do so for a monthly or annual charge."
+      answer: "Yes, Plato's Peach is free for teachers to use! If you'd like to support us financially, you can make a one-time donation or do so for a monthly or annual charge."
     }
   ]
 

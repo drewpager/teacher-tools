@@ -2,7 +2,7 @@ import { Box, Typography, Chip, FormGroup, FormControlLabel, Divider, Button, Mo
 import Switch, { SwitchProps } from '@mui/material/Switch';
 import { styled } from '@mui/material/styles';
 import React, { useState, forwardRef, useEffect } from 'react';
-import { Footer, SignupModal } from '../../lib/components/';
+import { Footer, SignupModal, FAQ } from '../../lib/components/';
 import { Stripe, loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 import CheckIcon from '@mui/icons-material/Check';
@@ -142,6 +142,29 @@ export const Donate = ({ viewer, setViewer }: props) => {
     }
   }
 
+  const donateFAQ = [
+    {
+      question: "Why should I donate to Plato’s Peach? What do my donations support?",
+      answer: "Donations to Plato’s Peach help us in our mission to support teachers and students globally with content and tools that fit their needs. We have an ambitious roadmap for both our growing catalog of content as well as our suite of tools to leverage that content within the learning journey. Your donations will help make this work possible."
+    },
+    {
+      question: "Is my gift tax deductible?",
+      answer: "Yes, all donations are tax-deductible to the fullest extent of U.S. law."
+    },
+    {
+      question: "I don’t want to give online. Where can I mail my donation check?",
+      answer: "You can mail your gift to our office at 1757 Playa Vista San Marcos, CA 92078. Please include a return address so we can send you a receipt."
+    },
+    {
+      question: "What if I want to make a donation larger than $10,000?",
+      answer: "You're amazing! We can work with you to make that happen. Please contact Tom at tom@teachertoolsusa.com"
+    },
+    {
+      question: "I can’t make a monetary donation right now. Are there other ways I can support Plato’s Peach?",
+      answer: "Use the product and share it with your friends, colleagues or anyone you think would find it beneficial for them. Thank you :)"
+    }
+  ]
+
   return (
     <Box sx={{ marginTop: 12 }}>
       <Helmet>
@@ -160,10 +183,10 @@ export const Donate = ({ viewer, setViewer }: props) => {
         <Grid item xs={12} sm={12} md={6} lg={6}>
           <Box className='donate-box--title'>
             <Typography variant="h1" className='donate-title--text'>
-              Donate to Plato's Peach Foundation for a Tax-Deductible Contribution to Support Education.
+              Donate to Plato's Peach Learning for a Tax-Deductible Contribution to Support Education.
             </Typography>
             <Typography variant='h4' className='subtitle--text'>
-              Plato's Peach Foundation is a 501(c)(3) nonprofit and nonpartisan organization. All donations are tax-deductible to the fullest extent of U.S. law.
+              Plato's Peach Learning Corporation is a 501(c)(3) nonprofit and nonpartisan organization. All donations are tax-deductible to the fullest extent of U.S. law.
             </Typography>
           </Box>
         </Grid>
@@ -283,6 +306,9 @@ export const Donate = ({ viewer, setViewer }: props) => {
             </Button>
           </Box>
         </Grid>
+        <Box className='signUp--faq'>
+          <FAQ questionAnswers={donateFAQ} />
+        </Box>
       </Grid>
       {/* <FormGroup sx={{ alignItems: 'center', marginRight: 2 }}>
         <FormControlLabel control={<PricingSwitch sx={{ m: 1 }} checked={monthlyCadence} onChange={() => setMonthlyCadence(!monthlyCadence)} />} label="" />

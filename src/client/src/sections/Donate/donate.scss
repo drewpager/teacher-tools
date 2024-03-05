@@ -53,14 +53,16 @@
 
 .MuiBox-root {
   &.box--donate {
-    width: 70%;
+    width: 80%;
     border: 2px solid black;
     border-radius: 0.5rem;
     padding: 1rem;
     margin-top: 2rem;
+    margin-right: 0.5rem;
 
     @media (max-width: 768px) {
       width: 100%;
+      margin-right: 0.5rem;
     }
   }
 }
