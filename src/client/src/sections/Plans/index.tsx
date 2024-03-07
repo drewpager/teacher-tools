@@ -64,7 +64,7 @@ export const Plans = ({ viewer, setViewer }: Props) => {
               <InlineCTA />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
-              <Typography variant="h2" className="planDonate-text">Consider Supporting Content Like This With a Donation</Typography>
+              <Typography variant="h2" className="planDonate-text">Support Content Like This With a Donation</Typography>
               <Typography variant="body1" className="planDonate-subtext">Donations to Plato’s Peach non-profit help us in our mission to support teachers and students globally with high-quality educational content and tools that fit their needs. We have an ambitious roadmap for both our growing catalog of free content as well as our suite of tools to leverage that content within the learning journey. Your donations will help make this work possible.</Typography>
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
