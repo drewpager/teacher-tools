@@ -146,7 +146,7 @@ export const Donate = ({ viewer, setViewer }: props) => {
           <DonateCard viewer={viewer} setViewer={setViewer} />
         </Grid>
         <Box className='donate--faq'>
-          <Typography className="faq-text">Frequent Asked Donor Questions</Typography>
+          <Typography className="faq-text">Frequently Asked Donor Questions</Typography>
           <FAQ questionAnswers={donateFAQ} />
         </Box>
       </Grid>
