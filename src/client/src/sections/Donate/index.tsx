@@ -2,7 +2,7 @@ import { Box, Typography, Chip, FormGroup, FormControlLabel, Divider, Button, Mo
 import Switch, { SwitchProps } from '@mui/material/Switch';
 import { styled } from '@mui/material/styles';
 import React, { useState, forwardRef, useEffect } from 'react';
-import { Footer, SignupModal, FAQ } from '../../lib/components/';
+import { Footer, SignupModal, FAQ, DonateCard } from '../../lib/components/';
 import { Stripe, loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 import CheckIcon from '@mui/icons-material/Check';
@@ -23,58 +23,6 @@ export const Donate = ({ viewer, setViewer }: props) => {
   const [promptOpen, setPromptOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<string>("o");
   const [amount, setAmount] = useState<number>(10);
-
-  const PricingSwitch = styled(Switch)(() => ({
-    width: 100,
-    height: 45,
-    padding: 0,
-    margin: 12,
-    borderRadius: "20% / 50%",
-    '& .MuiSwitch-switchBase': {
-      margin: 0,
-      padding: 0,
-      transform: 'translateX(-1px)',
-      '&.Mui-checked': {
-        color: '#fff',
-        transform: 'translateX(35px)',
-        '& .MuiSwitch-thumb:before': {
-          content: "'Yearly'",
-          position: 'relative',
-          width: '100%',
-          height: '100%',
-          left: 6,
-          top: 7,
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-        },
-        '& + .MuiSwitch-track': {
-          opacity: 1,
-          backgroundColor: theme.palette.mode === 'dark' ? '#8796A5' : '#aab4be',
-        },
-      },
-    },
-    '& .MuiSwitch-thumb': {
-      backgroundColor: theme.palette.mode === 'dark' ? '#003892' : '#001e3c',
-      width: 75,
-      height: 45,
-      borderRadius: 30,
-      fontSize: 18,
-      '&:before': {
-        content: "'Monthly'",
-        position: 'relative',
-        width: '100%',
-        height: '100%',
-        left: 6,
-        top: 7,
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-      },
-    },
-    '& .MuiSwitch-track': {
-      opacity: 1,
-      backgroundColor: theme.palette.mode === 'dark' ? '#8796A5' : '#aab4be',
-    },
-  }));
 
   const handlePromptClose = () => {
     setPromptOpen(false);
@@ -145,11 +93,15 @@ export const Donate = ({ viewer, setViewer }: props) => {
   const donateFAQ = [
     {
       question: "Why should I donate to Plato’s Peach? What do my donations support?",
-      answer: "Donations to Plato’s Peach help us in our mission to support teachers and students globally with content and tools that fit their needs. We have an ambitious roadmap for both our growing catalog of content as well as our suite of tools to leverage that content within the learning journey. Your donations will help make this work possible."
+      answer: "Donations to Plato’s Peach non-profit help us in our mission to support teachers and students globally with high-quality educational content and tools that fit their needs. We have an ambitious roadmap for both our growing catalog of free content as well as our suite of tools to leverage that content within the learning journey. Your donations will help make this work possible."
     },
     {
       question: "Is my gift tax deductible?",
       answer: "Yes, all donations are tax-deductible to the fullest extent of U.S. law."
+    },
+    {
+      question: "How do I get a receipt for my tax deductible donation?",
+      answer: "After your donation payment has been made, we will email you a receipt for tax purposes."
     },
     {
       question: "I don’t want to give online. Where can I mail my donation check?",
@@ -157,7 +109,7 @@ export const Donate = ({ viewer, setViewer }: props) => {
     },
     {
       question: "What if I want to make a donation larger than $10,000?",
-      answer: "You're amazing! We can work with you to make that happen. Please contact Tom at tom@teachertoolsusa.com"
+      answer: "You're amazing! We can work with you to make that happen. Please feel free to use our contact form and someone from our executive team will contact you directly."
     },
     {
       question: "I can’t make a monetary donation right now. Are there other ways I can support Plato’s Peach?",
@@ -191,122 +143,10 @@ export const Donate = ({ viewer, setViewer }: props) => {
           </Box>
         </Grid>
         <Grid item xs={12} sm={12} md={6} lg={6}>
-          <Box
-            className='box--donate'>
-            <Box sx={{ alignItems: "center" }}>
-              <Button
-                onClick={() => setSelected("o")}
-                variant={selected === "o" ? "contained" : "outlined"}
-                className="donationFrequency--button"
-                disableRipple
-              >One-Time</Button>
-              <Button
-                onClick={() => setSelected("m")}
-                variant={selected === "m" ? "contained" : "outlined"}
-                className="donationFrequency--button"
-                disableRipple
-              >Monthly</Button>
-              <Button
-                onClick={() => setSelected("a")}
-                variant={selected === "a" ? "contained" : "outlined"}
-                className="donationFrequency--button"
-                disableRipple
-              >Annually</Button>
-            </Box>
-            <Typography variant="h4" color={theme.palette.info.dark} sx={{ fontWeight: 600, marginTop: 2 }}>Choose Amount:</Typography>
-            <Grid container sx={{ marginLeft: 0 }}>
-              <Grid item xs={4} sm={4} md={4} lg={4}>
-                <Button
-                  sx={{ borderRadius: 0, textTransform: "capitalize", marginRight: 2, marginBottom: 2, width: "100%" }}
-                  onClick={() => setAmount(10)}
-                  variant={amount === 10 ? "contained" : "outlined"}
-                  disableRipple
-                >$10</Button>
-              </Grid>
-              <Grid item xs={4} sm={4} md={4} lg={4}>
-                <Button
-                  sx={{ borderRadius: 0, textTransform: "capitalize", marginRight: 2, marginBottom: 2, width: "100%" }}
-                  onClick={() => setAmount(20)}
-                  variant={amount === 20 ? "contained" : "outlined"}
-                  disableRipple
-                >$20</Button>
-              </Grid>
-              <Grid item xs={4} sm={4} md={4} lg={4}>
-                <Button
-                  sx={{ borderRadius: 0, textTransform: "capitalize", width: "100%" }}
-                  onClick={() => setAmount(30)}
-                  variant={amount === 30 ? "contained" : "outlined"}
-                  disableRipple
-                >$30</Button>
-              </Grid>
-              <Grid item xs={4} sm={4} md={4} lg={4}>
-                <Button
-                  sx={{ borderRadius: 0, textTransform: "capitalize", width: "100%" }}
-                  onClick={() => setAmount(100)}
-                  variant={amount === 100 ? "contained" : "outlined"}
-                  disableRipple
-                >$100</Button>
-              </Grid>
-              <Grid item xs={4} sm={4} md={4} lg={4}>
-                <Button
-                  sx={{ borderRadius: 0, textTransform: "capitalize", width: "100%" }}
-                  onClick={() => setAmount(200)}
-                  variant={amount === 200 ? "contained" : "outlined"}
-                  disableRipple
-                >$200</Button>
-              </Grid>
-              <Grid item xs={4} sm={4} md={4} lg={4}>
-                <Button
-                  sx={{ borderRadius: 0, textTransform: "capitalize", width: "100%" }}
-                  onClick={() => setAmount(500)}
-                  variant={amount === 500 ? "contained" : "outlined"}
-                  disableRipple
-                >$500</Button>
-              </Grid>
-            </Grid>
-            {/* <Typography variant="h4" color={theme.palette.info.dark} sx={{ fontWeight: 600, marginTop: 2 }}>Name a Fair Price:</Typography>
-            <TextField
-              type='number'
-              fullWidth
-              value={amount}
-              onChange={(e) => namePrice(e)}
-              InputProps={{
-                startAdornment: <InputAdornment position="start">$</InputAdornment>,
-              }}
-            /> */}
-            <Typography variant="h2" color={theme.palette.info.dark} sx={{ fontWeight: 600, marginTop: 2 }}>
-              ${amount}/{selected === "o" ? "Once" : selected === "m" ? "Month" : "Year"}
-            </Typography>
-            {selected !== "o" && <Typography variant="body2" color={theme.palette.info.dark} sx={{ fontWeight: 600, marginTop: 2 }}>You can stop recurring payments at any time. Free Signup/Account Required.</Typography>}
-            {viewer.id === null && selected !== "o" ? (
-              <Button
-                variant='contained'
-                onClick={() => setPromptOpen(true)}
-                className='donate-now--button'
-              >Donate Now</Button>
-            ) : (
-              <Button
-                variant="contained"
-                className="donate-now--button"
-                disabled={amount <= 0}
-                onClick={() => handleDonateNow(amount, selected)}
-                disableRipple
-              >
-                Donate Now
-              </Button>
-            )}
-            <Button
-              variant="contained"
-              sx={{ backgroundColor: "#57996A", color: "#fff", marginTop: 2, textTransform: "capitalize", borderRadius: 0 }}
-              href='https://donate.stripe.com/9AQ7tv3kN6tudrOaF9'
-              target="_blank"
-              disableRipple
-            >
-              Custom Amount
-            </Button>
-          </Box>
+          <DonateCard viewer={viewer} setViewer={setViewer} />
         </Grid>
-        <Box className='signUp--faq'>
+        <Box className='donate--faq'>
+          <Typography className="faq-text">Frequent Asked Donor Questions</Typography>
           <FAQ questionAnswers={donateFAQ} />
         </Box>
       </Grid>

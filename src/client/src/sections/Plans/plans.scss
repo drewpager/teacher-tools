@@ -1,0 +1,41 @@
+@use "../../library";
+@import "../../mixins";
+
+.MuiTypography-root {
+  &.planDonate-text {
+    padding: 1rem 0;
+    font-size: clamp(1.75rem, 1.5rem, 1.6rem);
+    color: library.$peachy;
+    align-self: baseline;
+    line-height: 115%;
+    font-family: "Source Serif Pro";
+    font-style: normal;
+    font-weight: bold;
+    margin-top: 4rem;
+    margin-left: 4rem;
+    margin-right: 1rem;
+
+    @media (max-width: 768px) {
+      margin-top: 0;
+      margin-left: 0;
+    }
+  }
+
+  &.planDonate-subtext {
+    padding: 1rem 0;
+    font-size: 1.25rem;
+    color: library.$peachy;
+    align-self: baseline;
+    line-height: 120%;
+    // font-family: "Source Serif Pro";
+    font-style: normal;
+    margin-top: 1rem;
+    margin-left: 4rem;
+    margin-right: 2.5rem;
+
+    @media (max-width: 768px) {
+      margin-top: 0;
+      margin-left: 0;
+    }
+  }
+}

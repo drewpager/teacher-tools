@@ -25,6 +25,7 @@ export * from "./PlaylistDetails";
 export * from "./ProductValues";
 export * from "./ProductDetails";
 export * from "./CTA";
+export * from "./DonateCard";
 export * from "./InlineCTA";
 export * from "./FAQ";
 export * from "./Footer";

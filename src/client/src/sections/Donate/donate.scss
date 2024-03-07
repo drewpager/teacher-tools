@@ -65,9 +65,34 @@
       margin-right: 0.5rem;
     }
   }
+
+  &.donate--faq {
+    min-width: 33%;
+    max-width: 60%;
+    height: auto;
+    margin: 4rem auto;
+
+    @media (max-width: 768px) {
+      min-width: 100%;
+      max-width: 100%;
+      margin: 2rem auto auto 0.25rem;
+    }
+  }
 }
 
 .MuiTypography-root {
+  &.faq-text {
+    padding: 1rem 0;
+    font-size: clamp(1.75rem, 1.5rem, 1.6rem);
+    color: library.$peachy;
+    align-self: baseline;
+    line-height: 115%;
+    font-family: "Source Serif Pro";
+    font-style: normal;
+    font-weight: bold;
+    text-align: center;
+  }
+
   &.donate-title--text {
     width: 70%;
     margin-top: 2rem;
@@ -86,6 +111,7 @@
       width: 90%;
     }
   }
+
 
   &.subtitle--text {
     width: 70%;
