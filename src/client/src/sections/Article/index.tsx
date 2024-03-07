@@ -1,5 +1,5 @@
 import React from 'react';
-import { useArticleQuery, useRelatedPlansQuery } from '../../graphql/generated';
+import { useArticleQuery, useRelatedPlansQuery, Viewer } from '../../graphql/generated';
 import { useParams } from 'react-router-dom';
 import { Box, LinearProgress, Grid, Card, Typography, Button } from '@mui/material';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
@@ -11,7 +11,11 @@ import { Link } from 'react-router-dom';
 import { formatSlug } from '../../lib/utils/formatSlug';
 import { PublicPlaylistCard } from '../../lib/components/PublicPlaylistCard';
 
-export const Article = () => {
+interface Props {
+  viewer: Viewer
+}
+
+export const Article = ({ viewer }: Props) => {
   const params = useParams();
   const { data, loading, error } = useArticleQuery({
     variables: {
@@ -116,9 +120,9 @@ export const Article = () => {
           <Grid item xs={12} sm={12} md={4} lg={4}>
             <Box className="featuredPlans--section">
               <h2>Featured Lesson Plans</h2>
-              {relatedPlansData?.relatedPlans.map((plan: any) => (
+              {relatedPlansData?.relatedPlans.map((plan: any, index) => (
                 <Box className="featuredPlan--card">
-                  {plan.public && <PublicPlaylistCard key={plan.id} {...plan} />}
+                  {plan.public && <PublicPlaylistCard key={index} {...plan} viewer={viewer} />}
                 </Box>
               ))}
             </Box>

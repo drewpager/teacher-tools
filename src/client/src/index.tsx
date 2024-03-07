@@ -140,7 +140,7 @@ const App = () => {
           <Route path="/quiz/:id" element={<Quiz />} />
           <Route path="/quiz/create" element={<CreateQuiz viewer={viewer} />} />
           <Route path="/article/create" element={<CreateArticle viewer={viewer} />} />
-          <Route path="/article/:id" element={<Article />} />
+          <Route path="/article/:id" element={<Article viewer={viewer} />} />
           <Route path="/article" element={<ArticlesCatalog viewer={viewer} />} />
           <Route path="/edit/:id" element={<EditPlaylist viewer={viewer} />} />
           <Route path="/lesson/create" children={(props: any) => (<CreateLesson {...props} viewer={viewer} />)} element={<CreateLesson viewer={viewer} />} />
