@@ -31,6 +31,7 @@ import { Helmet } from 'react-helmet';
 import { VariableSizeList as List } from 'react-window';
 import { BookmarkSwitch } from '../CreatePlaylist/bookmarkSwitch';
 import { LockSwitch } from '../CreatePlaylist/lockSwitch';
+import { GradeLevel } from '../CreatePlaylist/gradeLevel';
 
 import "../CreatePlaylist/createPlaylist.scss";
 
@@ -44,7 +45,8 @@ type InputLessonPlan = {
   creator: string,
   plan: Plan[],
   public: boolean,
-  premium: boolean
+  premium: boolean,
+  level: number[]
 }
 
 const InitialPlaylist: InputLessonPlan = {
@@ -53,7 +55,8 @@ const InitialPlaylist: InputLessonPlan = {
   creator: "",
   plan: [],
   public: false,
-  premium: false
+  premium: false,
+  level: [6, 8]
 }
 
 interface RenderProps {
@@ -93,9 +96,10 @@ export const EditPlaylist = ({ viewer }: props) => {
   const playlistRef = useRef<List>(null);
   const bookmarkRef = useRef<List>(null);
   const [yourContent, setYourContent] = useState<boolean>(false);
-  const [locked, setLocked] = useState<boolean>(false);
+  const [locked, setLocked] = useState<boolean | undefined>(false);
   const [ascending, setAscending] = useState<boolean>(true);
-  const [premium, setPremium] = useState<boolean>(false);
+  const [premium, setPremium] = useState<boolean | undefined>(false);
+  const [level, setLevel] = useState<number[]>([6, 8]);
   const [open, setOpen] = useState(false);
   const [autoSaved, setAutoSaved] = useState<boolean>(false)
 
@@ -107,7 +111,7 @@ export const EditPlaylist = ({ viewer }: props) => {
     setOpen(true);
   }
 
-  const limit: number = 1000;
+  const limit: number = 1500;
   const page: number = 1;
 
   const [updatePlanMutation, { loading: updatePlanLoading, error: updatePlanError }] = useUpdatePlanMutation({
@@ -130,11 +134,13 @@ export const EditPlaylist = ({ viewer }: props) => {
         _id: `${PlaylistData?.playlist.id}`,
         name: `${PlaylistData?.playlist.name}`,
         creator: `${PlaylistData?.playlist.creator}`,
-        // plan: PlaylistData?.playlist ? [...PlaylistData.playlist.plan] : [],
         plan: PlaylistData?.playlist ? PlaylistData.playlist.plan : [],
         public: PlaylistData?.playlist.public,
-        premium: PlaylistData?.playlist.premium
+        premium: PlaylistData?.playlist.premium,
+        level: PlaylistData?.playlist.level
       })
+      setPremium(PlaylistData.playlist.premium !== null && PlaylistData?.playlist.premium)
+      setLocked(PlaylistData.playlist.public !== null && PlaylistData?.playlist.public)
     }
   }, [PlaylistData])
 
@@ -514,7 +520,8 @@ export const EditPlaylist = ({ viewer }: props) => {
       creator: `${playlist.creator}`,
       plan: playlist.plan,
       public: locked,
-      premium: premium
+      premium: premium,
+      level: level
     })
   }
 
@@ -629,7 +636,8 @@ export const EditPlaylist = ({ viewer }: props) => {
     setPlaylist({
       name: `${PlaylistData?.playlist.name}`,
       creator: `${PlaylistData?.playlist.creator}`,
-      plan: PlaylistData?.playlist ? [...PlaylistData.playlist.plan] : []
+      plan: PlaylistData?.playlist ? [...PlaylistData.playlist.plan] : [],
+      level: PlaylistData?.playlist.level ? PlaylistData?.playlist.level : [6, 8],
     });
     setPlans([]);
     handleCategoryClick("All", 0)
@@ -671,6 +679,11 @@ export const EditPlaylist = ({ viewer }: props) => {
   const handlePremium = () => {
     setPremium(!premium);
     setPlaylist({ ...playlist, premium: !premium });
+  }
+
+  const handleGradeLevel = (newLevel: number[]) => {
+    setLevel(newLevel);
+    setPlaylist({ ...playlist, level: newLevel });
   }
 
   const resetSearch = () => {
@@ -915,10 +928,10 @@ export const EditPlaylist = ({ viewer }: props) => {
             </Grid>
           </DragDropContext>
           <Box className="button--slider-playlist">
-            <Tooltip title={viewer.paymentId !== null ? "Make Private/Public" : "Public Content Restricted to Paying Users"}>
-              <LockSwitch checked={!locked} onChange={handleLock} disabled={viewer.paymentId === null} />
+            <Tooltip title={viewer.id !== null ? "Make Private/Public" : "Public Content Restricted to Registered Users"}>
+              <LockSwitch checked={!locked} onChange={handleLock} disabled={viewer.id === null} />
             </Tooltip>
-            <Tooltip title={viewer.paymentId !== null ? "Make Private/Public" : "Public Content Restricted to Paying Users"}>
+            <Tooltip title={viewer.id !== null ? "Make Private/Public" : "Public Content Restricted to Registered Users"}>
               <Typography variant="body1" color={!locked ? "error" : "success"}>{!locked ? "Private" : "Public"}</Typography>
             </Tooltip>
             <Tooltip title="If two or more items contain dates, sort chronologically">
@@ -933,18 +946,21 @@ export const EditPlaylist = ({ viewer }: props) => {
                 sx={{ ml: 1 }}
               />
             </Tooltip>
-            <Tooltip title="Check to make premium (for paying users only)">
+            <Tooltip title="Check to make premium (for community members only)">
               <FormControlLabel
                 control={
                   <Checkbox
                     onChange={() => handlePremium()}
                     disableRipple
-                    disabled={viewer.paymentId === null}
+                    disabled={viewer.id === null}
                   />}
                 label="Premium Content"
                 sx={{ ml: 0.5 }}
               />
             </Tooltip>
+            <Box className="button--slider-playlist">
+              <GradeLevel level={level} setLevel={setLevel} onChange={(event: any, newLevel: number[]) => handleGradeLevel(newLevel)} />
+            </Box>
           </Box>
           <Button
             className="createPlaylist--button"
