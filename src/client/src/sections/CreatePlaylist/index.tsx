@@ -955,10 +955,10 @@ export const CreatePlaylist = ({ viewer }: props) => {
             </Grid>
           </DragDropContext>
           <Box className="button--slider-playlist">
-            <Tooltip title={viewer.paymentId !== null ? "Make Private/Public" : "Public Content Restricted to Paying Users"}>
-              <LockSwitch checked={!locked} onChange={handleLock} disabled={viewer.paymentId === null} />
+            <Tooltip title={viewer.id !== null ? "Make Private/Public" : "Public Content Restricted to Registered Users"}>
+              <LockSwitch checked={!locked} onChange={handleLock} disabled={viewer.id === null} />
             </Tooltip>
-            <Tooltip title={viewer.paymentId !== null ? "Make Private/Public" : "Public Content Restricted to Paying Users"}>
+            <Tooltip title={viewer.id !== null ? "Make Private/Public" : "Public Content Restricted to Registered Users"}>
               <Typography variant="body1" color={!locked ? "error" : "success"}>{!locked ? "Private" : "Public"}</Typography>
             </Tooltip>
             <Tooltip title="If two or more items contain dates, sort chronologically">
@@ -973,13 +973,13 @@ export const CreatePlaylist = ({ viewer }: props) => {
                 sx={{ ml: 1 }}
               />
             </Tooltip>
-            <Tooltip title="Check to make premium (for paying users only)">
+            <Tooltip title="Check to make premium (for Plato's Peach community only)">
               <FormControlLabel
                 control={
                   <Checkbox
                     onChange={() => handlePremium()}
                     disableRipple
-                    disabled={viewer.paymentId === null}
+                    disabled={viewer.id === null}
                   />}
                 label="Premium Content"
                 sx={{ ml: 0.5 }}

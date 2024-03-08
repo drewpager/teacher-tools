@@ -220,10 +220,10 @@ export const CreateArticle = ({ viewer }: Props) => {
                 <Typography variant="body1" color={locked ? "error" : "success"}>{locked ? "Private" : "Public"}</Typography>
               </Box> */}
               <Box className="button--slider-article">
-                <Tooltip title={viewer.paymentId !== null ? "Make Private/Public" : "Public Content Restricted to Paying Users"}>
-                  <LockSwitch checked={!locked} onChange={() => setLocked(!locked)} disabled={viewer.paymentId === null} />
+                <Tooltip title={viewer.id !== null ? "Make Private/Public" : "Public Content Restricted to Registered Users"}>
+                  <LockSwitch checked={!locked} onChange={() => setLocked(!locked)} disabled={viewer.id === null} />
                 </Tooltip>
-                <Tooltip title={viewer.paymentId !== null ? "Make Private/Public" : "Public Content Restricted to Paying Users"}>
+                <Tooltip title={viewer.id !== null ? "Make Private/Public" : "Public Content Restricted to Registered Users"}>
                   <Typography variant="body1" color={!locked ? "error" : "success"}>{!locked ? "Private" : "Public"}</Typography>
                 </Tooltip>
               </Box>

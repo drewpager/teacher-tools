@@ -59,7 +59,7 @@ export const CreatePlaylistSkeleton = () => {
         {/* Reset button placeholder */}
         <Skeleton variant="rectangular" width={75} height={40} sx={{ ml: 2 }} />
         <Grid container>
-          <Grid item xs={12} sm={12} md={7} lg={7}>
+          <Grid item xs={12} sm={12} md={6} lg={6}>
             <Card variant="outlined" className="createPlaylist-drop--card">
               {/* Title Field placeholder */}
               <Skeleton variant="rectangular" width={"100%"} height={50} />
@@ -73,7 +73,7 @@ export const CreatePlaylistSkeleton = () => {
             </Card>
           </Grid>
 
-          <Grid item xs={12} sm={12} md={5} lg={5}>
+          <Grid item xs={12} sm={12} md={6} lg={6}>
             <div style={{ display: "flex", alignItems: "center" }}>
               <BookmarkSwitch checked={true} />
               <Skeleton variant="text" width={160} height={50} />

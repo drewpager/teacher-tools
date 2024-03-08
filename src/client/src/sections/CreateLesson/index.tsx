@@ -512,10 +512,10 @@ export const CreateLesson = ({ viewer }: Props) => {
                   error={touched.endDate && errors.endDate ? true : false}
                 /><br />
                 <Box className="button--slider-lesson">
-                  <Tooltip title={viewer.paymentId !== null ? "Make Private/Public" : "Public Content Restricted to Paying Users"}>
+                  <Tooltip title={viewer.paymentId !== null ? "Make Private/Public" : "Public Content Restricted"}>
                     <LockSwitch checked={!locked} onChange={() => setLocked(!locked)} disabled={viewer.paymentId === null} />
                   </Tooltip>
-                  <Tooltip title={viewer.paymentId !== null ? "Make Private/Public" : "Public Content Restricted to Paying Users"}>
+                  <Tooltip title={viewer.paymentId !== null ? "Make Private/Public" : "Public Content Restricted"}>
                     <Typography variant="body1" color={!locked ? "error" : "success"}>{!locked ? "Private" : "Public"}</Typography>
                   </Tooltip>
                 </Box>

@@ -348,7 +348,7 @@ export const QuizCreate = ({ viewer }: props) => {
             </Box>
           </Modal>
           {!viewer.id ? (
-            <Tooltip title="Must be a paying user to use AI Quiz Generator">
+            <Tooltip title="Account required to use AI Quiz Generator">
               <IconButton
                 onClick={() => !viewer.id ? navigate('/signup', { replace: true }) : null}
                 disableRipple
@@ -553,10 +553,10 @@ export const QuizCreate = ({ viewer }: props) => {
                 )}
               </FieldArray>
               <Box sx={{ display: "flex", marginTop: "1rem" }}>
-                <Tooltip title={viewer.paymentId !== null ? "Make Private/Public" : "Public Content Restricted to Paying Users"}>
-                  <LockSwitch checked={!locked} onChange={() => { setLocked(!locked); values.public = !locked }} disabled={viewer.paymentId === null} />
+                <Tooltip title={viewer.id !== null ? "Make Private/Public" : "Public Content Restricted to Registered Users"}>
+                  <LockSwitch checked={!locked} onChange={() => { setLocked(!locked); values.public = !locked }} disabled={viewer.id === null} />
                 </Tooltip>
-                <Tooltip title={viewer.paymentId !== null ? "Make Private/Public" : "Public Content Restricted to Paying Users"}>
+                <Tooltip title={viewer.id !== null ? "Make Private/Public" : "Public Content Restricted to Registered Users"}>
                   <Typography variant="body1" color={!locked ? "error" : "success"}>{!locked ? "Private" : "Public"}</Typography>
                 </Tooltip>
               </Box>
@@ -590,15 +590,15 @@ export const QuizCreate = ({ viewer }: props) => {
                     </Fab>
                   </Box>
                   <Box className="generate-quiz--modal">
-                    {viewer.paymentId === null && setTfNums(2)}
+                    {/* {viewer.paymentId === null && setTfNums(2)}
                     {viewer.paymentId === null && setMcNums(2)}
-                    {viewer.paymentId === null && (<Typography variant="body2" color="error" sx={{ m: "1rem" }}>Free Plan Limited to 4 AI Generated Quiz Questions</Typography>)}
+                    {viewer.paymentId === null && (<Typography variant="body2" color="error" sx={{ m: "1rem" }}>Free Plan Limited to 4 AI Generated Quiz Questions</Typography>)} */}
                     <Typography variant="h3" sx={{ m: "1rem" }}>AI Quiz Generator</Typography>
                     <Typography variant="h4" sx={{ m: "1rem" }}>How many multiple choice questions?</Typography>
                     <Slider
                       aria-label="Multichoice Questions"
                       value={mcNums}
-                      onChange={viewer.paymentId !== null ? handleMcSlideChange : () => { }}
+                      onChange={handleMcSlideChange}
                       valueLabelDisplay="on"
                       step={1}
                       marks
@@ -610,7 +610,7 @@ export const QuizCreate = ({ viewer }: props) => {
                     <Slider
                       aria-label="Multichoice Questions"
                       value={tfNums}
-                      onChange={viewer.paymentId !== null ? handleTfSlideChange : () => { }}
+                      onChange={handleTfSlideChange}
                       valueLabelDisplay="on"
                       step={1}
                       marks
