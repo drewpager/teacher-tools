@@ -369,7 +369,7 @@ export type Lesson = {
 
 export type LessonPlanInput = {
   creator: Scalars['String'];
-  level?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  level?: InputMaybe<Array<Scalars['Int']>>;
   name: Scalars['String'];
   plan: Array<InputMaybe<Plan>>;
   premium?: InputMaybe<Scalars['Boolean']>;

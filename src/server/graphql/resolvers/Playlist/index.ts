@@ -144,6 +144,8 @@ export const playlistResolvers = {
               name: input.name,
               plan: input.plan,
               public: input.public,
+              premium: input.premium,
+              level: input.level,
             },
           }
         );

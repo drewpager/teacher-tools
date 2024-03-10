@@ -31,7 +31,7 @@ const marks = [
 
 export const GradeLevel = ({ level, setLevel, onChange }: props) => {
 
-  const [value2, setValue2] = useState<number[]>([6, 8]);
+  const [value2, setValue2] = useState<number[]>(level);
 
   const handleChange2 = (
     event: Event,

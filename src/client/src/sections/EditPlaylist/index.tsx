@@ -56,7 +56,7 @@ const InitialPlaylist: InputLessonPlan = {
   plan: [],
   public: false,
   premium: false,
-  level: [6, 8]
+  level: []
 }
 
 interface RenderProps {
@@ -99,7 +99,7 @@ export const EditPlaylist = ({ viewer }: props) => {
   const [locked, setLocked] = useState<boolean | undefined>(false);
   const [ascending, setAscending] = useState<boolean>(true);
   const [premium, setPremium] = useState<boolean | undefined>(false);
-  const [level, setLevel] = useState<number[]>([6, 8]);
+  const [level, setLevel] = useState<number[]>([7, 10]);
   const [open, setOpen] = useState(false);
   const [autoSaved, setAutoSaved] = useState<boolean>(false)
 
@@ -134,13 +134,20 @@ export const EditPlaylist = ({ viewer }: props) => {
         _id: `${PlaylistData?.playlist.id}`,
         name: `${PlaylistData?.playlist.name}`,
         creator: `${PlaylistData?.playlist.creator}`,
-        plan: PlaylistData?.playlist ? PlaylistData.playlist.plan : [],
+        plan: PlaylistData?.playlist ? [...PlaylistData.playlist.plan] : [],
         public: PlaylistData?.playlist.public,
         premium: PlaylistData?.playlist.premium,
-        level: PlaylistData?.playlist.level
+        level: PlaylistData.playlist.level ? [...PlaylistData?.playlist.level] : [7, 9],
       })
       setPremium(PlaylistData.playlist.premium !== null && PlaylistData?.playlist.premium)
       setLocked(PlaylistData.playlist.public !== null && PlaylistData?.playlist.public)
+      setLevel(PlaylistData.playlist.level ? [...PlaylistData?.playlist.level] : [7, 9])
+      setPlans([]);
+      handleCategoryClick("All", 0)
+      setAscending(true);
+      setYourContent(false);
+      updateListSize();
+      updateBookmarkSize();
     }
   }, [PlaylistData])
 
@@ -605,39 +612,14 @@ export const EditPlaylist = ({ viewer }: props) => {
     }
   }
 
-  const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    function renameKeys(obj: any, newKeys: any) {
-      const keyValues = Object.keys(obj).map((key: any) => {
-        const newKey = newKeys[key] || key;
-        return { [newKey]: obj[key] };
-      });
-      return Object.assign({}, ...keyValues);
-    }
-
-    const newKey = { id: "_id" }
-    const newPlan: any = []
-    playlist.plan.map((i: any) => newPlan.push(renameKeys(i, newKey)))
-    playlist.plan = newPlan;
-
-    await updatePlanMutation({
-      variables: {
-        input: playlist,
-        id: `${params.id}`
-      }
-    });
-
-    // // Navigate to User Profile Page
-    navigate(`../user/${viewer.id}`, { replace: true })
-  }
-
   const handleReset = () => {
     setPlaylist({
       name: `${PlaylistData?.playlist.name}`,
       creator: `${PlaylistData?.playlist.creator}`,
       plan: PlaylistData?.playlist ? [...PlaylistData.playlist.plan] : [],
-      level: PlaylistData?.playlist.level ? PlaylistData?.playlist.level : [6, 8],
+      level: !!PlaylistData?.playlist.level ? PlaylistData?.playlist.level : [7, 9],
+      public: PlaylistData?.playlist.public,
+      premium: PlaylistData?.playlist.premium
     });
     setPlans([]);
     handleCategoryClick("All", 0)
@@ -673,17 +655,67 @@ export const EditPlaylist = ({ viewer }: props) => {
 
   const handleLock = () => {
     setLocked(!locked);
-    setPlaylist({ ...playlist, public: !locked });
+    setPlaylist({
+      name: `${playlist.name}`,
+      creator: `${playlist.creator}`,
+      plan: playlist.plan,
+      public: !locked,
+      premium: premium,
+      level: level
+    })
   }
 
   const handlePremium = () => {
     setPremium(!premium);
-    setPlaylist({ ...playlist, premium: !premium });
+    setPlaylist({
+      name: `${playlist.name}`,
+      creator: `${playlist.creator}`,
+      plan: playlist.plan,
+      public: locked,
+      premium: !premium,
+      level: level
+    })
   }
 
   const handleGradeLevel = (newLevel: number[]) => {
     setLevel(newLevel);
-    setPlaylist({ ...playlist, level: newLevel });
+    setPlaylist({
+      name: `${playlist.name}`,
+      creator: `${playlist.creator}`,
+      plan: playlist.plan,
+      public: locked,
+      premium: premium,
+      level: newLevel
+    })
+  }
+
+  const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    function renameKeys(obj: any, newKeys: any) {
+      const keyValues = Object.keys(obj).map((key: any) => {
+        const newKey = newKeys[key] || key;
+        return { [newKey]: obj[key] };
+      });
+      return Object.assign({}, ...keyValues);
+    }
+
+    const newKey = { id: "_id" }
+    const newPlan: any = []
+    playlist.plan.map((i: any) => newPlan.push(renameKeys(i, newKey)))
+    playlist.plan = newPlan;
+
+    console.log(playlist);
+
+    await updatePlanMutation({
+      variables: {
+        input: playlist,
+        id: `${params.id}`
+      }
+    });
+
+    // // Navigate to User Profile Page
+    navigate(`../user/${viewer.id}`, { replace: true })
   }
 
   const resetSearch = () => {
@@ -793,7 +825,7 @@ export const EditPlaylist = ({ viewer }: props) => {
                         fullWidth
                         onChange={(e) => titleHandler(e)}
                         value={playlist.name}
-                        onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+                        onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }}
                       />
                       {playlist.plan.length === 0 && <CardMedia component="img" image={HowItWorks} sx={{ width: "95%", opacity: "50%" }} />}
 
@@ -910,7 +942,7 @@ export const EditPlaylist = ({ viewer }: props) => {
                         }}
                         helperText={searchError ? "No results found" : null}
                         error={searchError}
-                        onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+                        onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }}
                       />
                       <List
                         ref={yourContent ? bookmarkRef : listRef}

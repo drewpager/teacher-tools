@@ -353,7 +353,7 @@ export const typeDefs = gql`
     plan: [Plan]!
     public: Boolean
     premium: Boolean
-    level: [Int]
+    level: [Int!]
   }
 
   union LessonPlanUnion = Quiz | Lesson | Article
