@@ -165,7 +165,7 @@ export const UserPlaylistsCard = ({ playlist, paymentId }: Props) => {
             </Link>
             <Box className="user-playlists--buttons">
               <Tooltip title={`${playlist.public ? "Public" : "Private"}`}>
-                <IconButton onClick={() => setPublicDialogOpen(true)} disableRipple disabled={paymentId === "null"}>
+                <IconButton onClick={() => setPublicDialogOpen(true)} disableRipple>
                   {playlist.public ? <LockOpenIcon sx={{ color: theme.palette.primary.main }} /> : <LockIcon sx={{ color: theme.palette.primary.main }} />}
                 </IconButton>
               </Tooltip>
