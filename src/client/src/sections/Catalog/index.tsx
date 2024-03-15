@@ -115,15 +115,19 @@ export const Catalog = ({ viewer }: Props) => {
     setSearchInfo(false);
   }
 
-  const { data, loading, error } = useAllLessonsQuery({
+  const { data: lessonData, loading, error } = useAllLessonsQuery({
     variables: {
       limit: 1500,
       page: 1
     }
   });
 
-  const datum = useMemo(() => { return data }, [data])
-  let newDatum = datum?.allLessons.result.filter((d) => d.public)
+  // const datum = useMemo(() => { return lessonData }, [lessonData])
+  // let newDatum = datum?.allLessons.result.filter((d) => d.public)
+
+  let newDatum = useMemo(() => {
+    return lessonData?.allLessons.result.filter((d) => d.public) || []
+  }, [lessonData])
 
   if (loading && view === 'grid') {
     return <CatalogSkeletonGrid />
@@ -195,7 +199,7 @@ export const Catalog = ({ viewer }: Props) => {
 
 
   // Isolate the main and any secondary categories
-  const categor = datum?.allLessons.result;
+  const categor = lessonData?.allLessons.result;
   const mainCategoryArray: any[] = [];
   const secondaryCategory: any = [{}];
   const allCategories: any[] = [];
@@ -219,7 +223,7 @@ export const Catalog = ({ viewer }: Props) => {
     <Box maxWidth="100vw" overflow-x="hidden">
       <Helmet>
         <title>{`Catalog of ${newDatum?.length} Short History Documentaries | Plato's Peach`}</title>
-        <meta name="description" content={`${datum?.allLessons.total} Short Documentaries for Teachers to Leverage Trusted Content and Engage Students While Adhering to Widely Accepted Curriculum Standards.`} />
+        <meta name="description" content={`${newDatum?.length} Short Documentaries for Teachers to Leverage Trusted Content and Engage Students While Adhering to Widely Accepted Curriculum Standards.`} />
       </Helmet>
       <FeedbackModal />
       <Grid container maxWidth="100vw" overflow-x="hidden">
