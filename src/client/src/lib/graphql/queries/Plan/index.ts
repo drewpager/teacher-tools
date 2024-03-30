@@ -21,6 +21,7 @@ export const PLAN = gql`
           endDate
           creator
           public
+          duration
         }
         ... on Quiz {
           id

@@ -35,6 +35,7 @@ export const RELATED_PLANS = gql`
           endDate
           creator
           public
+          duration
         }
       }
       name

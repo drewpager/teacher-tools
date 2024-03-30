@@ -17,6 +17,7 @@ export interface LessonPlan {
   content: Content;
   public: boolean;
   pdf?: string;
+  duration?: number;
 }
 
 export interface Lesson {
@@ -30,6 +31,7 @@ export interface Lesson {
   endDate: string;
   creator: string;
   public: boolean;
+  duration?: number;
 }
 
 export interface Answers {

@@ -1,11 +1,4 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
-// import { AdvancedVideo, placeholder, responsive, lazyload } from '@cloudinary/react';
-// import { CloudinaryVideo } from "@cloudinary/url-gen";
-
-// Import required actions and qualifiers.
-// import { videoCodec } from "@cloudinary/url-gen/actions/transcode";
-// import { auto } from "@cloudinary/url-gen/qualifiers/videoCodec";
-// import { fit, } from "@cloudinary/url-gen/actions/resize";
 import { Box } from '@mui/material';
 import './videoPlayer.scss';
 
@@ -33,9 +26,6 @@ export const VideoPlayer = ({ url }: props) => {
     cloudinaryRef.current = window.cloudinary.videoPlayer(videoRef.current, {
       cloud_name: 'drewpager',
       showLogo: false,
-      // fluid: true,
-      // sourceTypes: ['mp4', 'mov'],
-      // transformation: [{ quality: "auto" }, { fetch_format: "auto" }]
     });
   }, [url, videoRef, fileString, path])
 
@@ -53,40 +43,7 @@ export const VideoPlayer = ({ url }: props) => {
         max-height={"auto"}
         className="cld-video-player cld-fluid"
       />
+      {/* {videoRef.current && console.log(videoRef.current.duration, videoRef.current.poster)} */}
     </Box>
   )
 }
-
-// Create and configure your Cloudinary instance.
-// const cldUrl = new CloudinaryVideo(`platos-peach-video${fileString[0]}`, { cloudName: 'drewpager' })
-// cldUrl.resize(fit(1200, undefined));
-
-// const sources = [
-//   {
-//     type: "mp4",
-//     codecs: ["avc1.4d002a"],
-//     transcode: videoCodec(auto())
-//   },
-// {
-//   type: "webm",
-//   codecs: ["vp8", "vorbis"],
-//   transcode: videoCodec(vp9())
-// },
-//   ];
-
-//   return (
-//     <Box className='tt-video-wrapper'>
-//       <AdvancedVideo
-//         cldVid={cldUrl}
-//         sources={sources}
-//         controls
-//         onContextMenu={(e) => e.preventDefault()}
-//         preload='metadata'
-//         autoPlay
-//         data-cld-colors='{ "base": "#0071ba", "accent": "#db8226", "text": "#fff" }'
-//         className="cld-video-player cld-video-player-skin-light"
-//         plugins={[lazyload(), responsive({ steps: 200 }), /* placeholder({ mode: 'blur' }) */]}
-//         data-test-id="video-player" />
-//     </Box>
-//   )
-// };

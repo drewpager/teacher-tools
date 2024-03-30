@@ -13,6 +13,7 @@ export interface CreateLessonInput {
   endDate: string;
   creator: string;
   public: boolean;
+  duration?: number;
 }
 
 export interface CreateLessonArgs {

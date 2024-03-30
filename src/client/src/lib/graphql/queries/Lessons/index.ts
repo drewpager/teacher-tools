@@ -15,6 +15,7 @@ export const ALL_LESSONS = gql`
         endDate
         creator
         public
+        duration
       }
     }
   }

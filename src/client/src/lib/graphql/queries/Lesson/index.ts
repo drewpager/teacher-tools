@@ -13,6 +13,7 @@ export const LESSON = gql`
       endDate
       creator
       public
+      duration
     }
   }
 `;

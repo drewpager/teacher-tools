@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useEffect, useRef } from 'react';
 import { Viewer, useLessonQuery, useRelatedPlansQuery } from '../../graphql/generated';
 import { useParams } from 'react-router-dom';
 import { LinearProgress, Box, Chip, Card, Grid, Button, Typography, Tooltip } from '@mui/material';
@@ -13,6 +13,12 @@ import { GoogleClassroomShareButton } from '../../lib/components';
 import './lessonPage.scss';
 interface Props {
   viewer: Viewer
+}
+
+declare global {
+  interface Window {
+    cloudinary: any;
+  }
 }
 
 export const Lesson = ({ viewer }: Props) => {
@@ -51,12 +57,56 @@ export const Lesson = ({ viewer }: Props) => {
     return slug.trim().replaceAll(" ", '%20');
   }
 
+  const GetVideoDuration = (duration: number) => {
+    let seconds = duration;
+    const minutes = Math.floor((duration / (1000 * 60)) % 60);
+    const hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+    const days = Math.floor(duration / (1000 * 60 * 60 * 24));
+
+    console.log("Seconds: ", seconds)
+    // Build the ISO 8601 duration string
+    let isoDuration = 'P';
+    if (days > 0) {
+      isoDuration += `${days}D`;
+    }
+    if (hours > 0 || minutes > 0 || seconds > 0) {
+      isoDuration += 'T';
+      if (hours > 0) {
+        isoDuration += `${hours}H`;
+      }
+      if (minutes > 0) {
+        isoDuration += `${minutes}M`;
+      }
+      if (seconds > 0) {
+        isoDuration += `${seconds}S`;
+      }
+    }
+
+    return isoDuration;
+  }
+
+  let dur = GetVideoDuration(lesson?.duration ? lesson.duration : 0);
+
+  const structuredData = {
+    "@context": "http://schema.org",
+    "@type": "VideoObject",
+    "name": lesson?.title,
+    "description": lesson?.meta,
+    "thumbnailUrl": lesson?.image,
+    "uploadDate": new Date().toISOString(),
+    "duration": dur,
+    "contentUrl": lesson?.video
+  };
+
   return (
     <>
       <Box className="lesson--page">
         <Helmet>
           <title>{lesson?.title} | Plato's Peach</title>
           <meta name="description" content={lesson?.meta?.length ? `${lesson?.meta}` : `A short documentary of ${lesson?.title} from ${formatDate(lesson?.startDate)} to ${formatDate(lesson?.endDate)}.`} />
+          {lesson?.duration && <script type="application/ld+json">
+            {JSON.stringify(structuredData)}
+          </script>}
         </Helmet>
         <Grid container>
           <Grid item xs={12} sm={12} md={12} lg={8}>

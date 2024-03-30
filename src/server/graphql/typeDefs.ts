@@ -56,6 +56,7 @@ export const typeDefs = gql`
     endDate: DateScalar
     creator: String
     public: Boolean
+    duration: Int
   }
 
   type AnswerOptions {
@@ -225,6 +226,7 @@ export const typeDefs = gql`
     endDate: DateScalar!
     creator: String!
     public: Boolean
+    duration: Int
   }
 
   input CreateArticleInput {
@@ -310,6 +312,7 @@ export const typeDefs = gql`
     endDate: DateScalar
     creator: String
     public: Boolean
+    duration: Int
   }
 
   input Answers {
@@ -345,6 +348,7 @@ export const typeDefs = gql`
     content: ContentInput
     public: Boolean
     pdf: String
+    duration: Int
   }
 
   input LessonPlanInput {

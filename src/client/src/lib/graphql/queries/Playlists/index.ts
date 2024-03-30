@@ -23,6 +23,7 @@ export const ALL_PLAYLISTS = gql`
             endDate
             creator
             public
+            duration
           }
           ... on Quiz {
             id

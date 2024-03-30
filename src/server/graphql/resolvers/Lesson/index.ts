@@ -146,6 +146,9 @@ export const lessonResolvers = {
     id: (lesson: Lesson) => {
       return lesson._id;
     },
+    duration: (lesson: Lesson) => {
+      return lesson.duration;
+    },
   },
   Playlist: {
     id: (playlist: Playlist) => {

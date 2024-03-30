@@ -21,6 +21,7 @@ export const PLAYLIST = gql`
           endDate
           creator
           public
+          duration
         }
         ... on Quiz {
           id
