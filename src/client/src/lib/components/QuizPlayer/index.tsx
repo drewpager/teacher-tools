@@ -64,6 +64,7 @@ export const QuizPlayer = ({ quiz }: Props) => {
     setScore(0);
     setQuizOptionId(undefined)
     setAnswers([]);
+    setUserAnswers(Array(quiz.questions.length).fill(null));
   }
 
   const showResult = () => {
@@ -80,6 +81,9 @@ export const QuizPlayer = ({ quiz }: Props) => {
         && <><Typography className="quiz-result" style={{ fontSize: 100 }} variant="h2">{score > 0 ? `${Math.round((score / totalCorrect) * 100)}%` : "0%"}</Typography>
           <Button type="submit" variant="outlined" onClick={() => resetQuiz()}>Retake!</Button></>
       }
+      {/* If Two Quizzes Back To Back, This Resets state to avoid conflicting errors */}
+      {document.getElementById("playlistcard--next_button")?.addEventListener("click", () => resetQuiz())}
+      {document.getElementById(`${title}`)?.addEventListener("focusout", () => resetQuiz())}
       <Divider sx={{ margin: "0.5em" }} />
       {
         showFinalResult ? (

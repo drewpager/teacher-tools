@@ -340,6 +340,7 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
               <ListItem disableGutters key={id}>
                 <ListItemButton
                   disableGutters
+                  id={`${item?.title}`}
                   className={active === `${item?.id}` ? 'playlistCard--button active' : 'playlistCard--button'}
                   onClick={() => handleChange({ ...item })}
                 >
@@ -396,7 +397,7 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
             )
           })}
           <Box>
-            <Button className="playlistcard--next_button" onClick={() => handleNextButton(active)} variant="contained">Next <SkipNextIcon /></Button>
+            <Button id="playlistcard--next_button" className="playlistcard--next_button" onClick={() => handleNextButton(active)} variant="contained">Next <SkipNextIcon /></Button>
           </Box>
         </Grid>
       </Grid>
