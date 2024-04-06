@@ -93,6 +93,7 @@ export const typeDefs = gql`
     public: Boolean
     premium: Boolean
     level: [Int!]
+    category: [String]
   }
 
   type Playlists {

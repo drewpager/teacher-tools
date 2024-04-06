@@ -18,6 +18,34 @@
   }
 }
 
+.lessonPlan--h1 {
+  margin-left: 9.5rem;
+
+  @media (max-width: 1200px) {
+    margin-left: 0;
+
+  }
+}
+
+.MuiGrid-root {
+  .lessonPlans--grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+
+    @media (max-width: 576px) {
+      display: block;
+      margin: 0;
+      gap: 0;
+    }
+  }
+
+  .lessonPlans--filter {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+}
+
 .MuiChip-root {
   &.playlists--chip {
     display: flex;

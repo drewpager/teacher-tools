@@ -9,6 +9,7 @@ export const PLAN = gql`
       public
       premium
       level
+      category
       plan {
         ... on Lesson {
           id

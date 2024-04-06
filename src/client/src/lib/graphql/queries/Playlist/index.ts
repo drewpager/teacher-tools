@@ -9,6 +9,7 @@ export const PLAYLIST = gql`
       public
       premium
       level
+      category
       plan {
         ... on Lesson {
           id

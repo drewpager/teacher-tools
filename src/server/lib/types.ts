@@ -60,6 +60,7 @@ export interface Playlist {
   public: boolean;
   premium: boolean;
   level: number[];
+  category: string[];
   authorized?: boolean; // https://www.newline.co/courses/tinyhouse-react-masterclass-part-2/building-the-listing-resolvers
 }
 

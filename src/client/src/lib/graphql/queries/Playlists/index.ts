@@ -11,6 +11,7 @@ export const ALL_PLAYLISTS = gql`
         public
         premium
         level
+        category
         plan {
           ... on Lesson {
             id
