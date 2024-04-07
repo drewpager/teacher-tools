@@ -1,5 +1,5 @@
 import React, { useState, useRef, ChangeEvent, useMemo, useEffect } from 'react';
-import { Box, Grid, TextField, InputAdornment, Pagination, Chip, FormControl, FormLabel, RadioGroup, Radio, FormControlLabel, Button } from '@mui/material';
+import { Box, Grid, TextField, InputAdornment, Pagination, Chip, FormControl, FormLabel, RadioGroup, Radio, FormControlLabel, Button, InputLabel, Select, MenuItem, SelectChangeEvent } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import { Playlist, Viewer, useAllPlaylistsQuery, Plan } from '../../graphql/generated';
 import { PublicPlaylistCard } from '../../lib/components/PublicPlaylistCard';
@@ -38,6 +38,7 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
   if (!data) {
     return <div>No data</div>;
   }
+
   // FOR SITEMAP GENERATION
   // const playlistRoutes = data?.allplaylists.result.map((playlist: any) => {
   //   if (playlist.public === true) {
@@ -66,7 +67,6 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
     setSearchInput(e.target.value)
 
     if (searchInput !== "") {
-      // setFilteredPlaylists(data?.allplaylists.result.filter((playlist) => playlist?.plan?.find((lesson) => lesson?.title?.toLowerCase().includes(searchInput.toLowerCase()))));
       setFilteredPlaylists(data?.allplaylists.result.filter((playlist) => playlist?.name?.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1) &&
         data?.allplaylists.result.filter((playlist) => playlist?.plan?.find((lesson) => lesson?.title?.toLowerCase().includes(searchInput.toLowerCase()))))
       setSearchError(false);
@@ -93,23 +93,23 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
     return numbers;
   }
 
-  const handleGradeFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setGradeFilter(Number(e.target.value));
+  const handleGradeFilterChange = (e: ChangeEvent<HTMLInputElement> | SelectChangeEvent<number>) => {
+    setGradeFilter(e.target.value === undefined ? undefined : Number(e.target.value));
     setFilteredPlaylists(data?.allplaylists.result.filter((playlist) => playlist?.level && getWholeNumbers(playlist.level).includes(Number(e.target.value))));
-  }
-
-  const handleCategoryFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setCategoryFilter(e.target.value);
-    setFilteredPlaylists(data?.allplaylists.result.filter((playlist) => playlist.category?.includes(e.target.value.toLowerCase())));
-  }
-
-  const handleFilters = () => {
-    if (gradeFilter) {
-      setFilteredPlaylists(data?.allplaylists.result.filter((playlist) => playlist?.level && getWholeNumbers(playlist.level).includes(gradeFilter)));
-    }
-
+    // window.location.replace(`/plans?grade=${e.target.value}`)
     if (categoryFilter) {
-      setFilteredPlaylists(data?.allplaylists.result.filter((playlist) => playlist.category?.includes(categoryFilter.toLowerCase())));
+      setFilteredPlaylists(data?.allplaylists.result.filter((playlist) => playlist?.level && getWholeNumbers(playlist.level).includes(Number(e.target.value)) && playlist.category?.includes(categoryFilter.toLowerCase())));
+      // window.location.replace(`/plans?category=${categoryFilter}&grade=${e.target.value}`)
+    }
+  }
+
+  const handleCategoryFilterChange = (e: ChangeEvent<HTMLInputElement> | SelectChangeEvent) => {
+    setCategoryFilter(e.target.value === "undefined" ? undefined : e.target.value);
+    setFilteredPlaylists(data?.allplaylists.result.filter((playlist) => playlist.category?.includes(e.target.value.toLowerCase())));
+    // window.location.replace(`/plans?category=${e.target.value}`)
+    if (gradeFilter) {
+      setFilteredPlaylists(data?.allplaylists.result.filter((playlist) => playlist?.level && getWholeNumbers(playlist.level).includes(gradeFilter) && playlist.category?.includes(e.target.value.toLowerCase())));
+      // window.location.replace(`/plans?category=${e.target.value}&grade=${gradeFilter}`)
     }
   }
 
@@ -122,11 +122,10 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
   return (
     <Box>
       <Helmet>
-        <title>{`Free Lesson Plan Templates | Plato's Peach`}</title>
+        <title>{`Free Lesson Plans & Templates | Plato's Peach`}</title>
         <meta name="description" content={`Discover interactive lesson plans including short videos, articles, PDFs, and assessments. Use the lesson plan as is or copy to your profile and modify for your classroom.`} />
       </Helmet>
       <Chip label="Lesson Plan Template Gallery" color="secondary" className="playlists--chip" size='medium' />
-      {console.log(data.allplaylists.result.map((playlist) => playlist.level && getWholeNumbers(playlist.level)))}
       <Box className="playlists--header">
         <TextField
           variant='outlined'
@@ -152,7 +151,65 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
       </Box>
       <Box>
         <Grid container>
-          <Grid item xs={12} sm={12} md={12} lg={3} className="lessonPlans--filter">
+          {/* Mobile Filter Treatment - Dropdown Menus */}
+          <Grid item xs={12} sm={12} md={12} lg={0} className="lessonPlans--dropdownFilter">
+            <FormControl sx={{ width: "30%", marginRight: "0.5rem" }}>
+              <InputLabel id="demo-simple-select-label">Grade Level</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={gradeFilter}
+                label="Grade Level"
+                onChange={(value) => handleGradeFilterChange(value)}
+              >
+                <MenuItem value={undefined}>
+                  <em>All Grades</em>
+                </MenuItem>
+                <MenuItem value={5}>5th Grade</MenuItem>
+                <MenuItem value={6}>6th Grade</MenuItem>
+                <MenuItem value={7}>7th Grade</MenuItem>
+                <MenuItem value={8}>8th Grade</MenuItem>
+                <MenuItem value={9}>9th Grade</MenuItem>
+                <MenuItem value={10}>10th Grade</MenuItem>
+                <MenuItem value={11}>11th Grade</MenuItem>
+                <MenuItem value={12}>12th Grade</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl sx={{ width: "30%", marginRight: "0.5rem" }}>
+              <InputLabel id="demo-simple-select-label">Category</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={categoryFilter ? categoryFilter : ""}
+                label="Category"
+                onChange={(value) => handleCategoryFilterChange(value)}
+              >
+                <MenuItem value="undefined">
+                  <em>All Categories</em>
+                </MenuItem>
+                <MenuItem value="American History">American History</MenuItem>
+                <MenuItem value="Military History">Military History</MenuItem>
+                <MenuItem value="World History">World History</MenuItem>
+                <MenuItem value="European History">European History</MenuItem>
+                <MenuItem value="Holiday History">Holiday History</MenuItem>
+                <MenuItem value="Biography">Biography</MenuItem>
+                <MenuItem value="Science">Science</MenuItem>
+                <MenuItem value="Art">Art</MenuItem>
+                <MenuItem value="World Religions">World Religions</MenuItem>
+                <MenuItem value="Ancient History">Ancient History</MenuItem>
+                <MenuItem value="African American History">African American History</MenuItem>
+              </Select>
+            </FormControl>
+            <Button
+              variant="contained"
+              color="primary"
+              sx={{ textTransform: 'capitalize' }}
+              onClick={handleRemoveFilters}
+            >Reset Filters</Button>
+          </Grid>
+
+          {/* Desktop Filter Treatment - Left Rail Radio Button Groups */}
+          <Grid item xs={12} sm={12} md={12} lg={3} className="lessonPlans--filterRadio">
             <FormControl sx={{ marginLeft: "1rem" }}>
               <FormLabel
                 id="radio-buttons-grade-level"
@@ -205,12 +262,6 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
                 <FormControlLabel value={45} control={<Radio onChange={(e) => handleTimeFilterChange(e)} />} label="45 Minutes" />
                 <FormControlLabel value={60} control={<Radio onChange={(e) => handleTimeFilterChange(e)} />} label="1 Hour+" />
               </RadioGroup> */}
-              <Button
-                variant="contained"
-                color="primary"
-                sx={{ marginTop: 2, textTransform: 'capitalize' }}
-                onClick={handleFilters}
-              >Apply Filter</Button>
               <Button
                 variant="contained"
                 color="primary"
