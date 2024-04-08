@@ -154,10 +154,10 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
           {/* Mobile Filter Treatment - Dropdown Menus */}
           <Grid item xs={12} sm={12} md={12} lg={0} className="lessonPlans--dropdownFilter">
             <FormControl sx={{ width: "30%", marginRight: "0.5rem" }}>
-              <InputLabel id="demo-simple-select-label">Grade Level</InputLabel>
+              <InputLabel id="mobile-select-grade">Grade</InputLabel>
               <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
+                labelId="mobile-select-grade"
+                id="mobile-simple-select"
                 value={gradeFilter}
                 label="Grade Level"
                 onChange={(value) => handleGradeFilterChange(value)}
@@ -176,10 +176,10 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
               </Select>
             </FormControl>
             <FormControl sx={{ width: "30%", marginRight: "0.5rem" }}>
-              <InputLabel id="demo-simple-select-label">Category</InputLabel>
+              <InputLabel id="mobile-select-category">Category</InputLabel>
               <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
+                labelId="mobile-select-category"
+                id="category-simple-select"
                 value={categoryFilter ? categoryFilter : ""}
                 label="Category"
                 onChange={(value) => handleCategoryFilterChange(value)}
