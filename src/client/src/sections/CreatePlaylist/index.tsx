@@ -1,4 +1,26 @@
-import { Grid, Box, Card, TextField, Button, IconButton, Fab, FormControlLabel, Chip, Typography, CardMedia, InputAdornment, Tooltip, Alert, Snackbar, Checkbox, Modal } from '@mui/material';
+import {
+  Grid,
+  Box,
+  Card,
+  TextField,
+  Button,
+  IconButton,
+  Fab,
+  FormControlLabel,
+  FormControl,
+  Select,
+  MenuItem,
+  InputLabel,
+  Chip,
+  Typography,
+  CardMedia,
+  InputAdornment,
+  Tooltip,
+  Alert,
+  Snackbar,
+  Checkbox,
+  Modal
+} from '@mui/material';
 import { Close } from '@mui/icons-material';
 import React, { useState, ChangeEvent, useRef, useEffect, useMemo, SyntheticEvent } from 'react';
 import {
@@ -51,7 +73,8 @@ type InputLessonPlan = {
   plan: Plan[],
   public: boolean,
   premium: boolean
-  level: number[]
+  level: number[],
+  category: string[]
 }
 
 const initialData: InputLessonPlan = {
@@ -60,7 +83,8 @@ const initialData: InputLessonPlan = {
   plan: [],
   public: false,
   premium: false,
-  level: [6, 8]
+  level: [6, 8],
+  category: [""]
 }
 
 
@@ -96,6 +120,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const [level, setLevel] = useState<number[]>([6, 8]);
   const [ascending, setAscending] = useState<boolean>(true);
   const [open, setOpen] = useState(false);
+  const [category, setCategory] = useState<string[]>([""])
 
   const handleClose = () => {
     setOpen(false);
@@ -495,7 +520,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
         creator: viewer && viewer.id ? viewer.id : "0",
         public: locked,
         premium: premium,
-        level: level
+        level: level,
+        category: category
       })
       setTitleError(false);
 
@@ -647,6 +673,11 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const handleGradeLevel = (newLevel: number[]) => {
     setLevel(newLevel);
     setPlaylist({ ...playlist, level: newLevel });
+  }
+
+  const handleCategory = (newCategory: string[]) => {
+    setCategory(newCategory);
+    setPlaylist({ ...playlist, category: newCategory });
   }
 
   const resetSearch = () => {
@@ -988,6 +1019,28 @@ export const CreatePlaylist = ({ viewer }: props) => {
             <Box className="button--slider-playlist">
               <GradeLevel level={level} setLevel={setLevel} onChange={(event: any, newLevel: number[]) => handleGradeLevel(newLevel)} />
             </Box>
+            <FormControl className="category--menu">
+              <InputLabel id="mobile-select-category">Category</InputLabel>
+              <Select
+                labelId="mobile-select-category"
+                id="category-simple-select"
+                value={category}
+                label="Category"
+                onChange={(e) => handleCategory([`${e.target.value}`])}
+              >
+                <MenuItem value="american history">American History</MenuItem>
+                <MenuItem value="military history">Military History</MenuItem>
+                <MenuItem value="world history">World History</MenuItem>
+                <MenuItem value="european history">European History</MenuItem>
+                <MenuItem value="holiday history">Holiday History</MenuItem>
+                <MenuItem value="biography">Biography</MenuItem>
+                <MenuItem value="science">Science</MenuItem>
+                <MenuItem value="art">Art</MenuItem>
+                <MenuItem value="world religions">World Religions</MenuItem>
+                <MenuItem value="ancient history">Ancient History</MenuItem>
+                <MenuItem value="african american history">African American History</MenuItem>
+              </Select>
+            </FormControl>
           </Box>
           <Button
             className="createPlaylist--button"
