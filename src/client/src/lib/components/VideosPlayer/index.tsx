@@ -23,11 +23,11 @@ export const VideosPlayer = ({ url }: props) => {
     <Box className='tt-video-wrapper'>
       <iframe
         loading="eager"
-        // onLoad={() => iframeLoading}
-        src={uframe}
+        onLoad={() => iframeLoading}
+        src={url}
         title="Plato's Peach Video"
         className="platos-peach-video-iframe"
-        allow="autoplay; fullscreen"
+        allow="fullscreen"
         style={{ "border": "2px solid #000", "backgroundColor": "#000" }}
       >
       </iframe>

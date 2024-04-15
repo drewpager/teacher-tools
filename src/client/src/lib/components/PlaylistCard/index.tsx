@@ -381,9 +381,9 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
             }
 
             if (iter?.__typename === "Lesson") {
-
               return (
-                <VideosPlayer url={`${iter.video}`} key={index} />
+                // <VideosPlayer url={`${iter.video}`} key={index} />
+                <VideosPlayer url={`${iter.video}`} key={iter.id} />
               )
             }
 
