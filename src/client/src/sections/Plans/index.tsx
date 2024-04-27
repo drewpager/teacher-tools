@@ -1,5 +1,5 @@
 import React from 'react';
-import { usePlaylistQuery, Viewer, Playlist, usePlanQuery } from '../../graphql/generated';
+import { usePlaylistQuery, Viewer, Playlist, usePlanQuery, useAllPlaylistsQuery } from '../../graphql/generated';
 import { useParams } from 'react-router-dom';
 import { Box, LinearProgress, Grid, Typography } from '@mui/material';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
@@ -8,6 +8,8 @@ import { Helmet } from 'react-helmet';
 import { PlaylistCardSkeleton } from '../../lib/components/PlaylistCard/playlistCardSkeleton';
 import { titleCase } from '../../lib/utils';
 import './plans.scss';
+import { Link } from 'react-router-dom';
+import { PublicPlaylistCard } from '../../lib/components/PublicPlaylistCard';
 
 interface Props {
   viewer: Viewer;
@@ -27,6 +29,13 @@ export const Plans = ({ viewer, setViewer }: Props) => {
     }
   });
 
+  const { data: allPlaylistsData, loading: allPlaylistsLoading, error: allPlaylistsError } = useAllPlaylistsQuery({
+    variables: {
+      limit: 3,
+      page: 7
+    }
+  });
+
   if (loading) {
     return (
       <PlaylistCardSkeleton />
@@ -35,10 +44,12 @@ export const Plans = ({ viewer, setViewer }: Props) => {
 
   if (error) {
     return (
-      <Box>
-        <h2>Playlist Not Found</h2>
-        <h3>Here are a few available playlists or you can try searching again.</h3>
-        <Search />
+      <Box sx={{ marginTop: 15 }}>
+        <Box sx={{ marginLeft: 5 }}>
+          <h2>Lesson Plan Not Found</h2>
+          <h3>Check out the <Link to="/plans" style={{ color: "#57996A" }}>Lesson Plan Catalog</Link> for all available plans. Here area few to get you started:</h3>
+          {allPlaylistsData && allPlaylistsData.allplaylists.result.map((playlist: Playlist) => (<PublicPlaylistCard key={playlist.id} id={playlist.id} name={playlist.name} plan={playlist.plan} creator={playlist.creator} premium={false} level={playlist.level} viewer={viewer} />))}
+        </Box>
         <DisplayError title='Failed to load playlist' />
         <Footer viewer={viewer} />
       </Box>

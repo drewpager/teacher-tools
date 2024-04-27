@@ -7,6 +7,8 @@ import { PlaylistCard, Search, Footer, CTA, InlineCTA } from '../../lib/componen
 import { Helmet } from 'react-helmet';
 import { PlaylistCardSkeleton } from '../../lib/components/PlaylistCard/playlistCardSkeleton';
 import { formatSlug } from '../../lib/utils/formatSlug';
+import { PublicPlaylistCard } from '../../lib/components/PublicPlaylistCard';
+import { Link } from 'react-router-dom';
 
 interface Props {
   viewer?: Viewer;
@@ -28,10 +30,11 @@ export const Playlist = ({ viewer }: Props) => {
 
   if (error) {
     return (
-      <Box>
-        <h2>Playlist Not Found</h2>
-        <h3>Here are a few available playlists or you can try searching again.</h3>
-        <Search />
+      <Box sx={{ marginTop: 15 }}>
+        <Box sx={{ marginLeft: 5 }}>
+          <h2>Lesson Plan Not Found</h2>
+          <h3>Check out the <Link to="/plans">Lesson Plan Catalog</Link> for all available plans.</h3>
+        </Box>
         <DisplayError title='Failed to load playlist' />
         <Footer viewer={viewer} />
       </Box>
