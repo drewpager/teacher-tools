@@ -53,15 +53,15 @@ const seed = async () => {
     const lessons: Lesson[] = [
       // {
       //   _id: new ObjectId(),
-      //   title: "Economic Opportunity Cost",
+      //   title: "Where in the World is Indiana",
       //   video:
-      //     "https://res.cloudinary.com/drewpager/video/upload/v1708213262/platos-peach-video/Economic_Opportunity_Cost_js5uhv.mov",
+      //     "https://res.cloudinary.com/drewpager/video/upload/v1713549231/platos-peach-video/Where_in_the_World_is_Indiana_osfomi.mov",
       //   image:
       //     "https://res.cloudinary.com/drewpager/image/upload/v1672415283/platos-peach-image/CleanShot_2022-12-30_at_07.47.46_2x_u14lxs.png",
-      //   startDate: "1917",
+      //   startDate: "1816",
       //   endDate: "Present",
-      //   category: ["economics"],
-      //   meta: "Economic opportunity cost refers to the potential benefits or profits that are forgone when choosing one option over another. It is the value of the next best alternative that is sacrificed in order to pursue a particular course of action. Understanding economic opportunity cost is essential for making informed decisions in business and personal finance.",
+      //   category: ["geography"],
+      //   meta: "Indiana, located in the Midwestern United States, is bordered by Lake Michigan to the northwest, Michigan to the north, Ohio to the east, Kentucky to the south, and Illinois to the west. Known for its farmland, Indiana is also famous for the Indianapolis 500, an annual auto race.",
       //   creator: "116143759549242008910",
       //   public: true,
       // },

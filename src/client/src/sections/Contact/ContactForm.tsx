@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from "react";
-import { Button, TextField, Box } from "@mui/material"
+import { Button, TextField, Box, Grid } from "@mui/material"
 import './contact.scss';
 
 export const ContactForm = () => {
@@ -38,17 +38,28 @@ export const ContactForm = () => {
   return (
     <Box>
       <form onSubmit={onSubmit}>
-        <Box className="contact--box">
-          <h1>Contact Us</h1>
-          <label htmlFor="name">Name</label>
-          <TextField type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
-          <label htmlFor="email">Email</label>
-          <TextField type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-          <label htmlFor="message">Message</label>
-          <TextField multiline maxRows={25} id="message" value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Send product feedback, feature requests, or any other correspondence for the Plato's Peach team!" required />
-          <Button variant="contained" className="contact--button" type="submit">Submit</Button>
-          {status && <p>Message {status}!</p>}
-        </Box>
+        <Grid container>
+          <Grid item xs={12} md={4} lg={4} xl={4}>
+            <Box className="contact--copy">
+              <h1>Contact Plato's Peach</h1>
+              <p>Plato's Peach is a platform for learning, sharing, and growing. We are always looking for ways to improve and would love to hear from you!</p>
+              <p>For any questions, comments, or concerns, please feel free to reach out to us using this form</p>
+            </Box>
+          </Grid>
+          <Grid item xs={12} md={8} lg={8} xl={8}>
+            <Box className="contact--box">
+              {/* <h1>Contact Us</h1> */}
+              <label htmlFor="name">Name</label>
+              <TextField type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
+              <label htmlFor="email">Email</label>
+              <TextField type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+              <label htmlFor="message">Message</label>
+              <TextField multiline maxRows={25} rows={4} id="message" value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Send product feedback, feature requests, or any other correspondence for the Plato's Peach team!" required />
+              <Button variant="contained" className="contact--button" type="submit">Submit</Button>
+              {status && <p>Message {status}!</p>}
+            </Box>
+          </Grid>
+        </Grid>
       </form>
     </Box>
   );

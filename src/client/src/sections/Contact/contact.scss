@@ -4,10 +4,17 @@
   &.contact--button {
     background: library.$blue;
     color: white;
+    text-transform: capitalize;
     padding: 0.5rem;
     margin: 1rem 0;
+    width: 25%;
+
     &:hover {
       background: library.$lightGreen;
+    }
+
+    @media (max-width: 768px) {
+      width: 100%;
     }
   }
 }
@@ -24,6 +31,20 @@
     @media (max-width: 768px) {
       width: 100%;
       margin-left: 0;
+      margin-top: 0;
+    }
+  }
+}
+
+.MuiBox-root {
+  &.contact--copy {
+    margin-top: 5rem;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      margin-top: 2rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
     }
   }
 }
