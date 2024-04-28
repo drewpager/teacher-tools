@@ -101,7 +101,7 @@ export const EditPlaylist = ({ viewer }: props) => {
   const [locked, setLocked] = useState<boolean | undefined>(false);
   const [ascending, setAscending] = useState<boolean>(true);
   const [premium, setPremium] = useState<boolean | undefined>(false);
-  const [level, setLevel] = useState<number[]>([7, 10]);
+  const [level, setLevel] = useState<number[]>([1, 12]);
   const [open, setOpen] = useState(false);
   const [autoSaved, setAutoSaved] = useState<boolean>(false)
   const [category, setCategory] = useState<string[]>([""])
@@ -140,14 +140,13 @@ export const EditPlaylist = ({ viewer }: props) => {
         plan: PlaylistData?.playlist ? [...PlaylistData.playlist.plan] : [],
         public: PlaylistData?.playlist.public,
         premium: PlaylistData?.playlist.premium,
-        level: PlaylistData.playlist.level ? [...PlaylistData?.playlist.level] : [7, 9],
+        level: PlaylistData?.playlist?.level?.length ? [...PlaylistData?.playlist.level] : [1, 12],
         category: PlaylistData.playlist.category ? [...PlaylistData?.playlist.category] : [""]
       })
       setPremium(PlaylistData.playlist.premium !== null && PlaylistData?.playlist.premium)
       setLocked(PlaylistData.playlist.public !== null && PlaylistData?.playlist.public)
-      setLevel(PlaylistData.playlist.level ? [...PlaylistData?.playlist.level] : [7, 9])
+      setLevel(PlaylistData?.playlist?.level !== null && PlaylistData?.playlist?.level !== undefined ? [...PlaylistData?.playlist?.level] : [1, 12])
       setCategory(PlaylistData?.playlist?.category ? PlaylistData?.playlist?.category.map((c) => `${c}`) : [""])
-      // setPlans(plans.filter(val => !PlaylistData?.playlist.plan.map((p) => p?.id).includes(val._id)))
       setPlans([])
       handleCategoryClick("All", 0)
       setAscending(true);
