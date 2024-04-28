@@ -222,8 +222,8 @@ export const Catalog = ({ viewer }: Props) => {
   return (
     <Box maxWidth="100vw" overflow-x="hidden">
       <Helmet>
-        <title>{`Catalog of ${newDatum?.length} Short History Documentaries | Plato's Peach`}</title>
-        <meta name="description" content={`${newDatum?.length} Short Documentaries for Teachers to Leverage Trusted Content and Engage Students While Adhering to Widely Accepted Curriculum Standards.`} />
+        <title>{`Catalog of ${newDatum?.length.toLocaleString()} Short History Documentaries | Plato's Peach`}</title>
+        <meta name="description" content={`${newDatum?.length.toLocaleString()} Short Documentaries for Teachers to Leverage Trusted Content and Engage Students While Adhering to Widely Accepted Curriculum Standards.`} />
       </Helmet>
       <FeedbackModal />
       <Grid container maxWidth="100vw" overflow-x="hidden">
@@ -265,7 +265,7 @@ export const Catalog = ({ viewer }: Props) => {
           <Box className="catalogBackground" sx={{ marginBottom: "80px" }} id={`${selected[0]}`}>
             <Box className="catalogHeader--container">
               <h1 className="catalogTitle">Documentary Catalog
-                {" "}<Chip label={newDatum?.length} color="primary" size="medium" />
+                {" "}<Chip label={newDatum?.length.toLocaleString()} color="primary" size="medium" />
               </h1><TextField
                 variant='outlined'
                 // id="catalog-search"
