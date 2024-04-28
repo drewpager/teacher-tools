@@ -1,4 +1,4 @@
-import { Grid, Box, Card, TextField, Button, Chip, FormControlLabel, Switch, Checkbox } from '@mui/material';
+import { Grid, Box, Card, TextField, Button, Chip, FormControlLabel, Switch, Checkbox, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import React, { useState, ChangeEvent, useRef, useEffect, useMemo } from 'react';
 import {
   useAllLessonsQuery,
@@ -46,7 +46,8 @@ type InputLessonPlan = {
   plan: Plan[],
   public: boolean,
   premium: boolean,
-  level: number[]
+  level: number[],
+  category: string[]
 }
 
 const InitialPlaylist: InputLessonPlan = {
@@ -56,7 +57,8 @@ const InitialPlaylist: InputLessonPlan = {
   plan: [],
   public: false,
   premium: false,
-  level: []
+  level: [],
+  category: [""]
 }
 
 interface RenderProps {
@@ -102,6 +104,7 @@ export const EditPlaylist = ({ viewer }: props) => {
   const [level, setLevel] = useState<number[]>([7, 10]);
   const [open, setOpen] = useState(false);
   const [autoSaved, setAutoSaved] = useState<boolean>(false)
+  const [category, setCategory] = useState<string[]>([""])
 
   const handleClose = () => {
     setOpen(false);
@@ -138,11 +141,14 @@ export const EditPlaylist = ({ viewer }: props) => {
         public: PlaylistData?.playlist.public,
         premium: PlaylistData?.playlist.premium,
         level: PlaylistData.playlist.level ? [...PlaylistData?.playlist.level] : [7, 9],
+        category: PlaylistData.playlist.category ? [...PlaylistData?.playlist.category] : [""]
       })
       setPremium(PlaylistData.playlist.premium !== null && PlaylistData?.playlist.premium)
       setLocked(PlaylistData.playlist.public !== null && PlaylistData?.playlist.public)
       setLevel(PlaylistData.playlist.level ? [...PlaylistData?.playlist.level] : [7, 9])
-      setPlans([]);
+      setCategory(PlaylistData?.playlist?.category ? PlaylistData?.playlist?.category.map((c) => `${c}`) : [""])
+      // setPlans(plans.filter(val => !PlaylistData?.playlist.plan.map((p) => p?.id).includes(val._id)))
+      setPlans([])
       handleCategoryClick("All", 0)
       setAscending(true);
       setYourContent(false);
@@ -528,7 +534,8 @@ export const EditPlaylist = ({ viewer }: props) => {
       plan: playlist.plan,
       public: locked,
       premium: premium,
-      level: level
+      level: level,
+      category: category
     })
   }
 
@@ -619,9 +626,10 @@ export const EditPlaylist = ({ viewer }: props) => {
       plan: PlaylistData?.playlist ? [...PlaylistData.playlist.plan] : [],
       level: !!PlaylistData?.playlist.level ? PlaylistData?.playlist.level : [7, 9],
       public: PlaylistData?.playlist.public,
-      premium: PlaylistData?.playlist.premium
+      premium: PlaylistData?.playlist.premium,
+      category: !!PlaylistData?.playlist.category ? PlaylistData?.playlist.category : [""],
     });
-    setPlans([]);
+    setPlans(plans.filter(val => !PlaylistData?.playlist.plan.map((p) => p?.id).includes(val._id)))
     handleCategoryClick("All", 0)
     setAscending(true);
     setYourContent(false);
@@ -631,7 +639,7 @@ export const EditPlaylist = ({ viewer }: props) => {
 
   const handleSwitch = () => {
     setYourContent(!yourContent)
-    setPlans([])
+    setPlans(plans.filter(val => !PlaylistData?.playlist.plan.map((p) => p?.id).includes(val._id)))
     updateListSize();
 
     if (!yourContent) {
@@ -661,7 +669,8 @@ export const EditPlaylist = ({ viewer }: props) => {
       plan: playlist.plan,
       public: !locked,
       premium: premium,
-      level: level
+      level: level,
+      category: category
     })
   }
 
@@ -673,7 +682,21 @@ export const EditPlaylist = ({ viewer }: props) => {
       plan: playlist.plan,
       public: locked,
       premium: !premium,
-      level: level
+      level: level,
+      category: category
+    })
+  }
+
+  const handleCategory = (newCategory: string[]) => {
+    setCategory(newCategory);
+    setPlaylist({
+      name: `${playlist.name}`,
+      creator: `${playlist.creator}`,
+      plan: playlist.plan,
+      public: locked,
+      premium: !premium,
+      level: level,
+      category: newCategory
     })
   }
 
@@ -685,7 +708,8 @@ export const EditPlaylist = ({ viewer }: props) => {
       plan: playlist.plan,
       public: locked,
       premium: premium,
-      level: newLevel
+      level: newLevel,
+      category: category
     })
   }
 
@@ -704,8 +728,6 @@ export const EditPlaylist = ({ viewer }: props) => {
     const newPlan: any = []
     playlist.plan.map((i: any) => newPlan.push(renameKeys(i, newKey)))
     playlist.plan = newPlan;
-
-    console.log(playlist);
 
     await updatePlanMutation({
       variables: {
@@ -993,6 +1015,28 @@ export const EditPlaylist = ({ viewer }: props) => {
             <Box className="button--slider-playlist">
               <GradeLevel level={level} setLevel={setLevel} onChange={(event: any, newLevel: number[]) => handleGradeLevel(newLevel)} />
             </Box>
+            <FormControl className="category--menu">
+              <InputLabel id="mobile-select-category">Category</InputLabel>
+              <Select
+                labelId="mobile-select-category"
+                id="category-simple-select"
+                value={category}
+                label="Category"
+                onChange={(e) => handleCategory([`${e.target.value}`])}
+              >
+                <MenuItem value="american history">American History</MenuItem>
+                <MenuItem value="military history">Military History</MenuItem>
+                <MenuItem value="world history">World History</MenuItem>
+                <MenuItem value="european history">European History</MenuItem>
+                <MenuItem value="holiday history">Holiday History</MenuItem>
+                <MenuItem value="biography">Biography</MenuItem>
+                <MenuItem value="science">Science</MenuItem>
+                <MenuItem value="art">Art</MenuItem>
+                <MenuItem value="world religions">World Religions</MenuItem>
+                <MenuItem value="ancient history">Ancient History</MenuItem>
+                <MenuItem value="african american history">African American History</MenuItem>
+              </Select>
+            </FormControl>
           </Box>
           <Button
             className="createPlaylist--button"
