@@ -297,7 +297,7 @@ export const Catalog = ({ viewer }: Props) => {
               <div className="catalog--item">
                 <>
                   <CatalogItem viewer={`${viewer.id}`} name="Search Results" category={filteredLesson} key={`${filteredLesson.length}`} bookmarks={userBookmarks} />
-                  {searchInfo && <Alert variant="outlined" severity="info" style={{ marginTop: "0.875rem" }}>Still not finding a topic you want? You can add it <Link to="/lesson/create" style={{ color: "#000" }}>here</Link>.</Alert>}
+                  {searchInfo && <Alert variant="outlined" severity="info" style={{ marginTop: "0.875rem" }}>Still not finding a topic you want? You can <Link to="/lesson/create" style={{ color: "#000" }}>create a lesson here</Link>.</Alert>}
                 </>
               </div>
             )}

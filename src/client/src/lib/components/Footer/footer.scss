@@ -25,15 +25,16 @@
   }
 
   &.footer--link-text {
-    color: #8d8c8c;
+    color: #182742;
     text-decoration: none;
     margin: 4px 0;
     text-align: center;
     line-height: 2rem;
     font-size: 1.2rem;
+
     &:hover {
       text-decoration: none;
-      color: #182742;
+      color: #8d8c8c;
     }
   }
 
@@ -58,7 +59,7 @@
 }
 
 .navbar--icon {
-  width: 80px; 
+  width: 80px;
   height: 80px;
   margin-top: 0.875rem;
   margin-right: -0.875rem;
