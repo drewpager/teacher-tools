@@ -146,7 +146,7 @@ export const Catalog = ({ viewer }: Props) => {
     )
   }
   // FOR SITEMAP GENERATION
-  // const lessonsRoutes = datum?.allLessons.result.map((lesson: any) => {
+  // const lessonsRoutes = lessonData?.allLessons.result.map((lesson: any) => {
   //   if (lesson.public === true) {
   //     return {
   //       url: `/lesson/${lesson.id}`,
