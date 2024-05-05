@@ -13,7 +13,6 @@ export * from "./AppHeader";
 export * from "./Playlist";
 export * from "./PlaylistsCatalog";
 export * from "./Plans";
-export * from "./Billing";
 export * from "./CreatePlaylist";
 export * from "./Catalog";
 export * from "./Contact";

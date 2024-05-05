@@ -32,12 +32,12 @@ export const QuizPlayer = ({ quiz }: Props) => {
   const handleClick = (a: AnswerOptions | null, id: number) => {
     if (a && answers.includes(a)) {
       setAnswers(answers.filter((ans) => ans !== a));
-      console.log(answers);
+      // console.log(answers);
     }
 
     if (a && !answers.includes(a)) {
       setAnswers([...answers, a]);
-      console.log(answers);
+      // console.log(answers);
     }
     setQuizOptionId(id);
     let updatedAnswers = [...userAnswers];
@@ -46,8 +46,8 @@ export const QuizPlayer = ({ quiz }: Props) => {
   }
 
   const handleQuizSubmit = () => {
-    console.log("Total correct: ", totalCorrect);
-    console.log("Answers: ", answers);
+    // console.log("Total correct: ", totalCorrect);
+    // console.log("Answers: ", answers);
 
     answers.map((ans) => {
       if (ans.isCorrect === true) {
