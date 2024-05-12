@@ -57,7 +57,7 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
   });
 
   useEffect(() => {
-    if (data && gradeFilter && categoryFilter) {
+    if (data && gradeFilter && categoryFilter !== undefined) {
       setFilteredPlaylists(data?.allplaylists.result.filter((playlist) => playlist?.level && getWholeNumbers(playlist.level).includes(Number(gradeFilter)) && playlist.category?.includes(categoryFilter.toLowerCase())));
     }
 
@@ -107,10 +107,13 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
   const updateURL = (grade: number | undefined, category?: string | undefined) => {
     if (grade && category === undefined) {
       navigate(`/plan/${grade}th-grade`);
-    } else if (grade && category) {
+    } else if (grade && category && category !== `undefined`) {
       navigate(`/plan/${grade}th-grade/${category.replaceAll(` `, `-`).toLowerCase()}`);
-    } else if (category && grade === undefined) {
+    } else if (category && category !== `undefined` && grade === undefined) {
+      console.log("here")
       navigate(`/plan/${category.replaceAll(` `, `-`).toLowerCase()}`);
+    } else if (category === `undefined`) {
+      navigate(`/plans`);
     }
   };
 
