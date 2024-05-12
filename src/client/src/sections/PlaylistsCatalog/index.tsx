@@ -7,6 +7,8 @@ import { Footer } from '../../lib/components';
 import { PlaylistsSkeleton } from './playlistsSkeleton';
 import './playlistsCatalogStyle.scss';
 import { Helmet } from 'react-helmet';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { titleCase } from '../../lib/utils';
 
 type Props = {
   viewer: Viewer
@@ -20,12 +22,53 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
   const [categoryFilter, setCategoryFilter] = useState<string | undefined>(undefined);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const extractGradeNumber = (path: string) => {
+    const regex = /\/plan\/(\d+)th-grade/;
+    const match = path.match(regex);
+    return match ? Number(match[1]) : undefined;
+  }
+
+  useEffect(() => {
+    if (location.pathname.length > 6) {
+      setGradeFilter(extractGradeNumber(location.pathname));
+      (location.pathname.match(/\//g) || []).length > 2 && setCategoryFilter(titleCase(`${location.pathname.split('/').pop()?.replaceAll('-', ' ')}`));
+    }
+  }, [navigate, location, gradeFilter, categoryFilter])
+
+  const getWholeNumbers = (range: number[]) => {
+    const [start, end] = range;
+    const numbers = [];
+
+    for (let i = start; i <= end; i++) {
+      numbers.push(i);
+    }
+
+    return numbers;
+  }
+
   const { data, loading, error } = useAllPlaylistsQuery({
     variables: {
       limit: 1000,
       page: 1,
     }
   });
+
+  useEffect(() => {
+    if (data && gradeFilter && categoryFilter) {
+      setFilteredPlaylists(data?.allplaylists.result.filter((playlist) => playlist?.level && getWholeNumbers(playlist.level).includes(Number(gradeFilter)) && playlist.category?.includes(categoryFilter.toLowerCase())));
+    }
+
+    if (data && categoryFilter && gradeFilter === undefined) {
+      setFilteredPlaylists(data?.allplaylists.result.filter((playlist) => playlist.category?.includes(categoryFilter.toLowerCase())));
+    }
+
+    if (data && gradeFilter && categoryFilter === undefined) {
+      setFilteredPlaylists(data?.allplaylists.result.filter((playlist) => playlist?.level && getWholeNumbers(playlist.level).includes(gradeFilter)));
+    }
+  }, [data, gradeFilter, categoryFilter])
 
   if (loading) {
     return (<PlaylistsSkeleton />);
@@ -61,6 +104,16 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
     setSearchError(false);
   }
 
+  const updateURL = (grade: number | undefined, category?: string | undefined) => {
+    if (grade && category === undefined) {
+      navigate(`/plan/${grade}th-grade`);
+    } else if (grade && category) {
+      navigate(`/plan/${grade}th-grade/${category.replaceAll(` `, `-`).toLowerCase()}`);
+    } else if (category && grade === undefined) {
+      navigate(`/plan/${category.replaceAll(` `, `-`).toLowerCase()}`);
+    }
+  };
+
   // Catalog Search Bar Feature
   const inputHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     e.preventDefault();
@@ -82,47 +135,39 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
     }
   }
 
-  const getWholeNumbers = (range: number[]) => {
-    const [start, end] = range;
-    const numbers = [];
-
-    for (let i = start; i <= end; i++) {
-      numbers.push(i);
-    }
-
-    return numbers;
-  }
-
   const handleGradeFilterChange = (e: ChangeEvent<HTMLInputElement> | SelectChangeEvent<number>) => {
     setGradeFilter(e.target.value === undefined ? undefined : Number(e.target.value));
     setFilteredPlaylists(data?.allplaylists.result.filter((playlist) => playlist?.level && getWholeNumbers(playlist.level).includes(Number(e.target.value))));
-    // window.location.replace(`/plans?grade=${e.target.value}`)
     if (categoryFilter) {
       setFilteredPlaylists(data?.allplaylists.result.filter((playlist) => playlist?.level && getWholeNumbers(playlist.level).includes(Number(e.target.value)) && playlist.category?.includes(categoryFilter.toLowerCase())));
-      // window.location.replace(`/plans?category=${categoryFilter}&grade=${e.target.value}`)
     }
+    updateURL(Number(e.target.value), categoryFilter ? categoryFilter : undefined);
   }
 
   const handleCategoryFilterChange = (e: ChangeEvent<HTMLInputElement> | SelectChangeEvent) => {
     setCategoryFilter(e.target.value === "undefined" ? undefined : e.target.value);
     setFilteredPlaylists(data?.allplaylists.result.filter((playlist) => playlist.category?.includes(e.target.value.toLowerCase())));
-    // window.location.replace(`/plans?category=${e.target.value}`)
     if (gradeFilter) {
       setFilteredPlaylists(data?.allplaylists.result.filter((playlist) => playlist?.level && getWholeNumbers(playlist.level).includes(gradeFilter) && playlist.category?.includes(e.target.value.toLowerCase())));
-      // window.location.replace(`/plans?category=${e.target.value}&grade=${gradeFilter}`)
     }
+    updateURL(gradeFilter ? gradeFilter : undefined, e.target.value);
   }
 
   const handleRemoveFilters = () => {
     setFilteredPlaylists([]);
     setGradeFilter(undefined);
     setCategoryFilter(undefined);
+    navigate(`/plans`);
   }
 
   return (
     <Box>
       <Helmet>
-        <title>{`Free Lesson Plans & Templates | Plato's Peach`}</title>
+        <title>{gradeFilter && categoryFilter
+          ? `Free ${gradeFilter}th Grade ${categoryFilter} Lesson Plans | Plato's Peach`
+          : gradeFilter ? `Free ${gradeFilter}th Grade Lesson Plans | Plato's Peach`
+            : categoryFilter ? `Free ${categoryFilter} Lesson Plans | Plato's Peach`
+              : `Free Lesson Plans & Templates | Plato's Peach`}</title>
         <meta name="description" content={`Discover interactive lesson plans including short videos, articles, PDFs, and assessments. Use the lesson plan as is or copy to your profile and modify for your classroom.`} />
       </Helmet>
       <Chip label="Lesson Plan Template Gallery" color="secondary" className="playlists--chip" size='medium' />
@@ -165,6 +210,7 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
                 <MenuItem value={undefined}>
                   <em>All Grades</em>
                 </MenuItem>
+                <MenuItem value={4}>4th Grade</MenuItem>
                 <MenuItem value={5}>5th Grade</MenuItem>
                 <MenuItem value={6}>6th Grade</MenuItem>
                 <MenuItem value={7}>7th Grade</MenuItem>
@@ -211,6 +257,12 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
           {/* Desktop Filter Treatment - Left Rail Radio Button Groups */}
           <Grid item xs={12} sm={12} md={12} lg={3} className="lessonPlans--filterRadio">
             <FormControl sx={{ marginLeft: "1rem" }}>
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ marginBottom: 2, textTransform: 'capitalize' }}
+                onClick={handleRemoveFilters}
+              >Reset Filters</Button>
               <FormLabel
                 id="radio-buttons-grade-level"
                 sx={{ color: 'black', fontWeight: 'bold' }}
@@ -218,7 +270,9 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
               <RadioGroup
                 aria-labelledby="radio-buttons-grade-level"
                 name="radio-buttons-group"
+                defaultValue={gradeFilter}
               >
+                <FormControlLabel value={4} control={<Radio onChange={(e) => handleGradeFilterChange(e)} />} label="4th Grade" />
                 <FormControlLabel value={5} control={<Radio onChange={(e) => handleGradeFilterChange(e)} />} label="5th Grade" />
                 <FormControlLabel value={6} control={<Radio onChange={(e) => handleGradeFilterChange(e)} />} label="6th Grade" />
                 <FormControlLabel value={7} control={<Radio onChange={(e) => handleGradeFilterChange(e)} />} label="7th Grade" />
@@ -236,6 +290,7 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
               <RadioGroup
                 aria-labelledby="radio-buttons-category"
                 name="radio-buttons-group"
+                defaultValue={categoryFilter}
               >
                 <FormControlLabel value="American History" control={<Radio onChange={(e) => handleCategoryFilterChange(e)} />} label="American History" />
                 <FormControlLabel value="World History" control={<Radio onChange={(e) => handleCategoryFilterChange(e)} />} label="World History" />
@@ -262,12 +317,6 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
                 <FormControlLabel value={45} control={<Radio onChange={(e) => handleTimeFilterChange(e)} />} label="45 Minutes" />
                 <FormControlLabel value={60} control={<Radio onChange={(e) => handleTimeFilterChange(e)} />} label="1 Hour+" />
               </RadioGroup> */}
-              <Button
-                variant="contained"
-                color="primary"
-                sx={{ marginTop: 2, textTransform: 'capitalize' }}
-                onClick={handleRemoveFilters}
-              >Reset Filters</Button>
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={9} className="lessonPlans--grid">

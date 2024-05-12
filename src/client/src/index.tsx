@@ -135,6 +135,9 @@ const App = () => {
           <Route path="/plans/:plan" element={<Plans viewer={viewer} setViewer={setViewer} />} />
           <Route path="/playlist/create" element={<CreatePlaylist viewer={viewer} />} />
           <Route path="/plans" element={<PlaylistsCatalog viewer={viewer} />} />
+          <Route path="/plan/:grade" element={<PlaylistsCatalog viewer={viewer} />} />
+          <Route path="/plan/:grade/:category" element={<PlaylistsCatalog viewer={viewer} />} />
+          <Route path="/plan/:category" element={<PlaylistsCatalog viewer={viewer} />} />
           <Route path="/quiz/:id" element={<Quiz />} />
           <Route path="/quiz/create" element={<CreateQuiz viewer={viewer} />} />
           <Route path="/article/create" element={<CreateArticle viewer={viewer} />} />
