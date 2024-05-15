@@ -5917,8 +5917,8 @@ const FetchRoutes = async () => {
   ];
 };
 
-// export removed
-const generateSitemap = async () => {
+// Remove export before running npm run generate-sitemap, replace after for build process
+export const generateSitemap = async () => {
   const routes = await FetchRoutes();
   const sitemapStream = new SitemapStream({
     hostname: "https://www.platospeach.com",
