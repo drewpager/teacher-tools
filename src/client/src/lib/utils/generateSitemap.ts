@@ -13,8 +13,62 @@ const FetchRoutes = async () => {
     { url: "/article/create", changefreq: "monthly", priority: 0.9 },
     { url: "/quiz/create", changefreq: "monthly", priority: 0.9 },
     { url: "/playlist/create", changefreq: "monthly", priority: 0.9 },
-    { url: "/pricing", changefreq: "monthly", priority: 0.8 },
+    { url: "/donate", changefreq: "monthly", priority: 0.8 },
     { url: "/plans", changefreq: "daily", priority: 0.9 },
+    { url: "/plan/4th-grade", changefreq: "daily", priority: 0.9 },
+    { url: "/plan/5th-grade", changefreq: "daily", priority: 0.9 },
+    { url: "/plan/6th-grade", changefreq: "daily", priority: 0.9 },
+    { url: "/plan/7th-grade", changefreq: "daily", priority: 0.9 },
+    { url: "/plan/8th-grade", changefreq: "daily", priority: 0.9 },
+    { url: "/plan/9th-grade", changefreq: "daily", priority: 0.9 },
+    { url: "/plan/10th-grade", changefreq: "daily", priority: 0.9 },
+    { url: "/plan/11th-grade", changefreq: "daily", priority: 0.9 },
+    { url: "/plan/12th-grade", changefreq: "daily", priority: 0.9 },
+    {
+      url: "/plan/4th-grade/american-history",
+      changefreq: "daily",
+      priority: 0.9,
+    },
+    {
+      url: "/plan/5th-grade/american-history",
+      changefreq: "daily",
+      priority: 0.9,
+    },
+    {
+      url: "/plan/6th-grade/american-history",
+      changefreq: "daily",
+      priority: 0.9,
+    },
+    {
+      url: "/plan/7th-grade/american-history",
+      changefreq: "daily",
+      priority: 0.9,
+    },
+    {
+      url: "/plan/8th-grade/american-history",
+      changefreq: "daily",
+      priority: 0.9,
+    },
+    {
+      url: "/plan/9th-grade/american-history",
+      changefreq: "daily",
+      priority: 0.9,
+    },
+    {
+      url: "/plan/10th-grade/american-history",
+      changefreq: "daily",
+      priority: 0.9,
+    },
+    {
+      url: "/plan/11th-grade/american-history",
+      changefreq: "daily",
+      priority: 0.9,
+    },
+    {
+      url: "/plan/12th-grade/american-history",
+      changefreq: "daily",
+      priority: 0.9,
+    },
     {
       url: "/plans/military-history-playlist",
       changefreq: "monthly",
@@ -122,6 +176,151 @@ const FetchRoutes = async () => {
     },
     {
       url: "/plans/pearl-harbor",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/prohibition",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/desegregation-in-schools",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/child-labor-in-america",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/history-of-computing",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/lewis-and-clark-expedition",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/patrick-henry",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/gettysburg-address",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/transcontinental-railroad",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/code-of-hammurabi",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/underground-railroad",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/marbury-v-madison",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/civil-rights-movement",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/rosa-parks",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/martin-luther-king-jr",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/cesar-chavez",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/harlem-renaissance",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/abolitionist-movement",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/trail-of-tears",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/salem-witch-trials",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/war-of-1812",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/roaring-twenties",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/early-humans",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/french-revolution",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/incas",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/american-civil-war-battles",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/great-depression",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/mexican-american-war",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/kristallnacht",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "/plans/social-darwinism",
       changefreq: "monthly",
       priority: 0.9,
     },
@@ -5100,10 +5299,626 @@ const FetchRoutes = async () => {
       changefreq: "yearly",
       priority: 0.8,
     },
+    {
+      url: "/lesson/65a41f604f41061083974744",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a41f604f41061083974746",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a41f604f41061083974745",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a41f604f41061083974747",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a41f604f41061083974749",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a41f604f41061083974748",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a54ddcdcc7fd36493adb66",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a54ddcdcc7fd36493adb68",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a54ddcdcc7fd36493adb67",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a54ddcdcc7fd36493adb69",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a54ddcdcc7fd36493adb6a",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a54ddcdcc7fd36493adb6b",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a54ddcdcc7fd36493adb6e",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a54ddcdcc7fd36493adb6f",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a54ddcdcc7fd36493adb6d",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a54ddcdcc7fd36493adb6c",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a54ddcdcc7fd36493adb70",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a54ddcdcc7fd36493adb71",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a54ddcdcc7fd36493adb72",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a54ddcdcc7fd36493adb73",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a54ddcdcc7fd36493adb74",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a54ddcdcc7fd36493adb77",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a54ddcdcc7fd36493adb76",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a54ddcdcc7fd36493adb75",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a54ddcdcc7fd36493adb78",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a54ddcdcc7fd36493adb79",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a54ddcdcc7fd36493adb7a",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a54ddcdcc7fd36493adb7c",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a54ddcdcc7fd36493adb7b",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a54ddcdcc7fd36493adb7d",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a54ddcdcc7fd36493adb7f",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a54ddcdcc7fd36493adb80",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65a54ddcdcc7fd36493adb7e",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32ba8f",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32ba90",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32ba91",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32ba93",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32ba92",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32ba94",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32ba96",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32ba98",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32ba95",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32ba97",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32ba9a",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32ba99",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32ba9d",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32ba9b",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32ba9c",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32ba9f",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32baa0",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32ba9e",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32baa1",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32baa2",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32baa3",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32baa4",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32baa6",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32baa7",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32baa8",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32baa5",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32baa9",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32baaa",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32baad",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32baae",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32baac",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32bab1",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32bab0",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32bab2",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32baaf",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32baab",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32bab3",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/65d364c04411325edc32bab4",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761de",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761df",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761e0",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761e1",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761e2",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761e3",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761e6",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761e7",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761e5",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761e4",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761e9",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761eb",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761ea",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761ec",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761e8",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761ed",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761f0",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761ef",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761ee",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761f1",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761f2",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761f6",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761f5",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761f7",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761f4",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761f3",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761f8",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761f9",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761fb",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761fc",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761fa",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761fd",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761fe",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe9761ff",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe976201",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe976200",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe976203",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe976204",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe97620a",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe976205",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe976207",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe976206",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe976208",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe976202",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe976209",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe97620b",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe97620f",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe97620e",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe97620c",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe97620d",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe976211",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: "/lesson/662bc4b36622a484fe976210",
+      changefreq: "yearly",
+      priority: 0.8,
+    },
   ];
 };
 
-export const generateSitemap = async () => {
+// export removed
+const generateSitemap = async () => {
   const routes = await FetchRoutes();
   const sitemapStream = new SitemapStream({
     hostname: "https://www.platospeach.com",

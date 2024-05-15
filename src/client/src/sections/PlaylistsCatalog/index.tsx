@@ -83,7 +83,7 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
   }
 
   // FOR SITEMAP GENERATION
-  // const playlistRoutes = data?.allplaylists.result.map((playlist: any) => {
+  // const playlistRoutes = data?.allplaylists.result.slice(24).map((playlist: any) => {
   //   if (playlist.public === true) {
   //     const slug = playlist?.name?.replace(/\s+/g, "-").toLowerCase();
   //     return {

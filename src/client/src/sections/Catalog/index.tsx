@@ -145,8 +145,8 @@ export const Catalog = ({ viewer }: Props) => {
       </Box>
     )
   }
-  // FOR SITEMAP GENERATION
-  // const lessonsRoutes = lessonData?.allLessons.result.map((lesson: any) => {
+  // FOR SITEMAP GENERATION - Replace 962 with ~1081 copy object from console and paste into generateSitemap.ts UTILS
+  // const lessonsRoutes = lessonData?.allLessons.result.slice(962).map((lesson: any) => {
   //   if (lesson.public === true) {
   //     return {
   //       url: `/lesson/${lesson.id}`,
