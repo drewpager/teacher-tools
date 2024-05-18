@@ -1,13 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import { FieldArray, Formik, getIn, FieldProps, Field } from 'formik';
 import { useCreateQuizMutation, Viewer, AnswerFormat, useGenerateQuizMutation, QuestionInput, Questions } from '../../graphql/generated';
 import {
   Box,
   TextField,
-  FormLabel,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
   Typography,
   Tooltip,
   Button,
@@ -22,7 +18,7 @@ import {
   Slider,
   Alert
 } from '@mui/material'
-import { Cancel, ControlPoint, Remove } from '@mui/icons-material';
+import { ControlPoint } from '@mui/icons-material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
@@ -30,8 +26,6 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { DisplayError } from '../../lib/utils';
-import { ReactComponent as PeachIcon } from '../../lib/assets/peach-logo.svg';
-import { Footer } from '../../lib/components';
 import './createQuiz.scss';
 import * as yup from 'yup';
 import { Link } from 'react-router-dom';
@@ -250,6 +244,13 @@ export const QuizCreate = ({ viewer }: props) => {
 
       if (generateQuizError) {
         console.log("Error from within: ", generateQuizError);
+        setGenerateQuizOpen(false);
+        setSubject("");
+        setMcNums(0);
+        setTfNums(0);
+        setNums(0);
+        setReady(false);
+        return (<Alert title="AI Quiz Generation Failed, Please Try Again" color='warning' />)
       }
 
       if (generateQuizLoading) {
