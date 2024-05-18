@@ -10,6 +10,7 @@
     .createPlaylist--h1,
     .createPlaylist--button {
       margin-left: 1rem;
+      text-transform: capitalize;
 
       @media (max-width: 768px) {
         margin: 0;

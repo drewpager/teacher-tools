@@ -205,15 +205,10 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
   useEffect(() => {
     if (!viewer.id) {
-      navigate('/signup', { replace: true })
+      navigate('/signup', { replace: true });
+      return;
     }
 
-    const playlistStorage = window.localStorage.getItem("playlist");
-    if (playlistStorage) {
-      setPlaylist(JSON.parse(playlistStorage));
-    }
-
-    setPlaylist(initialData);
     // Reset states to initial value or empty arrays
     setFilter([]);
     setPlans([]);
@@ -286,6 +281,15 @@ export const CreatePlaylist = ({ viewer }: props) => {
       }));
 
       setBookmarks(bookmarkInput);
+    }
+
+    const playlistStorage = window.localStorage.getItem("playlist");
+    if (playlistStorage) {
+      setPlaylist(JSON.parse(playlistStorage));
+      updateStates(playlist.plan, setPlans);
+      updateStates(playlist.plan, setFilter);
+    } else {
+      setPlaylist(initialData);
     }
 
     updateListSize()
@@ -704,6 +708,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
     playlist.plan.length = 0;
     window.localStorage.removeItem('playlist');
     setAutoSaved(false);
+    handleReset();
     navigate(`../user/${viewer.id}`, { replace: true })
   }
 
@@ -1039,6 +1044,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
                 <MenuItem value="world religions">World Religions</MenuItem>
                 <MenuItem value="ancient history">Ancient History</MenuItem>
                 <MenuItem value="african american history">African American History</MenuItem>
+                <MenuItem value="uncategorized">Uncategorized</MenuItem>
               </Select>
             </FormControl>
           </Box>
@@ -1048,7 +1054,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
             type='submit'
             disableRipple
             disableTouchRipple
-            disabled={titleError || playlist.plan.length === 0}
+            disabled={playlist.plan.length === 0 || titleError}
           >Create</Button>
         </form>
       </Box>
