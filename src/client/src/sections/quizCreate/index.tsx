@@ -232,6 +232,9 @@ export const QuizCreate = ({ viewer }: props) => {
 
   const handleQuizGenerate = async () => {
     try {
+      setGenerateQuizOpen(true);
+      setReady(false);
+
       const res = await generateQuiz({
         variables: {
           numMcQuestions: mcNums,
@@ -244,12 +247,7 @@ export const QuizCreate = ({ viewer }: props) => {
 
       if (generateQuizError) {
         console.log("Error from within: ", generateQuizError);
-        setGenerateQuizOpen(false);
-        setSubject("");
-        setMcNums(0);
-        setTfNums(0);
-        setNums(0);
-        setReady(false);
+        handleResetQuiz();
         return (<Alert title="AI Quiz Generation Failed, Please Try Again" color='warning' />)
       }
 
@@ -257,10 +255,18 @@ export const QuizCreate = ({ viewer }: props) => {
         console.log("Loading...");
       }
 
-      res && setGeneratedQuestions(res?.data?.generateQuiz)
-      setAiValues([...JSON.parse(`${generatedQuestions}`).questions]);
-      setReady(true)
+      if (res && res.data) {
+        setGeneratedQuestions(res.data.generateQuiz);
+        setAiValues([...JSON.parse(`${res.data.generateQuiz}`).questions]);
+        setNums(mcNums + tfNums);
+        setReady(true);
+      } else {
+        console.error("Unexpected response:", res);
+        handleResetQuiz();
+        return (<Alert title="AI Quiz Generation Failed, Please Try Again" color='warning' />)
+      }
     } catch (e) {
+      handleResetQuiz();
       return (<Alert title="AI Quiz Generation Failed, Please Try Again" color='warning' />)
     }
   }
@@ -630,7 +636,7 @@ export const QuizCreate = ({ viewer }: props) => {
                     <Button
                       variant="contained"
                       color="secondary"
-                      sx={{ ml: "1rem" }}
+                      sx={{ ml: "1rem", textTransform: "capitalize" }}
                       disabled={(subject === "") || (mcNums === 0 && tfNums === 0)}
                       onClick={handleQuizGenerate}
                     >Generate Quiz {generateQuizLoading && <CircularProgress size={20} sx={{ ml: 1, color: "#FFF" }} />}</Button>
