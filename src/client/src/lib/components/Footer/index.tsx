@@ -33,7 +33,7 @@ export const Footer = ({ viewer }: Props) => {
             >
               <PeachIcon className="navbar--icon" />
             </IconButton>
-            <Typography variant="h1" className="footer--title">
+            <Typography variant="h6" className="footer--title">
               <Link to="/" style={{ color: `${theme.palette.info.dark}`, textDecoration: "none" }}>
                 Plato's Peach
               </Link>
