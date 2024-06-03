@@ -149,6 +149,9 @@ export const lessonResolvers = {
     duration: (lesson: Lesson) => {
       return lesson.duration;
     },
+    // script: (lesson: Lesson) => {
+    //   return lesson.script;
+    // },
   },
   Playlist: {
     id: (playlist: Playlist) => {

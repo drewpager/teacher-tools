@@ -130,6 +130,12 @@ export const Lesson = ({ viewer }: Props) => {
                   url={`${lesson?.video}`}
                 />
               </Box>
+              {lesson?.script && (
+                <>
+                  <h4>Transcript</h4>
+                  <div dangerouslySetInnerHTML={{ __html: lesson.script }}></div>
+                </>
+              )}
             </Box>
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={4}>

@@ -57,6 +57,7 @@ export const typeDefs = gql`
     creator: String
     public: Boolean
     duration: Int
+    script: String
   }
 
   type AnswerOptions {
@@ -228,6 +229,7 @@ export const typeDefs = gql`
     creator: String!
     public: Boolean
     duration: Int
+    script: String
   }
 
   input CreateArticleInput {
@@ -314,6 +316,7 @@ export const typeDefs = gql`
     creator: String
     public: Boolean
     duration: Int
+    script: String
   }
 
   input Answers {
@@ -350,6 +353,7 @@ export const typeDefs = gql`
     public: Boolean
     pdf: String
     duration: Int
+    script: String
   }
 
   input LessonPlanInput {

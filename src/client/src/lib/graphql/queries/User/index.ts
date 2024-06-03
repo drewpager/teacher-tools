@@ -126,6 +126,7 @@ export const USER = gql`
           creator
           public
           duration
+          script
         }
         totalCount
       }

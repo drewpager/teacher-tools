@@ -14,6 +14,7 @@ export interface CreateLessonInput {
   creator: string;
   public: boolean;
   duration?: number;
+  script?: string;
 }
 
 export interface CreateLessonArgs {

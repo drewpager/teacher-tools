@@ -23,6 +23,7 @@ export const PLAN = gql`
           creator
           public
           duration
+          script
         }
         ... on Quiz {
           id

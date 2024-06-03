@@ -36,6 +36,7 @@ export const RELATED_PLANS = gql`
           creator
           public
           duration
+          script
         }
       }
       name

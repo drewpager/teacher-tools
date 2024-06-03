@@ -14,6 +14,7 @@ export const LESSON = gql`
       creator
       public
       duration
+      script
     }
   }
 `;

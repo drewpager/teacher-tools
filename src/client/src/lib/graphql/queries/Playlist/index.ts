@@ -23,6 +23,7 @@ export const PLAYLIST = gql`
           creator
           public
           duration
+          script
         }
         ... on Quiz {
           id
