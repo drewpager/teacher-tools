@@ -1,6 +1,7 @@
 import { Lesson } from "../../../lib/types";
 export interface LessonArgs {
   id: string;
+  title: string;
 }
 
 export interface CreateLessonInput {

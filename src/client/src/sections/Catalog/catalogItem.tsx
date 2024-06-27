@@ -144,7 +144,8 @@ export const CatalogItem = ({ name, category, viewer, bookmarks }: props) => {
                     {/* {l.category?.map((c, idx) => (
                       idx !== 0 && <Chip label={titleCase(`${c}`)} color="primary" key={idx} />
                     ))} */}
-                    <Link to={`/lesson/${l.id}`} style={{ textDecoration: "none" }}>
+                    {/* <Link to={`/lesson/${l.id}`} style={{ textDecoration: "none" }}> */}
+                    <Link to={`/lesson/${l.title?.toLowerCase().replaceAll(/ /g, "-")}`} style={{ textDecoration: "none" }}>
                       <Typography component="div" variant="h4" style={{ color: "#FAF9F6" }} className="card--title-link">
                         {l.title}
                       </Typography>

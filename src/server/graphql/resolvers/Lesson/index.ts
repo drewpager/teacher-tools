@@ -141,6 +141,20 @@ export const lessonResolvers = {
       }
       return cursor;
     },
+    lessonTitle: async (
+      _root: undefined,
+      { title }: LessonArgs,
+      { db }: { db: Database }
+    ): Promise<Lesson> => {
+      const regex = new RegExp(title, "i");
+      const lessonTitle = await db.lessons.findOne({ title: regex });
+
+      if (!lessonTitle) {
+        throw new Error("Failed to find lesson!");
+      }
+
+      return lessonTitle;
+    },
   },
   Lesson: {
     id: (lesson: Lesson) => {

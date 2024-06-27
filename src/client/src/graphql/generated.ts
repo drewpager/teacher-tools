@@ -564,6 +564,7 @@ export type Query = {
   article: Article;
   authUrl: Scalars['String'];
   lesson: Lesson;
+  lessonTitle: Lesson;
   plan: Playlist;
   playlist: Playlist;
   quiz: Quiz;
@@ -609,6 +610,11 @@ export type QueryArticleArgs = {
 
 export type QueryLessonArgs = {
   id: Scalars['ID'];
+};
+
+
+export type QueryLessonTitleArgs = {
+  title: Scalars['String'];
 };
 
 
@@ -830,6 +836,13 @@ export type LessonQueryVariables = Exact<{
 
 
 export type LessonQuery = { __typename?: 'Query', lesson: { __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null, public?: boolean | null, duration?: number | null, script?: string | null } };
+
+export type LessonTitleQueryVariables = Exact<{
+  title: Scalars['String'];
+}>;
+
+
+export type LessonTitleQuery = { __typename?: 'Query', lessonTitle: { __typename?: 'Lesson', id?: string | null, category?: Array<string | null> | null, title?: string | null, meta?: string | null, video?: string | null, image?: string | null, startDate?: any | null, endDate?: any | null, creator?: string | null, public?: boolean | null, duration?: number | null, script?: string | null } };
 
 export type AllLessonsQueryVariables = Exact<{
   limit: Scalars['Int'];
@@ -1465,6 +1478,52 @@ export function useLessonLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Les
 export type LessonQueryHookResult = ReturnType<typeof useLessonQuery>;
 export type LessonLazyQueryHookResult = ReturnType<typeof useLessonLazyQuery>;
 export type LessonQueryResult = Apollo.QueryResult<LessonQuery, LessonQueryVariables>;
+export const LessonTitleDocument = gql`
+    query LessonTitle($title: String!) {
+  lessonTitle(title: $title) {
+    id
+    category
+    title
+    meta
+    video
+    image
+    startDate
+    endDate
+    creator
+    public
+    duration
+    script
+  }
+}
+    `;
+
+/**
+ * __useLessonTitleQuery__
+ *
+ * To run a query within a React component, call `useLessonTitleQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLessonTitleQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLessonTitleQuery({
+ *   variables: {
+ *      title: // value for 'title'
+ *   },
+ * });
+ */
+export function useLessonTitleQuery(baseOptions: Apollo.QueryHookOptions<LessonTitleQuery, LessonTitleQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<LessonTitleQuery, LessonTitleQueryVariables>(LessonTitleDocument, options);
+      }
+export function useLessonTitleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LessonTitleQuery, LessonTitleQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<LessonTitleQuery, LessonTitleQueryVariables>(LessonTitleDocument, options);
+        }
+export type LessonTitleQueryHookResult = ReturnType<typeof useLessonTitleQuery>;
+export type LessonTitleLazyQueryHookResult = ReturnType<typeof useLessonTitleLazyQuery>;
+export type LessonTitleQueryResult = Apollo.QueryResult<LessonTitleQuery, LessonTitleQueryVariables>;
 export const AllLessonsDocument = gql`
     query AllLessons($limit: Int!, $page: Int!) {
   allLessons(limit: $limit, page: $page) {

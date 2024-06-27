@@ -1,5 +1,5 @@
 import React, { useMemo, useEffect, useRef } from 'react';
-import { Viewer, useLessonQuery, useRelatedPlansQuery } from '../../graphql/generated';
+import { Viewer, useLessonQuery, useRelatedPlansQuery, useLessonTitleQuery } from '../../graphql/generated';
 import { useParams } from 'react-router-dom';
 import { LinearProgress, Box, Chip, Card, Grid, Button, Typography, Tooltip } from '@mui/material';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
@@ -23,17 +23,25 @@ declare global {
 
 export const Lesson = ({ viewer }: Props) => {
   const params = useParams()
-  const screenWidth = window.screen.width;
-  const screenHeight = window.screen.height;
-  const { loading, data, error } = useLessonQuery({
+  // const screenWidth = window.screen.width;
+  // const screenHeight = window.screen.height;
+  const title = titleCase(`${params.id}`.replace(/-/g, " "));
+
+  // const { loading, data, error } = useLessonQuery({
+  //   variables: {
+  //     id: `${params.id}`
+  //   }
+  // });
+
+  const { data, loading, error } = useLessonTitleQuery({
     variables: {
-      id: `${params.id}`
+      title: title
     }
   });
 
   const { data: relatedPlansData, loading: relatedPlansLoading, error: relatedPlansError } = useRelatedPlansQuery({
     variables: {
-      id: `${params.id}`
+      id: `${data?.lessonTitle.id}`
     }
   })
 
@@ -51,7 +59,7 @@ export const Lesson = ({ viewer }: Props) => {
     )
   }
 
-  const lesson = data ? data.lesson : null;
+  const lesson = data ? data.lessonTitle : null;
 
   const formatSlugSpaces = (slug: string) => {
     return slug.trim().replaceAll(" ", '%20');

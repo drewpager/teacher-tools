@@ -79,7 +79,8 @@ export const UserBookmarks = ({ user, setBookmarksPage }: Props) => {
           <Grid item lg={4} md={6} sm={6} xs={12} key={index}>
             <ListItem key={index}>
               <Box>
-                <Link to={`/lesson/${b.id}`} style={{ color: "#000" }}>
+                {/* <Link to={`/lesson/${b.id}`} style={{ color: "#000" }}> */}
+                <Link to={`/lesson/${b.title?.toLowerCase().replaceAll(/ /g, "-")}`} style={{ color: "#000" }}>
                   <Typography variant="h3">{b.title}</Typography>
                 </Link>
               </Box>

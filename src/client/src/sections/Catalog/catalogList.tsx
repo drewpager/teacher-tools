@@ -88,7 +88,8 @@ export const CatalogList = ({ name, category, viewer, bookmarks }: props) => {
       }
       {category.map((lesson, index) => (
         <Box className="category--list-box" key={index}>
-          <Link to={`/lesson/${lesson.id}`} style={{ textDecoration: "none", color: "#fff" }}>
+          {/* <Link to={`/lesson/${lesson.id}`} style={{ textDecoration: "none", color: "#fff" }}> */}
+          <Link to={`/lesson/${lesson.title?.toLowerCase().replaceAll(/ /g, "-")}`} style={{ textDecoration: "none", color: "#fff" }}>
             <Typography variant="h4" className="category--list-title">{lesson.title}</Typography>
           </Link>
           <Tooltip title="View video" placement="top">

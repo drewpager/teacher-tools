@@ -175,6 +175,7 @@ export const typeDefs = gql`
     authUrl: String!
     user(id: ID!): User!
     lesson(id: ID!): Lesson!
+    lessonTitle(title: String!): Lesson!
     playlist(id: ID!): Playlist!
     plan(title: String!): Playlist!
     article(id: ID!): Article!
