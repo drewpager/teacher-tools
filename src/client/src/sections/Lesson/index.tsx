@@ -25,7 +25,7 @@ export const Lesson = ({ viewer }: Props) => {
   const params = useParams()
   // const screenWidth = window.screen.width;
   // const screenHeight = window.screen.height;
-  const title = titleCase(`${params.id}`.replace(/-/g, " "));
+  const title = titleCase(`${params.id}`.replaceAll(/-/g, " ").replaceAll(/_/g, "-"));
 
   // const { loading, data, error } = useLessonQuery({
   //   variables: {

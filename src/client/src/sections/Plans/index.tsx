@@ -19,7 +19,7 @@ interface Props {
 
 export const Plans = ({ viewer, setViewer }: Props) => {
   const params = useParams();
-  const title = titleCase(`${params.plan}`.replace(/-/g, " "));
+  const title = titleCase(`${params.plan}`.replace(/-/g, " ").replaceAll(/_/g, "-"));
   // console.log(`${params}`.trim().replace(/-/g, " "))
 
 

@@ -5,6 +5,7 @@ import { Playlist, LessonPlanUnion, useUserQuery } from '../../../graphql/genera
 import { useMutation } from '@apollo/client';
 import { gql } from 'graphql-tag';
 import { DisplaySuccess } from '../../utils';
+import { formatSlug } from '../../utils/formatSlug';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import LockIcon from '@mui/icons-material/Lock';
@@ -146,9 +147,9 @@ export const UserPlaylistsCard = ({ playlist, paymentId }: Props) => {
     setPublicDialogOpen(false);
   }
 
-  const formatSlug = (title: any) => {
-    return title.toLowerCase().replace(/ /g, "-");
-  }
+  // const formatSlug = (title: any) => {
+  //   return title.toLowerCase().replace(/ /g, "-");
+  // }
 
   return (
     <Grid item lg={4} md={6} sm={12} xs={12} key={playlist.id}>

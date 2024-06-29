@@ -1,5 +1,5 @@
 import React from "react";
 
 export const formatSlug = (title: any) => {
-  return title.replace(/\s+/g, "-").toLowerCase();
+  return title.replaceAll(/-/g, "_").replace(/ /g, "-").toLowerCase();
 };

@@ -80,7 +80,7 @@ export const UserBookmarks = ({ user, setBookmarksPage }: Props) => {
             <ListItem key={index}>
               <Box>
                 {/* <Link to={`/lesson/${b.id}`} style={{ color: "#000" }}> */}
-                <Link to={`/lesson/${b.title?.toLowerCase().replaceAll(/ /g, "-")}`} style={{ color: "#000" }}>
+                <Link to={`/lesson/${b.title?.toLowerCase().replaceAll(/-/g, "_").replaceAll(/ /g, "-")}`} style={{ color: "#000" }}>
                   <Typography variant="h3">{b.title}</Typography>
                 </Link>
               </Box>
