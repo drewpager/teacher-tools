@@ -10,7 +10,7 @@ import AppsIcon from '@mui/icons-material/Apps';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import SortByAlphaIcon from '@mui/icons-material/SortByAlpha';
 import { useAllLessonsQuery, Viewer, useUserQuery } from '../../graphql/generated';
-import { categories, titleCase, DisplayError } from '../../lib/utils';
+import { categories, titleCase, DisplayError, formatSlug } from '../../lib/utils';
 import { CatalogItem } from './catalogItem';
 import { CatalogList } from './catalogList';
 import { Footer } from '../../lib/components';
@@ -146,12 +146,12 @@ export const Catalog = ({ viewer }: Props) => {
     )
   }
   // FOR SITEMAP GENERATION - Replace 962 with ~1081 copy object from console and paste into generateSitemap.ts UTILS
-  // const lessonsRoutes = lessonData?.allLessons.result.slice(962).map((lesson: any) => {
+  // const lessonsRoutes = lessonData?.allLessons.result.slice(0).map((lesson: any) => {
   //   if (lesson.public === true) {
   //     return {
-  //       url: `/lesson/${lesson.id}`,
-  //       changefreq: "yearly",
-  //       priority: 0.8,
+  //       url: `/lesson/${formatSlug(lesson.title)}`,
+  //       changefreq: "monthly",
+  //       priority: 0.9,
   //     };
   //   } else {
   //     return null;

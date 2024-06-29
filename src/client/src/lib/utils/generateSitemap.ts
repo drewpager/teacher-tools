@@ -325,6 +325,11 @@ const FetchRoutes = async () => {
       priority: 0.9,
     },
     {
+      url: "/plans/panama-canal",
+      changefreq: "monthly",
+      priority: 0.9,
+    },
+    {
       url: "/article/6506066343ae84356582d1f8",
       changefreq: "monthly",
       priority: 0.9,
@@ -489,5431 +494,5433 @@ const FetchRoutes = async () => {
       changefreq: "monthly",
       priority: 0.9,
     },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9d1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9d2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9d3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9d6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9d5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9d7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9d8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9d9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9dc",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9de",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9db",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9dd",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9df",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9e1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9e3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9e4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9e5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9e0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9e2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9e9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9e8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9e7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9ea",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9ec",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9eb",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9e6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9ed",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9ee",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9ef",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9f3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9f1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9f0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9f2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9f4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9f8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9f5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9f6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9f7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9fa",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9fb",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9f9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9fc",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9fd",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9ff",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca01",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca05",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca02",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917c9fe",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca04",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca07",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca03",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca06",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca00",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca0b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca09",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca0a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca0c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca08",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca0d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca0e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca11",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca0f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca12",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca15",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca16",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca14",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca18",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca1c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca17",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca19",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca1d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca1a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca1b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca13",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca1e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca26",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca24",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca29",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca23",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca21",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca25",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca27",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca1f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca28",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca20",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca22",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca2a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca2b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca30",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca2e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca33",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca36",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca31",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca38",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca2f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca34",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca37",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca35",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca2d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca2c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca32",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca39",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca3f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca3b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca40",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca3a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca41",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca3c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca3d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca3e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca42",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca47",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca45",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca46",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca44",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca43",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca48",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca4d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca4a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca4e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca55",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca49",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca4b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca51",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca53",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca54",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca52",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca50",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca4f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca58",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca57",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca4c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca56",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca5a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca5c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca5b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca5e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca59",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca5d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca5f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca63",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca62",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca67",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca64",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca66",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca61",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca60",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca68",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca65",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca69",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca6f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca6e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca6c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca6a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca71",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca6b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca6d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca72",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca70",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca78",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca7b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca77",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca7a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca74",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca76",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca79",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca75",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca73",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca7f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca7e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca80",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca7d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca85",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca87",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca84",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca7c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca8a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca8c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca8e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca8d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca83",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca82",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca89",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca86",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca81",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca88",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca8b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca93",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca92",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca8f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca95",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca97",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca90",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca98",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca99",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca94",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca96",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca91",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca9b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca9f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca9a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca9d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca9c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ca9e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caa2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caa1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caa0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caa4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caa6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caa8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caa3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cab4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cab0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caaf",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cab3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caac",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caa5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cab5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caa9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caa7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cab2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caab",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cab1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cab6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caaa",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cab7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caae",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cabd",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cab9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cabe",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caba",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cabc",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cabb",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cac1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cabf",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cac0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cac2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cac3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cab8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cac4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cac8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cac6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cacb",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cac7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cac5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caca",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cac9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cacc",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cacd",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cad2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cacf",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cace",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cad1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cad0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cad7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cad6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cae0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cada",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cadb",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cad3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cad9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cadc",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cad4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cad8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cad5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cae1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cade",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cadd",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cadf",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cae2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cae3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cae4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cae8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cae6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cae9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cae7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caea",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caeb",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cafb",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caf7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caf0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caf4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caf1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cafa",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cae5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caf6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caf3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caed",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caf5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caee",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caef",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caf9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caf2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caec",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caf8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb01",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917caff",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cafe",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb00",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb0a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb06",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb05",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb03",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb07",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb04",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cafd",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb08",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb0b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb0d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb0e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb09",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb02",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb10",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb0f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb12",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb14",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb11",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb13",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb0c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb15",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb2b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb21",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb1e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb29",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb19",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb20",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb1f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb27",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb1c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb1d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb23",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb18",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb2c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb28",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb17",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb2a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb1b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb16",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb1a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb22",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb2f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb25",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb2d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb2e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb24",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb31",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb36",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb32",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb35",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb33",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb3a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb38",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb34",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb39",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb30",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb37",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb3c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb48",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb49",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb41",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb43",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb3d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb46",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb4a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb40",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb3b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb44",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb47",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb42",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb3f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb45",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb3e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb4c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb4d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb4e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb4f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb4b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb57",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb59",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb58",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb5c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb5d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb5b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb5e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb53",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb55",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb54",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb5a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb60",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb5f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb51",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb61",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb50",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb56",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb62",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb52",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb65",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb66",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb63",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb64",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb6d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb6b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb67",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb74",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb77",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb69",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb6f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb68",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb6c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb70",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb79",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb73",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb72",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb71",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb7b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb6e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb7d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb83",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb75",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb80",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb7f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb82",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb78",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb6a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb7e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb81",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb7a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb76",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb7c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb85",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb99",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb94",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb84",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb8c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb9a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb89",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb8a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb8b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb9c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb87",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb88",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb92",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cba0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb93",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb9d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb91",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb86",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb97",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb8e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb96",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb9b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb8d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb9f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb90",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb95",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb98",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cba1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb9e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cb8f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cba6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cba7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cba5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbaf",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbae",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbaa",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbab",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cba4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cba8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cba3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbad",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbac",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cba2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cba9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbb2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbb9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbb0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbbb",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbbc",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbc0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbbe",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbbd",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbb5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbb7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbb1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbb8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbb3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbb6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbb4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbba",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbbf",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbc2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbc1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbc9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbd7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbd4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbcc",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbd3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbd9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbc8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbca",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbc4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbc3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbd0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbcb",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbc6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbd6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbd8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbcf",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbc5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbc7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbd1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbce",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbda",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbcd",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbdb",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbdd",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbdf",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbe0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbdc",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbde",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbd5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbd2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbe7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbe4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbe1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbe3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbe2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbe8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbe9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbe6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbe5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbeb",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbef",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbea",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbed",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbee",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbec",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc00",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbfe",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbf6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbfc",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbfb",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbfa",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbf1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbfd",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbf4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbf2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbf7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbf0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbf9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc01",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbf3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbf5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbf8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cbff",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc03",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc11",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc05",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc0e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc18",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc15",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc0a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc0c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc1f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc12",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc17",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc04",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc09",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc1e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc0f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc19",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc0b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc06",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc07",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc13",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc16",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc10",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc0d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc02",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc14",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc20",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc22",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc1d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc21",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc1c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc23",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc1a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc1b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc27",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc25",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc28",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc26",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc24",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc2b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc2d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc2a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc2c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc29",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc35",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc2e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc33",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc34",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc31",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc30",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc2f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc32",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc3c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc36",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc3e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc42",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc39",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc37",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc40",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc3a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc3b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc3f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc3d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc38",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc41",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc43",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc46",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc45",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc44",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc47",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc5d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc52",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc5a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc54",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc48",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc56",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc4f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc53",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc5c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc5b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc4a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc59",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc49",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc4e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc55",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc57",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc4b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc4d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc50",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc5e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc5f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc58",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc51",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc4c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc62",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc6a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc63",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc61",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc69",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc64",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc68",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc65",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc67",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc60",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc66",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc6c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc6d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc72",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc77",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc6e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc70",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc71",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc74",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc76",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc73",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc78",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc75",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc6b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc6f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc7a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc79",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc88",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc83",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc7d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc89",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc7f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc85",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc7b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc7c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc86",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc7e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc8d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc8a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc80",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc8b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc81",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc87",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc82",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc8f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc84",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc8c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc8e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc94",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc92",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc90",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc98",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc97",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc95",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc96",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc99",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc93",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc9c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc9f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cca3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cca4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc9d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc9e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc9a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cca0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cca1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ccab",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ccb3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ccb5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ccb2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cca8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ccb0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cca9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ccaa",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ccac",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ccae",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ccb4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cca7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cc9b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ccb1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ccad",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ccaf",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cca2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cca5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917cca6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/647b649f6861ea1f2917ccb6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d45a7164db605ca2fd73",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d45a7164db605ca2fd75",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d45a7164db605ca2fd74",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d45a7164db605ca2fd77",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d45a7164db605ca2fd78",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d45a7164db605ca2fd76",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d45a7164db605ca2fd7b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d45a7164db605ca2fd7a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d45a7164db605ca2fd79",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d45a7164db605ca2fd7c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d45a7164db605ca2fd7d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d45a7164db605ca2fd80",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d45a7164db605ca2fd7f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d45a7164db605ca2fd7e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d45a7164db605ca2fd81",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5c1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5c2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5c3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5c6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5c5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5c4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5c8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5c7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5c9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5ca",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5cc",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5cd",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5cb",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5cf",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5ce",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5d2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5d0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5d1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5d3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5d4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5d5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5d8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5d7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5d6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5da",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5d9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5dc",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5db",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5dd",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5df",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5de",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5e2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5e3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5e1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5e0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5e4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5e5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5e9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5ec",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5ea",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5ed",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5e6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5e7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5e8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5eb",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5f1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5f3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5f2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5f0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5ee",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5ef",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5f6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5f5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5f4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5f7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5fa",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5f9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5fb",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5f8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5ff",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5fd",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5fe",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6d6102a80a71b0abac5fc",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6dcbf6865f2db3684113c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6dcbf6865f2db3684113d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6dcbf6865f2db3684113e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6dcbf6865f2db3684113f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6dcbf6865f2db36841141",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6dcbf6865f2db36841140",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6dcbf6865f2db36841143",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6dcbf6865f2db36841145",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6dcbf6865f2db36841142",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6dcbf6865f2db3684114a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6dcbf6865f2db36841148",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6dcbf6865f2db36841149",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6dcbf6865f2db36841146",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6dcbf6865f2db3684114d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6dcbf6865f2db3684114e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6dcbf6865f2db3684114f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6dcbf6865f2db3684114c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6dcbf6865f2db3684114b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6dcbf6865f2db36841150",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64a6dcbf6865f2db36841151",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793ba8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793baa",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793ba9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bad",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bac",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bab",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bb0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bb1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bae",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793baf",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bb4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bb3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bb2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bb5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bb6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bb9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bb8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bba",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bbc",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bb7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bbb",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bbf",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bc0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bbd",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bbe",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bc2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bc1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bc3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bc7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bc5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bc6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64aca768ef6e34bbf6793bc4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64b7f8b17fd2cbbaca2add4d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64b7f8b17fd2cbbaca2add4e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64b7f8b17fd2cbbaca2add50",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64b7f8b17fd2cbbaca2add52",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64b7f8b17fd2cbbaca2add51",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64b7f8b17fd2cbbaca2add53",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64b7f8b17fd2cbbaca2add54",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64b7f8b17fd2cbbaca2add55",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64b7f8b17fd2cbbaca2add56",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64b7f8b17fd2cbbaca2add58",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64b7f8b17fd2cbbaca2add57",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64ce9c57ca57d2b7ed9cc265",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64ce9c57ca57d2b7ed9cc266",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64ce9c57ca57d2b7ed9cc267",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64ce9c57ca57d2b7ed9cc26a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64ce9c57ca57d2b7ed9cc268",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64ce9c57ca57d2b7ed9cc269",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64ce9c57ca57d2b7ed9cc26d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64ce9c57ca57d2b7ed9cc26e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64ce9c57ca57d2b7ed9cc26b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64ce9c57ca57d2b7ed9cc26c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64ce9c57ca57d2b7ed9cc271",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64ce9c57ca57d2b7ed9cc270",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64ce9c57ca57d2b7ed9cc272",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64ce9c57ca57d2b7ed9cc26f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a11",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a10",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a13",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a12",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a15",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a14",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a18",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a19",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a1a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a16",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a1c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a1f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a1d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a1b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a1e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a20",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a24",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a23",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a26",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a21",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a27",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a22",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a2a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a28",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a2c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a29",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a2b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/64fe4f4e32e96814733c9a2d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/655635612b4a870e73171f2e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b0659f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065a1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065a0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065a3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065a2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065a4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065a5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065a6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065a7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065a8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065aa",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065a9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065ab",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065ad",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065ac",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065b1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065b0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065af",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065ae",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065b2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065b3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065b8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065b7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065b5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065b4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065b9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065ba",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065bc",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065bd",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065be",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065c1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065bb",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065bf",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065c0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065c5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065c4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065c3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065c7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065c6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065c9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065c8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065ca",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065cc",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/6557b8b6433167a730b065cd",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a41f604f41061083974744",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a41f604f41061083974746",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a41f604f41061083974745",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a41f604f41061083974747",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a41f604f41061083974749",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a41f604f41061083974748",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a54ddcdcc7fd36493adb66",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a54ddcdcc7fd36493adb68",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a54ddcdcc7fd36493adb67",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a54ddcdcc7fd36493adb69",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a54ddcdcc7fd36493adb6a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a54ddcdcc7fd36493adb6b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a54ddcdcc7fd36493adb6e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a54ddcdcc7fd36493adb6f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a54ddcdcc7fd36493adb6d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a54ddcdcc7fd36493adb6c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a54ddcdcc7fd36493adb70",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a54ddcdcc7fd36493adb71",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a54ddcdcc7fd36493adb72",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a54ddcdcc7fd36493adb73",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a54ddcdcc7fd36493adb74",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a54ddcdcc7fd36493adb77",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a54ddcdcc7fd36493adb76",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a54ddcdcc7fd36493adb75",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a54ddcdcc7fd36493adb78",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a54ddcdcc7fd36493adb79",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a54ddcdcc7fd36493adb7a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a54ddcdcc7fd36493adb7c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a54ddcdcc7fd36493adb7b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a54ddcdcc7fd36493adb7d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a54ddcdcc7fd36493adb7f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a54ddcdcc7fd36493adb80",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65a54ddcdcc7fd36493adb7e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32ba8f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32ba90",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32ba91",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32ba93",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32ba92",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32ba94",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32ba96",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32ba98",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32ba95",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32ba97",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32ba9a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32ba99",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32ba9d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32ba9b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32ba9c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32ba9f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32baa0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32ba9e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32baa1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32baa2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32baa3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32baa4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32baa6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32baa7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32baa8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32baa5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32baa9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32baaa",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32baad",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32baae",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32baac",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32bab1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32bab0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32bab2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32baaf",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32baab",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32bab3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/65d364c04411325edc32bab4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761de",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761df",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761e0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761e1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761e2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761e3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761e6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761e7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761e5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761e4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761e9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761eb",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761ea",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761ec",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761e8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761ed",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761f0",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761ef",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761ee",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761f1",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761f2",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761f6",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761f5",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761f7",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761f4",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761f3",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761f8",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761f9",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761fb",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761fc",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761fa",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761fd",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761fe",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe9761ff",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe976201",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe976200",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe976203",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe976204",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe97620a",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe976205",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe976207",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe976206",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe976208",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe976202",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe976209",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe97620b",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe97620f",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe97620e",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe97620c",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe97620d",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe976211",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: "/lesson/662bc4b36622a484fe976210",
-      changefreq: "yearly",
-      priority: 0.8,
-    },
+    [
+      {
+        url: "/lesson/the-migration-of-birds",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-hastings",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/martin-luther's-95-theses",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/george-washington",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/king-philip's-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-and-works-of-thomas-paine",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/toussaint-charbonneau",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/napoleon-bonaparte",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-lewis-and-clark-expedition",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/kit-carson-and-the-american-frontier",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-alien-and-sedition-acts",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/robert-e.-lee",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/pt-barnum",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/florence-nightingale-and-the-dawn-of-modern-healthcare",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/ulysses-s.-grant",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/stonewall-jackson",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/nat-turner's-rebellion",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/ada-lovelace:-first-female-computer-programmer",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-&-masterworks-of-rosa-bonheur",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/wyatt-earp",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-mexican_american-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/andrew-carnegie",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-forgotten-genius-of-charles-scott-sherrington",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/abraham-lincoln's-emancipation-proclamation",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/john-brown's-raid-on-harpers-ferry",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-great-moon-hoax-of-1835",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-chancellorsville",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/sherman's-march-to-the-sea",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-13th-amendment",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/marcus-garvey",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/mata-hari",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-little-bighorn",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/barney-oldfield,-the-fastest-man-on-earth",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/ho-chi-minh",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/ernie-pyle:-america's-eyewitness-to-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/dwight-d.-eisenhower",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-bronze-age",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/amelia-earhart-flies-the-pond",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/lucky-lindy",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-spy-behind-home-plate",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-assassination-of-president-mckinley",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-tuskegee-syphilis-experiment",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/ronald-reagan",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-jutland",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/louis-zamperini",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/edmund-hillary:-the-first-man-at-the-top-of-the-world",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/doughboys-of-the-first-world-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/babe-didrikson-zaharias",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-19th-amendment",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/league-of-nations",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/robert-wadlow,-the-tallest-man-on-earth",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/george-wallace",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-brusilov-offensive",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/orlando:-virginia-woolf's-seminal-novel",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/alan-shepard:-first-american-in-space",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/margaret-thatcher",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/martin-luther-king-jr.",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/albert-schatz,-the-biggest-loser-in-scientific-discovery",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/james-dean",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/galloping-gertie",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/how-detroit-out-built-her-enemies-during-world-war-two",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/pearl-harbor",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/muhammad-ali",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/a-big-week-for-the-allied-air-war-in-europe",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/kamikaze-attacks-of-wwii",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-french-sink-their-own-navy",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-yalta-conference-and-the-fate-of-post_war-europe",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-sabrejet's-role-in-the-korean-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/operation-aphrodite-goes-horribly-wrong",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/a-standout-hero-at-hacksaw-ridge",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-osan",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-last-days-of-adolf-hitler",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/an-american-aircrew's-miraculous-final-flight",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/imperial-japanese-navy-bombs-america",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-inch’on",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-fall-of-saigon",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-tet-offensive",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/exxon-valdez-oil-spill",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/teenage-castaways-of-'ata-island",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-cuban-missile-crisis-&-the-cold-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-woodstock-music-&-arts-festival",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/iran-hostage-crisis",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-bloody-ridge",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-resurrection-of-mary-rose",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-bay-of-pigs-invasion",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-day-we-lost-charlie",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/alexander-the-great",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-iron-age",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-seven-natural-wonders-of-the-world",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/mesolithic-period-of-early-man",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/genghis-khan",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-mardi-gras",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/yosemite",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/mesopotamia-and-the-fertile-crescent",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-christmas-trees",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/trojan-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/nefertiti",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/silk-road-to-china",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-neolithic-revolution",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-minoan-eruption-of-thera",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/gladiators-of-ancient-rome",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/hatshepsut,-the-queen-that-would-be-king",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/native-americans-and-the-buffalo",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/hanukkah",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/han-dynasty",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/shang-dynasty",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/history-of-hong-kong",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-code-of-hammurabi",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-gods-of-anunnaki",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-paleolithic-period",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-basic-practices-of-hinduism",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-punic-wars",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-great-pyramids-of-giza",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-mayans",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/history-of-jack-o'lanterns",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/leap-day",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-legend-of-werewolves",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-ancient-folklores-of-halloween",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/stonehenge",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-traditions-of-passover",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/leonidas-and-the-spartan-300",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/malaria",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-stone-age-of-early-man",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-parthenon",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/socrates",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-gaelic-festival-of-samhain",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-copper-age",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/ides-of-march",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-seven-wonders-of-the-ancient-world",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/mount-everest",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-anatomy-of-tornadoes",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-holy-city-of-jerusalem",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-acropolis",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-mirrors",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/sudden-death-at-pompeii",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/cleopatra",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/tuberculosis",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/satan",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-ancient-civilization-of-sparta",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-ark-of-the-covenant",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/grand-central-station",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-groundhog-day",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-empire-state-building",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/vatican-city",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-tōhoku-earthquake-of-japan",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-golden-gate-bridge",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-pagan-origins-of-halloween",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-april-fools'-day",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-tax-day",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/conspiracy-theories-and-the-sinking-of-the-titanic",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-flag-day",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-miranda-rights",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-bikini-swimsuit-comes-of-age",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/cinco-de-mayo",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-labor-day",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-memorial-day",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-burning-ghost-town-of-centralia-pennsylvania",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-independence-day",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-first-four-presidents-to-get-sick-in-the-white-house",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-star_spangled-banner",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/mount-rushmore",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-loch-ness-monster",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/jimmy-carter",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-father's-day",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/charlemagne",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-suez-canal-maritime’s-shortcut-through-egypt",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-geneva-convention",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-washington-monument",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/medieval-architecture",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/medieval-warfare",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-first-crusade",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/weapons-of-the-middle-ages",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-incas",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-samurai-of-feudal-japan",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-knights-templar",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-legend-of-bigfoot",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/marco-polo",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/canyon-de-chelly-and-the-dine-nation",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/medieval-christianity",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-day-of-the-dead",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/angkor-wat",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-suez-crisis",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/boxing-day",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-leaning-tower-of-pisa",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-veterans-day",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/world-war-one-mustard-gas-joins-the-fight-against-cancer",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/william-wallace",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-great-wall-of-china",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-historical-upside-to-pandemic-disease",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-barber's-poles",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-italian-renaissance",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/machu-picchu",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/hundred-years'-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/leonardo-da-vinci",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/ponce-de-leon",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/easter-island",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-house-of-medici",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/black-death",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/nicolaus-copernicus",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/hernán-cortés",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/niccolò-machiavelli",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/michelangelo",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-sistine-chapel",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-spanish-inquisition",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/christopher-columbus-and-the-new-world",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/king-henry-viii-of-england",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-hot-dogs",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/bloody-mary",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/dancing-plague-of-1518",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/typhus",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/early-european-contacts-in-north-america",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/new-amsterdam",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-new-england-colonies-and-native-americans",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-middle-passage",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-thanksgiving",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-northwest-passage",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-protestant-reformation",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-taj-mahal",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-puritans",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-voyage-of-ferdinand-magellan",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/first-thanksgiving",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/pocahontas",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-mayflower-compact",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/john-locke",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/galileo",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/yellow-fever",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-romanov-family",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-salem-witch-trials",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/bacon's-rebellion",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/vivaldi-and-the-figlie-del-coro",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/age-of-enlightenment",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/glorious-revolution",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/johann-sebastian-bach",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/samuel-adams",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-easter-bunny-and-his-eggs",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/onesimus:-an-african-slave-brings-smallpox-relief-to-the-colonies",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-great-awakening",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/catherine-the-great",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/peter-the-great",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-thirteen-virtues-of-ben-franklin",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/benedict-arnold",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/patrick-henry",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-french-&-indian-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-great-plains-people",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/poor-richard's-almanack",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/liberty-bell",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/thomas-jefferson",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/alexander-hamilton",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/mozart",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-proclamation-of-1763",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/robespierre",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/marquis-de-lafayette",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/pontiac's-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-industrial-revolution-in-great-britain",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/shot-heard-round-the-world",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-coercive-acts",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-articles-of-confederation",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/native-americans-and-the-revolutionary-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/paul-revere's-midnight-ride",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-boston-massacre",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/ben-franklin's-postal-service-spawns-an-american-revolution",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battles-of-lexington-&-concord",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/ludwig-van-beethoven",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/loyalists-v.-patriots-and-the-american-revolution",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/boston-tea-party",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-princeton",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-bunker-hill",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-siege-of-boston",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-trenton",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-saratoga",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/a-tragic-winter-at-valley-forge",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-cowpens",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/shays'-rebellion",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-yorktown",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/checks-and-balances",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-treaty-of-paris",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/constitutional-convention-of-1787",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-federalist-papers",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-american-election-of-1800",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/sojourner-truth",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-whiskey-rebellion",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-guillotines",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/james-buchanan",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-underground-railroad",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-the-chesapeake",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-fallen-timbers",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-ottoman-empire",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/sacagawea",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/eli-whitney-invents-the-cotton-gin",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/tammany-hall",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/flight-to-varennes",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-placebo-effect",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-white-house",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/native-american-governance-and-the-u.s.-constitution",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-presidents'-day",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-tippecanoe",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-luddites-of-great-britain",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-erie-canal",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-oregon-trail",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/frederick-douglass",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-the-thames",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/war-of-1812",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-ketchup",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/british-imperialism-in-india",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/manifest-destiny",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-napoleonic-wars",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/new-imperialism-and-the-white-man's-burden",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-age-of-queen-victoria",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/clara-barton",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/harriet-tubman",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/cholera",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-uncle-sam",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-magician-of-san-francisco",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-monroe-doctrine",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-second-middle-passage",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-rise-and-fall-of-the-whig-party",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/trail-of-tears",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/sitting-bull",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/child-labor-in-america",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/mark-twain",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/booker-t.-washington",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/birth-of-weather-forecasting-in-america",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/wilmot-proviso",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-kansas_nebraska-act",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/clipper-ships",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/thomas-edison",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/alexander-graham-bell",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/calamity-jane",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/california-genocide",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-bear-flag-revolt",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/karl-marx-and-the-communist-manifesto",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/cahill's-crossing",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/life-and-works-of-nikola-tesla",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-potato-chips",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-opium-wars",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/bleeding-kansas",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-donner-party",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/john-muir",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-irish-potato-famine",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-california-gold-rush",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-mountain-meadows-massacre",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-industrial-revolution-in-america",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/woodrow-wilson's-racist-policies",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-dred-scott-decision",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-seneca-falls-convention",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/french-imperialism-in-southeast-asia",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-homestead-act",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-pony-express",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-military-traditions-of-taps",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/annie-oakley",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-second-battle-of-bull-run",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-shiloh",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-first-battle-of-bull-run",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-capture-of-new-orleans",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/billy-the-kid",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/alice-in-wonderland",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-fredericksburg",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-atlanta",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-freedmen's-bureau",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-siege-of-vicksburg",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-new-york-city-draft-riots-of-1863",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/transcontinental-railroad",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-union-army-propels-lincoln-to-a-second-term",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/reconstruction-and-the-post_civil-war-south",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/william-randolph-hearst",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-antietam",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-gettysburg-address",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-fort-pillow",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-gettysburg",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-wright-brothers",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/sand-creek-massacre",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/mosby's-rangers",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/carpetbaggers-and-scalawags",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-appomattox-court-house",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-assassination-of-abraham-lincoln",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/buffalo-soldiers",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/juneteenth",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-brooklyn-bridge",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-15th-amendment",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/mahatma-gandhi",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-bonanza-kings",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-great-chicago-fire",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-gilded-age",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/houdini",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-navajo-treaty-of-1868",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-impeachment-of-andrew-johnson",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/w.e.b.-du-bois",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-age-of-imperialism-in-china",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/winston-churchill",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/herbert-hoover",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/alaska-purchase",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-compromise-of-1877",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/early-american-imperialism",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-opelousas-massacre",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/jim-crow-laws-and-the-segregated-south",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/impeached-american-presidents",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/thomas-edison-sees-the-light",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/albert-einstein",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/pancho-villa",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/joseph-stalin",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-american-eugenics-movement",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/fiorello-la-guardia",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/social-darwinism",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-johnstown-flood-of-1889",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-red-baron",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/helen-keller",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-scramble-for-africa",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-early-history-of-american-immigration",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-newburgh-conspiracy",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/mohawk-skywalkers",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-peanut-butter",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/lawrence-of-arabia",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-eiffel-tower",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-haymarket-riot",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/christy-girls",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-statue-of-liberty",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/yellow-journalism",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/ernest-hemingway",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-tong-wars-of-new-york-city",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-rough-riders",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-progressive-era",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/al-capone",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/mao-zedong",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-chinese-exclusion-act",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/f.-scott-fitzgerald",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-spanish_american-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/j.-edgar-hoover",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/ellis-island",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-turning-point-presidential-election-of-1896",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-first-cross_country-road-trip-by-car",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-tannenberg",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/stealing-mona-lisa",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-boxer-rebellion",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-model-t-ford",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-first-battle-of-the-marne",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/history-of-mother's-day",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/george-washington-carver",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/san-francisco's-earthquake-of-1906",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-armenian-genocide",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-general-slocum-disaster-of-1904",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/mutiny-of-the-pennsylvania-line",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-triangle-shirtwaist-fire",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-sinking-of-the-lusitania",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-new-england-heatwave-of-1911",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/julius-and-ethel-rosenberg",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/jacques-cousteau",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-panama-canal",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/jesse-owens",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/joseph-mccarthy",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/gerald-ford",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-christmas-truce-of-1914",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/thurgood-marshall",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/billie-holiday",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-great-migration",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-harlem-hellfighters",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/ernest-shackleton-survives-the-south-pole",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/harlem-renaissance",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-gallipoli",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/bonnie-and-clyde",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-weimar-republic",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-spanish-flu-of-1918",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/mask-slackers-and-the-spanish-flu-of-1918",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-roaring-twenties",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/sacco-&-vanzetti",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-rise-and-fall-of-fascism",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-great-boston-molasses-flood-of-1919",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-halifax-disaster-of-1917",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-red-summer-of-1919",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-bolshevik-revolution",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/maurice-hilleman-predicts-a-deadly-pandemic",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-treaty-of-versailles",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/zimmerman-telegram",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-palmer-raids",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/john-glenn",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-scopes-monkey-trial",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/flappers-of-the-roaring-twenties",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/alexander-fleming-discovers-penicillin",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/hoovervilles-of-the-great-depression",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/black-blizzards-and-the-dust-bowl",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-great-depression",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-stock-market-crash-of-1929",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/leopold-and-loeb",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/medgar-evers",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/prohibition-in-america",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/malcolm-x",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/collapse-of-the-soviet-union",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/mein-kampf",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-rosewood-massacre",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/cesar-chavez",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/geronimo",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-hoover-dam",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/big-bang-theory",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/alcatraz",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-night-witches-of-world-war-two",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-codebreakers-of-world-war-two",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-hitler-youth-of-nazi-germany",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/zoot-suits",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/hatred-and-healing-at-the-birwood-wall",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/conquering-the-hudson",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/works-progress-administration",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-bonus-expeditionary-forces-of-1932",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/stalin's-famine-in-the-ukraine",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-hindenburg-disaster",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/hitler's-olympic-games",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/fdr-and-the-new-deal",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/r_day",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-ritchie-boys-of-world-war-two",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-rape-of-nanking",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/end-of-prohibition",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-presidency-of-franklin-d.-roosevelt",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/nazis-use-of-performance_enhancing-drugs",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/valentina-tereshkova:-the-first-woman-in-space",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-tuskegee-airmen",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-great-purge",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-lend_lease-act-of-1941",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/hitler’s-atlantic-wall",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-code-talkers-of-world-war-two",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/bataan-death-march-of-world-war-two",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/rosie-the-riveter",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/japanese-internment-during-wwii",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/battle-of-britain",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/27-club",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/zoot-suit-riots",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-stalingrad",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-manhattan-project",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-midway",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/general-macarthur's-mess_up-in-manilla",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/british-airmen-crash-a-nazi-party",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/operation-overlord",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-expensive-flight-of-the-spruce-goose",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-guadalcanal",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/operation-market-garden",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-blue-baby-operation",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/operation-reunion",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/operation-magic-carpet",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/operation-paperclip",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-the-bulge",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-american-1950s",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-berlin-airlift",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-uss-indianapolis",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-kon_tiki-expedition",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-cold-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-truman-doctrine",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-iwo-jima",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-marshall-plan",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/ve_day",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-okinawa",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-nuremberg-trials",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/japanese-holdouts-of-world-war-two",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-hollywood-ten",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-korean-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-passing-of-fdr",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-potsdam-declaration",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-american-baby-boom",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-mann-gulch-fire-of-1949",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-great-london-smog-of-1952",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-ho-chi-minh-trail",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-coronation-of-queen-elizabeth-the-second",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/sputnik-and-the-birth-of-the-space-race",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/marilyn-monroe-sings-happy-birthday-to-jfk",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-u_2-spy-plane-incident",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-national-interstate-and-defense-highways-act-of-1956",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/laika,-the-first-canine-in-space",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-great-society-of-lyndon-baines-johnson",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/nasa-picks-the-right-stuff",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-berlin-wall",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/project-blue-book",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/emmett-till",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/freedom-summer",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-little-rock-nine",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/donut-dollies-and-the-vietnam-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-hungarian-uprising-of-1956",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-domino-theory-of-the-cold-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-tv-dinner-comes-of-age",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-american-1960s",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/freedom-riders-of-1961",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-huey's-role-in-the-vietnam-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-ford-motor-company-lays-an-egg",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/direct_dial-telephone-service-goes-nationwide",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/how-nasa-sold-the-moon-to-a-skeptical-nation",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/gulf-of-tonkin-resolution",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/cultural-revolution-of-china",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/ken-kesey-and-the-merry-pranksters",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/selma's-bloody-sunday",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-great-english-train-robbery-of-1963",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/jimi-hendrix-storms-the-monterey-pop-festival",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/agent-orange",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/juanita-moody-and-the-cuban-missile-crisis",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/poor-people's-campaign",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-first-successful-human-heart-transplant",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-khe-sanh",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-cobra's-role-in-the-vietnam-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-summer-of-love",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-disruptive-inventors-of-the-internet",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/a-bad-day-for-rock-n-roll-at-the-altamont-music-festival",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/mlk's-final-speech",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-sino_soviet-border-war-of-1969",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-orangeburg-massacre",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-easter-offensive",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/cleveland's-burning-river-sparks-an-environmental-revolution",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-marshmallow-test",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-last-men-on-the-moon",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-space-shuttle-program",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-great-postal-strike-of-1970",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/america-in-the-1970s",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-watergate-scandal",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-great-new-york-city-blackout-of-1977",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/stockholm-syndrome",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-mariel-boatlift-of-1980",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/hiv_aids",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/pol-pot-and-the-khmer-rouge",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-ghost-city-of-varosha",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-mt.-st.-helens-eruption",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-spring-offensive-of-1975",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/operation-babylift",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-1980s-in-america",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/three-mile-island",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-resignation-of-richard-milhous-nixon",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-air-traffic-controllers-strike-of-1981",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-iran_contra-affair",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/san-francisco-earthquake-of-1989",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/mr.-gorbachev,-tear-down-this-wall",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/crispr-explained",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/theo-jansen’s-strand-beasts",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-basic-practices-of-buddhism",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/birds-aren't-real",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/fall-of-the-western-roman-empire",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-nazca-lines",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-oakland-firestorm-of-1991",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-legend-of-santa-claus",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-tmc-dumont,-a-study-in-form,-function-&-design",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/sign-wars",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-fort-sumter",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/attila-the-hun",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/reaching-the-international-space-station",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-fall-of-the-byzantine-empire",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-great-firewall-of-china",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/caligula",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-valentine's-day",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/constantinople",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/rosh-hashanah",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/hurricane-katrina",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/car-t-cell-therapy-fights-cancer",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/history-of-may-day",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/krampus:-christmas-devil",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-roman-emperor-nero",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/artificial-intelligence-and-suicide-prevention",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-boxing-day-tsunami-of-2004",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-beliefs-and-practices-of-islam",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-pizzaioli-of-naples",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-roman-colosseum",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-middle-ages",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-engagement-rings",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/beowulf",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/friday-the-13th",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/carolingian-renaissance",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-navigators-of-polynesia",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/st.-patrick's-day",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/viking-norsemen",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/yuri-gagarin:-first-man-in-space",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/jfk,-the-first-television-president",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/armistice-day",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/hernando-de-soto",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/tiananmen-square-massacre",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-indian-removal-act",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/aaron-burr",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/dodd_frank-act",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/heaven's-gate",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/bartolomeu-dias",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/kaiser-wilhelm-ii",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/gandhi's-salt-march",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/pandemics-of-the-future",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/skinwalkers-of-the-navajo-nation",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/nelson-mandela",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/king-george-iii",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-immigration-act-of-1965",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-early-years-of-jamestown-colony",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/shootout-at-ok-corral",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-lost-colony-of-roanoke",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-chickamauga",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-fugitive-slave-act-of-1793",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/plymouth-colony",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/quantum-mechanics",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-fugitive-slave-act-of-1850",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/sumerian-tablets-of-ancient-mesopotamia",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-pullman-strike-of-1894",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/quantum-computing",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-bread-and-roses-strike",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-memphis-sanitation-strike",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-byzantine-empire",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-homestead-strike-of-1892",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-connecticut-compromise",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-vietnam-war-protest-movement",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-espionage-and-sedition-acts",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-napoleonic-code",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-social-security-act",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/tuberculosis-and-the-open_air-school-movement",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/hitler's-cavalry-of-the-future",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-war-of-mexican-independence",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/jimmy-hoffa",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/famous-presidential-pardons",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/battle-of-long-tan",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/everyday-life-in-colonial-america",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/misconceived-tanks-of-the-second-world-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-nazi's-plot-to-assassinate-the-big-three",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/friendly-fire-casualties-at-pearl-harbor",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/miracle-at-dunkirk",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/rené-descartes",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/robert-watson_watt",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/john-deere",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/leif-erikson",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-great-steel-strike-of-1919",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/mugwumps",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/panic-of-1893",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/alice-in-wonderland-syndrome",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-flint-sit_down-strike",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-iroquois-confederacy",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/operation-torch",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-toilets",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/john-milton",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-scottsboro-boys",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-third-ypres-campaign",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/erasmus-of-rotterdam",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/howard-hughes",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-immigration-act-of-1924",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-chattanooga",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/eugene-debs",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/lyndon-baines-johnson",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/freemasons",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/john-cabot",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/psychedelic-cave-raves-of-early-man",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/sinking-the-ss-athenia",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-assassination-of-john-f.-kennedy",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-plagues-of-san-francisco",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/sons-of-liberty",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/what's-up-with-larping?",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/why-witches-ride-brooms",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-verdun",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/titanic",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-outlaw-jesse-james",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/wine-windows-of-italy-make-a-covid-comeback",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/united-airlines-flight-629",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/pandemic-cholera",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/pandemic-smallpox",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/pandemic-typhus",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/sigmund-freud",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/a-shaky-grand-opening-for-the-happiest-place-on-earth",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/pandemic-typhoid",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/famous-native-americans",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/anne-frank",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/blackbeard",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/cowboys-of-the-american-west",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/franco",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/fidel-castro",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/early-modern-man-and-the-last-ice-age",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/isaac-newton",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/hiroshima,-the-day-the-world-went-nuclear",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/john-quincy-adams",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/life-aboard-the-mayflower",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/napalm-and-the-vietnam-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/rfk's-funeral-train",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/madam-c.j.-walker",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/ruby-bridges",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/robert-f.-kennedy",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-harmonicas",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-barbary-slave-trade",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-pakchon",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-liberation-of-paris",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-raid-on-son-tay",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-sacramento-river-massacre",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/women's-suffrage",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/vj-day",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/valhalla",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/battle-of-the-alamo",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/america's-first-opioid-crisis",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/california's-immigration-history",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/brown-v.-board-of-education",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/communication-techniques-of-early-man",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/francisco-pizarro",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/filibusters-in-central-america",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/grover-cleveland",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/harry-s.-truman",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/greek-mythology",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/germany's-spring-offensive-of-1918",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/how-to-make-a-microchip",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/joan-of-arc",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/orford-ness",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/robert-moses,-the-man-who-built-new-york-city",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/plessy-v.-ferguson",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/s&h-green-stamps",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/mcculloch-v.-maryland",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/minutemen",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/niels-bohr",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/queen-anne's-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/teddy-roosevelt",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-bermuda-triangle",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-amiens",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/tecumseh",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/seneca-village",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/susan-b.-anthony",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-discovery-of-insulin",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-crescent-city-tsunami-of-1964",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-co_evolution-of-dogs-&-humans",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-transistors",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-marburg-files",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-impeachments-of-donald-j.-trump",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-missouri-compromise",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-microchips",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/woodrow-wilson-",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-thirty-years'-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/typhoid-mary",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-roswell-incident",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/warren-g.-harding",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-black-friday-gold-scandal-of-1869",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-cultural-nations-of-america",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/max-planck",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/dante",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/thomas-hobbes",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-monkey-bars",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-first-slave-revolt-in-the-new-world",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-mach-loop",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-hudson's-bay-company",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/westminster-abbey",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-explorations-of-henry-hudson",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-black-friday",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-great-acadian-expulsion",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/samuel-de-champlain",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/misconceived-weapons-of-world-war-two",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/q_ships-of-world-war-one",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/squanto-and-the-pilgrims",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-klondike-gold-rush",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/marbury-v-madison",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/judas-and-jesus",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/franklin-d.-roosevelt",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/geoffrey-chaucer",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/australia's-defeat-at-rabaul",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/donatello",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/eleanor-of-aquitaine",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/rosa-parks-and-the-montgomery-bus-boycott-of-1955",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/conquering-the-hudson:-building-the-lincoln-tunnel",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/america-enters-world-war-two",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/navajo-code-talkers-of-world-war-two",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-the-somme",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-prophesies-of-nostradamus",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/chernobyl-suffers-a-catastrophic-meltdown",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/woodrow-wilson-hallucinates-at-the-paris-peace-conference",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-greensboro-four-make-civil-rights-history",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-neolithic-period",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-14th-amendment",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-long-island",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-aztecs-of-mesoamerica",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/wounded-knee",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-chesapeake-bay-bridge",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/red-clouds'-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/huey-long",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/yom-kippur",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-overland-campaign",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-vacuum-tubes",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/wilsonianism",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/jfk's-ich-bin-ein-berliner-speech",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/arlington-national-cemetery",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/america's-first-jet-aircraft",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/kristallnacht",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/march-of-the-ten-thousand",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/william-shakespeare",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-murder-of-thomas-becket",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-july-20-plot",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-great-plague-of-london",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-barbie-dolls",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-great-fire-of-london",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-colorado-gold-rush",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/teddy-roosevelt-and-the-river-of-doubt",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/sandro-botticelli",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/monkeypox",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/raphael",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/diphtheria",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/failed-warbirds-of-world-war-two",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/francis-bacon",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/jacques-cartier",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/joseph-lister:-the-father-of-modern-surgery",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/milk-sickness",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-haitian-revolution",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-great-dying",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-quebec",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-english-civil-wars",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-library-of-alexandria",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-last-cape-horners",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-mystic-massacre",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-great-fire-of-new-york",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/bonfire-of-the-vanities",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/adoptive-cell-transfer-therapy",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-compromise-of-1850",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/bomba-puertorriqueña",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/high-score-u.s.-submarines-of-wwii",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/eleanor-roosevelt",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-first-men-on-the-moon",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-zhou-dynasty",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-little-ice-age",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/hippocrates",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-qin-dynasty",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/gunpowder-plot",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-massachusetts-bay-colony",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-pequot-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-reichstag-fire",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-ming-dynasty",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/irwin-rommel",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/louis-pasteur",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/robert-koch",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/click-chemistry-fights-cancer",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-whales",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/credible-ufo-sightings-of-the-21st-century",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-french-revolution",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-hawthorne-effect",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-sui-dynasty",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-flies",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-tang-dynasty",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-lighthouse-of-alexandria",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-louisiana-purchase",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/martin-van-buren",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-american-1940s",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-american-1930s",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-song-dynasty",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-bats",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/u_boats-of-ww1",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/a-drunk-future-president",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/blitzkrieg",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/bombing-dresden",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/francisco-coronado",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/gutenberg's-printing-press",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/god-save-the-queen",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/hitler-invades-poland",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/samuel-johnson",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/japan's-occupation-of-korea",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-deer",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-trick_or_treat",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/history-of-baseball",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/sharecropping-in-the-american-south",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-history-of-typewriters",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-bears",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-qing-dynasty",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-peloponnesian-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-giraffes",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-frogs",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-yuan-dynasty",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/abandoned-civil-war-shelters-of-spain",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/anne-hutchinson",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/emiliano-zapata",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/emerging-therapies-for-glioma-patients",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-antikythera-mechanism",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/burning-the-library-of-alexandria",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/john-hancock",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-black-panthers",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-caning-of-charles-sumner",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-bomber-mafia",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-black-panthers-of-ww2",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-coyotes",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-collapse-of-the-bronze-age",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-zebras",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-hyenas",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-spanish-civil-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-lincoln_douglas-debates-of-1858",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-forbidden-city",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-tigers",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-minks",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-rabbits",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-kursk",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-boer-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-goths",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/rembrandt",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/operation-barbarossa",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/roger-williams",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/mother-teresa",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/glenn-curtiss,-the-fastest-man-alive",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/galen",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/apartheid",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/erwin-rommel",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/fdr-and-churchill",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/fighting-joe-hooker-cleans-house",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/antibody-drug-conjugates-fight-cancer",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/george-h.-w.-bush",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/imperialism-and-the-slaveholding-south",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/james-cook",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/philippine-independence-day",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/quantum-electrodynamics",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/quantum-chromodynamics",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/philippine-occupation-and-independence",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/quarks-and-gluons",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-birth-of-gospel",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-wild-turkeys",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-wolverines",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-buffalo",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-peshtigo-fire-of-1871",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/where-in-the-world-is-croatia",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/where-in-the-world-is-alaska",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-red-turban-rebellion",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/where-in-the-world-is-afghanistan",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-reconstruction-acts-of-1867",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/where-in-the-world-is-hawaii",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-skunks",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/where-in-the-world-is-maryland",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-cheetahs",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-confiscation-acts",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-dew-line",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-elephants",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-honda-point-disaster",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-seven-pines",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-bull-of-scapa-flow",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/lady-columbia",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-san-jacinto",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/skipjacks-of-the-chesapeake-bay",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/forrest-city",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/breakthroughs-in-antimatter",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/goody-two_shoes",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/car-t-cells-fight-autoimmune-disease",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-franco_prussian-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/convoys-of-the-second-world-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/charles-darwin",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/giulia-tofana:-the-poison-queen-of-italy",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-great-california-flood-of-1862",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-jewish-expulsion-from-spain",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/darwinian-medicine",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-gullah-geechee",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-jewish-massacre-of-1391",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-wolves-",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-muskrats",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-beavers",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/vichy-france",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-patent-office-fire-of-1836",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/where-in-the-world-is-estonia",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-resignation-of-george-washington",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-domesticated-house-cats",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/where-in-the-world-is-japan",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/where-in-the-world-is-georgia",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/black-holes",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/delta-blues",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/george-s.-patton",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/nanoparticles-fight-brain-cancer",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-dreyfus-affair",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/operation-plunder",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-sharks",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-rats",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-chimpanzees",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-kuiper-belt",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-physics-of-thermodynamics",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/where-in-the-world-is-kuwait",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-spanish_american-war",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/where-in-the-world-is-maine",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-physics-of-light",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/woodrow-wilson's-white-house-sheep",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/famous-gamblers-in-history",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/advances-in-anti_aging",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/where-in-the-world-is-texas",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/chemogenetics-fights-dementia",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/gothic-architecture",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-locusts",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/kublai-khan",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-battle-of-gazala",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/large-language-models-and-ai",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/galaxies",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-ghost-army-of-ww2",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-moose",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-physics-of-general-relativity",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-physics-of-vibrations-&-waves",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-physics-of-electricity",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-penguins",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/tiffany-girls",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/where-in-the-world-is-ireland",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/where-in-the-world-is-colorado",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/where-in-the-world-is-austria",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/breakthroughs-in-antibody-drug-development",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-fall-of-the-nasrid-dynasty",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-orangutans",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/lady-justice",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/in-search-of-ghost-particles",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-isle-of-man-motorcycle-race",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-aardvarks",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/ambush-at-nam-dong",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-life-of-sloths",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-physics-of-electromagnetism",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-tragedies-of-mary-&-abraham-lincoln",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/where-in-the-world-is-india",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-physics-of-balance",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/the-panic-of-1837",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/where-in-the-world-is-indiana",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+      {
+        url: "/lesson/where-in-the-world-is-cambodia",
+        changefreq: "monthly",
+        priority: 0.9,
+      },
+    ],
   ];
 };
 
