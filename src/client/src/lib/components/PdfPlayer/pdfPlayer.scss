@@ -1,10 +1,38 @@
+@use '../../../library';
+
 .MuiBox-root {
   &.pdf--player-section {
     margin: 2rem 0.5rem;
     min-height: 75vh;
-    width: 45%;
+    width: fit-content;
 
-    @media (max-width: 768px) {
+    @media (max-width: 830px) {
+      transform: scale(0.75);
+      margin-left: -2rem;
+      margin-top: -5rem;
+      margin-right: 0.5rem;
+      max-width: 80%;
+      height: auto;
+    }
+
+    @media (max-width: 650px) {
+      transform: scale(0.62);
+      margin-left: -3rem;
+      margin-top: -7rem;
+      margin-right: 0.5rem;
+      max-width: 80%;
+      height: auto;
+    }
+  }
+
+  &.pdf--viewer-section {
+    // margin: 0.5rem 0.5rem;
+    min-height: fit-content;
+    width: fit-content;
+    align-self: center;
+    justify-items: center;
+
+    @media (max-width: 830px) {
       scale: 0.75;
       margin-left: -2rem;
       margin-top: -5rem;
@@ -13,35 +41,24 @@
       height: auto;
     }
 
-    @media (max-width: 767px) {
-      scale: 0.55;
+    @media (max-width: 650px) {
+      scale: 0.62;
       margin-left: -3rem;
       margin-top: -7rem;
       margin-right: 0.5rem;
       max-width: 80%;
       height: auto;
     }
-
-    @media (max-width: 471px) {
-      scale: 0.45;
-      margin-left: -3rem;
-      margin-top: -8rem;
-      margin-right: 0.5rem;
-      max-width: 70%;
-      height: auto;
-    }
   }
 
   &.pdf-button--section {
-    text-align: center;
     min-width: max-content;
-    margin-bottom: 1rem;
-    position: static;
+    margin-bottom: 0.5rem;
 
     @media (max-width: 768px) {
-      margin-left: 0;
+      // margin-left: 10rem;
       min-width: max-content;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
     }
   }
 }
@@ -50,5 +67,46 @@
   &.pdfPage-chip {
     color: rgb(58, 112, 205);
     border: 1px solid rgb(58, 112, 205);
+  }
+}
+
+.preview-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: fit-content;
+  height: fit-content;
+  overflow-y: scroll;
+  background-color: library.$white;
+  padding: 2rem;
+  border-radius: 5px;
+  color: library.$darkGreen;
+
+  @media (max-width: 768px) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 50%;
+    overflow-y: scroll;
+  }
+}
+
+.MuiIconButton-root {
+  &.close--modal-button {
+    display: flex;
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: library.$orange;
+  }
+}
+
+.MuiSvgIcon-root {
+  &.preview-modal--button {
+    height: 1.85rem;
+    width: 1.85rem;
   }
 }
