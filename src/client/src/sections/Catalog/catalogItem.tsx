@@ -210,17 +210,16 @@ export const CatalogItem = ({ name, category, viewer, bookmarks }: props) => {
           autoHideDuration={5000}
           onClose={handleClose}
           anchorOrigin={{ vertical: "top", horizontal: 'center' }}
-          sx={{ bgcolor: 'background.paper' }}
         >
           {/* If not logged in, throw error/prompt when bookmark button clicked, otherwise bookmark successfully */}
           {bookmarkError || (viewer === "null") ?
             (
-              <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+              <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }} variant="filled">
                 Please sign up or login to bookmark!
               </Alert>
             ) :
             (
-              <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+              <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }} variant="filled">
                 {bookmarkStatus}!
               </Alert>
             )}
