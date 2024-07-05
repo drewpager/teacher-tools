@@ -104,8 +104,8 @@ export const User = ({ viewer }: Props) => {
       {userPlaylistsElement}
       {userQuizzesElement}
       {userArticlesElement}
-      {userLessonsElement}
       {userBookmarksElement}
+      {userLessonsElement}
       <Footer viewer={viewer} />
     </>
   )

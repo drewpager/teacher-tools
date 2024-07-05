@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Grid, ListItem, Tooltip, Typography, Button, Dialog, DialogContent, DialogTitle, DialogContentText, DialogActions } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import { User, Lesson, useDeleteAllBookmarksMutation } from '../../../../graphql/generated';
 import { Link } from 'react-router-dom';
 import { Cancel } from '@mui/icons-material';
@@ -75,6 +76,15 @@ export const UserBookmarks = ({ user, setBookmarksPage }: Props) => {
         )}
       </Grid>
       <Grid container>
+        {totalCount === 0 && (
+          <Box className="user-bookmark--how-to">
+            <Typography variant='h3' sx={{ color: '#000', fontWeight: "bold" }}>How to Get Started With Bookmarks:</Typography>
+            <Link to={`/catalog`} style={{ justifyContent: 'space-evenly', display: 'flex', alignItems: 'center' }}>
+              <BookmarkAddIcon sx={{ color: "black", marginRight: '0.25rem' }} />
+              <Typography variant='h3' sx={{ textDecoration: 'underline', color: '#000', marginBottom: '0.5rem' }}>Navigate Catalog and Bookmark Desired Content</Typography>
+            </Link>
+          </Box>
+        )}
         {bookmarks.map((b: Lesson, index: number) => (
           <Grid item lg={4} md={6} sm={6} xs={12} key={index}>
             <ListItem key={index}>

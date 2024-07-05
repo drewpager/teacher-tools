@@ -24,7 +24,7 @@ import { DeleteLessonData, DeleteLessonVariables } from '../../../sections/Lesso
 import { Viewer } from '../../../graphql/generated';
 import DeleteIcon from '@mui/icons-material/Delete';
 import './userLessonCard.scss';
-import { formatDate } from '../../utils';
+import { formatDate, formatSlug } from '../../utils';
 
 interface Props {
   lesson: {
@@ -82,7 +82,7 @@ export const LessonCard = ({ lesson }: Props) => {
       <ListItem key={id}>
         <Card className="user-lessons--card">
           <CardContent>
-            <Link to={`/lesson/${id}`} style={{ textDecoration: "none" }}>
+            <Link to={`/lesson/${formatSlug(lesson.title)}`} style={{ textDecoration: "none" }}>
               <Typography variant='h4' style={{ color: "#000" }}>
                 {title}
               </Typography>

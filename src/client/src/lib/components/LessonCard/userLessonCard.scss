@@ -6,5 +6,9 @@
     background-color: rgba(60, 117, 214, 0.1);
     border: 1px solid #182742;
     border-radius: 1.5rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }

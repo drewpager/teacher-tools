@@ -1,6 +1,7 @@
 import React, { ChangeEvent } from 'react';
-import { Box, Grid, Tooltip, Pagination } from '@mui/material';
+import { Box, Grid, Tooltip, Pagination, Typography } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { Articles } from '../../../../graphql/generated';
 import { Link } from 'react-router-dom';
 import { UserArticlesCard } from '../../../../lib/components/UserArticlesCard';
@@ -36,6 +37,19 @@ export const UserArticles = ({ userArticles, articlesPage, limit, setArticlesPag
         </Grid>
       </Grid>
       <Grid container sx={{ marginLeft: 0 }}>
+        {totalCount === 0 && (
+          <Box className="user-article--how-to">
+            <Typography variant='h3' sx={{ color: '#000', fontWeight: "bold" }}>How to Get Started With Articles:</Typography>
+            <Link to={`/article/create`} style={{ justifyContent: 'space-evenly', display: 'flex', alignItems: 'center' }}>
+              <AddCircleIcon sx={{ color: "black", marginRight: '0.25rem' }} />
+              <Typography variant='h3' sx={{ textDecoration: 'underline', color: '#000', marginBottom: '0.5rem' }}>Create an Article in Text Editor</Typography>
+            </Link>
+            <Link to={`/article/create`} style={{ justifyContent: 'space-evenly', display: 'flex', alignItems: 'center' }}>
+              <PictureAsPdfIcon sx={{ color: "black", marginRight: '0.25rem' }} />
+              <Typography variant='h3' sx={{ textDecoration: 'underline', color: '#000', marginBottom: '0.5rem' }}>Upload PDF Document</Typography>
+            </Link>
+          </Box>
+        )}
         {result.map((value: any, index) => (
           <UserArticlesCard article={value} key={index} />
         ))}
