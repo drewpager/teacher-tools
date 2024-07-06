@@ -7,14 +7,13 @@ import { DisplayError } from '../../lib/utils/alerts/displayError';
 import { Footer, VideoPlayer } from '../../lib/components';
 import { titleCase, formatDate, formatSlug } from '../../lib/utils';
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
+import { Link, redirect } from 'react-router-dom';
 import { PublicPlaylistCard } from '../../lib/components/PublicPlaylistCard';
 import { GoogleClassroomShareButton } from '../../lib/components';
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import './lessonPage.scss';
-import { redirect } from 'react-router-dom';
 interface Props {
   viewer: Viewer
 }
@@ -41,15 +40,32 @@ export const Lesson = ({ viewer }: Props) => {
   const [bookmarked, setBookmarked] = useState<any[]>([]);
 
   const params = useParams()
-  // const screenWidth = window.screen.width;
-  // const screenHeight = window.screen.height;
   const title = titleCase(`${params.id}`.replaceAll(/-/g, " ").replaceAll(/_/g, "-"));
 
-  // const { loading, data, error } = useLessonQuery({
+  // Trying to redirect to the correct lesson page
+
+  // const loader = async (title: string) => {
+  //   return redirect(`/lesson/${formatSlug(title)}`, 301);
+  // };
+
+  // const { data: lessonIdData, loading: lessonIdLoading, error: lessonIdError } = useLessonQuery({
   //   variables: {
   //     id: `${params.id}`
   //   }
   // });
+
+  // if (lessonIdData) {
+  //   let title = lessonIdData?.lesson?.title;
+  //   title && loader(title)
+  // }
+
+  // if (lessonIdLoading) {
+  //   console.log("Loading lesson id...")
+  // }
+
+  // if (lessonIdError) {
+  //   console.log("Error loading lesson id");
+  // }
 
   const { data: userData, loading: userLoading, error: userError } = useUserQuery({
     variables: {
@@ -106,10 +122,12 @@ export const Lesson = ({ viewer }: Props) => {
         }
       })
       setBookmarkStatus(`${res.data?.bookmarkLesson}`)
-      setBookmarked(prevBookmarks => prevBookmarks.includes(`${id}`) ? prevBookmarks.slice(prevBookmarks.indexOf(`${id}`), 1) : [...prevBookmarks, `${id}`]);
+      setBookmarked(prevBookmarks => prevBookmarks.includes(`${id}`) ? prevBookmarks.splice(prevBookmarks.indexOf(`${id}`), 1) && [...prevBookmarks] : [...prevBookmarks, `${id}`]);
       res && setOpen(true)
     }
   }
+
+  const lesson = data ? data.lessonTitle : null;
 
   BookmarkLessonLoading && (
     <CircularProgress sx={{
@@ -140,8 +158,6 @@ export const Lesson = ({ viewer }: Props) => {
       </>
     )
   }
-
-  const lesson = data ? data.lessonTitle : null;
 
   const formatSlugSpaces = (slug: string) => {
     return slug.trim().replaceAll(" ", '%20');
@@ -213,15 +229,15 @@ export const Lesson = ({ viewer }: Props) => {
                   <Chip variant='outlined' label={titleCase(`${i}`)} key={ind} color="error" className='lesson--category' />
                 </Link>
               ))}
-              <Tooltip title="Bookmark for lesson plan" placement="top">
+              <Tooltip title={bookmarked?.includes(`${lesson?.id}`) ? "Bookmarked, Click to Unbookmark" : "Bookmark for Lesson Plan"} placement="top">
                 <IconButton
-                  className="list-bookmark--button"
+                  className="bookmark--button"
                   aria-label="bookmark"
                   disableRipple
                   disableFocusRipple
                   onClick={() => onBookmark(`${lesson?.id}`, `${viewer.id}`)}
                 >
-                  <BookmarkAddIcon fontSize={"large"} color={bookmarked?.includes(`${lesson?.id}`) ? "success" : "inherit"} sx={{ paddingTop: '0.5rem' }} />
+                  <BookmarkAddIcon fontSize={"large"} color={bookmarked?.includes(`${lesson?.id}`) ? "success" : "primary"} sx={{ paddingTop: '0.5rem' }} />
                 </IconButton>
               </Tooltip>
               <Tooltip title="Assign via Google Classroom">
