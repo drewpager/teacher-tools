@@ -1,18 +1,31 @@
-import React, { useMemo, useEffect, useRef } from 'react';
-import { Viewer, useLessonQuery, useRelatedPlansQuery, useLessonTitleQuery } from '../../graphql/generated';
+import React, { useMemo, useEffect, useRef, useState } from 'react';
+import { Viewer, useLessonQuery, useRelatedPlansQuery, useLessonTitleQuery, useUserQuery } from '../../graphql/generated';
+import { Lesson as LessonProp } from '../../graphql/generated';
 import { useParams } from 'react-router-dom';
-import { LinearProgress, Box, Chip, Card, Grid, Button, Typography, Tooltip } from '@mui/material';
+import { LinearProgress, Box, Chip, Card, Grid, Button, Typography, Tooltip, Alert, CircularProgress, Snackbar, IconButton } from '@mui/material';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
 import { Footer, VideoPlayer } from '../../lib/components';
-import { titleCase, formatDate } from '../../lib/utils';
+import { titleCase, formatDate, formatSlug } from '../../lib/utils';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { PublicPlaylistCard } from '../../lib/components/PublicPlaylistCard';
 import { GoogleClassroomShareButton } from '../../lib/components';
-
+import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/client';
 import './lessonPage.scss';
+import { redirect } from 'react-router-dom';
 interface Props {
   viewer: Viewer
+}
+
+type BookmarkLessonData = {
+  bookmarkLesson: LessonProp;
+}
+
+type BookmarkLessonVariables = {
+  id: string;
+  viewer: string;
 }
 
 declare global {
@@ -22,6 +35,11 @@ declare global {
 }
 
 export const Lesson = ({ viewer }: Props) => {
+  const [open, setOpen] = useState<boolean>(false);
+  const [bookmarkError, setBookmarkError] = useState<boolean>(false);
+  const [bookmarkStatus, setBookmarkStatus] = useState<string>('');
+  const [bookmarked, setBookmarked] = useState<any[]>([]);
+
   const params = useParams()
   // const screenWidth = window.screen.width;
   // const screenHeight = window.screen.height;
@@ -32,6 +50,24 @@ export const Lesson = ({ viewer }: Props) => {
   //     id: `${params.id}`
   //   }
   // });
+
+  const { data: userData, loading: userLoading, error: userError } = useUserQuery({
+    variables: {
+      id: `${viewer?.id}`,
+      playlistsPage: 1,
+      lessonsPage: 1,
+      quizzesPage: 1,
+      articlesPage: 1,
+      limit: 1
+    }
+  })
+
+  useEffect(() => {
+    if (userData?.user?.bookmarks) {
+      const bookmarkIds = userData.user.bookmarks.map(i => i?.id);
+      setBookmarked(prevBookmarks => [...prevBookmarks, ...bookmarkIds]);
+    }
+  }, [userData]);
 
   const { data, loading, error } = useLessonTitleQuery({
     variables: {
@@ -44,6 +80,52 @@ export const Lesson = ({ viewer }: Props) => {
       id: `${data?.lessonTitle.id}`
     }
   })
+
+  const handleClose = () => {
+    setOpen(false)
+    setBookmarkError(false)
+  }
+
+  const BOOKMARK_LESSON = gql`
+    mutation BookmarkLesson($id: ID!, $viewer: String!) {
+      bookmarkLesson(id: $id, viewer: $viewer)
+    }
+  `;
+
+  const [bookmarkLesson, { loading: BookmarkLessonLoading, error: BookmarkLessonError }] = useMutation<BookmarkLessonData, BookmarkLessonVariables>(BOOKMARK_LESSON);
+
+  const onBookmark = async (id: string, viewer: string) => {
+    if (viewer === "null") {
+      setBookmarkError(true)
+      setOpen(true)
+    } else {
+      let res = await bookmarkLesson({
+        variables: {
+          id,
+          viewer
+        }
+      })
+      setBookmarkStatus(`${res.data?.bookmarkLesson}`)
+      setBookmarked(prevBookmarks => prevBookmarks.includes(`${id}`) ? prevBookmarks.slice(prevBookmarks.indexOf(`${id}`), 1) : [...prevBookmarks, `${id}`]);
+      res && setOpen(true)
+    }
+  }
+
+  BookmarkLessonLoading && (
+    <CircularProgress sx={{
+      color: 'inherit',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      zIndex: 1,
+    }} />
+  )
+
+  BookmarkLessonError && (
+    <Alert variant="outlined" severity="error">
+      Oops, something went wrong in the bookmarking process!
+    </Alert>
+  );
 
   if (loading || relatedPlansLoading) {
     return (
@@ -71,7 +153,7 @@ export const Lesson = ({ viewer }: Props) => {
     const hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
     const days = Math.floor(duration / (1000 * 60 * 60 * 24));
 
-    console.log("Seconds: ", seconds)
+    // console.log("Seconds: ", seconds)
     // Build the ISO 8601 duration string
     let isoDuration = 'P';
     if (days > 0) {
@@ -112,6 +194,7 @@ export const Lesson = ({ viewer }: Props) => {
         <Helmet>
           <title>{lesson?.title} | Plato's Peach</title>
           <meta name="description" content={lesson?.meta?.length ? `${lesson?.meta}` : `A short documentary of ${lesson?.title} from ${formatDate(lesson?.startDate)} to ${formatDate(lesson?.endDate)}.`} />
+          <link rel="canonical" href={`https://www.platospeach.com/lesson/${formatSlug(lesson?.title)}`} />
           {lesson?.duration && <script type="application/ld+json">
             {JSON.stringify(structuredData)}
           </script>}
@@ -130,9 +213,41 @@ export const Lesson = ({ viewer }: Props) => {
                   <Chip variant='outlined' label={titleCase(`${i}`)} key={ind} color="error" className='lesson--category' />
                 </Link>
               ))}
+              <Tooltip title="Bookmark for lesson plan" placement="top">
+                <IconButton
+                  className="list-bookmark--button"
+                  aria-label="bookmark"
+                  disableRipple
+                  disableFocusRipple
+                  onClick={() => onBookmark(`${lesson?.id}`, `${viewer.id}`)}
+                >
+                  <BookmarkAddIcon fontSize={"large"} color={bookmarked?.includes(`${lesson?.id}`) ? "success" : "inherit"} sx={{ paddingTop: '0.5rem' }} />
+                </IconButton>
+              </Tooltip>
               <Tooltip title="Assign via Google Classroom">
                 <GoogleClassroomShareButton url={`https://www.platospeach.com/lesson/${lesson?.id}`} />
               </Tooltip>
+              <>
+                <Snackbar
+                  open={open}
+                  autoHideDuration={6000}
+                  onClose={handleClose}
+                  anchorOrigin={{ vertical: "top", horizontal: 'center' }}
+                >
+                  {/* If not logged in, throw error/prompt when bookmark button clicked, otherwise bookmark successfully */}
+                  {bookmarkError || (!viewer) ?
+                    (
+                      <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }} variant="filled">
+                        Please sign up or login to bookmark!
+                      </Alert>
+                    ) :
+                    (
+                      <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }} variant="filled">
+                        {bookmarkStatus}!
+                      </Alert>
+                    )}
+                </Snackbar>
+              </>
               <Box className="lesson-video--section">
                 <VideoPlayer
                   url={`${lesson?.video}`}

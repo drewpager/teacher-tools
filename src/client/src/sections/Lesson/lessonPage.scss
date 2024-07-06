@@ -51,3 +51,18 @@
     }
   }
 }
+
+.MuiButtonBase-root {
+  &.list-bookmark--button {
+    color: black;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: baseline;
+
+    &:hover {
+      color: slategray;
+    }
+  }
+}
