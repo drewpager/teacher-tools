@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FieldArray, Formik, getIn, FieldProps, Field } from 'formik';
 import { useCreateQuizMutation, Viewer, AnswerFormat, useGenerateQuizMutation, QuestionInput, Questions } from '../../graphql/generated';
 import {
@@ -197,6 +197,12 @@ export const QuizCreate = ({ viewer }: props) => {
     }
   })
 
+  useEffect(() => {
+    if (aiValues.length > 0) {
+      setAiDisclaimer(true);
+    }
+  }, [aiValues]);
+
   const handleClose = () => {
     setOpen(false);
   }
@@ -281,9 +287,8 @@ export const QuizCreate = ({ viewer }: props) => {
           answerOptions: [...aiValues[i].answerOptions]
         });
       }
-      setAiDisclaimer(true);
-      handleResetQuiz();
     }
+    handleResetQuiz();
   }
 
   const quizCreatePage: boolean = pathname === "/quiz/create";
@@ -316,6 +321,7 @@ export const QuizCreate = ({ viewer }: props) => {
 
   if (error) {
     <Box>
+      {console.log("Error Here Sir: ", error)}
       <DisplayError title="Failed to create assessment" />
     </Box>
   }
