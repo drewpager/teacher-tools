@@ -188,7 +188,7 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
 
   const handleCopy = async (id: string, viewerId: string) => {
     if (viewerId === 'null' || viewerId === null || viewerId === undefined || viewerId === "undefined") {
-      setUserError("Please Login or Signup to Copy!");
+      // setUserError("Please Login or Signup to Copy!");
       setOpen(true);
       return;
     }
@@ -268,7 +268,9 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
           onClose={handleClose}
           anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         >
-          <Alert variant="filled" severity="error" onClose={handleClose}>{userError}</Alert>
+          <Alert variant="filled" severity="error" onClose={handleClose}>
+            Please <Link to="/signup" style={{ color: "#FFF" }}>sign up</Link> or <Link to="/login" style={{ color: "#FFF" }}>login</Link> to copy lesson plan!
+          </Alert>
         </Snackbar>
       )}
       {successOpen && (

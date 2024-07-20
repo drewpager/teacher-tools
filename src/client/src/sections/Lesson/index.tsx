@@ -254,12 +254,12 @@ export const Lesson = ({ viewer }: Props) => {
                   {bookmarkError || (!viewer) ?
                     (
                       <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }} variant="filled">
-                        Please sign up or login to bookmark!
+                        Please <Link to="/signup" style={{ color: "#FFF" }}>sign up</Link> or <Link to="/login" style={{ color: "#FFF" }}>login</Link> to bookmark!
                       </Alert>
                     ) :
                     (
                       <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }} variant="filled">
-                        {bookmarkStatus}!
+                        {titleCase(`${bookmarkStatus}!`)}
                       </Alert>
                     )}
                 </Snackbar>

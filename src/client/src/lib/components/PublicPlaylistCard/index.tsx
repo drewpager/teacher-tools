@@ -193,7 +193,7 @@ export const PublicPlaylistCard = ({ id, name, plan, creator, premium, level, vi
                 key={id}
               >
                 <Alert variant="filled" severity="error" sx={{ width: '100%' }}>
-                  Please sign up or log in to copy a lesson plan!
+                  Please <Link to="/signup" style={{ color: "#FFF" }}>sign up</Link> or <Link to="/login" style={{ color: "#FFF" }}>log in</Link> to copy a lesson plan!
                 </Alert>
               </Snackbar>
             </Box>
