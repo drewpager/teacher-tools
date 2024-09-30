@@ -88,13 +88,15 @@ export const Lesson = ({ viewer }: Props) => {
   const { data, loading, error } = useLessonTitleQuery({
     variables: {
       title: title
-    }
+    },
+    fetchPolicy: 'cache-first',
   });
 
   const { data: relatedPlansData, loading: relatedPlansLoading, error: relatedPlansError } = useRelatedPlansQuery({
     variables: {
       id: `${data?.lessonTitle.id}`
-    }
+    },
+    fetchPolicy: 'no-cache',
   })
 
   const handleClose = () => {
@@ -129,6 +131,8 @@ export const Lesson = ({ viewer }: Props) => {
 
   const lesson = data ? data.lessonTitle : null;
 
+  const script = lesson?.script;
+
   BookmarkLessonLoading && (
     <CircularProgress sx={{
       color: 'inherit',
@@ -155,6 +159,14 @@ export const Lesson = ({ viewer }: Props) => {
     return (
       <>
         <DisplayError title='Failed to load lesson' />
+      </>
+    )
+  }
+
+  if (relatedPlansError) {
+    return (
+      <>
+        <DisplayError title='Failed to load related lesson plans' />
       </>
     )
   }
@@ -272,7 +284,7 @@ export const Lesson = ({ viewer }: Props) => {
               {lesson?.script && (
                 <>
                   <h4>Transcript</h4>
-                  <div dangerouslySetInnerHTML={{ __html: lesson.script }}></div>
+                  <div dangerouslySetInnerHTML={{ __html: lesson?.script }}></div>
                 </>
               )}
             </Box>
