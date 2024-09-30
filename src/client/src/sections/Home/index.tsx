@@ -9,6 +9,8 @@ import {
   ProductDetails,
   HomeDetailsSkeleton,
   HomeInfoSkeleton,
+  CardCarousel,
+  LessonCarousel
 } from '../../lib/components/'
 import { Viewer, usePlaylistQuery } from '../../graphql/generated';
 import { PlaylistCard } from '../../lib/components/';
@@ -47,6 +49,8 @@ export const Home = ({ viewer }: Props) => {
       <HomeInfo />
       <ProductDetails />
       <ProductValues />
+      <LessonCarousel />
+      <CardCarousel viewer={viewer} />
       {data && <PlaylistCard playlist={data?.playlist} />}
       <CTA />
       {/* <CardGrid /> */}

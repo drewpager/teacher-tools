@@ -1,0 +1,81 @@
+.lesson-carousel {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: max-content; // Adjust height as per your needs
+  margin-top: 2rem;
+
+  .lesson-container {
+    flex: 0 0 auto;
+    min-width: 200px;
+    padding: 10px;
+  }
+
+  .moving-lesson {
+    width: 350px;
+    height: 100%;
+    animation: move-right 30s linear infinite running;
+  }
+}
+
+@keyframes move-right {
+  0% {
+    transform: translateX(-3000px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+// Responsive adjustments
+@media screen and (max-width: 600px) {
+  .lesson-carousel .lesson-container {
+    min-width: 150px;
+  }
+}
+
+.card--grid {
+  display: grid;
+  grid-template-rows: 25% 50% 25%;
+  grid-template-columns: 100%;
+
+  .card--content {
+    flex: '1 0 auto';
+    grid-row: 1 / -1;
+    grid-column: 1 / -1;
+    font-size: clamp(0.75rem, 1rem, 1.25rem);
+    align-content: flex-start;
+
+    >h4 {
+      z-index: 100;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    >h5 {
+      z-index: 100;
+    }
+
+    >img {
+      grid-row: 1 / -1;
+      grid-column: 1 / -1;
+      object-fit: cover;
+      opacity: 40%;
+      height: 100%;
+      width: 100vw;
+      border-radius: 0.875em;
+    }
+  }
+
+  // Play + Bookmark Buttons
+  .card--buttons {
+    grid-row: 3 / 4;
+    grid-column: 1 / -1;
+    align-items: center;
+    justify-content: start;
+  }
+}
