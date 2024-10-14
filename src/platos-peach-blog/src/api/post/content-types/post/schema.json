@@ -4,41 +4,47 @@
   "info": {
     "singularName": "post",
     "pluralName": "posts",
-    "displayName": "Post"
+    "displayName": "Post",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string",
       "required": true
     },
     "slug": {
-      "type": "string"
+      "type": "string",
+      "unique": true
     },
     "updated": {
       "type": "date"
     },
     "hero": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
       "type": "media",
-      "multiple": false
-    },
-    "body": {
-      "type": "dynamiczone",
-      "components": [
-        "table.table"
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
       ]
     },
-    "copy": {
+    "metaDescription": {
       "type": "text"
+    },
+    "bodyCopy": {
+      "type": "richtext"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "inversedBy": "posts"
+    },
+    "body": {
+      "type": "blocks"
     }
   }
 }

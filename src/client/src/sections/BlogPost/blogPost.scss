@@ -1,0 +1,42 @@
+@use "../../library";
+
+.MuiBox-root {
+  &.blog-post--header {
+    padding: 7rem 5rem 0 5rem;
+    display: grid;
+    grid-template-columns: 60% 1fr;
+    background-color: library.$lightPink;
+    border-bottom: 1px solid black;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+
+
+    @media (max-width: 1000px) {
+      grid-template-columns: 1fr;
+      padding: 2rem;
+      margin-top: 5rem;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+    }
+  }
+
+  &.blog-post--header-right {
+    align-self: center;
+    padding-left: 1rem;
+
+    @media (max-width: 1000px) {
+      display: none;
+    }
+  }
+
+  &.blog-post--body {
+    margin: 1rem 5rem;
+    max-width: 900px;
+
+    @media (max-width: 768px) {
+      margin: 1rem;
+    }
+  }
+}

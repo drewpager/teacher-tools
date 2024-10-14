@@ -42,7 +42,10 @@ import {
   SignUp,
   Article,
   Plans,
-  ArticlesCatalog
+  ArticlesCatalog,
+  BlogHub,
+  BlogPost,
+  BlogCategory
 } from './sections';
 import { HomeInfoSkeleton } from './lib/components';
 import { DisplayError } from './lib/utils';
@@ -145,6 +148,9 @@ const App = () => {
           <Route path="/article" element={<ArticlesCatalog viewer={viewer} />} />
           <Route path="/edit/:id" element={<EditPlaylist viewer={viewer} />} />
           <Route path="/lesson/create" children={(props: any) => (<CreateLesson {...props} viewer={viewer} />)} element={<CreateLesson viewer={viewer} />} />
+          <Route path="/blog" element={<BlogHub />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/category/:category" element={<BlogCategory />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
@@ -180,6 +186,7 @@ const authLink = setContext((_, { headers }) => {
   const token = sessionStorage.getItem("token");
   return {
     headers: {
+      ...headers,
       "X-CSRF-TOKEN": token || ""
     }
   }

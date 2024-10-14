@@ -67,6 +67,9 @@ export const Footer = ({ viewer }: Props) => {
           <Link to="/plans" style={{ textDecoration: "none" }}>
             <Typography variant='body1' className='footer--link-text'>Template Gallery</Typography>
           </Link>
+          <Link to="/blog" style={{ textDecoration: "none" }}>
+            <Typography variant='body1' className='footer--link-text'>Blog</Typography>
+          </Link>
           {viewer && viewer.id ? (<></>) : (
             <Link to="/signup" style={{ textDecoration: "none" }}>
               <Typography variant='body1' className='footer--link-text'>Free Signup</Typography>
