@@ -182,6 +182,10 @@ const httpLink = createHttpLink({
   uri: '/api',
 });
 
+const blogLink = createHttpLink({
+  uri: 'http://localhost:1337/',
+});
+
 const authLink = setContext((_, { headers }) => {
   const token = sessionStorage.getItem("token");
   return {
@@ -192,8 +196,19 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 
+const blogAuthLink = setContext((_, { headers }) => {
+  const key = `${process.env.REACT_APP_STRAPI}`;
+  return {
+    headers: {
+      ...headers,
+      "Authorization": `Bearer ${key}`
+    }
+  }
+});
+
+
 const client = new ApolloClient({
-  link: from([removeTypenameFromMutationLink, authLink.concat(httpLink)]),
+  link: from([removeTypenameFromMutationLink, authLink.concat(httpLink), blogAuthLink.concat(blogLink)]),
   cache: new InMemoryCache(),
 });
 
