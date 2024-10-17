@@ -41,7 +41,7 @@ type BlogPost = {
 
 export const BlogHub = () => {
   // const { loading, error, data } = useQuery(BLOG_POSTS);
-  const { data, loading, error } = useFetch("http://localhost:1337/api/posts?populate=*");
+  const { data, loading, error } = useFetch(`${process.env.REACT_APP_STRAPI_URL}/api/posts?populate=*`);
 
 
   error && console.error('error', error.message);
@@ -68,7 +68,7 @@ export const BlogHub = () => {
                 component="img"
                 alt={`${post.title} hero image`}
                 height="140"
-                image={`http://localhost:1337${post.hero.url}`}
+                image={`${process.env.REACT_APP_STRAPI_URL}${post.hero.url}`}
                 className="blog-card-img"
               />
             </Link>
