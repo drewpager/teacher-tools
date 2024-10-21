@@ -183,7 +183,7 @@ const httpLink = createHttpLink({
 });
 
 const blogLink = createHttpLink({
-  uri: process.env.REACT_APP_STRAPI_URL || 'http://localhost:1337',
+  uri: `${process.env.REACT_APP_STRAPI_URL}` || 'http://localhost:1337',
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -197,14 +197,14 @@ const authLink = setContext((_, { headers }) => {
 })
 
 const blogAuthLink = setContext((_, { headers }) => {
-  const key = process.env.REACT_APP_STRAPI;
+  const key = `${process.env.REACT_APP_STRAPI}`;
   return {
     headers: {
       ...headers,
-      "Authorization": `bearer ${key}`
+      "Authorization": `Bearer ${key}`
     }
   }
-});
+})
 
 
 const client = new ApolloClient({
