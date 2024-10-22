@@ -52,7 +52,7 @@ export const BlogPost = () => {
   // })
 
   // const { data, loading, error } = useFetch(`http://localhost:1337/api/posts/${id}?populate=*`)
-  const { data, loading, error } = useFetch(`${process.env.REACT_APP_STRAPI_URL}/api/posts?filters[slug][$eq]=${params.slug}&populate=*`);
+  const { data, loading, error } = useFetch(`https://platos-peach-blog-app.onrender.com/api/posts?filters[slug][$eq]=${params.slug}&populate=*`);
 
   let post: BlogItem = data && data.data[0];
 
@@ -78,7 +78,7 @@ export const BlogPost = () => {
         </Box>
         <Box className="blog-post--header-right">
           <img
-            src={post && post.hero && `${process.env.REACT_APP_STRAPI_URL}${post.hero.url}`}
+            src={post && post.hero && `https://platos-peach-blog-app.onrender.com${post.hero.url}`}
             alt={post?.title}
           />
         </Box>

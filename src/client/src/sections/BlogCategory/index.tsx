@@ -30,7 +30,7 @@ export const BlogCategory = () => {
   let category = categoryName?.category?.toLowerCase().replaceAll("-", " ");
 
 
-  const { data, loading, error } = useFetch(`${process.env.REACT_APP_STRAPI_URL}/api/posts?filters[categories][name][$eq]=${category}&populate=*`);
+  const { data, loading, error } = useFetch(`https://platos-peach-blog-app.onrender.com/api/posts?filters[categories][name][$eq]=${category}&populate=*`);
 
 
   error && console.error('error', error.message);
@@ -53,7 +53,7 @@ export const BlogCategory = () => {
                 component="img"
                 alt={`${post.title} hero image`}
                 height="140"
-                image={`${process.env.REACT_APP_STRAPI_URL}${post.hero.url}`}
+                image={`https://platos-peach-blog-app.onrender.com${post.hero.url}`}
                 className="blog-card-img"
               />
             </Link>
