@@ -42,5 +42,9 @@
     & a {
       color: library.$blue;
     }
+
+    & ul {
+      list-style-type: square;
+    }
   }
 }

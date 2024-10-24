@@ -71,7 +71,11 @@ export const BlogPost = () => {
       </Helmet>
       <Box className="blog-post--header">
         <Box className="blog-post--header-left">
-          <p><Link to="/blog" style={{ color: "#000" }}>blog</Link> <ArrowForwardIosIcon sx={{ fontSize: "0.75rem" }} /> {post?.title}</p>
+          <p><Link to="/blog" style={{ color: "#000" }}>blog</Link>
+            <ArrowForwardIosIcon sx={{ fontSize: "0.75rem" }} />
+            <Link to={`/category/${post?.categories[0].name}`} style={{ color: "#000" }}>{post?.categories[0].name}</Link>
+            <ArrowForwardIosIcon sx={{ fontSize: "0.75rem" }} />
+            {post?.title}</p>
           <h1 className="blog-post--title">{post?.title}</h1>
           <p>{post?.metaDescription}</p>
           <h5>Last Updated: {post && post.updated && formatDate(post.updated)}</h5>
