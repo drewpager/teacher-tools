@@ -28,6 +28,12 @@ type BlogItem = {
   hero: {
     url: string;
   }
+  user: {
+    name: string;
+    headshot: {
+      url: string;
+    }
+  }
 }
 
 // const BLOG_POST = gql`
@@ -67,6 +73,7 @@ export const BlogPost = () => {
       )}
       <Helmet>
         <title>{post?.title}</title>
+        {console.log(post)}
         <meta name='description' content={post?.metaDescription} />
       </Helmet>
       <Box className="blog-post--header">
@@ -79,6 +86,7 @@ export const BlogPost = () => {
           <h1 className="blog-post--title">{post?.title}</h1>
           <p>{post?.metaDescription}</p>
           <h5>Last Updated: {post && post.updated && formatDate(post.updated)}</h5>
+          {/* <img src={post?.user.headshot.url} alt={`${post?.user.name} author headshot`} /> */}
         </Box>
         <Box className="blog-post--header-right">
           <img
