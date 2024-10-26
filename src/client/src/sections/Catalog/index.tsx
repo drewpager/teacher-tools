@@ -140,8 +140,10 @@ export const Catalog = ({ viewer }: Props) => {
   if (error) {
     return (
       <Box>
-        {console.log("Error: ", error.message)}
-        <DisplayError title='Failed to load Content Catalog' />
+        <>
+          {console.log("Error: ", error.message)}
+          <DisplayError title='Failed to load Content Catalog' />
+        </>
       </Box>
     )
   }

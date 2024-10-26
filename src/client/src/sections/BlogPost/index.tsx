@@ -73,7 +73,6 @@ export const BlogPost = () => {
       )}
       <Helmet>
         <title>{post?.title}</title>
-        {console.log(post)}
         <meta name='description' content={post?.metaDescription} />
       </Helmet>
       <Box className="blog-post--header">

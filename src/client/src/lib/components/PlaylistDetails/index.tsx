@@ -17,6 +17,7 @@ import './playlistdetails.scss';
 interface Props {
   expand: boolean;
   onClick: ReactEventHandler;
+  children: React.ReactNode;
 }
 
 const ExpandMore = styled((props: Props) => {
@@ -39,42 +40,43 @@ export const PlaylistDetails = (playlist: Playlist) => {
   return (
     <>
       <Card className="playlistCard">
-        <CardContent className='card--content'>
-          <Link to={`/playlist/${playlist.id}`} style={{ textDecoration: "none" }}>
-            <Typography className='card--title' variant="h3">
-              {playlist.name}
-            </Typography>
-          </Link>
-        </CardContent>
-
-        <CardActions className='card--actions' disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-
-          <IconButton aria-label="share">
-            <ShareIcon />
-          </IconButton>
-
-          <ExpandMore
-            expand={expanded}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-          >
-            <ExpandMoreIcon />
-          </ExpandMore>
-        </CardActions>
-
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <ul>
-              {playlist?.plan?.map((j) => (
-                <li key={j?.id}><Typography paragraph>{j?.title}</Typography></li>
-              ))}
-            </ul>
+        <>
+          <CardContent className='card--content'>
+            <Link to={`/playlist/${playlist.id}`} style={{ textDecoration: "none" }}>
+              <Typography className='card--title' variant="h3">
+                {playlist.name}
+              </Typography>
+            </Link>
           </CardContent>
-        </Collapse>
+
+          <CardActions className='card--actions' disableSpacing>
+            <IconButton aria-label="add to favorites">
+              <FavoriteIcon />
+            </IconButton>
+
+            <IconButton aria-label="share">
+              <ShareIcon />
+            </IconButton>
+            <ExpandMore
+              expand={expanded}
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              aria-label="show more"
+            >
+              <ExpandMoreIcon />
+            </ExpandMore>
+          </CardActions>
+
+          <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <CardContent>
+              <ul>
+                {playlist?.plan?.map((j) => (
+                  <li key={j?.id}><Typography paragraph>{j?.title}</Typography></li>
+                ))}
+              </ul>
+            </CardContent>
+          </Collapse>
+        </>
       </Card>
     </>
   )

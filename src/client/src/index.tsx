@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {
@@ -126,14 +127,17 @@ const App = () => {
           <Route path="/catalog" element={<Catalog viewer={viewer} />} />
           <Route path="/lesson/:id" element={<Lesson viewer={viewer} />} />
           <Route path="/lessons/:filter?" element={<Lessons title="Plato's Peach" />} />
-          <Route path="/user/:id" children={(props: any) => (<User {...props} viewer={viewer} />)} element={<User viewer={viewer} />} />
+          {/* <Route path="/user/:id" children={(props: any) => (<User {...props} viewer={viewer} />)} element={<User viewer={viewer} />} /> */}
+          <Route path="/user/:id" element={<User viewer={viewer} />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/pricing" element={<Pricing viewer={viewer} setViewer={setViewer} />} />
           <Route path="/donate" element={<Donate viewer={viewer} setViewer={setViewer} />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/login" children={(props: any) => (<Login {...props} setViewer={setViewer} />)} element={<Login setViewer={setViewer} />} />
-          <Route path="/signup" children={(props: any) => (<SignUp {...props} setViewer={setViewer} />)} element={<SignUp setViewer={setViewer} />} />
+          {/* <Route path="/login" children={(props: any) => (<Login {...props} setViewer={setViewer} />)} element={<Login setViewer={setViewer} />} />
+          <Route path="/signup" children={(props: any) => (<SignUp {...props} setViewer={setViewer} />)} element={<SignUp setViewer={setViewer} />} /> */}
+          <Route path="/login" element={<Login setViewer={setViewer} />} />
+          <Route path="/signup" element={<SignUp setViewer={setViewer} />} />
           <Route path="/playlist/:id" element={<Playlist viewer={viewer} />} />
           <Route path="/plans/:plan" element={<Plans viewer={viewer} setViewer={setViewer} />} />
           <Route path="/playlist/create" element={<CreatePlaylist viewer={viewer} />} />
@@ -147,7 +151,8 @@ const App = () => {
           <Route path="/article/:id" element={<Article viewer={viewer} />} />
           <Route path="/article" element={<ArticlesCatalog viewer={viewer} />} />
           <Route path="/edit/:id" element={<EditPlaylist viewer={viewer} />} />
-          <Route path="/lesson/create" children={(props: any) => (<CreateLesson {...props} viewer={viewer} />)} element={<CreateLesson viewer={viewer} />} />
+          {/* <Route path="/lesson/create" children={(props: any) => (<CreateLesson {...props} viewer={viewer} />)} element={<CreateLesson viewer={viewer} />} /> */}
+          <Route path="/lesson/create" element={<CreateLesson viewer={viewer} />} />
           <Route path="/blog" element={<BlogHub />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/category/:category" element={<BlogCategory />} />
@@ -212,15 +217,25 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-ReactDOM.render(
+const root = createRoot(document.getElementById('root') as HTMLElement);
+root.render(
   <ThemeProvider theme={theme}>
     <ApolloProvider client={client}>
       <App />
     </ApolloProvider>
     <CssBaseline />
-  </ThemeProvider>,
-  document.getElementById('root')
+  </ThemeProvider>
 );
+
+// ReactDOM.render(
+//   <ThemeProvider theme={theme}>
+//     <ApolloProvider client={client}>
+//       <App />
+//     </ApolloProvider>
+//     <CssBaseline />
+//   </ThemeProvider>,
+//   document.getElementById('root')
+// );
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

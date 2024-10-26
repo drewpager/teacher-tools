@@ -36,9 +36,11 @@ import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 
 interface props {
   viewer: Viewer
+  children?: React.ReactNode
 }
 
 interface QuestionsProps {
+  children?: React.ReactNode
   questions: [
     {
       question: string,
@@ -52,6 +54,7 @@ interface QuestionsProps {
 }
 
 interface QuestionProps {
+  children?: React.ReactNode
   question: string,
   answerType: AnswerFormat,
   answerOptions: {
@@ -321,7 +324,7 @@ export const QuizCreate = ({ viewer }: props) => {
 
   if (error) {
     <Box>
-      {console.log("Error Here Sir: ", error)}
+      {/* {console.log("Error Here Sir: ", error)} */}
       <DisplayError title="Failed to create assessment" />
     </Box>
   }
@@ -416,240 +419,244 @@ export const QuizCreate = ({ viewer }: props) => {
           }}
         >
           {({ values, errors, touched, handleSubmit, handleChange }) => (
-            <form onSubmit={handleSubmit}>
-              {aiDisclaimer && (<Typography variant="h5" sx={{ color: "#BC4710" }}>Please confirm AI generated quiz is correct before saving. Large language models are known to hallucinate.</Typography>)}
-              <TextField
-                fullWidth
-                type="text"
-                name="title"
-                label="Enter assessment title"
-                value={values.title}
-                onChange={handleChange}
-                error={Boolean(errors.title)}
-                helperText={errors.title}
-                className="quizCreate--title"
-                variant="standard"
-                sx={{
-                  gridColumn: 3
-                }}
-              // onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
-              />
-              {/* {generateQuizOpen && aiValues.length > 0 && handleQuizGenerateUpdate(values)} */}
-              {ready && handleQuizGenerateUpdate(values)}
-              <FieldArray name="questions">
-                {({ insert, remove, push }) => (
-                  <div>
-                    {values.questions.length > 0 &&
-                      values.questions.map((question: any, index: number) => {
-                        return (
-                          <div className='row' key={index}>
-                            <div className='col' key={index}>
-                              <TextField
-                                placeholder={`Question`}
-                                fullWidth
-                                sx={{ paddingTop: "1rem", gridColumn: 4 }}
-                                name={`questions[${index}].question`}
-                                value={`${values.questions[index].question}`}
-                                onChange={handleChange}
-                                InputProps={{
-                                  endAdornment: (
-                                    <InputAdornment position="end">
-                                      <DeleteForeverIcon onClick={() => remove(index)} className="button--cancel" />
-                                    </InputAdornment>
-                                  )
-                                }}
-                              />
-                            </div>
-                            <Select
-                              variant='outlined'
-                              onChange={handleChange}
-                              fullWidth
-                              value={`${values.questions[index].answerType}`}
-                              defaultValue={`MULTIPLECHOICE`}
-                              inputProps={{
-                                name: `questions[${index}].answerType`,
-                              }}
-                              className="quizCreate--answerType-select"
-                            >
-                              <MenuItem value={`MULTIPLECHOICE`}>Multiple Choice</MenuItem>
-                              <MenuItem value={`TRUEFALSE`}>True/False</MenuItem>
-                            </Select>
-                            {question.answerType === "MULTIPLECHOICE" ? (
-                              <FieldArray name={`questions[${index}].answerOptions`}>
-                                {({ insert, remove, push }) => (
-                                  <div>
-                                    {/* {!!aiValues && values.questions[index].answerOptions === aiValues[0].answerOptions} */}
-                                    {values.questions[index].answerOptions.length > 0 &&
-                                      values.questions[index].answerOptions.map((option: any, indy: number) => {
-                                        return (
-                                          <div className="quiz__multiAnswerArea">
-                                            <div className="quiz__multiAnswers">
-                                              <Field
-                                                name={`questions[${index}].answerOptions[${indy}].isCorrect`}
-                                                component={checkInput}
-                                              />
-                                              <TextField
-                                                label="Enter Answer Option"
-                                                fullWidth
-                                                sx={{ marginTop: 2 }}
-                                                name={`questions[${index}].answerOptions[${indy}].answerText`}
-                                                value={`${values.questions[index].answerOptions[indy].answerText}`}
-                                                onChange={handleChange}
-                                                onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
-                                              />
-                                              <Button onClick={() => push({ answerText: "", isCorrect: false })} className="quiz--modicon-button" disableRipple disableFocusRipple>
-                                                <Tooltip title="Add another answer option" className="quiz--modicons">
-                                                  <ControlPoint />
-                                                </Tooltip>
-                                              </Button>
-                                              <Button onClick={() => remove(indy)} className="quiz--modicon-button" disableRipple disableFocusRipple>
-                                                <Tooltip title="Remove answer option" className="quiz--modicons">
-                                                  <RemoveCircleOutlineIcon />
-                                                </Tooltip>
-                                              </Button>
-                                            </div>
-                                          </div>
-                                        )
-                                      })}
-                                  </div>
+            <>
+              <form onSubmit={handleSubmit}>
+                <>
+                  {aiDisclaimer && (<Typography variant="h5" sx={{ color: "#BC4710" }}>Please confirm AI generated quiz is correct before saving. Large language models are known to hallucinate.</Typography>)}
+                  <TextField
+                    fullWidth
+                    type="text"
+                    name="title"
+                    label="Enter assessment title"
+                    value={values.title}
+                    onChange={handleChange}
+                    error={Boolean(errors.title)}
+                    helperText={errors.title}
+                    className="quizCreate--title"
+                    variant="standard"
+                    sx={{
+                      gridColumn: 3
+                    }}
+                  // onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+                  />
+                  {/* {generateQuizOpen && aiValues.length > 0 && handleQuizGenerateUpdate(values)} */}
+                  {ready && handleQuizGenerateUpdate(values)}
+                  <FieldArray name="questions">
+                    {({ insert, remove, push }) => (
+                      <div>
+                        {values.questions.length > 0 &&
+                          values.questions.map((question: any, index: number) => {
+                            return (
+                              <div className='row' key={index}>
+                                <div className='col' key={index}>
+                                  <TextField
+                                    placeholder={`Question`}
+                                    fullWidth
+                                    sx={{ paddingTop: "1rem", gridColumn: 4 }}
+                                    name={`questions[${index}].question`}
+                                    value={`${values.questions[index].question}`}
+                                    onChange={handleChange}
+                                    InputProps={{
+                                      endAdornment: (
+                                        <InputAdornment position="end">
+                                          <DeleteForeverIcon onClick={() => remove(index)} className="button--cancel" />
+                                        </InputAdornment>
+                                      )
+                                    }}
+                                  />
+                                </div>
+                                <Select
+                                  variant='outlined'
+                                  onChange={handleChange}
+                                  fullWidth
+                                  value={`${values.questions[index].answerType}`}
+                                  defaultValue={`MULTIPLECHOICE`}
+                                  inputProps={{
+                                    name: `questions[${index}].answerType`,
+                                  }}
+                                  className="quizCreate--answerType-select"
+                                >
+                                  <MenuItem value={`MULTIPLECHOICE`}>Multiple Choice</MenuItem>
+                                  <MenuItem value={`TRUEFALSE`}>True/False</MenuItem>
+                                </Select>
+                                {question.answerType === "MULTIPLECHOICE" ? (
+                                  <FieldArray name={`questions[${index}].answerOptions`}>
+                                    {({ insert, remove, push }) => (
+                                      <div>
+                                        {/* {!!aiValues && values.questions[index].answerOptions === aiValues[0].answerOptions} */}
+                                        {values.questions[index].answerOptions.length > 0 &&
+                                          values.questions[index].answerOptions.map((option: any, indy: number) => {
+                                            return (
+                                              <div className="quiz__multiAnswerArea">
+                                                <div className="quiz__multiAnswers">
+                                                  <Field
+                                                    name={`questions[${index}].answerOptions[${indy}].isCorrect`}
+                                                    component={checkInput}
+                                                  />
+                                                  <TextField
+                                                    label="Enter Answer Option"
+                                                    fullWidth
+                                                    sx={{ marginTop: 2 }}
+                                                    name={`questions[${index}].answerOptions[${indy}].answerText`}
+                                                    value={`${values.questions[index].answerOptions[indy].answerText}`}
+                                                    onChange={handleChange}
+                                                    onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+                                                  />
+                                                  <Button onClick={() => push({ answerText: "", isCorrect: false })} className="quiz--modicon-button" disableRipple disableFocusRipple>
+                                                    <Tooltip title="Add another answer option" className="quiz--modicons">
+                                                      <ControlPoint />
+                                                    </Tooltip>
+                                                  </Button>
+                                                  <Button onClick={() => remove(indy)} className="quiz--modicon-button" disableRipple disableFocusRipple>
+                                                    <Tooltip title="Remove answer option" className="quiz--modicons">
+                                                      <RemoveCircleOutlineIcon />
+                                                    </Tooltip>
+                                                  </Button>
+                                                </div>
+                                              </div>
+                                            )
+                                          })}
+                                      </div>
+                                    )}
+                                  </FieldArray>
+                                ) : (
+                                  <>
+                                  </>
                                 )}
-                              </FieldArray>
-                            ) : (
-                              <>
-                              </>
-                            )}
-                            {question.answerType === "TRUEFALSE" ? (
-                              /* TODO: disable remove button on last item and only render +/- buttons when last index of array */
-                              <FieldArray name={`questions[${index}].answerOptions`}>
-                                {({ insert, remove, push }) => (
-                                  <div>
-                                    {values.questions[index].answerOptions.length > 0 &&
-                                      values.questions[index].answerOptions.map((option: any, indy: number) => {
-                                        return (
-                                          <div className="quiz__multiAnswerArea">
-                                            <div className="quiz__multiAnswers">
-                                              <Field
-                                                name={`questions[${index}].answerOptions[${indy}].isCorrect`}
-                                                component={checkInput}
-                                              />
-                                            </div>
-                                          </div>
-                                        )
-                                      })}
-                                  </div>
+                                {question.answerType === "TRUEFALSE" ? (
+                                  /* TODO: disable remove button on last item and only render +/- buttons when last index of array */
+                                  <FieldArray name={`questions[${index}].answerOptions`}>
+                                    {({ insert, remove, push }) => (
+                                      <div>
+                                        {values.questions[index].answerOptions.length > 0 &&
+                                          values.questions[index].answerOptions.map((option: any, indy: number) => {
+                                            return (
+                                              <div className="quiz__multiAnswerArea">
+                                                <div className="quiz__multiAnswers">
+                                                  <Field
+                                                    name={`questions[${index}].answerOptions[${indy}].isCorrect`}
+                                                    component={checkInput}
+                                                  />
+                                                </div>
+                                              </div>
+                                            )
+                                          })}
+                                      </div>
+                                    )}
+                                  </FieldArray>
+                                ) : (
+                                  <>
+                                  </>
                                 )}
-                              </FieldArray>
-                            ) : (
-                              <>
-                              </>
-                            )}
-                          </div>
-                        )
-                      })}
-                    <div className="add--question-box">
-                      <IconButton
-                        className="quiz--button-add"
-                        onClick={() => push({
-                          question: '', answerType: AnswerFormat.Multiplechoice,
-                          answerOptions: [
-                            { answerText: "", isCorrect: true },
-                          ]
-                        })}
-                        disableRipple
-                        disableFocusRipple
-                      >
-                        <AddCircleIcon fontSize='large' />
-                        <Typography variant="h4" className="addQuestion--text">Add Question</Typography>
-                      </IconButton>
-                    </div>
-                  </div>
-                )}
-              </FieldArray>
-              <Box sx={{ display: "flex", marginTop: "1rem" }}>
-                <Tooltip title={viewer.id !== null ? "Make Private/Public" : "Public Content Restricted to Registered Users"}>
-                  <LockSwitch checked={!locked} onChange={() => { setLocked(!locked); values.public = !locked }} disabled={viewer.id === null} />
-                </Tooltip>
-                <Tooltip title={viewer.id !== null ? "Make Private/Public" : "Public Content Restricted to Registered Users"}>
-                  <Typography variant="body1" color={!locked ? "error" : "success"}>{!locked ? "Private" : "Public"}</Typography>
-                </Tooltip>
-              </Box>
-              <div className="quiz--button-area">
-                <Button
-                  variant="outlined"
-                  type="submit"
-                  className="quiz--button-submit"
-                  disabled={values.title.length === 0 || values.questions[0].question.length === 0}
-                >Save Assessment</Button>
-                {!viewer.id && (
-                  <Link to="/login" style={{ textDecoration: "none", color: "#BC4710" }}>
-                    <Typography variant="body2">Login required</Typography>
-                  </Link>)}
-                {quizCreatePage ? (
-                  <Link to={`../user/${viewer.id}`} style={{ textDecoration: "none" }}>
-                    <Typography variant="h4" className="quiz--button-cancel">Cancel</Typography>
-                  </Link>
-                ) : (<Typography variant="h5">Click away to close</Typography>)}
-              </div>
-              <Modal
-                open={generateQuizOpen}
-                onClose={handleGenerateClose}
-                aria-labelledby="platos-peach-demo-videon"
-                aria-describedby="platos-peach-demo-video-description"
-              >
-                <Box className="demo-video--modal">
-                  <Box>
-                    <Fab aria-label="cancel" onClick={handleGenerateClose} sx={{ justifySelf: "right", mb: "5px" }}>
-                      X
-                    </Fab>
+                              </div>
+                            )
+                          })}
+                        <div className="add--question-box">
+                          <IconButton
+                            className="quiz--button-add"
+                            onClick={() => push({
+                              question: '', answerType: AnswerFormat.Multiplechoice,
+                              answerOptions: [
+                                { answerText: "", isCorrect: true },
+                              ]
+                            })}
+                            disableRipple
+                            disableFocusRipple
+                          >
+                            <AddCircleIcon fontSize='large' />
+                            <Typography variant="h4" className="addQuestion--text">Add Question</Typography>
+                          </IconButton>
+                        </div>
+                      </div>
+                    )}
+                  </FieldArray>
+                  <Box sx={{ display: "flex", marginTop: "1rem" }}>
+                    <Tooltip title={viewer.id !== null ? "Make Private/Public" : "Public Content Restricted to Registered Users"}>
+                      <LockSwitch checked={!locked} onChange={() => { setLocked(!locked); values.public = !locked }} disabled={viewer.id === null} />
+                    </Tooltip>
+                    <Tooltip title={viewer.id !== null ? "Make Private/Public" : "Public Content Restricted to Registered Users"}>
+                      <Typography variant="body1" color={!locked ? "error" : "success"}>{!locked ? "Private" : "Public"}</Typography>
+                    </Tooltip>
                   </Box>
-                  <Box className="generate-quiz--modal">
-                    {/* {viewer.paymentId === null && setTfNums(2)}
+                  <div className="quiz--button-area">
+                    <Button
+                      variant="outlined"
+                      type="submit"
+                      className="quiz--button-submit"
+                      disabled={values.title.length === 0 || values.questions[0].question.length === 0}
+                    >Save Assessment</Button>
+                    {!viewer.id && (
+                      <Link to="/login" style={{ textDecoration: "none", color: "#BC4710" }}>
+                        <Typography variant="body2">Login required</Typography>
+                      </Link>)}
+                    {quizCreatePage ? (
+                      <Link to={`../user/${viewer.id}`} style={{ textDecoration: "none" }}>
+                        <Typography variant="h4" className="quiz--button-cancel">Cancel</Typography>
+                      </Link>
+                    ) : (<Typography variant="h5">Click away to close</Typography>)}
+                  </div>
+                  <Modal
+                    open={generateQuizOpen}
+                    onClose={handleGenerateClose}
+                    aria-labelledby="platos-peach-demo-videon"
+                    aria-describedby="platos-peach-demo-video-description"
+                  >
+                    <Box className="demo-video--modal">
+                      <Box>
+                        <Fab aria-label="cancel" onClick={handleGenerateClose} sx={{ justifySelf: "right", mb: "5px" }}>
+                          X
+                        </Fab>
+                      </Box>
+                      <Box className="generate-quiz--modal">
+                        {/* {viewer.paymentId === null && setTfNums(2)}
                     {viewer.paymentId === null && setMcNums(2)}
                     {viewer.paymentId === null && (<Typography variant="body2" color="error" sx={{ m: "1rem" }}>Free Plan Limited to 4 AI Generated Quiz Questions</Typography>)} */}
-                    <Typography variant="h3" sx={{ m: "1rem" }}>AI Quiz Generator</Typography>
-                    <Typography variant="h4" sx={{ m: "1rem" }}>How many multiple choice questions?</Typography>
-                    <Slider
-                      aria-label="Multichoice Questions"
-                      value={mcNums}
-                      onChange={handleMcSlideChange}
-                      valueLabelDisplay="on"
-                      step={1}
-                      marks
-                      min={0}
-                      max={10}
-                      sx={{ m: "1rem", width: "90%", color: "#3A70CD" }}
-                    />
-                    <Typography variant="h4" sx={{ m: "1rem" }}>How many true/false questions?</Typography>
-                    <Slider
-                      aria-label="Multichoice Questions"
-                      value={tfNums}
-                      onChange={handleTfSlideChange}
-                      valueLabelDisplay="on"
-                      step={1}
-                      marks
-                      min={0}
-                      max={10}
-                      sx={{ m: "1rem", width: "90%", color: "#3A70CD" }}
-                    />
-                    <Typography variant="h4" sx={{ m: "1rem" }}>What subject?</Typography>
-                    <TextField
-                      label="Subject"
-                      variant="outlined"
-                      sx={{ m: "1rem", width: "90%" }}
-                      placeholder='The Cuban Missile Crisis'
-                      onChange={(e) => setSubject(e.target.value)}
-                    />
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      sx={{ ml: "1rem", textTransform: "capitalize" }}
-                      disabled={(subject === "") || (mcNums === 0 && tfNums === 0)}
-                      onClick={handleQuizGenerate}
-                    >Generate Quiz {generateQuizLoading && <CircularProgress size={20} sx={{ ml: 1, color: "#FFF" }} />}</Button>
-                  </Box>
-                </Box>
-              </Modal>
-            </form>
+                        <Typography variant="h3" sx={{ m: "1rem" }}>AI Quiz Generator</Typography>
+                        <Typography variant="h4" sx={{ m: "1rem" }}>How many multiple choice questions?</Typography>
+                        <Slider
+                          aria-label="Multichoice Questions"
+                          value={mcNums}
+                          onChange={handleMcSlideChange}
+                          valueLabelDisplay="on"
+                          step={1}
+                          marks
+                          min={0}
+                          max={10}
+                          sx={{ m: "1rem", width: "90%", color: "#3A70CD" }}
+                        />
+                        <Typography variant="h4" sx={{ m: "1rem" }}>How many true/false questions?</Typography>
+                        <Slider
+                          aria-label="Multichoice Questions"
+                          value={tfNums}
+                          onChange={handleTfSlideChange}
+                          valueLabelDisplay="on"
+                          step={1}
+                          marks
+                          min={0}
+                          max={10}
+                          sx={{ m: "1rem", width: "90%", color: "#3A70CD" }}
+                        />
+                        <Typography variant="h4" sx={{ m: "1rem" }}>What subject?</Typography>
+                        <TextField
+                          label="Subject"
+                          variant="outlined"
+                          sx={{ m: "1rem", width: "90%" }}
+                          placeholder='The Cuban Missile Crisis'
+                          onChange={(e) => setSubject(e.target.value)}
+                        />
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          sx={{ ml: "1rem", textTransform: "capitalize" }}
+                          disabled={(subject === "") || (mcNums === 0 && tfNums === 0)}
+                          onClick={handleQuizGenerate}
+                        >Generate Quiz {generateQuizLoading && <CircularProgress size={20} sx={{ ml: 1, color: "#FFF" }} />}</Button>
+                      </Box>
+                    </Box>
+                  </Modal>
+                </>
+              </form>
+            </>
           )}
         </Formik>
       </Box>

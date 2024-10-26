@@ -390,139 +390,143 @@ export const CreateLesson = ({ viewer }: Props) => {
             }}
           >
             {({ values, errors, touched, isSubmitting, handleSubmit, handleChange, setFieldValue }) => (
-              <Form onSubmit={handleSubmit}>
-                {/* {errors.title ? (<h5>{errors.title}</h5>) : null} */}
-                <TextField
-                  variant="outlined"
-                  label="Title"
-                  helperText={errors.title ? `${errors.title}` : "Add a Lesson Title (Max Character Count of 160)"}
-                  sx={{ width: "75%" }}
-                  value={values.title}
-                  name="title"
-                  onChange={handleChange}
-                  required
-                  error={touched && errors.title ? true : false}
-                />
-                <br />
-                <TextField
-                  type="file"
-                  id="video"
-                  variant='outlined'
-                  helperText={errors.video ? `${errors.video}` : "Upload a Video or Lecture"}
-                  className='file--upload'
-                  sx={{ width: "75%", marginTop: 1 }}
-                  name="video"
-                  onChange={async (e: ChangeEvent<HTMLInputElement>) => { setFieldValue("video", await handleVideoUpload(e.target.files)) }}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <LabelProgress progress={progress} />
-                      </InputAdornment>
-                    ),
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <VideoLibrary />
-                      </InputAdornment>
-                    )
-                  }}
-                  required
-                  error={touched.video && errors.video ? true : false}
-                /><br />
-                <TextField
-                  type="file"
-                  id="image"
-                  variant='outlined'
-                  className='image--upload'
-                  helperText="Image"
-                  sx={{ width: "75%", marginTop: 1 }}
-                  name="image"
-                  onChange={async (e: ChangeEvent<HTMLInputElement>) => { setFieldValue("image", await handleImageUpload(e.target.files)) }}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <LabelProgress progress={imageProgress} />
-                      </InputAdornment>
-                    ),
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <AddPhotoAlternate />
-                      </InputAdornment>
-                    )
-                  }}
-                  color="primary"
-                  required
-                /><br />
-                <TextField
-                  variant="outlined"
-                  label="Description"
-                  multiline rows={3}
-                  helperText="Min Character Count of 160"
-                  sx={{ width: "75%", marginTop: 1 }}
-                  value={values.meta}
-                  name="meta"
-                  onChange={handleChange}
-                  required
-                  error={touched.meta && errors.meta ? true : false}
-                />
-                <FormGroup sx={{ marginTop: 1 }}>
-                  <Typography variant="h5">Category</Typography>
-                  <Typography variant="body2" style={{ color: "gray" }}>Select All That Apply</Typography>
-                  <FieldArray name="category">
-                    {({ insert, remove, push }) => (
-                      <div className="field--checkboxes">
-                        {categories.map((cat, index) => (
-                          <label
-                            key={index}
-                            className="field--checkboxes-label"
-                          >
-                            <Field
-                              type="checkbox"
-                              name="category"
-                              value={cat.name}
-                              className="field--checkbox"
-                              error={touched.category && errors.category ? true : false}
-                            />
-                            {titleCase(`${cat.name}`)}
-                          </label>
-                        ))}
-                      </div>
-                    )}
-                  </FieldArray>
-                </FormGroup>
-                <TextField
-                  variant='outlined'
-                  name="startDate"
-                  label="Start Date or Year"
-                  helperText={errors.startDate ? `${errors.startDate}` : "Add a time period start date as YYYY-MM-DD or -33,000 for 33,000 BCE"}
-                  sx={{ width: "75%", marginTop: 1 }}
-                  value={values.startDate}
-                  onChange={handleChange}
-                  error={touched.startDate && errors.startDate ? true : false}
-                  required
-                /><br />
-                <TextField
-                  variant='outlined'
-                  name="endDate"
-                  label="End Date or Year"
-                  helperText="YYYY-MM-DD, 1052 or Present"
-                  sx={{ width: "75%", marginTop: 1 }}
-                  value={values.endDate}
-                  onChange={handleChange}
-                  required
-                  error={touched.endDate && errors.endDate ? true : false}
-                /><br />
-                <Box className="button--slider-lesson">
-                  <Tooltip title={viewer.paymentId !== null ? "Make Private/Public" : "Public Content Restricted"}>
-                    <LockSwitch checked={!locked} onChange={() => setLocked(!locked)} disabled={viewer.paymentId === null} />
-                  </Tooltip>
-                  <Tooltip title={viewer.paymentId !== null ? "Make Private/Public" : "Public Content Restricted"}>
-                    <Typography variant="body1" color={!locked ? "error" : "success"}>{!locked ? "Private" : "Public"}</Typography>
-                  </Tooltip>
-                </Box>
-                {errors ? setError(true) : setError(false)}
-                {console.log(errors)}
-                <Button sx={{ marginTop: 2 }} disabled={!values.title || !values.endDate || isSubmitting} variant='contained' color='primary' type="submit">Submit</Button>
-              </Form>
+              <>
+                <Form onSubmit={handleSubmit}>
+                  <>
+                    {/* {errors.title ? (<h5>{errors.title}</h5>) : null} */}
+                    <TextField
+                      variant="outlined"
+                      label="Title"
+                      helperText={errors.title ? `${errors.title}` : "Add a Lesson Title (Max Character Count of 160)"}
+                      sx={{ width: "75%" }}
+                      value={values.title}
+                      name="title"
+                      onChange={handleChange}
+                      required
+                      error={touched && errors.title ? true : false}
+                    />
+                    <br />
+                    <TextField
+                      type="file"
+                      id="video"
+                      variant='outlined'
+                      helperText={errors.video ? `${errors.video}` : "Upload a Video or Lecture"}
+                      className='file--upload'
+                      sx={{ width: "75%", marginTop: 1 }}
+                      name="video"
+                      onChange={async (e: ChangeEvent<HTMLInputElement>) => { setFieldValue("video", await handleVideoUpload(e.target.files)) }}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <LabelProgress progress={progress} />
+                          </InputAdornment>
+                        ),
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <VideoLibrary />
+                          </InputAdornment>
+                        )
+                      }}
+                      required
+                      error={touched.video && errors.video ? true : false}
+                    /><br />
+                    <TextField
+                      type="file"
+                      id="image"
+                      variant='outlined'
+                      className='image--upload'
+                      helperText="Image"
+                      sx={{ width: "75%", marginTop: 1 }}
+                      name="image"
+                      onChange={async (e: ChangeEvent<HTMLInputElement>) => { setFieldValue("image", await handleImageUpload(e.target.files)) }}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <LabelProgress progress={imageProgress} />
+                          </InputAdornment>
+                        ),
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <AddPhotoAlternate />
+                          </InputAdornment>
+                        )
+                      }}
+                      color="primary"
+                      required
+                    /><br />
+                    <TextField
+                      variant="outlined"
+                      label="Description"
+                      multiline rows={3}
+                      helperText="Min Character Count of 160"
+                      sx={{ width: "75%", marginTop: 1 }}
+                      value={values.meta}
+                      name="meta"
+                      onChange={handleChange}
+                      required
+                      error={touched.meta && errors.meta ? true : false}
+                    />
+                    <FormGroup sx={{ marginTop: 1 }}>
+                      <Typography variant="h5">Category</Typography>
+                      <Typography variant="body2" style={{ color: "gray" }}>Select All That Apply</Typography>
+                      <FieldArray name="category">
+                        {({ insert, remove, push }) => (
+                          <div className="field--checkboxes">
+                            {categories.map((cat, index) => (
+                              <label
+                                key={index}
+                                className="field--checkboxes-label"
+                              >
+                                <Field
+                                  type="checkbox"
+                                  name="category"
+                                  value={cat.name}
+                                  className="field--checkbox"
+                                  error={touched.category && errors.category ? true : false}
+                                />
+                                {titleCase(`${cat.name}`)}
+                              </label>
+                            ))}
+                          </div>
+                        )}
+                      </FieldArray>
+                    </FormGroup>
+                    <TextField
+                      variant='outlined'
+                      name="startDate"
+                      label="Start Date or Year"
+                      helperText={errors.startDate ? `${errors.startDate}` : "Add a time period start date as YYYY-MM-DD or -33,000 for 33,000 BCE"}
+                      sx={{ width: "75%", marginTop: 1 }}
+                      value={values.startDate}
+                      onChange={handleChange}
+                      error={touched.startDate && errors.startDate ? true : false}
+                      required
+                    /><br />
+                    <TextField
+                      variant='outlined'
+                      name="endDate"
+                      label="End Date or Year"
+                      helperText="YYYY-MM-DD, 1052 or Present"
+                      sx={{ width: "75%", marginTop: 1 }}
+                      value={values.endDate}
+                      onChange={handleChange}
+                      required
+                      error={touched.endDate && errors.endDate ? true : false}
+                    /><br />
+                    <Box className="button--slider-lesson">
+                      <Tooltip title={viewer.paymentId !== null ? "Make Private/Public" : "Public Content Restricted"}>
+                        <LockSwitch checked={!locked} onChange={() => setLocked(!locked)} disabled={viewer.paymentId === null} />
+                      </Tooltip>
+                      <Tooltip title={viewer.paymentId !== null ? "Make Private/Public" : "Public Content Restricted"}>
+                        <Typography variant="body1" color={!locked ? "error" : "success"}>{!locked ? "Private" : "Public"}</Typography>
+                      </Tooltip>
+                    </Box>
+                    {errors ? setError(true) : setError(false)}
+                    {console.log(errors)}
+                    <Button sx={{ marginTop: 2 }} disabled={!values.title || !values.endDate || isSubmitting} variant='contained' color='primary' type="submit">Submit</Button>
+                  </>
+                </Form>
+              </>
             )}
           </Formik>
         </Box>

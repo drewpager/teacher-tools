@@ -83,42 +83,44 @@ export const PdfPlayer = ({ pdf }: Props) => {
             </IconButton>
           </Box>
           <Box className="pdf-button--section">
-            {(numPages > 1) ? (
-              <>
-                <IconButton
-                  disableRipple
-                  onClick={previousPage}
-                  disabled={pageNumber <= 1}
-                >
-                  <Button
+            <>
+              {(numPages > 1) ? (
+                <>
+                  <IconButton
+                    disableRipple
+                    onClick={previousPage}
                     disabled={pageNumber <= 1}
-                    disableRipple
                   >
-                    <UndoIcon /> Previous
-                  </Button>
-                </IconButton>
-                <Chip variant="outlined" className="pdfPage-chip" label={`Page ${pageNumber || (numPages ? 1 : '--')} of ${numPages || '--'}`} />
-                <IconButton
-                  disableRipple
-                  onClick={nextPage}
-                  disabled={pageNumber === numPages}
-                >
-                  <Button
+                    <Button
+                      disabled={pageNumber <= 1}
+                      disableRipple
+                    >
+                      <UndoIcon /> Previous
+                    </Button>
+                  </IconButton>
+                  <Chip variant="outlined" className="pdfPage-chip" label={`Page ${pageNumber || (numPages ? 1 : '--')} of ${numPages || '--'}`} />
+                  <IconButton
+                    disableRipple
+                    onClick={nextPage}
                     disabled={pageNumber === numPages}
-                    disableRipple
                   >
-                    Next <RedoIcon />
-                  </Button>
-                </IconButton>
-                <IconButton disableRipple sx={{ color: "#000" }}>
-                  <ZoomInIcon onClick={zoomIn} />
-                </IconButton>
-                <IconButton disableRipple sx={{ color: "#000" }}>
-                  <ZoomOutIcon onClick={zoomOut} />
-                </IconButton>
-              </>
-            ) : (<></>)}
-            {PDFError}
+                    <Button
+                      disabled={pageNumber === numPages}
+                      disableRipple
+                    >
+                      Next <RedoIcon />
+                    </Button>
+                  </IconButton>
+                  <IconButton disableRipple sx={{ color: "#000" }}>
+                    <ZoomInIcon onClick={zoomIn} />
+                  </IconButton>
+                  <IconButton disableRipple sx={{ color: "#000" }}>
+                    <ZoomOutIcon onClick={zoomOut} />
+                  </IconButton>
+                </>
+              ) : (<></>)}
+              {PDFError}
+            </>
           </Box>
           <Box className="pdf--viewer-section">
             <Document
@@ -153,37 +155,39 @@ export const PdfPlayer = ({ pdf }: Props) => {
         />
       </Document>
       <Box className="pdf-button--section">
-        {(numPages > 1) ? (
-          <>
-            <IconButton
-              disableRipple
-              onClick={previousPage}
-              disabled={pageNumber <= 1}
-            >
-              <Button
+        <>
+          {(numPages > 1) ? (
+            <>
+              <IconButton
+                disableRipple
+                onClick={previousPage}
                 disabled={pageNumber <= 1}
-                disableRipple
               >
-                <UndoIcon /> Previous
-              </Button>
-            </IconButton>
-            <Chip variant="outlined" className="pdfPage-chip" label={`Page ${pageNumber || (numPages ? 1 : '--')} of ${numPages || '--'}`} />
-            <IconButton
-              disableRipple
-              onClick={nextPage}
-              disabled={pageNumber === numPages}
-            >
-              <Button
+                <Button
+                  disabled={pageNumber <= 1}
+                  disableRipple
+                >
+                  <UndoIcon /> Previous
+                </Button>
+              </IconButton>
+              <Chip variant="outlined" className="pdfPage-chip" label={`Page ${pageNumber || (numPages ? 1 : '--')} of ${numPages || '--'}`} />
+              <IconButton
+                disableRipple
+                onClick={nextPage}
                 disabled={pageNumber === numPages}
-                disableRipple
               >
-                Next <RedoIcon />
-              </Button>
-            </IconButton>
-          </>
-        ) : (<></>)}
-        {PDFPreview}
-        {PDFError}
+                <Button
+                  disabled={pageNumber === numPages}
+                  disableRipple
+                >
+                  Next <RedoIcon />
+                </Button>
+              </IconButton>
+            </>
+          ) : (<></>)}
+          {PDFPreview}
+          {PDFError}
+        </>
       </Box>
     </Box>
   )
