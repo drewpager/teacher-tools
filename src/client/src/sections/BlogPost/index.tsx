@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 import Markdown from "react-markdown"
 // import { useQuery, gql } from "@apollo/client"
 import { useFetch } from "../BlogHub/useFetch"
-import { Alert, Box } from "@mui/material"
+import { Alert, Box, Typography } from "@mui/material"
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import "./blogPost.scss"
 import { formatDate } from "../../lib/utils"
@@ -90,9 +90,9 @@ export const BlogPost = () => {
               alt={`${post?.users[0].name} author headshot`}
               className="blog-post--author-headshot"
             />
-            <p>Written by: {post?.users.length === 1 ? post?.users[0].name : `${post?.users[0].name}, ${post?.users[1].name}`}</p>
+            <Typography variant="body1" sx={{ fontWeight: 600 }}>{post?.users.length === 1 ? post?.users[0].name : `${post?.users[0].name}, ${post?.users[1].name}`}</Typography>
           </Box>
-          <h5>Last Updated: {post && post.updated && formatDate(post.updated)}</h5>
+          <Typography variant="body1" sx={{ fontWeight: 800 }}>Last Updated: {post && post.updated && formatDate(post.updated)}</Typography>
         </Box>
         <Box className="blog-post--header-right">
           <img

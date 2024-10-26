@@ -76,7 +76,7 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
         >
           <PeachIcon className="navbar--icon" />
         </IconButton>
-        <Typography variant="h6" className="nav--title">
+        <Typography variant="body1" className="nav--title">
           <Link to="/" style={{ color: `${theme.palette.info.dark}`, textDecoration: "none" }}>
             Plato's Peach
           </Link>
