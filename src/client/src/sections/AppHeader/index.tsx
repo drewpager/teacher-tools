@@ -121,6 +121,11 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                     <Typography textAlign="center">Lesson Plan Catalog</Typography>
                   </Link>
                 </MenuItem>
+                <MenuItem className="dropdown--buttons" onClick={() => setAnchorElNav(null)} disableRipple disableTouchRipple>
+                  <Link to={`/blog`} style={{ textDecoration: 'none', color: "#000" }} onTransitionEnd={handleCloseNavMenu}>
+                    <Typography textAlign="center">Blog</Typography>
+                  </Link>
+                </MenuItem>
               </Menu>
               <Tooltip title="Create Content!">
                 <Button
@@ -325,6 +330,11 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                     <Typography textAlign="center">Lesson Plan Catalog</Typography>
                   </MenuItem>
                 </Link>
+                <Link to={`/blog`} style={{ textDecoration: 'none', color: "#000" }}>
+                  <MenuItem onClick={() => setAnchorElUser(null)} className="dropdown--buttons" disableRipple disableTouchRipple>
+                    <Typography textAlign="center">Blog</Typography>
+                  </MenuItem>
+                </Link>
 
               </Menu>
             </Box>
@@ -336,13 +346,61 @@ export const AppHeader = ({ viewer, setViewer }: Props) => {
                 <Link to={`/donate`} style={{ textDecoration: "none", marginRight: 32 }}>
                   <p style={{ color: `${theme.palette.info.dark}` }}>Donate</p>
                 </Link>
-                <Link to={`/contact`} style={{ textDecoration: "none", marginRight: 110 }}>
-                  <p style={{ color: `${theme.palette.info.dark}` }}>Contact Us</p>
+                <Link to={`/contact`} style={{ textDecoration: "none", marginRight: 32 }}>
+                  <p style={{ color: `${theme.palette.info.dark}` }}>Contact</p>
+                </Link>
+                <Link to={`/blog`} style={{ textDecoration: "none", marginRight: 110 }}>
+                  <p style={{ color: `${theme.palette.info.dark}` }}>Blog</p>
                 </Link>
               </div>
-              <Button disableFocusRipple disableRipple variant="outlined" className="catalog--button" href="/catalog">
+              {/* <Button disableFocusRipple disableRipple variant="outlined" className="catalog--button" href="/catalog">
                 Video Catalog
-              </Button>
+              </Button> */}
+              <Box>
+                <Button
+                  variant="outlined"
+                  className="catalog--button"
+                  // href="/catalog"
+                  onClick={handleOpenNavMenu}
+                  disableRipple
+                  disableFocusRipple
+                >
+                  Catalog
+                </Button>
+                <Menu
+                  sx={{ mt: '50px' }}
+                  id="action-appbar"
+                  anchorEl={anchorElNav}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                  }}
+                  // keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                  }}
+                  open={Boolean(anchorElNav)}
+                  onClose={handleCloseNavMenu}
+                  className="header--menu"
+                >
+                  <MenuItem className="dropdown--buttons" onClick={() => setAnchorElNav(null)} disableRipple disableTouchRipple>
+                    <Link to={`/catalog`} style={{ textDecoration: 'none', color: "#000" }}>
+                      <Typography textAlign="center">Lesson Catalog</Typography>
+                    </Link>
+                  </MenuItem>
+                  <MenuItem className="dropdown--buttons" onClick={() => setAnchorElNav(null)} disableRipple disableTouchRipple>
+                    <Link to={`/plans`} style={{ textDecoration: 'none', color: "#000" }} onTransitionEnd={handleCloseNavMenu}>
+                      <Typography textAlign="center">Lesson Plan Catalog</Typography>
+                    </Link>
+                  </MenuItem>
+                  <MenuItem className="dropdown--buttons" onClick={() => setAnchorElNav(null)} disableRipple disableTouchRipple>
+                    <Link to={`/blog`} style={{ textDecoration: 'none', color: "#000" }} onTransitionEnd={handleCloseNavMenu}>
+                      <Typography textAlign="center">Blog</Typography>
+                    </Link>
+                  </MenuItem>
+                </Menu>
+              </Box>
               <Link to={`/login`} style={{ textDecoration: "none" }}>
                 <Button disableFocusRipple disableRipple className="login--button">Login</Button>
               </Link>

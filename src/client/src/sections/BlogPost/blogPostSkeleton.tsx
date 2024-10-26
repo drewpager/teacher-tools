@@ -13,6 +13,7 @@ export const BlogPostSkeleton = () => {
           <Skeleton variant="text" width="75%" height="100px" />
           <Skeleton variant="text" width="60%" />
           <Skeleton variant="text" width="60%" />
+          <Skeleton variant="circular" width="50px" height="50px" />
           <Skeleton variant="text" width="25%" />
         </Box>
         <Box className="blog-post--header-right">

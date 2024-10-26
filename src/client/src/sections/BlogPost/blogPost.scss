@@ -1,5 +1,19 @@
 @use "../../library";
 
+
+.blog-post--author-headshot {
+  width: 50px;
+  height: auto;
+  border-radius: 50%;
+}
+
+.author-bio--section {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+  gap: 0.5rem;
+}
+
 .MuiBox-root {
   &.blog-post--header {
     padding: 7rem 5rem 0 5rem;
