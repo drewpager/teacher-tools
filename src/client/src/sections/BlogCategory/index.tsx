@@ -53,7 +53,7 @@ export const BlogCategory = () => {
                 component="img"
                 alt={`${post.title} hero image`}
                 height="140"
-                image={`https://platos-peach-blog-app.onrender.com${post.hero.url}`}
+                image={`${post.hero.url}`}
                 className="blog-card-img"
               />
             </Link>

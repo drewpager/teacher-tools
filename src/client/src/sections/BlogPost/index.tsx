@@ -75,6 +75,7 @@ export const BlogPost = () => {
         <title>{post?.title}</title>
         <meta name='description' content={post?.metaDescription} />
       </Helmet>
+      {console.log(post)}
       <Box className="blog-post--header">
         <Box className="blog-post--header-left">
           <p><Link to="/blog" style={{ color: "#000" }}>blog</Link>
@@ -86,7 +87,7 @@ export const BlogPost = () => {
           <p>{post?.metaDescription}</p>
           <Box className="author-bio--section">
             <img
-              src={`https://platos-peach-blog-app.onrender.com${post?.users[0].headshot.url}`}
+              src={`${post?.users[0].headshot.url}`}
               alt={`${post?.users[0].name} author headshot`}
               className="blog-post--author-headshot"
             />
@@ -96,7 +97,7 @@ export const BlogPost = () => {
         </Box>
         <Box className="blog-post--header-right">
           <img
-            src={post && post.hero && `https://platos-peach-blog-app.onrender.com${post.hero.url}`}
+            src={post && post.hero && `${post.hero.url}`}
             alt={post?.title}
           />
         </Box>
