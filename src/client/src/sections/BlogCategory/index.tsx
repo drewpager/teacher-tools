@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useFetch } from '../BlogHub/useFetch';
-import { Box, Card, CardMedia, Typography, CardContent, Divider, Chip } from '@mui/material'
+import { Box, Card, CardMedia, Typography, CardContent, Divider, Chip, Alert } from '@mui/material'
 import '../BlogHub/blogHub.scss';
 import { formatDate, titleCase } from '../../lib/utils';
 import { Footer } from '../../lib/components';
@@ -33,11 +33,20 @@ export const BlogCategory = () => {
   const { data, loading, error } = useFetch(`https://platos-peach-blog-app.onrender.com/api/posts?filters[categories][name][$eq]=${category}&populate=*`);
 
 
-  error && console.error('error', error.message);
+  if (error) {
+    return (<>
+      <BlogHubSkeleton />
+      <Alert severity="error">Error loading post. Please try again later.</Alert>
+    </>)
+  }
+
+
+  if (loading) {
+    return (<BlogHubSkeleton />);
+  }
 
   return (
     <>
-      {loading && <BlogHubSkeleton />}
       <Helmet>
         <title>{titleCase(`${category}`)}</title>
         <meta name='description' content={`Learn through our ${category} articles written by teachers and students.`} />

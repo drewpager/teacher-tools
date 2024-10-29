@@ -60,22 +60,27 @@ export const BlogPost = () => {
   // const { data, loading, error } = useFetch(`http://localhost:1337/api/posts/${id}?populate=*`)
   const { data, loading, error } = useFetch(`https://platos-peach-blog-app.onrender.com/api/posts?filters[slug][$eq]=${params.slug}&populate[0]=categories&populate[1]=hero&populate[2]=users.headshot`);
 
+  if (error) {
+    return (<>
+      <BlogPostSkeleton />
+      <Alert severity="error">Error loading post. Please try again later.</Alert>
+    </>)
+  }
+
+
+  if (loading) {
+    return (<BlogPostSkeleton />);
+  }
+
+
   let post: BlogItem = data && data.data[0];
 
   return (
     <>
-      {loading && <BlogPostSkeleton />}
-      {error && (
-        <>
-          <BlogPostSkeleton />
-          <Alert severity="error">Error loading post. Please try again later.</Alert>
-        </>
-      )}
       <Helmet>
         <title>{post?.title}</title>
         <meta name='description' content={post?.metaDescription} />
       </Helmet>
-      {console.log(post)}
       <Box className="blog-post--header">
         <Box className="blog-post--header-left">
           <p><Link to="/blog" style={{ color: "#000" }}>blog</Link>

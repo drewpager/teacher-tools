@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 import { useFetch } from './useFetch';
-import { Box, Card, CardMedia, Typography, CardContent, Divider, Chip } from '@mui/material'
+import { Box, Card, CardMedia, Typography, CardContent, Divider, Chip, Alert } from '@mui/material'
 import './blogHub.scss';
 import { formatDate, titleCase, formatSlug } from '../../lib/utils';
 import { Footer } from '../../lib/components';
@@ -45,11 +45,20 @@ export const BlogHub = () => {
   const { data, loading, error } = useFetch(`https://platos-peach-blog-app.onrender.com/api/posts?populate=*`);
 
 
-  error && console.error('error', error.message);
+  if (error) {
+    return (<>
+      <BlogHubSkeleton />
+      <Alert severity="error">Error loading post. Please try again later.</Alert>
+    </>)
+  }
+
+
+  if (loading) {
+    return (<BlogHubSkeleton />);
+  }
 
   return (
     <>
-      {loading && <BlogHubSkeleton />}
       <Helmet>
         <title>Plato's Peach Learn & Teach Center</title>
         <meta name='description' content="Teacher and student resources for the journey of history from the classroom and beyond." />
