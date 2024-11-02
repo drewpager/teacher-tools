@@ -32,6 +32,57 @@
       height: auto;
     }
   }
+
+  &.lesson--breadcrumb {
+    margin: 6rem 0rem 0rem 2rem;
+
+    @media (max-width: 1000px) {
+      max-width: 90%;
+      margin: 6rem 0rem 0rem 0rem;
+    }
+
+    @media (max-width: 768px) {
+      max-width: 98%;
+      margin: 6rem 0rem 0rem 0rem;
+    }
+  }
+
+  &.lesson--section {
+    margin: 0.5rem 2rem;
+    max-width: 80%;
+    font-size: 18pt;
+
+    @media (max-width: 1000px) {
+      max-width: 90%;
+      margin: 0.5rem 0;
+    }
+
+    @media (max-width: 768px) {
+      max-width: 98%;
+      margin: 0.5rem 0;
+    }
+  }
+
+  &.featuredPlans--section {
+    margin-top: 7rem;
+    width: 100%;
+
+    @media (max-width: 900px) {
+      margin-right: 0.5rem;
+      width: 100%;
+      margin-top: 0;
+    }
+
+    @media (min-width: 900px) {
+      top: 7rem;
+      position: sticky;
+    }
+  }
+
+  &.featuredPlan--card {
+    width: fit-content;
+    margin-right: 2rem;
+  }
 }
 
 .MuiGrid-container {

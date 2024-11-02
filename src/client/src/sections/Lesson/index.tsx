@@ -11,6 +11,7 @@ import { Link, redirect } from 'react-router-dom';
 import { PublicPlaylistCard } from '../../lib/components/PublicPlaylistCard';
 import { GoogleClassroomShareButton } from '../../lib/components';
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import './lessonPage.scss';
@@ -216,6 +217,11 @@ export const Lesson = ({ viewer }: Props) => {
     "contentUrl": lesson?.video
   };
 
+  const catalogLink = (category: string) => {
+    category = category.trim();
+    return category.replaceAll(" ", "%20").toLowerCase();
+  }
+
   return (
     <>
       <Box className="lesson--page">
@@ -229,7 +235,23 @@ export const Lesson = ({ viewer }: Props) => {
         </Helmet>
         <Grid container>
           <Grid item xs={12} sm={12} md={12} lg={8}>
-            <Box className="article--section">
+            <Box className="lesson--breadcrumb">
+              <p><Link to="/catalog" style={{ color: "#000" }}>Catalog</Link>
+                {" "}
+                <ArrowForwardIosIcon sx={{ fontSize: "0.75rem" }} />
+                {" "}
+                <Link to={`/catalog/#${lesson?.category?.length && catalogLink(`${lesson.category[0]}`)}`} style={{ color: "#000" }}>{lesson?.category?.length && titleCase(`${lesson.category[0]}`)}</Link>
+                {" "}
+                {(lesson?.category?.length && lesson?.category?.length > 1) && (
+                  <>
+                    {" "}
+                    <ArrowForwardIosIcon sx={{ fontSize: "0.75rem" }} />
+                    <Link to={`/catalog/#${lesson?.category?.length && catalogLink(`${lesson.category[1]}`)}`} style={{ color: "#000" }}>{lesson?.category?.length && titleCase(`${lesson.category[1]}`.trim())}</Link>
+                    {" "}
+                  </>
+                )}</p>
+            </Box>
+            <Box className="lesson--section">
               <h1>{lesson?.title}</h1>
               {lesson?.startDate === lesson?.endDate ? (
                 <Chip variant="filled" label={`${formatDate(lesson?.startDate)}`} color="primary" className='lesson--category' />
