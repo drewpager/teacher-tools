@@ -6,6 +6,9 @@ import './playlistcard.scss';
 export const PlaylistCardSkeleton = () => {
   return (
     <>
+      <Box className="plan--breadcrumb">
+        <Skeleton variant="rectangular" height={50} width={"20%"} />
+      </Box>
       <Box className="title-button--section">
         <Skeleton variant="text" height={130} width={350} sx={{ mr: "1rem" }} />
         <Skeleton variant="circular" height={50} width={50} sx={{ mr: "1rem" }} />

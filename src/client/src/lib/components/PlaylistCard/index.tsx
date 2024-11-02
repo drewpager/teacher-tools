@@ -36,7 +36,7 @@ import { Playlist, LessonPlanUnion, Viewer, useUserQuery, useAllUsersQuery, User
 import { QuizPlayer, ArticlePlayer, GoogleClassroomShareButton } from '../index';
 import { VideosPlayer } from '../VideosPlayer';
 import './playlistcard.scss';
-import { formatDate } from '../../utils';
+import { formatDate, titleCase } from '../../utils';
 import { useNavigate } from 'react-router-dom';
 import { gql } from 'graphql-tag';
 import { DisplaySuccess } from '../../utils';
@@ -47,6 +47,7 @@ import { formatSlug } from '../../utils/formatSlug';
 import PaidIcon from '@mui/icons-material/Paid';
 import HistoryToggleOffIcon from '@mui/icons-material/HistoryToggleOff';
 import GradingIcon from '@mui/icons-material/Grading';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Link } from 'react-router-dom';
 
 interface Props {
@@ -283,8 +284,25 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
           <Alert variant="filled" severity="success" onClose={handleSuccessClose}>{userSuccess}</Alert>
         </Snackbar>
       )}
+      <Box className="plan--breadcrumb">
+        <p><Link to="/plans" style={{ color: "#000" }}>Plans</Link>
+          {" "}
+          <ArrowForwardIosIcon sx={{ fontSize: "0.75rem" }} />
+          {" "}
+          {playlist?.category?.length && (
+            <>
+              <Link to={`/plan/${formatSlug(playlist?.category[0])}`} style={{ color: "#000" }}>
+                {titleCase(`${playlist.category[0]}`)}
+              </Link>
+              {" "}
+              <ArrowForwardIosIcon sx={{ fontSize: "0.75rem" }} />
+              {" "}
+            </>)}
+          {playlist.name}
+        </p>
+      </Box>
       <Box className="title-button--section">
-        <Typography className='playlist--title' variant="h2">
+        <Typography className='playlist--title' variant="h1">
           {playlist.name}
         </Typography>
         <Tooltip title={`Created by ${userName}`}>

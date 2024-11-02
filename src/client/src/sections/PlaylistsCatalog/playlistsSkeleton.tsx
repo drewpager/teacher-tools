@@ -5,8 +5,8 @@ import "./playlistsCatalogStyle.scss";
 
 export const PlaylistsSkeleton = () => {
   return (
-    <div>
-      <Box sx={{ marginTop: "7rem" }}>
+    <>
+      <Box sx={{ marginTop: "40px" }}>
         <Skeleton
           variant="rounded"
           height="35px"
@@ -40,6 +40,6 @@ export const PlaylistsSkeleton = () => {
         </Grid>
       </Box>
       <Footer />
-    </div>
+    </>
   )
 }

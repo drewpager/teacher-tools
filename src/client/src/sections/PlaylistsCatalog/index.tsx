@@ -33,10 +33,11 @@ export const PlaylistsCatalog = ({ viewer }: Props) => {
 
   useEffect(() => {
     if (location.pathname.length > 6) {
-      setGradeFilter(extractGradeNumber(location.pathname));
+      (location.pathname.match(/\//g) || []).length > 1 && location.pathname.match(/[0-9]+/g) && setGradeFilter(extractGradeNumber(location.pathname));
+      (location.pathname.match(/\//g) || []).length > 1 && !location.pathname.match(/[0-9]+/g) && setCategoryFilter(titleCase(`${location.pathname.split('/').pop()?.replaceAll('-', ' ')}`));
       (location.pathname.match(/\//g) || []).length > 2 && setCategoryFilter(titleCase(`${location.pathname.split('/').pop()?.replaceAll('-', ' ')}`));
     }
-  }, [navigate, location, gradeFilter, categoryFilter])
+  }, [location.pathname])
 
   const getWholeNumbers = (range: number[]) => {
     const [start, end] = range;

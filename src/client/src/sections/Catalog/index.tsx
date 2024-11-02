@@ -256,7 +256,7 @@ export const Catalog = ({ viewer }: Props) => {
                     {titleCase(cat)}
                   </Typography>
                 }>
-                  {combinedCategories.sort().map((i: any, indy: number) => i.main === cat && !!i.secondary ? (
+                  {combinedCategories.sort().map((i: any, indy: number) => i.main === cat && !!i.secondary && !mainCategories.includes(i.secondary.trim()) ? (
                     <TreeItem itemId={`${i.secondary}`} label={
                       <Typography variant='h4'>
                         {titleCase(`${i.secondary}`)}
