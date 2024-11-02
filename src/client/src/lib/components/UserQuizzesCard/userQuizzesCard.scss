@@ -13,3 +13,15 @@
     align-items: last baseline;
   }
 }
+
+.MuiTypography-root {
+  &.user--quizzes-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #000;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

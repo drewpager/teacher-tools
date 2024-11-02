@@ -4,8 +4,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Close, ViewModule } from '@mui/icons-material';
 import Pipe from '../../lib/assets/pipe.svg';
-import TreeView from '@mui/lab/TreeView';
-import TreeItem from '@mui/lab/TreeItem';
+import { SimpleTreeView } from '@mui/x-tree-view'
+import { TreeItem } from '@mui/x-tree-view/TreeItem';
 import AppsIcon from '@mui/icons-material/Apps';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import SortByAlphaIcon from '@mui/icons-material/SortByAlpha';
@@ -113,6 +113,12 @@ export const Catalog = ({ viewer }: Props) => {
     setFilteredLesson([]);
     setSearchError(false);
     setSearchInfo(false);
+  }
+
+  const PipeIcon = () => {
+    return (
+      <Icon sx={{ color: "black" }}><img alt="catalog pipe" src={Pipe} /></Icon>
+    )
   }
 
   const { data: lessonData, loading, error } = useAllLessonsQuery({
@@ -231,36 +237,38 @@ export const Catalog = ({ viewer }: Props) => {
       <Grid container maxWidth="100vw" overflow-x="hidden">
         <Grid item sm={12} md={3} lg={3}>
           <Box className="catalogGrid--categories">
-            <TreeView
+            <SimpleTreeView
               aria-label="controlled"
-              defaultCollapseIcon={<ExpandMoreIcon />}
-              defaultExpandIcon={<ChevronRightIcon />}
-              defaultEndIcon={<Icon sx={{ color: "black" }}><img alt="catalog pipe" src={Pipe} /></Icon>}
-              expanded={expanded}
-              selected={selected}
-              onNodeToggle={handleToggle}
-              onNodeSelect={handleSelect}
+              slots={{
+                collapseIcon: ExpandMoreIcon,
+                expandIcon: ChevronRightIcon,
+                endIcon: PipeIcon
+              }}
+              expandedItems={expanded}
+              selectedItems={selected}
+              onExpandedItemsChange={handleToggle}
+              onSelectedItemsChange={handleSelect}
               multiSelect
             >
-              {mainCategories?.map((cat, ind) => (
-                <TreeItem nodeId={`${cat}`} label={
-                  <Typography variant='h3' key={`${ind}`}>
+              {mainCategories?.map((cat: string, ind: number) => (
+                <TreeItem itemId={cat} key={cat} label={
+                  <Typography variant='h3'>
                     {titleCase(cat)}
                   </Typography>
                 }>
-                  {combinedCategories.sort().map((i: any) => i.main === `${cat}` && !!i.secondary ? (
-                    <TreeItem nodeId={`${i.secondary}`} label={
+                  {combinedCategories.sort().map((i: any, indy: number) => i.main === cat && !!i.secondary ? (
+                    <TreeItem itemId={`${i.secondary}`} label={
                       <Typography variant='h4'>
                         {titleCase(`${i.secondary}`)}
                       </Typography>
                     }
-                      key={`${i.secondary}`} />
+                      key={`${i.secondary}${indy}`} />
                   ) : (
                     <></>
                   ))}
                 </TreeItem>
               ))}
-            </TreeView>
+            </SimpleTreeView>
           </Box>
         </Grid>
         <Grid item sm={12} md={9} lg={9}>

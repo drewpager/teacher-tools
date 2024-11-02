@@ -157,7 +157,7 @@ export const UserPlaylistsCard = ({ playlist, paymentId }: Props) => {
         <Card className="user-playlists--card">
           <CardContent>
             <Link to={`/plans/${formatSlug(playlist.name)}`} style={{ textDecoration: "none" }}>
-              <Typography variant='h4' style={{ color: "#000" }}>
+              <Typography variant='h4' style={{ color: "#000" }} className="user--playlist-title">
                 {playlist.name}
               </Typography>
               <Typography variant='h6' style={{ color: "#000" }}>

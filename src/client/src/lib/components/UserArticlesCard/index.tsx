@@ -77,7 +77,7 @@ export const UserArticlesCard = ({ article }: Props) => {
         <Card className="user-articles--card">
           <CardContent>
             <Link to={`/article/${article.id}`} style={{ textDecoration: "none" }}>
-              <Typography variant='h4' style={{ color: "#000" }}>
+              <Typography variant='h4' style={{ color: "#000" }} className="user--article-title">
                 {article.title}
               </Typography>
             </Link>

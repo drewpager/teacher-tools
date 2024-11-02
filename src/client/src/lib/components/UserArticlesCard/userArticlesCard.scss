@@ -13,3 +13,15 @@
     align-items: center;
   }
 }
+
+.MuiTypography-root {
+  &.user--article-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #000;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

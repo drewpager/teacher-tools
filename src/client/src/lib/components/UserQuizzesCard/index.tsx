@@ -76,7 +76,7 @@ export const UserQuizzesCard = ({ quiz }: Props) => {
         <Card className='user-quiz--card'>
           <CardContent>
             <Link to={`/quiz/${quiz.id}`} style={{ textDecoration: "none" }}>
-              <Typography variant='h4' style={{ color: "#000" }}>
+              <Typography variant='h4' style={{ color: "#000" }} className="user--quizzes-title">
                 {quiz.title}
               </Typography>
               <Typography variant='h6' style={{ color: "#000" }}>
