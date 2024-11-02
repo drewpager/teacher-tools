@@ -62,9 +62,9 @@ export const categories = [
   {
     name: "uncategorized",
   },
-  {
-    name: "business",
-  },
+  // {
+  //   name: "business",
+  // },
 ];
 
 // export const categories = ["History", "Biography", "American History", "World History", "Military History", "Medicine"]

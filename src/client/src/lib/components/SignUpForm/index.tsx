@@ -19,7 +19,7 @@ interface Values {
 
 
 const MuiInput = ({ field, form, ...props }: any) => {
-  return <TextField className="signup-input" variant="outlined" {...field} {...props} />;
+  return <TextField className="signup-input" variant="outlined" sx={{ margin: '0.5rem 0' }} {...field} {...props} />;
 }
 
 const SignupSchema = Yup.object({
@@ -71,7 +71,7 @@ export const SignUpForm = () => {
   }
 
   return (
-    <Box className='signup-form'>
+    <Box>
       <Formik
         initialValues={{
           email: '',
@@ -91,7 +91,7 @@ export const SignUpForm = () => {
         }}
       >
         {({ errors, touched, values }) => (
-          <Form>
+          <Form className='signup-form'>
             {/* <label htmlFor="email">Email</label> */}
             <Field id="email" name="email" label="Email" component={MuiInput} />
             {errors.email && touched.email ? (
