@@ -46,7 +46,8 @@ import {
   ArticlesCatalog,
   BlogHub,
   BlogPost,
-  BlogCategory
+  BlogCategory,
+  CreateLessonPlan
 } from './sections';
 import { HomeInfoSkeleton } from './lib/components';
 import { DisplayError } from './lib/utils';
@@ -141,6 +142,7 @@ const App = () => {
           <Route path="/playlist/:id" element={<Playlist viewer={viewer} />} />
           <Route path="/plans/:plan" element={<Plans viewer={viewer} setViewer={setViewer} />} />
           <Route path="/playlist/create" element={<CreatePlaylist viewer={viewer} />} />
+          <Route path="/planning" element={<CreateLessonPlan />} />
           <Route path="/plans" element={<PlaylistsCatalog viewer={viewer} />} />
           <Route path="/plan/:grade" element={<PlaylistsCatalog viewer={viewer} />} />
           <Route path="/plan/:grade/:category" element={<PlaylistsCatalog viewer={viewer} />} />

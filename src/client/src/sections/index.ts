@@ -30,5 +30,6 @@ export * from "./ArticlesCatalog";
 export * from "./BlogHub";
 export * from "./BlogPost";
 export * from "./BlogCategory";
+export * from "./CreateLessonPlan";
 // export { BlogHub } from "./blog/pages/hub";
 // export * from "./Stripe";

@@ -1,4 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, {
+  useState,
+  useEffect,
+  createContext,
+  Fragment,
+  useCallback,
+  useContext,
+  useMemo,
+  useRef,
+} from 'react';
 import { FieldArray, Formik, getIn, FieldProps, Field } from 'formik';
 import { useCreateQuizMutation, Viewer, AnswerFormat, useGenerateQuizMutation, QuestionInput, Questions } from '../../graphql/generated';
 import {
@@ -16,7 +25,10 @@ import {
   Fab,
   Modal,
   Slider,
-  Alert
+  Alert,
+  FormControl,
+  InputLabel,
+  Menu
 } from '@mui/material'
 import { ControlPoint } from '@mui/icons-material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -33,6 +45,355 @@ import { FeedbackModal } from '../Contact/FeedbackModal';
 import { styled } from '@mui/material/styles';
 import { VideoPlayer } from '../../lib/components';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+
+import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
+
+import ReactDOM from 'react-dom';
+
+import {
+  attachClosestEdge,
+  type Edge,
+  extractClosestEdge,
+} from '@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge';
+import { combine } from '@atlaskit/pragmatic-drag-and-drop/combine';
+import {
+  draggable,
+  dropTargetForElements,
+  monitorForElements,
+} from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
+import { setCustomNativeDragPreview } from '@atlaskit/pragmatic-drag-and-drop/element/set-custom-native-drag-preview';
+import { pointerOutsideOfPreview } from '@atlaskit/pragmatic-drag-and-drop/element/pointer-outside-of-preview';
+import { token } from '@atlaskit/tokens';
+import { DropIndicator } from '@atlaskit/pragmatic-drag-and-drop-react-drop-indicator/box';
+import { getReorderDestinationIndex } from '@atlaskit/pragmatic-drag-and-drop-hitbox/util/get-reorder-destination-index';
+import { reorder } from '@atlaskit/pragmatic-drag-and-drop/reorder';
+import { triggerPostMoveFlash } from '@atlaskit/pragmatic-drag-and-drop-flourish/trigger-post-move-flash';
+
+type ItemPosition = 'first' | 'last' | 'middle' | 'only';
+
+type CleanupFn = () => void;
+
+type ItemEntry = { itemId: string; element: HTMLElement };
+
+type ListContextValue = {
+  getListLength: () => number;
+  registerItem: (entry: ItemEntry) => CleanupFn;
+  reorderItem: (args: {
+    startIndex: number;
+    indexOfTarget: number;
+    closestEdgeOfTarget: Edge | null;
+  }) => void;
+  instanceId: symbol;
+};
+
+let ListContext = createContext<ListContextValue | null>(null);
+
+const useListContext = () => {
+  const listContext = useContext(ListContext);
+  // invariant(listContext !== null);
+  if (!listContext) {
+    throw new Error("useListContext must be used within a ListContext.Provider");
+  }
+  return listContext;
+}
+
+const itemKey = Symbol('item');
+type ItemData = {
+  [itemKey]: true;
+  item: QuestionProps;
+  index: number;
+  instanceId: symbol;
+}
+
+function getItemData({
+  item,
+  index,
+  instanceId,
+}: {
+  item: QuestionProps;
+  index: number;
+  instanceId: symbol;
+}): ItemData {
+  return {
+    [itemKey]: true,
+    item,
+    index,
+    instanceId,
+  };
+}
+
+function isItemData(data: Record<string | symbol, unknown>): data is ItemData {
+  return data[itemKey] === true;
+}
+
+function getItemPosition({ index, items }: { index: number; items: QuestionProps[] }): ItemPosition {
+  if (items.length === 1) {
+    return 'only';
+  }
+
+  if (index === 0) {
+    return 'first';
+  }
+
+  if (index === items.length - 1) {
+    return 'last';
+  }
+
+  return 'middle';
+}
+
+type DraggableState =
+  | { type: 'idle' }
+  | { type: 'preview', container: HTMLElement }
+  | { type: 'dragging' };
+
+const idleState: DraggableState = { type: 'idle' };
+const draggingState: DraggableState = { type: 'dragging' };
+
+function DropDownContent({ position, index }: { position: ItemPosition; index: number }) {
+  const { reorderItem, getListLength } = useListContext();
+
+  const isMoveUpDisabled = position === 'first' || position === 'only';
+  const isMoveDownDisabled = position === 'last' || position === 'only';
+
+  const moveToTop = useCallback(() => {
+    reorderItem({
+      startIndex: index,
+      indexOfTarget: 0,
+      closestEdgeOfTarget: null
+    });
+  }, [index, reorderItem]);
+
+  const moveUp = useCallback(() => {
+    reorderItem({
+      startIndex: index,
+      indexOfTarget: index - 1,
+      closestEdgeOfTarget: null
+    });
+  }, [index, reorderItem]);
+
+  const moveDown = useCallback(() => {
+    reorderItem({
+      startIndex: index,
+      indexOfTarget: index + 1,
+      closestEdgeOfTarget: null
+    });
+  }, [index, reorderItem]);
+
+  const moveToBottom = useCallback(() => {
+    reorderItem({
+      startIndex: index,
+      indexOfTarget: getListLength() - 1,
+      closestEdgeOfTarget: null
+    });
+  }, [index, getListLength, reorderItem]);
+
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <div>
+      <IconButton
+        aria-label="more"
+        id="long-button"
+        aria-controls={open ? 'long-menu' : undefined}
+        aria-expanded={open ? 'true' : undefined}
+        aria-haspopup="true"
+        onClick={handleClick}
+      >
+        <DragIndicatorIcon />
+      </IconButton>
+      <Menu
+        id="long-menu"
+        MenuListProps={{
+          'aria-labelledby': 'long-button',
+        }}
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        slotProps={{
+          paper: {
+            style: {
+              maxHeight: 'max-content',
+              width: '20ch',
+            },
+          },
+        }}
+      >
+        <MenuItem key={1} onClick={moveUp} disabled={isMoveUpDisabled}>
+          Move Up
+        </MenuItem>
+        <MenuItem key={2} onClick={moveDown} disabled={isMoveDownDisabled}>
+          Move Down
+        </MenuItem>
+        <MenuItem key={3} onClick={moveToTop} disabled={isMoveUpDisabled}>
+          Move To Top
+        </MenuItem>
+        <MenuItem key={4} onClick={moveToBottom} disabled={isMoveDownDisabled}>
+          Move To Bottom
+        </MenuItem>
+      </Menu>
+    </div>
+  )
+}
+
+function ListItem({
+  item,
+  index,
+  position
+}: {
+  item: QuestionProps;
+  index: number;
+  position: ItemPosition;
+}) {
+  const { registerItem, instanceId } = useListContext();
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [closestEdge, setClosestEdge] = useState<Edge | null>(null);
+
+  const dragHandleRef = useRef<HTMLButtonElement>(null);
+
+  const [draggableState, setDraggableState] = useState<DraggableState>(idleState);
+
+  useEffect(() => {
+    const element = ref.current;
+    const dragHandle = dragHandleRef.current;
+    if (element === null || dragHandle === null) {
+      return;
+    }
+    // invariant(element);
+    // invariant(dragHandle);
+
+    if (!element || !dragHandle) {
+      return;
+    }
+
+    const data = getItemData({ item, index, instanceId });
+    return combine(
+      registerItem({ itemId: item.question, element }),
+      draggable({
+        element: dragHandle,
+        getInitialData: () => data,
+        onGenerateDragPreview({ nativeSetDragImage }) {
+          setCustomNativeDragPreview({
+            nativeSetDragImage,
+            getOffset: pointerOutsideOfPreview({
+              x: "16px",
+              y: "8px"
+            }),
+            render({ container }) {
+              setDraggableState({ type: 'preview', container });
+
+              return () => setDraggableState(draggingState);
+            }
+          });
+        },
+        onDragStart() {
+          setDraggableState(draggingState);
+        },
+        onDrop() {
+          setDraggableState(idleState);
+        },
+      }),
+      dropTargetForElements({
+        element,
+        canDrop({ source }) {
+          return isItemData(source.data) && source.data.instanceId === instanceId;
+        },
+        getData({ input }) {
+          return attachClosestEdge(data, {
+            element,
+            input,
+            allowedEdges: ['top', 'bottom'],
+          })
+        },
+        onDrag({ self, source }) {
+          const isSource = source.element === element;
+
+          if (isSource) {
+            setClosestEdge(null);
+            return
+          }
+
+          const closestEdge = extractClosestEdge(self.data);
+
+          const sourceIndex: number | any = source.data.index;
+          // invariant(typeof sourceIndex === 'number');
+          if (typeof (sourceIndex) !== 'number') {
+            return
+          }
+
+          const isItemBeforeSource = index === sourceIndex - 1;
+          const isItemAfterSource = index === sourceIndex + 1;
+
+          const isDropIndicatorHidden =
+            (isItemBeforeSource && closestEdge === 'bottom') ||
+            (isItemAfterSource && closestEdge === 'top');
+
+          if (isDropIndicatorHidden) {
+            setClosestEdge(null);
+            return;
+          }
+
+          setClosestEdge(closestEdge);
+        },
+        onDragLeave() {
+          setClosestEdge(null);
+        },
+        onDrop() {
+          setClosestEdge(null);
+        },
+      }),
+    );
+  }, [instanceId, item, index, registerItem]);
+
+  return (
+    <>
+      <Box ref={ref}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            borderBottom: closestEdge ? "1px dashed blue" : 'none',
+          }}
+        >
+          <Box ref={dragHandleRef}>
+            <DropDownContent position={position} index={index} />
+          </Box>
+        </div>
+        {closestEdge && <DropIndicator edge={closestEdge} gap="1px" />}
+      </Box>
+      {draggableState.type === 'preview' &&
+        ReactDOM.createPortal(<div>{item.question}</div>,
+          draggableState.container
+        )}
+    </>
+  )
+}
+
+function getItemRegistry() {
+  const registry = new Map<string, HTMLElement>();
+
+  function register({ itemId, element }: ItemEntry) {
+    registry.set(itemId, element);
+
+    return function unregister() {
+      registry.delete(itemId);
+    };
+  }
+
+  function getElement(itemId: any) {
+    return registry.get(itemId) ?? null;
+  }
+
+  return { register, getElement };
+}
 
 interface props {
   viewer: Viewer
@@ -189,6 +550,7 @@ export const QuizCreate = ({ viewer }: props) => {
   const [subject, setSubject] = useState<string>("");
   const [generatedQuestions, setGeneratedQuestions] = useState<QuestionsProps>();
   const [aiValues, setAiValues] = useState<QuestionProps[]>([]);
+  const [vals, setVals] = useState<QuestionProps[]>([]);
   const [aiDisclaimer, setAiDisclaimer] = useState<boolean>(false);
   const [ready, setReady] = useState<boolean>(false);
 
@@ -316,6 +678,131 @@ export const QuizCreate = ({ viewer }: props) => {
   //   )
   // }
 
+  type ListState = {
+    items: QuestionProps[];
+    lastCardMoved: {
+      item: QuestionProps;
+      previousIndex: number;
+      currentIndex: number;
+      numberOfItems: number;
+    } | null;
+  };
+
+
+  const [{ items, lastCardMoved }, setListState] = useState<ListState>({
+    items: vals,
+    lastCardMoved: null,
+  });
+  const [registry] = useState(getItemRegistry);
+
+  const [instanceId] = useState(() => Symbol('instance-id'));
+
+  const reorderItem = useCallback(
+    ({
+      startIndex,
+      indexOfTarget,
+      closestEdgeOfTarget,
+    }: {
+      startIndex: number;
+      indexOfTarget: number;
+      closestEdgeOfTarget: Edge | null;
+    }) => {
+      if (
+        startIndex < 0 ||
+        startIndex >= items.length ||
+        indexOfTarget < 0 ||
+        indexOfTarget >= items.length
+      ) {
+        return;
+      }
+      const finishIndex = getReorderDestinationIndex({
+        startIndex,
+        indexOfTarget,
+        closestEdgeOfTarget,
+        axis: 'vertical',
+      });
+
+      if (finishIndex === startIndex) {
+        return;
+      }
+
+      setListState((listState) => {
+        const item = listState.items[startIndex];
+
+        return {
+          items: reorder({
+            list: listState.items,
+            startIndex,
+            finishIndex,
+          }),
+          lastCardMoved: {
+            item,
+            previousIndex: startIndex,
+            currentIndex: finishIndex,
+            numberOfItems: listState.items.length,
+          },
+        };
+      });
+    }, [items.length],
+  );
+
+  useEffect(() => {
+    return monitorForElements({
+      canMonitor({ source }) {
+        return isItemData(source.data) && source.data.instanceId === instanceId;
+      },
+      onDrop({ location, source }) {
+        const target = location.current.dropTargets[0];
+        if (!target) {
+          return;
+        }
+
+        const sourceData = source.data;
+        const targetData = target.data;
+
+        if (!isItemData(sourceData) || !isItemData(targetData)) {
+          return;
+        }
+
+        const indexOfTarget = items.findIndex((item) => item === targetData.item);
+        if (indexOfTarget < 0) {
+          return;
+        }
+
+        const closestEdgeOfTarget = extractClosestEdge(targetData);
+
+        reorderItem({
+          startIndex: sourceData.index,
+          indexOfTarget,
+          closestEdgeOfTarget,
+        });
+      },
+    });
+  }, [instanceId, items, reorderItem]);
+
+  useEffect(() => {
+    if (lastCardMoved === null) {
+      return;
+    }
+    const { item, previousIndex, currentIndex, numberOfItems } = lastCardMoved;
+    const element = registry.getElement(item);
+
+    if (element) {
+      triggerPostMoveFlash(element);
+    }
+  }, [lastCardMoved, registry]);
+
+  const getListLength = useCallback(() => items.length, [items.length]);
+
+  const contextValue: ListContextValue = useMemo(() => {
+    return {
+      registerItem: registry.register,
+      reorderItem,
+      instanceId,
+      getListLength
+    }
+  }, [registry.register, reorderItem, instanceId, getListLength]);
+
   if (loading) {
     <Box sx={{ marginTop: 15 }}>
       <CircularProgress color='primary' />
@@ -418,244 +905,252 @@ export const QuizCreate = ({ viewer }: props) => {
             }
           }}
         >
-          {({ values, errors, touched, handleSubmit, handleChange }) => (
+          {({ values, errors, touched, handleSubmit, handleChange, setFieldValue }) => (
             <>
-              <form onSubmit={handleSubmit}>
-                <>
-                  {aiDisclaimer && (<Typography variant="h5" sx={{ color: "#BC4710" }}>Please confirm AI generated quiz is correct before saving. Large language models are known to hallucinate.</Typography>)}
-                  <TextField
-                    fullWidth
-                    type="text"
-                    name="title"
-                    label="Enter assessment title"
-                    value={values.title}
-                    onChange={handleChange}
-                    error={Boolean(errors.title)}
-                    helperText={errors.title}
-                    className="quizCreate--title"
-                    variant="standard"
-                    sx={{
-                      gridColumn: 3
-                    }}
-                  // onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
-                  />
-                  {/* {generateQuizOpen && aiValues.length > 0 && handleQuizGenerateUpdate(values)} */}
-                  {ready && handleQuizGenerateUpdate(values)}
-                  <FieldArray name="questions">
-                    {({ insert, remove, push }) => (
-                      <div>
-                        {values.questions.length > 0 &&
-                          values.questions.map((question: any, index: number) => {
-                            return (
-                              <div className='row' key={index}>
-                                <div className='col' key={index}>
-                                  <TextField
-                                    placeholder={`Question`}
-                                    fullWidth
-                                    sx={{ paddingTop: "1rem", gridColumn: 4 }}
-                                    name={`questions[${index}].question`}
-                                    value={`${values.questions[index].question}`}
+              <ListContext.Provider value={contextValue}>
+                <form onSubmit={handleSubmit}>
+                  <>
+                    {aiDisclaimer && (<Typography variant="h5" sx={{ color: "#BC4710" }}>Please confirm AI generated quiz is correct before saving. Large language models are known to hallucinate.</Typography>)}
+                    <TextField
+                      fullWidth
+                      type="text"
+                      name="title"
+                      label="Enter assessment title"
+                      value={values.title}
+                      onChange={handleChange}
+                      error={Boolean(errors.title)}
+                      helperText={errors.title}
+                      className="quizCreate--title"
+                      variant="standard"
+                      sx={{
+                        gridColumn: 3
+                      }}
+                    // onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+                    />
+                    {/* {generateQuizOpen && aiValues.length > 0 && handleQuizGenerateUpdate(values)} */}
+                    {ready && handleQuizGenerateUpdate(values)}
+                    <FieldArray name="questions">
+                      {({ insert, remove, push }) => (
+                        <div>
+                          {values.questions.length > 0 &&
+                            values.questions.map((question: any, index: number) => {
+                              return (
+                                <div className='row' key={index}>
+                                  <div className='col' key={index}>
+                                    <ListItem
+                                      key={index}
+                                      item={values.questions[index]}
+                                      index={index}
+                                      position={getItemPosition({ index, items: values.questions })}
+                                    />
+                                    <TextField
+                                      placeholder={`Question`}
+                                      fullWidth
+                                      sx={{ paddingTop: "1rem", gridColumn: 4 }}
+                                      name={`questions[${index}].question`}
+                                      value={`${values.questions[index].question}`}
+                                      onChange={handleChange}
+                                      InputProps={{
+                                        endAdornment: (
+                                          <InputAdornment position="end">
+                                            <DeleteForeverIcon onClick={() => remove(index)} className="button--cancel" />
+                                          </InputAdornment>
+                                        )
+                                      }}
+                                    />
+                                  </div>
+                                  <Select
+                                    variant='outlined'
                                     onChange={handleChange}
-                                    InputProps={{
-                                      endAdornment: (
-                                        <InputAdornment position="end">
-                                          <DeleteForeverIcon onClick={() => remove(index)} className="button--cancel" />
-                                        </InputAdornment>
-                                      )
+                                    fullWidth
+                                    value={`${values.questions[index].answerType}`}
+                                    defaultValue={`MULTIPLECHOICE`}
+                                    inputProps={{
+                                      name: `questions[${index}].answerType`,
                                     }}
-                                  />
+                                    className="quizCreate--answerType-select"
+                                  >
+                                    <MenuItem value={`MULTIPLECHOICE`}>Multiple Choice</MenuItem>
+                                    <MenuItem value={`TRUEFALSE`}>True/False</MenuItem>
+                                  </Select>
+                                  {question.answerType === "MULTIPLECHOICE" ? (
+                                    <FieldArray name={`questions[${index}].answerOptions`}>
+                                      {({ insert, remove, push }) => (
+                                        <div>
+                                          {/* {!!aiValues && values.questions[index].answerOptions === aiValues[0].answerOptions} */}
+                                          {values.questions[index].answerOptions.length > 0 &&
+                                            values.questions[index].answerOptions.map((option: any, indy: number) => {
+                                              return (
+                                                <div className="quiz__multiAnswerArea">
+                                                  <div className="quiz__multiAnswers">
+                                                    <Field
+                                                      name={`questions[${index}].answerOptions[${indy}].isCorrect`}
+                                                      component={checkInput}
+                                                    />
+                                                    <TextField
+                                                      label="Enter Answer Option"
+                                                      fullWidth
+                                                      sx={{ marginTop: 2 }}
+                                                      name={`questions[${index}].answerOptions[${indy}].answerText`}
+                                                      value={`${values.questions[index].answerOptions[indy].answerText}`}
+                                                      onChange={handleChange}
+                                                      onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+                                                    />
+                                                    <Button onClick={() => push({ answerText: "", isCorrect: false })} className="quiz--modicon-button" disableRipple disableFocusRipple>
+                                                      <Tooltip title="Add another answer option" className="quiz--modicons">
+                                                        <ControlPoint />
+                                                      </Tooltip>
+                                                    </Button>
+                                                    <Button onClick={() => remove(indy)} className="quiz--modicon-button" disableRipple disableFocusRipple>
+                                                      <Tooltip title="Remove answer option" className="quiz--modicons">
+                                                        <RemoveCircleOutlineIcon />
+                                                      </Tooltip>
+                                                    </Button>
+                                                  </div>
+                                                </div>
+                                              )
+                                            })}
+                                        </div>
+                                      )}
+                                    </FieldArray>
+                                  ) : (
+                                    <>
+                                    </>
+                                  )}
+                                  {question.answerType === "TRUEFALSE" ? (
+                                    /* TODO: disable remove button on last item and only render +/- buttons when last index of array */
+                                    <FieldArray name={`questions[${index}].answerOptions`}>
+                                      {({ insert, remove, push }) => (
+                                        <div>
+                                          {values.questions[index].answerOptions.length > 0 &&
+                                            values.questions[index].answerOptions.map((option: any, indy: number) => {
+                                              return (
+                                                <div className="quiz__multiAnswerArea">
+                                                  <div className="quiz__multiAnswers">
+                                                    <Field
+                                                      name={`questions[${index}].answerOptions[${indy}].isCorrect`}
+                                                      component={checkInput}
+                                                    />
+                                                  </div>
+                                                </div>
+                                              )
+                                            })}
+                                        </div>
+                                      )}
+                                    </FieldArray>
+                                  ) : (
+                                    <>
+                                    </>
+                                  )}
                                 </div>
-                                <Select
-                                  variant='outlined'
-                                  onChange={handleChange}
-                                  fullWidth
-                                  value={`${values.questions[index].answerType}`}
-                                  defaultValue={`MULTIPLECHOICE`}
-                                  inputProps={{
-                                    name: `questions[${index}].answerType`,
-                                  }}
-                                  className="quizCreate--answerType-select"
-                                >
-                                  <MenuItem value={`MULTIPLECHOICE`}>Multiple Choice</MenuItem>
-                                  <MenuItem value={`TRUEFALSE`}>True/False</MenuItem>
-                                </Select>
-                                {question.answerType === "MULTIPLECHOICE" ? (
-                                  <FieldArray name={`questions[${index}].answerOptions`}>
-                                    {({ insert, remove, push }) => (
-                                      <div>
-                                        {/* {!!aiValues && values.questions[index].answerOptions === aiValues[0].answerOptions} */}
-                                        {values.questions[index].answerOptions.length > 0 &&
-                                          values.questions[index].answerOptions.map((option: any, indy: number) => {
-                                            return (
-                                              <div className="quiz__multiAnswerArea">
-                                                <div className="quiz__multiAnswers">
-                                                  <Field
-                                                    name={`questions[${index}].answerOptions[${indy}].isCorrect`}
-                                                    component={checkInput}
-                                                  />
-                                                  <TextField
-                                                    label="Enter Answer Option"
-                                                    fullWidth
-                                                    sx={{ marginTop: 2 }}
-                                                    name={`questions[${index}].answerOptions[${indy}].answerText`}
-                                                    value={`${values.questions[index].answerOptions[indy].answerText}`}
-                                                    onChange={handleChange}
-                                                    onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
-                                                  />
-                                                  <Button onClick={() => push({ answerText: "", isCorrect: false })} className="quiz--modicon-button" disableRipple disableFocusRipple>
-                                                    <Tooltip title="Add another answer option" className="quiz--modicons">
-                                                      <ControlPoint />
-                                                    </Tooltip>
-                                                  </Button>
-                                                  <Button onClick={() => remove(indy)} className="quiz--modicon-button" disableRipple disableFocusRipple>
-                                                    <Tooltip title="Remove answer option" className="quiz--modicons">
-                                                      <RemoveCircleOutlineIcon />
-                                                    </Tooltip>
-                                                  </Button>
-                                                </div>
-                                              </div>
-                                            )
-                                          })}
-                                      </div>
-                                    )}
-                                  </FieldArray>
-                                ) : (
-                                  <>
-                                  </>
-                                )}
-                                {question.answerType === "TRUEFALSE" ? (
-                                  /* TODO: disable remove button on last item and only render +/- buttons when last index of array */
-                                  <FieldArray name={`questions[${index}].answerOptions`}>
-                                    {({ insert, remove, push }) => (
-                                      <div>
-                                        {values.questions[index].answerOptions.length > 0 &&
-                                          values.questions[index].answerOptions.map((option: any, indy: number) => {
-                                            return (
-                                              <div className="quiz__multiAnswerArea">
-                                                <div className="quiz__multiAnswers">
-                                                  <Field
-                                                    name={`questions[${index}].answerOptions[${indy}].isCorrect`}
-                                                    component={checkInput}
-                                                  />
-                                                </div>
-                                              </div>
-                                            )
-                                          })}
-                                      </div>
-                                    )}
-                                  </FieldArray>
-                                ) : (
-                                  <>
-                                  </>
-                                )}
-                              </div>
-                            )
-                          })}
-                        <div className="add--question-box">
-                          <IconButton
-                            className="quiz--button-add"
-                            onClick={() => push({
-                              question: '', answerType: AnswerFormat.Multiplechoice,
-                              answerOptions: [
-                                { answerText: "", isCorrect: true },
-                              ]
+                              )
                             })}
-                            disableRipple
-                            disableFocusRipple
-                          >
-                            <AddCircleIcon fontSize='large' />
-                            <Typography variant="h4" className="addQuestion--text">Add Question</Typography>
-                          </IconButton>
+                          <div className="add--question-box">
+                            <IconButton
+                              className="quiz--button-add"
+                              onClick={() => push({
+                                question: '', answerType: AnswerFormat.Multiplechoice,
+                                answerOptions: [
+                                  { answerText: "", isCorrect: true },
+                                ]
+                              })}
+                              disableRipple
+                              disableFocusRipple
+                            >
+                              <AddCircleIcon fontSize='large' />
+                              <Typography variant="h4" className="addQuestion--text">Add Question</Typography>
+                            </IconButton>
+                          </div>
                         </div>
-                      </div>
-                    )}
-                  </FieldArray>
-                  <Box sx={{ display: "flex", marginTop: "1rem" }}>
-                    <Tooltip title={viewer.id !== null ? "Make Private/Public" : "Public Content Restricted to Registered Users"}>
-                      <LockSwitch checked={!locked} onChange={() => { setLocked(!locked); values.public = !locked }} disabled={viewer.id === null} />
-                    </Tooltip>
-                    <Tooltip title={viewer.id !== null ? "Make Private/Public" : "Public Content Restricted to Registered Users"}>
-                      <Typography variant="body1" color={!locked ? "error" : "success"}>{!locked ? "Private" : "Public"}</Typography>
-                    </Tooltip>
-                  </Box>
-                  <div className="quiz--button-area">
-                    <Button
-                      variant="outlined"
-                      type="submit"
-                      className="quiz--button-submit"
-                      disabled={values.title.length === 0 || values.questions[0].question.length === 0}
-                    >Save Assessment</Button>
-                    {!viewer.id && (
-                      <Link to="/login" style={{ textDecoration: "none", color: "#BC4710" }}>
-                        <Typography variant="body2">Login required</Typography>
-                      </Link>)}
-                    {quizCreatePage ? (
-                      <Link to={`../user/${viewer.id}`} style={{ textDecoration: "none" }}>
-                        <Typography variant="h4" className="quiz--button-cancel">Cancel</Typography>
-                      </Link>
-                    ) : (<Typography variant="h5">Click away to close</Typography>)}
-                  </div>
-                  <Modal
-                    open={generateQuizOpen}
-                    onClose={handleGenerateClose}
-                    aria-labelledby="platos-peach-demo-videon"
-                    aria-describedby="platos-peach-demo-video-description"
-                  >
-                    <Box className="demo-video--modal">
-                      <Box>
-                        <Fab aria-label="cancel" onClick={handleGenerateClose} sx={{ justifySelf: "right", mb: "5px" }}>
-                          X
-                        </Fab>
-                      </Box>
-                      <Box className="generate-quiz--modal">
-                        {/* {viewer.paymentId === null && setTfNums(2)}
+                      )}
+                    </FieldArray>
+                    <Box sx={{ display: "flex", marginTop: "1rem" }}>
+                      <Tooltip title={viewer.id !== null ? "Make Private/Public" : "Public Content Restricted to Registered Users"}>
+                        <LockSwitch checked={!locked} onChange={() => { setLocked(!locked); values.public = !locked }} disabled={viewer.id === null} />
+                      </Tooltip>
+                      <Tooltip title={viewer.id !== null ? "Make Private/Public" : "Public Content Restricted to Registered Users"}>
+                        <Typography variant="body1" color={!locked ? "error" : "success"}>{!locked ? "Private" : "Public"}</Typography>
+                      </Tooltip>
+                    </Box>
+                    <div className="quiz--button-area">
+                      <Button
+                        variant="outlined"
+                        type="submit"
+                        className="quiz--button-submit"
+                        disabled={values.title.length === 0 || values.questions[0].question.length === 0}
+                      >Save Assessment</Button>
+                      {!viewer.id && (
+                        <Link to="/login" style={{ textDecoration: "none", color: "#BC4710" }}>
+                          <Typography variant="body2">Login required</Typography>
+                        </Link>)}
+                      {quizCreatePage ? (
+                        <Link to={`../user/${viewer.id}`} style={{ textDecoration: "none" }}>
+                          <Typography variant="h4" className="quiz--button-cancel">Cancel</Typography>
+                        </Link>
+                      ) : (<Typography variant="h5">Click away to close</Typography>)}
+                    </div>
+                    <Modal
+                      open={generateQuizOpen}
+                      onClose={handleGenerateClose}
+                      aria-labelledby="platos-peach-demo-videon"
+                      aria-describedby="platos-peach-demo-video-description"
+                    >
+                      <Box className="demo-video--modal">
+                        <Box>
+                          <Fab aria-label="cancel" onClick={handleGenerateClose} sx={{ justifySelf: "right", mb: "5px" }}>
+                            X
+                          </Fab>
+                        </Box>
+                        <Box className="generate-quiz--modal">
+                          {/* {viewer.paymentId === null && setTfNums(2)}
                     {viewer.paymentId === null && setMcNums(2)}
                     {viewer.paymentId === null && (<Typography variant="body2" color="error" sx={{ m: "1rem" }}>Free Plan Limited to 4 AI Generated Quiz Questions</Typography>)} */}
-                        <Typography variant="h3" sx={{ m: "1rem" }}>AI Quiz Generator</Typography>
-                        <Typography variant="h4" sx={{ m: "1rem" }}>How many multiple choice questions?</Typography>
-                        <Slider
-                          aria-label="Multichoice Questions"
-                          value={mcNums}
-                          onChange={handleMcSlideChange}
-                          valueLabelDisplay="on"
-                          step={1}
-                          marks
-                          min={0}
-                          max={10}
-                          sx={{ m: "1rem", width: "90%", color: "#3A70CD" }}
-                        />
-                        <Typography variant="h4" sx={{ m: "1rem" }}>How many true/false questions?</Typography>
-                        <Slider
-                          aria-label="Multichoice Questions"
-                          value={tfNums}
-                          onChange={handleTfSlideChange}
-                          valueLabelDisplay="on"
-                          step={1}
-                          marks
-                          min={0}
-                          max={10}
-                          sx={{ m: "1rem", width: "90%", color: "#3A70CD" }}
-                        />
-                        <Typography variant="h4" sx={{ m: "1rem" }}>What subject?</Typography>
-                        <TextField
-                          label="Subject"
-                          variant="outlined"
-                          sx={{ m: "1rem", width: "90%" }}
-                          placeholder='The Cuban Missile Crisis'
-                          onChange={(e) => setSubject(e.target.value)}
-                        />
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          sx={{ ml: "1rem", textTransform: "capitalize" }}
-                          disabled={(subject === "") || (mcNums === 0 && tfNums === 0)}
-                          onClick={handleQuizGenerate}
-                        >Generate Quiz {generateQuizLoading && <CircularProgress size={20} sx={{ ml: 1, color: "#FFF" }} />}</Button>
+                          <Typography variant="h3" sx={{ m: "1rem" }}>AI Quiz Generator</Typography>
+                          <Typography variant="h4" sx={{ m: "1rem" }}>How many multiple choice questions?</Typography>
+                          <Slider
+                            aria-label="Multichoice Questions"
+                            value={mcNums}
+                            onChange={handleMcSlideChange}
+                            valueLabelDisplay="on"
+                            step={1}
+                            marks
+                            min={0}
+                            max={10}
+                            sx={{ m: "1rem", width: "90%", color: "#3A70CD" }}
+                          />
+                          <Typography variant="h4" sx={{ m: "1rem" }}>How many true/false questions?</Typography>
+                          <Slider
+                            aria-label="Multichoice Questions"
+                            value={tfNums}
+                            onChange={handleTfSlideChange}
+                            valueLabelDisplay="on"
+                            step={1}
+                            marks
+                            min={0}
+                            max={10}
+                            sx={{ m: "1rem", width: "90%", color: "#3A70CD" }}
+                          />
+                          <Typography variant="h4" sx={{ m: "1rem" }}>What subject?</Typography>
+                          <TextField
+                            label="Subject"
+                            variant="outlined"
+                            sx={{ m: "1rem", width: "90%" }}
+                            placeholder='The Cuban Missile Crisis'
+                            onChange={(e) => setSubject(e.target.value)}
+                          />
+                          <Button
+                            variant="contained"
+                            color="secondary"
+                            sx={{ ml: "1rem", textTransform: "capitalize" }}
+                            disabled={(subject === "") || (mcNums === 0 && tfNums === 0)}
+                            onClick={handleQuizGenerate}
+                          >Generate Quiz {generateQuizLoading && <CircularProgress size={20} sx={{ ml: 1, color: "#FFF" }} />}</Button>
+                        </Box>
                       </Box>
-                    </Box>
-                  </Modal>
-                </>
-              </form>
+                    </Modal>
+                  </>
+                </form>
+              </ListContext.Provider>
             </>
           )}
         </Formik>
