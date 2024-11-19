@@ -11,6 +11,7 @@ import React, {
 
 import { FormControl, Select, MenuItem, InputLabel, IconButton, Menu, Box } from '@mui/material';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
+import { AnswerFormat } from '../../graphql/generated';
 
 import ReactDOM from 'react-dom';
 import invariant from 'tiny-invariant';
@@ -33,6 +34,43 @@ import { DropIndicator } from '@atlaskit/pragmatic-drag-and-drop-react-drop-indi
 import { getReorderDestinationIndex } from '@atlaskit/pragmatic-drag-and-drop-hitbox/util/get-reorder-destination-index';
 import { reorder } from '@atlaskit/pragmatic-drag-and-drop/reorder';
 import { triggerPostMoveFlash } from '@atlaskit/pragmatic-drag-and-drop-flourish/trigger-post-move-flash';
+
+interface QuestionsProps {
+  children?: React.ReactNode
+  questions: [
+    {
+      question: string,
+      answerType: AnswerFormat,
+      answerOptions: {
+        answerText: string,
+        isCorrect: boolean
+      }[],
+      id: string;
+    },
+  ]
+}
+
+interface QuestionProps {
+  children?: React.ReactNode
+  question: string,
+  answerType: AnswerFormat,
+  answerOptions: {
+    answerText: string,
+    isCorrect: boolean
+  }[],
+  id: string;
+}
+
+interface QuestionInput {
+  children?: React.ReactNode
+  question: string,
+  answerType: string,
+  answerOptions: {
+    answerText: string,
+    isCorrect: boolean
+  }[],
+  id: string
+}
 
 type ItemPosition = 'first' | 'last' | 'middle' | 'only';
 
@@ -62,15 +100,10 @@ const useListContext = () => {
   return listContext;
 }
 
-type Item = {
-  id: string;
-  label: string;
-}
-
 const itemKey = Symbol('item');
 type ItemData = {
   [itemKey]: true;
-  item: Item;
+  item: QuestionProps;
   index: number;
   instanceId: symbol;
 }
@@ -80,7 +113,7 @@ function getItemData({
   index,
   instanceId,
 }: {
-  item: Item;
+  item: QuestionProps;
   index: number;
   instanceId: symbol;
 }): ItemData {
@@ -96,7 +129,7 @@ function isItemData(data: Record<string | symbol, unknown>): data is ItemData {
   return data[itemKey] === true;
 }
 
-function getItemPosition({ index, items }: { index: number; items: Item[] }): ItemPosition {
+function getItemPosition({ index, items }: { index: number; items: QuestionProps[] }): ItemPosition {
   if (items.length === 1) {
     return 'only';
   }
@@ -117,40 +150,41 @@ type DraggableState =
   | { type: 'preview', container: HTMLElement }
   | { type: 'dragging' };
 
-const defaultItems: Item[] = [
+const defaultItems: QuestionProps[] = [
   {
-    id: 'task-1',
-    label: 'Organize a team-building event',
+    question: "What is the capital of France?",
+    id: '1',
+    answerType: AnswerFormat.Multiplechoice,
+    answerOptions: [
+      { answerText: "Paris", isCorrect: true },
+      { answerText: "London", isCorrect: false },
+      { answerText: "Berlin", isCorrect: false },
+      { answerText: "Madrid", isCorrect: false }
+    ]
   },
   {
-    id: 'task-2',
-    label: 'Create and maintain office inventory',
+    question: "What is the capital of Germany?",
+    id: '2',
+    answerType: AnswerFormat.Multiplechoice,
+    answerOptions: [
+      { answerText: "Paris", isCorrect: false },
+      { answerText: "London", isCorrect: false },
+      { answerText: "Berlin", isCorrect: true },
+      { answerText: "Madrid", isCorrect: false }
+    ]
   },
   {
-    id: 'task-3',
-    label: 'Update company website content',
-  },
-  {
-    id: 'task-4',
-    label: 'Plan and execute marketing campaigns',
-  },
-  {
-    id: 'task-5',
-    label: 'Coordinate employee training sessions',
-  },
-  {
-    id: 'task-6',
-    label: 'Manage facility maintenance',
-  },
-  {
-    id: 'task-7',
-    label: 'Organize customer feedback surveys',
-  },
-  {
-    id: 'task-8',
-    label: 'Coordinate travel arrangements',
-  },
-];
+    question: "What is the capital of Spain?",
+    id: '3',
+    answerType: AnswerFormat.Multiplechoice,
+    answerOptions: [
+      { answerText: "Paris", isCorrect: false },
+      { answerText: "London", isCorrect: false },
+      { answerText: "Berlin", isCorrect: false },
+      { answerText: "Madrid", isCorrect: true }
+    ]
+  }
+]
 
 const idleState: DraggableState = { type: 'idle' };
 const draggingState: DraggableState = { type: 'dragging' };
@@ -253,7 +287,7 @@ function ListItem({
   index,
   position
 }: {
-  item: Item;
+  item: QuestionProps;
   index: number;
   position: ItemPosition;
 }) {
@@ -357,12 +391,19 @@ function ListItem({
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '8px',
-            borderBottom: closestEdge ? "1px dashed blue" : 'none',
+            gap: '1px',
+            borderBottom: closestEdge ? "2px solid blue" : 'none',
           }}
         >
           <div style={{ flex: 1 }}>
-            {item.label}
+            {item.question}
+            <ul>
+              {item.answerOptions.map((option, index) => (
+                <li>
+                  {option.answerText}
+                </li>
+              ))}
+            </ul>
           </div>
           <Box ref={dragHandleRef}>
             <DropDownContent position={position} index={index} />
@@ -370,10 +411,10 @@ function ListItem({
         </div>
         {closestEdge && <DropIndicator edge={closestEdge} gap="1px" />}
       </Box>
-      {draggableState.type === 'preview' &&
-        ReactDOM.createPortal(<div>{item.label}</div>,
+      {/* {draggableState.type === 'preview' &&
+        ReactDOM.createPortal(<div>{item.question}</div>,
           draggableState.container
-        )}
+        )} */}
     </>
   )
 }
@@ -397,9 +438,9 @@ function getItemRegistry() {
 }
 
 type ListState = {
-  items: Item[];
+  items: QuestionProps[];
   lastCardMoved: {
-    item: Item;
+    item: QuestionProps;
     previousIndex: number;
     currentIndex: number;
     numberOfItems: number;
