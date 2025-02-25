@@ -32,6 +32,7 @@ export interface Lesson {
   creator: string;
   public: boolean;
   duration?: number;
+  script?: string;
 }
 
 export interface Answers {
