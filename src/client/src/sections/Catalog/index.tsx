@@ -4,7 +4,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Close, ViewModule } from '@mui/icons-material';
 import Pipe from '../../lib/assets/pipe.svg';
-import { SimpleTreeView } from '@mui/x-tree-view'
+import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView'
 import { TreeItem } from '@mui/x-tree-view/TreeItem';
 import AppsIcon from '@mui/icons-material/Apps';
 import TableRowsIcon from '@mui/icons-material/TableRows';

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { pdfjs, Document, Page } from 'react-pdf';
-import { Chip, IconButton, Button, Box, Typography, Skeleton, Fab, Tooltip } from '@mui/material';
+import { Chip, IconButton, Button, Box, Typography, Skeleton, Tooltip } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import UndoIcon from '@mui/icons-material/Undo';
 import RedoIcon from '@mui/icons-material/Redo';
@@ -11,14 +11,11 @@ import ZoomOutIcon from '@mui/icons-material/ZoomOut';
 import "./pdfPlayer.scss";
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
-import "pdfjs-dist/build/pdf.worker.entry";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.js',
+  'pdfjs-dist/build/pdf.worker.min.mjs',
   import.meta.url,
 ).toString();
-
-// pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.js`;
 
 type Props = {
   pdf: string | null | undefined;

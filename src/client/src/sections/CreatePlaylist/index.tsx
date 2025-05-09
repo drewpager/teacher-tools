@@ -103,6 +103,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
   const [searchInput, setSearchInput] = useState<string>("")
   const [searchError, setSearchError] = useState<boolean>(false)
   const [titleError, setTitleError] = useState<boolean>(false)
+  const [titleErrorMessage, setTitleErrorMessage] = useState<string>("")
   const [autoSaved, setAutoSaved] = useState<boolean>(false)
   const [variant, setVariant] = useState<boolean>(true)
   const [plans, setPlans] = useState<Plan[]>([])
@@ -508,14 +509,25 @@ export const CreatePlaylist = ({ viewer }: props) => {
 
   const titleHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     e.preventDefault();
+    const titleRegex = /[;/?:@&=+$,%#{}|^~[\]`"<>]/g
+    const matches = e.target.value.match(titleRegex)
 
     // Check if Lesson Plan Name Already Exists and throw error if yes to avoid URL duplication
     lessonPlanQuery?.map((i) => {
       existingPlanNames.push(i.name.toLowerCase());
     });
 
-    if (existingPlanNames.includes(e.target.value.toLowerCase())) {
+    if (e.target.value.match(titleRegex)) {
+      setTitleError(true)
+      setTitleErrorMessage(`Title cannot include: ${matches?.join(", ")}.`)
+      setPlaylist({ ...playlist, name: `${e.target.value}` })
+    } else if (existingPlanNames.includes(e.target.value.toLowerCase())) {
       setTitleError(true);
+      setTitleErrorMessage("Title already exists, please choose unique title.")
+      setPlaylist({ ...playlist, name: `${e.target.value}` })
+    } else if (e.target.value.length === 0) {
+      setTitleError(true)
+      setTitleErrorMessage("Please Add Valid Title")
       setPlaylist({ ...playlist, name: `${e.target.value}` })
     } else {
       setPlaylist({
@@ -757,8 +769,8 @@ export const CreatePlaylist = ({ viewer }: props) => {
     <div>
       <Helmet>
         <title>{`Lesson Plan Tool | Plato's Peach`}</title>
-        <meta name="description" content={`Leverage our catalog of short documentaries and custom assessments to create interactive lesson plans.`} />
-      </Helmet>
+        < meta name="description" content={`Leverage our catalog of short documentaries and custom assessments to create interactive lesson plans.`} />
+      </Helmet >
       <Box className="createPlaylist--box">
         {/* <FeedbackModal /> */}
         <Box sx={{ display: "flex", alignItems: "baseline" }}>
@@ -855,11 +867,10 @@ export const CreatePlaylist = ({ viewer }: props) => {
                         onChange={(e) => titleHandler(e)}
                         value={playlist.name}
                         error={titleError}
-                        helperText={titleError ? "Title already exists, please choose unique title." : null}
+                        helperText={titleError ? titleErrorMessage : null}
                       // onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
                       />
                       {playlist.plan.length === 0 && <CardMedia component="img" image={HowItWorks} sx={{ width: "95%", opacity: "50%" }} />}
-
                       <List
                         ref={playlistRef}
                         height={800}
@@ -1059,6 +1070,6 @@ export const CreatePlaylist = ({ viewer }: props) => {
         </form>
       </Box>
       <Footer viewer={viewer} />
-    </div>
+    </div >
   )
 }
