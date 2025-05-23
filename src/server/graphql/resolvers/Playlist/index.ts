@@ -57,15 +57,20 @@ export const playlistResolvers = {
         totalCount: 0,
       };
 
-      let cursor = await db.playlists.find({});
-      const totalCount = cursor;
+      // 1. Get totalCount from the database directly
+      const totalCount = await db.playlists.countDocuments({});
 
-      cursor = cursor.skip(page > 1 ? (page - 1) * limit : 0);
-      cursor = cursor.limit(limit);
+      // 2. Fetch paginated playlists
+      const cursor = db.playlists
+        .find({})
+        .skip(page > 1 ? (page - 1) * limit : 0)
+        .limit(limit);
 
-      data.total = await cursor.count();
       data.result = await cursor.toArray();
-      data.totalCount = await totalCount.count();
+      // 3. data.total is the number of documents in the current page's result
+      data.total = data.result.length;
+      // 4. data.totalCount is the total number of documents in the collection
+      data.totalCount = totalCount;
 
       return data;
     },
