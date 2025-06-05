@@ -148,7 +148,7 @@ const DraggableItem = ({
   const itemStyle = {
     ...style,
     opacity: dragState.isDragging ? 0.5 : 1,
-    transform: dragState.isDragging ? 'rotate(5deg)' : 'none',
+    transform: dragState.isDragging ? 'scale(0.5)' : 'none',
     transition: 'opacity 0.2s ease, transform 0.2s ease',
     cursor: 'grab',
     userSelect: 'none' as const
@@ -593,7 +593,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       const newPlan = reorder({
         list: playlist.plan,
         startIndex: source.index,
-        finishIndex: destination.droppableId === "playlist" ? destination.index : destination.index
+        finishIndex: destination.index
       });
 
       setPlaylist({ ...playlist, plan: newPlan });
@@ -616,27 +616,35 @@ export const CreatePlaylist = ({ viewer }: props) => {
       return;
     }
 
+    // Moving from lessons to playlist
     if (destination.droppableId === "playlist") {
       const item = plans[source.index];
       const newPlans = plans.filter((_, i) => i !== source.index);
-      const newPlaylist = [...playlist.plan, item];
+
+      // Insert item at the correct destination index
+      const newPlaylist = [...playlist.plan];
+      newPlaylist.splice(destination.index, 0, item);
 
       setPlans(newPlans);
       setPlaylist({ ...playlist, plan: newPlaylist });
-      window.localStorage.setItem("playlist", JSON.stringify(playlist));
+      window.localStorage.setItem("playlist", JSON.stringify({ ...playlist, plan: newPlaylist }));
       updatePlaylistSize();
       setAutoSaved(true);
     }
 
+    // Moving from playlist to lessons
     if (destination.droppableId === "lessons") {
       const item = playlist.plan[source.index];
       const newPlaylist = playlist.plan.filter((_, i) => i !== source.index);
-      const newPlans = [...plans, item];
+
+      // Insert item at the correct destination index
+      const newPlans = [...plans];
+      newPlans.splice(destination.index, 0, item);
 
       setPlans(newPlans);
       setFilter(newPlans);
       setPlaylist({ ...playlist, plan: newPlaylist });
-      window.localStorage.setItem("playlist", JSON.stringify(playlist));
+      window.localStorage.setItem("playlist", JSON.stringify({ ...playlist, plan: newPlaylist }));
       updateListSize();
       setAutoSaved(true);
     }
