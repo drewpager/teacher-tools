@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Card, CardContent, CardActions, Typography, Button, Box, CircularProgress, Alert, Snackbar, IconButton, Icon, Divider } from '@mui/material';
+import { Card, CardContent, CardActions, Typography, Button, Box, CircularProgress, Alert, Snackbar, Divider } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import { useApolloClient } from '@apollo/react-hooks';
 import { AUTH_URL } from '../../lib/graphql/queries/AuthUrl/index';
@@ -19,7 +19,7 @@ interface Props {
 
 export const Login = ({ setViewer }: Props) => {
   const [open, setOpen] = useState(false);
-  const [error, setError] = useState(false);
+
   const client = useApolloClient();
   const [logIn, {
     data: Mutation,
@@ -33,11 +33,7 @@ export const Login = ({ setViewer }: Props) => {
         return (<DisplaySuccess title="You've successfully logged in!" />)
       }
     },
-    onError: error => {
-      if (error) {
-        setError(true);
-      }
-    }
+    onError: _error => { }
   });
 
   const logInRef = useRef(logIn);
@@ -61,7 +57,6 @@ export const Login = ({ setViewer }: Props) => {
       window.location.href = data.authUrl;
 
     } catch {
-      setError(true)
     }
   }
 
@@ -144,6 +139,9 @@ export const Login = ({ setViewer }: Props) => {
             <Typography sx={{ fontStyle: 'italic' }}>Or</Typography>
             <Typography variant="h5">Login With Email</Typography>
             <LogInForm />
+            <Typography sx={{ marginTop: 1 }}>
+              <Link to="/forgot-password" style={{ color: "#000" }}>Forgot password?</Link>
+            </Typography>
             <Typography variant="h5">New User? <Link to="/signup" style={{ color: "#000" }}>Sign Up Here.</Link></Typography>
           </CardContent>
         </Card>

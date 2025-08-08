@@ -30,5 +30,7 @@ export * from "./ArticlesCatalog";
 export * from "./BlogHub";
 export * from "./BlogPost";
 export * from "./BlogCategory";
+export * from "./ForgotPassword";
+export * from "./ResetPassword";
 // export { BlogHub } from "./blog/pages/hub";
 // export * from "./Stripe";

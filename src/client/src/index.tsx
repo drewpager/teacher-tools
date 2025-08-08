@@ -27,6 +27,8 @@ import {
   Privacy,
   Pricing,
   Login,
+  ForgotPassword,
+  ResetPassword,
   AppHeader,
   Playlist,
   PlaylistsCatalog,
@@ -137,6 +139,8 @@ const App = () => {
           {/* <Route path="/login" children={(props: any) => (<Login {...props} setViewer={setViewer} />)} element={<Login setViewer={setViewer} />} />
           <Route path="/signup" children={(props: any) => (<SignUp {...props} setViewer={setViewer} />)} element={<SignUp setViewer={setViewer} />} /> */}
           <Route path="/login" element={<Login setViewer={setViewer} />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/signup" element={<SignUp setViewer={setViewer} />} />
           <Route path="/playlist/:id" element={<Playlist viewer={viewer} />} />
           <Route path="/plans/:plan" element={<Plans viewer={viewer} setViewer={setViewer} />} />

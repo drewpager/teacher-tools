@@ -88,6 +88,9 @@ export interface User {
   authorized?: boolean;
   bookmarks?: any[];
   package?: Package;
+  // Optional password reset fields
+  passwordResetToken?: string;
+  passwordResetExpires?: number;
 }
 
 export interface Article {
