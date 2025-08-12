@@ -1,6 +1,13 @@
 require("dotenv").config();
 import OpenAI from "openai";
 
+if (!process.env.OPENAI_API_KEY) {
+  throw new Error(
+    "OPENAI_API_KEY is not set. Please configure your environment."
+  );
+}
+console.log("process.env: ", process.env);
+console.log("OPENAI_API_KEY: ", process.env.OPENAI_API_KEY);
 const openai = new OpenAI({ apiKey: `${process.env.OPENAI_API_KEY}` });
 
 type quizProps = {
@@ -27,11 +34,15 @@ export const OpenAIQuiz = async ({
         content: `${inputString}`,
       },
     ],
-    model: "gpt-4-1106-preview",
+    model: "gpt-4o-mini",
     response_format: { type: "json_object" },
   });
 
+  console.log(completion);
+
   const message = completion.choices[0].message.content;
+
+  console.log(message);
 
   return message;
 };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { FieldArray, Formik, getIn, FieldProps, Field } from 'formik';
-import { useCreateQuizMutation, Viewer, AnswerFormat, useGenerateQuizMutation, QuestionInput, Questions } from '../../graphql/generated';
+import { FieldArray, Formik, getIn, FieldProps, Field, useFormikContext } from 'formik';
+import { useCreateQuizMutation, Viewer, AnswerFormat, useGenerateQuizMutation } from '../../graphql/generated';
 import {
   Box,
   TextField,
@@ -39,19 +39,7 @@ interface props {
   children?: React.ReactNode
 }
 
-interface QuestionsProps {
-  children?: React.ReactNode
-  questions: [
-    {
-      question: string,
-      answerType: AnswerFormat,
-      answerOptions: {
-        answerText: string,
-        isCorrect: boolean
-      }[],
-    },
-  ]
-}
+// AI generated questions are kept in `aiValues`
 
 interface QuestionProps {
   children?: React.ReactNode
@@ -134,22 +122,7 @@ const LockSwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-const Input = ({ field, form: { errors, touched } }: FieldProps) => {
-  const errorMessage = getIn(errors, field.name);
-
-  return (
-    <>
-      <TextField
-        {...field}
-        placeholder={`Question`}
-        fullWidth
-        sx={{ paddingTop: "0.5rem", gridColumn: 4 }}
-        onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
-      />
-      {!!touched && errors && <div>{errorMessage}</div>}
-    </>
-  )
-}
+// Removed unused Input component
 
 // TODO: Click to switch answerOption value from True to False
 const checkInput = ({ field, form: { errors, touched, setFieldValue } }: FieldProps) => {
@@ -187,10 +160,10 @@ export const QuizCreate = ({ viewer }: props) => {
   const [tfNums, setTfNums] = useState<number>(0);
   const [nums, setNums] = useState<number>(0);
   const [subject, setSubject] = useState<string>("");
-  const [generatedQuestions, setGeneratedQuestions] = useState<QuestionsProps>();
   const [aiValues, setAiValues] = useState<QuestionProps[]>([]);
   const [aiDisclaimer, setAiDisclaimer] = useState<boolean>(false);
   const [ready, setReady] = useState<boolean>(false);
+  const [genError, setGenError] = useState<string | null>(null);
 
   const [generateQuiz, { loading: generateQuizLoading, error: generateQuizError }] = useGenerateQuizMutation({
     variables: {
@@ -216,10 +189,12 @@ export const QuizCreate = ({ viewer }: props) => {
 
   const handleGenerateQuiz = async () => {
     setGenerateQuizOpen(true);
+    setGenError(null);
   }
 
   const handleGenerateClose = () => {
     setGenerateQuizOpen(false);
+    setGenError(null);
   }
 
   const handleMcSlideChange = (event: Event, newValue: number | number[]) => {
@@ -243,6 +218,7 @@ export const QuizCreate = ({ viewer }: props) => {
     try {
       setGenerateQuizOpen(true);
       setReady(false);
+      setGenError(null);
 
       const res = await generateQuiz({
         variables: {
@@ -256,43 +232,55 @@ export const QuizCreate = ({ viewer }: props) => {
 
       if (generateQuizError) {
         console.log("Error from within: ", generateQuizError);
+        setGenError('AI Quiz Generation Failed, Please Try Again');
         handleResetQuiz();
-        return (<Alert title="AI Quiz Generation Failed, Please Try Again" color='warning' />)
+        return;
       }
 
       if (generateQuizLoading) {
         console.log("Loading...");
       }
 
-      if (res && res.data) {
-        setGeneratedQuestions(res.data.generateQuiz);
-        setAiValues([...JSON.parse(`${res.data.generateQuiz}`).questions]);
+      console.log("Res: ", res);
+
+      if (res && res.data && res.data.generateQuiz) {
+        console.log("Res.data: ", res.data.generateQuiz);
+        const parsed = JSON.parse(res.data.generateQuiz as unknown as string);
+        setAiValues(parsed.questions);
         setNums(mcNums + tfNums);
         setReady(true);
       } else {
         console.error("Unexpected response:", res);
+        setGenError('AI Quiz Generation Failed, Please Try Again');
         handleResetQuiz();
-        return (<Alert title="AI Quiz Generation Failed, Please Try Again" color='warning' />)
+        return;
       }
     } catch (e) {
+      console.error(e);
+      setGenError('AI Quiz Generation Failed, Please Try Again');
       handleResetQuiz();
-      return (<Alert title="AI Quiz Generation Failed, Please Try Again" color='warning' />)
+      return;
     }
   }
 
-  const handleQuizGenerateUpdate = (values: any) => {
-    if (aiValues.length > 0) {
-      values.questions.splice(0, 1);
-      for (let i = 0; i < nums; i++) {
-        values.questions.push({
+  const ApplyAIValues: React.FC<{ ready: boolean; aiValues: QuestionProps[]; nums: number; onDone: () => void; }> = ({ ready, aiValues, nums, onDone }) => {
+    const { values, setFieldValue } = useFormikContext<any>();
+    useEffect(() => {
+      if (!ready || aiValues.length === 0) return;
+      const newQuestions = [...values.questions];
+      newQuestions.splice(0, 1);
+      for (let i = 0; i < nums && i < aiValues.length; i++) {
+        newQuestions.push({
           question: aiValues[i].question,
           answerType: aiValues[i].answerType,
           answerOptions: [...aiValues[i].answerOptions]
         });
       }
-    }
-    handleResetQuiz();
-  }
+      setFieldValue('questions', newQuestions);
+      onDone();
+    }, [ready, aiValues, nums, onDone, setFieldValue, values.questions]);
+    return null;
+  };
 
   const quizCreatePage: boolean = pathname === "/quiz/create";
 
@@ -439,8 +427,7 @@ export const QuizCreate = ({ viewer }: props) => {
                     }}
                   // onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
                   />
-                  {/* {generateQuizOpen && aiValues.length > 0 && handleQuizGenerateUpdate(values)} */}
-                  {ready && handleQuizGenerateUpdate(values)}
+                  <ApplyAIValues ready={ready} aiValues={aiValues} nums={nums} onDone={handleResetQuiz} />
                   <FieldArray name="questions">
                     {({ insert, remove, push }) => (
                       <div>
@@ -608,6 +595,9 @@ export const QuizCreate = ({ viewer }: props) => {
                         </Fab>
                       </Box>
                       <Box className="generate-quiz--modal">
+                        {genError && (
+                          <Alert severity="warning" sx={{ m: 1 }}>{genError}</Alert>
+                        )}
                         {/* {viewer.paymentId === null && setTfNums(2)}
                     {viewer.paymentId === null && setMcNums(2)}
                     {viewer.paymentId === null && (<Typography variant="body2" color="error" sx={{ m: "1rem" }}>Free Plan Limited to 4 AI Generated Quiz Questions</Typography>)} */}
