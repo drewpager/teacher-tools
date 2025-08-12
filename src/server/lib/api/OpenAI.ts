@@ -6,8 +6,7 @@ if (!process.env.OPENAI_API_KEY) {
     "OPENAI_API_KEY is not set. Please configure your environment."
   );
 }
-console.log("process.env: ", process.env);
-console.log("OPENAI_API_KEY: ", process.env.OPENAI_API_KEY);
+
 const openai = new OpenAI({ apiKey: `${process.env.OPENAI_API_KEY}` });
 
 type quizProps = {

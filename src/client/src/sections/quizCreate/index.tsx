@@ -241,10 +241,7 @@ export const QuizCreate = ({ viewer }: props) => {
         console.log("Loading...");
       }
 
-      console.log("Res: ", res);
-
       if (res && res.data && res.data.generateQuiz) {
-        console.log("Res.data: ", res.data.generateQuiz);
         const parsed = JSON.parse(res.data.generateQuiz as unknown as string);
         setAiValues(parsed.questions);
         setNums(mcNums + tfNums);
@@ -312,7 +309,6 @@ export const QuizCreate = ({ viewer }: props) => {
 
   if (error) {
     <Box>
-      {/* {console.log("Error Here Sir: ", error)} */}
       <DisplayError title="Failed to create assessment" />
     </Box>
   }

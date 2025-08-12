@@ -40,7 +40,6 @@ import {
   Catalog,
   Contact,
   Quiz,
-  TestElement,
   Donate,
   SignUp,
   Article,
@@ -124,7 +123,6 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home viewer={viewer} />} />
           <Route path="/dash" element={<Dashboard viewer={viewer} />} />
-          <Route path="/test" element={<TestElement viewer={viewer} />} />
           {/* <Route path="/stripe" children={(props: any) => (<Stripe {...props} setViewer={setViewer} />)} element={<Stripe viewer={viewer} setViewer={setViewer} />} /> */}
           <Route path="/catalog" element={<Catalog viewer={viewer} />} />
           <Route path="/lesson/:id" element={<Lesson viewer={viewer} />} />
@@ -231,17 +229,4 @@ root.render(
   </ThemeProvider>
 );
 
-// ReactDOM.render(
-//   <ThemeProvider theme={theme}>
-//     <ApolloProvider client={client}>
-//       <App />
-//     </ApolloProvider>
-//     <CssBaseline />
-//   </ThemeProvider>,
-//   document.getElementById('root')
-// );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

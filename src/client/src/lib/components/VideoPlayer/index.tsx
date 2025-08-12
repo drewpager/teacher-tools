@@ -13,16 +13,23 @@ declare global {
 }
 
 export const VideoPlayer = ({ url }: props) => {
-  let path = useMemo(() => new URL(url), [url])
-  let pathname = path.pathname;
+  let path = useMemo(() => {
+    try {
+      return new URL(url);
+    } catch {
+      return null;
+    }
+  }, [url]);
+  let pathname = path?.pathname ?? '';
   let re = new RegExp(/platos-peach-video/gm)
   let filePath = pathname.split(re)
-  let fileString = filePath[1].split(".")
-  let cloudinaryRef = useRef();
+  let fileString = (filePath[1] ?? '').split(".")
+  let cloudinaryRef = useRef<any>();
   let videoRef: any = useRef();
 
   useEffect(() => {
     if (cloudinaryRef.current) return;
+    if (!window?.cloudinary || !videoRef.current) return;
     cloudinaryRef.current = window.cloudinary.videoPlayer(videoRef.current, {
       cloud_name: 'drewpager',
       showLogo: false,
@@ -35,6 +42,7 @@ export const VideoPlayer = ({ url }: props) => {
         ref={videoRef}
         data-cld-public-id={`platos-peach-video${fileString[0]}`}
         key={`platos-peach-video${fileString[0]}`}
+        data-testid="video-player"
         controls
         crossOrigin="anonymous"
         preload="metadata"

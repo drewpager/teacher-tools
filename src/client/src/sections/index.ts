@@ -2,7 +2,6 @@ export * from "./Lessons";
 export * from "./Home";
 export * from "./Lesson";
 export * from "./Dashboard";
-export * from "./TestElement";
 export * from "./NotFound";
 export * from "./User";
 export * from "./Terms";

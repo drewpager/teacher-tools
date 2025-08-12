@@ -72,6 +72,7 @@
     "@types/jest": "^29.5.3",
     "@types/omit-deep-lodash": "^1.1.1",
     "@types/react-beautiful-dnd": "^13.1.2",
+    "patch-package": "^8.0.0",
     "sass": "^1.54.5"
   },
   "scripts": {
