@@ -482,8 +482,8 @@ export const viewerResolvers = {
         cursor = cursor.skip(page > 0 ? (page - 1) * limit : 0);
         cursor = cursor.limit(limit);
 
-        data.total = await cursor.count();
         data.result = await cursor.toArray();
+        data.total = data.result.length;
 
         return data;
       } catch (e) {

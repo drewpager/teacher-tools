@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useUserQuery, Viewer } from '../../graphql/generated';
 import { UserProfile, UserLessons, UserPlaylists, UserQuizzes, UserBookmarks, UserArticles } from './components';
+import { ImprovedUserProfile } from './components/UserProfile/improvedUserProfile';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
 import { PageSkeleton } from '../../lib/components';
 import { Footer } from '../../lib/components';
@@ -36,7 +37,7 @@ export const User = ({ viewer }: Props) => {
   const user = data ? data.user : null;
 
   const viewerIsUser = viewer.id === params.id;
-  const UserProfileElement = user ? <UserProfile user={user} viewerIsUser={viewerIsUser} /> : null;
+  const UserProfileElement = user ? <ImprovedUserProfile user={user} viewerIsUser={viewerIsUser} /> : null;
 
   const userLessons = user ? user.lessons : null;
   const userPlaylists = user ? user.playlists : null;
