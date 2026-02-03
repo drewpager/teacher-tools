@@ -1,15 +1,20 @@
-import React from 'react';
-import { usePlaylistQuery, Viewer, Playlist, usePlanQuery, useAllPlaylistsQuery } from '../../graphql/generated';
+import React, { lazy, Suspense } from 'react';
+import { Viewer, Playlist, usePlanQuery, useAllPlaylistsQuery } from '../../graphql/generated';
 import { useParams } from 'react-router-dom';
-import { Box, LinearProgress, Grid, Typography } from '@mui/material';
+import { Box, Grid, Typography, Skeleton } from '@mui/material';
 import { DisplayError } from '../../lib/utils/alerts/displayError';
-import { PlaylistCard, Search, Footer, CTA, InlineCTA, DonateCard } from '../../lib/components/';
+import { PlaylistCard } from '../../lib/components/PlaylistCard';
+import { Footer } from '../../lib/components/Footer';
+import { InlineCTA } from '../../lib/components/InlineCTA';
 import { Helmet } from 'react-helmet';
 import { PlaylistCardSkeleton } from '../../lib/components/PlaylistCard/playlistCardSkeleton';
 import { titleCase } from '../../lib/utils';
 import './plans.scss';
 import { Link } from 'react-router-dom';
 import { PublicPlaylistCard } from '../../lib/components/PublicPlaylistCard';
+
+// Lazy load DonateCard - only needed for public playlists
+const DonateCard = lazy(() => import('../../lib/components/DonateCard'));
 
 interface Props {
   viewer: Viewer;
@@ -20,8 +25,6 @@ interface Props {
 export const Plans = ({ viewer, setViewer }: Props) => {
   const params = useParams();
   const title = titleCase(`${params.plan}`.replace(/-/g, " ").replaceAll(/_/g, "-"));
-  // console.log(`${params}`.trim().replace(/-/g, " "))
-
 
   const { data, loading, error } = usePlanQuery({
     variables: {
@@ -29,11 +32,13 @@ export const Plans = ({ viewer, setViewer }: Props) => {
     }
   });
 
-  const { data: allPlaylistsData, loading: allPlaylistsLoading, error: allPlaylistsError } = useAllPlaylistsQuery({
+  // Only fetch fallback playlists when there's an error (skip: true until needed)
+  const { data: allPlaylistsData } = useAllPlaylistsQuery({
     variables: {
       limit: 3,
       page: 7
-    }
+    },
+    skip: !error // Only run this query if the main query errors
   });
 
   if (loading) {
@@ -76,13 +81,15 @@ export const Plans = ({ viewer, setViewer }: Props) => {
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
               <Typography variant="h2" className="planDonate-text">Support Content Like This With a Donation</Typography>
-              <Typography variant="body1" className="planDonate-subtext">Donations to Plato’s Peach non-profit help us in our mission to support teachers and students globally with high-quality educational content and tools that fit their needs. We have an ambitious roadmap for both our growing catalog of free content as well as our suite of tools to leverage that content within the learning journey. Your donations will help make this work possible.</Typography>
+              <Typography variant="body1" className="planDonate-subtext">Donations to Plato's Peach non-profit help us in our mission to support teachers and students globally with high-quality educational content and tools that fit their needs. We have an ambitious roadmap for both our growing catalog of free content as well as our suite of tools to leverage that content within the learning journey. Your donations will help make this work possible.</Typography>
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
-              <DonateCard viewer={viewer} setViewer={setViewer} />
+              <Suspense fallback={<Skeleton variant="rectangular" height={300} />}>
+                <DonateCard viewer={viewer} setViewer={setViewer} />
+              </Suspense>
             </Grid>
           </Grid>
-        ) : <></>}
+        ) : null}
         <Footer viewer={viewer} />
       </>
     )

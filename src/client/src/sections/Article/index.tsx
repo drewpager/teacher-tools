@@ -6,6 +6,7 @@ import { DisplayError } from '../../lib/utils/alerts/displayError';
 import { Footer, PdfPlayer } from '../../lib/components/';
 import { Helmet } from 'react-helmet';
 import draftToHtml from 'draftjs-to-html';
+import DOMPurify from 'dompurify';
 import './article.scss';
 import { Link } from 'react-router-dom';
 import { formatSlug } from '../../lib/utils/formatSlug';
@@ -113,7 +114,7 @@ export const Article = ({ viewer }: Props) => {
           <Grid item xs={12} sm={12} md={8} lg={8}>
             <Box className="article--section">
               <h2>{article.title}</h2>
-              {newRawContent && (<div className="article--body" dangerouslySetInnerHTML={{ __html: draftToHtml(newRawContent) }} />)}
+              {newRawContent && (<div className="article--body" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(draftToHtml(newRawContent)) }} />)}
               {(article.pdf === "undefined" || article.pdf === null) ? (<></>) : (<PdfPlayer pdf={article.pdf} />)}
             </Box>
           </Grid>

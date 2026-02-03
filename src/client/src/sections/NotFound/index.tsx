@@ -1,23 +1,46 @@
 import React, { useEffect, useRef } from 'react';
 import { Typography, Grid, Link, Box } from '@mui/material'
 import { Footer } from '../../lib/components';
-import lottie from 'lottie-web';
 import { Helmet } from 'react-helmet';
 
 import './notFound.scss';
 
 export const NotFound = () => {
-  const container = useRef<any>();
+  const container = useRef<HTMLDivElement>(null);
+  const animationRef = useRef<any>(null);
 
   useEffect(() => {
-    lottie.loadAnimation({
-      container: container.current,
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      animationData: require('../../lib/assets/error-animation.json')
-    })
-  }, [container])
+    // Only load if container exists and animation not already loaded
+    if (!container.current || animationRef.current) return;
+
+    const loadAnimation = async () => {
+      const [lottie, animationData] = await Promise.all([
+        import('lottie-web'),
+        import('../../lib/assets/error-animation.json')
+      ]);
+
+      // Double-check we haven't loaded yet and container still exists
+      if (!animationRef.current && container.current) {
+        animationRef.current = lottie.default.loadAnimation({
+          container: container.current,
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          animationData: animationData.default
+        });
+      }
+    };
+
+    loadAnimation();
+
+    return () => {
+      if (animationRef.current) {
+        animationRef.current.destroy();
+        animationRef.current = null;
+      }
+    };
+  }, []);
+
   return (
     <Grid container className='grid--container'>
       <Helmet>

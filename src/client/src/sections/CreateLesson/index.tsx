@@ -8,7 +8,7 @@ import { useCreateLessonMutation, Viewer } from '../../graphql/generated';
 import { categories, DisplayError, DisplaySuccess, titleCase } from '../../lib/utils';
 import { Footer } from '../../lib/components';
 import theme from '../../theme';
-import Moment from 'moment';
+import { parse, isValid } from 'date-fns';
 import './createLesson.scss';
 import { FeedbackModal } from '../Contact/FeedbackModal';
 import { SignUpPrompt } from '../SignupPrompt';
@@ -55,11 +55,11 @@ const validationSchema = yup.object({
       // check to see if the previous transform already parsed the date
       if (context.isType(value)) return value;
 
-      // the default coercion failed so let's try it with Moment.js instead
-      value = Moment(originalValue, "YYYY-MM-DD");
+      // the default coercion failed so let's try it with date-fns instead
+      const parsedDate = parse(originalValue, "yyyy-MM-dd", new Date());
 
       // if it's valid return the date object, otherwise return an `InvalidDate`
-      return value.isValid() ? value.toDate() : new Date('');
+      return isValid(parsedDate) ? parsedDate : new Date('');
     })
     .required('Please add an end date (YYYY-MM-DD)'),
   video: yup

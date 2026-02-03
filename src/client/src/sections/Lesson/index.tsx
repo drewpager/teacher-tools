@@ -1,4 +1,5 @@
 import React, { useMemo, useEffect, useRef, useState } from 'react';
+import DOMPurify from 'dompurify';
 import { Viewer, useLessonQuery, useRelatedPlansQuery, useLessonTitleQuery, useUserQuery } from '../../graphql/generated';
 import { Lesson as LessonProp } from '../../graphql/generated';
 import { useParams } from 'react-router-dom';
@@ -97,7 +98,7 @@ export const Lesson = ({ viewer }: Props) => {
     variables: {
       id: `${data?.lessonTitle.id}`
     },
-    fetchPolicy: 'no-cache',
+    fetchPolicy: 'cache-and-network', // Returns cached data immediately, fetches fresh data in background
   })
 
   const handleClose = () => {
@@ -306,7 +307,7 @@ export const Lesson = ({ viewer }: Props) => {
               {lesson?.script && (
                 <>
                   <h4>Transcript</h4>
-                  <div dangerouslySetInnerHTML={{ __html: lesson?.script }}></div>
+                  <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(lesson?.script) }}></div>
                 </>
               )}
             </Box>

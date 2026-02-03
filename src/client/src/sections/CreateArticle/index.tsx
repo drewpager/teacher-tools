@@ -8,6 +8,7 @@ import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { convertToRaw } from 'draft-js';
 import { Footer, PdfPlayer, VideoPlayer, PdfUploader } from '../../lib/components';
 import draftToHtml from 'draftjs-to-html';
+import DOMPurify from 'dompurify';
 import { useNavigate, Link } from 'react-router-dom';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 
@@ -236,7 +237,7 @@ export const CreateArticle = ({ viewer }: Props) => {
             <Chip label="Preview Article" variant="filled" />
             <h2>{title}</h2>
             {/* {rawContent && console.log(draftToHtml(rawContent))} */}
-            {rawContent && (<div dangerouslySetInnerHTML={{ __html: draftToHtml(rawContent) }} />)}
+            {rawContent && (<div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(draftToHtml(rawContent)) }} />)}
             {pdf && (<PdfPlayer pdf={pdf} />)}
           </Box>
         </Grid>

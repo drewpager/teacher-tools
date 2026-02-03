@@ -57,7 +57,7 @@ export const Catalog = ({ viewer }: Props) => {
       quizzesPage: 1,
       articlesPage: 1,
       limit: 1
-    }, pollInterval: 1000
+    }
   });
 
   if (userLoading) {
@@ -69,7 +69,7 @@ export const Catalog = ({ viewer }: Props) => {
   }
 
   useEffect(() => {
-    setUserBookmarks([userData?.user.bookmarks?.map((bookmark) => bookmark?.id)])
+    setUserBookmarks(userData?.user.bookmarks?.map((bookmark) => bookmark?.id) || [])
     if (window.location.hash) {
       setSelected([window.location.hash.slice(1).replaceAll("%20", " ")])
     }

@@ -298,9 +298,11 @@ export const viewerResolvers = {
           const password = input?.password;
           const emailInput = { input: { email: email, password: password } };
           const emailLogin = await logInViaEmail(emailInput, res, db);
+          // Generate a session token instead of exposing password
+          const sessionToken = crypto.randomBytes(16).toString("hex");
           return {
             _id: emailLogin?._id,
-            token: emailInput?.input?.password,
+            token: sessionToken,
             avatar: emailLogin?.avatar,
             contact: input?.email,
             paymentId: emailLogin?.paymentId,

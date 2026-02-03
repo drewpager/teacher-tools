@@ -202,3 +202,5 @@ export const DonateCard = ({ viewer, setViewer }: props) => {
     </Box>
   )
 }
+
+export default DonateCard;

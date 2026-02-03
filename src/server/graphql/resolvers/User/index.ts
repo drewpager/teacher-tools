@@ -17,8 +17,15 @@ import {
 } from "./types";
 import { authorize } from "../../../lib/utils";
 import { User, Database, Lesson, Viewer, Package } from "../../../lib/types";
+import { Loaders } from "../../../lib/loaders";
 import { ObjectId } from "mongodb";
 const stripe = require("stripe")(`${process.env.S_SECRET_KEY}`);
+
+interface Context {
+  db: Database;
+  req: Request;
+  loaders: Loaders;
+}
 
 export const userResolvers = {
   Query: {
@@ -50,19 +57,26 @@ export const userResolvers = {
       { page, limit }: AllUsersArgs,
       { db }: { db: Database }
     ): Promise<AllUsersData> => {
+      // Use $facet to combine data and count in a single query
+      const result = await db.users
+        .aggregate([
+          {
+            $facet: {
+              data: [
+                { $skip: page > 1 ? (page - 1) * limit : 0 },
+                { $limit: limit },
+              ],
+              totalCount: [{ $count: "count" }],
+            },
+          },
+        ])
+        .toArray();
+
       const data: AllUsersData = {
-        total: 0,
-        result: [],
-        totalCount: 0,
+        total: result[0]?.data?.length || 0,
+        result: result[0]?.data || [],
+        totalCount: result[0]?.totalCount[0]?.count || 0,
       };
-
-      let cursor = await db.users.find({});
-      cursor = cursor.skip(page > 1 ? (page - 1) * limit : 0);
-      cursor = cursor.limit(limit);
-
-      data.result = await cursor.toArray();
-      data.total = data.result.length;
-      data.totalCount = await db.users.countDocuments({});
 
       return data;
     },
@@ -77,31 +91,35 @@ export const userResolvers = {
     playlists: async (
       user: User,
       { limit, page }: UserPlaylistArgs,
-      { db }: { db: Database }
+      { db, loaders }: Context
     ): Promise<UserPlaylistData | null> => {
       try {
-        // if (!user.authorized) {
-        //   return null;
-        // }
+        // Return empty results if limit is 0 or negative (MongoDB requires positive limit)
+        if (limit <= 0) {
+          return { total: 0, result: [], totalCount: 0 };
+        }
+        // Use $facet aggregation to get data and count in a single query
+        const result = await db.playlists
+          .aggregate([
+            { $match: { creator: { $in: [user._id] } } },
+            { $sort: { _id: -1 } },
+            {
+              $facet: {
+                data: [
+                  { $skip: page > 0 ? (page - 1) * limit : 0 },
+                  { $limit: limit },
+                ],
+                totalCount: [{ $count: "count" }],
+              },
+            },
+          ])
+          .toArray();
 
         const data: UserPlaylistData = {
-          total: 0,
-          result: [],
-          totalCount: 0,
+          total: result[0]?.data?.length || 0,
+          result: result[0]?.data || [],
+          totalCount: result[0]?.totalCount[0]?.count || 0,
         };
-
-        let cursor = await db.playlists
-          .find({ creator: { $in: [user._id] } })
-          .sort({ _id: -1 });
-
-        cursor = cursor.skip(page > 0 ? (page - 1) * limit : 0);
-        cursor = cursor.limit(limit);
-
-        data.result = await cursor.toArray();
-        data.total = data.result.length;
-        data.totalCount = await db.playlists.countDocuments({
-          creator: { $in: [user._id] },
-        });
 
         return data;
       } catch (e) {
@@ -111,33 +129,35 @@ export const userResolvers = {
     lessons: async (
       user: User,
       { limit, page }: UserLessonArgs,
-      { db }: { db: Database }
+      { db, loaders }: Context
     ): Promise<UserLessonData | null> => {
       try {
+        // Return empty results if limit is 0 or negative (MongoDB requires positive limit)
+        if (limit <= 0) {
+          return { total: 0, result: [], totalCount: 0 };
+        }
+        // Use $facet aggregation to get data and count in a single query
+        const result = await db.lessons
+          .aggregate([
+            { $match: { creator: { $in: [user._id] } } },
+            { $sort: { _id: -1 } },
+            {
+              $facet: {
+                data: [
+                  { $skip: page > 0 ? (page - 1) * limit : 0 },
+                  { $limit: limit },
+                ],
+                totalCount: [{ $count: "count" }],
+              },
+            },
+          ])
+          .toArray();
+
         const data: UserLessonData = {
-          total: 0,
-          result: [],
-          totalCount: 0,
+          total: result[0]?.data?.length || 0,
+          result: result[0]?.data || [],
+          totalCount: result[0]?.totalCount[0]?.count || 0,
         };
-
-        let cursor = await db.lessons
-          .find({
-            creator: { $in: [user._id] },
-          })
-          .sort({ _id: -1 });
-
-        cursor = cursor.skip(page > 0 ? (page - 1) * limit : 0);
-        cursor = cursor.limit(limit);
-
-        data.result = await cursor.toArray();
-        data.total = data.result.length;
-        data.totalCount = await db.lessons.countDocuments({
-          creator: { $in: [user._id] },
-        });
-
-        // if (data.total === 0) {
-        //   return null;
-        // }
 
         return data;
       } catch (e) {
@@ -147,28 +167,35 @@ export const userResolvers = {
     quizzes: async (
       user: User,
       { limit, page }: UserQuizArgs,
-      { db }: { db: Database }
+      { db, loaders }: Context
     ): Promise<UserQuizData | null> => {
       try {
+        // Return empty results if limit is 0 or negative (MongoDB requires positive limit)
+        if (limit <= 0) {
+          return { total: 0, result: [], totalCount: 0 };
+        }
+        // Use $facet aggregation to get data and count in a single query
+        const result = await db.quizzes
+          .aggregate([
+            { $match: { creator: { $in: [user._id] } } },
+            { $sort: { _id: -1 } },
+            {
+              $facet: {
+                data: [
+                  { $skip: page > 0 ? (page - 1) * limit : 0 },
+                  { $limit: limit },
+                ],
+                totalCount: [{ $count: "count" }],
+              },
+            },
+          ])
+          .toArray();
+
         const data: UserQuizData = {
-          total: 0,
-          result: [],
-          totalCount: 0,
+          total: result[0]?.data?.length || 0,
+          result: result[0]?.data || [],
+          totalCount: result[0]?.totalCount[0]?.count || 0,
         };
-        let cursor = await db.quizzes
-          .find({
-            creator: { $in: [user._id] },
-          })
-          .sort({ _id: -1 });
-
-        cursor = cursor.skip(page > 0 ? (page - 1) * limit : 0);
-        cursor = cursor.limit(limit);
-
-        data.result = await cursor.toArray();
-        data.total = data.result.length;
-        data.totalCount = await db.quizzes.countDocuments({
-          creator: { $in: [user._id] },
-        });
 
         return data;
       } catch (e) {
@@ -178,48 +205,44 @@ export const userResolvers = {
     articles: async (
       user: User,
       { limit, page }: UserArticleArgs,
-      { db }: { db: Database }
+      { db, loaders }: Context
     ): Promise<UserArticleData | null> => {
       try {
+        // Return empty results if limit is 0 or negative (MongoDB requires positive limit)
+        if (limit <= 0) {
+          return { total: 0, result: [], totalCount: 0 };
+        }
+        // Use $facet aggregation to get data and count in a single query
+        const result = await db.articles
+          .aggregate([
+            { $match: { creator: { $in: [user._id] } } },
+            { $sort: { _id: -1 } },
+            {
+              $facet: {
+                data: [
+                  { $skip: page > 0 ? (page - 1) * limit : 0 },
+                  { $limit: limit },
+                ],
+                totalCount: [{ $count: "count" }],
+              },
+            },
+          ])
+          .toArray();
+
         const data: UserArticleData = {
-          total: 0,
-          result: [],
-          totalCount: 0,
+          total: result[0]?.data?.length || 0,
+          result: result[0]?.data || [],
+          totalCount: result[0]?.totalCount[0]?.count || 0,
         };
-        let cursor = await db.articles
-          .find({
-            creator: { $in: [user._id] },
-          })
-          .sort({ _id: -1 });
-
-        cursor = cursor.skip(page > 0 ? (page - 1) * limit : 0);
-        cursor = cursor.limit(limit);
-
-        data.result = await cursor.toArray();
-        data.total = data.result.length;
-        data.totalCount = await db.articles.countDocuments({
-          creator: { $in: [user._id] },
-        });
 
         return data;
       } catch (e) {
         throw new Error(`Failed to query articles ${e}`);
       }
     },
-    bookmarks: async (
-      user: User,
-      {}: BookmarkLessonArgs,
-      { db }: { db: Database }
-    ): Promise<Lesson[] | null> => {
-      try {
-        const cursor = await db.users.distinct("bookmarks", {
-          _id: `${user._id}`,
-        });
-
-        return cursor;
-      } catch (e) {
-        throw new Error(`Failed to bookmark anything ${e}`);
-      }
+    bookmarks: (user: User): Lesson[] => {
+      // Bookmarks are stored as full Lesson objects in the user document
+      return user.bookmarks || [];
     },
     package: (user: User) => {
       return user.package;

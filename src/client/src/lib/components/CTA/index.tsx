@@ -2,20 +2,43 @@ import { Typography, Button, Card, Grid } from '@mui/material';
 import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './callAction.scss';
-import lottie from 'lottie-web';
 
 export const CTA = () => {
-  const containCTA = useRef<any>();
+  const containCTA = useRef<HTMLDivElement>(null);
+  const animationRef = useRef<any>(null);
 
   useEffect(() => {
-    lottie.loadAnimation({
-      container: containCTA.current,
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      animationData: require('../../assets/dancing-book.json')
-    })
-  }, [containCTA])
+    // Only load if container exists and animation not already loaded
+    if (!containCTA.current || animationRef.current) return;
+
+    const loadAnimation = async () => {
+      const [lottie, animationData] = await Promise.all([
+        import('lottie-web'),
+        import('../../assets/dancing-book.json')
+      ]);
+
+      // Double-check we haven't loaded yet and container still exists
+      if (!animationRef.current && containCTA.current) {
+        animationRef.current = lottie.default.loadAnimation({
+          container: containCTA.current,
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          animationData: animationData.default
+        });
+      }
+    };
+
+    loadAnimation();
+
+    return () => {
+      if (animationRef.current) {
+        animationRef.current.destroy();
+        animationRef.current = null;
+      }
+    };
+  }, []);
+
   return (
     <Card className="callAction--home">
       <Grid container className="grid--container">

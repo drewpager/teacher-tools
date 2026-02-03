@@ -2,6 +2,7 @@ import React from 'react';
 import { Article } from '../../../graphql/generated';
 import { Box, Divider } from '@mui/material';
 import draftToHtml from 'draftjs-to-html';
+import DOMPurify from 'dompurify';
 import ArticleIcon from '@mui/icons-material/Article';
 import './articlePlayer.scss';
 import { PdfPlayer } from '../PdfPlayer';
@@ -59,7 +60,7 @@ export const ArticlePlayer = ({ article }: Props) => {
       <Divider />
       <Box sx={{ maxWidth: "100%" }}>
         {(article.pdf === "undefined" || article.pdf === null) ? (<></>) : (<PdfPlayer pdf={article.pdf} />)}
-        {newRawContent && <div className="article--body" dangerouslySetInnerHTML={{ __html: draftToHtml(newRawContent) }} />}
+        {newRawContent && <div className="article--body" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(draftToHtml(newRawContent)) }} />}
       </Box>
     </Box>
   )

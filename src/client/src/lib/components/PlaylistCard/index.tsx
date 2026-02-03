@@ -32,8 +32,10 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import QuizIcon from '@mui/icons-material/Quiz';
 import ArticleIcon from '@mui/icons-material/Article';
-import { Playlist, LessonPlanUnion, Viewer, useUserQuery, useAllUsersQuery, User } from '../../../graphql/generated';
-import { QuizPlayer, ArticlePlayer, GoogleClassroomShareButton } from '../index';
+import { Playlist, LessonPlanUnion, Viewer, useUserQuery, useAllUsersLazyQuery, User } from '../../../graphql/generated';
+import { QuizPlayer } from '../QuizPlayer';
+import { ArticlePlayer } from '../ArticlePlayer';
+import { GoogleClassroomShareButton } from '../GoogleClassroomButton';
 import { VideosPlayer } from '../VideosPlayer';
 import './playlistcard.scss';
 import { formatDate, titleCase } from '../../utils';
@@ -88,9 +90,10 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
   const [estimatedTime, setEstimatedTime] = useState<number>(0);
   const [teacherEmail, setTeacherEmail] = useState<string>("");
 
-  const { data: allUsersData, loading: allUsersLoading, error: allUsersError } = useAllUsersQuery({
+  // Lazy query - only fetches users when teacher email validation is needed
+  const [fetchAllUsers, { data: allUsersData, loading: allUsersLoading, error: allUsersError }] = useAllUsersLazyQuery({
     variables: {
-      limit: 1000,
+      limit: 100, // Reduced from 1000 - consider server-side validation
       page: 1
     }
   })
@@ -139,21 +142,27 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
     })
   }, [playlist.plan])
 
+  // Only fetch users when teacher email is entered and we need validation
   useEffect(() => {
-    let userEmails: string[] = [];
-    allUsersData?.allUsers?.result.map((user) => {
-      userEmails.push(user.contact);
+    if (teacherEmail.length > 0 && playlist.premium && !viewer?.id) {
+      fetchAllUsers();
+    }
+  }, [teacherEmail, playlist.premium, viewer?.id, fetchAllUsers]);
 
-      if (user?.contact === teacherEmail) {
-        document.querySelector('.hide-premium')?.classList.remove('hide-premium');
-        document.querySelector('.premium-content--card')?.classList.add('display-none');
-        setOpen(false);
-        setUserSuccess("Email Accepted!");
-        setSuccessOpen(true);
-      }
-    })
+  // Validate teacher email against fetched users
+  useEffect(() => {
+    if (!allUsersData?.allUsers?.result || !teacherEmail.length) return;
 
-    if (teacherEmail.length && userEmails.indexOf(teacherEmail) === -1) {
+    const userEmails = allUsersData.allUsers.result.map(user => user.contact);
+    const emailFound = userEmails.includes(teacherEmail);
+
+    if (emailFound) {
+      document.querySelector('.hide-premium')?.classList.remove('hide-premium');
+      document.querySelector('.premium-content--card')?.classList.add('display-none');
+      setOpen(false);
+      setUserSuccess("Email Accepted!");
+      setSuccessOpen(true);
+    } else {
       setUserError("Teacher's Email Not Recognized!");
       setOpen(true);
     }
@@ -163,11 +172,8 @@ export const PlaylistCard = ({ playlist, viewer }: Props) => {
 
   if (error) return (<Alert severity="error">{error.message}</Alert>)
 
-  let userImage = data?.user.avatar;
-  let userName = data?.user.name;
-
-  if (allUsersLoading) return (<></>);
-  if (allUsersError) return (<Alert severity="error">{allUsersError.message}</Alert>);
+  const userImage = data?.user.avatar;
+  const userName = data?.user.name;
 
   const handleChange = ({ ...item }: LessonPlanUnion) => {
     if (document.contains(document.getElementById("video-player"))) {

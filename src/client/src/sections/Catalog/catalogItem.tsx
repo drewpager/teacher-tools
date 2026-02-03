@@ -174,7 +174,7 @@ export const CatalogItem = ({ name, category, viewer, bookmarks }: props) => {
                       disableFocusRipple
                       onClick={() => onBookmark(`${l.id}`, viewer)}
                     >
-                      <BookmarkAddIcon color={bookmarked[0]?.includes(`${l.id}`) ? "success" : "inherit"} />
+                      <BookmarkAddIcon color={bookmarked.includes(`${l.id}`) ? "success" : "inherit"} />
                     </IconButton>
                   </Box>
                 </Box>

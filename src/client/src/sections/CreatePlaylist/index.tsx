@@ -288,7 +288,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
       quizzesPage: 0,
       articlesPage: 0,
       limit: 0
-    }, pollInterval: 5000
+    }
   });
 
   const { data: lessonData, loading: lessonLoading, error: lessonError } = useAllLessonsQuery({
@@ -302,7 +302,7 @@ export const CreatePlaylist = ({ viewer }: props) => {
     variables: {
       limit: limit,
       page: page
-    }, pollInterval: 5000
+    }
   })
 
   const { data: articleData, loading: articleLoading, error: articleError } = useAllArticlesQuery({
@@ -774,6 +774,10 @@ export const CreatePlaylist = ({ viewer }: props) => {
       return { ...filter }
     }
     setPlans([...filter.filter((e) => e.category?.includes(i))])
+  }
+
+  if (!viewer.id) {
+    return null; // Will redirect via useEffect
   }
 
   if (error || userError) {

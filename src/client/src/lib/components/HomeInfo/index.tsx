@@ -1,21 +1,44 @@
 import React, { useEffect, useRef } from 'react';
 import { Typography, Grid, Link, Box } from '@mui/material'
-import lottie from 'lottie-web';
 
 import './homeinfo.scss';
 
 export const HomeInfo = () => {
-  const contain = useRef<any>();
+  const contain = useRef<HTMLDivElement>(null);
+  const animationRef = useRef<any>(null);
 
   useEffect(() => {
-    lottie.loadAnimation({
-      container: contain.current,
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      animationData: require('../../assets/platos-quiz.json')
-    })
-  }, [contain])
+    // Only load if container exists and animation not already loaded
+    if (!contain.current || animationRef.current) return;
+
+    const loadAnimation = async () => {
+      const [lottie, animationData] = await Promise.all([
+        import('lottie-web'),
+        import('../../assets/platos-quiz.json')
+      ]);
+
+      // Double-check we haven't loaded yet and container still exists
+      if (!animationRef.current && contain.current) {
+        animationRef.current = lottie.default.loadAnimation({
+          container: contain.current,
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          animationData: animationData.default
+        });
+      }
+    };
+
+    loadAnimation();
+
+    return () => {
+      if (animationRef.current) {
+        animationRef.current.destroy();
+        animationRef.current = null;
+      }
+    };
+  }, []);
+
   return (
     <Grid container className='grid--container'>
       <Grid item xs={12} sm={12} md={7} lg={6}>
@@ -24,7 +47,7 @@ export const HomeInfo = () => {
             Easy Interactive Lesson Plans, Templates and Tools For Teachers
           </Typography>
           <Typography variant='h4' className='subtitle--text'>
-            We’re an educational film company with a mission to provide short, world-class documentary films, lesson plans and assessment questions for students, teachers and life-long learners.
+            We're an educational film company with a mission to provide short, world-class documentary films, lesson plans and assessment questions for students, teachers and life-long learners.
           </Typography>
           <div className="grid--buttons">
             <Link variant="subtitle1" href="/catalog" className='startTeaching--button'>
